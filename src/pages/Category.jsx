@@ -1,16 +1,16 @@
 import React from 'react'
 import HeroSlider from '../components/HeroSlider'
-import TopCategories from '../components/TopCategories'
+import ProductCategories from '../components/ProductCategories'
 import FeaturedProducts from '../components/FeaturedProducts'
 
-const Home = () => {
+const Category = () => {
   return (
     <div>
       <HeroSlider/>
-      <TopCategories/>
+      <ProductCategories/>
       <FeaturedProducts/>
     </div>
   )
 }
 
-export default Home
+export default Category
