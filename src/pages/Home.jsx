@@ -1,6 +1,6 @@
 import React from 'react'
 import HeroSlider from '../components/HeroSlider'
-import TopCategories from '../components/TopCategories'
+import TopCategories from './TopCategories'
 import FeaturedProducts from '../components/FeaturedProducts'
 
 const Home = () => {
