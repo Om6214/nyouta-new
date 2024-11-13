@@ -1,5 +1,3 @@
-'use client'
-
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import placeholder from '../assets/images/placeholder.jpg'
 import { Link } from "react-router-dom"
@@ -68,7 +66,7 @@ export default function FeaturedProducts() {
     <section className="py-16 px-4">
       <div className="container mx-auto">
       <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-brown-900 mb-4">
+          <h2 className="text-3xl md:text-4xl  text-brown-900 mb-4">
             Featured Products
           </h2>
           <div className="w-40 h-0.5 bg-amber-400 mx-auto mb-6"></div>
