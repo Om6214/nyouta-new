@@ -53,6 +53,10 @@ export default function TopCategories() {
     sub: "",
     subSub: "",
   });
+  const [priceFilter, setPriceFilter] = useState(3000);
+  const handlePriceChange = (event) => {
+    setPriceFilter(event.target.value);
+  };
 
   const handleMainChange = (event) => {
     const { value } = event.target;
@@ -81,6 +85,7 @@ export default function TopCategories() {
     }));
   };
 
+  
   return (
     <section className="py-16 px-4 bg-amber-50">
       <div className="container mx-auto">
@@ -90,7 +95,7 @@ export default function TopCategories() {
             <h2 className="text-3xl font-bold text-brown-900 mb-4">
               Product Categories
             </h2>
-
+  
             {/* Main Dropdown */}
             <div className="mb-0">
               <label
@@ -113,7 +118,7 @@ export default function TopCategories() {
                 ))}
               </select>
             </div>
-
+  
             {/* Sub Dropdown */}
             {selectedOptions.main && (
               <div className="mb-0">
@@ -134,7 +139,7 @@ export default function TopCategories() {
                 </select>
               </div>
             )}
-
+  
             {/* Sub-Sub Dropdown */}
             {selectedOptions.sub && (
               <div className="mb-0">
@@ -155,44 +160,110 @@ export default function TopCategories() {
                 </select>
               </div>
             )}
+  
+            {/* Price Filter */}
+            <div className="mb-0">
+              <label
+                htmlFor="price-range"
+                className="block text-sm font-medium text-amber-700 mb-2"
+              >
+                Filter by Price (₹1 - ₹3000)
+              </label>
+              <input
+                type="range"
+                id="price-range"
+                className="w-64 "
+                min="1"
+                max="3000"
+                value={priceFilter}
+                onChange={handlePriceChange}
+                style={{
+                  background: "brown",
+                  accentColor: "brown",
+                }}
+              />
+              <div className="text-sm text-gray-600 mt-2">
+                Up to Price: ₹{priceFilter}
+              </div>
+            </div>
           </div>
-
+  
           {/* Right Division */}
           <div className="lg:w-3/4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-brown-900 mb-4">
-                Let Us Make Your Best Day A Memorable One!
-              </h2>
-              <div className="w-40 h-0.5 bg-amber-400 mx-auto mb-6"></div>
-              <h3 className="text-xl text-amber-700 font-medium">
-                BROWSE OUR POPULAR CATEGORIES
-              </h3>
-            </div>
-
+            
+            {/* Image Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-              {categories.map((category, index) => (
-                <Link
-                  to={`/category/${category.title
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}`}
+              {[
+                {
+                  url: "https://lovely-cards.com/cdn/shop/files/IMG_6839_1080x1080_ee5c0b11-10df-400a-9783-46907b9310fa.jpg?v=1726214919",
+                  title: "Elegant Wedding Cards",
+                  price: "₹500",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+                  title: "Custom Invitation Cards",
+                  price: "₹750",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/products/dgc-098_6bc30bc3-17be-42cf-83a8-a9e8e923926b.jpg?v=1709379501",
+                  title: "Premium Greeting Cards",
+                  price: "₹1000",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/products/dgs-w01-des151_27f01796-aab5-4dba-acce-81381e8349ca.jpg?v=1709379205",
+                  title: "Floral Designs",
+                  price: "₹850",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015",
+                  title: "Minimalistic Cards",
+                  price: "₹600",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/files/signateur2079.jpg?v=1711865872",
+                  title: "Modern Invitations",
+                  price: "₹950",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/files/signateur2080.jpg?v=1711865896",
+                  title: "Traditional Touch",
+                  price: "₹700",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/products/dgs-w01-t-des02_5725db6e-38b2-4fe1-ac6e-095d3d50db2c.jpg?v=1709378960",
+                  title: "Classic Elegance",
+                  price: "₹800",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/products/dgf-01_96bccd93-fcf7-4f98-961a-3cc0b7dd1776.jpg?v=1713598965",
+                  title: "Funky Patterns",
+                  price: "₹650",
+                },
+                {
+                  url: "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015",
+                  title: "Sophisticated Styles",
+                  price: "₹850",
+                },
+              ].map((image, index) => (
+                <div
                   key={index}
-                  className="group"
+                  className="relative flex flex-col items-center group"
                 >
-                  <div className="relative flex flex-col items-center">
-                    <div className="relative w-full aspect-square mb-3 transform transition-transform group-hover:scale-105">
-                      <div className="absolute inset-0 bg-gradient-to-b from-amber-100 to-amber-200 rounded-xl"></div>
-                      <img
-                        src={category.image}
-                        alt={category.title}
-                        fill
-                        className="object-contain p-4"
-                      />
-                    </div>
-                    <h4 className="text-center text-brown-800 font-medium text-sm md:text-base group-hover:text-amber-700 transition-colors">
-                      {category.title}
-                    </h4>
+                  <div className="relative w-full aspect-square mb-3 transform transition-transform group-hover:scale-105">
+                    <div className="absolute inset-0  rounded-xl"></div>
+                    <img
+                      src={image.url}
+                      alt={image.title}
+                      className="object-contain p-4 rounded-lg"
+                    />
                   </div>
-                </Link>
+                  <h4 className="text-center text-brown-800 font-medium text-sm md:text-base group-hover:text-amber-700 transition-colors">
+                    {image.title}
+                  </h4>
+                  <p className="text-center text-gray-700 font-medium text-sm">
+                    {image.price}
+                  </p>
+                </div>
               ))}
             </div>
           </div>

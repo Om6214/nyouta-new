@@ -6,7 +6,6 @@ import FeaturedProducts from '../components/FeaturedProducts'
 const Category = () => {
   return (
     <div>
-      <HeroSlider/>
       <ProductCategories/>
       <FeaturedProducts/>
     </div>
