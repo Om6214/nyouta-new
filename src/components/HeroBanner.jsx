@@ -26,7 +26,7 @@ const HeroBanner = () => {
                         className="flex flex-col justify-center w-full"
                     >
                         <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-8xl">
-                            <span className="mt-2 mb-8 block"><span className="text-amber-700">ई-न्यौता
+                            <span className="mt-2 mb-8 block"><span className="text-amber-700">न्यौता
                             </span> for all the moments that matter</span>
 
                             <span className="block text-base font-semibold uppercase tracking-wide text-amber-700">
