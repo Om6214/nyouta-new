@@ -29,9 +29,9 @@ export default function MainNav() {
       <div className="container mx-auto">
         {/* Top Navigation */}
         <div className="flex h-20 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             {/* <Elephant className="h-10 w-10 text-brown-600" /> */}
-            <span className="text-xl font-bold">न्यौता</span>
+            <span className="text-xl font-bold">ई-न्यौता</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -39,7 +39,7 @@ export default function MainNav() {
             <ul className="flex w-full space-x-8 items-center justify-end">
               {["About", "Products", "Categories", "Contact Us"].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="py-2 hover:text-brown-600">
+                  <Link to={`/${item.toLowerCase()}`} className="py-2 hover:text-brown-600">
                     {item}
                   </Link>
                 </li>
@@ -74,13 +74,13 @@ export default function MainNav() {
               {openDropdown === "user" && (
                 <div className="absolute right-0 mt-2 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
                   <Link
-                    href="/login"
+                    to="/login"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Log in
                   </Link>
                   <Link
-                    href="/register"
+                    to="/register"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Register
@@ -101,7 +101,7 @@ export default function MainNav() {
 
         {/* Mobile Drawer Menu */}
         {isDrawerOpen && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden">
+          <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden transition-all duration-500">
             <div className="absolute right-0 h-full w-64 bg-white p-4">
               <button
                 className="mb-4 text-right"
@@ -112,7 +112,7 @@ export default function MainNav() {
               <ul className="">
                 {["About", "Products", "Categories", "Contact Us"].map((item) => (
                   <li key={item}>
-                    <Link href="#" className="py-2 hover:text-brown-600">
+                    <Link to={`/${item.toLowerCase()}`} className="py-2 hover:text-brown-600">
                       {item}
                     </Link>
                   </li>

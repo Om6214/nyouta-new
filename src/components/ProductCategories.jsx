@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import products from '../products.json'
 export default function TopCategories() {
   const categories = [
     { title: "Save the Date", image: "/placeholder.svg?height=200&width=200" },
@@ -192,78 +192,27 @@ export default function TopCategories() {
           <div className="lg:w-3/4">
             
             {/* Image Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-              {[
-                {
-                  url: "https://lovely-cards.com/cdn/shop/files/IMG_6839_1080x1080_ee5c0b11-10df-400a-9783-46907b9310fa.jpg?v=1726214919",
-                  title: "Elegant Wedding Cards",
-                  price: "₹500",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-                  title: "Custom Invitation Cards",
-                  price: "₹750",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/products/dgc-098_6bc30bc3-17be-42cf-83a8-a9e8e923926b.jpg?v=1709379501",
-                  title: "Premium Greeting Cards",
-                  price: "₹1000",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/products/dgs-w01-des151_27f01796-aab5-4dba-acce-81381e8349ca.jpg?v=1709379205",
-                  title: "Floral Designs",
-                  price: "₹850",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015",
-                  title: "Minimalistic Cards",
-                  price: "₹600",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/files/signateur2079.jpg?v=1711865872",
-                  title: "Modern Invitations",
-                  price: "₹950",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/files/signateur2080.jpg?v=1711865896",
-                  title: "Traditional Touch",
-                  price: "₹700",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/products/dgs-w01-t-des02_5725db6e-38b2-4fe1-ac6e-095d3d50db2c.jpg?v=1709378960",
-                  title: "Classic Elegance",
-                  price: "₹800",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/products/dgf-01_96bccd93-fcf7-4f98-961a-3cc0b7dd1776.jpg?v=1713598965",
-                  title: "Funky Patterns",
-                  price: "₹650",
-                },
-                {
-                  url: "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015",
-                  title: "Sophisticated Styles",
-                  price: "₹850",
-                },
-              ].map((image, index) => (
-                <div
+            <div className="grid grid-cols-2 sm:grid-cols-3  gap-4 md:gap-6">
+              {products.map((product, index) => (
+                <Link to={`/product/${product.id}`}
                   key={index}
                   className="relative flex flex-col items-center group"
                 >
                   <div className="relative w-full aspect-square mb-3 transform transition-transform group-hover:scale-105">
                     <div className="absolute inset-0  rounded-xl"></div>
                     <img
-                      src={image.url}
-                      alt={image.title}
+                      src={product.image[0]}
+                      alt={product.name}
                       className="object-contain p-4 rounded-lg"
                     />
                   </div>
                   <h4 className="text-center text-brown-800 font-medium text-sm md:text-base group-hover:text-amber-700 transition-colors">
-                    {image.title}
+                    {product.name}
                   </h4>
                   <p className="text-center text-gray-700 font-medium text-sm">
-                    {image.price}
+                    {product.price}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
