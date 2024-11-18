@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { Link } from "react-router-dom"
 import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react"
