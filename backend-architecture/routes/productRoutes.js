@@ -1,6 +1,6 @@
-const express = require('express');
-const { authenticateToken, authorizeRole } = require('../middlewares/authMiddleware');
-const Product = require('../models/Product');
+import express from 'express';
+import { authenticateToken, authorizeRole } from '../middlewares/authMiddleware.js';
+import Product from '../models/Product.js';
 
 const router = express.Router();
 
@@ -22,4 +22,4 @@ router.post('/', authenticateToken, authorizeRole(['admin']), async (req, res) =
     }
 });
 
-module.exports = router;
+export default router;
