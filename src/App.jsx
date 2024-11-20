@@ -13,6 +13,8 @@ import CategoriesPage from './pages/CategoriesPage'
 import About from './components/About'
 import { useState } from 'react';
 import Checkout from './pages/Checkout';
+import ProductsCategory from './pages/ProductsCategory';
+
 
 function App() {
 
@@ -33,6 +35,8 @@ function App() {
           <Route path='/categories' element={<CategoriesPage/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/checkout' element={<Checkout/>} />
+          <Route path="/products/:category" element={<ProductsCategory/>} />
+      
         </Routes>
         <Footer />
       </BrowserRouter>
