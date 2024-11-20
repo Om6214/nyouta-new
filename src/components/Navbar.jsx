@@ -29,7 +29,7 @@ export default function MainNav() {
         <div className="flex h-20 items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2">
             {/* <Elephant className="h-10 w-10 text-brown-600" /> */}
-            <span className="text-xl font-bold">ई-न्यौता</span>
+            <span className="text-xl font-bold">न्यौता</span>
           </Link>
 
           {/* Desktop Menu */}

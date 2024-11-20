@@ -29,7 +29,7 @@ export default function TopCategories() {
         <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-4 md:gap-6">
           {categories.map((category, index) => (
             <Link
-              to={`/category/${category.title.toLowerCase().replace(/\s+/g, '-')}`}
+              to={`/products/${category.title.toLowerCase().replace(/\s+/g, '-')}`}
               key={index}
               className="group"
             >
