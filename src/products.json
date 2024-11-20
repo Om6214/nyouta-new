@@ -1,263 +1,282 @@
 [
-    {
-      "id": "1",
-      "name": "Elegant Wedding Invitation",
-      "sku": "WED-001",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 49.99,
-      "tags": ["wedding", "invitation", "elegant", "classic"],
-      "category": "wedding invitation",
-      "subCategory": "traditional"
-    },
-    {
-      "id": "2",
-      "name": "Rustic Party Invitation",
-      "sku": "PARTY-002",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 29.99,
-      "tags": ["party", "rustic", "invitation"],
-      "category": "party invitation",
-      "subCategory": "birthday"
-    },
-    {
-      "id": "3",
-      "name": "Classic Pooja Invitation",
-      "sku": "POOJA-003",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 19.99,
-      "tags": ["pooja", "invitation", "traditional"],
-      "category": "pooja invitations",
-      "subCategory": "festive"
-    },
-    {
-      "id": "4",
-      "name": "Modern Ceremony Invitation",
-      "sku": "CER-004",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 39.99,
-      "tags": ["ceremony", "modern", "invitation"],
-      "category": "ceremony invitations",
-      "subCategory": "anniversary"
-    },
-    {
-      "id": "5",
-      "name": "Save the Date Floral Card",
-      "sku": "SAVE-005",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 25.99,
-      "tags": ["save the date", "floral", "invitation"],
-      "category": "save the date",
-      "subCategory": "floral"
-    },
-    {
-      "id": "6",
-      "name": "Elegant Wedding Video Invite",
-      "sku": "VID-006",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 59.99,
-      "tags": ["wedding", "video", "invitation"],
-      "category": "video invite",
-      "subCategory": "romantic"
-    },
-    {
-      "id": "7",
-      "name": "Minimalist Wedding Invitation",
-      "sku": "WED-007",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 49.99,
-      "tags": ["wedding", "minimalist", "invitation"],
-      "category": "wedding invitation",
-      "subCategory": "modern"
-    },
-    {
-      "id": "8",
-      "name": "Vintage Party Invitation",
-      "sku": "PARTY-008",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 34.99,
-      "tags": ["party", "vintage", "invitation"],
-      "category": "party invitation",
-      "subCategory": "retro"
-    },
-    {
-      "id": "9",
-      "name": "Traditional Pooja Invitation",
-      "sku": "POOJA-009",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 22.99,
-      "tags": ["pooja", "traditional", "invitation"],
-      "category": "pooja invitations",
-      "subCategory": "festive"
-    },
-    {
-      "id": "10",
-      "name": "Formal Ceremony Invitation",
-      "sku": "CER-010",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 40.99,
-      "tags": ["ceremony", "formal", "invitation"],
-      "category": "ceremony invitations",
-      "subCategory": "formal"
-    },
-    {
-      "id": "11",
-      "name": "Save the Date Botanical Card",
-      "sku": "SAVE-011",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 27.99,
-      "tags": ["save the date", "botanical", "invitation"],
-      "category": "save the date",
-      "subCategory": "botanical"
-    },
-    {
-      "id": "12",
-      "name": "Animated Wedding Video Invite",
-      "sku": "VID-012",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 75.99,
-      "tags": ["wedding", "animated", "video", "invitation"],
-      "category": "video invite",
-      "subCategory": "animated"
-    },
-    {
-      "id": "13",
-      "name": "Elegant Party Invitation",
-      "sku": "PARTY-013",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 36.99,
-      "tags": ["party", "elegant", "invitation"],
-      "category": "party invitation",
-      "subCategory": "formal"
-    },
-    {
-      "id": "14",
-      "name": "Colorful Pooja Invitation",
-      "sku": "POOJA-014",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 18.99,
-      "tags": ["pooja", "colorful", "invitation"],
-      "category": "pooja invitations",
-      "subCategory": "vibrant"
-    },
-    {
-      "id": "15",
-      "name": "Royal Ceremony Invitation",
-      "sku": "CER-015",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 45.99,
-      "tags": ["ceremony", "royal", "invitation"],
-      "category": "ceremony invitations",
-      "subCategory": "luxury"
-    },
-    {
-      "id": "16",
-      "name": "Whimsical Save the Date Card",
-      "sku": "SAVE-016",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 24.99,
-      "tags": ["save the date", "whimsical", "invitation"],
-      "category": "save the date",
-      "subCategory": "fun"
-    },
-    {
-      "id": "17",
-      "name": "Rustic Wedding Video Invite",
-      "sku": "VID-017",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 64.99,
-      "tags": ["wedding", "video", "rustic", "invitation"],
-      "category": "video invite",
-      "subCategory": "vintage"
-    },
-    {
-      "id": "18",
-      "name": "Casual Party Invitation",
-      "sku": "PARTY-018",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 32.99,
-      "tags": ["party", "casual", "invitation"],
-      "category": "party invitation",
-      "subCategory": "casual"
-    },
-    {
-      "id": "19",
-      "name": "Traditional Ceremony Invitation",
-      "sku": "CER-019",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 39.99,
-      "tags": ["ceremony", "traditional", "invitation"],
-      "category": "ceremony invitations",
-      "subCategory": "heritage"
-    },
-    {
-      "id": "20",
-      "name": "Save the Date Luxury Card",
-      "sku": "SAVE-020",
-      "image": [
-        "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
-        "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
-      ],
-      "price": 29.99,
-      "tags": ["save the date", "luxury", "invitation"],
-      "category": "save the date",
-      "subCategory": "premium"
-    }
-  ]
-  
+  {
+    "id": "1",
+    "name": "Elegant Wedding Invitation",
+    "sku": "WED-001",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 49.99,
+    "tags": ["wedding", "invitation", "elegant", "classic"],
+    "category": "E-INVITE",
+    "subCategory": "Wedding Invitations",
+    "subSubCategory": "Wedding Invitations"
+  },
+  {
+    "id": "2",
+    "name": "Rustic Party Invitation",
+    "sku": "PARTY-002",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 29.99,
+    "tags": ["party", "rustic", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Party Invitation",
+    "subSubCategory": "Birthday Party"
+  },
+  {
+    "id": "3",
+    "name": "Classic Pooja Invitation",
+    "sku": "POOJA-003",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 19.99,
+    "tags": ["pooja", "invitation", "traditional"],
+    "category": "E-INVITE",
+    "subCategory": "Pooja & Ritual",
+    "subSubCategory": "Aarti Books and Chalisa"
+  },
+  {
+    "id": "4",
+    "name": "Modern Ceremony Invitation",
+    "sku": "CER-004",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 39.99,
+    "tags": ["ceremony", "modern", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Wedding Invitations",
+    "subSubCategory": "Anniversary Invitations"
+  },
+  {
+    "id": "5",
+    "name": "Save the Date Floral Card",
+    "sku": "SAVE-005",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 25.99,
+    "tags": ["save the date", "floral", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Wedding Invitations",
+    "subSubCategory": "Save the Date"
+  },
+  {
+    "id": "6",
+    "name": "Elegant Wedding Video Invite",
+    "sku": "VID-006",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 59.99,
+    "tags": ["wedding", "video", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Announcement",
+    "subSubCategory": "Wed"
+  },
+  {
+    "id": "7",
+    "name": "Minimalist Wedding Invitation",
+    "sku": "WED-007",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 49.99,
+    "tags": ["wedding", "minimalist", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Wedding Invitations",
+    "subSubCategory": "Wedding Invitations"
+  },
+  {
+    "id": "8",
+    "name": "Vintage Party Invitation",
+    "sku": "PARTY-008",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 34.99,
+    "tags": ["party", "vintage", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Party Invitation",
+    "subSubCategory": "Celebration Party"
+  },
+  {
+    "id": "9",
+    "name": "Traditional Pooja Invitation",
+    "sku": "POOJA-009",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 22.99,
+    "tags": ["pooja", "traditional", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Pooja & Ritual",
+    "subSubCategory": "Mata Jagran Invitations"
+  },
+  {
+    "id": "10",
+    "name": "Formal Ceremony Invitation",
+    "sku": "CER-010",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 40.99,
+    "tags": ["ceremony", "formal", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Wedding Invitations",
+    "subSubCategory": "Engagement Invitations"
+  },
+  {
+    "id": "11",
+    "name": "Elegant Royal Wedding Invitation",
+    "sku": "WED-011",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 79.99,
+    "tags": ["wedding", "royal", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Wedding Invitations",
+    "subSubCategory": "Royal Wedding Invitations"
+  },
+  {
+    "id": "12",
+    "name": "Halloween Party Invitation",
+    "sku": "PARTY-012",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 22.99,
+    "tags": ["party", "halloween", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Party Invitation",
+    "subSubCategory": "Halloween Party"
+  },
+  {
+    "id": "13",
+    "name": "Budget Wedding Planner",
+    "sku": "BUDGET-013",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 19.99,
+    "tags": ["planner", "budget", "wedding"],
+    "category": "special-for-u",
+    "subCategory": "Digital Spread Sheet",
+    "subSubCategory": "Budget Purchase Expenses"
+  },
+  {
+    "id": "14",
+    "name": "Sangeet Ceremony Invitation",
+    "sku": "SANGEET-014",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 34.99,
+    "tags": ["sangeet", "ceremony", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Welcome Signage",
+    "subSubCategory": "Sangeet Ceremony"
+  },
+  {
+    "id": "15",
+    "name": "Luxury Wedding Planner",
+    "sku": "LUXURY-015",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 89.99,
+    "tags": ["planner", "luxury", "wedding"],
+    "category": "special-for-u",
+    "subCategory": "Wedding Planner",
+    "subSubCategory": "Wedding Planner | ROYAL"
+  },
+  {
+    "id": "16",
+    "name": "Wedding News E-Paper Subscription",
+    "sku": "NEWS-016",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 14.99,
+    "tags": ["wedding", "news", "magazine"],
+    "category": "New Trendz",
+    "subCategory": "Wedding News E-Paper",
+    "subSubCategory": ""
+  },
+  {
+    "id": "17",
+    "name": "Event E-Magazine Subscription",
+    "sku": "MAG-017",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 9.99,
+    "tags": ["event", "magazine", "e-magazine"],
+    "category": "New Trendz",
+    "subCategory": "Event E-Magazine",
+    "subSubCategory": ""
+  },
+  {
+    "id": "18",
+    "name": "Traditional Engagement Invitation",
+    "sku": "ENG-018",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 30.99,
+    "tags": ["engagement", "traditional", "invitation"],
+    "category": "E-INVITE",
+    "subCategory": "Wedding Invitations",
+    "subSubCategory": "Engagement Invitations"
+  },
+  {
+    "id": "19",
+    "name": "Photo E-Book Wedding Edition",
+    "sku": "PHOTO-019",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 24.99,
+    "tags": ["photo", "ebook", "wedding"],
+    "category": "New Trendz",
+    "subCategory": "Photo E-Book",
+    "subSubCategory": ""
+  },
+  {
+    "id": "20",
+    "name": "Ultimate Wedding Planner",
+    "sku": "ULTIMATE-020",
+    "image": [
+      "https://lovely-cards.com/cdn/shop/files/dgc-102-1.jpg?v=1713336487",
+      "https://lovely-cards.com/cdn/shop/files/acr-w05-2.jpg?v=1711619015"
+    ],
+    "price": 129.99,
+    "tags": ["planner", "ultimate", "wedding"],
+    "category": "special-for-u",
+    "subCategory": "Wedding Planner",
+    "subSubCategory": "Wedding Planner | ULTIMATE"
+  }
+]
