@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import CategoriesPage from './pages/CategoriesPage'
 import About from './components/About'
+import ProductsCategory from './pages/ProductsCategory';
 
 function App() {
 
@@ -20,6 +21,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+
+          {/* this is a comment */}
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Category />} />
           <Route path='/contact us' element={<ContactUs/>}/>
@@ -28,6 +31,8 @@ function App() {
           <Route path='/register' element={<Register/>}/>
           <Route path='/categories' element={<CategoriesPage/>}/>
           <Route path='/about' element={<About/>}/>
+          <Route path="/products/:category" element={<ProductsCategory/>} />
+          <Route path="/product/:id" element={<ProductPage/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
