@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import productsData from '../products.json'
 
 export default function ProductPage() {
@@ -30,10 +30,12 @@ export default function ProductPage() {
     console.log(`Added ${quantity} ${product.name}(s) to cart`)
     // Implement your add to cart logic here
   }
-
+  const navigate = useNavigate()
   const buyNow = () => {
     console.log(`Buying ${quantity} ${product.name}(s) now`)
     // Implement your buy now logic here
+    navigate('/checkout')
+    
   }
 
   const editProduct = () => {
@@ -97,7 +99,7 @@ export default function ProductPage() {
           </div>
           <div className="space-x-4 flex">
             <button
-              onClick={addToCart}
+              onClick={() => addToCart(product)}
               className="w-full bg-primaryBlue text-white py-2 px-4 rounded-full hover:bg-blue-700 transition-colors"
             >
               Add to Cart

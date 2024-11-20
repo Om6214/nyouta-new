@@ -11,6 +11,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import CategoriesPage from './pages/CategoriesPage'
 import About from './components/About'
+import { useState } from 'react';
+import Checkout from './pages/Checkout';
 
 function App() {
 
@@ -23,11 +25,12 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Category />} />
           <Route path='/contact us' element={<ContactUs/>}/>
-          <Route path="/product/:id" element={<ProductPage />} /> 
+          <Route path="/product/:id" element={<ProductPage/>} /> 
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/categories' element={<CategoriesPage/>}/>
           <Route path='/about' element={<About/>}/>
+          <Route path='/checkout' element={<Checkout/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
