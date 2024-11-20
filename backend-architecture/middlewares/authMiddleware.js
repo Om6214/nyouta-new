@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 // Authenticate JWT
 const authenticateToken = (req, res, next) => {
@@ -23,15 +23,12 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Authorize roles
-const authorizeRole = (roles) => {
-    return (req, res, next) => {
-        if (!req.user || !roles.includes(req.user.role)) {
-            return res.status(403).json({
-                message: 'Access denied. You do not have the required permissions.',
-            });
-        }
-        next();
-    };
+const authorizeRole = (roles) => (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+        return res.status(403).json({ message: 'Forbidden: Insufficient permissions' });
+    }
+    next();
 };
 
-module.exports = { authenticateToken, authorizeRole };
+// Export both as named exports
+export { authenticateToken, authorizeRole };

@@ -22,6 +22,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+
+          {/* this is a comment */}
           <Route path='/' element={<Home />} />
           <Route path='/products' element={<Category />} />
           <Route path='/contact us' element={<ContactUs/>}/>
