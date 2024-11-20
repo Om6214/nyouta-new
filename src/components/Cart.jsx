@@ -57,12 +57,12 @@ export default function Cart() {
       {isCartOpen && (
         <div
           ref={cartRef} // Reference for the cart container
-          className={`fixed top-0 right-0 h-full w-96 bg-white shadow-lg transform transition-transform duration-300 ${
+          className={`fixed top-0 right-0 h-full w-96 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
             isCartOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           {/* Cart Header */}
-          <div className="flex justify-between items-center p-4 border-b bg-gray-100">
+          <div className="flex justify-between items-center p-4 border-b bg-gray-100 ">
             {/* Adding a background to ensure visibility */}
             <h2 className="text-xl font-bold text-black">Your Cart</h2>
             {/* Close Icon */}
