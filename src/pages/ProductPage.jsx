@@ -1,9 +1,14 @@
 'use client'
 
 import React, { useState } from 'react'
+<<<<<<< HEAD
 import { useParams } from 'react-router-dom'
 import productsData from '../products.json' // Assuming products data is stored in this file
 import { useCart } from "../CartContext"; // Assuming CartContext is used to manage the cart state
+=======
+import { useNavigate, useParams } from 'react-router-dom'
+import productsData from '../products.json'
+>>>>>>> ef42b3499a705c2b90af146d35fb0edff01db263
 
 export default function ProductPage() {
   const { id } = useParams(); // Get product ID from URL params
@@ -32,6 +37,7 @@ export default function ProductPage() {
     setQuantity(isNaN(value) ? 1 : Math.max(1, value)); // Ensure the quantity is at least 1
   };
 
+<<<<<<< HEAD
   // Handle adding product to cart
   const handleAddToCart = () => {
     addToCart(product, quantity); // Add selected product and quantity to cart
@@ -43,6 +49,19 @@ export default function ProductPage() {
     console.log(`Buying ${quantity} ${product.name}(s) now`);
     // Implement actual purchase logic here
   };
+=======
+  const addToCart = () => {
+    console.log(`Added ${quantity} ${product.name}(s) to cart`)
+    // Implement your add to cart logic here
+  }
+  const navigate = useNavigate()
+  const buyNow = () => {
+    console.log(`Buying ${quantity} ${product.name}(s) now`)
+    // Implement your buy now logic here
+    navigate('/checkout')
+    
+  }
+>>>>>>> ef42b3499a705c2b90af146d35fb0edff01db263
 
   // Handle "Edit Product" functionality (you can modify it to implement actual editing process)
   const editProduct = () => {
@@ -111,7 +130,11 @@ export default function ProductPage() {
           {/* Action buttons */}
           <div className="space-x-4 flex">
             <button
+<<<<<<< HEAD
               onClick={handleAddToCart}
+=======
+              onClick={() => addToCart(product)}
+>>>>>>> ef42b3499a705c2b90af146d35fb0edff01db263
               className="w-full bg-primaryBlue text-white py-2 px-4 rounded-full hover:bg-blue-700 transition-colors"
             >
               Add to Cart

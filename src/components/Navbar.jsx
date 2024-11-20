@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react";
@@ -9,6 +10,23 @@ export default function MainNav() {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { cartItems, toggleCart } = useCart(); // Access cartItems and toggleCart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+=======
+import * as React from "react"
+import { Link } from "react-router-dom"
+import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react"
+import Cart from "../pages/Cart"
+
+export default function MainNav() {
+  const [cartItems, setCartItems] = React.useState([])
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+  const [isScrolled, setIsScrolled] = React.useState(false)
+  const [openDropdown, setOpenDropdown] = React.useState(null)
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
+>>>>>>> ef42b3499a705c2b90af146d35fb0edff01db263
+
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item])
+  }
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +50,12 @@ export default function MainNav() {
         {/* Top Navigation */}
         <div className="flex h-20 items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2">
+<<<<<<< HEAD
             <span className="text-xl font-bold">ई-न्यौता</span>
+=======
+            {/* <Elephant className="h-10 w-10 text-brown-600" /> */}
+            <span className="text-xl font-bold">न्यौता</span>
+>>>>>>> ef42b3499a705c2b90af146d35fb0edff01db263
           </Link>
 
           {/* Desktop Menu */}
@@ -59,7 +82,13 @@ export default function MainNav() {
                 0
               </span>
             </Link>
+<<<<<<< HEAD
             <button onClick={toggleCart} className="flex items-center gap-1 relative">
+=======
+            
+            <Link href="/cart" className="flex items-center gap-1">
+              
+>>>>>>> ef42b3499a705c2b90af146d35fb0edff01db263
               <ShoppingBag className="h-6 w-6" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 right-0 rounded-full bg-black px-2 py-1 text-[8px] text-white">

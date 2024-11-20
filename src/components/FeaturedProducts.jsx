@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import placeholder from '../assets/images/placeholder.jpg'
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import productsData from "../products.json";
 
 export default function FeaturedProducts() {
   const [currentSlide, setCurrentSlide] = useState(0)

@@ -1,0 +1,23 @@
+import mongoose from 'mongoose';
+
+const OrderSchema = new mongoose.Schema(
+  {
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to User
+    products: [
+      {
+        product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true }, // Reference to Product
+        quantity: { type: Number, required: true },
+        price: { type: Number, required: true }, // Price at the time of order
+      },
+    ],
+    totalPrice: { type: Number, required: true },
+    status: { type: String, default: 'pending', enum: ['pending', 'completed', 'shipped', 'cancelled'] },
+    paymentInfo: {
+      method: { type: String, enum: ['credit_card', 'paypal', 'bank_transfer'], required: true },
+      status: { type: String, enum: ['pending', 'paid', 'failed'], default: 'pending' },
+    },
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model('Order', OrderSchema);
