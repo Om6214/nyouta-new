@@ -1,11 +1,18 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
 import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react"
+import Cart from "../pages/Cart"
 
 export default function MainNav() {
+  const [cartItems, setCartItems] = React.useState([])
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [openDropdown, setOpenDropdown] = React.useState(null)
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
+
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item])
+  }
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +63,9 @@ export default function MainNav() {
               <Heart className="h-6 w-6" />
               <span className="relative -top-3 right-2 rounded-full bg-black px-2 py-1 text-[8px] text-white">0</span>
             </Link>
+            
             <Link href="/cart" className="flex items-center gap-1">
+              
               <ShoppingBag className="h-6 w-6" />
               <span className="relative -top-3 right-2 rounded-full bg-black px-2 py-1 text-[8px] text-white">0</span>
             </Link>
