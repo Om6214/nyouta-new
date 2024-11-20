@@ -32,6 +32,7 @@ export default function FeaturedProducts() {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          dots: false,
         },
       },
       {
@@ -39,6 +40,7 @@ export default function FeaturedProducts() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          dots: false,
         },
       },
     ],
@@ -154,7 +156,7 @@ export default function FeaturedProducts() {
                   />
                   <div className="px-4 py-2 flex flex-col gap-2">
                     <h1 className="font-bold text-lg">{prod.name}</h1>
-                    <h1 className="text-red-500">Rs. {prod.price}</h1>
+                    <h1 className="text-red-600">${prod.price}</h1>
                     <h2>{prod.subCategory}</h2>
                   </div>
                 </Link>
