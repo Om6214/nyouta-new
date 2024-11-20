@@ -59,10 +59,10 @@ export default function MainNav() {
             <Link className="pr-4">
               <Search className="h-6 w-6" />
             </Link>
-            <Link href="/wishlist" className="flex items-center gap-1">
+            {/* <Link href="/wishlist" className="flex items-center gap-1">
               <Heart className="h-6 w-6" />
               <span className="relative -top-3 right-2 rounded-full bg-black px-2 py-1 text-[8px] text-white">0</span>
-            </Link>
+            </Link> */}
             
             <Link href="/cart" className="flex items-center gap-1">
               
