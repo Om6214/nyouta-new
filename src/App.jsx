@@ -16,6 +16,9 @@ import Checkout from './pages/Checkout';
 import ProductsCategory from './pages/ProductsCategory';
 import Cart from './components/Cart';
 import { CartProvider } from './CartContext';
+import DashboardLayout from './dashboard/DashboardLayout';
+import Dashboard from './dashboard/Dashboard';
+import AddProduct from './dashboard/AddProduct';
 
 
 function App() {
@@ -35,6 +38,10 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/checkout' element={<Checkout/>} />
           <Route path="/products/:category" element={<ProductsCategory/>} />
+          <Route path='/admin/dashboard' element={<DashboardLayout/>}>
+              <Route index path='/admin/dashboard' element={<Dashboard/>}/>
+              <Route path='/admin/dashboard/add-product' element={<AddProduct/>}/>
+          </Route>
       
         </Routes>
         <Footer />
