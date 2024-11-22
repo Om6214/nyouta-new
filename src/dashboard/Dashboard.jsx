@@ -51,6 +51,7 @@ const Dashboard = () => {
         </div>
         <div className="bg-blue-400 border-t-2 border-gray-400 p-4">
             <h1 className="text-xl">Inventory Items:</h1>
+            <p className="pt-4">No Items in the Inventory....!!!!</p>
         </div>
       </div>
     </>
