@@ -34,7 +34,7 @@ const SidebarDash = () => {
               href="/admin/dashboard"
               className={`hover:translate-x-1 duration-300 ease-out ${
                 isActivePath("/admin/dashboard")
-                  ? "bg-gray-400 font-bold border-r-2 border-black"
+                  ? "bg-gray-400 font-bold border-r-4 border-black"
                   : ""
               }`}
               icon={HiChartPie}
@@ -45,7 +45,7 @@ const SidebarDash = () => {
               href="/admin/dashboard/add-product"
               className={`hover:translate-x-1 duration-300 ease-out ${
                 isActivePath("/admin/dashboard/add-product")
-                  ? "bg-gray-400 font-bold border-r-2 border-black"
+                  ? "bg-gray-400 font-bold border-r-4 border-black"
                   : ""
               }`}
               icon={HiShoppingBag}
