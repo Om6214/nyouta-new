@@ -5,6 +5,7 @@ import FeaturedProducts from '../components/FeaturedProducts'
 import HeroBanner from '../components/HeroBanner'
 import About from '../components/About'
 import Testimonials from '../components/Testimonials'
+import InviteSection from '../components/InviteSection'
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       {/* <HeroSlider/> */}
       <HeroBanner/>
       <TopCategories/>
+      <InviteSection/>
       <FeaturedProducts/>
       <About/>
       <Testimonials/>
