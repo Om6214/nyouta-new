@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useCart } from '../CartContext'; // Import Cart Context
 import productsData from '../products.json'; // Import product data
+import * as fabric from 'fabric'; // Import Fabric.js for canvas functionality
 
 export default function PhysicalCardEditPage() {
   const location = useLocation();
@@ -11,13 +12,25 @@ export default function PhysicalCardEditPage() {
   const product = productsData.find((p) => p.id === id); // Find product by ID
   const { addToCart } = useCart(); // Access the addToCart function from CartContext
 
-  const [text, setText] = useState(''); // Text to overlay
-  const [font, setFont] = useState('Arial'); // Font for the text
-  const [color, setColor] = useState('#000000'); // Text color
+  // State for text fields
+  const [groomName, setGroomName] = useState(''); // Groom's name
+  const [brideName, setBrideName] = useState(''); // Bride's name
+  const [date, setDate] = useState(''); // Date
+  const [font, setFont] = useState('Dancing Script'); // Font for the text (stylist font)
+  const [color, setColor] = useState('#FFFFFF'); // Text color
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Disable the button initially
 
-  // Handle text changes
-  const handleTextChange = (event) => setText(event.target.value);
+  const canvasRef = useRef(null); // Reference for the canvas element
+  const [canvas, setCanvas] = useState(null); // Fabric canvas object
+
+  // Handle Groom's name change
+  const handleGroomNameChange = (event) => setGroomName(event.target.value);
+
+  // Handle Bride's name change
+  const handleBrideNameChange = (event) => setBrideName(event.target.value);
+
+  // Handle Date change
+  const handleDateChange = (event) => setDate(event.target.value);
 
   // Handle font changes
   const handleFontChange = (event) => setFont(event.target.value);
@@ -27,59 +40,171 @@ export default function PhysicalCardEditPage() {
 
   // Handle "Add to Cart"
   const handleAddToCart = () => {
-    if (product) {
-      const customizedProduct = {
-        ...product,
-        image: imageUrl, // Assigning the original image URL
-        textOverlay: text, // Include user text
-        font,
-        color,
-        customizationType: 'Physical Card', // Tagging the product type
-      };
-      addToCart(customizedProduct, 1); // Add customized product to cart
-      console.log(`Added ${customizedProduct.name} with image ${customizedProduct.image} to cart`);
-    } else {
-      console.error('Product information is missing');
-    }
+    const customizedProduct = {
+      ...product,
+      customizationType: 'Physical Card',
+      groomName,
+      brideName,
+      date,
+      font,
+      color,
+    };
+
+    addToCart(customizedProduct, 1);
+    console.log(`Added ${customizedProduct.name} to cart`);
   };
 
-  // Enable the Add to Cart button when text, font, and color are selected
+  // Enable the Add to Cart button when all necessary fields are completed
   useEffect(() => {
-    if (text && font && color) {
+    if (groomName && brideName && date && font && color) {
       setIsButtonDisabled(false); // Enable the button
     } else {
       setIsButtonDisabled(true); // Keep the button disabled
     }
-  }, [text, font, color]);
+  }, [groomName, brideName, date, font, color]);
+
+  // Initialize the Fabric.js canvas when the component mounts
+  useEffect(() => {
+    const fabricCanvas = new fabric.Canvas(canvasRef.current, {
+      width: 800,  // Set a fixed width
+      height: 600, // Set a fixed height
+    });
+
+    setCanvas(fabricCanvas); // Set the canvas reference
+
+    // If there's an image URL, load it into the canvas
+    if (imageUrl) {
+      const imgElement = new Image();
+      imgElement.src = imageUrl;
+
+      imgElement.onload = () => {
+        const img = new fabric.Image(imgElement, {
+          left: 0,
+          top: 0,
+          selectable: false,
+          evented: false,
+          scaleX: fabricCanvas.width / imgElement.width,
+          scaleY: fabricCanvas.height / imgElement.height,
+        });
+
+        fabricCanvas.set({
+          backgroundImage: img,
+        });
+
+        fabricCanvas.renderAll(); // Ensure the canvas is rendered with the image
+        console.log('Image loaded into canvas');
+      };
+
+      imgElement.onerror = (err) => {
+        console.error('Error loading image:', err);
+      };
+    }
+
+    return () => {
+      fabricCanvas.dispose();
+    };
+  }, [imageUrl]);
+
+  // Update the canvas whenever any of the text fields change
+  useEffect(() => {
+    if (canvas && imageUrl) {
+      const groomText = new fabric.Text(groomName, {
+        left: 150,
+        top: 100,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      const brideText = new fabric.Text(brideName, {
+        left: 150,
+        top: 150,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      const dateText = new fabric.Text(date, {
+        left: 150,
+        top: 200,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      canvas.clear(); // Clear existing objects
+      const imgElement = new Image();
+      imgElement.src = imageUrl;
+
+      imgElement.onload = () => {
+        const img = new fabric.Image(imgElement, {
+          left: 0,
+          top: 0,
+          selectable: false,
+          evented: false,
+          scaleX: canvas.width / imgElement.width,
+          scaleY: canvas.height / imgElement.height,
+        });
+
+        canvas.set({
+          backgroundImage: img,
+        });
+
+        // Add the text objects to the canvas
+        canvas.add(groomText);
+        canvas.add(brideText);
+        canvas.add(dateText);
+        canvas.renderAll();
+      };
+
+      imgElement.onerror = (err) => {
+        console.error('Error loading image:', err);
+      };
+    }
+  }, [groomName, brideName, date, font, color, canvas, imageUrl]);
 
   if (!product) return <div>Product not found</div>;
 
   return (
     <div className="edit-image-page max-w-7xl mx-auto p-6 bg-gray-100">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Editing Image for Product {product.name}</h1>
-      
+
       {imageUrl ? (
         <div className="flex flex-col lg:flex-row gap-8 justify-center">
           
-          {/* Image Display */}
+          {/* Canvas Display */}
           <div className="w-full lg:w-2/3 bg-white p-4 shadow-xl rounded-lg flex justify-center">
-            <img
-              src={imageUrl}
-              alt="Selected Product"
-              className="w-full max-w-[500px] h-auto rounded-lg shadow-md border border-gray-300"
-            />
+            <canvas ref={canvasRef}></canvas>
           </div>
 
           {/* Customization Form */}
           <div className="w-full lg:w-1/3 bg-white p-6 shadow-xl rounded-lg">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Customize Your Card</h2>
             
-            {/* Text Input */}
-            <label className="text-lg font-medium text-gray-700 mb-2">Text to Add:</label>
+            {/* Groom's Name Input */}
+            <label className="text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
             <input
               type="text"
-              value={text}
-              onChange={handleTextChange}
+              value={groomName}
+              onChange={handleGroomNameChange}
+              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            {/* Bride's Name Input */}
+            <label className="text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
+            <input
+              type="text"
+              value={brideName}
+              onChange={handleBrideNameChange}
+              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            {/* Date Input */}
+            <label className="text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
+            <input
+              type="date"
+              value={date}
+              onChange={handleDateChange}
               className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
@@ -90,33 +215,35 @@ export default function PhysicalCardEditPage() {
               onChange={handleFontChange}
               className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="Arial">Arial</option>
-              <option value="Helvetica">Helvetica</option>
-              <option value="Courier New">Courier New</option>
-              <option value="Times New Roman">Times New Roman</option>
+              <option value="Poppins">Poppins</option>
+              <option value="Lobster">Lobster</option>
+              <option value="Dancing Script">Dancing Script</option>
+              <option value="Great Vibes">Great Vibes</option>
+              <option value="Sacramento">Sacramento</option>
+              <option value="Pacifico">Pacifico</option>
             </select>
 
-            {/* Color Picker */}
+            {/* Color Selection */}
             <label className="text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
             <input
               type="color"
               value={color}
               onChange={handleColorChange}
-              className="w-full border p-3 mb-4 rounded-lg"
+              className="w-full p-3 mb-4 rounded-lg"
             />
 
             {/* Add to Cart Button */}
             <button
+              className={`w-full bg-blue-500 text-white py-3 rounded-lg text-lg ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
               onClick={handleAddToCart}
-              disabled={isButtonDisabled} // Disable if the button is not ready
-              className={`w-full px-6 py-3 ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'} text-white font-semibold rounded-lg mb-4 transition duration-300`}
+              disabled={isButtonDisabled}
             >
               Add to Cart
             </button>
           </div>
         </div>
       ) : (
-        <p className="text-center text-lg text-gray-600">No image selected.</p>
+        <div className="text-center text-gray-700">No image available for this product</div>
       )}
     </div>
   );

@@ -19,6 +19,7 @@ import Dashboard from './dashboard/Dashboard';
 import AddProduct from './dashboard/AddProduct';
 import DigitalCardEditPage from './pages/DigitalCardEditPage';
 import PhysicalCardEditPage from './pages/PhysicalCardEditPage';
+import WeddingCardEditor from './pages/WeddingCardEditor';
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
               <Route index path='/admin/dashboard' element={<Dashboard/>}/>
               <Route path='/admin/dashboard/add-product' element={<AddProduct/>}/>
           </Route>
+          <Route path="/editor" element={<WeddingCardEditor/>} />
+          
       
         </Routes>
         <Footer /> {/* Your Footer */}
