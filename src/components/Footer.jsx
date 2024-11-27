@@ -57,17 +57,8 @@ export default function Footer() {
               <Link href="#" className="hover:text-white transition-colors" aria-label="YouTube">
                 <Youtube className="w-6 h-6" />
               </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Pinterest">
-                p
-              </Link>
               <Link href="#" className="hover:text-white transition-colors" aria-label="Instagram">
                 <Instagram className="w-6 h-6" />
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Telegram">
-               T
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="WhatsApp">
-                w
               </Link>
             </div>
           </div>
@@ -89,7 +80,7 @@ export default function Footer() {
                 </a>
               </div>
               <div className="text-sm">
-                <p>{ "Monday to Saturday 10am-5pm IST }" }</p>
+                <p>{ "Monday to Saturday 10am-5pm IST" }</p>
                 <p>Closed all Sunday & holidays</p>
               </div>
 

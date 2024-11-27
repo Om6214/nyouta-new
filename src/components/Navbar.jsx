@@ -3,7 +3,44 @@ import { Link } from "react-router-dom";
 import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react";
 import { useCart } from "../CartContext"; // Import your cart context
 
+const navItems = [
+  {
+    label: 'About',
+    url: '/about'
+  },
+  {
+    label: 'Products',
+    url: '/products',
+    children: [
+      { label: 'Wedding Invitations' },
+      { label: 'Wedding Stationery' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+      { label: 'Wedding Decorations' },
+    ]
+  },
+  {
+    label: 'Categories',
+    url:'/categories'
+  },
+  {
+    label: 'Contact Us',
+    url: '/contact-us'
+  }
+]
 export default function MainNav() {
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -38,11 +75,26 @@ export default function MainNav() {
           {/* Desktop Menu */}
           <div className="hidden md:flex w-full flex-1 items-center gap-2 px-4">
             <ul className="flex w-full space-x-8 items-center justify-end">
-              {["About", "Products", "Categories", "Contact Us"].map((item) => (
-                <li key={item}>
-                  <Link to={`/${item.toLowerCase()}`} className="py-2 hover:text-brown-600">
-                    {item}
+              {navItems.map((item) => (
+                <li key={item} onMouseOut={() => setIsDropdownOpen(false)}>
+                  {item.children ? (
+                    <Link to={item.url} onMouseOver={() => setIsDropdownOpen(true)} className="py-2 hover:text-red-500">
+                    {item.label}
                   </Link>
+                  ) : (
+                    <Link to={item.url} className="py-2 hover:text-red-500">
+                    {item.label}
+                  </Link>
+                  )}
+                  {item.children && isDropdownOpen && (
+                    <ul className="grid grid-cols-4 gap-x-36 gap-y-8 absolute mt-1 right-20 p-8 bg-gray-100 rounded-lg" onMouseOver={() => setIsDropdownOpen(true)}>
+                      {item.children.map((child, childIndex) => (
+                        <li key={childIndex}>
+                          <a href="" className="text-md hover:text-red-500 hover:translate-x-2 transition duration-300">{child.label}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))}
             </ul>
