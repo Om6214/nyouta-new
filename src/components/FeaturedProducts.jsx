@@ -53,7 +53,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 px-4 bg-amber-600 ml-14 mr-14 mt-20">
+    <section className="py-16 px-4 bg-amber-50 ml-14 mr-14 mt-20">
       <div className="container mx-auto">
         {/* Heading with animation and font-family */}
         <div className="text-center mb-12">

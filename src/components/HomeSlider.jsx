@@ -20,8 +20,8 @@ const HomeSlider = () => {
   return (
     <>
     <div className="py-8">
-        <h1 className="lg:text-4xl text-center mb-6">Bring your memories to life with Nyouta</h1>
-        <div className="w-40 h-[3px] bg-amber-400 mx-auto mb-2"></div>
+        <h1 className="lg:text-4xl text-center mb-6"  style={{ fontFamily: "Lobster, cursive" }}>Bring your memories to life with Nyouta</h1>
+        
     </div>
     <div className="flex flex-col lg:flex-row px-12">
       <div className="slider-container lg:w-[70%] rounded-lg">

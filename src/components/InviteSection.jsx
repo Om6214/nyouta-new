@@ -17,7 +17,7 @@ const InviteSection = () => {
   };
 
   return (
-    <section className='py-16 lg:px-12 px-6 sm:px-8 bg-amber-600 ml-14 mr-14'>
+    <section className='py-16 lg:px-12 px-6 sm:px-8 bg-amber-50 ml-14 mr-14'>
       <div className="text-center mb-8">
         <h1 className='lg:text-5xl text-3xl font-extrabold text-white mb-4' style={{
               fontFamily: "Fredoka One, Dancing Script",
