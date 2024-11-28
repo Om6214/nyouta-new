@@ -1,21 +1,27 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import placeholder from "../assets/images/placeholder.jpg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useRef } from "react";
 import productsData from "../products.json";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function FeaturedProducts() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  var settings = {
+  const sliderRef = useRef(null); // Create a reference to the slider
+
+  // Settings for the slider
+  const settings = {
     dots: true,
-    infinite: false,
-    speed: 500,
+    infinite: true, // Infinite scrolling to create a continuous loop
+    speed: 7000, // Very slow transition speed for each slide (7 seconds)
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 4, // Scroll 4 slides at a time for manual navigation
+    autoplay: true, // Enable autoplay for automatic sliding
+    autoplaySpeed: 5000, // Change slide every 5 seconds (no breaks between slides)
+    cssEase: "linear", // Linear transition for a smooth continuous movement
     initialSlide: 0,
+    pauseOnHover: false, // Disable pause on hover to maintain continuous scrolling
     responsive: [
       {
         breakpoint: 1024,
@@ -46,191 +52,145 @@ export default function FeaturedProducts() {
     ],
   };
 
-  const products = [
-    {
-      category: "Framed Prints",
-      title: "Colored Frame with Photo",
-      image: placeholder,
-      originalPrice: 389,
-      discountedPrice: 292,
-      discount: 25,
-      bgColor: "bg-[#ffeedd]",
-    },
-    {
-      category: "Premium Frames With Photo",
-      title: "Urban Touch Frame with Photo",
-      image: placeholder,
-      originalPrice: 1459,
-      discountedPrice: 1094,
-      discount: 25,
-      bgColor: "bg-[#e6e6ed]",
-    },
-    {
-      category: "Photobooks",
-      title: '8" Hardcover',
-      image: placeholder,
-      originalPrice: 1199,
-      discountedPrice: 1019,
-      discount: 15,
-      bgColor: "bg-[#fff3d6]",
-    },
-    {
-      category: "Card Stock Prints",
-      title: "Retro Prints (24 Prints)",
-      image: placeholder,
-      originalPrice: 399,
-      discountedPrice: 170,
-      discount: 57,
-      bgColor: "bg-[#e6f0f5]",
-    },
-  ];
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % products.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + products.length) % products.length);
-  };
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    })
-      .format(price)
-      .replace("₹", "Rs. ");
-  };
-
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 bg-amber-600 ml-14 mr-14 mt-20">
       <div className="container mx-auto">
+        {/* Heading with animation and font-family */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl  text-brown-900 mb-4">
+          <h2
+            className="text-4xl md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            style={{
+              fontFamily: "Fredoka One, Dancing Script, cursive",
+              color: "#1f2937", // Dark Gray
+            }}
+          >
             Featured Products
           </h2>
-          <div className="w-40 h-0.5 bg-amber-400 mx-auto mb-6"></div>
-          <h3 className="text-xl text-amber-700 font-medium">
+          <h3
+            className="text-xl font-medium transition-opacity duration-700 opacity-100"
+            style={{
+              fontFamily: "Dancing Script, cursive",
+              color: "#fbbf24", // Amber
+            }}
+          >
             SEE OUR MOST POPULAR PRODUCTS
           </h3>
+
         </div>
 
-        {/*Slider New  */}
-        <div className="slider-container mx-4">
+        {/* Slider */}
+        <div className="slider-container mx-4 relative">
           <style>
-            {`.slick-slide {
-            padding: 0 10px; 
-            box-sizing: border-box;
-          }
-          .slick-list {
-            margin: 0 -10px;
-          }
-          .slick-arrow{
-          border-radius: 5px;
-          background: blue;
-          width: 25px;
-          height: 25px;
-          }
-          .slick-arrow:hover{
-          background: black;
-          }
-          `}
+            {`
+            .slick-slide {
+              padding: 0 15px;
+            }
+            .slick-list {
+              margin: 0 -15px;
+            }
+            .slick-arrow {
+              border-radius: 50%;
+              background: #f59e0b; /* Amber color for buttons */
+              width: 45px;
+              height: 45px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: white;
+              transition: background 0.3s ease;
+              position: absolute;
+              top: 50%;
+              z-index: 1;
+            }
+            .slick-prev {
+              left: -40px;
+            }
+            .slick-next {
+              right: -40px;
+            }
+            .slick-arrow:hover {
+              background: #d97706; /* Darker amber for hover */
+              cursor: pointer;
+            }
+            .slick-slide > div {
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+              min-height: 450px; /* Ensure each card is at least this tall */
+            }
+            .slick-slide img {
+              object-fit: contain;
+              height: 250px; /* Fixed height for the image */
+              width: 100%;
+              border-radius: 8px;
+            }
+            .slick-slide .card-content {
+              flex-grow: 1;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              padding-top: 16px;
+            }
+            `}
           </style>
-          <Slider {...settings}>
+
+          {/* Slider Content */}
+          <Slider {...settings} ref={sliderRef}>
             {productsData.map((prod, i) => (
               <div
                 key={i}
-                className="bg-blue-200 rounded-lg hover:scale-105 hover:text-[#ff8700] transition duration-300 ease-in"
+                className="bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
                 <Link
-                  key={i}
                   to={`/product/${prod.id}`}
-                  className="flex flex-col gap-2 "
+                  className="flex flex-col gap-4 mt-10"
                 >
-                  <img
-                    src={prod.image[0]}
-                    className="rounded-t-lg"
-                    alt={prod.name}
-                  />
-                  <div className="px-4 py-2 flex flex-col gap-2">
-                    <h1 className="font-bold text-lg">{prod.name}</h1>
-                    <h1 className="text-red-600">${prod.price}</h1>
-                    <h2>{prod.subCategory}</h2>
+                  <div className="relative aspect-w-1 aspect-h-1">
+                    <img
+                      src={prod.image[0] || placeholder}
+                      alt={prod.name}
+                      className="object-cover rounded-t-lg"
+                    />
+                  </div>
+                  <div className="px-4 py-3 flex flex-col gap-3 card-content">
+                    <h1
+                      className="font-semibold text-xl text-gray-900"
+                      style={{ fontFamily: "Poppins, sans-serif" }}
+                    >
+                      {prod.name}
+                    </h1>
+                    <h3
+                      className="text-sm text-gray-600"
+                      style={{ fontFamily: "Lobster, cursive" }}
+                    >
+                      {prod.subCategory}
+                    </h3>
+                    <div className="flex items-baseline gap-4">
+                      <span
+                        className="text-xl font-bold text-gray-900"
+                        style={{ fontFamily: "Roboto, sans-serif" }}
+                      >
+                        Rs. {prod.price}
+                      </span>
+                      <span
+                        className="text-sm text-gray-500 line-through"
+                        style={{ fontFamily: "Roboto, sans-serif" }}
+                      >
+                        Rs. 14
+                      </span>
+                      <span
+                        className="text-sm text-red-500"
+                        style={{ fontFamily: "Roboto, sans-serif" }}
+                      >
+                        {prod.discount}% OFF
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </div>
             ))}
           </Slider>
         </div>
-
-        {/* <div className="relative">
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 -translate-x-6 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 translate-x-6 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product, index) => (
-              <Link href="#" key={index} className="block group">
-                <div
-                  className={`rounded-2xl p-6 ${product.bgColor} transition-transform group-hover:scale-[1.02]`}
-                >
-                  <div className="relative aspect-square mb-4">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      fill
-                      className="object-contain p-4"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-gray-600 text-sm">{product.category}</p>
-                    <h3 className="font-medium text-gray-900 group-hover:text-gray-700">
-                      {product.title}
-                    </h3>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-gray-900">
-                        From {formatPrice(product.discountedPrice)}
-                      </span>
-                      <span className="text-gray-500 line-through text-sm">
-                        {formatPrice(product.originalPrice)}
-                      </span>
-                      <span className="text-red-500 text-sm">
-                        {product.discount}%
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex justify-center gap-2 mt-8">
-            {products.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  currentSlide === index ? "bg-gray-800" : "bg-gray-300"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div> */}
       </div>
     </section>
   );
