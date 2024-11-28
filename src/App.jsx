@@ -26,8 +26,7 @@ function App() {
   return (
     <CartProvider> {/* Wrap the entire app with CartProvider */}
       <BrowserRouter>
-        <Navbar /> {/* Your Navbar */}
-        <Cart /> {/* The Cart component, this should show the cart's content */}
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Category />} />
