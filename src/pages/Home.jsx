@@ -6,14 +6,20 @@ import HeroBanner from '../components/HeroBanner'
 import About from '../components/About'
 import Testimonials from '../components/Testimonials'
 import InviteSection from '../components/InviteSection'
+import HomeSlider from '../components/HomeSlider'
+import CategorySlider from '../components/CategorySlider'
+import CategoryCard from '../components/CategoryCard'
 
 const Home = () => {
   return (
     <div className='bg-white'>
       {/* <HeroSlider/> */}
       <HeroBanner/>
-      <TopCategories/>
+      <CategoryCard/>
+      {/* <TopCategories/> */}
+      <HomeSlider/>
       <InviteSection/>
+      {/* <CategorySlider/> */}
       <FeaturedProducts/>
       <About/>
       <Testimonials/>
