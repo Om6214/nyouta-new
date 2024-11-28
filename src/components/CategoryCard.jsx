@@ -28,7 +28,7 @@ const categories = [
     },
     {
         title: 'E Invitations',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus.',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus. Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had.',
         subCategory: [
             {
                 subTitle: 'Wedding Invitation',
@@ -50,7 +50,7 @@ const categories = [
     },
     {
         title: 'Photo Books',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus.',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus.Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had.',
         subCategory: [
             {
                 subTitle: 'Soft Cover Photobook',
@@ -102,7 +102,7 @@ const categories = [
     },
     {
         title: 'Free Greetings',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus.',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus. ',
         subCategory: [
             {
                 subTitle: 'Wishes Greeting',
@@ -157,38 +157,82 @@ const categories = [
 ]
 
 const CategoryCard = () => {
-    const [selectedCategory, setSelectedCategory] = useState(categories[0])
-  return (
-    <div className=' mt-8 py-6 rounded-lg bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500'>
-        <div>
-            <h1 className='text-4xl pl-6 font-bold py-4'>Here are our product categories</h1>
-        </div>
-        <div className='p-4 '>
-        <ul className='flex gap-4 bg-gradient-to-r from-amber-500 to-amber-500 px-2 py-2 rounded-lg'>
-        {categories.map((cat, index) => (
-                <li className={`text-lg cursor-pointer px-2 py-1 rounded-lg ${selectedCategory === cat ? 'bg-amber-600 font-semibold' : 'bg-transparent hover:bg-amber-300'}`} key={index} onClick={()=> setSelectedCategory(cat)}>{cat.title}</li>
-            ))}
-            </ul>
-        </div>
+    const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
-        {selectedCategory && (
-            <div className='flex gap-4 justify-around my-6'>
-                <div className='flex flex-col items-center gap-10 w-[30%]'>
-                <h1 className='text-4xl font-semibold'>{selectedCategory.title}</h1>
-                <p className='text-gray-800 text-center text-lg'>{selectedCategory.description}</p>
-                </div>
-                <div className='grid grid-cols-4 gap-4'>
-                    {selectedCategory.subCategory.map((sub, index) => (
-                        <div key={index} className=' bg-amber-400 shadow-xl rounded-lg hover:-translate-y-1 transition duration-300 ease-in'>
-                            <img className='w-[220px] h-[250px] rounded-t-lg' src={sub.imgUrl} alt="" />
-                            <h1 className='text-xl py-2 text-center'>{sub.subTitle}</h1>
-                        </div>
-                    ))}
-                </div>
+    return (
+        <div className="mt-8 py-10 px-8 rounded-lg bg-gradient-to-b from-amber-50 to-yellow-100 shadow-lg">
+            {/* Header Section */}
+            <div className="text-center mb-10">
+                <h1 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500">
+                    Explore Our Product Categories
+                </h1>
+                <p className="text-gray-700 text-lg mt-4 leading-relaxed">
+                    Browse through our wide range of categories to find something perfect for your needs!
+                </p>
+                <div className="w-24 h-[4px] bg-amber-500 mx-auto mt-6 rounded-full"></div>
             </div>
-        )}
-    </div>
-  )
-}
+
+            {/* Categories Navigation */}
+            <div className="p-6 bg-yellow-100 rounded-lg shadow-md">
+                <ul className="flex flex-wrap gap-6 justify-center">
+                    {categories.map((cat, index) => (
+                        <li
+                            key={index}
+                            className={`text-lg font-medium cursor-pointer px-6 py-3 rounded-lg transition-all duration-300 transform 
+                                ${selectedCategory === cat
+                                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg scale-105"
+                                    : "bg-gray-200 text-gray-700 hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
+                                }`}
+                            onClick={() => setSelectedCategory(cat)}
+                        >
+                            {cat.title}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {/* Selected Category Display */}
+            {selectedCategory && (
+                <div className="flex flex-col lg:flex-row gap-10 justify-between items-start mt-12">
+                    {/* Category Info */}
+                    <div className="text-start w-full lg:w-[30%] flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
+                        <h1 className="text-4xl font-bold text-gray-800">
+                            {selectedCategory.title}
+                        </h1>
+                        <p className="text-gray-600 text-lg leading-relaxed">
+                            {selectedCategory.description}
+                        </p>
+                        <div className="w-16 h-[3px] bg-gradient-to-r from-amber-400 to-orange-400 rounded-full"></div>
+                    </div>
+
+                    {/* Subcategories Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
+                        {selectedCategory.subCategory.map((sub, index) => (
+                            <div
+                                key={index}
+                                className="relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
+                            >
+                                <div className="relative overflow-hidden group">
+                                    <img
+                                        className="w-full h-[200px] object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110"
+                                        src={sub.imgUrl || invitation}
+                                        alt={sub.subTitle}
+                                    />
+                                    <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <p className="text-white font-bold text-lg">View More</p>
+                                    </div>
+                                </div>
+                                <h1 className="text-lg font-semibold text-center text-gray-800 py-4">
+                                    {sub.subTitle}
+                                </h1>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
 
 export default CategoryCard
