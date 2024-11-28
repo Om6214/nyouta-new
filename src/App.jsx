@@ -24,7 +24,7 @@ import WeddingCardEditor from './pages/WeddingCardEditor';
 
 function App() {
   return (
-    <CartProvider> {/* Wrap the entire app with CartProvider */}
+    <CartProvider> 
       <BrowserRouter>
         <Navbar />
         <Routes>
