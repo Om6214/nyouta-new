@@ -157,7 +157,7 @@ const categories = [
 ]
 
 const CategoryCard = () => {
-    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [selectedCategory, setSelectedCategory] = useState(categories[0])
   return (
     <div className=' mt-8 py-6 rounded-lg bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500'>
         <div>
@@ -177,9 +177,9 @@ const CategoryCard = () => {
                 <h1 className='text-4xl font-semibold'>{selectedCategory.title}</h1>
                 <p className='text-gray-800 text-center text-lg'>{selectedCategory.description}</p>
                 </div>
-                <div className='grid grid-cols-3 gap-4'>
+                <div className='grid grid-cols-4 gap-4'>
                     {selectedCategory.subCategory.map((sub, index) => (
-                        <div key={index} className=' bg-amber-400 shadow-2xl rounded-lg hover:border-2 hover:border-black'>
+                        <div key={index} className=' bg-amber-400 shadow-xl rounded-lg hover:-translate-y-1 transition duration-300 ease-in'>
                             <img className='w-[220px] h-[250px] rounded-t-lg' src={sub.imgUrl} alt="" />
                             <h1 className='text-xl py-2 text-center'>{sub.subTitle}</h1>
                         </div>

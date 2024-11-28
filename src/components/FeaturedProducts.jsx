@@ -114,14 +114,14 @@ export default function FeaturedProducts() {
             }
             .slick-slide > div {
               display: flex;
-              flex-direction: column;
-              height: 100%;
-              min-height: 450px; /* Ensure each card is at least this tall */
+              // flex-direction: column;
+              // height: 100%;
+              // min-height: 450px; /* Ensure each card is at least this tall */
             }
             .slick-slide img {
               object-fit: contain;
-              height: 250px; /* Fixed height for the image */
-              width: 100%;
+              // height: 250px; /* Fixed height for the image */
+              // width: 100%;
               border-radius: 8px;
             }
             .slick-slide .card-content {
