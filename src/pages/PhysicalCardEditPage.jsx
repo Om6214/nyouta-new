@@ -17,7 +17,7 @@ export default function PhysicalCardEditPage() {
   const [brideName, setBrideName] = useState(''); // Bride's name
   const [date, setDate] = useState(''); // Date
   const [font, setFont] = useState('Dancing Script'); // Font for the text (stylist font)
-  const [color, setColor] = useState('#FFFFFF'); // Text color
+  const [color, setColor] = useState('#000000'); // Text color
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Disable the button initially
 
   const canvasRef = useRef(null); // Reference for the canvas element
@@ -109,24 +109,24 @@ export default function PhysicalCardEditPage() {
   useEffect(() => {
     if (canvas && imageUrl) {
       const groomText = new fabric.Text(groomName, {
-        left: 150,
-        top: 100,
+        left: canvas.width / 2 - (groomName.length * 15) / 2, // Dynamically center based on text width
+        top: canvas.height / 4, // Dynamically space vertically
         fontSize: 30,
         fill: color,
         fontFamily: font,
       });
 
       const brideText = new fabric.Text(brideName, {
-        left: 150,
-        top: 150,
+        left: canvas.width / 2 - (brideName.length * 15) / 2, // Dynamically center based on text width
+        top: canvas.height / 2, // Vertically below groom's name
         fontSize: 30,
         fill: color,
         fontFamily: font,
       });
 
       const dateText = new fabric.Text(date, {
-        left: 150,
-        top: 200,
+        left: canvas.width / 2 - (date.length * 15) / 2, // Dynamically center based on text width
+        top: canvas.height / 1.5, // Below the bride's name
         fontSize: 30,
         fill: color,
         fontFamily: font,
@@ -166,28 +166,28 @@ export default function PhysicalCardEditPage() {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="edit-image-page max-w-7xl mx-auto p-6 bg-gray-100">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Editing Image for Product {product.name}</h1>
+    <div className="edit-image-page max-w-7xl mx-auto p-8 bg-gray-50">
+      <h1 className="text-4xl font-bold text-center text-gray-900 mb-8">Customize Your {product.name}</h1>
 
       {imageUrl ? (
-        <div className="flex flex-col lg:flex-row gap-8 justify-center">
+        <div className="flex flex-col lg:flex-row gap-12 justify-center">
           
           {/* Canvas Display */}
-          <div className="w-full lg:w-2/3 bg-white p-4 shadow-xl rounded-lg flex justify-center">
+          <div className="w-full lg:w-2/3 bg-white p-6 shadow-2xl rounded-xl flex justify-center items-center border border-gray-300">
             <canvas ref={canvasRef}></canvas>
           </div>
 
           {/* Customization Form */}
-          <div className="w-full lg:w-1/3 bg-white p-6 shadow-xl rounded-lg">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Customize Your Card</h2>
-            
+          <div className="w-full lg:w-1/3 bg-white p-8 shadow-lg rounded-xl border border-gray-300">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Personalize Your Card</h2>
+
             {/* Groom's Name Input */}
             <label className="text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
             <input
               type="text"
               value={groomName}
               onChange={handleGroomNameChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border-2 p-4 mb-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             {/* Bride's Name Input */}
@@ -196,7 +196,7 @@ export default function PhysicalCardEditPage() {
               type="text"
               value={brideName}
               onChange={handleBrideNameChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border-2 p-4 mb-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             {/* Date Input */}
@@ -205,7 +205,7 @@ export default function PhysicalCardEditPage() {
               type="date"
               value={date}
               onChange={handleDateChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border-2 p-4 mb-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             {/* Font Selection */}
@@ -213,7 +213,7 @@ export default function PhysicalCardEditPage() {
             <select
               value={font}
               onChange={handleFontChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border-2 p-4 mb-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="Poppins">Poppins</option>
               <option value="Lobster">Lobster</option>
@@ -229,12 +229,12 @@ export default function PhysicalCardEditPage() {
               type="color"
               value={color}
               onChange={handleColorChange}
-              className="w-full p-3 mb-4 rounded-lg"
+              className="w-full p-4 mb-6 rounded-xl"
             />
 
             {/* Add to Cart Button */}
             <button
-              className={`w-full bg-blue-500 text-white py-3 rounded-lg text-lg ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+              className={`w-full bg-blue-600 text-white py-4 rounded-xl text-lg transition duration-300 ease-in-out ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
               onClick={handleAddToCart}
               disabled={isButtonDisabled}
             >
@@ -243,7 +243,7 @@ export default function PhysicalCardEditPage() {
           </div>
         </div>
       ) : (
-        <div className="text-center text-gray-700">No image available for this product</div>
+        <div className="text-center text-gray-700 text-xl">No image available for this product</div>
       )}
     </div>
   );
