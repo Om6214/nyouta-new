@@ -1,128 +1,259 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import productsData from '../products.json'; // Assuming you have this data file with a list of products
+import { useCart } from '../CartContext'; // Import Cart Context
+import productsData from '../products.json'; // Import product data
+import * as fabric from 'fabric'; // Import Fabric.js for canvas functionality
 
-export default function DigitalCardEditPage() {
+export default function WeddingCardEditPage() {
   const location = useLocation();
   const { id } = useParams(); // Get the product ID from the URL
-  const { imageUrl } = location.state || {}; // Get the image URL passed through state
+  const { imageUrl } = location.state || {}; // Get the original image URL passed through state
 
-  // Find the product by its ID from the products data
-  const product = productsData.find((p) => p.id === id);
+  const product = productsData.find((p) => p.id === id); // Find product by ID
+  const { addToCart } = useCart(); // Access the addToCart function from CartContext
 
-  const [text, setText] = useState(''); // Text to overlay
-  const [font, setFont] = useState('Arial'); // Font for the text
+  // State for text fields
+  const [groomName, setGroomName] = useState(''); // Groom's name
+  const [brideName, setBrideName] = useState(''); // Bride's name
+  const [date, setDate] = useState(''); // Wedding date
+  const [font, setFont] = useState('Dancing Script'); // Font for the text
   const [color, setColor] = useState('#000000'); // Text color
-  const [paymentCompleted, setPaymentCompleted] = useState(false); // State to track payment status
-  const [showPaymentForm, setShowPaymentForm] = useState(false); // To toggle payment form visibility
-  const [isApplyChangesEnabled, setIsApplyChangesEnabled] = useState(false); // To track if apply changes button is enabled
-  const [isPayNowEnabled, setIsPayNowEnabled] = useState(false); // To track if pay now button is enabled
+  const [isApplyChangesEnabled, setIsApplyChangesEnabled] = useState(false); // Control Apply Changes Button state
+  const [isPayNowEnabled, setIsPayNowEnabled] = useState(false); // Control Pay Now Button state
+  const [paymentCompleted, setPaymentCompleted] = useState(false); // Track payment status
+  const [showPaymentForm, setShowPaymentForm] = useState(false); // Toggle payment form visibility
 
-  // Enable Apply Changes button if text, font, and color are selected
-  useEffect(() => {
-    if (text && font && color) {
-      setIsApplyChangesEnabled(true); // Enable Apply Changes button
-    } else {
-      setIsApplyChangesEnabled(false); // Disable Apply Changes button
-    }
-  }, [text, font, color]);
+  const canvasRef = useRef(null); // Reference for the canvas element
+  const [canvas, setCanvas] = useState(null); // Fabric canvas object
 
-  // Handle the text change in the form
-  const handleTextChange = (event) => {
-    setText(event.target.value); // Update text state
-  };
+  // Handlers for input fields
+  const handleGroomNameChange = (event) => setGroomName(event.target.value);
+  const handleBrideNameChange = (event) => setBrideName(event.target.value);
+  const handleDateChange = (event) => setDate(event.target.value);
+  const handleFontChange = (event) => setFont(event.target.value);
+  const handleColorChange = (event) => setColor(event.target.value);
 
-  // Handle font change in the form
-  const handleFontChange = (event) => {
-    setFont(event.target.value); // Update font state
-  };
-
-  // Handle color change for text
-  const handleColorChange = (event) => {
-    setColor(event.target.value); // Update text color state
-  };
-
-  // Handle Apply Changes button click
+  // Handle Apply Changes
   const handleApplyChanges = () => {
-    if (text && font && color) {
-      setIsPayNowEnabled(true); // Enable Pay Now button after applying changes
-    }
+    // Logic to apply changes, possibly update canvas or save data
+    setIsApplyChangesEnabled(false); // Disable Apply Changes after applying
+    setIsPayNowEnabled(true); // Enable Pay Now after applying changes
   };
 
-  // Simulate showing the payment form when the user clicks "Pay Now"
+  // Handle Payment
   const handlePayment = () => {
     setShowPaymentForm(true); // Show the payment form
   };
 
-  // Handle payment form submission
+  // Handle Payment Form Submission
   const handlePaymentSubmit = (event) => {
     event.preventDefault();
-    // Simulate payment processing (replace with actual payment logic)
-    setTimeout(() => {
-      alert('Payment Successful!');
-      setPaymentCompleted(true); // Set payment as completed
-      setShowPaymentForm(false); // Hide payment form after successful payment
-    }, 2000); // Simulate payment delay
+    // Simulate payment completion (you would integrate your payment logic here)
+    setPaymentCompleted(true);
+    setShowPaymentForm(false);
   };
 
-  // Handle image download
+  // Handle Download
   const handleDownload = () => {
-    alert('Download functionality is currently not implemented.');
+    // Logic to download the image (e.g., save canvas as an image file)
+    const dataUrl = canvas.toDataURL();
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = 'customized-wedding-card.png';
+    link.click();
   };
 
-  if (!product) {
-    return <div>Product not found</div>;
-  }
+  // Enable/Disable the Apply Changes Button based on field validation
+  useEffect(() => {
+    if (groomName && brideName && date && font && color) {
+      setIsApplyChangesEnabled(true);
+    } else {
+      setIsApplyChangesEnabled(false);
+    }
+  }, [groomName, brideName, date, font, color]);
+
+  // Initialize Fabric.js canvas
+  useEffect(() => {
+    const fabricCanvas = new fabric.Canvas(canvasRef.current, {
+      width: 800,
+      height: 600,
+    });
+
+    setCanvas(fabricCanvas);
+
+    if (imageUrl) {
+      const imgElement = new Image();
+      imgElement.src = imageUrl;
+
+      imgElement.onload = () => {
+        const canvasWidth = 800;
+        const canvasHeight = 600;
+
+        const imgWidth = imgElement.width;
+        const imgHeight = imgElement.height;
+
+        const scaleFactor = 1.2; // Increase size by 20%
+        const scaleX = (canvasWidth / imgWidth) * scaleFactor;
+        const scaleY = (canvasHeight / imgHeight) * scaleFactor;
+        const scale = Math.min(scaleX, scaleY);
+
+        const centerX = (canvasWidth - imgWidth * scale) / 2;
+        const centerY = (canvasHeight - imgHeight * scale) / 2;
+
+        const img = new fabric.Image(imgElement, {
+          left: centerX,
+          top: centerY,
+          selectable: false,
+          evented: false,
+          scaleX: scale,
+          scaleY: scale,
+        });
+
+        fabricCanvas.set({
+          backgroundImage: img,
+        });
+
+        fabricCanvas.renderAll();
+      };
+
+      imgElement.onerror = (err) => {
+        console.error('Error loading image:', err);
+      };
+    }
+
+    return () => {
+      fabricCanvas.dispose();
+    };
+  }, [imageUrl]);
+
+  // Update canvas on text and style changes
+  useEffect(() => {
+    if (canvas && imageUrl) {
+      const groomText = new fabric.Text(groomName, {
+        left: 150,
+        top: 100,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      const brideText = new fabric.Text(brideName, {
+        left: 150,
+        top: 150,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      const dateText = new fabric.Text(date, {
+        left: 150,
+        top: 200,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      canvas.clear();
+      const imgElement = new Image();
+      imgElement.src = imageUrl;
+
+      imgElement.onload = () => {
+        const canvasWidth = 800;
+        const canvasHeight = 600;
+
+        const imgWidth = imgElement.width;
+        const imgHeight = imgElement.height;
+
+        const scaleFactor = 1.2;
+        const scaleX = (canvasWidth / imgWidth) * scaleFactor;
+        const scaleY = (canvasHeight / imgHeight) * scaleFactor;
+        const scale = Math.min(scaleX, scaleY);
+
+        const centerX = (canvasWidth - imgWidth * scale) / 2;
+        const centerY = (canvasHeight - imgHeight * scale) / 2;
+
+        const img = new fabric.Image(imgElement, {
+          left: centerX,
+          top: centerY,
+          selectable: false,
+          evented: false,
+          scaleX: scale,
+          scaleY: scale,
+        });
+
+        canvas.set({
+          backgroundImage: img,
+        });
+
+        canvas.add(groomText);
+        canvas.add(brideText);
+        canvas.add(dateText);
+        canvas.renderAll();
+      };
+
+      imgElement.onerror = (err) => {
+        console.error('Error loading image:', err);
+      };
+    }
+  }, [groomName, brideName, date, font, color, canvas, imageUrl]);
+
+  if (!product) return <div>Product not found</div>;
 
   return (
     <div className="edit-image-page max-w-7xl mx-auto p-6 bg-gray-100">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Edit Your Digital Card for Product {product.name}</h1>
-      
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Customize Your Wedding Card for {product.name}</h1>
+
       {imageUrl ? (
         <div className="flex flex-col lg:flex-row gap-8 justify-center">
-          
-          {/* Image Display */}
           <div className="w-full lg:w-2/3 bg-white p-4 shadow-xl rounded-lg flex justify-center">
-            <img 
-              src={imageUrl} 
-              alt="Product" 
-              className="w-full max-w-[500px] h-auto rounded-lg shadow-md border border-gray-300"
-            />
+            <canvas ref={canvasRef}></canvas>
           </div>
 
-          {/* Form for Editing Text */}
           <div className="w-full lg:w-1/3 bg-white p-6 shadow-xl rounded-lg">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Customize Your Card</h2>
-            
-            {/* Text Input */}
-            <label className="text-lg font-medium text-gray-700 mb-2">Text to Add:</label>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Card Details</h2>
+
+            <label className="text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
             <input
               type="text"
-              value={text}
-              onChange={handleTextChange}
+              value={groomName}
+              onChange={handleGroomNameChange}
               className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-            {/* Font Selection */}
-            <label className="text-lg font-medium text-gray-700 mb-2">Select Font:</label>
+            <label className="text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
+            <input
+              type="text"
+              value={brideName}
+              onChange={handleBrideNameChange}
+              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <label className="text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
+            <input
+              type="date"
+              value={date}
+              onChange={handleDateChange}
+              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+
+            <label className="text-lg font-medium text-gray-700 mb-2">Font:</label>
             <select
               value={font}
               onChange={handleFontChange}
               className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="Arial">Arial</option>
-              <option value="Helvetica">Helvetica</option>
-              <option value="Courier New">Courier New</option>
-              <option value="Times New Roman">Times New Roman</option>
+              <option value="Dancing Script">Dancing Script</option>
+              <option value="Pacifico">Pacifico</option>
+              <option value="Lobster">Lobster</option>
             </select>
 
-            {/* Text Color Picker */}
-            <label className="text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
+            <label className="text-lg font-medium text-gray-700 mb-2">Text Color:</label>
             <input
               type="color"
               value={color}
               onChange={handleColorChange}
-              className="w-full border p-3 mb-4 rounded-lg"
+              className="w-full h-12 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             {/* Apply Changes Button */}
