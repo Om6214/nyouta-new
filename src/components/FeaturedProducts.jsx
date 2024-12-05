@@ -58,20 +58,13 @@ export default function FeaturedProducts() {
         {/* Heading with animation and font-family */}
         <div className="text-center mb-12">
           <h2
-            className="text-4xl md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
-            style={{
-              fontFamily: "Fredoka One, Dancing Script, cursive",
-              color: "#1f2937", // Dark Gray
-            }}
+            className="text-4xl font-primaryFont md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
             Featured Products
           </h2>
           <h3
-            className="text-xl font-medium transition-opacity duration-700 opacity-100"
-            style={{
-              fontFamily: "Dancing Script, cursive",
-              color: "#fbbf24", // Amber
-            }}
+            className="text-3xl font-primaryFont mt-6 font-medium text-amber-500 transition-opacity duration-700 opacity-100"
+            
           >
             SEE OUR MOST POPULAR PRODUCTS
           </h3>
@@ -149,7 +142,7 @@ export default function FeaturedProducts() {
                     <img
                       src={prod.image[0] || placeholder}
                       alt={prod.name}
-                      className="object-cover rounded-t-lg"
+                      className="object-cover w-[350px] h-[300px] rounded-t-lg"
                     />
                   </div>
                   <div className="px-4 py-3 flex flex-col gap-3 card-content">

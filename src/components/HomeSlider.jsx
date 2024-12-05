@@ -19,8 +19,8 @@ const HomeSlider = () => {
   };
   return (
     <>
-    <div className="pt-16">
-        <h1 className="lg:text-4xl text-2xl text-center"  style={{ fontFamily: "Lobster, cursive" }}>Bring your memories to life with Nyouta</h1>
+    <div className="my-16">
+        <h1 className="lg:text-5xl text-2xl text-center font-primaryFont font-bold ">Bring your memories to life with Nyouta</h1>
         
     </div>
     <div className="flex flex-col lg:flex-row lg:px-12">
@@ -40,7 +40,7 @@ const HomeSlider = () => {
           </div>
         </Slider>
       </div>
-      <div className="mx-2 flex flex-col gap-8 py-4 items-center justify-center rounded-lg bg-gradient-to-r from-amber-300 to-amber-500 w-full">
+      <div className="mx-2 flex flex-col gap-8 py-4 items-center justify-center rounded-lg bg-gradient-to-r from-[#563B0E] to-amber-700 w-full">
         <h1 className="text-3xl text-center font-bold">Nyouta</h1>
         <div className="flex gap-2 items-center">
             <h1 className="flex items-center gap-1 text-rose-500 text-2xl"><Heart size={32}/> <span>35 Lakh</span></h1>
