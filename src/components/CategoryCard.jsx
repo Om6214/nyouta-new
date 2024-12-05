@@ -206,7 +206,7 @@ const CategoryCard = () => {
                     </div>
 
                     {/* Subcategories Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 w-full">
                         {selectedCategory.subCategory.map((sub, index) => (
                             <div
                                 key={index}
