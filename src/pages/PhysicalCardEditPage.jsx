@@ -55,91 +55,113 @@ export default function PhysicalCardEditPage() {
   }, [groomName, brideName, date, font, color]);
 
   // Initialize the Fabric.js canvas
-  useEffect(() => {
-    if (imageUrl) {
-      const imgElement = new Image();
-      imgElement.src = imageUrl;
+  // Initialize the Fabric.js canvas
+useEffect(() => {
+  if (imageUrl) {
+    const imgElement = new Image();
+    imgElement.src = imageUrl;
 
-      imgElement.onload = () => {
-        const fabricCanvas = new fabric.Canvas(canvasRef.current, {
-          width: imgElement.width, // Set canvas width to image width
-          height: imgElement.height, // Set canvas height to image height
-        });
+    imgElement.onload = () => {
+      const canvasWidth = 800; // Fixed canvas width for uniformity
+      const canvasHeight = 600; // Fixed canvas height for uniformity
 
-        setCanvas(fabricCanvas);
+      const fabricCanvas = new fabric.Canvas(canvasRef.current, {
+        width: canvasWidth,
+        height: canvasHeight,
+      });
 
-        const img = new fabric.Image(imgElement, {
-          left: 0,
-          top: 0,
-          selectable: false,
-          evented: false,
-        });
+      setCanvas(fabricCanvas);
 
-        fabricCanvas.add(img);
-        fabricCanvas.renderAll();
-        console.log('Image loaded into canvas');
-      };
+      // Scale the image proportionally to fit the canvas
+      const img = new fabric.Image(imgElement, {
+        left: 0,
+        top: 0,
+        selectable: false,
+        evented: false,
+      });
 
-      imgElement.onerror = (err) => {
-        console.error('Error loading image:', err);
-      };
-    }
+      const scaleX = canvasWidth / imgElement.width;
+      const scaleY = canvasHeight / imgElement.height;
+      const scale = Math.min(scaleX, scaleY); // Scale proportionally
 
-    return () => {
-      if (canvas) canvas.dispose();
+      img.scale(scale);
+      fabricCanvas.add(img);
+      fabricCanvas.renderAll();
+      console.log('Image loaded into canvas with adjusted dimensions');
     };
-  }, [imageUrl]);
 
-  // Update the canvas text elements when inputs change
-  useEffect(() => {
-    if (canvas) {
-      canvas.clear(); // Clear the canvas
-      const imgElement = new Image();
-      imgElement.src = imageUrl;
+    imgElement.onerror = (err) => {
+      console.error('Error loading image:', err);
+    };
+  }
 
-      imgElement.onload = () => {
-        const img = new fabric.Image(imgElement, {
-          left: 0,
-          top: 0,
-          selectable: false,
-          evented: false,
-        });
+  return () => {
+    if (canvas) canvas.dispose();
+  };
+}, [imageUrl]);
 
-        canvas.add(img);
+// Update the canvas text elements when inputs change
+useEffect(() => {
+  if (canvas) {
+    canvas.clear(); // Clear the canvas
+    const imgElement = new Image();
+    imgElement.src = imageUrl;
 
-        const groomText = new fabric.Text(groomName, {
-          left: canvas.width / 2 - (groomName.length * 15) / 2,
-          top: canvas.height / 4,
-          fontSize: 30,
-          fill: color,
-          fontFamily: font,
-        });
+    imgElement.onload = () => {
+      const canvasWidth = 800;
+      const canvasHeight = 600;
 
-        const brideText = new fabric.Text(brideName, {
-          left: canvas.width / 2 - (brideName.length * 15) / 2,
-          top: canvas.height / 2,
-          fontSize: 30,
-          fill: color,
-          fontFamily: font,
-        });
+      const img = new fabric.Image(imgElement, {
+        left:350,
+        top: 0,
+        selectable: false,
+        evented: false,
+      });
 
-        const dateText = new fabric.Text(date, {
-          left: canvas.width / 2 - (date.length * 15) / 2,
-          top: canvas.height / 1.5,
-          fontSize: 30,
-          fill: color,
-          fontFamily: font,
-        });
+      const scaleX = canvasWidth / imgElement.width;
+      const scaleY = canvasHeight / imgElement.height;
+      const scale = Math.min(scaleX, scaleY);
 
-        canvas.add(groomText, brideText, dateText);
-        canvas.renderAll();
-      };
+      img.scale(scale);
+      canvas.add(img);
 
-      imgElement.onerror = (err) => {
-        console.error('Error loading image:', err);
-      };
-    }
-  }, [groomName, brideName, date, font, color, canvas, imageUrl]);
+      // Add Groom's Name Text
+      const groomText = new fabric.Text(groomName, {
+        left: 400,
+        top: 100,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      // Add Bride's Name Text
+      const brideText = new fabric.Text(brideName, {
+        left: 400,
+        top: 150,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      // Add Wedding Date Text
+      const dateText = new fabric.Text(date, {
+        left: 400,
+        top: 200,
+        fontSize: 30,
+        fill: color,
+        fontFamily: font,
+      });
+
+      canvas.add(groomText, brideText, dateText);
+      canvas.renderAll();
+    };
+
+    imgElement.onerror = (err) => {
+      console.error('Error loading image:', err);
+    };
+  }
+}, [groomName, brideName, date, font, color, canvas, imageUrl]);
+
 
   if (!product) return <div>Product not found</div>;
 
@@ -150,15 +172,17 @@ export default function PhysicalCardEditPage() {
       </h1>
   
       {imageUrl ? (
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
+        <div className="flex flex-col lg:flex-row gap-12 ">
           {/* Canvas Display */}
-          <div className="flex-grow w-full lg:w-2/3 bg-white shadow-xl rounded-xl p-4 relative">
+          <div className="flex-grow w-full lg:w-2/3  shadow-xl rounded-xl p-4 relative ">
             <h2 className="text-lg font-medium text-gray-600 text-center mb-4">
               Preview Your Custom Card
             </h2>
-            <div className="relative flex items-center justify-center overflow-hidden rounded-lg border border-gray-200">
-              <canvas ref={canvasRef}></canvas>
-            </div>
+            
+            <div className="w-full lg:w-2/3 flex justify-center items-center rounded-lg int">
+            <canvas ref={canvasRef} className="w-full h-full rounded-lg "></canvas>
+
+          </div>
           </div>
   
           {/* Customization Form */}
