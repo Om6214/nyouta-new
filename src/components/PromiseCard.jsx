@@ -28,7 +28,7 @@ const PromiseCard = () => {
         <h1 className='text-center font-primaryFont text-4xl lg:text-6xl font-bold pt-8'>Our Promise to Customers</h1>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 lg:px-16 px-2 py-10'>
             {promises.map((prom, index) => (
-                <div key={index} className='bg-gradient-to-br from-amber-900 via-amber-500 to-amber-900 flex flex-col items-center gap-4 py-10 px-4 rounded-lg hover:-translate-y-3 duration-300 ease-in cursor-pointer'>
+                <div key={index} className='bg-gradient-to-br from-amber-500 via-amber-100 to-amber-300 flex flex-col items-center gap-4 py-10 px-4 rounded-lg hover:-translate-y-3 duration-300 ease-in cursor-pointer'>
                     <img className='w-[75px]' src={prom.icon} alt="" />
                     <h1 className='text-3xl font-semibold'>{prom.title}</h1>
                     <h3 className='text-center'>{prom.description}</h3>
