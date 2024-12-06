@@ -38,7 +38,7 @@ export default function ProductPage() {
       }
   
       navigate(route, {
-        state: { imageUrl: product.image[currentImageIndex] },
+        state: { imageUrl: product.image[1] },
       });
     }
   };

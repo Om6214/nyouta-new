@@ -130,7 +130,7 @@ export default function WeddingCardEditPage() {
   useEffect(() => {
     if (canvas && imageUrl) {
       const groomText = new fabric.Text(groomName, {
-        left: 150,
+        left: 400,
         top: 100,
         fontSize: 30,
         fill: color,
@@ -138,7 +138,7 @@ export default function WeddingCardEditPage() {
       });
 
       const brideText = new fabric.Text(brideName, {
-        left: 150,
+        left: 400,
         top: 150,
         fontSize: 30,
         fill: color,
@@ -146,7 +146,7 @@ export default function WeddingCardEditPage() {
       });
 
       const dateText = new fabric.Text(date, {
-        left: 150,
+        left: 400,
         top: 200,
         fontSize: 30,
         fill: color,
@@ -206,8 +206,8 @@ export default function WeddingCardEditPage() {
       {imageUrl ? (
         <div className="flex flex-col lg:flex-row gap-10 justify-center items-start">
           {/* Canvas Section */}
-          <div className="w-full lg:w-2/3 flex justify-center items-center rounded-lg shadow-xl bg-white p-6">
-            <canvas ref={canvasRef} className="w-full h-auto rounded-lg border border-gray-300"></canvas>
+          <div className="w-full lg:w-2/3 flex justify-center items-center rounded-lg ">
+            <canvas ref={canvasRef} className="w-full h-auto rounded-lg "></canvas>
           </div>
   
           {/* Customization Form Section */}
