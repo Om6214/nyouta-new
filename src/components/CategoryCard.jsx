@@ -12,23 +12,23 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wedding Invitation",
-        imgUrl: invitation,
+        imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // URL from product.json
         url: "/products/wedding-invites",
       },
       {
         subTitle: "Party Invitation",
-        imgUrl: vinvite,
-        url: "/products/wedding-invites",
+        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // URL from product.json
+        url: "/products/party-invites",
       },
       {
         subTitle: "Pooja Invitation",
-        imgUrl: invitation,
-        url: "/products/wedding-invites",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // URL from product.json
+        url: "/products/pooja-invites",
       },
       {
         subTitle: "Ceremony Invitation",
-        imgUrl: vinvite,
-        url: "/products/wedding-invites",
+        imgUrl: "https://imagizer.imageshack.com/img922/701/tU9pus.jpg", // URL from product.json
+        url: "/products/ceremony-invites",
       },
     ],
   },
@@ -39,19 +39,19 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wedding Invitation",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // URL from product.json
       },
       {
         subTitle: "Party Invitation",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // URL from product.json
       },
       {
         subTitle: "Pooja Invitation",
-        imgUrl: "",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // URL from product.json
       },
       {
         subTitle: "Ceremony Invitation",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img922/701/tU9pus.jpg", // URL from product.json
       },
     ],
   },
@@ -62,23 +62,23 @@ const categories = [
     subCategory: [
       {
         subTitle: "Soft Cover Photobook",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // Example image
       },
       {
         subTitle: "Hard Cover Photobook",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg", // Example image
       },
       {
         subTitle: "Spiral Photobook",
-        imgUrl: "",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
       {
         subTitle: "Photo Folder",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // Example image
       },
       {
         subTitle: "Digital Photobook",
-        imgUrl: "",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
     ],
   },
@@ -89,23 +89,23 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wedding Itinerary",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
       },
       {
         subTitle: "Stickers",
-        imgUrl: "",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
       {
         subTitle: "Tags/Badges",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img922/3017/bflFDJ.jpg", // Example image
       },
       {
         subTitle: "Welcome Signages",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
       },
       {
         subTitle: "Accessories",
-        imgUrl: "",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
     ],
   },
@@ -116,23 +116,23 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wishes Greeting",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
       },
       {
         subTitle: "Thanks Greeting",
-        imgUrl: "",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
       {
         subTitle: "Feeling Greeting",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
       },
       {
         subTitle: "Funny Greeting",
-        imgUrl: "",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
       {
         subTitle: "Accessories",
-        imgUrl: "",
+        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
       },
     ],
   },
@@ -143,30 +143,31 @@ const categories = [
     subCategory: [
       {
         subTitle: "Newspaper",
-        imgUrl: welcome,
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
       },
       {
         subTitle: "Magazines",
-        imgUrl: welcome,
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
       },
     ],
   },
   {
-    title: "Calenders",
+    title: "Calendars",
     description:
       "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
     subCategory: [
       {
-        subTitle: "Wedding Calender",
-        imgUrl: welcome,
+        subTitle: "Wedding Calendar",
+        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
       },
       {
-        subTitle: "Family Calender",
-        imgUrl: welcome,
+        subTitle: "Family Calendar",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
     ],
   },
 ];
+
 
 const CategoryCard = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
@@ -257,11 +258,11 @@ const CategoryCard = () => {
                   animate="visible"
                   variants={gridVariants}
                   key={index}
-                  className="relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
+                  className="relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 ml-8"
                 >
-                  <div className="relative overflow-hidden group">
+                  <div className="relative overflow-hidden group w-[300px] h-[400px]">
                     <img
-                      className="w-full h-[200px] object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110"
+                      className="w-full h-[450px] object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110 "
                       src={sub.imgUrl || invitation}
                       alt={sub.subTitle}
                     />
