@@ -20,11 +20,11 @@ const InviteSection = () => {
     <section className='py-16 lg:px-12 px-6 sm:px-8 bg-amber-50 ml-14 mr-14'>
       <div className="text-center mb-8">
         <h1 className='lg:text-5xl text-3xl font-extrabold text-white mb-4' style={{
-              fontFamily: "Fredoka One, Dancing Script",
-              color: "#1f2937", // Dark Gray
-            }}>Send Invites By</h1>
+          fontFamily: "Andallan", // Use the font
+          color: "#1f2937", // Optional color styling
+        }}>Send Invites By</h1>
       </div>
-      
+
       <div className='grid lg:grid-cols-2 grid-cols-1 gap-8'>
         {/* Surprise Party Invitation Card */}
         <div className='bg-white shadow-lg hover:shadow-2xl px-8 py-6 rounded-lg transition-all duration-300'>
@@ -51,7 +51,7 @@ const InviteSection = () => {
         {/* Wedding Invitation Card */}
         <div className='bg-white shadow-lg hover:shadow-2xl px-8 py-6 rounded-lg transition-all duration-300'>
           <div className='flex flex-col gap-6 items-start'>
-            <h2 className='text-3xl  text-gray-800'style={{
+            <h2 className='text-3xl  text-gray-800' style={{
               fontFamily: "Fredoka One, Pacifico",
               color: "#1f2937", // Dark Gray
             }}>Wedding Invitation</h2>

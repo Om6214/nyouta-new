@@ -2,3 +2,138 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: 'Andallan';
+  src: url('./fonts/Andallan.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Angelina';
+  src: url('./fonts/angelina-regular-400.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('./fonts/Bebas-Neue-Bold.ttf.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Blade Rush';
+  src: url('./fonts/blade-rush-blade-rush-regular-400.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Cinzel';
+  src: url('./fonts/Cinzel-Regular.ttf.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Garden Hidaleya';
+  src: url('./fonts/Garden-Hidaleya.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Justin Hailey';
+  src: url('./fonts/justin-hailey-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Lovely Valentine';
+  src: url('./fonts/lovely-valentine-script.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Magdelin';
+  src: url('./fonts/magdelin-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Mussica Swash';
+  src: url('./fonts/MussicaSwash.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'New Walt Disney';
+  src: url('./fonts/New-Walt-Disney-Font-Regular.ttf.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Nexa Bold';
+  src: url('./fonts/NexaBold.ttf.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./fonts/Quicksand-Medium.ttf.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Rhinatta';
+  src: url('./fonts/rhinatta-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Shattime';
+  src: url('./fonts/shattime-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Vivaldi';
+  src: url('./fonts/Vivaldi-Italic.ttf.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Wedding';
+  src: url('./fonts/Wedding.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
