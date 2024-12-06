@@ -16,6 +16,7 @@ export default function PhysicalCardEditPage() {
   const [groomName, setGroomName] = useState(''); // Groom's name
   const [brideName, setBrideName] = useState(''); // Bride's name
   const [date, setDate] = useState(''); // Date
+  const [time, setTime] = useState(''); // Time
   const [font, setFont] = useState('Dancing Script'); // Font for the text
   const [color, setColor] = useState('#000000'); // Text color
   const [isButtonDisabled, setIsButtonDisabled] = useState(true); // Disable the button initially
@@ -27,6 +28,7 @@ export default function PhysicalCardEditPage() {
   const handleGroomNameChange = (event) => setGroomName(event.target.value);
   const handleBrideNameChange = (event) => setBrideName(event.target.value);
   const handleDateChange = (event) => setDate(event.target.value);
+  const handleTimeChange = (event) => setTime(event.target.value);
   const handleFontChange = (event) => setFont(event.target.value);
   const handleColorChange = (event) => setColor(event.target.value);
 
@@ -38,6 +40,7 @@ export default function PhysicalCardEditPage() {
       groomName,
       brideName,
       date,
+      time,
       font,
       color,
     };
@@ -47,121 +50,128 @@ export default function PhysicalCardEditPage() {
 
   // Enable the Add to Cart button when all necessary fields are completed
   useEffect(() => {
-    if (groomName && brideName && date && font && color) {
+    if (groomName && brideName && date && time && font && color) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-  }, [groomName, brideName, date, font, color]);
+  }, [groomName, brideName, date, time, font, color]);
 
   // Initialize the Fabric.js canvas
-  // Initialize the Fabric.js canvas
-useEffect(() => {
-  if (imageUrl) {
-    const imgElement = new Image();
-    imgElement.src = imageUrl;
+  useEffect(() => {
+    if (imageUrl) {
+      const imgElement = new Image();
+      imgElement.src = imageUrl;
 
-    imgElement.onload = () => {
-      const canvasWidth = 800; // Fixed canvas width for uniformity
-      const canvasHeight = 600; // Fixed canvas height for uniformity
+      imgElement.onload = () => {
+        const canvasWidth = 800; // Fixed canvas width for uniformity
+        const canvasHeight = 600; // Fixed canvas height for uniformity
 
-      const fabricCanvas = new fabric.Canvas(canvasRef.current, {
-        width: canvasWidth,
-        height: canvasHeight,
-      });
+        const fabricCanvas = new fabric.Canvas(canvasRef.current, {
+          width: canvasWidth,
+          height: canvasHeight,
+        });
 
-      setCanvas(fabricCanvas);
+        setCanvas(fabricCanvas);
 
-      // Scale the image proportionally to fit the canvas
-      const img = new fabric.Image(imgElement, {
-        left: 0,
-        top: 0,
-        selectable: false,
-        evented: false,
-      });
+        // Scale the image proportionally to fit the canvas
+        const img = new fabric.Image(imgElement, {
+          left: 0,
+          top: 0,
+          selectable: false,
+          evented: false,
+        });
 
-      const scaleX = canvasWidth / imgElement.width;
-      const scaleY = canvasHeight / imgElement.height;
-      const scale = Math.min(scaleX, scaleY); // Scale proportionally
+        const scaleX = canvasWidth / imgElement.width;
+        const scaleY = canvasHeight / imgElement.height;
+        const scale = Math.min(scaleX, scaleY); // Scale proportionally
 
-      img.scale(scale);
-      fabricCanvas.add(img);
-      fabricCanvas.renderAll();
-      console.log('Image loaded into canvas with adjusted dimensions');
+        img.scale(scale);
+        fabricCanvas.add(img);
+        fabricCanvas.renderAll();
+        console.log('Image loaded into canvas with adjusted dimensions');
+      };
+
+      imgElement.onerror = (err) => {
+        console.error('Error loading image:', err);
+      };
+    }
+
+    return () => {
+      if (canvas) canvas.dispose();
     };
+  }, [imageUrl]);
 
-    imgElement.onerror = (err) => {
-      console.error('Error loading image:', err);
-    };
-  }
+  // Update the canvas text elements when inputs change
+  useEffect(() => {
+    if (canvas) {
+      canvas.clear(); // Clear the canvas
+      const imgElement = new Image();
+      imgElement.src = imageUrl;
 
-  return () => {
-    if (canvas) canvas.dispose();
-  };
-}, [imageUrl]);
+      imgElement.onload = () => {
+        const canvasWidth = 800;
+        const canvasHeight = 600;
 
-// Update the canvas text elements when inputs change
-useEffect(() => {
-  if (canvas) {
-    canvas.clear(); // Clear the canvas
-    const imgElement = new Image();
-    imgElement.src = imageUrl;
+        const img = new fabric.Image(imgElement, {
+          left: 230,
+          top: 0,
+          selectable: false,
+          evented: false,
+        });
 
-    imgElement.onload = () => {
-      const canvasWidth = 800;
-      const canvasHeight = 600;
+        const scaleX = canvasWidth / imgElement.width;
+        const scaleY = canvasHeight / imgElement.height;
+        const scale = Math.min(scaleX, scaleY);
 
-      const img = new fabric.Image(imgElement, {
-        left:350,
-        top: 0,
-        selectable: false,
-        evented: false,
-      });
+        img.scale(scale);
+        canvas.add(img);
 
-      const scaleX = canvasWidth / imgElement.width;
-      const scaleY = canvasHeight / imgElement.height;
-      const scale = Math.min(scaleX, scaleY);
+        // Add Groom's Name Text
+        const groomText = new fabric.Text(groomName, {
+          left: 400,
+          top: 100,
+          fontSize: 30,
+          fill: color,
+          fontFamily: font,
+        });
 
-      img.scale(scale);
-      canvas.add(img);
+        // Add Bride's Name Text
+        const brideText = new fabric.Text(brideName, {
+          left: 400,
+          top: 150,
+          fontSize: 30,
+          fill: color,
+          fontFamily: font,
+        });
 
-      // Add Groom's Name Text
-      const groomText = new fabric.Text(groomName, {
-        left: 400,
-        top: 100,
-        fontSize: 30,
-        fill: color,
-        fontFamily: font,
-      });
+        // Add Wedding Date Text
+        const dateText = new fabric.Text(date, {
+          left: 400,
+          top: 200,
+          fontSize: 30,
+          fill: color,
+          fontFamily: font,
+        });
 
-      // Add Bride's Name Text
-      const brideText = new fabric.Text(brideName, {
-        left: 400,
-        top: 150,
-        fontSize: 30,
-        fill: color,
-        fontFamily: font,
-      });
+        // Add Wedding Time Text
+        const timeText = new fabric.Text(time, {
+          left: 400,
+          top: 250,
+          fontSize: 30,
+          fill: color,
+          fontFamily: font,
+        });
 
-      // Add Wedding Date Text
-      const dateText = new fabric.Text(date, {
-        left: 400,
-        top: 200,
-        fontSize: 30,
-        fill: color,
-        fontFamily: font,
-      });
+        canvas.add(groomText, brideText, dateText, timeText);
+        canvas.renderAll();
+      };
 
-      canvas.add(groomText, brideText, dateText);
-      canvas.renderAll();
-    };
-
-    imgElement.onerror = (err) => {
-      console.error('Error loading image:', err);
-    };
-  }
-}, [groomName, brideName, date, font, color, canvas, imageUrl]);
-
+      imgElement.onerror = (err) => {
+        console.error('Error loading image:', err);
+      };
+    }
+  }, [groomName, brideName, date, time, font, color, canvas, imageUrl]);
 
   if (!product) return <div>Product not found</div>;
 
@@ -170,25 +180,23 @@ useEffect(() => {
       <h1 className="text-5xl font-extrabold text-center text-gray-800 mb-10">
         Customize Your {product.name}
       </h1>
-  
+
       {imageUrl ? (
         <div className="flex flex-col lg:flex-row gap-12 ">
           {/* Canvas Display */}
-          <div className="flex-grow w-full lg:w-2/3  shadow-xl rounded-xl p-4 relative ">
+          <div className="flex-grow w-full lg:w-2/3 shadow-xl rounded-xl p-4 relative">
             <h2 className="text-lg font-medium text-gray-600 text-center mb-4">
               Preview Your Custom Card
             </h2>
-            
-            <div className="w-full lg:w-2/3 flex justify-center items-center rounded-lg int">
-            <canvas ref={canvasRef} className="w-full h-full rounded-lg "></canvas>
+            <div className="w-full flex justify-center items-center rounded-lg">
+              <canvas ref={canvasRef} className="w-full h-full rounded-lg"></canvas>
+            </div>
+          </div>
 
-          </div>
-          </div>
-  
           {/* Customization Form */}
           <div className="flex-grow w-full lg:w-1/3 bg-white shadow-xl rounded-xl p-8 border border-gray-300">
             <h2 className="text-3xl font-semibold text-gray-800 mb-6">Personalize Your Card</h2>
-  
+
             {/* Groom's Name Input */}
             <div className="mb-6">
               <label className="block text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
@@ -200,7 +208,7 @@ useEffect(() => {
                 placeholder="Enter Groom's Name"
               />
             </div>
-  
+
             {/* Bride's Name Input */}
             <div className="mb-6">
               <label className="block text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
@@ -212,7 +220,7 @@ useEffect(() => {
                 placeholder="Enter Bride's Name"
               />
             </div>
-  
+
             {/* Wedding Date Input */}
             <div className="mb-6">
               <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
@@ -223,7 +231,18 @@ useEffect(() => {
                 className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
               />
             </div>
-  
+
+            {/* Wedding Time Input */}
+            <div className="mb-6">
+              <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Time:</label>
+              <input
+                type="time"
+                value={time}
+                onChange={handleTimeChange}
+                className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
+              />
+            </div>
+
             {/* Font Selection */}
             <div className="mb-6">
               <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
@@ -240,7 +259,7 @@ useEffect(() => {
                 <option value="Pacifico">Pacifico</option>
               </select>
             </div>
-  
+
             {/* Color Picker */}
             <div className="mb-8">
               <label className="block text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
@@ -251,7 +270,7 @@ useEffect(() => {
                 className="w-full h-12 cursor-pointer rounded-lg border-2"
               />
             </div>
-  
+
             {/* Add to Cart Button */}
             <button
               className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg font-medium text-lg ${
@@ -271,5 +290,4 @@ useEffect(() => {
       )}
     </div>
   );
-  
 }

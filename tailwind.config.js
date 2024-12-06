@@ -1,21 +1,16 @@
-const flowbite = require("flowbite-react/tailwind");
+import flowbite from "flowbite-react/tailwind";
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    flowbite.content(),
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", flowbite.content()],
   theme: {
     extend: {
       fontFamily: {
-        primaryFont: "Fredoka One, Dancing Script"
+        primaryFont: "Fredoka One, Dancing Script",
       },
-      colors:{
-        primaryBlue:'#14233C'
+      colors: {
+        primaryBlue: "#14233C",
       },
     },
   },
   plugins: [flowbite.plugin()],
-}
-
+};
