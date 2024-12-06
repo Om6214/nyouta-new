@@ -14,7 +14,7 @@ export default function FeaturedProducts() {
   const settings = {
     dots: true,
     infinite: true, // Infinite scrolling to create a continuous loop
-    speed: 7000, // Very slow transition speed for each slide (7 seconds)
+    speed: 10000, // Very slow transition speed for each slide (7 seconds)
     slidesToShow: 4,
     slidesToScroll: 4, // Scroll 4 slides at a time for manual navigation
     autoplay: true, // Enable autoplay for automatic sliding
