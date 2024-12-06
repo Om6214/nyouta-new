@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react";
 import { useCart } from "../CartContext"; // Import your cart context
 import logo from "../assets/images/nyouta-logo-1.jpg";
+import { motion } from "framer-motion";
 
 
 const navItems = [
@@ -61,6 +62,17 @@ export default function MainNav() {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
 
+  const gridVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: (index) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: index * 0.2, // Staggered animation for each item
+      },
+    }),
+  };
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all ${
@@ -90,13 +102,16 @@ export default function MainNav() {
                   </Link>
                   )}
                   {item.children && isDropdownOpen && (
-                    <ul className="grid grid-cols-4 gap-x-36 gap-y-8 absolute mt-1 right-20 p-8 bg-gray-100 rounded-lg" onMouseOver={() => setIsDropdownOpen(true)}>
+                    <motion.ul initial={{opacity: 0, x: -50}} animate={{opacity: 1, x: 0}} transition={{duration: 1.0}} className="grid grid-cols-4 gap-x-36 gap-y-8 absolute mt-1 right-20 p-8 bg-gray-100 rounded-lg" onMouseOver={() => setIsDropdownOpen(true)}>
                       {item.children.map((child, childIndex) => (
-                        <li key={childIndex}>
+                        <motion.li 
+                        initial="hidden"
+                        animate="visible"
+                        variants={gridVariants} key={childIndex}>
                           <a href="" className="text-md hover:text-red-500 hover:translate-x-2 transition duration-300">{child.label}</a>
-                        </li>
+                        </motion.li>
                       ))}
-                    </ul>
+                    </motion.ul>
                   )}
                 </li>
               ))}
