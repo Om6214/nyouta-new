@@ -6,7 +6,7 @@ const VideoCard = () => {
     const navigate = useNavigate()
   return (
     <div>
-        <div className='lg:px-16 px-4 py-8 lg:py-16 flex flex-col lg:flex-row gap-8 justify-around bg-gradient-to-br from-amber-500 to-amber-700'>
+        <div className='lg:px-16 px-4 py-8 lg:py-16 flex flex-col lg:flex-row gap-8 justify-around bg-gradient-to-br from-amber-50 to-amber-70'>
             <div>
             <iframe className='rounded-lg w-[410px] lg:w-[650px]' width="650" height="400" src="https://www.youtube.com/embed/K1WByQwJoO8" title="Nyouta, where memories are brought to life!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
