@@ -9,6 +9,7 @@ import InviteSection from '../components/InviteSection'
 import HomeSlider from '../components/HomeSlider'
 import CategorySlider from '../components/CategorySlider'
 import CategoryCard from '../components/CategoryCard'
+import VideoCard from '../components/VideoCard'
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
       <InviteSection/>
       {/* <CategorySlider/> */}
       <FeaturedProducts/>
+      <VideoCard/>
       <About/>
       <Testimonials/>
     </div>

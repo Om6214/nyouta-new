@@ -19,12 +19,12 @@ const HomeSlider = () => {
   };
   return (
     <>
-    <div className="my-16">
-        <h1 className="lg:text-5xl text-2xl text-center font-primaryFont font-bold ">Bring your memories to life with Nyouta</h1>
+    <div className="lg:my-16 mt-6">
+        <h1 className="lg:text-5xl text-3xl text-center font-primaryFont font-bold ">Bring your memories to life with Nyouta</h1>
         
     </div>
     <div className="flex flex-col lg:flex-row lg:px-12">
-      <div className="slider-container lg:w-[70%] rounded-lg py-12">
+      <div className="slider-container lg:w-[70%] rounded-lg lg:py-12 py-8">
         <Slider {...settings} className="px-6">
           <div>
             <img className="w-full lg:h-[350px] lg:object-cover rounded-lg" src={img1} alt="" />
