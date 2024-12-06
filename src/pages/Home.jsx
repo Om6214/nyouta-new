@@ -10,6 +10,7 @@ import HomeSlider from '../components/HomeSlider'
 import CategorySlider from '../components/CategorySlider'
 import CategoryCard from '../components/CategoryCard'
 import VideoCard from '../components/VideoCard'
+import PromiseCard from '../components/PromiseCard'
 
 const Home = () => {
   return (
@@ -24,6 +25,7 @@ const Home = () => {
       <FeaturedProducts/>
       <VideoCard/>
       <About/>
+      <PromiseCard/>
       <Testimonials/>
     </div>
   )

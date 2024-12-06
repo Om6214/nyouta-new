@@ -176,7 +176,7 @@ const CategoryCard = () => {
       opacity: 1,
       x: 0,
       transition: {
-        duration: 0.5,
+        duration: 1.5,
         delay: index * 0.2, // Staggered animation for each item
       },
     }),
@@ -234,7 +234,7 @@ const CategoryCard = () => {
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 1.7 }}
         >
           <div className="flex flex-col lg:flex-row gap-10 justify-between items-start mt-12">
             {/* Category Info */}
