@@ -82,7 +82,7 @@ export default function MainNav() {
       <div className="container mx-auto">
         {/* Top Navigation */}
         <div className="flex h-24 items-center justify-between px-4">
-          <Link to="/" className="flex items-center pl-12 gap-2">
+          <Link to="/" className="flex items-center lg:pl-12 pl-2 gap-2">
             <img className="w-20 rounded-[50%]" src={logo} alt="logo-imgh" />
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>

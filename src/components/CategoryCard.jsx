@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import invitation from "../assets/images/placeholder.jpg";
 import vinvite from "../assets/images/v-invite.webp";
 import welcome from "../assets/images/welcome sign.webp";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const categories = [
   {
@@ -171,6 +171,8 @@ const categories = [
 
 const CategoryCard = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const gridRef = useRef(null)
+  const isInView = useInView(gridRef, {once: true})
   const gridVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: (index) => ({
@@ -250,7 +252,7 @@ const CategoryCard = () => {
             </div>
 
             {/* Subcategories Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 w-full">
               {selectedCategory.subCategory.map((sub, index) => (
                 <motion.div
                   custom={index}
