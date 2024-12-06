@@ -10,19 +10,23 @@ const categories = [
         subCategory: [
             {
                 subTitle: 'Wedding Invitation',
-                imgUrl: invitation
+                imgUrl: invitation,
+                url: '/products/wedding-invites'
             },
             {
                 subTitle: 'Party Invitation',
-                imgUrl: vinvite
+                imgUrl: vinvite,
+                url: '/products/wedding-invites'
             },
             {
                 subTitle: 'Pooja Invitation',
-                imgUrl: invitation
+                imgUrl: invitation,
+                url: '/products/wedding-invites'
             },
             {
                 subTitle: 'Ceremony Invitation',
-                imgUrl: vinvite
+                imgUrl: vinvite,
+                url: '/products/wedding-invites'
             },
         ]
     },
@@ -163,10 +167,10 @@ const CategoryCard = () => {
         <div className="mt-8 py-10 px-8 rounded-lg bg-gradient-to-b from-amber-50 to-yellow-100 shadow-lg">
             {/* Header Section */}
             <div className="text-center mb-10">
-                <h1 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500">
+                <h1 className="lg:text-6xl font-primaryFont font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500">
                     Explore Our Product Categories
                 </h1>
-                <p className="text-gray-700 text-lg mt-4 leading-relaxed">
+                <p className="text-gray-700 font-primaryFont lg:text-3xl mt-4 leading-relaxed">
                     Browse through our wide range of categories to find something perfect for your needs!
                 </p>
                 <div className="w-24 h-[4px] bg-amber-500 mx-auto mt-6 rounded-full"></div>
@@ -206,7 +210,7 @@ const CategoryCard = () => {
                     </div>
 
                     {/* Subcategories Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 w-full">
                         {selectedCategory.subCategory.map((sub, index) => (
                             <div
                                 key={index}
@@ -219,7 +223,7 @@ const CategoryCard = () => {
                                         alt={sub.subTitle}
                                     />
                                     <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <p className="text-white font-bold text-lg">View More</p>
+                                       <a href={sub.url}><p className="text-white font-bold text-lg">View More</p></a> 
                                     </div>
                                 </div>
                                 <h1 className="text-lg font-semibold text-center text-gray-800 py-4">

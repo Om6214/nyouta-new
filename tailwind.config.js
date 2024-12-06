@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        primaryFont: "Fredoka One, Dancing Script"
+      },
       colors:{
         primaryBlue:'#14233C'
       },

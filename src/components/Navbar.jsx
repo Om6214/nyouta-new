@@ -2,6 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react";
 import { useCart } from "../CartContext"; // Import your cart context
+import logo from "../assets/images/nyouta-logo-1.jpg";
+
 
 const navItems = [
   {
@@ -67,9 +69,10 @@ export default function MainNav() {
     >
       <div className="container mx-auto">
         {/* Top Navigation */}
-        <div className="flex h-20 items-center justify-between px-4">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold">न्यौता</span>
+        <div className="flex h-24 items-center justify-between px-4">
+          <Link to="/" className="flex items-center pl-12 gap-2">
+            <img className="w-20 rounded-[50%]" src={logo} alt="logo-imgh" />
+            {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
 
           {/* Desktop Menu */}

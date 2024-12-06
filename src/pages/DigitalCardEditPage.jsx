@@ -200,62 +200,80 @@ export default function WeddingCardEditPage() {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="edit-image-page max-w-7xl mx-auto p-6 bg-gray-100">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Customize Your Wedding Card for {product.name}</h1>
-
+    <div className="edit-image-page max-w-7xl mx-auto p-8 bg-gray-50">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">Customize Your Wedding Card for {product.name}</h1>
+  
       {imageUrl ? (
-        <div className="flex flex-col lg:flex-row gap-8 justify-center">
-          <div className="w-full lg:w-2/3 bg-white p-4 shadow-xl rounded-lg flex justify-center">
-            <canvas ref={canvasRef}></canvas>
+        <div className="flex flex-col lg:flex-row gap-10 justify-center items-start">
+          {/* Canvas Section */}
+          <div className="w-full lg:w-2/3 flex justify-center items-center rounded-lg shadow-xl bg-white p-6">
+            <canvas ref={canvasRef} className="w-full h-auto rounded-lg border border-gray-300"></canvas>
           </div>
-
-          <div className="w-full lg:w-1/3 bg-white p-6 shadow-xl rounded-lg">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Card Details</h2>
-
-            <label className="text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
-            <input
-              type="text"
-              value={groomName}
-              onChange={handleGroomNameChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
-            <label className="text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
-            <input
-              type="text"
-              value={brideName}
-              onChange={handleBrideNameChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
-            <label className="text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
-            <input
-              type="date"
-              value={date}
-              onChange={handleDateChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
-
-            <label className="text-lg font-medium text-gray-700 mb-2">Font:</label>
-            <select
-              value={font}
-              onChange={handleFontChange}
-              className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="Dancing Script">Dancing Script</option>
-              <option value="Pacifico">Pacifico</option>
-              <option value="Lobster">Lobster</option>
-            </select>
-
-            <label className="text-lg font-medium text-gray-700 mb-2">Text Color:</label>
-            <input
-              type="color"
-              value={color}
-              onChange={handleColorChange}
-              className="w-full h-12 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-
+  
+          {/* Customization Form Section */}
+          <div className="w-full lg:w-1/3 bg-white shadow-xl rounded-lg p-8">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-6">Card Details</h2>
+  
+            {/* Groom's Name */}
+            <div className="mb-6">
+              <label className="text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
+              <input
+                type="text"
+                value={groomName}
+                onChange={handleGroomNameChange}
+                className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter Groom's Name"
+              />
+            </div>
+  
+            {/* Bride's Name */}
+            <div className="mb-6">
+              <label className="text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
+              <input
+                type="text"
+                value={brideName}
+                onChange={handleBrideNameChange}
+                className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter Bride's Name"
+              />
+            </div>
+  
+            {/* Wedding Date */}
+            <div className="mb-6">
+              <label className="text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
+              <input
+                type="date"
+                value={date}
+                onChange={handleDateChange}
+                className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+  
+            {/* Font Selection */}
+            <div className="mb-6">
+              <label className="text-lg font-medium text-gray-700 mb-2">Font:</label>
+              <select
+                value={font}
+                onChange={handleFontChange}
+                className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="Dancing Script">Dancing Script</option>
+                <option value="Pacifico">Pacifico</option>
+                <option value="Lobster">Lobster</option>
+              </select>
+            </div>
+  
+            {/* Text Color */}
+            <div className="mb-8">
+              <label className="text-lg font-medium text-gray-700 mb-2">Text Color:</label>
+              <input
+                type="color"
+                value={color}
+                onChange={handleColorChange}
+                className="w-full h-12 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+  
             {/* Apply Changes Button */}
             <button
               onClick={handleApplyChanges}
@@ -264,7 +282,7 @@ export default function WeddingCardEditPage() {
             >
               Apply Changes
             </button>
-
+  
             {/* Payment / Download Button */}
             {!paymentCompleted ? (
               <button
@@ -287,37 +305,53 @@ export default function WeddingCardEditPage() {
       ) : (
         <p className="text-center text-lg text-gray-600">No image selected.</p>
       )}
-
+  
       {/* Payment Form Modal */}
       {showPaymentForm && !paymentCompleted && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Enter Payment Details</h2>
+          <div className="bg-white p-8 rounded-lg shadow-lg w-1/3 max-w-md">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6">Enter Payment Details</h2>
             <form onSubmit={handlePaymentSubmit}>
-              <label className="block mb-2 text-gray-700">Name:</label>
-              <input
-                type="text"
-                required
-                className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <label className="block mb-2 text-gray-700">Card Number:</label>
-              <input
-                type="text"
-                required
-                className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <label className="block mb-2 text-gray-700">Expiration Date:</label>
-              <input
-                type="text"
-                required
-                className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <label className="block mb-2 text-gray-700">CVV:</label>
-              <input
-                type="text"
-                required
-                className="w-full border p-3 mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              {/* Name Input */}
+              <div className="mb-4">
+                <label className="block text-gray-700">Name:</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+  
+              {/* Card Number Input */}
+              <div className="mb-4">
+                <label className="block text-gray-700">Card Number:</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+  
+              {/* Expiration Date */}
+              <div className="mb-4">
+                <label className="block text-gray-700">Expiration Date:</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+  
+              {/* CVV */}
+              <div className="mb-6">
+                <label className="block text-gray-700">CVV:</label>
+                <input
+                  type="text"
+                  required
+                  className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+  
               <button
                 type="submit"
                 className="w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300"
@@ -325,6 +359,7 @@ export default function WeddingCardEditPage() {
                 Submit Payment
               </button>
             </form>
+  
             <button
               onClick={() => setShowPaymentForm(false)}
               className="mt-4 w-full px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition duration-300"
@@ -336,4 +371,5 @@ export default function WeddingCardEditPage() {
       )}
     </div>
   );
+  
 }

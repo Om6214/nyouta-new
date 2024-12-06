@@ -49,7 +49,7 @@ export default function Testimonials() {
   return (
     <section className=" py-16 text-primaryBlue">
       <div className="container mx-auto px-4">
-        <h2 className="mb-12 text-center text-3xl font-bold tracking-tight lg:text-4xl">
+        <h2 className="mb-12 font-primaryFont text-center text-3xl font-bold tracking-tight lg:text-5xl">
           What Our Clients Say
         </h2>
         <div className="relative mx-auto max-w-4xl overflow-hidden">

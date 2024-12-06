@@ -193,7 +193,7 @@ export default function TopCategories() {
                       <img
                         src={product.image[0]}
                         alt={product.name}
-                        className="object-contain p-4 rounded-lg"
+                        className="object-cover w-96 h-96 p-4 rounded-lg"
                       />
                     </div>
                     <h4 className="text-center text-brown-800 font-medium text-sm md:text-base">
@@ -205,6 +205,7 @@ export default function TopCategories() {
                   </Link>
                 ))}
               </div>
+
             )}
           </div>
         </div>
