@@ -183,7 +183,7 @@ const CategoryCard = () => {
   };
 
   return (
-    <div className="mt-8 py-10 px-8 rounded-lg bg-gradient-to-b from-amber-50 to-yellow-100 shadow-lg">
+    <div className="mt-8 py-10 lg:px-8 px-2 rounded-lg bg-gradient-to-b from-amber-50 to-yellow-100 shadow-lg">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, x: -80 }}
@@ -191,10 +191,10 @@ const CategoryCard = () => {
         transition={{ duration: 1.8 }}
       >
         <div className="text-center mb-10">
-          <h1 className="lg:text-6xl font-primaryFont font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500">
+          <h1 className="lg:text-6xl text-3xl font-primaryFont font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500">
             Explore Our Product Categories
           </h1>
-          <p className="text-gray-700 font-primaryFont lg:text-3xl mt-4 leading-relaxed">
+          <p className="text-gray-700 font-primaryFont lg:text-3xl text-xl mt-4 leading-relaxed">
             Browse through our wide range of categories to find something
             perfect for your needs!
           </p>
