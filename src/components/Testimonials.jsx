@@ -3,51 +3,55 @@
 import { Star } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
-
 const testimonials = [
   {
     id: 1,
     name: 'Sarah Johnson',
     role: 'Homeowner',
     content: 'REIAS India made my dream of owning a home a reality. Their expertise and dedication are unmatched!',
-    avatar: '/placeholder.svg?height=80&width=80'
+    avatar: 'https://picsum.photos/80?random=1', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 2,
     name: 'Rahul Patel',
     role: 'Property Investor',
     content: 'Ive worked with many real estate firms, but REIAS India stands out. Their market insights are invaluable.',
-    avatar: '/placeholder.svg?height=80&width=80'
+    avatar: 'https://picsum.photos/80?random=2', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#FFD700', '#FFD700'], // All Gold
   },
   {
     id: 3,
     name: 'Priya Sharma',
     role: 'First-time Buyer',
     content: 'As a first-time buyer, I was nervous. REIAS India guided me through every step with patience and professionalism.',
-    avatar: '/placeholder.svg?height=80&width=80'
+    avatar: 'https://picsum.photos/80?random=3', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 4,
     name: 'Alex Chen',
     role: 'Commercial Property Owner',
     content: 'REIAS Indias commercial property expertise helped me secure an excellent location for my business.',
-    avatar: '/placeholder.svg?height=80&width=80'
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   }
-]
+];
+
 
 export default function Testimonials() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000) // Change testimonial every 5 seconds
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 3000); // Change testimonial every 5 seconds
 
-    return () => clearInterval(timer)
-  }, [])
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <section className=" py-16 text-primaryBlue">
+    <section className="py-16 text-primaryBlue">
       <div className="container mx-auto px-4">
         <h2 className="mb-12 font-primaryFont text-center text-3xl font-bold tracking-tight lg:text-5xl">
           What Our Clients Say
@@ -68,13 +72,16 @@ export default function Testimonials() {
                     className="mb-4 rounded-full"
                   />
                   <blockquote className="mb-4 text-lg italic">"{testimonial.content}"</blockquote>
-                  <div className=" flex">
-                    <Star/>
-                    <Star/>
-                    <Star/>
-                    <Star/>
-                    <Star/>
-                    </div>
+                  <div className="flex">
+                    {testimonial.starColors.map((color, index) => (
+                      <Star
+                        key={index}
+                        style={{ fill: color }} // Use `fill` to color the inside of the star
+                        className="w-5 h-5"
+                      />
+                    ))}
+                  </div>
+
                   <cite className="not-italic">
                     <span className="font-semibold">{testimonial.name}</span>
                     <span className="block text-sm text-gray-400">{testimonial.role}</span>
@@ -88,14 +95,13 @@ export default function Testimonials() {
           {testimonials.map((_, index) => (
             <button
               key={index}
-              className={`h-2 w-2 rounded-full ${
-                index === currentTestimonial ? 'bg-primaryBlue' : 'bg-amber-600'
-              }`}
+              className={`h-2 w-2 rounded-full ${index === currentTestimonial ? 'bg-primaryBlue' : 'bg-amber-600'
+                }`}
               onClick={() => setCurrentTestimonial(index)}
             />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
