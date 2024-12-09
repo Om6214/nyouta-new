@@ -186,6 +186,20 @@ export default function MainNav() {
           </div>
         )}
       </div>
+      <div className="hidden lg:flex py-2 justify-center">
+        <ul className="flex gap-8 justify-center items-center text-md font-heroFont">
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Wedding Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Party Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Pooja Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Ceremony Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Wishes Greeting</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Thanks Greeting</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Feelings Greeting</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Newspaper</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Magazines</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Family Calenders</a></li>
+        </ul>
+      </div>
     </header>
   );
 }
