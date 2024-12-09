@@ -10,7 +10,7 @@ export default function PhysicalCardEditPage() {
 
   const product = productsData.find((p) => p.id === id); // Find product by ID
   const { addToCart } = useCart(); // Access the addToCart function from CartContext
-  
+
   const canvasRef = useRef(null); // Reference for the HTML5 canvas element
 
   const [groomName, setGroomName] = useState('Vikram');
@@ -22,7 +22,7 @@ export default function PhysicalCardEditPage() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false); // State for modal visibility
-  
+
   const [textPosition, setTextPosition] = useState({
     groomName: { x: 350, y: 150 },
     brideName: { x: 350, y: 200 },
@@ -118,9 +118,9 @@ export default function PhysicalCardEditPage() {
     const height = textSize; // Approximate height of the text
 
     if (
-      mouseX > textPositionCheck.x && 
-      mouseX < textPositionCheck.x + width && 
-      mouseY > textPositionCheck.y - height && 
+      mouseX > textPositionCheck.x &&
+      mouseX < textPositionCheck.x + width &&
+      mouseY > textPositionCheck.y - height &&
       mouseY < textPositionCheck.y + height
     ) {
       setIsDragging(true);
@@ -196,7 +196,7 @@ export default function PhysicalCardEditPage() {
 
       {imageUrl ? (
         <div className="flex flex-col lg:flex-row gap-10 justify-center items-start">
-          <div className="w-full lg:w-2/3 flex justify-center items-center rounded-lg">
+          <div className="w-full lg:w-3/3 flex justify-center items-center rounded-lg">
             <canvas
               ref={canvasRef}
               className="w-full h-auto rounded-lg"
@@ -209,105 +209,113 @@ export default function PhysicalCardEditPage() {
             ></canvas>
           </div>
 
-          <div className="w-full lg:w-1/3 bg-white shadow-xl rounded-xl p-8 border border-gray-300">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6">Personalize Your Card</h2>
-            <div className="mb-6">
-              <label className="block text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
-              <input
-                type="text"
-                value={groomName}
-                onChange={handleGroomNameChange}
-                className="w-full border-2 px-4 py-3 rounded-lg"
-                placeholder="Enter Groom's Name"
-              />
+          <div className="w-full lg:w-2/3 bg-white shadow-xl rounded-xl p-8 border border-gray-300 mx-auto">
+            <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Personalize Your Card</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Groom's Name */}
+              <div>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
+                <input
+                  type="text"
+                  value={groomName}
+                  onChange={handleGroomNameChange}
+                  className="w-full border-2 px-4 py-3 rounded-lg"
+                  placeholder="Enter Groom's Name"
+                />
+              </div>
+              {/* Bride's Name */}
+              <div>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
+                <input
+                  type="text"
+                  value={brideName}
+                  onChange={handleBrideNameChange}
+                  className="w-full border-2 px-4 py-3 rounded-lg"
+                  placeholder="Enter Bride's Name"
+                />
+              </div>
+              {/* Wedding Date */}
+              <div>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
+                <input
+                  type="date"
+                  value={date}
+                  onChange={handleDateChange}
+                  className="w-full border-2 px-4 py-3 rounded-lg"
+                />
+              </div>
+              {/* Wedding Time */}
+              <div>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Time:</label>
+                <input
+                  type="time"
+                  value={time}
+                  onChange={handleTimeChange}
+                  className="w-full border-2 px-4 py-3 rounded-lg"
+                />
+              </div>
+              {/* Select Font */}
+              <div>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
+                <select
+                  value={font}
+                  onChange={handleFontChange}
+                  className="w-full border-2 px-4 py-3 rounded-lg"
+                >
+                  <option value="Poppins">Poppins</option>
+                  <option value="Lobster">Lobster</option>
+                  <option value="Dancing Script">Dancing Script</option>
+                  <option value="Great Vibes">Great Vibes</option>
+                  <option value="Sacramento">Sacramento</option>
+                  <option value="Pacifico">Pacifico</option>
+                  <option value="Andallan">Andallan</option>
+                  <option value="Angelina">Angelina</option>
+                  <option value="Bebas Neue">Bebas Neue</option>
+                  <option value="Blade Rush">Blade Rush</option>
+                  <option value="Cinzel">Cinzel</option>
+                  <option value="Garden Hidaleya">Garden Hidaleya</option>
+                  <option value="Justin Hailey">Justin Hailey</option>
+                  <option value="Lovely Valentine">Lovely Valentine</option>
+                  <option value="Magdelin">Magdelin</option>
+                  <option value="Mussica Swash">Mussica Swash</option>
+                  <option value="New Walt Disney">New Walt Disney</option>
+                  <option value="Nexa Bold">Nexa Bold</option>
+                  <option value="Quicksand">Quicksand</option>
+                  <option value="Rhinatta">Rhinatta</option>
+                  <option value="Shattime">Shattime</option>
+                  <option value="Vivaldi">Vivaldi</option>
+                  <option value="Wedding">Wedding</option>
+                </select>
+              </div>
+              {/* Select Text Color */}
+              <div>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
+                <input
+                  type="color"
+                  value={color}
+                  onChange={handleColorChange}
+                  className="w-full h-12 cursor-pointer rounded-lg border-2"
+                />
+              </div>
             </div>
-            <div className="mb-6">
-              <label className="block text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
-              <input
-                type="text"
-                value={brideName}
-                onChange={handleBrideNameChange}
-                className="w-full border-2 px-4 py-3 rounded-lg"
-                placeholder="Enter Bride's Name"
-              />
-            </div>
-            <div className="mb-6">
-              <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
-              <input
-                type="date"
-                value={date}
-                onChange={handleDateChange}
-                className="w-full border-2 px-4 py-3 rounded-lg"
-              />
-            </div>
-            <div className="mb-6">
-              <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Time:</label>
-              <input
-                type="time"
-                value={time}
-                onChange={handleTimeChange}
-                className="w-full border-2 px-4 py-3 rounded-lg"
-              />
-            </div>
-            <div className="mb-6">
-              <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
-              <select
-                value={font}
-                onChange={handleFontChange}
-                className="w-full border-2 px-4 py-3 rounded-lg"
+            {/* Buttons */}
+            <div className="mt-8 flex flex-col lg:flex-row gap-4">
+              <button
+                className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={handleAddToCart}
+                disabled={isButtonDisabled}
               >
-                <option value="Poppins">Poppins</option>
-                <option value="Lobster">Lobster</option>
-                <option value="Dancing Script">Dancing Script</option>
-                <option value="Great Vibes">Great Vibes</option>
-                <option value="Sacramento">Sacramento</option>
-                <option value="Pacifico">Pacifico</option>
-                <option value="Andallan">Andallan</option>
-                <option value="Angelina">Angelina</option>
-                <option value="Bebas Neue">Bebas Neue</option>
-                <option value="Blade Rush">Blade Rush</option>
-                <option value="Cinzel">Cinzel</option>
-                <option value="Garden Hidaleya">Garden Hidaleya</option>
-                <option value="Justin Hailey">Justin Hailey</option>
-                <option value="Lovely Valentine">Lovely Valentine</option>
-                <option value="Magdelin">Magdelin</option>
-                <option value="Mussica Swash">Mussica Swash</option>
-                <option value="New Walt Disney">New Walt Disney</option>
-                <option value="Nexa Bold">Nexa Bold</option>
-                <option value="Quicksand">Quicksand</option>
-                <option value="Rhinatta">Rhinatta</option>
-                <option value="Shattime">Shattime</option>
-                <option value="Vivaldi">Vivaldi</option>
-                <option value="Wedding">Wedding</option>
-              </select>
+                Add to Cart
+              </button>
+              <button
+                onClick={handlePreview}
+                className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600"
+              >
+                Preview
+              </button>
             </div>
-            <div className="mb-8">
-              <label className="block text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
-              <input
-                type="color"
-                value={color}
-                onChange={handleColorChange}
-                className="w-full h-12 cursor-pointer rounded-lg border-2"
-              />
-            </div>
-
-            {/* The Add to Cart button */}
-            <button
-              className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-              onClick={handleAddToCart}
-              disabled={isButtonDisabled}
-            >
-              Add to Cart
-            </button>
-            
-            {/* Preview button below the Add to Cart button */}
-            <button
-              onClick={handlePreview}
-              className="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600"
-            >
-              Preview
-            </button>
           </div>
+
         </div>
       ) : (
         <div className="text-center text-gray-700 text-xl mt-12">
