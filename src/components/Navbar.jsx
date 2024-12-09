@@ -89,26 +89,26 @@ export default function MainNav() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex w-full flex-1 items-center gap-2 px-4">
-            <ul className="flex w-full space-x-8 items-center justify-end">
+            <ul className="flex w-full space-x-8 items-center justify-end font-heroFont">
               {navItems.map((item) => (
                 <li key={item} onMouseOut={() => setIsDropdownOpen(false)}>
                   {item.children ? (
-                    <Link to={item.url} onMouseOver={() => setIsDropdownOpen(true)} className="py-2 hover:text-red-500">
+                    <Link to={item.url} onMouseOver={() => setIsDropdownOpen(true)} className="py-2 hover:text-primary hover:border-b-2 border-primary hover:font-semibold">
                     {item.label}
                   </Link>
                   ) : (
-                    <Link to={item.url} className="py-2 hover:text-red-500">
+                    <Link to={item.url} className="py-2 hover:text-primary hover:border-b-2 border-primary hover:font-semibold">
                     {item.label}
                   </Link>
                   )}
                   {item.children && isDropdownOpen && (
-                    <motion.ul initial={{opacity: 0, x: -50}} animate={{opacity: 1, x: 0}} transition={{duration: 1.0}} className="grid grid-cols-4 gap-x-36 gap-y-8 absolute mt-1 right-20 p-8 bg-gray-100 rounded-lg" onMouseOver={() => setIsDropdownOpen(true)}>
+                    <motion.ul initial={{opacity: 0, x: -50}} animate={{opacity: 1, x: 0}} transition={{duration: 1.0}} className="grid grid-cols-4 gap-x-36 gap-y-8 absolute mt-2 right-20 p-8 bg-priBg rounded-lg" onMouseOver={() => setIsDropdownOpen(true)}>
                       {item.children.map((child, childIndex) => (
                         <motion.li 
                         initial="hidden"
                         animate="visible"
                         variants={gridVariants} key={childIndex}>
-                          <a href="" className="text-md hover:text-red-500 hover:translate-x-2 transition duration-300">{child.label}</a>
+                          <a href="" className="text-md hover:text-primary hover:border-b-2 border-primary pb-[1px]">{child.label}</a>
                         </motion.li>
                       ))}
                     </motion.ul>
@@ -121,11 +121,11 @@ export default function MainNav() {
           {/* Right Section for Icons */}
           <div className="flex items-center gap-4">
             <Link className="pr-4">
-              <Search className="h-6 w-6" />
+              <Search className="h-6 w-6 hover:text-primary" />
             </Link>
             
             <button onClick={toggleCart} className="flex items-center gap-1 relative">
-              <ShoppingBag className="h-6 w-6" />
+              <ShoppingBag className="h-6 w-6 hover:text-primary" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 right-0 rounded-full bg-black px-2 py-1 text-[8px] text-white">
                   {totalItems}
@@ -188,16 +188,16 @@ export default function MainNav() {
       </div>
       <div className="hidden lg:flex py-2 justify-center">
         <ul className="flex gap-8 justify-center items-center text-md font-heroFont">
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Wedding Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Party Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Pooja Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Ceremony Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Wishes Greeting</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Thanks Greeting</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Feelings Greeting</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Newspaper</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Magazines</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:transition duration-300" href="/products">Family Calenders</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Wedding Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Party Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Pooja Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Ceremony Invite</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Wishes Greeting</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Thanks Greeting</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Feelings Greeting</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Newspaper</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Magazines</a></li>
+          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Family Calenders</a></li>
         </ul>
       </div>
     </header>
