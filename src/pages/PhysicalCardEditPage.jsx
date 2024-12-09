@@ -17,8 +17,8 @@ export default function PhysicalCardEditPage() {
   const [brideName, setBrideName] = useState('Aditi');
   const [date, setDate] = useState('2025-12-25');
   const [time, setTime] = useState('10:30');
-  const [font, setFont] = useState('Dancing Script');
-  const [color, setColor] = useState('#000000');
+  const [font, setFont] = useState('Pacifico');
+  const [color, setColor] = useState('#ad101f');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false); // State for modal visibility

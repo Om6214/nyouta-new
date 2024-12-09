@@ -9,13 +9,13 @@ export default function PhysicalCardEditPage() {
 
   const product = productsData.find((p) => p.id === id); // Find product by ID
 
-  // State for text fields
+  const [paymentDone, setPaymentDone] = useState(false); // State to track payment status
   const [groomName, setGroomName] = useState('Vikram'); // Groom's name
   const [brideName, setBrideName] = useState('Aditi'); // Bride's name
   const [date, setDate] = useState('2025-12-25'); // Date
   const [time, setTime] = useState('10:30'); // Time
-  const [font, setFont] = useState('Dancing Script'); // Font for the text
-  const [color, setColor] = useState('#000000'); // Text color
+  const [font, setFont] = useState('Pacifico'); // Font for the text
+  const [color, setColor] = useState('#ad101f'); // Text color
   const [previewImage, setPreviewImage] = useState(null);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false); // State for modal visibility
 
@@ -76,6 +76,24 @@ export default function PhysicalCardEditPage() {
     setIsPreviewModalOpen(true); // Open the modal
   };
 
+  const handlePayment = () => {
+    // Simulate payment processing
+
+    setTimeout(() => {
+      alert('Payment successful!');
+      setPaymentDone(true); // Set payment status to true after successful payment
+    }, 1000); // Simulate payment delay
+  };
+
+
+
+  
+
+  const handleShareCard = () => {
+    // Logic for sharing the card, e.g., generating a shareable link or downloading
+    alert('Card sharing functionality coming soon!');
+  };
+
   const PreviewModal = ({ isOpen, onClose, image }) => {
     if (!isOpen) return null;
 
@@ -84,7 +102,7 @@ export default function PhysicalCardEditPage() {
         <div className="bg-white p-4 rounded-lg shadow-lg relative">
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 text-gray-600 text-4xl"
+            className="absolute top-2 right-2 text-gray- 600 text-4xl"
             style={{ width: '40px', height: '40px' }} // Making the close button larger
           >
             &times;
@@ -159,21 +177,7 @@ export default function PhysicalCardEditPage() {
               </div>
 
               {/* Select Font */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
-                <select
-                  value={font}
-                  onChange={handleInputChange(setFont)}
-                  className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
-                >
-                  <option value="Poppins">Poppins</option>
-                  <option value="Lobster">Lobster</option>
-                  <option value="Dancing Script">Dancing Script</option>
-                  <option value="Great Vibes">Great Vibes</option>
-                  <option value="Sacramento">Sacramento</option>
-                  <option value="Pacifico">Pacifico</option>
-                </select>
-              </div>
+              
 
               {/* Select Text Color */}
               <div>
@@ -181,21 +185,69 @@ export default function PhysicalCardEditPage() {
                 <input
                   type="color"
                   value={color}
+                  
+        
                   onChange={handleInputChange(setColor)}
                   className="w-full h-12 cursor-pointer rounded-lg border-2"
                 />
               </div>
 
+              <div>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
+                <select
+                  value={font}
+                  onChange={handleInputChange(setFont)}
+                  className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
+                >
+                   <option value="Poppins">Poppins</option>
+                  <option value="Lobster">Lobster</option>
+                  <option value="Dancing Script">Dancing Script</option>
+                  <option value="Great Vibes">Great Vibes</option>
+                  <option value="Sacramento">Sacramento</option>
+                  <option value="Pacifico">Pacifico</option>
+                  <option value="Andallan">Andallan</option>
+                  <option value="Angelina">Angelina</option>
+                  <option value="Bebas Neue">Bebas Neue</option>
+                  <option value="Blade Rush">Blade Rush</option>
+                  <option value="Cinzel">Cinzel</option>
+                  <option value="Garden Hidaleya">Garden Hidaleya</option>
+                  <option value="Justin Hailey">Justin Hailey</option>
+                  <option value="Lovely Valentine">Lovely Valentine</option>
+                  <option value="Magdelin">Magdelin</option>
+                  <option value="Mussica Swash">Mussica Swash</option>
+                  <option value="New Walt Disney">New Walt Disney</option>
+                  <option value="Nexa Bold">Nexa Bold</option>
+                  <option value="Quicksand">Quicksand</option>
+                  <option value="Rhinatta">Rhinatta</option>
+                  <option value="Shattime">Shattime</option>
+                  <option value="Vivaldi">Vivaldi</option>
+                  <option value="Wedding">Wedding</option>
+                </select>
+              </div>
+
               {/* Buttons */}
-              <div className="col-span-2 mt-4">
+              <div className ="mt-8 flex flex-col lg:flex-row gap-12">
                 <button
                   onClick={handlePreview}
-                  className="w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600"
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white px-8 rounded-lg"
                 >
                   Preview
                 </button>
-
-                
+                {!paymentDone ? (
+                  <button
+                    onClick={handlePayment}
+                    className="bg-green-500 text-white py-2 px-10 rounded-lg hover:bg-green-600 w-auto"
+                  >
+                    Pay Now
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleShareCard}
+                    className="bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600"
+                  >
+                    Share Card
+                  </button>
+                )}
               </div>
             </div>
           </div>
