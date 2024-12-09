@@ -41,7 +41,7 @@ export default function About() {
   }, [])
 
   return (
-    <section className="relative min-h-screen bg-priBg ">
+    <section className="relative min-h-screen bg-priBg font-heroFont">
       <div className="container mx-auto px-4 py-16 lg:py-24">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
@@ -60,8 +60,8 @@ export default function About() {
               ABOUT <span className='text-amber-700'>ई-न्यौता</span>
             </h1>
             <p className="text-lg">
-            eNyouta presents to you an exclusive collection of Digital Wedding Invitations, Party Invitations, Pooja Ritual Invitations & Events Invitations Card designs. We designers have included all Invitation Suite Theme styles from Traditional Indian Ethnic to Photo based & Pastel Modern Floral.
-            Hassle free to send & share the joy across all mediums be it Email, Whatsapp or Social Media such as Facebook, Instagram. (note here it will be in Image format). Save the environment by going paperless. No printing & courier costs.
+            Nyouta is Brand of Angira Creation, we understand that every moment of your wedding is a reflection of your unique love story. That’s why we offer an array of free wedding and party invitations, itineraries, calendars, photo books, and greetings to help you celebrate your journey in style. Our designs blend creativity with elegance, capturing your precious memories in a way that feels as special as the day itself. <br />
+            Our mission is to make your wedding planning simpler and more beautiful, allowing you to focus on what truly matters—creating unforgettable memories with your loved ones. From personalized wedding itineraries to stunning photo books and interactive wedding invitations, we provide everything you need to make your celebration even more memorable.
             </p>
             <div className="grid grid-cols-4 gap-8">
               <div>
@@ -89,7 +89,7 @@ export default function About() {
                 <div className="mt-2 text-sm text-primaryBlue">Satisfied Customers</div>
               </div>
             </div>
-            <button className="rounded-full bg-[#14233C] px-6 py-3 w-fit text-white hover:bg-white hover:border-[#14233C] border hover:text-[#14233C] ">
+            <button className="rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-3 w-fit text-white font-heroFont text-lg hover:bg-white hover:border-[#14233C] border hover:text-[#14233C] ">
               About Us
             </button>
           </div>

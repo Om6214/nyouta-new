@@ -210,14 +210,14 @@ const CategoryCard = () => {
         transition={{ duration: 2.0 }}
       >
         <div className="p-6 bg-yellow-100 rounded-lg shadow-md">
-          <ul className="flex flex-wrap gap-6 justify-center">
+          <ul className="flex flex-wrap gap-4 justify-start">
             {categories.map((cat, index) => (
               <motion.li
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
                 key={index}
-                className={`text-lg font-heroFont font-medium cursor-pointer px-6 py-3 rounded-lg transition-all duration-300 transform 
+                className={`text-md font-heroFont font-medium cursor-pointer px-6 py-3 rounded-lg transition-all duration-300 transform 
                                 ${
                                   selectedCategory === cat
                                     ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105"
@@ -252,7 +252,7 @@ const CategoryCard = () => {
             </div> */}
 
             {/* Subcategories Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8 w-full">
               {selectedCategory.subCategory.map((sub, index) => (
                 <motion.div
                   custom={index}
@@ -260,11 +260,11 @@ const CategoryCard = () => {
                   animate="visible"
                   variants={gridVariants}
                   key={index}
-                  className="relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 ml-8"
+                  className="relative w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 ml-8"
                 >
-                  <div className="relative overflow-hidden group w-[300px] h-[400px]">
+                  <div className="relative overflow-hidden group w-[200px] h-[250px]">
                     <img
-                      className="w-full h-[450px] object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110 "
+                      className="w-full object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110 "
                       src={sub.imgUrl || invitation}
                       alt={sub.subTitle}
                     />

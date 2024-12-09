@@ -17,7 +17,7 @@ const HeroBanner = () => {
     const scale = useTransform(scrollY, [400, 700], [1, 0.7])
     const opacity = useTransform(scrollY, [400, 700], [1, 0.5])
     return (
-        <motion.div style={{ scale, opacity }} className="flex min-h-screen items-center bg-priBg border rounded-3xl xx-8 ">
+        <motion.div style={{ scale, opacity }} className="flex items-center bg-priBg mx-4 rounded-t-3xl">
             <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
                 <div className="flex gap-8 flex-col-reverse lg:flex-row   lg:gap-16">
                     <motion.div
@@ -26,7 +26,7 @@ const HeroBanner = () => {
                         transition={{ duration: 0.8 }}
                         className="flex flex-col justify-center w-full"
                     >
-                        <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-8xl">
+                        <h1 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl md:text-7xl">
                             <span className="mt-2 mb-8 block font-heroFont"><span className="text-primary">न्यौता
                             </span> for all the moments that matter</span>
 
@@ -50,7 +50,7 @@ const HeroBanner = () => {
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1 }}
-                        className="relative block lg:h-[90vh] w-full"
+                        className="relative block lg:h-[50vh] w-full"
                     >
                         <img
                             src={homegif}

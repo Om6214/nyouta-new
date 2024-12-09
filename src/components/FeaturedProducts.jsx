@@ -14,14 +14,11 @@ export default function FeaturedProducts() {
   const settings = {
     dots: true,
     infinite: true, // Infinite scrolling to create a continuous loop
-    speed: 10000, // Very slow transition speed for each slide (7 seconds)
+    speed: 500, // Very slow transition speed for each slide (7 seconds)
     slidesToShow: 4,
     slidesToScroll: 4, // Scroll 4 slides at a time for manual navigation
-    autoplay: true, // Enable autoplay for automatic sliding
-    autoplaySpeed: 5000, // Change slide every 5 seconds (no breaks between slides)
-    cssEase: "linear", // Linear transition for a smooth continuous movement
+    autoplay: false, 
     initialSlide: 0,
-    pauseOnHover: false, // Disable pause on hover to maintain continuous scrolling
     responsive: [
       {
         breakpoint: 1024,
@@ -112,7 +109,7 @@ export default function FeaturedProducts() {
               // min-height: 450px; /* Ensure each card is at least this tall */
             }
             .slick-slide img {
-              object-fit: contain;
+              // object-fit: contain;
               // height: 250px; /* Fixed height for the image */
               // width: 100%;
               border-radius: 8px;
@@ -132,20 +129,20 @@ export default function FeaturedProducts() {
             {productsData.map((prod, i) => (
               <div
                 key={i}
-                className="bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
+                className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
                 <Link
                   to={`/product/${prod.id}`}
-                  className="flex flex-col gap-4 mt-10"
+                  className="flex flex-col"
                 >
                   <div className="relative aspect-w-1 aspect-h-1">
                     <img
                       src={prod.image[0] || placeholder}
                       alt={prod.name}
-                      className="object-cover w-[350px] h-[300px] rounded-t-lg"
+                      className="object-cover w-full h-[200px] rounded-t-lg"
                     />
                   </div>
-                  <div className="px-4 py-3 flex flex-col gap-3 card-content">
+                  <div className="px-4 py-1 flex flex-col gap-2 justify-around card-content">
                     <h1
                       className="font-semibold text-xl text-primary font-heroFont"
                     >

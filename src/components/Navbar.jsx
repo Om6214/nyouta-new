@@ -16,9 +16,9 @@ const navItems = [
     url: '/products',
     children: [
       { label: 'Wedding Invitations' },
-      { label: 'Wedding Stationery' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
+      { label: 'Party Invitation' },
+      { label: 'Pooja Invitation' },
+      { label: 'Ceremony Invitation' },
       { label: 'Wedding Decorations' },
       { label: 'Wedding Decorations' },
       { label: 'Wedding Decorations' },
