@@ -300,6 +300,12 @@ export default function PhysicalCardEditPage() {
             </div>
             {/* Buttons */}
             <div className="mt-8 flex flex-col lg:flex-row gap-4">
+            <button
+                onClick={handlePreview}
+                className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600"
+              >
+                Preview
+              </button>
               <button
                 className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={handleAddToCart}
@@ -307,12 +313,7 @@ export default function PhysicalCardEditPage() {
               >
                 Add to Cart
               </button>
-              <button
-                onClick={handlePreview}
-                className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600"
-              >
-                Preview
-              </button>
+             
             </div>
           </div>
 
