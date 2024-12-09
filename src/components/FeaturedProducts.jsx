@@ -131,7 +131,7 @@ export default function FeaturedProducts() {
                 key={i}
                 className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
-                <Link
+                <Link key={i}
                   to={`/product/${prod.id}`}
                   className="flex flex-col"
                 >

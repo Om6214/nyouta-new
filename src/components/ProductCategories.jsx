@@ -79,9 +79,9 @@ export default function TopCategories() {
   });
 
   return (
-    <section className="py-16 px-4 bg-amber-50">
+    <section className="py-16 px-4 bg-priBg">
       <div className="container mx-auto">
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col lg:flex-row">
           {/* Left Division */}
           <div className="lg:w-1/4 flex flex-col items-start gap-8">
             <h2 className="text-3xl font-bold text-brown-900 mb-4">
@@ -181,27 +181,31 @@ export default function TopCategories() {
             {filteredProducts.length === 0 ? (
               <div>No products found</div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 {filteredProducts.map((product) => (
                   <Link
                     to={`/product/${product.id}`}
                     key={product.id}
                     state={{ product }} // Pass product data
-                    className="relative flex flex-col items-center group"
+                    className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group"
                   >
                     <div className="relative w-full aspect-square mb-3">
                       <img
                         src={product.image[0]}
                         alt={product.name}
-                        className="object-cover w-96 h-96 p-4 rounded-lg"
+                        className="object-cover w-full h-72 rounded-t-xl"
                       />
                     </div>
+                    <div className="flex flex-col px-[2px]">
+
+                   
                     <h4 className="text-center text-brown-800 font-medium text-sm md:text-base">
                       {product.name}
                     </h4>
                     <p className="text-center text-gray-700 font-medium text-sm">
                       ₹{product.price}
                     </p>
+                    </div>
                   </Link>
                 ))}
               </div>
