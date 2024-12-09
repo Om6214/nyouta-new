@@ -186,7 +186,7 @@ const CategoryCard = () => {
   };
 
   return (
-    <div className="mt-8 py-10 lg:px-8 px-2 rounded-lg bg-gradient-to-b from-amber-50 to-yellow-100 shadow-lg">
+    <div className=" py-10 lg:px-8 px-2 bg-priBg shadow-lg">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, x: -80 }}
@@ -194,10 +194,10 @@ const CategoryCard = () => {
         transition={{ duration: 1.8 }}
       >
         <div className="text-center mb-10">
-          <h1 className="lg:text-6xl text-3xl font-primaryFont font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500">
+          <h1 className="lg:text-6xl text-3xl font-primaryFont font-extrabold bg-clip-text text-primary">
             Explore Our Product Categories
           </h1>
-          <p className="text-gray-700 font-primaryFont lg:text-3xl text-xl mt-4 leading-relaxed">
+          <p className="text-primary font-primaryFont lg:text-3xl font-semibold text-xl mt-4 leading-relaxed">
             Browse through our wide range of categories to find something
             perfect for your needs!
           </p>
@@ -217,10 +217,10 @@ const CategoryCard = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
                 key={index}
-                className={`text-lg font-medium cursor-pointer px-6 py-3 rounded-lg transition-all duration-300 transform 
+                className={`text-lg font-heroFont font-medium cursor-pointer px-6 py-3 rounded-lg transition-all duration-300 transform 
                                 ${
                                   selectedCategory === cat
-                                    ? "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg scale-105"
+                                    ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105"
                                     : "bg-gray-200 text-gray-700 hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
                                 }`}
                 onClick={() => setSelectedCategory(cat)}
@@ -239,9 +239,9 @@ const CategoryCard = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.7 }}
         >
-          <div className="flex flex-col lg:flex-row gap-10 justify-between items-start mt-12">
+          <div className="flex flex-col lg:flex-col gap-10 justify-between items-start mt-12">
             {/* Category Info */}
-            <div className="text-start w-full lg:w-[30%] flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
+            {/* <div className="text-start w-full lg:w-[30%] flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
               <h1 className="text-4xl font-bold text-gray-800">
                 {selectedCategory.title}
               </h1>
@@ -249,10 +249,10 @@ const CategoryCard = () => {
                 {selectedCategory.description}
               </p>
               <div className="w-16 h-[3px] bg-gradient-to-r from-amber-400 to-orange-400 rounded-full"></div>
-            </div>
+            </div> */}
 
             {/* Subcategories Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
               {selectedCategory.subCategory.map((sub, index) => (
                 <motion.div
                   custom={index}
@@ -276,7 +276,7 @@ const CategoryCard = () => {
                       </a>
                     </div>
                   </div>
-                  <h1 className="text-lg font-semibold text-center text-gray-800 py-4">
+                  <h1 className="text-lg font-heroFont font-semibold text-center text-gray-800 py-4">
                     {sub.subTitle}
                   </h1>
                 </motion.div>

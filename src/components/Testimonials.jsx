@@ -51,9 +51,9 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="py-16 text-primaryBlue">
+    <section className="py-16 text-primaryBlue bg-priBg">
       <div className="container mx-auto px-4">
-        <h2 className="mb-12 font-primaryFont text-center text-3xl font-bold tracking-tight lg:text-5xl">
+        <h2 className="mb-12 text-primary font-primaryFont text-center text-3xl font-bold tracking-tight lg:text-5xl">
           What Our Clients Say
         </h2>
         <div className="relative mx-auto max-w-4xl overflow-hidden">
@@ -71,7 +71,7 @@ export default function Testimonials() {
                     height={80}
                     className="mb-4 rounded-full"
                   />
-                  <blockquote className="mb-4 text-lg italic">"{testimonial.content}"</blockquote>
+                  <blockquote className="mb-4 font-heroFont text-lg italic">"{testimonial.content}"</blockquote>
                   <div className="flex">
                     {testimonial.starColors.map((color, index) => (
                       <Star
@@ -83,7 +83,7 @@ export default function Testimonials() {
                   </div>
 
                   <cite className="not-italic">
-                    <span className="font-semibold">{testimonial.name}</span>
+                    <span className="font-semibold font-heroFont">{testimonial.name}</span>
                     <span className="block text-sm text-gray-400">{testimonial.role}</span>
                   </cite>
                 </div>
@@ -95,7 +95,7 @@ export default function Testimonials() {
           {testimonials.map((_, index) => (
             <button
               key={index}
-              className={`h-2 w-2 rounded-full ${index === currentTestimonial ? 'bg-primaryBlue' : 'bg-amber-600'
+              className={`h-2 w-2 rounded-full ${index === currentTestimonial ? 'bg-third' : 'bg-amber-600'
                 }`}
               onClick={() => setCurrentTestimonial(index)}
             />

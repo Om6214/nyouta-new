@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* *{
+  background-color: #EDC52C;
+} */
+
 @font-face {
   font-family: 'Andallan';
   src: url('./fonts/Andallan.otf') format('opentype');

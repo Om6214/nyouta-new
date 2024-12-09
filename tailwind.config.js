@@ -6,9 +6,13 @@ export default {
     extend: {
       fontFamily: {
         primaryFont: "Fredoka One, Dancing Script",
+        heroFont: ['Raleway', 'sans-serif']
       },
       colors: {
-        primaryBlue: "#14233C",
+        priBg: "#EAD7B4",
+        primary: '#BB531E',
+        secondary: '#9C712B',
+        third: '#553B10'
       },
     },
   },

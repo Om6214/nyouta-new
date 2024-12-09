@@ -19,11 +19,11 @@ const HomeSlider = () => {
   };
   return (
     <>
-    <div className="lg:my-16 mt-6">
-        <h1 className="lg:text-5xl text-3xl text-center font-primaryFont font-bold ">Bring your memories to life with Nyouta</h1>
+    <div className="lg:py-16 pt-6 bg-priBg">
+        <h1 className="lg:text-5xl text-3xl text-primary text-center font-primaryFont font-bold ">Bring your memories to life with Nyouta</h1>
         
     </div>
-    <div className="flex flex-col lg:flex-row lg:px-12">
+    <div className="flex flex-col bg-priBg lg:flex-row lg:px-12">
       <div className="slider-container lg:w-[70%] rounded-lg lg:py-12 py-8">
         <Slider {...settings} className="px-6">
           <div>
@@ -40,19 +40,19 @@ const HomeSlider = () => {
           </div>
         </Slider>
       </div>
-      <div className="mx-2 flex flex-col gap-8 py-4 items-center justify-center rounded-lg bg-gradient-to-br from-amber-900 via-amber-500 to-amber-900 w-full">
+      <div className="mx-2 flex flex-col gap-8 py-4 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary w-full">
         <h1 className="lg:text-5xl text-3xl font-primaryFont text-center font-bold">Nyouta</h1>
         <div className="flex gap-2 items-center">
-            <h1 className="flex items-center gap-1 text-rose-500 text-2xl"><Heart size={32}/> <span>35 Lakh</span></h1>
-            <h2>Customers</h2>
+            <h1 className="flex font-heroFont items-center gap-1 text-third text-2xl"><Heart size={32}/> <span>35 Lakh</span></h1>
+            <h2 className="font-heroFont">Customers</h2>
         </div>
         <div className="flex gap-2 items-center">
-            <h1 className="flex items-center gap-1 text-rose-500 text-2xl"><ShieldCheck size={32} /> <span>1 crore</span></h1>
-            <h2>Cards printed</h2>
+            <h1 className="flex font-heroFont items-center gap-1 text-third text-2xl"><ShieldCheck size={32} /> <span>1 crore</span></h1>
+            <h2 className="font-heroFont">Cards printed</h2>
         </div>
         <div className="flex gap-2 items-center">
-            <h1 className="flex items-center gap-1 text-rose-500 text-2xl"><Star size={32} /> <span>1 Lakh</span></h1>
-            <h2>5 star ratings</h2>
+            <h1 className="flex font-heroFont items-center gap-1 text-third text-2xl"><Star size={32} /> <span>1 Lakh</span></h1>
+            <h2 className="font-heroFont">5 star ratings</h2>
         </div>
       </div>
     </div>

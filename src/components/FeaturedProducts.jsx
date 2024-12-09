@@ -53,17 +53,17 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 px-4 bg-amber-50 ml-14 mr-14 mt-20">
+    <section className="py-16 px-4 lg:px-24 bg-priBg">
       <div className="container mx-auto">
         {/* Heading with animation and font-family */}
         <div className="text-center mb-12">
           <h2
-            className="text-4xl font-primaryFont md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="text-4xl font-primaryFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
             Featured Products
           </h2>
           <h3
-            className="text-3xl font-primaryFont mt-6 font-medium text-amber-500 transition-opacity duration-700 opacity-100"
+            className="text-3xl font-primaryFont mt-6 font-medium text-primary transition-opacity duration-700 opacity-100"
             
           >
             SEE OUR MOST POPULAR PRODUCTS
@@ -147,14 +147,12 @@ export default function FeaturedProducts() {
                   </div>
                   <div className="px-4 py-3 flex flex-col gap-3 card-content">
                     <h1
-                      className="font-semibold text-xl text-gray-900"
-                      style={{ fontFamily: "Poppins, sans-serif" }}
+                      className="font-semibold text-xl text-primary font-heroFont"
                     >
                       {prod.name}
                     </h1>
                     <h3
-                      className="text-sm text-gray-600"
-                      style={{ fontFamily: "Lobster, cursive" }}
+                      className="text-md font-semibold text-yhird font-heroFont"
                     >
                       {prod.subCategory}
                     </h3>
