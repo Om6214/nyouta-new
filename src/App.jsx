@@ -21,8 +21,6 @@ import DigitalCardEditPage from './pages/DigitalCardEditPage';
 import PhysicalCardEditPage from './pages/PhysicalCardEditPage';
 import WeddingCardEditor from './pages/WeddingCardEditor';
 
-//ghghhjuhuhdddddefhhhhhsdfdvfv f
-
 function App() {
   return (
     <CartProvider> 
@@ -42,15 +40,13 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
-          <Route path='/admin/dashboard' element={<DashboardLayout/>}>
-              <Route index path='/admin/dashboard' element={<Dashboard/>}/>
-              <Route path='/admin/dashboard/add-product' element={<AddProduct/>}/>
+          <Route path='/admin/dashboard' element={<DashboardLayout />}>
+              <Route index path='/admin/dashboard' element={<Dashboard />} />
+              <Route path='/admin/dashboard/add-product' element={<AddProduct />} />
           </Route>
-          <Route path="/editor" element={<WeddingCardEditor/>} />
-          
-      
+          <Route path="/editor" element={<WeddingCardEditor />} />
         </Routes>
-        <Footer /> {/* Your Footer */}
+        <Footer />
       </BrowserRouter>
     </CartProvider>
   );

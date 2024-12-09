@@ -13,12 +13,12 @@ export default function WeddingCardEditPage() {
   const { addToCart } = useCart(); // Access the addToCart function from CartContext
 
   // State for text fields
-  const [groomName, setGroomName] = useState('');
-  const [brideName, setBrideName] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [font, setFont] = useState('Dancing Script');
-  const [color, setColor] = useState('#000000');
+  const [groomName, setGroomName] = useState('Vikram'); // Groom's name
+  const [brideName, setBrideName] = useState('Aditi'); // Bride's name
+  const [date, setDate] = useState('2025-12-25'); // Date
+  const [time, setTime] = useState('10:30'); // Time
+  const [font, setFont] = useState('Dancing Script'); // Font for the text
+  const [color, setColor] = useState('#000000'); // Text color
   const [isApplyChangesEnabled, setIsApplyChangesEnabled] = useState(false);
   const [isPayNowEnabled, setIsPayNowEnabled] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
@@ -84,7 +84,7 @@ export default function WeddingCardEditPage() {
 
         const img = new fabric.Image(imgElement, {
           left: centerX,
-          top: centerY,
+ top: centerY,
           selectable: false,
           evented: false,
           scaleX: scale,
@@ -113,10 +113,10 @@ export default function WeddingCardEditPage() {
       };
 
       const texts = [
-        new fabric.Text(groomName, { left: 400, top: 100, ...textOptions }),
-        new fabric.Text(brideName, { left: 400, top: 150, ...textOptions }),
-        new fabric.Text(date, { left: 400, top: 200, ...textOptions }),
-        new fabric.Text(time, { left: 400, top: 250, ...textOptions }),
+        new fabric.Text(groomName, { left: 350, top: 100, ...textOptions }),
+        new fabric.Text(brideName, { left: 350, top: 150, ...textOptions }),
+        new fabric.Text(date, { left: 300, top: 200, ...textOptions }),
+        new fabric.Text(time, { left: 330, top: 250, ...textOptions }),
       ];
 
       canvas.clear();
@@ -174,41 +174,93 @@ export default function WeddingCardEditPage() {
           <div className="w-full lg:w-1/3 bg-white shadow-xl rounded-lg p-8">
             <h2 className="text-3xl font-semibold text-gray-800 mb-6">Card Details</h2>
 
-            {[
-              { label: "Groom's Name", value: groomName, onChange: handleInputChange(setGroomName), placeholder: "Enter Groom's Name" },
-              { label: "Bride's Name", value: brideName, onChange: handleInputChange(setBrideName), placeholder: "Enter Bride's Name" },
-              { label: 'Wedding Date', value: date, onChange: handleInputChange(setDate), type: 'date' },
-              { label: 'Wedding Time', value: time, onChange: handleInputChange(setTime), type: 'time' },
-            ].map(({ label, ...props }) => (
-              <div key={label} className="mb-6">
-                <label className="text-lg font-medium text-gray-700 mb-2">{label}:</label>
-                <input
-                  {...props}
-                  className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            ))}
+            <div className="mb-6">
+              <label className="block text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
+              <input
+                type="text"
+                value={groomName}
+                onChange={handleInputChange(setGroomName)}
+                className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
+                placeholder="Enter Groom's Name"
+              />
+            </div>
 
             <div className="mb-6">
-              <label className="text-lg font-medium text-gray-700 mb-2">Font Style:</label>
+              <label className="block text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
+              <input
+                type="text"
+                value={brideName}
+                onChange={handleInputChange(setBrideName)}
+                className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
+                placeholder="Enter Bride's Name"
+              />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
+              <input
+                type="date"
+                value={date}
+                onChange={handleInputChange(setDate)}
+                className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue -500 focus:outline-none text-gray-700"
+              />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Time:</label>
+              <input
+                type="time"
+                value={time}
+                onChange={handleInputChange(setTime)}
+                className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black"
+              />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
               <select
                 value={font}
                 onChange={handleInputChange(setFont)}
-                className="w-full border-2 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
               >
-                <option value="Dancing Script">Dancing Script</option>
-                <option value="Pacifico">Pacifico</option>
+                <option value="Poppins">Poppins</option>
                 <option value="Lobster">Lobster</option>
+                <option value="Dancing Script">Dancing Script</option>
+                <option value="Great Vibes">Great Vibes</option>
+                <option value="Sacramento">Sacramento</option>
+                <option value="Pacifico">Pacifico</option>
+                <option value="Andallan">Andallan</option>
+                <option value="Angelina">Angelina</option>
+                <option value="Bebas Neue">Bebas Neue</option>
+                <option value="Blade Rush">Blade Rush</option>
+                <option value="Cinzel">Cinzel</option>
+                <option value="Garden Hidaleya">Garden Hidaleya</option>
+                <option value="Justin Hailey">Justin Hailey</option>
+                <option value="Lovely Valentine">Lovely Valentine</option>
+                <option value="Magdelin">Magdelin</option>
+                <option value="Mussica Swash">Mussica Swash</option>
+                <option value="New Walt Disney">New Walt Disney</option>
+                <option value="Nexa Bold">Nexa Bold</option>
+                <option value="Quicksand">Quicksand</option>
+                <option value="Rhinatta">Rhinatta</option>
+                <option value="Shattime">Shattime</option>
+                <option value="Vivaldi">Vivaldi</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Dancing Script">Dancing Script</option>
+                <option value="Lobster">Lobster</option>
+                <option value="Great Vibes">Great Vibes</option>
+                <option value="Sacramento">Sacramento</option>
+                <option value="Pacifico">Pacifico</option>
               </select>
             </div>
 
             <div className="mb-8">
-              <label className="text-lg font-medium text-gray-700 mb-2">Text Color:</label>
+              <label className="block text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
               <input
                 type="color"
                 value={color}
                 onChange={handleInputChange(setColor)}
-                className="w-full h-12 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full h-12 cursor-pointer rounded-lg border-2"
               />
             </div>
 

@@ -7,6 +7,11 @@ export default function Cart() {
   const cartRef = useRef(null);
   const cartButtonRef = useRef(null); // Reference for the cart button
 
+  // Log to debug if the cart is opening/closing
+  useEffect(() => {
+    console.log("Cart is open:", isCartOpen);
+  }, [isCartOpen]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -38,12 +43,9 @@ export default function Cart() {
       {/* Cart Button */}
       <button
         ref={cartButtonRef}
-        onClick={(e) => {
-          e.stopPropagation();
-          toggleCart();
-        }}
+        onClick={toggleCart} // Removed e.stopPropagation() here
       >
-        
+        <ShoppingBag className="h-6 w-6" />
       </button>
 
       {/* Cart Panel */}

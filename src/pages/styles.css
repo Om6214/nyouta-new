@@ -1,0 +1,17 @@
+.react-time-picker {
+  width: 100% !important;
+  border-radius: 8px;
+  padding: 0.5rem;
+  border: 2px solid #d1d5db; /* Tailwind gray-300 */
+  font-size: 1rem;
+}
+
+.react-time-picker__wrapper {
+  border: none;
+  color: #374151; /* Tailwind gray-700 */
+}
+
+.react-time-picker__inputGroup {
+  font-family: inherit;
+  font-size: inherit;
+}

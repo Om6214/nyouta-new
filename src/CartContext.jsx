@@ -11,11 +11,18 @@ export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = (product, quantity) => {
+    if (!product || !product.id) {
+      console.error('Product is invalid', product);
+      return;
+    }
+
     setCartItems((prevItems) => {
       const itemIndex = prevItems.findIndex((item) => item.id === product.id);
       if (itemIndex === -1) {
+        // Product not found, add a new one
         return [...prevItems, { ...product, quantity }];
       } else {
+        // Product exists, update the quantity
         const updatedItems = [...prevItems];
         updatedItems[itemIndex].quantity += quantity;
         return updatedItems;

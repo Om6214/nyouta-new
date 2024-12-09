@@ -29,20 +29,19 @@ export default function ProductPage() {
       setWarning("Please select a card type to edit the image.");
     } else {
       let route = `/product/${product.id}/edit`;
-  
+
       // Append the selected type to the route
       if (selectedType === "Physical Card") {
         route += "-physical-card";
       } else if (selectedType === "Digital Card") {
         route += "-digital-card";
       }
-  
+
       navigate(route, {
         state: { imageUrl: product.image[1] },
       });
     }
   };
-  
 
   const buyNow = () => {
     console.log(`Buying ${quantity} ${product.name}(s)`);
@@ -87,9 +86,9 @@ export default function ProductPage() {
                   <button
                     key={type}
                     onClick={() => setSelectedType(type)}
-                    className={`px-4 py-2 text-sm bg-white text-black rounded-full border-2 ${
+                    className={`px-4 py-2 text-sm bg-white text-black rounded-full border-2 shadow-md transition-all focus:outline-none hover:bg-gray-100 ${
                       selectedType === type ? "border-green-500 bg-green-50" : "border-gray-300"
-                    } transition-all focus:outline-none hover:bg-gray-100`}
+                    }`}
                   >
                     {type}
                   </button>
@@ -110,7 +109,7 @@ export default function ProductPage() {
                 value={quantity}
                 onChange={handleQuantityChange}
                 min="1"
-                className="border rounded-lg px-3 py-2 w-20"
+                className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -133,7 +132,7 @@ export default function ProductPage() {
               {selectedType !== "Photobook" && (
                 <button
                   onClick={handleEditImage}
-                  className="w-full bg-blue-600 text-white py-3 px-6 rounded-full hover:bg-blue-700 transition-colors"
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
                 >
                   Edit Image Card
                 </button>
@@ -142,7 +141,7 @@ export default function ProductPage() {
               {selectedType === "Photobook" && (
                 <button
                   onClick={() => alert("Uploading photos for Photobook")}
-                  className="w-full bg-gray-200 text-black py-3 px-6 rounded-full border border-gray-300 hover:bg-gray-300 transition-colors"
+                  className="w-full bg-gray-200 text-black py-3 px-6 rounded-full border border-gray-300 hover:bg-gray-300 transition-colors shadow-md"
                 >
                   Upload Photos
                 </button>
@@ -150,7 +149,7 @@ export default function ProductPage() {
 
               <button
                 onClick={buyNow}
-                className="w-full bg-yellow-600 text-white py-3 px-6 rounded-full hover:bg-yellow-700 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-700 transition-colors"
               >
                 Buy Now
               </button>
