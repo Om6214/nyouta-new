@@ -11,6 +11,7 @@ import CategorySlider from '../components/CategorySlider'
 import CategoryCard from '../components/CategoryCard'
 import VideoCard from '../components/VideoCard'
 import PromiseCard from '../components/PromiseCard'
+import DiscountOffer from '../components/DiscountOffer'
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
       {/* <TopCategories/> */}
       <HomeSlider/>
       <InviteSection/>
+      <DiscountOffer/>
       {/* <CategorySlider/> */}
       <FeaturedProducts/>
       <VideoCard/>
