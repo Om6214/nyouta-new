@@ -46,6 +46,7 @@ export default function PhysicalCardEditPage() {
   const handleAddToCart = () => {
     const customizedProduct = {
       ...product,
+      id: `${product.id}-${groomName}-${brideName}-${date}`, // Unique ID
       customizationType: 'Physical Card',
       groomName,
       brideName,
@@ -54,6 +55,7 @@ export default function PhysicalCardEditPage() {
       font,
       color,
     };
+    
     addToCart(customizedProduct, 1);
     console.log(`Added ${customizedProduct.name} to cart`);
   };

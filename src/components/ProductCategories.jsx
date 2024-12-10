@@ -4,26 +4,67 @@ import products from "../products.json";
 
 export default function TopCategories() {
   const dropdownData = {
-    "E-INVITE": {
-      Announcement: ["Countdown", "Matrimonial Biodata", "Personalize", "Shock Sandesh", "Social Invites", "Thanks to Guest", "Wishes to Invitor", "Wishes to New", "Wed"],
-      "Party Invitation": ["Birthday Party", "Celebration Party", "Dastar Bandi", "Garba Party", "Halloween Party", "Kitty Party", "Kua Poojan", "Lohri Celebration", "Opening Ceremony", "Retirement Party"],
-      "Pooja & Ritual": ["Aarti Books and Chalisa", "Griha Pravesh", "Katha & Path Invitations", "Mata Jagran Invitations", "Sawamani Invitations", "Shyam Jagran Invitations"],
-      "Wedding Invitations": ["Anniversary Invitations", "Ceremony Invitations", "Engagement Invitations", "Pre Invitation", "Royal Wedding Invitations", "Save the Date", "Theme Invitations", "Wedding Invitations", "Wedding Logos", "Wedding Timeline"],
-      "Welcome Signage": ["Birthday", "Celebration Parties", "Direction Signages", "Engagement Ceremony", "Haldi Ceremony", "Halloween Party", "Lohri Celebration", "Mehandi Celebration", "Sangeet Ceremony", "Wedding Ceremony"],
+    "E-Invitations": {
+      "Wedding Invitations": ["Pre Invitations - Manuhar","Save the Date","Wedding Invitations","Ceremony Invitations","Wedding Timeline","Royal Collection - NEW"],
+      "Party Invitations": ["Birthday Party","Kitty Party","Retirement Party","Halloween Party","Lohri Party"],
+      "Pooja Invitations": ["Sawamani","Griha Pravesh","Shyam Jagran"],
+      "Ceremony Invitations": ["Engagement Ceremony","Wedding Anniversary","Wedding Events","Opening Ceremony","Kua Poojan"],
+      "Short Invitation - FREE": ["Wedding Invitations","Party Invitations"],
+      "Matrimonial Biodata": ["Marriage Biodata"],
     },
-    "New Trendz": {
-      "Event E-Magazine": [],
-      "New Trendz Invitations": [],
-      "Photo E-Book": [],
-      "Wedding E-Magazine": [],
-      "Wedding News E-Paper": [],
+    "Print Invitations": {
+      "Wedding Invitations" : ["Elegant Collection", "Vintage  Collection", "Royal Invitations", "Slider Invitations", "Passport Theme Invitations", "Newspaper Invitations", "Aadhar Card Invitations", "ATM Theme Invitations"],
+      "Party Invitation": ["Birthday Party", "Kitty Party", "Retirement Party", "Halloween Party", "Lohri Party"],
+      "Pooja Invitations": ["Sawamani", "Griha Pravesh", "Shyam Jagran", "Engagement Ceremony", "Sawamani Invitations", "Shyam Jagran Invitations"],
+      "Ceremony Invitations": ["Engagement Ceremony", "Wedding Anniversary", "Opening Ceremony", "Kua Poojan"],
+      //"Welcome Signage": ["Birthday", "Celebration Parties", "Direction Signages", "Engagement Ceremony", "Haldi Ceremony", "Halloween Party", "Lohri Celebration", "Mehandi Celebration", "Sangeet Ceremony", "Wedding Ceremony"],
     },
-    "special-for-u": {
-      "Digital Spread Sheet": ["Budget Purchase Expenses", "Guest Management", "Guest Management | FREE", "Ultimate Wedding Planner", "Wedding Management"],
-      "Guest Management Planner": ["Birthday Guest Management", "Event Guest Management", "Guest Management Booklet", "Wedding Guest Management"],
-      "Wedding Notebook": ["Wedding Notebook", "Wedding Notebook | POPULAR", "Wedding Notebook | ROYAL", "Wedding Notebook | ULTIMATE"],
-      "Wedding Planner": ["Wedding Planner", "Wedding Planner | POPULAR", "Wedding Planner | ROYAL", "Wedding Planner | ULTIMATE"],
+    "Photo Books": {
+      "Soft Cover Photobook": ["Wedding Photobook", "Engagement Photobook", "Anniversary Photobook", "Birthday Photobook"],
+      "Hard Cover Photobook": ["Wedding Photobook", "Engagement Photobook", "Anniversary Photobook", "Birthday Photobook"],
+      "Spiral Photobook": ["Wedding Photobook", "Engagement Photobook", "Anniversary Photobook", "Birthday Photobook"],
+      "Photo Folder": ["Wedding Photobook", "Engagement Photobook", "Anniversary Photobook", "Birthday Photobook"],
+      "Digtial Photobook > Best Seller": ["Wedding Photobook", "Engagement Photobook", "Anniversary Photobook", "Birthday Photobook"],
     },
+
+    "Itinerary": {
+      "Wedding Itinerary": ["Room Itinerary", "Check-in Itinerary", "Room Key Enevelop", "Thank You Cards","Wedding Menu","Table Itinerary","Dining Table Mats"],
+      "Stickers": ["Guest Name Stickers", "Gift Box Sticker", "Vehicle Stickers", "Designer Stickers","Vintage Stickers"],
+      "Tags / Bedges": ["Luggage Tag", "Door Handle Tag", "Gift Tag", "Parking Tags","Wedding Bedges"],
+      "Welcome Signages": ["Wedding Ceremony", "Haldi Ceremony", "Mehandi Ceremony", "Sangeet Ceremony","Direction Signage","Engagement Ceremony","Anniversary Ceremony","Lohri Party","Halloween Party","Birthday Party","Celeration Party"],
+      "Accessories  > Best Seller": ["Shagun Enevelop for New Wed", "Shagun Enevelop for Guests", "Coasters", "Paper Napkins","Party Dangler","Event Banner","Face Mask","Photo Megnet","Funny Poster"],
+      "Games": ["Playing Cards", "Puzzle Games", "Fun Games"],
+    },
+
+    "Guest Surprising ": {
+      "Newspapers": ["Wedding Newspaper", "Engagement Newspaper", "Birthday Newspaper", "Special Event","E-Paper"],
+      "Magazine": ["Wedding Magazine", "Engagement Magazine", "Birthday Magazine", "Special Event","E-Magazine"],
+      
+    },
+
+    "Calendars 2025": {
+      "Mini Desktop Calendar": ["Wedding Calendar", "Birthday Calendar", "Family & Kids"],
+      "Wall Calendar - Portrait": ["Wedding Calendar", "Birthday Calendar", "Family & Kids"],
+      "Wall Calendar - Landscape": ["Wedding Calendar", "Birthday Calendar", "Family & Kids"],
+      "Desktop Calendar": ["Wedding Calendar", "Birthday Calendar", "Family & Kids"],
+      "Table Tent Calendar":["Wedding Calendar", "Birthday Calendar", "Family & Kids"],
+      "Poster Calendar": ["Wedding Calendar", "Birthday Calendar", "Family & Kids"],
+    },
+
+    "Planner Books": {
+      "Planner Books": ["Wedding Management", "Guest Management", "Wedding Notepad","Guest List Booklet - Best Seller"],
+      "Free Printable": ["Wedding Guest List-PDF", "Wedding Guest List - XLS", "Wedding Notepad - PDF"],
+     
+    },
+
+    "Free Greetings": {
+      "Wishes Greeting": ["Wishes to New Wed", "Engagement Wishes", "Anniversary Wishes","Birthday Wishes","Retirement Wishes","General Wishes"],
+      "Thanks Greeting": ["Thanks to Invitor", "Thanks to Guests", "Thanks for Wishes","General Greetings"],
+      "Feeling Greetings": ["Love Cards", "Sorry Cards", "Congrats Cards","Miss you Card","Good Luck Cards"],
+      "Funny Greetings": ["For Wedding", "For Anniversary", "For Party","General Greetings"],
+  
+    },
+
   };
 
   const [selectedOptions, setSelectedOptions] = useState({
@@ -66,6 +107,7 @@ export default function TopCategories() {
   };
 
   // Filter Logic
+  
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       !selectedOptions.main || product.category === selectedOptions.main;
@@ -200,8 +242,12 @@ export default function TopCategories() {
 
                    
                     <h4 className="text-center text-brown-800 font-medium text-sm md:text-base">
-                      {product.name}
+                      {product.subSubCategory} 
                     </h4>
+
+
+
+                    
                     <p className="text-center text-gray-700 font-medium text-sm">
                       ₹{product.price}
                     </p>
