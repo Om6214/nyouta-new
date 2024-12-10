@@ -55,12 +55,12 @@ export default function FeaturedProducts() {
         {/* Heading with animation and font-family */}
         <div className="text-center mb-12">
           <h2
-            className="text-4xl font-primaryFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="text-5xl font-primaryFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
             Featured Products
           </h2>
           <h3
-            className="text-3xl font-primaryFont mt-6 font-medium text-primary transition-opacity duration-700 opacity-100"
+            className="text-2xl font-primaryFont mt-6 font-medium text-primary transition-opacity duration-700 opacity-100"
             
           >
             SEE OUR MOST POPULAR PRODUCTS

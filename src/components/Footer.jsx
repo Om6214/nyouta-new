@@ -48,18 +48,18 @@ export default function Footer() {
 
             <h2 className="text-xl font-semibold mt-8 mb-4 text-white">Be Social & Stay Connected</h2>
             <div className="flex space-x-4">
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/nyoutastores" target="_blank" className="hover:text-white transition-colors" aria-label="Facebook">
                 <Facebook className="w-6 h-6" />
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Twitter">
+              </a>
+              <a href="https://x.com/Nyoutastore" target="_blank" className="hover:text-white transition-colors" aria-label="Twitter">
                 <Twitter className="w-6 h-6" />
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="YouTube">
+              </a>
+              <a href="https://www.youtube.com/@nyoutastore" target="_blank" className="hover:text-white transition-colors" aria-label="YouTube">
                 <Youtube className="w-6 h-6" />
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Instagram">
+              </a>
+              <a href="https://www.instagram.com/nyoutastore/" target="_blank" className="hover:text-white transition-colors" aria-label="Instagram">
                 <Instagram className="w-6 h-6" />
-              </Link>
+              </a>
             </div>
           </div>
 

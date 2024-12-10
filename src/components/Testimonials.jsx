@@ -6,36 +6,316 @@ import { useState, useEffect } from 'react'
 const testimonials = [
   {
     id: 1,
-    name: 'Sarah Johnson',
+    name: 'Aditi & Vikram',
     role: 'Homeowner',
-    content: 'REIAS India made my dream of owning a home a reality. Their expertise and dedication are unmatched!',
+    content: 'Elegant, unique, and easy to share—our wedding invite was perfect!',
     avatar: 'https://picsum.photos/80?random=1', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 2,
-    name: 'Rahul Patel',
+    name: 'Meera & Aditya',
     role: 'Property Investor',
-    content: 'Ive worked with many real estate firms, but REIAS India stands out. Their market insights are invaluable.',
+    content: 'The animated invite was magical and set the tone for our big day.',
     avatar: 'https://picsum.photos/80?random=2', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#FFD700', '#FFD700'], // All Gold
   },
   {
     id: 3,
-    name: 'Priya Sharma',
+    name: 'Shivani & Kunal',
     role: 'First-time Buyer',
-    content: 'As a first-time buyer, I was nervous. REIAS India guided me through every step with patience and professionalism.',
+    content: 'Angira Creation captured our love story beautifully in the invitation.',
     avatar: 'https://picsum.photos/80?random=3', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 4,
-    name: 'Alex Chen',
+    name: 'Divya & Aarav',
+    role: 'First-time Buyer',
+    content: 'Modern, eco-friendly, and absolutely gorgeous. Loved it!',
+    avatar: 'https://picsum.photos/80?random=3', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 5,
+    name: 'Niharika & Raj',
     role: 'Commercial Property Owner',
-    content: 'REIAS Indias commercial property expertise helped me secure an excellent location for my business.',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
-  }
+  },
+  {
+    id: 6,
+    name: 'Preeti & Sameer',
+    role: 'Commercial Property Owner',
+    content: 'Guests couldn’t stop praising the unique and elegant design.',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 7,
+    name: 'Tanvi & Manan',
+    role: 'Commercial Property Owner',
+    content: 'Exceeded all expectations—our invite was simply perfect!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 8,
+    name: 'Rohini & Akshay',
+    role: 'Commercial Property Owner',
+    content: 'Professional, creative, and fast. A wonderful experience!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 9,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 10,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 11,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 12,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 13,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 14,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 15,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 16,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 17,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 18,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 19,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 20,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 21,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 22,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 23,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 24,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 25,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 26,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 27,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 28,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 29,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 30,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 31,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 32,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 33,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 34,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 35,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 36,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 37,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 38,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
+  {
+    id: 39,
+    name: 'Niharika & Raj',
+    role: 'Commercial Property Owner',
+    content: 'Stunning design and hassle-free process. Highly recommend!',
+    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
+    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+  },
 ];
 
 
