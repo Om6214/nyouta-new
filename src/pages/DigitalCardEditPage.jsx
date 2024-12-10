@@ -4,22 +4,32 @@ import productsData from '../products.json';
 
 export default function PhysicalCardEditPage() {
   const location = useLocation();
-  const { id } = useParams(); // Get the product ID from the URL
-  const { imageUrl } = location.state || {}; // Get the original image URL passed through state
+  const { id } = useParams();
+  const { imageUrl } = location.state || {};
 
-  const product = productsData.find((p) => p.id === id); // Find product by ID
+  const product = productsData.find((p) => p.id === id);
 
-  const [paymentDone, setPaymentDone] = useState(false); // State to track payment status
-  const [groomName, setGroomName] = useState('Vikram'); // Groom's name
-  const [brideName, setBrideName] = useState('Aditi'); // Bride's name
-  const [date, setDate] = useState('2025-12-25'); // Date
-  const [time, setTime] = useState('10:30'); // Time
-  const [font, setFont] = useState('Pacifico'); // Font for the text
-  const [color, setColor] = useState('#ad101f'); // Text color
+  const [paymentDone, setPaymentDone] = useState(false);
+  const [groomName, setGroomName] = useState('Vikram');
+  const [brideName, setBrideName] = useState('Aditi');
+  const [date, setDate] = useState('2025-12-25');
+  const [time, setTime] = useState('10:30');
+  const [font, setFont] = useState('Pacifico');
+  const [color, setColor] = useState('#ad101f');
+  const [textSize] = useState(30);
+  const [textPosition, setTextPosition] = useState({
+    groomName: { x: 350, y: 150 },
+    brideName: { x: 350, y: 200 },
+    date: { x: 350, y: 250 },
+    time: { x: 350, y: 300 },
+  });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [draggingText, setDraggingText] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false); // State for modal visibility
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
-  const canvasRef = useRef(null); // Reference for the HTML5 canvas element
+  const canvasRef = useRef(null);
 
   const handleInputChange = (setter) => (event) => setter(event.target.value);
 
@@ -31,13 +41,11 @@ export default function PhysicalCardEditPage() {
     const img = new Image();
 
     img.src = imageUrl;
-    img.crossOrigin = 'anonymous'; // Handle cross-origin image
+    img.crossOrigin = 'anonymous';
 
     img.onload = () => {
-      // Clear the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Scale and draw the background image
       const scaleX = canvas.width / img.width;
       const scaleY = canvas.height / img.height;
       const scale = Math.min(scaleX, scaleY);
@@ -46,51 +54,84 @@ export default function PhysicalCardEditPage() {
 
       ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 
-      // Draw each text customization (groom name, bride name, date, time)
-      ctx.font = `${30}px ${font}`;
-      ctx.fillStyle = color;
-
-      ctx.fillText(groomName, 350, 150);
-      ctx.fillText(brideName, 350, 200);
-      ctx.fillText(date, 350, 250);
-      ctx.fillText(time, 350, 300);
-    };
-
-    img.onerror = (err) => {
-      console.error('Error loading image:', err);
+      Object.keys(textPosition).forEach((key) => {
+        const { x, y } = textPosition[key];
+        ctx.font = `${textSize}px ${font}`;
+        ctx.fillStyle = color;
+        ctx.fillText(eval(key), x, y);
+      });
     };
   };
 
   useEffect(() => {
-    drawCanvas();
-  }, [groomName, brideName, date, time, font, color, imageUrl]);
+    document.fonts.load(`10px ${font}`).then(drawCanvas);
+  }, [imageUrl, groomName, brideName, date, time, font, color, textPosition]);
+
+  const handleMouseDown = (event) => {
+    const { offsetX, offsetY } = event.nativeEvent;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    Object.keys(textPosition).forEach((key) => {
+      const { x, y } = textPosition[key];
+      const textWidth = ctx.measureText(eval(key)).width;
+      const textHeight = textSize;
+
+      if (
+        offsetX >= x &&
+        offsetX <= x + textWidth &&
+        offsetY >= y - textHeight &&
+        offsetY <= y
+      ) {
+        setIsDragging(true);
+        setDragStart({ x: offsetX, y: offsetY });
+        setDraggingText(key);
+      }
+    });
+  };
+
+  const handleMouseMove = (event) => {
+    if (!isDragging || !draggingText) return;
+
+    const { offsetX, offsetY } = event.nativeEvent;
+    const dx = offsetX - dragStart.x;
+    const dy = offsetY - dragStart.y;
+
+    setTextPosition((prev) => ({
+      ...prev,
+      [draggingText]: {
+        x: prev[draggingText].x + dx,
+        y: prev[draggingText].y + dy,
+      },
+    }));
+
+    setDragStart({ x: offsetX, y: offsetY });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setDraggingText(null);
+  };
 
   const handlePreview = () => {
-    drawCanvas(); // Ensure the latest updates are drawn on the canvas
     const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    // Get the image data from the canvas
-    const dataUrl = canvas.toDataURL('image/png');
-    setPreviewImage(dataUrl);
-    setIsPreviewModalOpen(true); // Open the modal
+    if (canvas) {
+      const image = canvas.toDataURL('image/png'); // Generate the image
+      setPreviewImage(image); // Save the image to state
+      setIsPreviewModalOpen(true); // Open the modal
+    } else {
+      console.error("Canvas not found!");
+    }
   };
 
   const handlePayment = () => {
-    // Simulate payment processing
-
     setTimeout(() => {
       alert('Payment successful!');
-      setPaymentDone(true); // Set payment status to true after successful payment
-    }, 1000); // Simulate payment delay
+      setPaymentDone(true);
+    }, 1000);
   };
 
-
-
-  
-
   const handleShareCard = () => {
-    // Logic for sharing the card, e.g., generating a shareable link or downloading
     alert('Card sharing functionality coming soon!');
   };
 
@@ -113,22 +154,24 @@ export default function PhysicalCardEditPage() {
       </div>
     );
   };
-
-  if (!product) return <div>Product not found</div>;
-
   return (
     <div className="edit-image-page max-w-7xl mx-auto p-8 bg-gray-50">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">Customize Your {product.name}</h1>
-
+  
       {imageUrl ? (
         <div className="flex flex-col lg:flex-row gap-10 justify-center items-start">
-          <div className="w-full lg:w-2/3 flex justify-center items-center rounded-lg">
+          <div
+            className="w-full lg:w-2/3 flex justify-center items-center rounded-lg"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+          >
             <canvas ref={canvasRef} className="w-full h-auto rounded-lg" width={800} height={600}></canvas>
           </div>
-
+  
           <div className="w-full lg:w-1/3 bg-white shadow-xl rounded-lg p-8">
             <h2 className="text-3xl font-semibold text-gray-800 mb-6">Card Details</h2>
-
+  
             <div className="grid grid-cols-2 gap-6">
               {/* Groom's Name */}
               <div>
@@ -141,7 +184,7 @@ export default function PhysicalCardEditPage() {
                   placeholder="Enter Groom's Name"
                 />
               </div>
-
+  
               {/* Bride's Name */}
               <div>
                 <label className="block text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
@@ -153,7 +196,7 @@ export default function PhysicalCardEditPage() {
                   placeholder="Enter Bride's Name"
                 />
               </div>
-
+  
               {/* Wedding Date */}
               <div>
                 <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
@@ -164,7 +207,7 @@ export default function PhysicalCardEditPage() {
                   className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
                 />
               </div>
-
+  
               {/* Wedding Time */}
               <div>
                 <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Time:</label>
@@ -175,23 +218,19 @@ export default function PhysicalCardEditPage() {
                   className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
                 />
               </div>
-
-              {/* Select Font */}
-              
-
+  
               {/* Select Text Color */}
               <div>
                 <label className="block text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
                 <input
                   type="color"
                   value={color}
-                  
-        
                   onChange={handleInputChange(setColor)}
                   className="w-full h-12 cursor-pointer rounded-lg border-2"
                 />
               </div>
-
+  
+              {/* Select Font */}
               <div>
                 <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
                 <select
@@ -199,7 +238,7 @@ export default function PhysicalCardEditPage() {
                   onChange={handleInputChange(setFont)}
                   className="w-full border-2 px-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-700"
                 >
-                   <option value="Poppins">Poppins</option>
+                  <option value="Poppins">Poppins</option>
                   <option value="Lobster">Lobster</option>
                   <option value="Dancing Script">Dancing Script</option>
                   <option value="Great Vibes">Great Vibes</option>
@@ -224,40 +263,38 @@ export default function PhysicalCardEditPage() {
                   <option value="Wedding">Wedding</option>
                 </select>
               </div>
-
-              {/* Buttons */}
-              <div className ="mt-8 flex flex-col lg:flex-row gap-12">
+            </div>
+  
+            {/* Buttons */}
+            <div className="mt-8 flex flex-col lg:flex-row gap-12">
+              <button
+                onClick={handlePreview}
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white px-8 rounded-lg py-2"
+              >
+                Preview
+              </button>
+              {!paymentDone ? (
                 <button
-                  onClick={handlePreview}
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white px-8 rounded-lg"
+                  onClick={handlePayment}
+                  className="bg-green-500 text-white py-2 px-10 rounded-lg hover:bg-green-600 w-auto"
                 >
-                  Preview
+                  Pay Now
                 </button>
-                {!paymentDone ? (
-                  <button
-                    onClick={handlePayment}
-                    className="bg-green-500 text-white py-2 px-10 rounded-lg hover:bg-green-600 w-auto"
-                  >
-                    Pay Now
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleShareCard}
-                    className="bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600"
-                  >
-                    Share Card
-                  </button>
-                )}
-              </div>
+              ) : (
+                <button
+                  onClick={handleShareCard}
+                  className="bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600"
+                >
+                  Share Card
+                </button>
+              )}
             </div>
           </div>
         </div>
       ) : (
-        <div className="text-center text-gray-700 text-xl mt-12">
-          No image available for this product
-        </div>
+        <div className="text-center text-gray-700 text-xl mt-12">No image available for this product</div>
       )}
-
+  
       {/* Render the Preview Modal */}
       <PreviewModal
         isOpen={isPreviewModalOpen}

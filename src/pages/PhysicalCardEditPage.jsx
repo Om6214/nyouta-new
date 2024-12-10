@@ -12,29 +12,28 @@ export default function PhysicalCardEditPage() {
   const { addToCart } = useCart(); // Access the addToCart function from CartContext
 
   const canvasRef = useRef(null); // Reference for the HTML5 canvas element
-
   const [groomName, setGroomName] = useState('Vikram');
   const [brideName, setBrideName] = useState('Aditi');
   const [date, setDate] = useState('2025-12-25');
   const [time, setTime] = useState('10:30');
   const [font, setFont] = useState('Pacifico');
   const [color, setColor] = useState('#ad101f');
+  const [textSize, setTextSize] = useState(30); // Default font size
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [previewImage, setPreviewImage] = useState(null);
-  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false); // State for modal visibility
-
+  // State for modal visibility
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [textPosition, setTextPosition] = useState({
     groomName: { x: 350, y: 150 },
     brideName: { x: 350, y: 200 },
     date: { x: 350, y: 250 },
     time: { x: 350, y: 300 },
   });
-
-  const [textSize, setTextSize] = useState(30); // Default font size
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [draggingText, setDraggingText] = useState(null);
 
+  // Text fields change handlers
   const handleGroomNameChange = (event) => setGroomName(event.target.value);
   const handleBrideNameChange = (event) => setBrideName(event.target.value);
   const handleDateChange = (event) => setDate(event.target.value);
@@ -42,6 +41,7 @@ export default function PhysicalCardEditPage() {
   const handleFontChange = (event) => setFont(event.target.value);
   const handleColorChange = (event) => setColor(event.target.value);
 
+  // Add to Cart functionality
   const handleAddToCart = () => {
     const customizedProduct = {
       ...product,
@@ -57,6 +57,7 @@ export default function PhysicalCardEditPage() {
     console.log(`Added ${customizedProduct.name} to cart`);
   };
 
+  // Enable or disable the Add to Cart button
   useEffect(() => {
     if (groomName && brideName && date && time && font && color) {
       setIsButtonDisabled(false);
@@ -65,6 +66,7 @@ export default function PhysicalCardEditPage() {
     }
   }, [groomName, brideName, date, time, font, color]);
 
+  // Draw the canvas
   const drawCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas || !imageUrl) return;
@@ -88,82 +90,80 @@ export default function PhysicalCardEditPage() {
 
       ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 
-      // Draw each text customization (groom name, bride name, date, time)
-      ctx.font = `${textSize}px ${font}`;
-      ctx.fillStyle = color;
-
-      ctx.fillText(groomName, textPosition.groomName.x, textPosition.groomName.y);
-      ctx.fillText(brideName, textPosition.brideName.x, textPosition.brideName.y);
-      ctx.fillText(date, textPosition.date.x, textPosition.date.y);
-      ctx.fillText(time, textPosition.time.x, textPosition.time.y);
-    };
-
-    img.onerror = (err) => {
-      console.error('Error loading image:', err);
+      // Draw text on canvas
+      const textTypes = ['groomName', 'brideName', 'date', 'time'];
+      textTypes.forEach((textType) => {
+        ctx.font = `${textSize}px ${font}`;
+        ctx.fillStyle = color;
+        ctx.fillText(eval(textType), textPosition[textType].x, textPosition[textType].y);
+      });
     };
   };
 
+  // Redraw the canvas when dependencies change
   useEffect(() => {
-    drawCanvas();
-  }, [groomName, brideName, date, time, font, color, textPosition, textSize, imageUrl]);
+    document.fonts.load(`10px ${font}`).then(drawCanvas);
+  }, [imageUrl, groomName, brideName, date, time, font, color, textPosition, textSize]);
 
-  const handleMouseDown = (e, textType) => {
+  // Handle dragging logic
+
+  const handlePreview = () => {
     const canvas = canvasRef.current;
-    const mouseX = e.clientX - canvas.offsetLeft;
-    const mouseY = e.clientY - canvas.offsetTop;
-
-    // Check if the mouse is over the specific text
-    const textPositionCheck = textPosition[textType];
-    const width = 200; // Approximate width of text, can be adjusted based on font/size
-    const height = textSize; // Approximate height of the text
-
-    if (
-      mouseX > textPositionCheck.x &&
-      mouseX < textPositionCheck.x + width &&
-      mouseY > textPositionCheck.y - height &&
-      mouseY < textPositionCheck.y + height
-    ) {
-      setIsDragging(true);
-      setDraggingText(textType);
-      setDragStart({ x: mouseX, y: mouseY });
+    if (canvas) {
+      const image = canvas.toDataURL('image/png'); // Generate the image
+      setPreviewImage(image); // Save the image to state
+      setIsPreviewModalOpen(true); // Open the modal
+    } else {
+      console.error("Canvas not found!");
     }
   };
 
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
 
+  const handleMouseDown = (event) => {
+    const { offsetX, offsetY } = event.nativeEvent;
     const canvas = canvasRef.current;
-    const mouseX = e.clientX - canvas.offsetLeft;
-    const mouseY = e.clientY - canvas.offsetTop;
+    const ctx = canvas.getContext('2d');
 
-    const dx = mouseX - dragStart.x;
-    const dy = mouseY - dragStart.y;
+    const textTypes = ['groomName', 'brideName', 'date', 'time'];
+    textTypes.forEach((textType) => {
+      const { x, y } = textPosition[textType];
+      const textWidth = ctx.measureText(eval(textType)).width;
+      const textHeight = textSize;
+
+      if (
+        offsetX >= x &&
+        offsetX <= x + textWidth &&
+        offsetY >= y - textHeight &&
+        offsetY <= y
+      ) {
+        setIsDragging(true);
+        setDragStart({ x: offsetX, y: offsetY });
+        setDraggingText(textType);
+      }
+    });
+  };
+
+  const handleMouseMove = (event) => {
+    if (!isDragging || !draggingText) return;
+
+    const { offsetX, offsetY } = event.nativeEvent;
+    const dx = offsetX - dragStart.x;
+    const dy = offsetY - dragStart.y;
 
     setTextPosition((prev) => ({
       ...prev,
       [draggingText]: {
         x: prev[draggingText].x + dx,
         y: prev[draggingText].y + dy,
-      }
+      },
     }));
 
-    setDragStart({ x: mouseX, y: mouseY });
+    setDragStart({ x: offsetX, y: offsetY });
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
     setDraggingText(null);
-  };
-
-  const handlePreview = () => {
-    drawCanvas(); // Ensure the latest updates are drawn on the canvas
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    // Get the image data from the canvas
-    const dataUrl = canvas.toDataURL('image/png');
-    setPreviewImage(dataUrl);
-    setIsPreviewModalOpen(true); // Open the modal
   };
 
   const PreviewModal = ({ isOpen, onClose, image }) => {
@@ -174,7 +174,7 @@ export default function PhysicalCardEditPage() {
         <div className="bg-white p-4 rounded-lg shadow-lg relative">
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 text-gray-600 text-4xl"
+            className="absolute top-2 right-2 text-gray- 600 text-4xl"
             style={{ width: '40px', height: '40px' }} // Making the close button larger
           >
             &times;
@@ -186,9 +186,8 @@ export default function PhysicalCardEditPage() {
     );
   };
 
-  if (!product) return <div>Product not found</div>;
-
   return (
+
     <div className="edit-image-page max-w-7xl mx-auto py-12 px-6 bg-gray-100">
       <h1 className="text-5xl font-extrabold text-center text-gray-800 mb-10">
         Customize Your {product.name}
@@ -199,14 +198,12 @@ export default function PhysicalCardEditPage() {
           <div className="w-full lg:w-3/3 flex justify-center items-center rounded-lg">
             <canvas
               ref={canvasRef}
-              className="w-full h-auto rounded-lg"
               width={800}
               height={600}
-              onMouseDown={(e) => handleMouseDown(e, 'groomName')}
+              onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
-              onMouseOut={handleMouseUp} // Ensure dragging stops if the mouse leaves the canvas
-            ></canvas>
+            />
           </div>
 
           <div className="w-full lg:w-2/3 bg-white shadow-xl rounded-xl p-8 border border-gray-300 mx-auto">
@@ -241,7 +238,7 @@ export default function PhysicalCardEditPage() {
                   type="date"
                   value={date}
                   onChange={handleDateChange}
-                  className="w-full border-2 px-4 py-3 rounded-lg"
+                  className="w-full border -2 px-4 py-3 rounded-lg"
                 />
               </div>
               {/* Wedding Time */}
@@ -262,7 +259,7 @@ export default function PhysicalCardEditPage() {
                   onChange={handleFontChange}
                   className="w-full border-2 px-4 py-3 rounded-lg"
                 >
-                  <option value="Poppins">Poppins</option>
+                 <option value="Poppins">Poppins</option>
                   <option value="Lobster">Lobster</option>
                   <option value="Dancing Script">Dancing Script</option>
                   <option value="Great Vibes">Great Vibes</option>
@@ -300,12 +297,13 @@ export default function PhysicalCardEditPage() {
             </div>
             {/* Buttons */}
             <div className="mt-8 flex flex-col lg:flex-row gap-4">
-            <button
-                onClick={handlePreview}
+              <button
+                onClick={handlePreview} // Use the handlePreview function
                 className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600"
               >
                 Preview
               </button>
+
               <button
                 className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={handleAddToCart}
@@ -313,10 +311,8 @@ export default function PhysicalCardEditPage() {
               >
                 Add to Cart
               </button>
-             
             </div>
           </div>
-
         </div>
       ) : (
         <div className="text-center text-gray-700 text-xl mt-12">
@@ -328,9 +324,9 @@ export default function PhysicalCardEditPage() {
       <PreviewModal
         isOpen={isPreviewModalOpen}
         onClose={() => setIsPreviewModalOpen(false)}
-        image={previewImage}
+        image={previewImage} // Pass the previewImage state here
       />
+
     </div>
   );
 }
-
