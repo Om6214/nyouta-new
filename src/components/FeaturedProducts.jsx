@@ -55,12 +55,12 @@ export default function FeaturedProducts() {
         {/* Heading with animation and font-family */}
         <div className="text-center mb-12">
           <h2
-            className="text-4xl font-primaryFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="text-5xl font-primaryFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
             Featured Products
           </h2>
           <h3
-            className="text-3xl font-primaryFont mt-6 font-medium text-primary transition-opacity duration-700 opacity-100"
+            className="text-2xl font-primaryFont mt-6 font-medium text-primary transition-opacity duration-700 opacity-100"
             
           >
             SEE OUR MOST POPULAR PRODUCTS
@@ -126,19 +126,20 @@ export default function FeaturedProducts() {
 
           {/* Slider Content */}
           <Slider {...settings} ref={sliderRef}>
-            {productsData.map((prod, i) => (
+            {productsData.map((product, index) => (
               <div
-                key={i}
+                key={index}
                 className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
-                <Link key={i}
-                  to={`/product/${prod.id}`}
+                <Link key={index}
+                  to={`/product/${product.id}`}
                   className="flex flex-col"
+                  state={{product}}
                 >
                   <div className="relative aspect-w-1 aspect-h-1">
                     <img
-                      src={prod.image[0] || placeholder}
-                      alt={prod.name}
+                      src={product.image[0] || placeholder}
+                      alt={product.name}
                       className="object-cover w-full h-[200px] rounded-t-lg"
                     />
                   </div>
@@ -146,19 +147,19 @@ export default function FeaturedProducts() {
                     <h1
                       className="font-semibold text-xl text-primary font-heroFont"
                     >
-                      {prod.name}
+                      {product.name}
                     </h1>
                     <h3
                       className="text-md font-semibold text-yhird font-heroFont"
                     >
-                      {prod.subCategory}
+                      {product.subCategory}
                     </h3>
                     <div className="flex items-baseline gap-4">
                       <span
                         className="text-xl font-bold text-gray-900"
                         style={{ fontFamily: "Roboto, sans-serif" }}
                       >
-                        Rs. {prod.price}
+                        Rs. {product.price}
                       </span>
                       <span
                         className="text-sm text-gray-500 line-through"
@@ -170,7 +171,7 @@ export default function FeaturedProducts() {
                         className="text-sm text-red-500"
                         style={{ fontFamily: "Roboto, sans-serif" }}
                       >
-                        {prod.discount}% OFF
+                        {product.discount}% OFF
                       </span>
                     </div>
                   </div>

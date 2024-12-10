@@ -88,7 +88,7 @@ export default function MainNav() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex w-full flex-1 items-center gap-2 px-4">
+          {/* <div className="hidden md:flex w-full flex-1 items-center gap-2 px-4">
             <ul className="flex w-full space-x-8 items-center justify-end font-heroFont">
               {navItems.map((item) => (
                 <li key={item} onMouseOut={() => setIsDropdownOpen(false)}>
@@ -116,13 +116,13 @@ export default function MainNav() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Right Section for Icons */}
           <div className="flex items-center gap-4">
-            <Link className="pr-4">
+            {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
-            </Link>
+            </Link> */}
             
             <button onClick={toggleCart} className="flex items-center gap-1 relative">
               <ShoppingBag className="h-6 w-6 hover:text-primary" />

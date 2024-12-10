@@ -25,14 +25,14 @@ export default function Footer() {
           <div>
             <h2 className="text-xl font-semibold mb-4 text-white">Quick Links</h2>
             <ul className="space-y-2">
-              <li><Link href="/wedding" className="hover:text-white transition-colors">Wedding Invitations</Link></li>
-              <li><Link href="/party" className="hover:text-white transition-colors">Party Invitations</Link></li>
-              <li><Link href="/pooja" className="hover:text-white transition-colors">Pooja & Rituals</Link></li>
-              <li><Link href="/signages" className="hover:text-white transition-colors">Welcome Signages</Link></li>
-              <li><Link href="/announcement" className="hover:text-white transition-colors">Announcement</Link></li>
-              <li><Link href="/theme" className="hover:text-white transition-colors">Theme Invitations</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="/printables" className="hover:text-white transition-colors">Free Printables</Link></li>
+              <li><a href="/products" className="hover:text-white transition-colors">Wedding Invitations</a></li>
+              <li><a href="/products" className="hover:text-white transition-colors">Party Invitations</a></li>
+              <li><a href="/products" className="hover:text-white transition-colors">Pooja & Rituals</a></li>
+              <li><a href="/products" className="hover:text-white transition-colors">Welcome Signages</a></li>
+              <li><a href="/products" className="hover:text-white transition-colors">Announcement</a></li>
+              <li><a href="/products" className="hover:text-white transition-colors">Theme Invitations</a></li>
+              <li><a href="/blog" className="hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/printables" className="hover:text-white transition-colors">Free Printables</a></li>
             </ul>
           </div>
 
@@ -48,18 +48,18 @@ export default function Footer() {
 
             <h2 className="text-xl font-semibold mt-8 mb-4 text-white">Be Social & Stay Connected</h2>
             <div className="flex space-x-4">
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/nyoutastores" target="_blank" className="hover:text-white transition-colors" aria-label="Facebook">
                 <Facebook className="w-6 h-6" />
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Twitter">
+              </a>
+              <a href="https://x.com/Nyoutastore" target="_blank" className="hover:text-white transition-colors" aria-label="Twitter">
                 <Twitter className="w-6 h-6" />
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="YouTube">
+              </a>
+              <a href="https://www.youtube.com/@nyoutastore" target="_blank" className="hover:text-white transition-colors" aria-label="YouTube">
                 <Youtube className="w-6 h-6" />
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors" aria-label="Instagram">
+              </a>
+              <a href="https://www.instagram.com/nyoutastore/" target="_blank" className="hover:text-white transition-colors" aria-label="Instagram">
                 <Instagram className="w-6 h-6" />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -70,13 +70,13 @@ export default function Footer() {
               <div className="flex items-center space-x-2">
                 <Mail className="w-5 h-5" />
                 <a href="mailto:info@enyouta.com" className="hover:text-white transition-colors">
-                  E-mail Us: info@enyouta.com
+                  info@enyouta.com
                 </a>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="w-5 h-5" />
                 <a href="tel:+919549541111" className="hover:text-white transition-colors">
-                  WhatsApp: +91-954-954-1111
+        +91-954-954-1111
                 </a>
               </div>
               <div className="text-sm">
