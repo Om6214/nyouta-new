@@ -70,249 +70,249 @@ const testimonials = [
   },
   {
     id: 9,
-    name: 'Niharika & Raj',
+    name: 'Ria & Arjun',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The perfect mix of tradition and modern elegance. Thank you!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 10,
-    name: 'Niharika & Raj',
+    name: 'Priya & Rajesh',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'A seamless process from concept to delivery. Highly satisfied!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 11,
-    name: 'Niharika & Raj',
+    name: 'Shalini & Raj',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'A beautiful invitation that set the perfect tone for our wedding.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 12,
-    name: 'Niharika & Raj',
+    name: 'Priya & Vikram',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Angira Creation made our wedding planning so much easier.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 13,
-    name: 'Niharika & Raj',
+    name: 'Anjali & Kunal',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The invite was a perfect blend of tradition and modernity.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 14,
-    name: 'Niharika & Raj',
+    name: 'Sanya & Arjun',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Our wedding invite was a masterpiece. Thank you!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 15,
-    name: 'Niharika & Raj',
+    name: 'Priya & Rajesh',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Guests loved the interactive features of our digital invite.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 16,
-    name: 'Niharika & Raj',
+    name: 'Neha & Karan',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'A hassle-free experience with a beautiful outcome.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 17,
-    name: 'Niharika & Raj',
+    name: 'Aarav & Meera',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Professional service and a stunning final product.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 18,
-    name: 'Niharika & Raj',
+    name: 'Anjali & Kunal',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The invite was a perfect blend of tradition and modernity.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 19,
-    name: 'Niharika & Raj',
+    name: 'Priya & Rajesh',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Guests loved the interactive features of our digital invite.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 20,
-    name: 'Niharika & Raj',
+    name: 'Maya % Aarav',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The best decision we made for our wedding—so beautiful and easy!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 21,
-    name: 'Niharika & Raj',
+    name: 'Simran & Karan',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Everyone loved the creative and elegant design. Thank you!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 22,
-    name: 'Niharika & Raj',
+    name: 'Ishita & Raghav',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The level of detail in our wedding invitation was incredible.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 23,
-    name: 'Niharika & Raj',
+    name: 'Meera & Sanjay',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The design team brought our vision to life beautifully!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 24,
-    name: 'Niharika & Raj',
+    name: 'Ananya & Viraj',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Quick, professional, and stunning. Absolutely loved it!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 25,
-    name: 'Niharika & Raj',
+    name: 'Diya & Aditya',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'A breathtaking invite that set the tone for our wedding perfectly.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 26,
-    name: 'Niharika & Raj',
+    name: 'Raj & Sneha',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The digital wedding card was vibrant, modern, and easy to share!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 27,
-    name: 'Niharika & Raj',
+    name: 'Tanvi & Sameer',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Our guests were wowed by the invite’s beauty and elegance.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 28,
-    name: 'Niharika & Raj',
+    name: 'Naina & Akash',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'A digital masterpiece for our wedding that left a lasting impression!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 29,
-    name: 'Niharika & Raj',
+    name: 'Pooja & Rahul',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The eco-friendly invitation was as stunning as it was thoughtful.',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 30,
-    name: 'Niharika & Raj',
+    name: 'Isha & Rohan',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Such an elegant and unique design—we’re still receiving compliments!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 31,
-    name: 'Niharika & Raj',
+    name: 'Alisha & Ankur',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'It felt like a luxury experience from start to finish. Thank you!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 32,
-    name: 'Niharika & Raj',
+    name: 'Aditi & Pranav',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'We loved how the invite perfectly matched our wedding theme!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 33,
-    name: 'Niharika & Raj',
+    name: 'Divya & Suraj',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Our families were amazed by the beauty of the digital card!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 34,
-    name: 'Niharika & Raj',
+    name: 'Meera & Sanjay',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The design team brought our vision to life beautifully!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 35,
-    name: 'Niharika & Raj',
+    name: 'Aditi & Vikram',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The wedding calendar was stunning—a beautiful way to relive our special day',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 36,
-    name: 'Niharika & Raj',
+    name: 'Ria & Arjun',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Flipping through the calendar each month is like reliving our wedding!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 37,
-    name: 'Niharika & Raj',
+    name: 'Ananya & Ritesh',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'A beautifully crafted reminder of our special day. Truly amazing!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 38,
-    name: 'Niharika & Raj',
+    name: 'Neha & Rohit',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'Our wedding calendar turned out to be a favorite gift for family!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
   {
     id: 39,
-    name: 'Niharika & Raj',
+    name: 'Ishika & Pranav',
     role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
+    content: 'The wedding itinerary was beautifully designed and so helpful for our guests!',
     avatar: 'https://picsum.photos/80?random=4', // Placeholder image
     starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
   },
