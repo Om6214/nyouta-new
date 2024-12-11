@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import Category from './pages/Category';
@@ -23,10 +23,9 @@ import WeddingCardEditor from './pages/WeddingCardEditor';
 
 // gaganluthrasirji
 
-
 function App() {
   return (
-    <CartProvider> 
+    <CartProvider>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -36,7 +35,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/product/:id/edit-digital-card" element={<DigitalCardEditPage />} />
-          <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/categories" element={<CategoriesPage />} />
@@ -44,15 +42,30 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
           <Route path='/admin/dashboard' element={<DashboardLayout />}>
-              <Route index path='/admin/dashboard' element={<Dashboard />} />
-              <Route path='/admin/dashboard/add-product' element={<AddProduct />} />
+            <Route index path='/admin/dashboard' element={<Dashboard />} />
+            <Route path='/admin/dashboard/add-product' element={<AddProduct />} />
           </Route>
           <Route path="/editor" element={<WeddingCardEditor />} />
+          <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
         </Routes>
-        <Footer />
+
+        {/* Conditionally render Footer */}
+        <ConditionalFooter />
       </BrowserRouter>
     </CartProvider>
   );
+}
+
+// A component to conditionally render the Footer based on the route
+function ConditionalFooter() {
+  const location = useLocation();
+  
+  // Check if the current route matches the path for the physical card edit page
+  if (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) {
+    return null;  // Don't render Footer for this route
+  }
+  
+  return <Footer />;  // Render Footer for all other routes
 }
 
 export default App;
