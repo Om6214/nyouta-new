@@ -1,335 +1,245 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useCart } from '../CartContext'; // Import Cart Context
-import productsData from '../products.json'; // Import product data
+import { FaTrash } from 'react-icons/fa'; 
 
-export default function PhysicalCardEditPage() {
+export default function WeddingCardEditor() {
+  const [textFields, setTextFields] = useState([
+    { id: 'mainText1', text: 'Aarav', x: 80, y: 120, size: 30, font: 'Arial' },
+    { id: 'mainText2', text: 'Rohini', x: 220, y: 120, size: 30, font: 'Arial' },
+    { id: 'subText1', text: 'July 13, 2022 ', x: 140, y: 190, size: 20, font: 'Arial' },
+    { id: 'subText2', text: '12 : 30 AM ', x: 150, y: 250, size: 20, font: 'Arial' },
+  ]);
+
+  const [selectedField, setSelectedField] = useState(null); // Track selected field
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
+  const [newText, setNewText] = useState(''); // New text for update
+  const [isSizeChangerVisible, setIsSizeChangerVisible] = useState(false); // Show/hide size changer
+  const [sizeValue, setSizeValue] = useState(30); // Track size value for the range input
+  const [dragging, setDragging] = useState(false); // Dragging state
+  const [offset, setOffset] = useState({ x: 0, y: 0 }); // Offset for dragging
+  const [newTextInput, setNewTextInput] = useState(''); // Text input for new text
+
   const location = useLocation();
   const { id } = useParams(); // Get the product ID from the URL
-  const { imageUrl } = location.state || {}; // Get the original image URL passed through state
+  const { imageUrl } = location.state || {};
 
-  const product = productsData.find((p) => p.id === id); // Find product by ID
-  const { addToCart } = useCart(); // Access the addToCart function from CartContext
-
-  const canvasRef = useRef(null); // Reference for the HTML5 canvas element
-  const [groomName, setGroomName] = useState('Vikram');
-  const [brideName, setBrideName] = useState('Aditi');
-  const [date, setDate] = useState('2025-12-25');
-  const [time, setTime] = useState('10:30');
-  const [font, setFont] = useState('Pacifico');
-  const [color, setColor] = useState('#ad101f');
-  const [textSize, setTextSize] = useState(30); // Default font size
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [previewImage, setPreviewImage] = useState(null);
-  // State for modal visibility
-  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
-  const [textPosition, setTextPosition] = useState({
-    groomName: { x: 280, y: 160 },
-    brideName: { x: 440, y: 160 },
-    date: { x: 320, y: 220 },
-    time: { x: 350, y: 280 },
-   
-  });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [draggingText, setDraggingText] = useState(null);
-
-  // Text fields change handlers
-  const handleGroomNameChange = (event) => setGroomName(event.target.value);
-  const handleBrideNameChange = (event) => setBrideName(event.target.value);
-  const handleDateChange = (event) => setDate(event.target.value);
-  const handleTimeChange = (event) => setTime(event.target.value);
-  const handleFontChange = (event) => setFont(event.target.value);
-  const handleColorChange = (event) => setColor(event.target.value);
-
-  // Add to Cart functionality
-  const handleAddToCart = () => {
-    const customizedProduct = {
-      ...product,
-      id: `${product.id}-${groomName}-${brideName}-${date}`, // Unique ID
-      customizationType: 'Physical Card',
-      groomName,
-      brideName,
-      date,
-      time,
-      font,
-      color,
-    };
-    
-    addToCart(customizedProduct, 1);
-    console.log(`Added ${customizedProduct.name} to cart`);
-  };
-
-  // Enable or disable the Add to Cart button
-  useEffect(() => {
-    if (groomName && brideName && date && time && font && color) {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
-  }, [groomName, brideName, date, time, font, color]);
-
-  // Draw the canvas
-  const drawCanvas = () => {
-    const canvas = canvasRef.current;
-    if (!canvas || !imageUrl) return;
-
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-
-    img.src = imageUrl;
-    img.crossOrigin = 'anonymous'; // Handle cross-origin image
-
-    img.onload = () => {
-      // Clear the canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Scale and draw the background image
-      const scaleX = canvas.width / img.width;
-      const scaleY = canvas.height / img.height;
-      const scale = Math.min(scaleX, scaleY);
-      const x = (canvas.width - img.width * scale) / 2;
-      const y = (canvas.height - img.height * scale) / 2;
-
-      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-
-      // Draw text on canvas
-      const textTypes = ['groomName', 'brideName', 'date', 'time'];
-      textTypes.forEach((textType) => {
-        ctx.font = `${textSize}px ${font}`;
-        ctx.fillStyle = color;
-        ctx.fillText(eval(textType), textPosition[textType].x, textPosition[textType].y);
-      });
-    };
-  };
-
-  // Redraw the canvas when dependencies change
-  useEffect(() => {
-    document.fonts.load(`10px ${font}`).then(drawCanvas);
-  }, [imageUrl, groomName, brideName, date, time, font, color, textPosition, textSize]);
-
-  // Handle dragging logic
-
-  const handlePreview = () => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const image = canvas.toDataURL('image/png'); // Generate the image
-      setPreviewImage(image); // Save the image to state
-      setIsPreviewModalOpen(true); // Open the modal
-    } else {
-      console.error("Canvas not found!");
+  // Handle text field selection
+  const handleSelectTextField = (id) => {
+    const field = textFields.find((field) => field.id === id);
+    if (field) {
+      setSelectedField(id); // Set the selected field
+      setNewText(field.text); // Set the current text to modal input
+      setSizeValue(field.size); // Set the size value for the range input
+      setIsSizeChangerVisible(true); // Show the size changer
     }
   };
 
-
-  const handleMouseDown = (event) => {
-    const { offsetX, offsetY } = event.nativeEvent;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-
-    const textTypes = ['groomName', 'brideName', 'date', 'time'];
-    textTypes.forEach((textType) => {
-      const { x, y } = textPosition[textType];
-      const textWidth = ctx.measureText(eval(textType)).width;
-      const textHeight = textSize;
-
-      if (
-        offsetX >= x &&
-        offsetX <= x + textWidth &&
-        offsetY >= y - textHeight &&
-        offsetY <= y
-      ) {
-        setIsDragging(true);
-        setDragStart({ x: offsetX, y: offsetY });
-        setDraggingText(textType);
-      }
-    });
+  // Update text after clicking 'Update'
+  const handleUpdate = () => {
+    setTextFields((prevFields) =>
+      prevFields.map((field) =>
+        field.id === selectedField ? { ...field, text: newText, size: sizeValue } : field
+      )
+    );
+    setIsModalOpen(false); // Close the modal after update
   };
 
-  const handleMouseMove = (event) => {
-    if (!isDragging || !draggingText) return;
+  // Handle the size change via the range input
+  const handleSizeChange = (e) => {
+    const newSize = parseInt(e.target.value, 10); // Ensure the size is an integer
+    setSizeValue(newSize);
 
-    const { offsetX, offsetY } = event.nativeEvent;
-    const dx = offsetX - dragStart.x;
-    const dy = offsetY - dragStart.y;
-
-    setTextPosition((prev) => ({
-      ...prev,
-      [draggingText]: {
-        x: prev[draggingText].x + dx,
-        y: prev[draggingText].y + dy,
-      },
-    }));
-
-    setDragStart({ x: offsetX, y: offsetY });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    setDraggingText(null);
-  };
-
-  const PreviewModal = ({ isOpen, onClose, image }) => {
-    if (!isOpen) return null;
-
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div className="bg-white p-4 rounded-lg shadow-lg relative">
-          <button
-            onClick={onClose}
-            className="absolute top-2 right-2 text-gray- 600 text-4xl"
-            style={{ width: '40px', height: '40px' }} // Making the close button larger
-          >
-            &times;
-          </button>
-          <h2 className="text-lg font-semibold mb-4">Preview</h2>
-          <img src={image} alt="Preview" className="w-full h-auto rounded-lg" />
-        </div>
-      </div>
+    // Update the text field size for the selected field
+    setTextFields((prevFields) =>
+      prevFields.map((field) =>
+        field.id === selectedField ? { ...field, size: newSize } : field
+      )
     );
   };
 
+  // Handle mouse down to initiate dragging
+  const handleMouseDown = (id, e) => {
+    e.preventDefault();
+    const field = textFields.find((field) => field.id === id);
+    setSelectedField(id);
+    setDragging(true);
+    setOffset({ x: e.clientX - field.x, y: e.clientY - field.y });
+  };
+
+  // Handle mouse move to drag text
+  const handleMouseMove = (e) => {
+    if (dragging && selectedField) {
+      const newX = e.clientX - offset.x;
+      const newY = e.clientY - offset.y;
+
+      setTextFields((prevFields) =>
+        prevFields.map((field) =>
+          field.id === selectedField ? { ...field, x: newX, y: newY } : field
+        )
+      );
+    }
+  };
+
+  // Handle mouse up to stop dragging
+  const handleMouseUp = () => {
+    setDragging(false);
+  };
+
+  // Function to handle adding new text to the image
+  const handleAddNewText = () => {
+    const newId = `newText${Date.now()}`;
+    const newField = {
+      id: newId,
+      text: newTextInput || 'Enter text',
+      x: 100,
+      y: 100,
+      size: 30,
+      font: 'Arial',
+    };
+    setTextFields((prevFields) => [...prevFields, newField]);
+    setNewTextInput(''); // Clear the input field after adding
+  };
+
+  // Function to remove the text field
+  const handleRemoveTextField = (id) => {
+    setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
+    setSelectedField(null); // Deselect after deletion
+  };
+
   return (
+    <div
+      className="container mx-auto py-12 justify-center"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+    >
+      {/* Page Navigation */}
+      <div className="w-full mb-6 flex justify-center gap-4">
+        {['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5'].map((pageName, index) => (
+          <button key={index} className="text-xl font-semibold">{pageName}</button>
+        ))}
+      </div>
 
-    <div className="edit-image-page max-w-7xl mx-auto py-12 px-6 bg-gray-100">
-      <h1 className="text-5xl font-extrabold text-center text-gray-800 mb-10">
-        Customize Your {product.name}
-      </h1>
-
-      {imageUrl ? (
-        <div className="flex flex-col lg:flex-row gap-10 justify-center items-start">
-          <div className="w-full lg:w-3/3 flex justify-center items-center rounded-lg">
-            <canvas
-              ref={canvasRef}
-              width={800}
-              height={600}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-            />
-          </div>
-
-          <div className="w-full lg:w-2/3 bg-white shadow-xl rounded-xl p-8 border border-gray-300 mx-auto">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-6 text-center">Personalize Your Card</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Groom's Name */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-2">Groom's Name:</label>
-                <input
-                  type="text"
-                  value={groomName}
-                  onChange={handleGroomNameChange}
-                  className="w-full border-2 px-4 py-3 rounded-lg"
-                  placeholder="Enter Groom's Name"
-                />
-              </div>
-              {/* Bride's Name */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-2">Bride's Name:</label>
-                <input
-                  type="text"
-                  value={brideName}
-                  onChange={handleBrideNameChange}
-                  className="w-full border-2 px-4 py-3 rounded-lg"
-                  placeholder="Enter Bride's Name"
-                />
-              </div>
-              {/* Wedding Date */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Date:</label>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={handleDateChange}
-                  className="w-full border -2 px-4 py-3 rounded-lg"
-                />
-              </div>
-              {/* Wedding Time */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-2">Wedding Time:</label>
-                <input
-                  type="time"
-                  value={time}
-                  onChange={handleTimeChange}
-                  className="w-full border-2 px-4 py-3 rounded-lg"
-                />
-              </div>
-              {/* Select Font */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-2">Select Font:</label>
-                <select
-                  value={font}
-                  onChange={handleFontChange}
-                  className="w-full border-2 px-4 py-3 rounded-lg"
+      {/* Main Content Area */}
+      <div className="flex flex-col items-center w-full">
+        {/* Editable Image Area */}
+        <div className="relative w-80 h-112 mb-6">
+          <img src={imageUrl} alt="Background" className="w-full h-full object-cover" />
+          {/* Editable Text Fields */}
+          {textFields.map(({ id, text, x, y, size, font }) => (
+            <div
+              key={id}
+              className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
+              style={{
+                top: y,
+                left: x,
+                fontSize: `${size}px`,  // Make sure fontSize is in 'px'
+                fontFamily: font,
+                transform: 'translate(-50%, -50%)',
+                cursor: 'move',
+                zIndex: selectedField === id ? 10 : 1,
+              }}
+              onMouseDown={(e) => handleMouseDown(id, e)}
+              onClick={() => handleSelectTextField(id)} // Set text as selected on click
+            >
+              {text}
+              {/* Show Delete Icon only if text field is selected */}
+              {selectedField === id && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemoveTextField(id); // Remove text field
+                  }}
+                  className="absolute top-0 right-0 text-red-500 bg-transparent border-none cursor-pointer"
                 >
-                 <option value="Poppins">Poppins</option>
-                  <option value="Lobster">Lobster</option>
-                  <option value="Dancing Script">Dancing Script</option>
-                  <option value="Great Vibes">Great Vibes</option>
-                  <option value="Sacramento">Sacramento</option>
-                  <option value="Pacifico">Pacifico</option>
-                  <option value="Andallan">Andallan</option>
-                  <option value="Angelina">Angelina</option>
-                  <option value="Bebas Neue">Bebas Neue</option>
-                  <option value="Blade Rush">Blade Rush</option>
-                  <option value="Cinzel">Cinzel</option>
-                  <option value="Garden Hidaleya">Garden Hidaleya</option>
-                  <option value="Justin Hailey">Justin Hailey</option>
-                  <option value="Lovely Valentine">Lovely Valentine</option>
-                  <option value="Magdelin">Magdelin</option>
-                  <option value="Mussica Swash">Mussica Swash</option>
-                  <option value="New Walt Disney">New Walt Disney</option>
-                  <option value="Nexa Bold">Nexa Bold</option>
-                  <option value="Quicksand">Quicksand</option>
-                  <option value="Rhinatta">Rhinatta</option>
-                  <option value="Shattime">Shattime</option>
-                  <option value="Vivaldi">Vivaldi</option>
-                  <option value="Wedding">Wedding</option>
-                </select>
-              </div>
-              {/* Select Text Color */}
-              <div>
-                <label className="block text-lg font-medium text-gray-700 mb-2">Select Text Color:</label>
-                <input
-                  type="color"
-                  value={color}
-                  onChange={handleColorChange}
-                  className="w-full h-12 cursor-pointer rounded-lg border-2"
-                />
-              </div>
+                  <FaTrash size={14} />
+                </button>
+              )}
             </div>
-            {/* Buttons */}
-            <div className="mt-8 flex flex-col lg:flex-row gap-4">
-              <button
-                onClick={handlePreview} // Use the handlePreview function
-                className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600"
-              >
-                Preview
-              </button>
+          ))}
+        </div>
 
-              <button
-                className={`w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg ${isButtonDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-                onClick={handleAddToCart}
-                disabled={isButtonDisabled}
-              >
-                Add to Cart
-              </button>
+        {/* Buttons (Edit, Size, New Text, Next) */}
+        <div className="flex gap-4 justify-center items-center mb-4">
+          <button
+            onClick={() => setIsModalOpen(true)} // Open modal when Edit is clicked
+            className="px-4 py-2 bg-blue-500 text-white rounded"
+            disabled={!selectedField} // Disable if no text field is selected
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => setIsSizeChangerVisible(!isSizeChangerVisible)} // Toggle size changer visibility
+            className="px-4 py-2 bg-blue-500 text-white rounded"
+            disabled={!selectedField} // Disable if no text field is selected
+          >
+            Size
+          </button>
+          <button
+            onClick={handleAddNewText} // Add new text
+            className="px-4 py-2 bg-blue-500 text-white rounded"
+          >
+            New Text
+          </button>
+          <button
+            onClick={() => alert('Next page')}
+            className="px-4 py-2 bg-green-500 text-white rounded"
+          >
+            Next
+          </button>
+        </div>
+
+        {/* Size Changer */}
+        {isSizeChangerVisible && selectedField && (
+          <div className="mb-4">
+            <label htmlFor="text-size" className="block text-sm font-medium text-amber-700 mb-2">
+              Resize Text
+            </label>
+            <input
+              type="range"
+              id="text-size"
+              className="w-64"
+              min="10"
+              max="100"
+              value={sizeValue}
+              onChange={handleSizeChange}
+            />
+            <div className="text-sm text-gray-600 mt-2">Text Size: {sizeValue}</div>
+          </div>
+        )}
+
+        {/* Modal for Editing Text */}
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+              <h2 className="text-xl mb-4">Edit Text</h2>
+              <div className="mb-4">
+                <strong>Preview:</strong>
+                <div style={{ fontSize: '16px', fontFamily: 'Arial' }}>{newText}</div>
+              </div>
+              <input
+                type="text"
+                value={newText}
+                onChange={(e) => setNewText(e.target.value)}
+                className="w-full p-2 border rounded mb-4"
+              />
+              <div className="flex justify-end gap-2">
+                <button
+                  onClick={handleUpdate}
+                  className="px-4 py-2 bg-blue-500 text-white rounded"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-4 py-2 bg-gray-500 text-white rounded"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="text-center text-gray-700 text-xl mt-12">
-          No image available for this product
-        </div>
-      )}
-
-      {/* Render the Preview Modal */}
-      <PreviewModal
-        isOpen={isPreviewModalOpen}
-        onClose={() => setIsPreviewModalOpen(false)}
-        image={previewImage} // Pass the previewImage state here
-      />
-
+        )}
+      </div>
     </div>
   );
 }
