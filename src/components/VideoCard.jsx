@@ -13,7 +13,7 @@ const VideoCard = () => {
                 <button className='flex items-center gap-2 bg-gradient-to-br from-primary to-secondary rounded-lg text-white hover:bg-gradient-to-r hover:from-amber-900 hover:to-amber-700 px-8 py-2 shadow-xl lg:text-xl transition duration-300 ease-in' onClick={() => navigate('/products')}>Shop Now <span><SquareArrowOutUpRight /></span></button>
             </div>
             <div>
-            <iframe className='rounded-lg object-cover w-[410px] lg:w-[650px]' width="650" height="400" src="https://www.youtube.com/embed/GVBTLJ6Fqys?si=MnaWRogQwnaYNcCD" title="Nyouta, where memories are brought to life!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe className='rounded-lg object-cover w-[350px] lg:w-[650px]' height="400" src="https://www.youtube.com/embed/GVBTLJ6Fqys?si=MnaWRogQwnaYNcCD" title="Nyouta, where memories are brought to life!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
     </div>

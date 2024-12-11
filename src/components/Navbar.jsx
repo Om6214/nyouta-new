@@ -1,54 +1,113 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { Heart, Search, ShoppingBag, User, ChevronDown, Menu, X } from "lucide-react";
+import {
+  Heart,
+  Search,
+  ShoppingBag,
+  User,
+  ChevronDown,
+  Menu,
+  X,
+} from "lucide-react";
 import { useCart } from "../CartContext"; // Import your cart context
 import logo from "../assets/images/nyouta-logo-1.jpg";
-import { motion } from "framer-motion";
-
+import { AnimatePresence, motion } from "framer-motion";
 
 const navItems = [
   {
-    label: 'About',
-    url: '/about'
-  },
-  {
-    label: 'Products',
-    url: '/products',
+    label: "Print Invitations",
+    url: "/about",
     children: [
-      { label: 'Wedding Invitations' },
-      { label: 'Party Invitation' },
-      { label: 'Pooja Invitation' },
-      { label: 'Ceremony Invitation' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-      { label: 'Wedding Decorations' },
-    ]
+      { label: "Wedding Invitations" },
+      { label: "Party Invitation" },
+      { label: "Pooja Invitation" },
+      { label: "Ceremony Invitation" },
+    ],
   },
   {
-    label: 'Categories',
-    url:'/categories'
+    label: "E Invitation",
+    url: "/products",
+    children: [
+      { label: "Wedding Invitations" },
+      { label: "Party Invitation" },
+      { label: "Pooja Invitation" },
+      { label: "Ceremony Invitation" },
+      { label: "Short Invitation - Free" },
+      { label: "Matrimonial Biodata" },
+    ],
   },
   {
-    label: 'Contact Us',
-    url: '/contact-us'
-  }
-]
+    label: "Photo Books",
+    url: "/categories",
+    children: [
+      { label: "Soft Cover Photobook" },
+      { label: "Hard Cover Photobook" },
+      { label: "Spiral Photobook" },
+      { label: "Photo Folder" },
+      { label: "Digital Photobook" },
+    ],
+  },
+  {
+    label: "Itinerary",
+    url: "/contact-us",
+    children: [
+      { label: "Wedding Itinerary" },
+      { label: "Stickers" },
+      { label: "Tags/Badges" },
+      { label: "Welcome Signages" },
+      { label: "Accessories" },
+      { label: "Games" },
+    ],
+  },
+  {
+    label: "Calendars 2025",
+    url: "/contact-us",
+    children: [
+      { label: "Mini Desktop Calendar" },
+      { label: "Wall Calendar - Potrait" },
+      { label: "Wall Calendar - Landscape" },
+      { label: "Desktop Calendar" },
+      { label: "Table Tent Calendar" },
+      { label: "Poster Calendar" },
+    ],
+  },
+  {
+    label: "Free Greetings",
+    url: "/contact-us",
+    children: [
+      { label: "Wishes Greeting" },
+      { label: "Thanks Greeting" },
+      { label: "Feeling Greeting" },
+      { label: "Funny Greeting" },
+    ],
+  },
+  {
+    label: "Guest Surprising",
+    url: "/contact-us",
+    children: [{ label: "Newspaper" }, { label: "Magazines" }],
+  },
+  {
+    label: "Planner Books",
+    url: "/contact-us",
+    children: [{ label: "Planner Books" }, { label: "Free Printables" }],
+  },
+  {
+    label: "Photo Prints",
+    url: "/contact-us",
+    children: [
+      { label: "Photo Prints Sets" },
+      { label: "Unique Photo Prints" },
+    ],
+  },
+];
 export default function MainNav() {
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(null);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { cartItems, toggleCart } = useCart(); // Access cartItems and toggleCart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const [isHoveringDropdown, setIsHoveringDropdown] = React.useState(false)
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +120,24 @@ export default function MainNav() {
   const handleDropdownToggle = (dropdown) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
+
+  const handleMouseEnter = (index) => {
+    setIsDropdownOpen(index)
+  };
+
+  const handleMouseLeave = () => {
+   if (!isHoveringDropdown) {
+    setIsDropdownOpen(null)
+   }
+  };
+
+  // React.useEffect(() => {
+  //   return () => {
+  //     if (timeoutRef.current) {
+  //       clearTimeout(timeoutRef.current);
+  //     }
+  //   };
+  // }, []);
 
   const gridVariants = {
     hidden: { opacity: 0, y: -50 },
@@ -81,9 +158,9 @@ export default function MainNav() {
     >
       <div className="container mx-auto">
         {/* Top Navigation */}
-        <div className="flex h-24 items-center justify-between px-4">
-          <Link to="/" className="flex items-center lg:pl-12 pl-2 gap-2">
-            <img className="w-20 rounded-[50%]" src={logo} alt="logo-imgh" />
+        <div className="flex h-16 items-center justify-between px-4">
+          <Link to="/" className="flex items-center pt-4 lg:pl-12 pl-2 gap-2">
+            <img className="w-16 rounded-[50%]" src={logo} alt="logo-imgh" />
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
 
@@ -123,8 +200,11 @@ export default function MainNav() {
             {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
             </Link> */}
-            
-            <button onClick={toggleCart} className="flex items-center gap-1 relative">
+
+            <button
+              onClick={toggleCart}
+              className="flex items-center gap-1 relative"
+            >
               <ShoppingBag className="h-6 w-6 hover:text-primary" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 right-0 rounded-full bg-black px-2 py-1 text-[8px] text-white">
@@ -160,7 +240,10 @@ export default function MainNav() {
             </div>
 
             {/* Mobile Drawer Button */}
-            <button className="md:hidden p-2" onClick={() => setIsDrawerOpen(true)}>
+            <button
+              className="md:hidden p-2"
+              onClick={() => setIsDrawerOpen(true)}
+            >
               <Menu className="h-6 w-6" />
             </button>
           </div>
@@ -170,17 +253,25 @@ export default function MainNav() {
         {isDrawerOpen && (
           <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden transition-all duration-500">
             <div className="absolute right-0 h-full w-64 bg-white p-4">
-              <button className="mb-4 text-right" onClick={() => setIsDrawerOpen(false)}>
+              <button
+                className="mb-4 text-right"
+                onClick={() => setIsDrawerOpen(false)}
+              >
                 <X />
               </button>
               <ul className="">
-                {["About", "Products", "Categories", "Contact Us"].map((item) => (
-                  <li key={item}>
-                    <Link to={`/${item.toLowerCase()}`} className="py-2 hover:text-brown-600">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
+                {["About", "Products", "Categories", "Contact Us"].map(
+                  (item) => (
+                    <li key={item}>
+                      <Link
+                        to={`/${item.toLowerCase()}`}
+                        className="py-2 hover:text-brown-600"
+                      >
+                        {item}
+                      </Link>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
@@ -188,16 +279,52 @@ export default function MainNav() {
       </div>
       <div className="hidden lg:flex py-2 justify-center">
         <ul className="flex gap-8 justify-center items-center text-md font-heroFont">
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Wedding Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Party Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Pooja Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Ceremony Invite</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Wishes Greeting</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Thanks Greeting</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Feelings Greeting</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Newspaper</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Magazines</a></li>
-          <li><a className="hover:border-b-2 border-primary pb-1 hover:text-primary hover:font-semibold hover:transition ease-in duration-200" href="/products">Family Calenders</a></li>
+          {navItems.map((item, index) => (
+            <li
+              key={index}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+              className="relative"
+            >
+              <a
+                href={item.url}
+                className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold"
+              >
+                {item.label}
+              </a>
+              <AnimatePresence>
+              {item.children && isDropdownOpen === index && (
+                <motion.ul
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1.0 }}
+                  className="flex flex-col z-10 min-w-[200px] absolute mt-2 left-2 bg-priBg rounded-lg"
+                  onMouseEnter={() => setIsHoveringDropdown(true)}
+                  onMouseLeave={() => {
+                    setIsHoveringDropdown(false);
+                    setIsDropdownOpen(null)
+                  }}
+                >
+                  {item.children.map((child, childIndex) => (
+                    <motion.li
+                      initial="hidden"
+                      animate="visible"
+                      variants={gridVariants}
+                      key={childIndex}
+                    >
+                      <a
+                        href=""
+                        className="text-md block hover:text-primary hover:border-b-2 border-primary pb-[1px]"
+                      >
+                        {child.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              )}
+              </AnimatePresence>
+            </li>
+          ))}
         </ul>
       </div>
     </header>

@@ -126,7 +126,7 @@ export default function FeaturedProducts() {
 
           {/* Slider Content */}
           <Slider {...settings} ref={sliderRef}>
-            {productsData.map((product, index) => (
+            {productsData.slice(20, 35).map((product, index) => (
               <div
                 key={index}
                 className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
