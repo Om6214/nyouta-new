@@ -5,13 +5,13 @@ import cors from 'cors';
 import connectDB from './config/db.js';  // Ensure to include the .js extension if it's an ES module
 import authRoutes from './routes/authRoutes.js';  // Same as above
 import productRoutes from './routes/productRoutes.js';  // Same as above
-
+import morgan from 'morgan'
 // Load environment variables
 dotenv.config();
 
 // Initialize app
 const app = express();
-
+app.use(morgan("tiny"));
 // Middleware
 app.use(bodyParser.json());
 app.use(cors({
@@ -25,8 +25,8 @@ app.options('*', cors()); // Enable preflight for all routes
 connectDB();
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/products', productRoutes);
 
 // Port
 const PORT = process.env.PORT || 5000;

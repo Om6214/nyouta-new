@@ -1,7 +1,10 @@
-
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
+import { GoogleLogin } from '@react-oauth/google';
+import { useDispatch } from 'react-redux';
+import { googleSignup, register, verifyEmail } from '../Store/slices/authSlice';
+
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -10,9 +13,20 @@ export default function Register() {
     password: '',
     confirmPassword: '',
   })
+  const [otp, setotp] = useState();
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [error, setError] = useState('')
+  const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const handleGoogleLogin = async (response) => {
+    const res = await dispatch(googleSignup(response));
+    if (res.type === 'auth/googleSignup/fulfilled') {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -22,7 +36,7 @@ export default function Register() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
 
@@ -36,10 +50,15 @@ export default function Register() {
       return
     }
 
-    // Here you would typically make an API call to register the user
-    console.log('Registration attempt with:', formData)
-    // For demonstration, we'll just log the attempt
-    alert('Registration attempt made. Check console for details.')
+    const data = {
+      name: formData.name,
+      emailorphone: formData.email,
+      password: formData.password,
+    }
+    const res = await dispatch(register(data));
+    if (res.type === 'auth/register/fulfilled') {
+      setIsOtpModalOpen(true);
+    }
   }
 
   const togglePasswordVisibility = (field) => {
@@ -49,6 +68,37 @@ export default function Register() {
       setShowConfirmPassword(!showConfirmPassword)
     }
   }
+
+  const handleOTP = async (e) => {
+    e.preventDefault();
+    const data = {
+      otp: otp,
+      emailorphone: formData.email,
+    }
+    console.log(data);
+    const res = await dispatch(verifyEmail(data));
+    if (res.type === 'auth/verifyEmail/fulfilled') {
+      setIsOtpModalOpen(false);
+    }
+  }
+  const OtpModal = () => (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded shadow-md">
+        <h2 className="text-lg font-bold">Enter OTP</h2>
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          className="border p-2 rounded w-full"
+          value={otp}
+          onChange={(e) => setotp(e.target.value)}
+        />
+        <div className="mt-4 flex justify-end">
+          <button onClick={() => setIsOtpModalOpen(false)} className="mr-2 text-gray-500">Cancel</button>
+          <button onClick={handleOTP} className="bg-indigo-600 text-white px-4 py-2 rounded">Submit</button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -156,6 +206,22 @@ export default function Register() {
               Register
             </button>
           </div>
+          <div className="mt-4 flex justify-center">
+            <GoogleLogin
+              onSuccess={(response) => {
+
+                handleGoogleLogin(response);
+              }}
+              onError={() => {
+                console.log("Login failed");
+              }}
+              type="standard"
+              text="continue_with"
+              theme="dark"
+              shape='square'
+            />
+          </div>
+
         </form>
 
         <div className="text-center">
@@ -167,6 +233,7 @@ export default function Register() {
           </p>
         </div>
       </div>
+      {isOtpModalOpen && <OtpModal />}
     </div>
   )
 }

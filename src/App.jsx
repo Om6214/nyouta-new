@@ -20,10 +20,38 @@ import AddProduct from './dashboard/AddProduct';
 import DigitalCardEditPage from './pages/DigitalCardEditPage';
 import PhysicalCardEditPage from './pages/PhysicalCardEditPage';
 import WeddingCardEditor from './pages/WeddingCardEditor';
+import { useGoogleOneTapLogin } from '@react-oauth/google';
+import { googleSignup } from './Store/slices/authSlice';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 // gaganluthrasirji
 
 function App() {
+
+// useEffect(()=>{
+//   const token = localStorage.getItem("token");
+//   console.log("token", token);
+//   {
+//     !token &&
+//       useGoogleOneTapLogin({
+//         onSuccess: async (credentialResponse) => {
+//           console.log("credentialResponse", credentialResponse);
+//           const res = await googleSignup(credentialResponse);
+//           if (res.type === 'auth/googleSignup/fulfilled') {
+//             setTimeout(() => {
+//               window.location.reload();
+//             }, 2000);
+//           }
+//         },
+//         onError: () => {
+//           toast.error("Login failed.");
+//         },
+//         prompt: "select_account",
+//       });
+//   }
+// },[])
+
   return (
     <CartProvider>
       <BrowserRouter>
@@ -59,12 +87,12 @@ function App() {
 // A component to conditionally render the Footer based on the route
 function ConditionalFooter() {
   const location = useLocation();
-  
+
   // Check if the current route matches the path for the physical card edit page
   if (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) {
     return null;  // Don't render Footer for this route
   }
-  
+
   return <Footer />;  // Render Footer for all other routes
 }
 
