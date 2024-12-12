@@ -1,10 +1,12 @@
 
 import React, { useState, useEffect } from 'react'
-import banner1 from "../assets/images/banner1.webp"
-import banner2 from "../assets/images/banner2.webp"
+import img2 from "../assets/images/home-2.webp";
+import img3 from "../assets/images/home-3.webp";
+import img4 from "../assets/images/home-4.webp";
 const images = [
-  banner1,
-  banner2
+  img2,
+  img3,
+  img4
 ]
 
 export default function HeroSlider() {

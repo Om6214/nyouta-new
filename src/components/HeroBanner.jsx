@@ -17,7 +17,7 @@ const HeroBanner = () => {
     const scale = useTransform(scrollY, [400, 700], [1, 0.7])
     const opacity = useTransform(scrollY, [400, 700], [1, 0.5])
     return (
-        <motion.div style={{ scale, opacity }} className="flex items-center bg-priBg mx-4 rounded-t-3xl">
+        <motion.div style={{ scale, opacity }} className="flex items-center bg-priBg">
             <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
                 <div className="flex gap-8 flex-col-reverse lg:flex-row   lg:gap-16">
                     <motion.div
