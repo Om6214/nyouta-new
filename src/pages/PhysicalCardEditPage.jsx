@@ -172,8 +172,8 @@ export default function WeddingCardEditor() {
       text: newTextInput || 'Enter text',
       x: 100,
       y: 100,
-      size: 30,
-      font: 'Arial',
+      size: 25,
+      font: 'Blade Rush',
     };
     setTextFields((prevFields) => [...prevFields, newField]);
     setNewTextInput('');
@@ -204,8 +204,8 @@ export default function WeddingCardEditor() {
   };
 
   return (
-    <div className="container mx-auto py-12 flex flex-col items-center">
-      {/* Heading and Horizontal Line 
+    <div className="container mx-auto  flex flex-col items-center">
+ 
       <div className="w-full text-center mb-1 flex justify-between items-center">
         <div className="flex-1 text-center ml-96">
           <h1 className="text-3xl font-bold">Editing Screen</h1>
@@ -217,7 +217,7 @@ export default function WeddingCardEditor() {
         </button>
       </div>
 
-      <hr className="my-4 border-t-2 border-gray-300 w-full" />
+      
       
       {/* Horizontal Lines on the Left and Right */}
       <hr className="  border-gray-300 w-full" />
@@ -253,7 +253,7 @@ export default function WeddingCardEditor() {
 
             {/* Editable Image Area */}
             <div className="relative w-80 h-112 mb-6">
-              <img src={imageUrl} alt="Background" className="w-full h-full object-cover" />
+              <img src={imageUrl} alt="Background" className="w-full h-full object-cover " />
               {/* Editable Text Fields */}
               {textFields.map(({ id, text, x, y, size, font }) => (
                 <div
@@ -278,9 +278,9 @@ export default function WeddingCardEditor() {
                         e.stopPropagation();
                         handleRemoveTextField(id);
                       }}
-                      className="absolute top-0 right-0 text-red-500 bg-transparent border-none cursor-pointer"
+                      className="absolute top-0 right-50 text-white-500 bg-transparent border-none cursor-pointer  "
                     >
-                      <FaTrash size={14} />
+                      <FaTrash size={13} />
                     </button>
                   )}
                 </div>
