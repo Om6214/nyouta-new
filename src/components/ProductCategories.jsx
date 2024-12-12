@@ -9,8 +9,10 @@ export default function TopCategories() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
   const dropdownData = {
     "E-Invitations": {
       "Wedding Invitations": ["Pre Invitations - Manuhar","Save the Date","Wedding Invitations","Ceremony Invitations","Wedding Timeline","Royal Collection - NEW"],

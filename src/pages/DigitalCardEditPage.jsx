@@ -8,8 +8,10 @@ export default function PhysicalCardEditPage() {
   const { products } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
   const location = useLocation();
   const { id } = useParams();
   const { imageUrl } = location.state || {};

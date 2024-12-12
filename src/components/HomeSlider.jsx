@@ -15,9 +15,11 @@ const HomeSlider = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
-console.log(products.filter((items) => [1, 9, 14, 18].includes(items.id)));
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
+console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
   const settings = {
     dots: true,
     infinite: true,

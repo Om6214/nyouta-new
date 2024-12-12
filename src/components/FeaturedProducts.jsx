@@ -2,7 +2,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import placeholder from "../assets/images/placeholder.jpg";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import productsData from "../products.json";
+// import productsData from "../products.json";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -16,8 +16,10 @@ export default function FeaturedProducts() {
   const dispatch = useDispatch();
   const sliderRef = useRef(null); // Create a reference to the slider
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
   // Settings for the slider
   const settings = {
     dots: true,

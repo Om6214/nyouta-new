@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-// import productData from '../products.json';
 import { useSelector } from "react-redux";
 import { getProducts } from "../Store/slices/productSlice";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function CategoriesPage() {
   const { products } = useSelector((state) => state.product);
+  console.log(products);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());

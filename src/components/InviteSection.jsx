@@ -13,8 +13,10 @@ const InviteSection = () => {
   const [invitationType, setInvitationType] = useState("");
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
 
   // Handler to open the popup
   const handleOpenPopup = (type) => {
