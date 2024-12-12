@@ -44,7 +44,8 @@ console.log(products.filter((items) => [1, 9, 14, 18].includes(items.id)));
         </Slider>
       </div>
       <div>
-        <div className="grid grid-cols-2 gap-y-4 gap-x-2  px-6 py-4">
+        <h1 className="px-6 text-xl font-bold text-primary">Top Products</h1>
+        <div className="grid grid-cols-2 gap-y-4 gap-x-2  px-6 pt-2">
           {products.filter((items) => ["1", "9", "14", "18"].includes(items.id)).map((items, index) => (
             <div key={items.id} className="bg-gradient-to-r shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg">
               <Link key={index} to={`/products/${items.id}`} state={{items}}>

@@ -59,7 +59,7 @@ export default function FeaturedProducts() {
           >
             Customer Favorites
           </h2>
-          <div className="flex flex-col items-start gap-4 px-8 text-heroFont">
+          <div className="flex flex-col items-start gap-10 py-4 px-8 text-heroFont">
           <p>"Crafted with Care, Designed for You: Our curated stationary collection brings the finest artistry from around the globe to your fingertips. Each piece tells a unique story, ensuring quality, elegence and authenticity you can trust"</p>
           <a className="bg-primary px-4 py-1 rounded-lg text-lg flex items-center gap-1" href="#">Browse all products <span><ArrowRight /></span></a>
           </div>
@@ -74,6 +74,7 @@ export default function FeaturedProducts() {
             }
             .slick-list {
               margin: 0 -15px;
+              padding: 25px 0;
             }
             .slick-arrow {
               border-radius: 50%;
@@ -109,7 +110,6 @@ export default function FeaturedProducts() {
               // object-fit: contain;
               // height: 250px; /* Fixed height for the image */
               // width: 100%;
-              border-radius: 8px;
             }
             .slick-slide .card-content {
               flex-grow: 1;

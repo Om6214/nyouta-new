@@ -32,7 +32,7 @@ const BlogsCard = () => {
             {blogsTitle.map((blog, index) => (
                 <div key={index} className='flex flex-col items-center bg-gradient-to-br from-primary to-secondary rounded-lg'>
                     <img className='lg:w-full object-cover lg:h-[300px] rounded-t-lg' src={blog.imgURL} alt="" />
-                    <div className='flex flex-col items-start justify-between px-8 py-4 gap-3'>
+                    <div className='flex flex-col h-1/2 items-start justify-between px-8 py-4 gap-3'>
                         <h1 className='text-2xl lg:text-2xl font-bold'>{blog.title}</h1>
                         <p>{blog.description}</p>
                         <a className='flex items-center gap-2 bg-secondary hover:bg-primary px-6 py-2 rounded-lg' href="#">Read More <span><SquareArrowOutUpRight /></span></a>
