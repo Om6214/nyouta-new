@@ -23,7 +23,7 @@ console.log(products.filter((items) => [1, 9, 14, 18].includes(items.id)));
   return (
     <>
     <div className="lg:py-6 pt-6 bg-priBg">
-        <h1 className="lg:text-5xl text-3xl text-primary text-center font-primaryFont font-bold ">Bring your memories to life with Nyouta</h1>
+        <h1 className="lg:text-5xl text-3xl text-primary text-center font-heroFont font-semibold ">Bring your memories to life with Nyouta</h1>
         
     </div>
     <div className="flex flex-col bg-priBg lg:flex-row">
@@ -44,7 +44,7 @@ console.log(products.filter((items) => [1, 9, 14, 18].includes(items.id)));
         </Slider>
       </div>
       <div>
-        <div className="grid grid-cols-2 gap-y-4 gap-x-2 bg-gray-300 px-6 py-4">
+        <div className="grid grid-cols-2 gap-y-4 gap-x-2  px-6 py-4">
           {products.filter((items) => ["1", "9", "14", "18"].includes(items.id)).map((items, index) => (
             <div key={items.id} className="bg-gradient-to-r shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg">
               <Link key={index} to={`/products/${items.id}`} state={{items}}>

@@ -9,9 +9,9 @@ export default {
         heroFont: ['Raleway', 'sans-serif']
       },
       colors: {
-        priBg: "#EAD7B4",
-        primary: '#BB531E',
-        secondary: '#9C712B',
+        priBg: "#FAF0DC",
+        primary: '#AF7D32',
+        secondary: '#643C28',
         third: '#553B10'
       },
     },

@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import placeholder from "../assets/images/placeholder.jpg";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
@@ -15,8 +15,8 @@ export default function FeaturedProducts() {
     dots: true,
     infinite: true, // Infinite scrolling to create a continuous loop
     speed: 500, // Very slow transition speed for each slide (7 seconds)
-    slidesToShow: 4,
-    slidesToScroll: 4, // Scroll 4 slides at a time for manual navigation
+    slidesToShow: 3,
+    slidesToScroll: 3, // Scroll 4 slides at a time for manual navigation
     autoplay: false, 
     initialSlide: 0,
     responsive: [
@@ -50,26 +50,23 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 px-4 lg:px-24 bg-priBg">
-      <div className="container mx-auto">
+    <section className="py-16 px-4 lg:px-8 bg-priBg">
+      <div className="container mx-auto flex lg:flex-row flex-col gap-8">
         {/* Heading with animation and font-family */}
-        <div className="text-center mb-12">
+        <div className="my-4">
           <h2
-            className="text-5xl font-primaryFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="text-5xl font-heroFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
-            Featured Products
+            Customer Favorites
           </h2>
-          <h3
-            className="text-2xl font-primaryFont mt-6 font-medium text-primary transition-opacity duration-700 opacity-100"
-            
-          >
-            SEE OUR MOST POPULAR PRODUCTS
-          </h3>
-
+          <div className="flex flex-col items-start gap-4 px-8 text-heroFont">
+          <p>"Crafted with Care, Designed for You: Our curated stationary collection brings the finest artistry from around the globe to your fingertips. Each piece tells a unique story, ensuring quality, elegence and authenticity you can trust"</p>
+          <a className="bg-primary px-4 py-1 rounded-lg text-lg flex items-center gap-1" href="#">Browse all products <span><ArrowRight /></span></a>
+          </div>
         </div>
 
         {/* Slider */}
-        <div className="slider-container mx-4 relative">
+        <div className="slider-container mx-4 relative lg:w-[65%]">
           <style>
             {`
             .slick-slide {

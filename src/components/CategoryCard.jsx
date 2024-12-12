@@ -194,10 +194,10 @@ const CategoryCard = () => {
         transition={{ duration: 1.8 }}
       >
         <div className="text-center mb-10">
-          <h1 className="lg:text-6xl text-3xl font-primaryFont font-extrabold bg-clip-text text-primary">
+          <h1 className="lg:text-6xl text-3xl font-heroFont font-extrabold bg-clip-text text-primary">
             Explore Our Product Categories
           </h1>
-          <p className="text-primary font-primaryFont lg:text-3xl font-semibold text-xl mt-4 leading-relaxed">
+          <p className="text-primary font-heroFont lg:text-3xl font-semibold text-xl mt-4 leading-relaxed">
             Browse through our wide range of categories to find something
             perfect for your needs!
           </p>
