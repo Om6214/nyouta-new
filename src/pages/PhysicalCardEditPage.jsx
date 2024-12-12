@@ -130,193 +130,185 @@ export default function WeddingCardEditor() {
     }
   };
 
-  return (
-    <div
-      className="container mx-auto py-12 justify-center"
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-    >
-      {/* Page Navigation */}
-      <div className="w-full mb-6 flex justify-center gap-4">
-        {['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5'].map((pageName, index) => (
-          <button key={index} className="text-xl font-semibold">{pageName}</button>
+ return (
+  <div
+    className="container mx-auto py-12 flex justify-center"
+    onMouseMove={handleMouseMove}
+    onMouseUp={handleMouseUp}
+  >
+    {/* Page Navigation */}
+    {/* Main Content Area */}
+    <div className="flex flex-col items-center w-full">
+      {/* Editable Image Area */}
+      <div className="relative w-80 h-112 mb-6">
+        <img src={imageUrl} alt="Background" className="w-full h-full object-cover" />
+        {/* Editable Text Fields */}
+        {textFields.map(({ id, text, x, y, size, font }) => (
+          <div
+            key={id}
+            className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
+            style={{
+              top: y,
+              left: x,
+              fontSize: `${size}px`, // Ensure fontSize is in 'px'
+              fontFamily: font,
+              transform: 'translate(-50%, -50%)',
+              cursor: 'move',
+              zIndex: selectedField === id ? 10 : 1,
+            }}
+            onMouseDown={(e) => handleMouseDown(id, e)}
+            onClick={() => handleSelectTextField(id)} // Set text as selected on click
+          >
+            {text}
+            {/* Show Delete Icon only if text field is selected */}
+            {selectedField === id && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleRemoveTextField(id); // Remove text field
+                }}
+                className="absolute top-0 right-0 text-red-500 bg-transparent border-none cursor-pointer"
+              >
+                <FaTrash size={14} />
+              </button>
+            )}
+          </div>
         ))}
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex flex-col items-center w-full">
-        {/* Editable Image Area */}
-        <div className="relative w-80 h-112 mb-6">
-          <img src={imageUrl} alt="Background" className="w-full h-full object-cover" />
-          {/* Editable Text Fields */}
-          {textFields.map(({ id, text, x, y, size, font }) => (
-            <div
-              key={id}
-              className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
-              style={{
-                top: y,
-                left: x,
-                fontSize: `${size}px`, // Ensure fontSize is in 'px'
-                fontFamily: font,
-                transform: 'translate(-50%, -50%)',
-                cursor: 'move',
-                zIndex: selectedField === id ? 10 : 1,
-              }}
-              onMouseDown={(e) => handleMouseDown(id, e)}
-              onClick={() => handleSelectTextField(id)} // Set text as selected on click
-            >
-              {text}
-              {/* Show Delete Icon only if text field is selected */}
-              {selectedField === id && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleRemoveTextField(id); // Remove text field
-                  }}
-                  className="absolute top-0 right-0 text-red-500 bg-transparent border-none cursor-pointer"
-                >
-                  <FaTrash size={14} />
-                </button>
-              )}
-            </div>
-          ))}
+      {/* Error Message */}
+      {showErrorMessage && (
+        <div className="text-red-500 mb-4 absolute top-56 right-96">
+          Please select a text field first!
         </div>
+      )}
 
-        {/* Error Message */}
-        {showErrorMessage && (
-          <div className="text-red-500 mb-4">
-            Please select a text field first!
-          </div>
-        )}
-
-        {isSizeChangerVisible && selectedField && (
-          <div className="mb-4">
-            <input
-              type="range"
-              id="text-size"
-              className="w-64"
-              min="10"
-              max="100"
-              value={sizeValue}
-              onChange={handleSizeChange}
-            />
-            <div className="text-sm text-gray-600 mt-2">Text Size: {sizeValue}</div>
-          </div>
-        )}
-
-        {/* Buttons (Edit, Size, New Text, Next, Font) */}
-        <div className="flex gap-4 justify-center items-center mb-4 w-80">
-          <button
-            onClick={() => {
-              if (selectedField) {
-                setIsModalOpen(true); // Open modal when Edit is clicked
-                const selectedFieldData = textFields.find((field) => field.id === selectedField);
-                if (selectedFieldData) {
-                  setNewText(selectedFieldData.text); // Set the selected field's text to the modal
-                }
-              } else {
-                setShowErrorMessage(true); // Show error if no field is selected
-              }
-            }}
-            className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
-            //disabled={!selectedField} // Disable if no text field is selected
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => {
-              if (selectedField) {
-                setIsSizeChangerVisible(!isSizeChangerVisible); // Toggle size changer visibility
-              } else {
-                setShowErrorMessage(true); // Show error if no field is selected
-              }
-            }}
-            className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
-            //disabled={!selectedField} // Disable if no text field is selected
-          >
-            Size
-          </button>
-          <button
-            onClick={handleAddNewText} // Add new text
-            className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
-          >
-            New 
-          </button>
-          <button
-            onClick={() => {
-              if (selectedField) {
-                setIsFontModalOpen(true); // Open font modal
-              } else {
-                setShowErrorMessage(true); // Show error if no field is selected
-              }
-            }}
-            className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
-            //disabled={!selectedField} // Disable if no text field is selected
-          >
-            Font
-          </button>
-          <button
-            onClick={() => alert('Next page')}
-            className="px-3 py-1 rounded border border-green-400 text-green-600 hover:bg-green-100"
-          >
-            Next
-          </button>
+      {isSizeChangerVisible && selectedField && (
+        <div className="mb-4 absolute top-56 right-80">
+          <input
+            type="range"
+            id="text-size"
+            className="w-64"
+            min="10"
+            max="100"
+            value={sizeValue}
+            onChange={handleSizeChange}
+          />
+          <div className="text-sm text-gray-600 mt-2">Text Size: {sizeValue}</div>
         </div>
+      )}
 
-        {/* Modal for Editing Text */}
-        {isModalOpen && selectedField && (
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-              <h2 className="text-xl mb-4">Edit Text</h2>
-              <div>
-                <label htmlFor="text">Text</label>
-                <input
-                  type="text"
-                  id="text"
-                  className="w-full p-2 border rounded mb-4"
-                  value={newText}
-                  onChange={(e) => setNewText(e.target.value)}
-                />
-              </div>
-              <button onClick={handleUpdate} className="px-6 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100 mr-32">
-                Update
-              </button>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-6 py-1 rounded border border-green-400 text-green-600 hover:bg-green-100 "
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Font Modal for selecting a font */}
-        {isFontModalOpen && (
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-              <h2 className="text-xl mb-4">Choose Font</h2>
-              <div>
-                {['Arial', 'Blade Rush', 'Comic Sans MS', 'Courier New'].map((font) => (
-                  <button
-                    key={font}
-                    onClick={() => handleFontSelect(font)}
-                    className="block w-full text-left px-4 py-2 border-b hover:bg-gray-200"
-                  >
-                    {font}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => setIsFontModalOpen(false)}
-                className="px-6 py-1 rounded border border-green-400 text-green-600 hover:bg-green-100 mt-4"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
+      {/* Buttons (Edit, Size, New Text, Next, Font) */}
+      <div className="absolute top-6 right-80 flex gap-4 z-10 mt-36">
+        <button
+          onClick={() => {
+            if (selectedField) {
+              setIsModalOpen(true); // Open modal when Edit is clicked
+              const selectedFieldData = textFields.find((field) => field.id === selectedField);
+              if (selectedFieldData) {
+                setNewText(selectedFieldData.text); // Set the selected field's text to the modal
+              }
+            } else {
+              setShowErrorMessage(true); // Show error if no field is selected
+            }
+          }}
+          className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => {
+            if (selectedField) {
+              setIsSizeChangerVisible(!isSizeChangerVisible); // Toggle size changer visibility
+            } else {
+              setShowErrorMessage(true); // Show error if no field is selected
+            }
+          }}
+          className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
+        >
+          Size
+        </button>
+        <button
+          onClick={handleAddNewText} // Add new text
+          className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
+        >
+          New
+        </button>
+        <button
+          onClick={() => {
+            if (selectedField) {
+              setIsFontModalOpen(true); // Open font modal
+            } else {
+              setShowErrorMessage(true); // Show error if no field is selected
+            }
+          }}
+          className="px-3 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100"
+        >
+          Font
+        </button>
+        
       </div>
+
+      {/* Modals and Error Messages below Buttons */}
+
+      {/* Modal for Editing Text */}
+      {isModalOpen && selectedField && (
+        <div className=" bg-gray-500 bg-opacity-50 flex justify-center items-center z-50  absolute top-64 right-56      ">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-xl mb-4">Edit Text</h2>
+            <div>
+              <label htmlFor="text">Text</label>
+              <input
+                type="text"
+                id="text"
+                className="w-full p-2 border rounded mb-4"
+                value={newText}
+                onChange={(e) => setNewText(e.target.value)}
+              />
+            </div>
+            <button
+              onClick={handleUpdate}
+              className="px-6 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100 mr-32"
+            >
+              Update
+            </button>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="px-6 py-1 rounded border border-green-400 text-green-600 hover:bg-green-100 "
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Font Modal for selecting a font */}
+      {isFontModalOpen && (
+        <div className=" bg-gray-500 bg-opacity-50 flex justify-center items-center z-50  absolute top-64 right-56">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-xl mb-4">Choose Font</h2>
+            <div>
+              {['Arial', 'Blade Rush', 'Comic Sans MS', 'Courier New'].map((font) => (
+                <button
+                  key={font}
+                  onClick={() => handleFontSelect(font)}
+                  className="block w-full text-left px-4 py-2 border-b hover:bg-gray-200"
+                >
+                  {font}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setIsFontModalOpen(false)}
+              className="px-6 py-1 rounded border border-green-400 text-green-600 hover:bg-green-100 mt-4"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
+
 }
