@@ -3,7 +3,6 @@ import { useLocation, useParams } from 'react-router-dom';
 // import productsData from '../products.json';
 import { useSelector } from 'react-redux';
 import { getProducts } from '../Store/slices/productSlice';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 export default function PhysicalCardEditPage() {
   const { products } = useSelector((state) => state.product);
