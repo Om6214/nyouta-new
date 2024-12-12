@@ -6,10 +6,18 @@ import productsData from "../products.json";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProducts } from "../Store/slices/productSlice";
+import { useDispatch } from "react-redux";
 
 export default function FeaturedProducts() {
+  const { products } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
   const sliderRef = useRef(null); // Create a reference to the slider
-
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
   // Settings for the slider
   const settings = {
     dots: true,
@@ -123,20 +131,20 @@ export default function FeaturedProducts() {
 
           {/* Slider Content */}
           <Slider {...settings} ref={sliderRef}>
-            {productsData.slice(20, 35).map((product, index) => (
+            {products?.slice(20, 35).map((product, index) => (
               <div
                 key={index}
                 className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
                 <Link key={index}
-                  to={`/product/${product.id}`}
+                  to={`/product/${product?._id}`}
                   className="flex flex-col"
                   state={{product}}
                 >
                   <div className="relative aspect-w-1 aspect-h-1">
                     <img
-                      src={product.image[0] || placeholder}
-                      alt={product.name}
+                      src={product?.image[0] || placeholder}
+                      alt={product?.name}
                       className="object-cover w-full h-[200px] rounded-t-lg"
                     />
                   </div>
@@ -144,19 +152,19 @@ export default function FeaturedProducts() {
                     <h1
                       className="font-semibold text-xl text-primary font-heroFont"
                     >
-                      {product.name}
+                      {product?.name}
                     </h1>
                     <h3
                       className="text-md font-semibold text-yhird font-heroFont"
                     >
-                      {product.subCategory}
+                      {product?.subCategory}
                     </h3>
                     <div className="flex items-baseline gap-4">
                       <span
                         className="text-xl font-bold text-gray-900"
                         style={{ fontFamily: "Roboto, sans-serif" }}
                       >
-                        Rs. {product.price}
+                        Rs. {product?.price}
                       </span>
                       <span
                         className="text-sm text-gray-500 line-through"
@@ -168,7 +176,7 @@ export default function FeaturedProducts() {
                         className="text-sm text-red-500"
                         style={{ fontFamily: "Roboto, sans-serif" }}
                       >
-                        {product.discount}% OFF
+                        {product?.discount}% OFF
                       </span>
                     </div>
                   </div>

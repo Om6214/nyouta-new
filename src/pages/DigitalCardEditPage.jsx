@@ -1,13 +1,21 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import productsData from '../products.json';
-
+// import productsData from '../products.json';
+import { useSelector } from 'react-redux';
+import { getProducts } from '../Store/slices/productSlice';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 export default function PhysicalCardEditPage() {
+  const { products } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
   const location = useLocation();
   const { id } = useParams();
   const { imageUrl } = location.state || {};
 
-  const product = productsData.find((p) => p.id === id);
+  const product = products?.find((p) => p?._id === id);
 
   const [paymentDone, setPaymentDone] = useState(false);
   const [groomName, setGroomName] = useState('Vikram');

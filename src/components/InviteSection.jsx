@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import products from "../products.json";
+// import products from "../products.json";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-
+import { useSelector } from "react-redux";
+import { getProducts } from "../Store/slices/productSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 const InviteSection = () => {
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.product);
   const [showPopup, setShowPopup] = useState(false);
   const [invitationType, setInvitationType] = useState("");
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
   // Handler to open the popup
   const handleOpenPopup = (type) => {
@@ -37,26 +46,26 @@ const InviteSection = () => {
           <div className="py-4">
             <div className="grid grid-cols-2 gap-4">
               {products
-                .filter((items) =>
-                  [139, 145, 149, 154].includes(Number(items.id))
+                ?.filter((items) =>
+                  [139, 145, 149, 154]?.includes(Number(items?.id))
                 )
-                .map((items, index) => (
+                ?.map((items, index) => (
                   <div
-                    key={items.id}
+                    key={items?._id}
                     className="bg-gradient-to-br shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg"
                   >
                     <Link
                       key={index}
-                      to={`/products/${items.id}`}
+                      to={`/products/${items?._id}`}
                       state={{ items }}
                     >
                       <img
                         className="w-full lg:h-[150px] h-[100px] object-cover rounded-t-lg"
-                        src={items.image[0]}
+                        src={items?.image[0]}
                         alt=""
                       />
                       <h1 className="text-center text-white py-[2px] font-heroFont font-semibold">
-                        {items.subCategory}
+                        {items?.subCategory}
                       </h1>
                     </Link>
                   </div>
@@ -81,26 +90,26 @@ const InviteSection = () => {
           <div className="py-4">
             <div className="grid grid-cols-2 gap-4">
               {products
-                .filter((items) =>
-                  [107, 110, 116, 119].includes(Number(items.id))
+                ?.filter((items) =>
+                  [107, 110, 116, 119]?.includes(Number(items?.id))
                 )
-                .map((items, index) => (
+                ?.map((items, index) => (
                   <div
-                    key={items.id}
+                    key={items?._id}
                     className="bg-gradient-to-br shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg"
                   >
                     <Link
                       key={index}
-                      to={`/products/${items.id}`}
+                      to={`/products/${items?._id}`}
                       state={{ items }}
                     >
                       <img
                         className="w-full lg:h-[150px] h-[100px] object-cover rounded-t-lg"
-                        src={items.image[1]}
+                        src={items?.image[1]}
                         alt=""
                       />
                       <h1 className="text-center text-white py-[2px] font-heroFont font-semibold">
-                        {items.subCategory}
+                        {items?.subCategory}
                       </h1>
                     </Link>
                   </div>
