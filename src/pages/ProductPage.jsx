@@ -37,8 +37,9 @@ export default function ProductPage() {
         route += "-digital-card";
       }
 
+      // Pass the entire array of images to the next page
       navigate(route, {
-        state: { imageUrl: product.image[1] },
+        state: { images: product.image, selectedType },
       });
     }
   };

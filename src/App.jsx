@@ -29,33 +29,12 @@ import { useEffect } from 'react';
 
 function App() {
 
-// useEffect(()=>{
-//   const token = localStorage.getItem("token");
-//   console.log("token", token);
-//   {
-//     !token &&
-//       useGoogleOneTapLogin({
-//         onSuccess: async (credentialResponse) => {
-//           console.log("credentialResponse", credentialResponse);
-//           const res = await googleSignup(credentialResponse);
-//           if (res.type === 'auth/googleSignup/fulfilled') {
-//             setTimeout(() => {
-//               window.location.reload();
-//             }, 2000);
-//           }
-//         },
-//         onError: () => {
-//           toast.error("Login failed.");
-//         },
-//         prompt: "select_account",
-//       });
-//   }
-// },[])
+  // useEffect(()=>{...}) // Your previous effect logic
 
   return (
     <CartProvider>
       <BrowserRouter>
-        <Navbar />
+        <ConditionalNavbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Category />} />
@@ -82,6 +61,18 @@ function App() {
       </BrowserRouter>
     </CartProvider>
   );
+}
+
+// A component to conditionally render the Navbar based on the route
+function ConditionalNavbar() {
+  const location = useLocation();
+
+  // Check if the current route matches the path for the physical card edit page
+  if (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) {
+    return null;  // Don't render Navbar for this route
+  }
+
+  return <Navbar />;  // Render Navbar for all other routes
 }
 
 // A component to conditionally render the Footer based on the route
