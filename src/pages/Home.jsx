@@ -17,8 +17,8 @@ import BlogsCard from '../components/BlogsCard'
 const Home = () => {
   return (
     <div className='bg-white'>
-      {/* <HeroSlider/> */}
-      <HeroBanner/>
+      <HeroSlider/>
+      {/* <HeroBanner/> */}
       <CategoryCard/>
       {/* <TopCategories/> */}
       <HomeSlider/>
