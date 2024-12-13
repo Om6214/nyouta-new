@@ -31,7 +31,7 @@ const InviteSection = () => {
   };
 
   return (
-    <section className="py-16 lg:px-6 px-2 bg-priBg">
+    <section className="py-16 lg:px-20 px-2 bg-priBg">
       <div className="text-center mb-8">
         <h1 className="lg:text-5xl text-3xl font-semibold font-heroFont text-primary  mb-4">
           Send Invites By
@@ -48,26 +48,25 @@ const InviteSection = () => {
           <div className="py-4">
             <div className="grid grid-cols-2 gap-4">
               {products
-                ?.filter((items) =>
-                  [139, 145, 149, 154]?.includes(Number(items?.id))
+                ?.filter((product) =>
+                  [139, 145, 149, 154]?.includes(Number(product?.id))
                 )
-                ?.map((items, index) => (
+                ?.map((product, index) => (
                   <div
-                    key={items?._id}
+                    key={product?._id}
                     className="bg-gradient-to-br shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg"
                   >
                     <Link
-                      key={index}
-                      to={`/products/${items?._id}`}
-                      state={{ items }}
+                      to={`/products/${product?._id}`}
+                      state={{ product: product }}
                     >
                       <img
                         className="w-full lg:h-[150px] h-[100px] object-cover rounded-t-lg"
-                        src={items?.image[0]}
+                        src={product?.image[0]}
                         alt=""
                       />
                       <h1 className="text-center text-white py-[2px] font-heroFont font-semibold">
-                        {items?.subCategory}
+                        {product?.subCategory}
                       </h1>
                     </Link>
                   </div>
@@ -92,26 +91,26 @@ const InviteSection = () => {
           <div className="py-4">
             <div className="grid grid-cols-2 gap-4">
               {products
-                ?.filter((items) =>
-                  [107, 110, 116, 119]?.includes(Number(items?.id))
+                ?.filter((product) =>
+                  [107, 110, 116, 119]?.includes(Number(product?.id))
                 )
-                ?.map((items, index) => (
+                ?.map((product, index) => (
                   <div
-                    key={items?._id}
+                    key={product?._id}
                     className="bg-gradient-to-br shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg"
                   >
                     <Link
                       key={index}
-                      to={`/products/${items?._id}`}
-                      state={{ items }}
+                      to={`/products/${product?._id}`}
+                      state={{ product }}
                     >
                       <img
                         className="w-full lg:h-[150px] h-[100px] object-cover rounded-t-lg"
-                        src={items?.image[1]}
+                        src={product?.image[1]}
                         alt=""
                       />
                       <h1 className="text-center text-white py-[2px] font-heroFont font-semibold">
-                        {items?.subCategory}
+                        {product?.subCategory}
                       </h1>
                     </Link>
                   </div>
