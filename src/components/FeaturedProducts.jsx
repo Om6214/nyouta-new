@@ -88,9 +88,9 @@ export default function FeaturedProducts() {
             }
             .slick-arrow {
               border-radius: 50%;
-              background: #f59e0b; /* Amber color for buttons */
-              width: 45px;
-              height: 45px;
+              background: #f59e0b; 
+              width: 25px;
+              height: 25px;
               display: flex;
               justify-content: center;
               align-items: center;

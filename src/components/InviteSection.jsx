@@ -54,7 +54,7 @@ const InviteSection = () => {
                 ?.map((product, index) => (
                   <div
                     key={product?._id}
-                    className="bg-gradient-to-br shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg"
+                    className="bg-primary shadow-lg hover:shadow-2xl rounded-lg"
                   >
                     <Link
                       to={`/products/${product?._id}`}

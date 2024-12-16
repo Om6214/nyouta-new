@@ -220,7 +220,7 @@ const CategoryCard = () => {
                 className={`text-md font-heroFont font-medium cursor-pointer px-6 py-3 rounded-lg transition-all duration-300 transform 
                                 ${
                                   selectedCategory === cat
-                                    ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg scale-105"
+                                    ? "bg-primary text-white shadow-lg scale-105"
                                     : "bg-gray-200 text-gray-700 hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
                                 }`}
                 onClick={() => setSelectedCategory(cat)}
@@ -252,7 +252,7 @@ const CategoryCard = () => {
             </div> */}
 
             {/* Subcategories Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:gap-8 gap-4 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {selectedCategory.subCategory.map((sub, index) => (
                 <motion.div
                   custom={index}
@@ -260,7 +260,7 @@ const CategoryCard = () => {
                   animate="visible"
                   variants={gridVariants}
                   key={index}
-                  className="relative w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 lg:ml-8"
+                  className="relative w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="relative overflow-hidden group w-[200px] h-[250px]">
                     <img

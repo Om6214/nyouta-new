@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { FaTrash, FaUndo, FaRedo, FaFont, FaRegEdit, FaPlus, FaFileImage, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import '../utils/pdf.css'; // Correctly import the external CSS file
+// import '../utils/pdf.css'; // Correctly import the external CSS file
 
 export default function WeddingCardEditor() {
   const [textFields, setTextFields] = useState([
