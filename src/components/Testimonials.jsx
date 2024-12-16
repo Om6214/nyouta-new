@@ -1,326 +1,374 @@
-'use client'
+"use client";
 
-import { Star } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import Slider from "react-slick";
 
 const testimonials = [
   {
     id: 1,
-    name: 'Aditi & Vikram',
-    role: 'Homeowner',
-    content: 'Elegant, unique, and easy to share—our wedding invite was perfect!',
-    avatar: 'https://picsum.photos/80?random=1', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Aditi & Vikram",
+    role: "Homeowner",
+    content:
+      "Elegant, unique, and easy to share—our wedding invite was perfect!",
+    avatar: "https://picsum.photos/80?random=1", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 2,
-    name: 'Meera & Aditya',
-    role: 'Property Investor',
-    content: 'The animated invite was magical and set the tone for our big day.',
-    avatar: 'https://picsum.photos/80?random=2', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#FFD700', '#FFD700'], // All Gold
+    name: "Meera & Aditya",
+    role: "Property Investor",
+    content:
+      "The animated invite was magical and set the tone for our big day.",
+    avatar: "https://picsum.photos/80?random=2", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#FFD700", "#FFD700"], // All Gold
   },
   {
     id: 3,
-    name: 'Shivani & Kunal',
-    role: 'First-time Buyer',
-    content: 'Angira Creation captured our love story beautifully in the invitation.',
-    avatar: 'https://picsum.photos/80?random=3', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Shivani & Kunal",
+    role: "First-time Buyer",
+    content:
+      "Angira Creation captured our love story beautifully in the invitation.",
+    avatar: "https://picsum.photos/80?random=3", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 4,
-    name: 'Divya & Aarav',
-    role: 'First-time Buyer',
-    content: 'Modern, eco-friendly, and absolutely gorgeous. Loved it!',
-    avatar: 'https://picsum.photos/80?random=3', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Divya & Aarav",
+    role: "First-time Buyer",
+    content: "Modern, eco-friendly, and absolutely gorgeous. Loved it!",
+    avatar: "https://picsum.photos/80?random=3", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 5,
-    name: 'Niharika & Raj',
-    role: 'Commercial Property Owner',
-    content: 'Stunning design and hassle-free process. Highly recommend!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Niharika & Raj",
+    role: "Commercial Property Owner",
+    content: "Stunning design and hassle-free process. Highly recommend!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 6,
-    name: 'Preeti & Sameer',
-    role: 'Commercial Property Owner',
-    content: 'Guests couldn’t stop praising the unique and elegant design.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Preeti & Sameer",
+    role: "Commercial Property Owner",
+    content: "Guests couldn’t stop praising the unique and elegant design.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 7,
-    name: 'Tanvi & Manan',
-    role: 'Commercial Property Owner',
-    content: 'Exceeded all expectations—our invite was simply perfect!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Tanvi & Manan",
+    role: "Commercial Property Owner",
+    content: "Exceeded all expectations—our invite was simply perfect!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 8,
-    name: 'Rohini & Akshay',
-    role: 'Commercial Property Owner',
-    content: 'Professional, creative, and fast. A wonderful experience!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Rohini & Akshay",
+    role: "Commercial Property Owner",
+    content: "Professional, creative, and fast. A wonderful experience!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 9,
-    name: 'Ria & Arjun',
-    role: 'Commercial Property Owner',
-    content: 'The perfect mix of tradition and modern elegance. Thank you!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Ria & Arjun",
+    role: "Commercial Property Owner",
+    content: "The perfect mix of tradition and modern elegance. Thank you!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 10,
-    name: 'Priya & Rajesh',
-    role: 'Commercial Property Owner',
-    content: 'A seamless process from concept to delivery. Highly satisfied!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Priya & Rajesh",
+    role: "Commercial Property Owner",
+    content: "A seamless process from concept to delivery. Highly satisfied!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 11,
-    name: 'Shalini & Raj',
-    role: 'Commercial Property Owner',
-    content: 'A beautiful invitation that set the perfect tone for our wedding.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Shalini & Raj",
+    role: "Commercial Property Owner",
+    content:
+      "A beautiful invitation that set the perfect tone for our wedding.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 12,
-    name: 'Priya & Vikram',
-    role: 'Commercial Property Owner',
-    content: 'Angira Creation made our wedding planning so much easier.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Priya & Vikram",
+    role: "Commercial Property Owner",
+    content: "Angira Creation made our wedding planning so much easier.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 13,
-    name: 'Anjali & Kunal',
-    role: 'Commercial Property Owner',
-    content: 'The invite was a perfect blend of tradition and modernity.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Anjali & Kunal",
+    role: "Commercial Property Owner",
+    content: "The invite was a perfect blend of tradition and modernity.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 14,
-    name: 'Sanya & Arjun',
-    role: 'Commercial Property Owner',
-    content: 'Our wedding invite was a masterpiece. Thank you!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Sanya & Arjun",
+    role: "Commercial Property Owner",
+    content: "Our wedding invite was a masterpiece. Thank you!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 15,
-    name: 'Priya & Rajesh',
-    role: 'Commercial Property Owner',
-    content: 'Guests loved the interactive features of our digital invite.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Priya & Rajesh",
+    role: "Commercial Property Owner",
+    content: "Guests loved the interactive features of our digital invite.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 16,
-    name: 'Neha & Karan',
-    role: 'Commercial Property Owner',
-    content: 'A hassle-free experience with a beautiful outcome.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Neha & Karan",
+    role: "Commercial Property Owner",
+    content: "A hassle-free experience with a beautiful outcome.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 17,
-    name: 'Aarav & Meera',
-    role: 'Commercial Property Owner',
-    content: 'Professional service and a stunning final product.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Aarav & Meera",
+    role: "Commercial Property Owner",
+    content: "Professional service and a stunning final product.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 18,
-    name: 'Anjali & Kunal',
-    role: 'Commercial Property Owner',
-    content: 'The invite was a perfect blend of tradition and modernity.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Anjali & Kunal",
+    role: "Commercial Property Owner",
+    content: "The invite was a perfect blend of tradition and modernity.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 19,
-    name: 'Priya & Rajesh',
-    role: 'Commercial Property Owner',
-    content: 'Guests loved the interactive features of our digital invite.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Priya & Rajesh",
+    role: "Commercial Property Owner",
+    content: "Guests loved the interactive features of our digital invite.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 20,
-    name: 'Maya % Aarav',
-    role: 'Commercial Property Owner',
-    content: 'The best decision we made for our wedding—so beautiful and easy!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Maya % Aarav",
+    role: "Commercial Property Owner",
+    content: "The best decision we made for our wedding—so beautiful and easy!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 21,
-    name: 'Simran & Karan',
-    role: 'Commercial Property Owner',
-    content: 'Everyone loved the creative and elegant design. Thank you!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Simran & Karan",
+    role: "Commercial Property Owner",
+    content: "Everyone loved the creative and elegant design. Thank you!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 22,
-    name: 'Ishita & Raghav',
-    role: 'Commercial Property Owner',
-    content: 'The level of detail in our wedding invitation was incredible.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Ishita & Raghav",
+    role: "Commercial Property Owner",
+    content: "The level of detail in our wedding invitation was incredible.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 23,
-    name: 'Meera & Sanjay',
-    role: 'Commercial Property Owner',
-    content: 'The design team brought our vision to life beautifully!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Meera & Sanjay",
+    role: "Commercial Property Owner",
+    content: "The design team brought our vision to life beautifully!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 24,
-    name: 'Ananya & Viraj',
-    role: 'Commercial Property Owner',
-    content: 'Quick, professional, and stunning. Absolutely loved it!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Ananya & Viraj",
+    role: "Commercial Property Owner",
+    content: "Quick, professional, and stunning. Absolutely loved it!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 25,
-    name: 'Diya & Aditya',
-    role: 'Commercial Property Owner',
-    content: 'A breathtaking invite that set the tone for our wedding perfectly.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Diya & Aditya",
+    role: "Commercial Property Owner",
+    content:
+      "A breathtaking invite that set the tone for our wedding perfectly.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 26,
-    name: 'Raj & Sneha',
-    role: 'Commercial Property Owner',
-    content: 'The digital wedding card was vibrant, modern, and easy to share!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Raj & Sneha",
+    role: "Commercial Property Owner",
+    content: "The digital wedding card was vibrant, modern, and easy to share!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 27,
-    name: 'Tanvi & Sameer',
-    role: 'Commercial Property Owner',
-    content: 'Our guests were wowed by the invite’s beauty and elegance.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Tanvi & Sameer",
+    role: "Commercial Property Owner",
+    content: "Our guests were wowed by the invite’s beauty and elegance.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 28,
-    name: 'Naina & Akash',
-    role: 'Commercial Property Owner',
-    content: 'A digital masterpiece for our wedding that left a lasting impression!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Naina & Akash",
+    role: "Commercial Property Owner",
+    content:
+      "A digital masterpiece for our wedding that left a lasting impression!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 29,
-    name: 'Pooja & Rahul',
-    role: 'Commercial Property Owner',
-    content: 'The eco-friendly invitation was as stunning as it was thoughtful.',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Pooja & Rahul",
+    role: "Commercial Property Owner",
+    content:
+      "The eco-friendly invitation was as stunning as it was thoughtful.",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 30,
-    name: 'Isha & Rohan',
-    role: 'Commercial Property Owner',
-    content: 'Such an elegant and unique design—we’re still receiving compliments!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Isha & Rohan",
+    role: "Commercial Property Owner",
+    content:
+      "Such an elegant and unique design—we’re still receiving compliments!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 31,
-    name: 'Alisha & Ankur',
-    role: 'Commercial Property Owner',
-    content: 'It felt like a luxury experience from start to finish. Thank you!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Alisha & Ankur",
+    role: "Commercial Property Owner",
+    content:
+      "It felt like a luxury experience from start to finish. Thank you!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 32,
-    name: 'Aditi & Pranav',
-    role: 'Commercial Property Owner',
-    content: 'We loved how the invite perfectly matched our wedding theme!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Aditi & Pranav",
+    role: "Commercial Property Owner",
+    content: "We loved how the invite perfectly matched our wedding theme!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 33,
-    name: 'Divya & Suraj',
-    role: 'Commercial Property Owner',
-    content: 'Our families were amazed by the beauty of the digital card!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Divya & Suraj",
+    role: "Commercial Property Owner",
+    content: "Our families were amazed by the beauty of the digital card!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 34,
-    name: 'Meera & Sanjay',
-    role: 'Commercial Property Owner',
-    content: 'The design team brought our vision to life beautifully!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Meera & Sanjay",
+    role: "Commercial Property Owner",
+    content: "The design team brought our vision to life beautifully!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 35,
-    name: 'Aditi & Vikram',
-    role: 'Commercial Property Owner',
-    content: 'The wedding calendar was stunning—a beautiful way to relive our special day',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Aditi & Vikram",
+    role: "Commercial Property Owner",
+    content:
+      "The wedding calendar was stunning—a beautiful way to relive our special day",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 36,
-    name: 'Ria & Arjun',
-    role: 'Commercial Property Owner',
-    content: 'Flipping through the calendar each month is like reliving our wedding!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Ria & Arjun",
+    role: "Commercial Property Owner",
+    content:
+      "Flipping through the calendar each month is like reliving our wedding!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 37,
-    name: 'Ananya & Ritesh',
-    role: 'Commercial Property Owner',
-    content: 'A beautifully crafted reminder of our special day. Truly amazing!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Ananya & Ritesh",
+    role: "Commercial Property Owner",
+    content:
+      "A beautifully crafted reminder of our special day. Truly amazing!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 38,
-    name: 'Neha & Rohit',
-    role: 'Commercial Property Owner',
-    content: 'Our wedding calendar turned out to be a favorite gift for family!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Neha & Rohit",
+    role: "Commercial Property Owner",
+    content:
+      "Our wedding calendar turned out to be a favorite gift for family!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
     id: 39,
-    name: 'Ishika & Pranav',
-    role: 'Commercial Property Owner',
-    content: 'The wedding itinerary was beautifully designed and so helpful for our guests!',
-    avatar: 'https://picsum.photos/80?random=4', // Placeholder image
-    starColors: ['#FFD700', '#FFD700', '#FFD700', '#C0C0C0', '#C0C0C0'], // Gold and Silver
+    name: "Ishika & Pranav",
+    role: "Commercial Property Owner",
+    content:
+      "The wedding itinerary was beautifully designed and so helpful for our guests!",
+    avatar: "https://picsum.photos/80?random=4", // Placeholder image
+    starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
 ];
 
-
 export default function Testimonials() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  var settings = {
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -333,11 +381,31 @@ export default function Testimonials() {
   return (
     <section className="py-16 text-primaryBlue bg-priBg">
       <div className="container mx-auto px-4">
-        <h2 className="mb-12 text-primary font-primaryFont text-center text-3xl font-bold tracking-tight lg:text-5xl">
+        <h2 className="mb-12 text-primary font-heroFont text-center text-3xl font-semibold tracking-tight lg:text-5xl">
           What Our Clients Say
         </h2>
-        <div className="relative mx-auto max-w-4xl overflow-hidden">
-          <div
+        <div className="relative mx-auto overflow-hidden">
+          <div className="slider-container mx-16">
+            <Slider {...settings}>
+              {testimonials.map((items) => (
+                <div>
+                  <div className="flex flex-col gap-4 items-center font-heroFont">
+                    <img className="rounded-full" src={items.avatar} alt="" />
+                    <div className="flex flex-col gap-3 items-center">
+                      <p className="text-center">{items.content}</p>
+                      <h1 className="font-semibold">{items.name}</h1>
+                      <blockquote>{items.role}</blockquote>
+                    </div>
+                    <div>
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+          {/* <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
           >
@@ -369,9 +437,9 @@ export default function Testimonials() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
-        <div className="mt-8 flex justify-center space-x-2">
+        {/* <div className="mt-8 flex justify-center space-x-2">
           {testimonials.map((_, index) => (
             <button
               key={index}
@@ -380,7 +448,7 @@ export default function Testimonials() {
               onClick={() => setCurrentTestimonial(index)}
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

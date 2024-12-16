@@ -13,6 +13,7 @@ import VideoCard from '../components/VideoCard'
 import PromiseCard from '../components/PromiseCard'
 import DiscountOffer from '../components/DiscountOffer'
 import BlogsCard from '../components/BlogsCard'
+import ProductCard from '../components/ProductCard'
 
 const Home = () => {
   return (
@@ -27,6 +28,7 @@ const Home = () => {
       {/* <CategorySlider/> */}
       <FeaturedProducts/>
       <VideoCard/>
+      <ProductCard/>
       <About/>
       <BlogsCard/>
       <PromiseCard/>

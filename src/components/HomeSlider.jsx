@@ -57,7 +57,7 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
         <h1 className="px-6 text-xl font-bold text-primary">Top Products</h1>
         <div className="grid grid-cols-2 gap-y-4 gap-x-2  px-6 pt-2">
           {products?.filter((items) => ["1", "9", "14", "18"].includes(items?.id)).map((items, index) => (
-            <div key={items.id} className="bg-gradient-to-r shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg">
+            <div key={items.id} className="bg-primary shadow-lg hover:shadow-2xl rounded-lg">
               <Link key={index} to={`/products/${items?._id}`} state={{items}}>
               <img className="w-full lg:h-[130px] h-[100px] object-cover rounded-t-lg" src={items?.image[1]} alt="" />
                 <h1 className="px-2 py-[2px] font-heroFont font-semibold">{items?.name}</h1>
