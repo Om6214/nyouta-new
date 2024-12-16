@@ -72,6 +72,9 @@ function ConditionalNavbar() {
   if (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) {
     return null;  // Don't render Navbar for this route
   }
+  if (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card')) {
+    return null;  // Don't render Navbar for this route
+  }
 
   return <Navbar />;  // Render Navbar for all other routes
 }

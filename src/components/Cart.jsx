@@ -35,9 +35,7 @@ export default function Cart() {
 
   return (
     <div>
-      <button ref={cartButtonRef} onClick={toggleCart}>
-        <ShoppingBag className="h-6 w-6" />
-      </button>
+     
 
       {isCartOpen && (
   <div
