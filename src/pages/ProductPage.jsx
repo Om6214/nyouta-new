@@ -11,7 +11,7 @@ export default function ProductPage() {
   const [selectedType, setSelectedType] = useState(null);
   const [warning, setWarning] = useState("");
 
-  const types = ["Physical Card", "Digital Card", "Photobook"];
+  const types = ["Pdf Invitation", "Video Invitation"];
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
 
@@ -31,9 +31,9 @@ export default function ProductPage() {
       let route = `/product/${product.id}/edit`;
 
       // Append the selected type to the route
-      if (selectedType === "Physical Card") {
+      if (selectedType === "Pdf Invitation") {
         route += "-physical-card";
-      } else if (selectedType === "Digital Card") {
+      } else if (selectedType === "Video Invitation") {
         route += "-digital-card";
       }
 
@@ -56,7 +56,7 @@ export default function ProductPage() {
           <img
             src={product.image[currentImageIndex]}
             alt={product.name}
-            className="w-full h-auto object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="w-64 h-112 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
           <div className="grid grid-cols-5 gap-3 mt-4">
             {product.image.map((img, index) => (
