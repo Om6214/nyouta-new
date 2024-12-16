@@ -3,7 +3,7 @@
 import { Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
-
+import bgImg from "../assets/images/19.png";
 const testimonials = [
   {
     id: 1,
@@ -382,14 +382,15 @@ export default function Testimonials() {
     <section className="py-16 text-primaryBlue bg-priBg">
       <div className="container mx-auto px-4">
         <h2 className="mb-12 text-primary font-heroFont text-center text-3xl font-semibold tracking-tight lg:text-5xl">
-          What Our Clients Say
+        Real Stories, Real Experiences – Our Customers Speak
         </h2>
         <div className="relative mx-auto overflow-hidden">
           <div className="slider-container mx-16">
             <Slider {...settings}>
               {testimonials.map((items) => (
                 <div>
-                  <div className="flex flex-col gap-4 items-center font-heroFont">
+                  <div  className="flex flex-col gap-4 items-center font-heroFont">
+                    <img src={bgImg} className="absolute top-[-20px] w-[420px] h-[250px]" alt="" />
                     <img className="rounded-full" src={items.avatar} alt="" />
                     <div className="flex flex-col gap-3 items-center">
                       <p className="text-center">{items.content}</p>

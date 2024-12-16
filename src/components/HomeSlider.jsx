@@ -32,12 +32,13 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
   };
   return (
     <>
-    <div className="lg:py-6 pt-6 bg-priBg">
-        <h1 className="lg:text-5xl text-3xl text-primary text-center font-heroFont font-semibold ">Bring your memories to life with Nyouta</h1>
+    <div className="lg:py-1 pt-6 bg-priBg">
+        <h1 className="lg:text-5xl text-3xl text-primary text-center font-heroFont font-semibold ">Your Wedding, Your Shape</h1>
+        <h2 className="lg:text-3xl text-xl text-primary pt-1 font-heroFont text-center">Celebrate in Style with Our Distinctively Shaped Invitations by nyouta</h2>
         
     </div>
     <div className="flex flex-col bg-priBg lg:flex-row">
-      <div className="slider-container lg:w-[65%] rounded-lg my-auto">
+      <div className="slider-container lg:w-[70%] rounded-lg my-auto">
         <Slider {...settings} className="px-6">
           <div>
             <img className="w-full lg:h-[350px] lg:object-cover rounded-lg" src={img1} alt="" />
@@ -53,34 +54,14 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
           </div>
         </Slider>
       </div>
-      <div>
-        <h1 className="px-6 text-xl font-bold text-primary">Top Products</h1>
-        <div className="grid grid-cols-2 gap-y-4 gap-x-2  px-6 pt-2">
-          {products?.filter((items) => ["1", "9", "14", "18"].includes(items?.id)).map((items, index) => (
-            <div key={items.id} className="bg-primary shadow-lg hover:shadow-2xl rounded-lg">
-              <Link key={index} to={`/products/${items?._id}`} state={{items}}>
-              <img className="w-full lg:h-[130px] h-[100px] object-cover rounded-t-lg" src={items?.image[1]} alt="" />
-                <h1 className="px-2 py-[2px] font-heroFont font-semibold">{items?.name}</h1>
-                </Link>
-            </div>
-          ))}
+      <div className="">
+        <div className="py-6 px-6 mt-4 flex flex-col gap-4 items-start border-2 rounded-xl">
+          <h1 className="text-7xl font-themeFont font-bold">new !</h1>
+          <h1 className="text-5xl font-themeFont">Shaped Wedding Invitation</h1>
+          <h2 className="text-xl">Unique shapes that stack together in a perfect piece suite</h2>
+          <button className="bg-pink-600 font-bold text-white px-3 py-1 rounded-full text-lg">Shop New Shapes</button>
         </div>
       </div>
-      {/* <div className="mx-2 flex flex-col gap-8 py-4 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-secondary w-full">
-        <h1 className="lg:text-5xl text-3xl font-primaryFont text-center font-bold">Nyouta</h1>
-        <div className="flex gap-2 items-center">
-            <h1 className="flex font-heroFont items-center gap-1 text-third text-2xl"><Heart size={32}/> <span>35 Lakh</span></h1>
-            <h2 className="font-heroFont">Customers</h2>
-        </div>
-        <div className="flex gap-2 items-center">
-            <h1 className="flex font-heroFont items-center gap-1 text-third text-2xl"><ShieldCheck size={32} /> <span>1 crore</span></h1>
-            <h2 className="font-heroFont">Cards printed</h2>
-        </div>
-        <div className="flex gap-2 items-center">
-            <h1 className="flex font-heroFont items-center gap-1 text-third text-2xl"><Star size={32} /> <span>1 Lakh</span></h1>
-            <h2 className="font-heroFont">5 star ratings</h2>
-        </div>
-      </div> */}
     </div>
     </>
   );

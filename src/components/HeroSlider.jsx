@@ -9,6 +9,33 @@ const images = [
   img4
 ]
 
+const tiles = [
+  {
+    title: 'SAVE THE DATE',
+    des: 'Customize and Share - FREE'
+  },
+  {
+    title: 'PDF INVITES',
+    des: 'Customize and Share'
+  },
+  {
+    title: 'ROYAL E-INVITES',
+    des: 'Big on Style, Small on Cost'
+  },
+  {
+    title: 'VIDEO INVITES',
+    des: 'Share Your Joy in Motion'
+  },
+  {
+    title: 'WISHES GREETINGS',
+    des: 'Customize and Share - FREE'
+  },
+  {
+    title: 'THANKS GREETINGS',
+    des: 'Customize and Share - FREE'
+  },
+]
+
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
@@ -34,6 +61,7 @@ export default function HeroSlider() {
   }
 
   return (
+    <>
     <div className="relative h-[400px] w-full overflow-hidden">
       {images.map((image, index) => (
         <div
@@ -83,5 +111,16 @@ export default function HeroSlider() {
         ))}
       </div>
     </div>
+    <div className='lg:px-4 px-2 py-2'>
+        <div className='grid lg:grid-cols-6 grid-cols-3 justify-center gap-2 lg:gap-3'>
+          {tiles.map((tile) => (
+            <div className='bg-primary py-2 rounded-full overflow-hidden'>
+              <h1 className='bg-secondary text-white font-semibold text-center'>{tile.title}</h1>
+              <h2 className='text-center'>{tile.des}</h2>
+            </div>
+          ))}
+        </div>
+    </div>
+    </>
   )
 }
