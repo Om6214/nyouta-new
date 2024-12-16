@@ -40,7 +40,7 @@ const plans = [
 
 const WeddingPlan = () => {
   return (
-    <div className="bg-secondary text-white my-8 px-4 py-6 font-heroFont">
+    <div className="bg-secondary text-white mt-8 px-4 py-6 font-heroFont">
       <div className="flex flex-col gap-3">
         <h1 className="lg:text-5xl text-3xl font-bold">
           Your Wedding Journey Starts Here...

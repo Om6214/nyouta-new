@@ -165,6 +165,10 @@ export default function MainNav() {
             <img className="w-56" src={logo} alt="logo-imgh" />
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
+          <div className="flex">
+            <input className="rounded-l-lg" type="search" name="search" id="search" placeholder="I'm shopping for"/>
+            <button className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont">Search</button>
+          </div>
 
           {/* Desktop Menu */}
           {/* <div className="hidden md:flex w-full flex-1 items-center gap-2 px-4">

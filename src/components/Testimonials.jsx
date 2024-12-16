@@ -389,10 +389,10 @@ export default function Testimonials() {
             <Slider {...settings}>
               {testimonials.map((items) => (
                 <div>
-                  <div  className="flex flex-col gap-4 items-center font-heroFont">
-                    <img src={bgImg} className="absolute top-[-20px] w-[420px] h-[250px]" alt="" />
+                  <div  className="flex flex-col gap-4 items-center font-heroFont overflow-hidden">
+                    <img src={bgImg} className="absolute top-[-20px] w-[380px] h-[250px]" alt="" />
                     <img className="rounded-full" src={items.avatar} alt="" />
-                    <div className="flex flex-col gap-3 items-center">
+                    <div className="flex flex-col gap-3 px-4 items-center">
                       <p className="text-center">{items.content}</p>
                       <h1 className="font-semibold">{items.name}</h1>
                       <blockquote>{items.role}</blockquote>
