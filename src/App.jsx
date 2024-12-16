@@ -87,6 +87,9 @@ function ConditionalFooter() {
   if (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) {
     return null;  // Don't render Footer for this route
   }
+  if (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card')) {
+    return null;  // Don't render Footer for this route
+  }
 
   return <Footer />;  // Render Footer for all other routes
 }

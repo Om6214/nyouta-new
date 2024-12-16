@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { FaTrash, FaUndo, FaRedo, FaFont, FaRegEdit, FaPlus, FaFileImage, FaArrowLeft, FaArrowRight, FaArrowsAlt } from 'react-icons/fa';
 import '../utils/pdf.css'; // Correctly import the external CSS file
+import video from "../assets/video/video.mp4"; // Ensure the correct file extension
 
 export default function WeddingCardEditor() {
   const [textFields, setTextFields] = useState([
-    { id: 'mainText1', text: 'Aarav', x: 80, y: 160, size: 30, font: 'Blade Rush' },
-    { id: 'mainText2', text: 'Rohini', x: 220, y: 160, size: 30, font: 'Blade Rush' },
-    { id: 'subText1', text: 'July 13, 2022 ', x: 180, y: 190, size: 20, font: 'Blade Rush' },
-    { id: 'subText2', text: '12 : 30 AM ', x: 190, y: 250, size: 20, font: 'Blade Rush' },
+  
   ]);
 
   const [images, setImages] = useState([]); // State for images
@@ -49,20 +47,17 @@ export default function WeddingCardEditor() {
       setTextFields(savedPages[currentImageIndex]);
     } else {
       setTextFields([
-        { id: 'mainText1', text: 'Aarav', x: 80, y: 140, size: 30, font: 'Blade Rush' },
-        { id: 'mainText2', text: 'Rohini', x: 220, y: 140, size: 30, font: 'Blade Rush' },
-        { id: 'subText1', text: 'July 13, 2022 ', x: 160, y: 190, size: 20, font: 'Blade Rush' },
-        { id: 'subText2', text: '12 : 30 AM ', x: 170, y: 250, size: 20, font: 'Blade Rush' },
+     
       ]);
     }
   }, [currentImageIndex]);
 
-
-
   const handleRedo = () => {
     if (redoStack.length > 0) {
       const redoChange = redoStack.pop();
-      setUndoStack((prevStack) => [...prevStack, { textFields }]);
+      setUndoStack((prevStack) => [...prevStack, {
+        textFields
+      }]);
       setTextFields(redoChange.textFields); // Apply redo change
     }
   };
@@ -70,7 +65,6 @@ export default function WeddingCardEditor() {
   const handleDeleteImage = (index) => {
     if (index !== null) {
       setImages(images.filter((_, i) => i !== index));
-      //setIsCustomizeModalOpen(false);
     }
   };
 
@@ -78,7 +72,6 @@ export default function WeddingCardEditor() {
     if (index !== null) {
       const newImage = images[index]; // Assuming you want to copy the same image
       setImages([...images, newImage]);
-      //setIsCustomizeModalOpen(false);
     }
   };
 
@@ -244,7 +237,7 @@ export default function WeddingCardEditor() {
   };
 
   return (
-    <div className="container mx-auto  md:bg-gradient-to-br">
+    <div className="container mx-auto md:bg-gradient-to-br">
       <div className="w-full text-center flex justify-evenly items-center">
         <div className="flex gap-4 z-10 relative left-14">
           <button
@@ -266,15 +259,13 @@ export default function WeddingCardEditor() {
           <h1 className="text-3xl font-bold text-gray-800 hidden md:block">Editing Screen</h1>
         </div>
         <button className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2">
-          {/* Generated icon for Download */}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-download" width="20" height="20">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <path d="M7 10l5 5 5-5"></path>
             <path d="M12 15V3"></path>
           </svg>
-          Download PDF
+          Download Video
         </button>
-
       </div>
 
       <hr className="border-gray-300 w-full " />
@@ -282,12 +273,8 @@ export default function WeddingCardEditor() {
       <div className="flex w-full relative">
         <div className="hidden md:block absolute top-0 bottom-0 border-l-2 border-gray-300"></div>
 
-
         <div className="hidden md:block w-48 lg:w-56 flex flex-col gap-6 md:p-4 lg:p-6 h-screen overflow-y-auto bg-gray-100 border-r border-gray-300 shadow-md">
-          {/* Title */}
           <h2 className="font-bold text-gray-800 mb-4 text-2xl text-center border-b border-gray-300 pb-2">All Pages</h2>
-
-          {/* Thumbnails */}
           {images.length > 0 ? (
             images.map((img, index) => (
               <div
@@ -297,28 +284,35 @@ export default function WeddingCardEditor() {
                   : 'bg-white border-gray-200 hover:shadow-lg hover:border-gray-300'
                   }`}
               >
-                <img
-                  src={img}
-                  alt={`Thumbnail ${index + 1}`}
-                  className={`w-full rounded-md object-cover cursor-pointer transform transition duration-300 ${selectedImageIndex === index
-                    ? 'scale-105'
-                    : 'filter blur-sm hover:blur-none'
-                    }`}
-                  onClick={() => handleThumbnailClick(index)}
-                />
+                {index === 0 ? (
+                  <video
+                    src={video}
+                    controls
+                    className="w-full rounded-md object-cover cursor-pointer"
+                  />
+                ) : (
+                  <img
+                    src={img}
+                    alt={`Thumbnail ${index + 1}`}
+                    className={`w-full rounded-md object-cover cursor-pointer transform transition duration-300 ${selectedImageIndex === index
+                      ? 'scale-105'
+                      : 'filter blur-sm hover:blur-none'
+                      }`}
+                    onClick={() => handleThumbnailClick(index)}
+                  />
+                )}
                 <span
                   className={`mt-1 text-center text-sm font-medium ${selectedImageIndex === index ? 'text-[#AF7D32]' : 'text-gray-600'
                     }`}
                 >
-                  Image {index + 1}
+                  {index === 0 ? 'Video' : `Image ${index + 1}`}
                 </span>
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-500 mt-6">No images available.</p> // Message if no images are found
+            <p className="text-center text-gray-500 mt-6">No images available.</p>
           )}
 
-          {/* Fixed Customize Image Button */}
           <div className="fixed bottom-4 left-20 z-50">
             <button
               onClick={openCustomizeModal}
@@ -341,16 +335,13 @@ export default function WeddingCardEditor() {
               Customize Image
             </button>
           </div>
-
         </div>
-
 
         {isCustomizeModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col lg:w-1/3 md:w-auto">
               <h2 className="text-2xl font-bold mb-4">Let's Customize Images</h2>
               <div className="gap-4 flex flex-col overflow-y-auto" style={{ height: "500px" }}>
-
                 {images.map((img, index) => (
                   <div
                     key={index}
@@ -361,11 +352,10 @@ export default function WeddingCardEditor() {
                     onDrop={() => handleDrop(index)}
                   >
                     <button
-                      onClick={() => {/* Add functionality to rearrange images if needed */ }}
+                      onClick={() => { /* Add functionality to rearrange images if needed */ }}
                       className="mt-4 px-6 py-2 bg-[#AF7D32] text-white rounded hover:bg-[#643C28] transition flex items-center gap-2"
                     >
                       <FaArrowsAlt size={20} />
-
                     </button>
                     <img
                       src={img}
@@ -397,27 +387,31 @@ export default function WeddingCardEditor() {
               >
                 Close
               </button>
-              {/* Rearrange Button */}
-
             </div>
           </div>
         )}
-
-
 
         <div
           className="flex flex-col ml-14 w-full relative"
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
         >
-          <div className="flex flex-col 2xl:mb-6 md:ml-0 sm:ml-0 xl:mb-6 xl:ml-56 md:mr-4 mr-8">
-            {/* Image Container */}
+          <div className="flex flex-col 2xl:mb-6 md:ml-0 sm 
+:ml-0 xl:mb-6 xl:ml-56 md:mr-4 mr-8">
             <div className="relative md:w-3/5 lg:w-80 lg:h-112 flex items-center mr-8 rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden">
-              <img
-                src={imageUrl}
-                alt="Background"
-                className="w-full h-auto object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-              />
+              {currentImageIndex === 0 ? (
+                <video
+                  src={video}
+                  controls
+                  className="w-full h-auto object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                />
+              ) : (
+                <img
+                  src={imageUrl}
+                  alt="Background"
+                  className="w-full h-auto object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                />
+              )}
               {/* Left Arrow */}
               <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
                 <button
@@ -461,7 +455,7 @@ export default function WeddingCardEditor() {
                         e.stopPropagation();
                         handleRemoveTextField(id);
                       }}
-                      className="absolute top-0 right-0 text-gray-1000  rounded-full transition duration-300"
+                      className="absolute top-0 right-0 text-gray-1000 rounded-full transition duration-300"
                     >
                       <FaTrash size={13} />
                     </button>
@@ -500,6 +494,7 @@ export default function WeddingCardEditor() {
                 className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
+
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -519,13 +514,16 @@ export default function WeddingCardEditor() {
             </div>
           </div>
 
-
           {isPreviewOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
               <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center overflow-y-auto">
                 <h2 className="text-2xl font-bold mb-4">Preview</h2>
                 <div className="relative w-80 h-112">
-                  <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                  {currentImageIndex === 0 ? (
+                    <video src={video} controls className="w-full h-full object-cover" />
+                  ) : (
+                    <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                  )}
                   {textFields.map(({ id, text, x, y, size, font }) => (
                     <div
                       key={id}
@@ -561,7 +559,8 @@ export default function WeddingCardEditor() {
           {isSizeModalOpen && (
             <div className="bg-gray-500 bg-opacity-50 justify-center items-center z-50 md:absolute top-20 right-1 sm:flex-wrap">
               <div className="bg-white p-6 rounded-lg shadow-lg md:w-96">
-                <h2 className="text-xl mb-4">Change Text Size</h2>
+                <h2 className
+                  ="text-xl mb-4">Change Text Size</h2>
                 <input
                   type="range"
                   id="text-size"
@@ -641,7 +640,6 @@ export default function WeddingCardEditor() {
 
           <div className="relative md:absolute top-10 md:top-40 gap-4 z-10 md:right-0 xl:right-10 sm:top-auto sm:pr-4 sm:-ml-0 mr-12">
             <div className="grid grid-cols-2 sm:grid-cols-2 md:flex md:flex-col flex-wrap gap-4">
-              {/* Edit Button */}
               <button
                 onClick={() => {
                   if (selectedField) {
@@ -674,7 +672,6 @@ export default function WeddingCardEditor() {
                 <span>Edit</span>
               </button>
 
-              {/* Size Button */}
               <button
                 onClick={() => {
                   if (selectedField) {
@@ -702,7 +699,6 @@ export default function WeddingCardEditor() {
                 <span>Size</span>
               </button>
 
-              {/* New Button */}
               <button
                 onClick={handleAddNewText}
                 className="flex items-center justify-center gap-2 px-4 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-md hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
@@ -724,7 +720,6 @@ export default function WeddingCardEditor() {
                 <span>New</span>
               </button>
 
-              {/* Font Button */}
               <button
                 onClick={() => {
                   if (selectedField) {
@@ -752,7 +747,6 @@ export default function WeddingCardEditor() {
                 <span>Font</span>
               </button>
 
-              {/* Add Images Button */}
               <button
                 className="flex items-center justify-center gap-2 px-4 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-md hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
@@ -775,17 +769,15 @@ export default function WeddingCardEditor() {
             </div>
           </div>
 
-
           {showSuccessMessage && (
             <div className="absolute top-0 right-10 bg-green-100 border border-green-400 text-green-700 p-2 rounded">
               Changes saved successfully!
             </div>
           )}
-
         </div>
-        <div className="hidden md:block   border-l-2 border-gray-300"></div>
-
+        <div className="hidden md:block border-l-2 border-gray-300"></div>
       </div>
-    </div>
+    
+    </div >
   );
 }
