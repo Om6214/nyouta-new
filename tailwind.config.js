@@ -6,7 +6,8 @@ export default {
     extend: {
       fontFamily: {
         primaryFont: "Fredoka One, Dancing Script",
-        heroFont: ['Raleway', 'sans-serif']
+        heroFont: ['Raleway', 'sans-serif'],
+        themeFont: ["Cedarville Cursive", "cursive"]
       },
       colors: {
         priBg: "#FAF0DC",

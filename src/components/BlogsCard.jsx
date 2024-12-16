@@ -30,12 +30,12 @@ const BlogsCard = () => {
         <h1 className='text-5xl lg:text-6xl font-semibold py-8 font-heroFont text-primary text-center'>Ideas and Inspiration</h1>
         <div className='grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-2 font-heroFont'>
             {blogsTitle.map((blog, index) => (
-                <div key={index} className='flex flex-col items-center bg-primary rounded-lg'>
+                <div key={index} className='flex flex-col items-center border-2 border-secondary rounded-lg'>
                     <img className='lg:w-full object-cover lg:h-[300px] rounded-t-lg' src={blog.imgURL} alt="" />
                     <div className='flex flex-col h-1/2 items-start justify-between px-8 py-4 gap-3'>
                         <h1 className='text-2xl lg:text-2xl font-bold'>{blog.title}</h1>
                         <p>{blog.description}</p>
-                        <a className='flex items-center gap-2 bg-secondary hover:bg-primary px-6 py-2 rounded-lg' href="#">Read More <span><SquareArrowOutUpRight /></span></a>
+                        <a className='flex items-center gap-2 bg-primary hover:bg-secondary font-bold hover:text-white px-6 py-2 rounded-lg' href="#">Read More <span><SquareArrowOutUpRight /></span></a>
                     </div>
                 </div>
             ))}

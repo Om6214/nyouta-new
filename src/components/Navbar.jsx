@@ -10,7 +10,7 @@ import {
   X,
 } from "lucide-react";
 import { useCart } from "../CartContext"; // Import your cart context
-import logo from "../assets/images/nyouta-logo-1.jpg";
+import logo from "../assets/images/nyouta-logo2.jpg";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navItems = [
@@ -92,16 +92,18 @@ const navItems = [
     children: [{ label: "Planner Books" }, { label: "Free Printables" }],
   },
   {
-    label: "Photo Prints",
+    label: "E-Shop",
     url: "/contact-us",
     children: [
-      { label: "Photo Prints Sets" },
-      { label: "Unique Photo Prints" },
+      { label: "Shagun Envelop" },
+      { label: "Photo Magnet" },
+      { label: "Gifts" },
+      { label: "Essentials" },
     ],
   },
 ];
 export default function MainNav() {
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -152,15 +154,15 @@ export default function MainNav() {
   };
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all ${
+      className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
         isScrolled ? "bg-white shadow-md" : "bg-white"
       }`}
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto ">
         {/* Top Navigation */}
-        <div className="flex h-16 items-center justify-between px-4">
+        <div className="flex h-18 items-center justify-between px-4">
           <Link to="/" className="flex items-center pt-4 lg:pl-12 pl-2 gap-2">
-            <img className="w-16 rounded-[50%]" src={logo} alt="logo-imgh" />
+            <img className="w-56" src={logo} alt="logo-imgh" />
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
 
@@ -278,7 +280,7 @@ export default function MainNav() {
         )}
       </div>
       <div className="hidden lg:flex py-2 justify-center">
-        <ul className="flex gap-8 justify-center items-center text-md font-heroFont">
+        <ul className="flex gap-12 justify-center  items-center text-md font-heroFont">
           {navItems.map((item, index) => (
             <li
               key={index}
@@ -298,11 +300,11 @@ export default function MainNav() {
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1.0 }}
-                  className="flex flex-col z-10 min-w-[200px] absolute mt-2 left-2 bg-priBg rounded-lg"
+                  className="flex flex-col z-10 border-b-2 border-primary min-w-[200px] absolute p-2 gap-2 left-2 bg-priBg rounded-lg"
                   onMouseEnter={() => setIsHoveringDropdown(true)}
                   onMouseLeave={() => {
                     setIsHoveringDropdown(false);
-                    setIsDropdownOpen(null)
+                    // setIsDropdownOpen(false)
                   }}
                 >
                   {item.children.map((child, childIndex) => (

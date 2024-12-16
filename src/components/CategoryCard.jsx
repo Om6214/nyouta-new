@@ -53,6 +53,14 @@ const categories = [
         subTitle: "Ceremony Invitation",
         imgUrl: "https://imagizer.imageshack.com/img922/701/tU9pus.jpg", // URL from product.json
       },
+      {
+        subTitle: "Short Invitation - Free",
+        imgUrl: "https://imagizer.imageshack.com/img922/701/tU9pus.jpg", // URL from product.json
+      },
+      {
+        subTitle: "Matrimonial Biodata",
+        imgUrl: "https://imagizer.imageshack.com/img922/701/tU9pus.jpg", // URL from product.json
+      },
     ],
   },
   {
@@ -107,6 +115,41 @@ const categories = [
         subTitle: "Accessories",
         imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
+      {
+        subTitle: "Games",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
+    ],
+  },
+  {
+    title: "Calendars 2025",
+    description:
+      "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
+    subCategory: [
+      {
+        subTitle: "Mini Desktop Calendar",
+        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+      },
+      {
+        subTitle: "Wall Calendar - Potrait",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
+      {
+        subTitle: "Wall Calendar - Landscape",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
+      {
+        subTitle: "Desktop Calendar",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
+      {
+        subTitle: "Table Tent Calendar",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
+      {
+        subTitle: "Poster Calender",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
     ],
   },
   {
@@ -130,10 +173,6 @@ const categories = [
         subTitle: "Funny Greeting",
         imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
       },
-      {
-        subTitle: "Accessories",
-        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
-      },
     ],
   },
   {
@@ -152,20 +191,44 @@ const categories = [
     ],
   },
   {
-    title: "Calendars",
+    title: "Planner Books",
     description:
       "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
     subCategory: [
       {
-        subTitle: "Wedding Calendar",
-        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+        subTitle: "Planner Books",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
       },
       {
-        subTitle: "Family Calendar",
-        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+        subTitle: "Free Printables",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
       },
     ],
   },
+  {
+    title: "E-Shop",
+    description:
+      "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
+    subCategory: [
+      {
+        subTitle: "Shagun Envelop",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+      },
+      {
+        subTitle: "Photo Magnet",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+      },
+      {
+        subTitle: "Gifts",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+      },
+      {
+        subTitle: "Essentials",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+      },
+    ],
+  },
+  
 ];
 
 
@@ -186,7 +249,7 @@ const CategoryCard = () => {
   };
 
   return (
-    <div className=" py-10 lg:px-8 px-2 bg-priBg shadow-lg">
+    <div className=" py-10 bg-priBg shadow-lg">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, x: -80 }}
@@ -194,10 +257,10 @@ const CategoryCard = () => {
         transition={{ duration: 1.8 }}
       >
         <div className="text-center mb-10">
-          <h1 className="lg:text-6xl text-3xl font-heroFont font-extrabold bg-clip-text text-primary">
+          <h1 className="lg:text-5xl text-3xl font-heroFont font-extrabold bg-clip-text text-primary">
             Explore Our Product Categories
           </h1>
-          <p className="text-primary font-heroFont lg:text-3xl font-semibold text-xl mt-4 leading-relaxed">
+          <p className="text-primary font-heroFont lg:text-2xl font-semibold text-xl mt-4 leading-relaxed">
             Browse through our wide range of categories to find something
             perfect for your needs!
           </p>
@@ -209,7 +272,7 @@ const CategoryCard = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 2.0 }}
       >
-        <div className="p-6 bg-yellow-100 rounded-lg shadow-md">
+        <div className="py-2 px-4 bg-secondary shadow-md">
           <ul className="flex flex-wrap gap-4 justify-start">
             {categories.map((cat, index) => (
               <motion.li
@@ -217,10 +280,10 @@ const CategoryCard = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
                 key={index}
-                className={`text-md font-heroFont font-medium cursor-pointer px-6 py-3 rounded-lg transition-all duration-300 transform 
+                className={`text-md font-heroFont font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform 
                                 ${
                                   selectedCategory === cat
-                                    ? "bg-primary text-white shadow-lg scale-105"
+                                    ? "bg-violet-400 text-pink-600 shadow-lg scale-105"
                                     : "bg-gray-200 text-gray-700 hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
                                 }`}
                 onClick={() => setSelectedCategory(cat)}
@@ -239,20 +302,10 @@ const CategoryCard = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.7 }}
         >
-          <div className="flex flex-col lg:flex-col gap-10 justify-between items-start mt-12">
-            {/* Category Info */}
-            {/* <div className="text-start w-full lg:w-[30%] flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
-              <h1 className="text-4xl font-bold text-gray-800">
-                {selectedCategory.title}
-              </h1>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                {selectedCategory.description}
-              </p>
-              <div className="w-16 h-[3px] bg-gradient-to-r from-amber-400 to-orange-400 rounded-full"></div>
-            </div> */}
+          <div className="flex flex-col lg:flex-col gap-10 justify-between items-start mt-4">
 
             {/* Subcategories Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-4">
               {selectedCategory.subCategory.map((sub, index) => (
                 <motion.div
                   custom={index}
@@ -260,9 +313,9 @@ const CategoryCard = () => {
                   animate="visible"
                   variants={gridVariants}
                   key={index}
-                  className="relative w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
+                  className="relative lg:w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="relative overflow-hidden group w-[200px] h-[250px]">
+                  <div className="relative overflow-hidden group lg:w-[200px] lg:h-[250px]">
                     <img
                       className="w-full object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110 "
                       src={sub.imgUrl || invitation}
