@@ -33,7 +33,7 @@ const Home = () => {
       <CategoryFeat/>
       <MemoryCard/>
       <Trending/>
-      <InviteSection/>
+      {/* <InviteSection/> */}
 
       <VideoCard/>
       <SurpriseCard/>
