@@ -42,7 +42,7 @@ export default function About() {
 
   return (
     <section className="relative min-h-screen bg-secondary font-heroFont">
-      <div className="container mx-auto px-4 py-16 lg:py-24">
+      <div className="container mx-auto px-4 py-16 lg:py-24 text-white">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
             <img

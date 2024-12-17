@@ -16,6 +16,8 @@ import BlogsCard from '../components/BlogsCard'
 import ProductCard from '../components/ProductCard'
 import WeddingPlan from '../components/WeddingPlan'
 import CategoryFeat from '../components/CategoryFeat'
+import Trending from '../components/Trending'
+import MemoryCard from '../components/MemoryCard'
 
 const Home = () => {
   return (
@@ -28,6 +30,8 @@ const Home = () => {
       <HomeSlider/>
       <WeddingPlan/>
       <CategoryFeat/>
+      <MemoryCard/>
+      <Trending/>
       <InviteSection/>
 
       <VideoCard/>

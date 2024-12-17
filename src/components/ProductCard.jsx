@@ -14,10 +14,10 @@ const ProductCard = () => {
       }, [dispatch, products]);
   return (
     <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 lg:px-8 px-2 my-4 font-heroFont'>
-        <div className='bg-primary p-2'>
+        <div className='bg-blue-100 p-2'>
             <div className='flex justify-between items-center py-2'>
             <h1 className='text-3xl'>Flat 40% Off</h1>
-            <a className='bg-secondary rounded-[50%] p-1 hover:bg-amber-500 transition duration-300 ease-in' href="#"><ChevronRight /></a>
+            <a className='bg-primary rounded-[50%] p-1 hover:bg-amber-500 transition duration-300 ease-in' href="#"><ChevronRight /></a>
             </div>
             <div className='grid grid-cols-2 gap-3'>
                 {products?.slice(10, 14).map((product) => (
@@ -30,10 +30,10 @@ const ProductCard = () => {
                 ))}
             </div>
         </div>
-        <div className='bg-primary p-2'>
+        <div className='bg-blue-100 p-2'>
             <div className='flex justify-between items-center py-2'>
             <h1 className='text-3xl'>Hand Crafted</h1>
-            <a className='bg-secondary rounded-[50%] p-1 hover:bg-amber-500 transition duration-300 ease-in' href="#"><ChevronRight /></a>
+            <a className='bg-primary rounded-[50%] p-1 hover:bg-amber-500 transition duration-300 ease-in' href="#"><ChevronRight /></a>
             </div>
             <div className='grid grid-cols-2 gap-3'>
                 {products?.slice(30, 34).map((product) => (
@@ -46,10 +46,10 @@ const ProductCard = () => {
                 ))}
             </div>
         </div>
-        <div className='bg-primary p-2'>
+        <div className='bg-blue-100 p-2'>
             <div className='flex justify-between items-center py-2'>
             <h1 className='text-3xl'>Most Popular</h1>
-            <a className='bg-secondary rounded-[50%] p-1 hover:bg-amber-500 transition duration-300 ease-in' href="#"><ChevronRight /></a>
+            <a className='bg-primary rounded-[50%] p-1 hover:bg-amber-500 transition duration-300 ease-in' href="#"><ChevronRight /></a>
             </div>
             <div className='grid grid-cols-2 gap-3'>
                 {products?.slice(68, 72).map((product) => (

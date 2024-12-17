@@ -25,9 +25,9 @@ const promises = [
 
 const PromiseCard = () => {
   return (
-    <div className='bg-priBg py-8'>
+    <div className=' py-8'>
         <h1 className='text-center text-primary font-heroFont text-2xl lg:text-4xl font-semibold pt-8'>Our Promise : Quality, Personalization, and a Heartfelt Experience</h1>
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:px-16 px-2 py-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-8 gap-20 lg:px-16 px-2 py-10'>
             {promises.map((prom, index) => (
                 <div key={index} className=' relative flex flex-col items-center gap-2 py-10 px-4 rounded-lg hover:-translate-y-3 duration-300 ease-in cursor-pointer'>
                     <img src={bgImg} className='absolute lg:top-[-60px] top-[-45px] w-[500px]' alt="" />

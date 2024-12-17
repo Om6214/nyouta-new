@@ -346,7 +346,7 @@ export default function Testimonials() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
@@ -379,8 +379,8 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="py-16 text-primaryBlue bg-priBg">
-      <div className="container mx-auto px-4">
+    <section className="py-16 text-primaryBlue ">
+      <div className="container mx-auto lg:px-4">
         <h2 className="mb-12 text-primary font-heroFont text-center text-3xl font-semibold tracking-tight lg:text-5xl">
         Real Stories, Real Experiences – Our Customers Speak
         </h2>
