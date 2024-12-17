@@ -32,7 +32,7 @@ const VideoCard = () => {
             memories that will last a lifetime.
           </h3>
           <button
-            className="flex items-center gap-2 bg-gradient-to-br from-primary to-secondary rounded-lg text-white hover:bg-gradient-to-r hover:from-amber-900 hover:to-amber-700 px-8 py-2 shadow-xl lg:text-xl transition duration-300 ease-in"
+            className="flex items-center gap-2 bg-primary rounded-lg text-white hover:bg-gradient-to-r hover:from-amber-900 hover:to-amber-700 px-8 py-2 shadow-xl lg:text-xl transition duration-300 ease-in"
             onClick={() => navigate("/products")}
           >
             Shop Now{" "}

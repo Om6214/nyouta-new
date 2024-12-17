@@ -15,6 +15,7 @@ import DiscountOffer from '../components/DiscountOffer'
 import BlogsCard from '../components/BlogsCard'
 import ProductCard from '../components/ProductCard'
 import WeddingPlan from '../components/WeddingPlan'
+import CategoryFeat from '../components/CategoryFeat'
 
 const Home = () => {
   return (
@@ -23,11 +24,12 @@ const Home = () => {
       {/* <HeroBanner/> */}
       <CategoryCard/>
       {/* <TopCategories/> */}
+      <FeaturedProducts/>
       <HomeSlider/>
       <WeddingPlan/>
+      <CategoryFeat/>
       <InviteSection/>
 
-      <FeaturedProducts/>
       <VideoCard/>
       <ProductCard/>
       <About/>

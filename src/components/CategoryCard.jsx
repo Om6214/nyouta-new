@@ -249,7 +249,7 @@ const CategoryCard = () => {
   };
 
   return (
-    <div className=" py-10 bg-priBg shadow-lg">
+    <div className=" py-10">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, x: -80 }}

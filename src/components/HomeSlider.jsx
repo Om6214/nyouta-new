@@ -32,12 +32,12 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
   };
   return (
     <>
-    <div className="lg:py-1 pt-6 bg-priBg">
+    <div className="lg:py-1 pt-6">
         <h1 className="lg:text-5xl text-3xl text-primary text-center font-heroFont font-semibold ">Your Wedding, Your Shape</h1>
         <h2 className="lg:text-3xl text-xl text-primary pt-1 font-heroFont text-center">Celebrate in Style with Our Distinctively Shaped Invitations by nyouta</h2>
         
     </div>
-    <div className="flex flex-col bg-priBg lg:flex-row">
+    <div className="flex flex-col lg:flex-row px-2">
       <div className="slider-container lg:w-[70%] rounded-lg my-auto">
         <Slider {...settings} className="px-6">
           <div>
@@ -55,7 +55,7 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
         </Slider>
       </div>
       <div className="">
-        <div className="py-6 px-6 mt-4 flex flex-col gap-4 items-start border-2 rounded-xl">
+        <div className="py-6 px-6 mt-4 flex flex-col gap-4 items-start border-2 rounded-xl bg-priBg">
           <h1 className="text-7xl font-themeFont font-bold">new !</h1>
           <h1 className="text-5xl font-themeFont">Shaped Wedding Invitation</h1>
           <h2 className="text-xl">Unique shapes that stack together in a perfect piece suite</h2>

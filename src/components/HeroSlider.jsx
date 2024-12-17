@@ -73,7 +73,7 @@ export default function HeroSlider() {
           <img
             src={image}
             alt={`Slide ${index + 1}`}
-            className="h-full w-full object-cover"
+            className="h-full w-full lg:object-cover"
           />
         </div>
       ))}
@@ -112,9 +112,9 @@ export default function HeroSlider() {
       </div>
     </div>
     <div className='lg:px-4 px-2 py-2'>
-        <div className='grid lg:grid-cols-6 grid-cols-3 justify-center gap-2 lg:gap-3'>
+        <div className='lg:grid lg:grid-cols-6 hidden justify-center gap-2 lg:gap-3'>
           {tiles.map((tile) => (
-            <div className='bg-primary py-2 rounded-full overflow-hidden'>
+            <div className='bg-primary rounded-full overflow-hidden'>
               <h1 className='bg-secondary text-white font-semibold text-center'>{tile.title}</h1>
               <h2 className='text-center'>{tile.des}</h2>
             </div>

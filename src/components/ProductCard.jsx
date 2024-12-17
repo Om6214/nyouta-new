@@ -13,7 +13,7 @@ const ProductCard = () => {
         }
       }, [dispatch, products]);
   return (
-    <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 lg:px-8 px-2 bg-priBg font-heroFont'>
+    <div className='grid lg:grid-cols-3 grid-cols-1 gap-4 lg:px-8 px-2 my-4 font-heroFont'>
         <div className='bg-primary p-2'>
             <div className='flex justify-between items-center py-2'>
             <h1 className='text-3xl'>Flat 40% Off</h1>
