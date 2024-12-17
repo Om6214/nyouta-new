@@ -3,6 +3,8 @@ import { useLocation, useParams } from 'react-router-dom';
 import { FaTrash, FaUndo, FaRedo, FaFont, FaRegEdit, FaPlus, FaFileImage, FaArrowLeft, FaArrowRight, FaArrowsAlt } from 'react-icons/fa';
 import '../utils/pdf.css'; // Correctly import the external CSS file
 
+
+
 export default function WeddingCardEditor() {
   const [textFields, setTextFields] = useState([
     { id: 'mainText1', text: 'Aarav', x: 80, y: 160, size: 30, font: 'Blade Rush' },
@@ -58,6 +60,31 @@ export default function WeddingCardEditor() {
   }, [currentImageIndex]);
 
 
+
+  const handleResizeMouseDown = (id, e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const initialWidth = textFields.find(field => field.id === id).size;
+    const initialX = e.clientX;
+
+    const handleMouseMove = (moveEvent) => {
+      const newSize = Math.max(initialWidth + (moveEvent.clientX - initialX), 10); // Minimum size of 10
+      setTextFields((prevFields) =>
+        prevFields.map((field) =>
+          field.id === id ? { ...field, size: newSize } : field
+        )
+      );
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
 
   const handleRedo = () => {
     if (redoStack.length > 0) {
@@ -152,29 +179,6 @@ export default function WeddingCardEditor() {
     );
   };
 
-  const handleMouseDown = (id, e) => {
-    e.preventDefault();
-    const field = textFields.find((field) => field.id === id);
-    setSelectedField(id);
-    setDragging(true);
-    setOffset({ x: e.clientX - field.x, y: e.clientY - field.y });
-    setUndoStack((prevStack) => [
-      ...prevStack,
-      { textFields: [...textFields] }
-    ]);
-  };
-
-  const handleMouseMove = (e) => {
-    if (dragging && selectedField) {
-      const newX = e.clientX - offset.x;
-      const newY = e.clientY - offset.y;
-      setTextFields((prevFields) =>
-        prevFields.map((field) =>
-          field.id === selectedField ? { ...field, x: newX, y: newY } : field
-        )
-      );
-    }
-  };
 
   const handleUndo = () => {
     if (undoStack.length > 0) {
@@ -184,9 +188,7 @@ export default function WeddingCardEditor() {
     }
   };
 
-  const handleMouseUp = () => {
-    setDragging(false);
-  };
+
 
   const handleNextImage = () => {
     if (currentImageIndex < images.length - 1) {
@@ -243,6 +245,32 @@ export default function WeddingCardEditor() {
     setIsCustomizeModalOpen(true);
   };
 
+
+
+  const handleMouseDown = (id, e) => {
+    e.preventDefault();
+    const field = textFields.find((field) => field.id === id);
+    setSelectedField(id);
+    setDragging(true);
+    setOffset({ x: e.clientX - field.x, y: e.clientY - field.y });
+  };
+
+  const handleMouseMove = (e) => {
+    if (dragging && selectedField) {
+      const newX = e.clientX - offset.x;
+      const newY = e.clientY - offset.y;
+      setTextFields((prevFields) =>
+        prevFields.map((field) =>
+          field.id === selectedField ? { ...field, x: newX, y: newY } : field
+        )
+      );
+    }
+  };
+
+  const handleMouseUp = () => {
+    setDragging(false);
+  };
+
   return (
     <div className="container mx-auto  md:bg-gradient-to-br">
       <div className="w-full text-center flex justify-evenly items-center">
@@ -265,15 +293,20 @@ export default function WeddingCardEditor() {
         <div className="flex-1 text-center">
           <h1 className="text-3xl font-bold text-gray-800 hidden md:block">Editing Screen</h1>
         </div>
-        <button className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2">
-          {/* Generated icon for Download */}
+        <button 
+        
+        className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-download" width="20" height="20">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <path d="M7 10l5 5 5-5"></path>
             <path d="M12 15V3"></path>
           </svg>
-          Download PDF
+
+          Download pdf
         </button>
+
+
+
 
       </div>
 
@@ -351,6 +384,65 @@ export default function WeddingCardEditor() {
               <h2 className="text-2xl font-bold mb-4">Let's Customize Images</h2>
               <div className="gap-4 flex flex-col overflow-y-auto" style={{ height: "500px" }}>
 
+
+
+                {/* Text Fields */}
+                // Text Fields Rendering
+                {textFields.map(({ id, text, x, y, size, font }) => (
+                  <div
+                    key={id}
+                    className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
+                    style={{
+                      top: y,
+                      left: x,
+                      fontSize: `${size}px`,
+                      fontFamily: font,
+                      transform: 'translate(-50%, -50%)',
+                      cursor: 'move',
+                      zIndex: selectedField === id ? 10 : 1,
+                      whiteSpace: 'nowrap', // Prevent text wrapping
+                    }}
+                    onMouseDown={(e) => handleMouseDown(id, e)}
+                    onClick={() => handleSelectTextField(id)}
+                  >
+                    {text}
+                    {selectedField === id && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveTextField(id);
+                        }}
+                        className="absolute top-0 right-0 text-gray-1000 rounded-full transition duration-300"
+                      >
+                        <FaTrash size={13} />
+                      </button>
+                    )}
+                    {/* Resizing handle */}
+                    <div
+                      onMouseDown={(e) => handleResizeMouseDown(id, e)} // Use the new resizing function
+                      className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-ew-resize"
+                      style={{ transform: 'translate(50%, 50%)' }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => setIsCustomizeModalOpen(false)}
+                className="mt-4 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+              >
+                Close
+              </button>
+              {/* Rearrange Button */}
+
+            </div>
+          </div>
+        )}
+
+        {isCustomizeModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col lg:w-1/3 md:w-auto">
+              <h2 className="text-2xl font-bold mb-4">Let's Customize Images</h2>
+              <div className="gap-4 flex flex-col overflow-y-auto" style={{ height: "500px" }}>
                 {images.map((img, index) => (
                   <div
                     key={index}
@@ -361,11 +453,10 @@ export default function WeddingCardEditor() {
                     onDrop={() => handleDrop(index)}
                   >
                     <button
-                      onClick={() => {/* Add functionality to rearrange images if needed */ }}
+                      onClick={() => { /* Add functionality to rearrange images if needed */ }}
                       className="mt-4 px-6 py-2 bg-[#AF7D32] text-white rounded hover:bg-[#643C28] transition flex items-center gap-2"
                     >
                       <FaArrowsAlt size={20} />
-
                     </button>
                     <img
                       src={img}
@@ -397,8 +488,6 @@ export default function WeddingCardEditor() {
               >
                 Close
               </button>
-              {/* Rearrange Button */}
-
             </div>
           </div>
         )}
@@ -438,6 +527,9 @@ export default function WeddingCardEditor() {
               </div>
 
               {/* Text Fields */}
+
+
+
               {textFields.map(({ id, text, x, y, size, font }) => (
                 <div
                   key={id}
@@ -447,25 +539,32 @@ export default function WeddingCardEditor() {
                     left: x,
                     fontSize: `${size}px`,
                     fontFamily: font,
+                    whiteSpace: 'wrap', // Prevents text wrapping
+                    overflow: 'hidden',   // Optional: hide overflow if text is too long
                     transform: 'translate(-50%, -50%)',
                     cursor: 'move',
                     zIndex: selectedField === id ? 10 : 1,
                   }}
                   onMouseDown={(e) => handleMouseDown(id, e)}
-                  onClick={() => handleSelectTextField(id)}
                 >
                   {text}
                   {selectedField === id && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleRemoveTextField(id);
+                        setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
+                        setSelectedField(null);
                       }}
-                      className="absolute top-0 right-0 text-gray-1000  rounded-full transition duration-300"
+                      className="absolute top-0 right-0 text-gray-1000 rounded-full transition duration-300"
                     >
                       <FaTrash size={13} />
                     </button>
                   )}
+                  <div
+                    onMouseDown={(e) => handleResizeMouseDown(id, e)}
+                    className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-ew-resize"
+                    style={{ transform: 'translate(50%, 50%)' }}
+                  />
                 </div>
               ))}
             </div>
@@ -524,7 +623,7 @@ export default function WeddingCardEditor() {
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
               <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center overflow-y-auto">
                 <h2 className="text-2xl font-bold mb-4">Preview</h2>
-                <div className="relative w-80 h-112">
+                <div className="relative w-80 h -112">
                   <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
                   {textFields.map(({ id, text, x, y, size, font }) => (
                     <div
@@ -558,31 +657,7 @@ export default function WeddingCardEditor() {
             </div>
           )}
 
-          {isSizeModalOpen && (
-            <div className="bg-gray-500 bg-opacity-50 justify-center items-center z-50 md:absolute top-20 right-1 sm:flex-wrap">
-              <div className="bg-white p-6 rounded-lg shadow-lg md:w-96">
-                <h2 className="text-xl mb-4">Change Text Size</h2>
-                <input
-                  type="range"
-                  id="text-size"
-                  className="w-full"
-                  min="10"
-                  max="100"
-                  value={sizeValue}
-                  onChange={handleSizeChange}
-                />
-                <div className="text-sm text-gray-600 mt-2">Text Size: {sizeValue}</div>
-                <div className="flex justify-end mt-4">
-                  <button
-                    onClick={() => setIsSizeModalOpen(false)}
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
+
 
           {isModalOpen && selectedField && (
             <div className="bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 md:absolute top-20 right-1 sm:flex-wrap">
@@ -675,32 +750,7 @@ export default function WeddingCardEditor() {
               </button>
 
               {/* Size Button */}
-              <button
-                onClick={() => {
-                  if (selectedField) {
-                    setIsSizeModalOpen(true);
-                  } else {
-                    setShowErrorMessage(true);
-                  }
-                }}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-md hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
-                  />
-                </svg>
-                <span>Size</span>
-              </button>
+
 
               {/* New Button */}
               <button
