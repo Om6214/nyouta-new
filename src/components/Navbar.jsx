@@ -161,11 +161,11 @@ export default function MainNav() {
       <div className="container mx-auto ">
         {/* Top Navigation */}
         <div className="flex h-18 items-center justify-between px-4">
-          <Link to="/" className="flex items-center pt-4 lg:pl-12 pl-2 gap-2">
-            <img className="w-56" src={logo} alt="logo-imgh" />
+          <Link to="/" className="flex items-center pt-4 lg:pl-12 gap-2">
+            <img className="lg:w-56 w-36" src={logo} alt="logo-imgh" />
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
-          <div className="flex">
+          <div className="lg:flex hidden">
             <input className="rounded-l-lg" type="search" name="search" id="search" placeholder="I'm shopping for"/>
             <button className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont">Search</button>
           </div>
