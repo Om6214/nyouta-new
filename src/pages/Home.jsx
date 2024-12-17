@@ -18,6 +18,7 @@ import WeddingPlan from '../components/WeddingPlan'
 import CategoryFeat from '../components/CategoryFeat'
 import Trending from '../components/Trending'
 import MemoryCard from '../components/MemoryCard'
+import SurpriseCard from '../components/SurpriseCard'
 
 const Home = () => {
   return (
@@ -35,11 +36,12 @@ const Home = () => {
       <InviteSection/>
 
       <VideoCard/>
+      <SurpriseCard/>
       <ProductCard/>
       <About/>
+      <Testimonials/>
       <BlogsCard/>
       <PromiseCard/>
-      <Testimonials/>
     </div>
   )
 }

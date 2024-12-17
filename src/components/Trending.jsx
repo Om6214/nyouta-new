@@ -17,7 +17,6 @@ const Trending = () => {
   
 
   var settings = {
-    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 5,
@@ -30,7 +29,7 @@ const Trending = () => {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true,
+
         },
       },
       {
@@ -64,11 +63,11 @@ const Trending = () => {
         <div className="slider-container">
           <Slider {...settings}>
             {products.slice(4, 20).map((product) => (
-              <div className="h-[250px]">
+              <div className="lg:h-[250px] h-[300px]">
                 <div className="relative">
                   <img className="absolute -z-10" src={bgImg} alt="" />
 
-                  <img className="w-36 h-[130px] absolute top-16 left-14 object-cover" src={product.image[0]} alt="" />
+                  <img className="lg:w-36 w-44 lg:h-[130px] h-[150px] absolute lg:top-16 top-[75px] left-14 object-cover" src={product.image[0]} alt="" />
                 </div>
               </div>
             ))}
