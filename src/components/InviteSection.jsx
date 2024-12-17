@@ -31,7 +31,7 @@ const InviteSection = () => {
   };
 
   return (
-    <section className="py-16 lg:px-20 px-2 bg-priBg">
+    <section className="py-16 lg:px-20 px-2">
       <div className="text-center mb-8">
         <h1 className="lg:text-5xl text-3xl font-semibold font-heroFont text-primary  mb-4">
           Send Invites By
@@ -40,7 +40,7 @@ const InviteSection = () => {
 
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-8">
         {/* Surprise Party Invitation Card */}
-        <div className="bg-white shadow-lg hover:shadow-2xl px-8 py-6 rounded-lg transition-all duration-300">
+        <div className="bg-priBg shadow-lg hover:shadow-2xl px-8 py-6 rounded-lg transition-all duration-300">
             <h2 className="lg:text-4xl text-2xl font-heroFont font-bold text-primary">
               Free Greetings
             </h2>
@@ -83,7 +83,7 @@ const InviteSection = () => {
         </div>
 
         {/* Wedding Invitation Card */}
-        <div className="bg-white shadow-lg hover:shadow-2xl px-8 py-6 rounded-lg transition-all duration-300">
+        <div className="bg-priBg shadow-lg hover:shadow-2xl px-8 py-6 rounded-lg transition-all duration-300">
         <h2 className="lg:text-4xl text-2xl font-heroFont font-bold text-primary">
               Calendars 2025
             </h2>

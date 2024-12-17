@@ -390,12 +390,12 @@ export default function Testimonials() {
               {testimonials.map((items) => (
                 <div>
                   <div  className="flex flex-col gap-4 items-center font-heroFont overflow-hidden">
-                    <img src={bgImg} className="absolute top-[-20px] w-[380px] h-[250px]" alt="" />
+                    <img src={bgImg} className="absolute top-[-20px] w-[380px] lg:h-[250px] h-[300px]" alt="" />
                     <img className="rounded-full" src={items.avatar} alt="" />
                     <div className="flex flex-col gap-3 px-4 items-center">
                       <p className="text-center">{items.content}</p>
                       <h1 className="font-semibold">{items.name}</h1>
-                      <blockquote>{items.role}</blockquote>
+                      <blockquote className="text-center">{items.role}</blockquote>
                     </div>
                     <div>
                       <span></span>

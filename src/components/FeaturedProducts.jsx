@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../Store/slices/productSlice";
 import { useDispatch } from "react-redux";
+import cardImg from "../assets/images/18.png";
 
 export default function FeaturedProducts() {
   const { products } = useSelector((state) => state.product);
@@ -25,7 +26,7 @@ export default function FeaturedProducts() {
     dots: true,
     infinite: true, // Infinite scrolling to create a continuous loop
     speed: 500, // Very slow transition speed for each slide (7 seconds)
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 3, // Scroll 4 slides at a time for manual navigation
     autoplay: false, 
     initialSlide: 0,
@@ -33,7 +34,7 @@ export default function FeaturedProducts() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
@@ -60,23 +61,20 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 px-4 lg:px-8 bg-priBg">
-      <div className="container mx-auto flex lg:flex-row flex-col gap-8">
+    <section className="py-16 px-4 lg:px-8">
+      <div className="container mx-auto gap-8">
         {/* Heading with animation and font-family */}
         <div className="my-4">
           <h2
-            className="text-5xl font-heroFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="text-5xl font-heroFont text-center text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
             Customer Favorites
           </h2>
-          <div className="flex flex-col items-start gap-10 py-4 px-8 text-heroFont">
-          <p>"Crafted with Care, Designed for You: Our curated stationary collection brings the finest artistry from around the globe to your fingertips. Each piece tells a unique story, ensuring quality, elegence and authenticity you can trust"</p>
-          <a className="bg-primary px-4 py-1 rounded-lg text-lg flex items-center gap-1" href="#">Browse all products <span><ArrowRight /></span></a>
-          </div>
+          <h3 className="text-4xl text-center text-primary font-heroFont font-semibold">Top Picks Chosen by Our Happy Customers</h3>
         </div>
 
         {/* Slider */}
-        <div className="slider-container mx-4 relative lg:w-[65%]">
+        <div className="slider-container mx-4 relative">
           <style>
             {`
             .slick-slide {
@@ -87,10 +85,10 @@ export default function FeaturedProducts() {
               padding: 25px 0;
             }
             .slick-arrow {
-              border-radius: 50%;
+              // border-radius: 50%;
               background: #f59e0b; 
-              width: 25px;
-              height: 25px;
+              width: 30px;
+              height: 30px;
               display: flex;
               justify-content: center;
               align-items: center;
@@ -144,6 +142,7 @@ export default function FeaturedProducts() {
                   state={{product}}
                 >
                   <div className="relative aspect-w-1 aspect-h-1">
+                    {/* <img src={cardImg} className="absolute top-0 left-0" alt="" /> */}
                     <img
                       src={product?.image[0] || placeholder}
                       alt={product?.name}
