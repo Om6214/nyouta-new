@@ -26,6 +26,7 @@
     "react-konva": "^18.2.10",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.28.0",
+    "react-sketch-canvas": "^6.2.0",
     "react-slick": "^0.30.2",
     "react-time-picker": "^7.0.0",
     "react-toastify": "^10.0.6",

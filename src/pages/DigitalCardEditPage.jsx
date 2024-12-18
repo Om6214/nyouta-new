@@ -419,35 +419,42 @@ export default function WeddingCardEditor() {
                 <div className="relative w-80 h-112">
                   <video src={video} controls className="w-full h-full object-cover" />
                   {textFields.map(({ id, text, x, y, size, font }) => (
-                    <div
-                      key={id}
-                      className="absolute"
-                      style={{
-                        top: y,
-                        left: x,
-                        fontSize: `${size}px`,
-                        fontFamily: font,
-                        transform: 'translate(-50%, -50%)',
-                      }}
-                    >
-                      {text}
-                    </div>
-                  ))}
-                  {smallImages.map(({ id, src, x, y, size }) => (
-                    <img
-                      key={id}
-                      src={src}
-                      alt="Small"
-                      className="absolute"
-                      style={{
-                        top: y,
-                        left: x,
-                        width: `${size}px`,
-                        height: `${size}px`,
-                        transform: 'translate(-50%, -50%)',
-                      }}
-                    />
-                  ))}
+                                 <div
+                                   key={id}
+                                   className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
+                                   style={{
+                                     top: y,
+                                     left: x,
+                                     fontSize: `${size}px`,
+                                     fontFamily: font,
+                                     whiteSpace: 'nowrap', // Prevents text wrapping
+                                     overflow: 'hidden',   // Optional: hide overflow if text is too long
+                                     transform: 'translate(-50%, -50%)',
+                                     cursor: 'move',
+                                     zIndex: selectedField === id ? 10 : 1,
+                                   }}
+                                   onMouseDown={(e) => handleMouseDown(id, e)}
+                                 >
+                                   {text}
+                                   {selectedField === id && (
+                                     <button
+                                       onClick={(e) => {
+                                         e.stopPropagation();
+                                         setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
+                                         setSelectedField(null);
+                                       }}
+                                       className="absolute top-0 right-0 text-gray-1000 rounded-full transition duration-300"
+                                     >
+                                       <FaTrash size={13} />
+                                     </button>
+                                   )}
+                                   <div
+                                     onMouseDown={(e) => handleResizeMouseDown(id, e)}
+                                     className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-ew-resize"
+                                     style={{ transform: 'translate(50%, 50%)' }}
+                                   />
+                                 </div>
+                               ))}
                 </div>
                 <button
                   onClick={() => setIsPreviewOpen(false)}
