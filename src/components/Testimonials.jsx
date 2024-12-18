@@ -3,7 +3,7 @@
 import { Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
-import bgImg from "../assets/images/19.png";
+import bgImg from "../assets/images/mahal1.png";
 const testimonials = [
   {
     id: 1,
@@ -339,14 +339,14 @@ export default function Testimonials() {
     infinite: true,
     speed: 500,
     autoplay: true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 5,
+    slidesToScroll: 3,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 5,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
@@ -382,23 +382,28 @@ export default function Testimonials() {
     <section className="py-16 text-primaryBlue ">
       <div className="container mx-auto lg:px-4">
         <h2 className="mb-12 text-primary font-heroFont text-center text-3xl font-semibold tracking-tight lg:text-5xl">
-        Real Stories, Real Experiences – Our Customers Speak
+          Real Stories, Real Experiences – Our Customers Speak
         </h2>
         <div className="relative mx-auto overflow-hidden">
           <div className="slider-container mx-16">
             <Slider {...settings}>
               {testimonials.map((items) => (
                 <div>
-                  <div  className="flex flex-col gap-4 items-center font-heroFont overflow-hidden">
-                    <img src={bgImg} className="absolute top-[-20px] w-[380px] lg:h-[250px] h-[300px]" alt="" />
+                  <div className="flex flex-col gap-4 items-center relative font-heroFont overflow-hidden">
+                    <img
+                      src={bgImg}
+                      className="h-[350px]"
+                      alt=""
+                    />
+                    <div className=" flex flex-col gap-4 items-center absolute pt-12">
                     <img className="rounded-full" src={items.avatar} alt="" />
-                    <div className="flex flex-col gap-3 px-4 items-center">
-                      <p className="text-center">{items.content}</p>
-                      <h1 className="font-semibold">{items.name}</h1>
-                      <blockquote className="text-center">{items.role}</blockquote>
+                    <div className="flex flex-col gap-3 px-4 pt-8 items-center">
+                      <p className="text-center px-">{items.content}</p>
+                      <h1 className="font-semibold bg-pink-600 px-4 text-white">{items.name}</h1>
+                      <blockquote className="text-center">
+                        {items.role}
+                      </blockquote>
                     </div>
-                    <div>
-                      <span></span>
                     </div>
                   </div>
                 </div>

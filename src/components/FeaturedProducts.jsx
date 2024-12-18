@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../Store/slices/productSlice";
 import { useDispatch } from "react-redux";
-import cardImg from "../assets/images/productcard.jpg";
+import cardImg from "../assets/images/mahal1.png";
 
 export default function FeaturedProducts() {
   const { products } = useSelector((state) => state.product);
@@ -66,11 +66,11 @@ export default function FeaturedProducts() {
         {/* Heading with animation and font-family */}
         <div className="my-4">
           <h2
-            className="text-5xl font-heroFont text-center text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="lg:text-5xl text-4xl font-heroFont text-center text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
             Customer Favorites
           </h2>
-          <h3 className="text-4xl text-center text-primary font-heroFont font-semibold">Top Picks Chosen by Our Happy Customers</h3>
+          <h3 className="lg:text-4xl text-2xl text-center text-primary font-heroFont font-semibold">Top Picks Chosen by Our Happy Customers</h3>
         </div>
 
         {/* Slider */}
@@ -134,18 +134,18 @@ export default function FeaturedProducts() {
             {products?.slice(25, 35).map((product, index) => (
               <div
                 key={index}
-                className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
+                className="bg-white lg:h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
                 <Link key={index}
                   to={`/product/${product?._id}`}
                   className="flex flex-col"
                   state={{product}}
                 >
-                  <div className="relative" >
-                    <img src={cardImg} className="absolute top-0 left-0" alt="" />
+                  <div className="relative flex flex-col items-center justify-center" >
+                    <img src={cardImg} className="" alt="" />
                     
                   
-                  <div className="px-4 py-1 font-heroFont z-50 top-24 absolute flex flex-col gap- justify-around card-content">
+                  <div className="px-4 pt-20 absolute font-heroFont flex flex-col  justify-around">
                   <img
                       src={product?.image[0] || placeholder}
                       alt={product?.name}

@@ -62,13 +62,13 @@ const Trending = () => {
       <div className="mx-16">
         <div className="slider-container">
           <Slider {...settings}>
-            {products.slice(4, 20).map((product) => (
+            {products.slice(100, 120).map((product) => (
               <div className="lg:h-[250px] h-[300px]">
-                <div className="relative">
-                  <img className="absolute -z-10" src={bgImg} alt="" />
-                  <div className="absolute lg:top-16 top-[75px] left-4 flex flex-col items-center font-heroFont">
-                  <img className="lg:w-56 w-44 lg:h-[130px] h-[150px]  object-cover" src={product.image[0]} alt="" />
-                  <p className="">{product.subSubCategory}</p>
+                <div className="relative flex flex-col items-center justify-center">
+                  <img className="" src={bgImg} alt="" />
+                  <div className="absolute flex flex-col items-center font-heroFont">
+                    <img className="h-[170px] w-full object-cover" src={product.image[0]} alt="" />
+                    <p className="font-semibold">{product.subSubCategory}</p>
                   </div>
                 </div>
               </div>

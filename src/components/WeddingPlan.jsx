@@ -1,4 +1,5 @@
 import React from "react";
+import buttonBg from "../assets/images/button.png";
 
 const plans = [
   {
@@ -59,7 +60,10 @@ const WeddingPlan = () => {
               <div className="flex flex-col gap-2 items-center">
                 <h1 className="text-center font-semibold border-b-2 ">{plan.title}</h1>
                 <h2>{plan.format}</h2>
-                <button className="bg-pink-600 px-3 py-1 rounded-full text-lg font-semibold">{plan.btn}</button>
+                <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
+                  <img className="h-8" src={buttonBg} alt="" />
+                  <button className="text-lg font-semibold absolute ">{plan.btn}</button>
+                </div>
               </div>
             </div>
           ))}

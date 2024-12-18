@@ -4,6 +4,7 @@ import img1 from "../assets/images/home-1.webp";
 import img2 from "../assets/images/home-2.webp";
 import img3 from "../assets/images/home-3.webp";
 import img4 from "../assets/images/home-4.webp";
+import buttonBg from "../assets/images/button.png";
 
 const MemoryCard = () => {
   return (
@@ -27,7 +28,10 @@ const MemoryCard = () => {
           <p className="pr-36 font-heroFont">
             Create Timeless Moments Endless Memories with Personalized Products
           </p>
-          <a href="#" className="font-heroFont bg-pink-600 px-6 py-1 text-lg font-semibold text-white rounded-full">View All Products</a>
+          <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
+            <img className="h-8" src={buttonBg} alt="" />
+            <a href="" className="text-lg font-semibold  text-white absolute">View All Products</a>
+          </div>
         </div>
         <div className="lg:w-[70%]">
           <div className="h-80 rounded-xl sm:h-64 xl:h-80 2xl:h-96">

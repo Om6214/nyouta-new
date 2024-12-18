@@ -1,6 +1,7 @@
 import { SquareArrowOutUpRight } from "lucide-react";
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import buttonBg from "../assets/images/button.png";
 
 const VideoCard = () => {
   const navigate = useNavigate();
@@ -31,8 +32,10 @@ const VideoCard = () => {
             the essence of every special occasion. Let Nyouta help you make
             memories that will last a lifetime.
           </h3>
+          <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
+            <img className="h-10" src={buttonBg} alt="" />
           <button
-            className="flex items-center gap-2 bg-primary rounded-lg text-white hover:bg-gradient-to-r hover:from-amber-900 hover:to-amber-700 px-8 py-2 shadow-xl lg:text-xl transition duration-300 ease-in"
+            className="flex absolute items-center gap-2 font-bold text-white lg:text-xl"
             onClick={() => navigate("/products")}
           >
             Shop Now{" "}
@@ -40,6 +43,7 @@ const VideoCard = () => {
               <SquareArrowOutUpRight />
             </span>
           </button>
+          </div>
         </div>
       </div>
     </div>

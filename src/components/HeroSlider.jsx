@@ -120,9 +120,9 @@ export default function HeroSlider() {
           <h1 className='text-4xl lg:text-5xl font-themeFont font-bold'>Wedding Website</h1>
           <h4 className='text-sm font-semibold text-center'>Create your free wedding website and share all the relevant details about your celebration with your guests.</h4>
           <img className='h-44' src={webImg} alt="" />
-          <div className='relative'>
-              <img className='h-12' src={buttonBg} alt="" />
-              <button className='absolute top-1 left-14 text-2xl font-semibold text-white'>Explore More</button>
+          <div className='relative flex flex-col items-center justify-center hover:translate-x-2 duration-300'>
+              <img className='h-8' src={buttonBg} alt="" />
+              <button className='absolute text-xl font-semibold text-white'>Explore More</button>
           </div>
           <p className='text-sm font-semibold'>A simple, beautiful wedding website just for you - FREE</p>
         </div>
