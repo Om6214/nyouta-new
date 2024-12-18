@@ -20,6 +20,8 @@ import AddProduct from './dashboard/AddProduct';
 import DigitalCardEditPage from './pages/DigitalCardEditPage';
 import PhysicalCardEditPage from './pages/PhysicalCardEditPage';
 import WeddingCardEditor from './pages/WeddingCardEditor';
+import WeddingWebsite from './pages/WeddingWebsite';
+import WeddingWebsiteTemplates from './pages/WeddingWebsiteTemplates';
 import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { googleSignup } from './Store/slices/authSlice';
 import { toast } from 'react-toastify';
@@ -38,6 +40,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Category />} />
+          <Route path="/wedding-website/:slug" element={<WeddingWebsite />} />
+          <Route path="/wedding-website-templates" element={<WeddingWebsiteTemplates />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
@@ -68,12 +72,11 @@ function App() {
 function ConditionalNavbar() {
   const location = useLocation();
 
-  // Check if the current route matches the path for the physical card edit page
-  if (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) {
-    return null;  // Don't render Navbar for this route
-  }
-  if (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card')) {
-    return null;  // Don't render Navbar for this route
+  // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
+  if (location.pathname.includes('/wedding-website') || 
+      (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
+      (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
+    return null;  // Don't render Navbar for these routes
   }
 
   return <Navbar />;  // Render Navbar for all other routes
@@ -83,12 +86,11 @@ function ConditionalNavbar() {
 function ConditionalFooter() {
   const location = useLocation();
 
-  // Check if the current route matches the path for the physical card edit page
-  if (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) {
-    return null;  // Don't render Footer for this route
-  }
-  if (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card')) {
-    return null;  // Don't render Footer for this route
+  // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
+  if (location.pathname.includes('/wedding-website') || 
+      (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
+      (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
+    return null;  // Don't render Footer for these routes
   }
 
   return <Footer />;  // Render Footer for all other routes

@@ -64,7 +64,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  isWeddingWebsiteCreated: {
+  slug: {
+    type: String,
+    required: false,
+    unique: true,
+  },
+  isWebsiteCreated: {
     type: Boolean,
     default: false,
   },
