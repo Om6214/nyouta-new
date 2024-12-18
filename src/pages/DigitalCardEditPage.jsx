@@ -18,10 +18,10 @@ export default function PhysicalCardEditPage() {
   const [color, setColor] = useState('#ad101f');
   const [textSize] = useState(30);
   const [textPosition, setTextPosition] = useState({
-    groomName: { x: 350, y: 150 },
-    brideName: { x: 350, y: 200 },
-    date: { x: 350, y: 250 },
-    time: { x: 350, y: 300 },
+    groomName: { x: 280, y: 160 },
+    brideName: { x: 440, y: 160 },
+    date: { x: 320, y: 220 },
+    time: { x: 350, y: 280 },
   });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
