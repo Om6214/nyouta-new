@@ -399,7 +399,7 @@ export default function Testimonials() {
                     <img className="rounded-full" src={items.avatar} alt="" />
                     <div className="flex flex-col gap-3 px-4 pt-8 items-center">
                       <p className="text-center px-4">{items.content}</p>
-                      <h1 className="font-semibold">{items.name}</h1>
+                      <h1 className="font-semibold bg-pink-600 px-4 text-white">{items.name}</h1>
                       <blockquote className="text-center">
                         {items.role}
                       </blockquote>
