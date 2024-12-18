@@ -339,14 +339,14 @@ export default function Testimonials() {
     infinite: true,
     speed: 500,
     autoplay: true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 5,
+    slidesToScroll: 3,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 5,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
@@ -398,7 +398,7 @@ export default function Testimonials() {
                     <div className=" flex flex-col gap-4 items-center absolute pt-12">
                     <img className="rounded-full" src={items.avatar} alt="" />
                     <div className="flex flex-col gap-3 px-4 pt-8 items-center">
-                      <p className="text-center px-4">{items.content}</p>
+                      <p className="text-center px-">{items.content}</p>
                       <h1 className="font-semibold bg-pink-600 px-4 text-white">{items.name}</h1>
                       <blockquote className="text-center">
                         {items.role}
