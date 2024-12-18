@@ -4,6 +4,7 @@ import img1 from "../assets/images/home-1.webp";
 import img2 from "../assets/images/home-2.webp";
 import img3 from "../assets/images/home-3.webp";
 import img4 from "../assets/images/home-4.webp";
+import buttonBg from "../assets/images/button.png";
 import { Heart, ShieldCheck, Star } from "lucide-react";
 // import products from "../products.json";
 import { Link } from "react-router-dom";
@@ -59,7 +60,11 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
           <h1 className="text-7xl font-themeFont font-bold">new !</h1>
           <h1 className="text-5xl font-themeFont">Shaped Wedding Invitation</h1>
           <h2 className="text-xl">Unique shapes that stack together in a perfect piece suite</h2>
-          <button className="bg-pink-600 font-bold text-white px-3 py-1 rounded-full text-lg">Shop New Shapes</button>
+          <div className="relative  hover:translate-x-2 duration-300">
+            <img className="h-8" src={buttonBg} alt="" />
+            <button className="absolute top-0 left-4 text-lg font-semibold text-white">Shop New Shapes</button>
+          </div>
+
         </div>
       </div>
     </div>

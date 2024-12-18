@@ -3,6 +3,7 @@ import giftImg from "../assets/images/gift.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import buttonBg from "../assets/images/button.png";
 
 const items = [
     {
@@ -84,7 +85,10 @@ const CategoryFeat = () => {
             <div>
                 <div className="flex flex-col items-center bg-blue-100 pb-4 rounded-2xl">
                 <img src={item.imgURL} alt="" />
-                <button className="text-lg font-semibold bg-pink-600 text-white px-4 rounded-2xl">{item.name}</button>
+                <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
+                  <img className="h-8" src={buttonBg} alt="" />
+                <button className="text-lg font-semibold  text-white absolute">{item.name}</button>
+                </div>
                 </div>
             </div>
         ))}
