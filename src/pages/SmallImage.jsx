@@ -25,8 +25,9 @@ const SmallImage = ({ src, id, x, y, onDelete, onResize }) => {
       const newX = e.clientX - offset.x;
       const newY = e.clientY - offset.y;
       setPosition({ x: newX, y: newY });
-      onResize(id, newX, newY); // Update position in the parent
+      onResize(id, newX, newY, size); // Update position in the parent, size remains the same
     }
+
     if (resizing) {
       const deltaX = e.clientX - resizeStart.x;
       const deltaY = e.clientY - resizeStart.y;

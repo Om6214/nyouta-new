@@ -1,16 +1,33 @@
-// Preview.js
-import React from 'react';
+import React, { useRef } from 'react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const Preview = ({ images, textFields, currentImage, onClose }) => {
+  const previewRef = useRef();
+
+  const handleDownloadPDF = async () => {
+    const element = previewRef.current;
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: false,
+    });
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'px',
+      format: [canvas.width, canvas.height],
+    });
+    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+    pdf.save('preview.pdf');
+  };
+
   return (
-    <div className="fixed inset-0   bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center overflow-y-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
         <h2 className="text-2xl font-bold mb-4">Preview</h2>
-        <div className="relative w-80 h-112">
-          {/* Main image preview */}
+        <div ref={previewRef} className="relative w-80 h-112">
           <img src={currentImage} alt="Preview" className="w-full h-full object-cover rounded" />
-          
-          {/* Render text fields */}
           {textFields.map(({ id, text, x, y, size, font }) => (
             <div
               key={id}
@@ -21,40 +38,35 @@ const Preview = ({ images, textFields, currentImage, onClose }) => {
                 fontSize: `${size}px`,
                 fontFamily: font,
                 transform: 'translate(-50%, -50%)',
-                color: 'black', // Optional: Change text color for better visibility
-                //textShadow: '1px 1px 2px rgba(0, 0, 0, 0)', // Optional: Add shadow for better readability
               }}
             >
               {text}
             </div>
           ))}
-          
-          {/* Render small images */}
-          {images.map(({ id, src, x, y }) => (
+          {images.map(({ id, src, x, y, size }) => (
             <img
               key={id}
               src={src}
               alt={`Small Image ${id}`}
               className="absolute"
               style={{
-                top: y+27,
-                left: x-200,
-                width: '50px', // Adjust size as needed
-                height: '50px', // Adjust size as needed
-                objectFit: 'cover',
+                top: y+54,
+                left: x-180,
+                width: `${size}px`,
+                height: `${size}px`,
                 transform: 'translate(-50%, -50%)',
               }}
             />
           ))}
         </div>
-        
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="mt-4 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-        >
-          Close Preview
-        </button>
+        <div className="mt-4 flex gap-4">
+          <button onClick={onClose} className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300">
+            Close Preview
+          </button>
+          <button onClick={handleDownloadPDF} className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300">
+            Download PDF
+          </button>
+        </div>
       </div>
     </div>
   );

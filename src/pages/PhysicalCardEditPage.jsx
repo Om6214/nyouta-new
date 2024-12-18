@@ -5,6 +5,7 @@ import '../utils/pdf.css'; // Correctly import the external CSS file
 import SmallImage from './SmallImage';
 import ImageUploadOptions from './ImageUploadOptions';
 import Preview from './Preview';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -41,6 +42,7 @@ export default function WeddingCardEditor() {
   const [smallImages, setSmallImages] = useState([]);
   const [showImageUploadOptions, setShowImageUploadOptions] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+
 
   const location = useLocation();
   const { id } = useParams();
@@ -187,7 +189,7 @@ export default function WeddingCardEditor() {
     );
   };
 
-  
+
 
 
   const handleUndo = () => {
@@ -296,13 +298,6 @@ export default function WeddingCardEditor() {
     setSmallImages((prevImages) => prevImages.filter((image) => image.id !== id));
   };
 
-  const handleResizeSmallImage = (id, newX, newY) => {
-    setSmallImages((prevImages) =>
-      prevImages.map((image) =>
-        image.id === id ? { ...image, x: newX, y: newY } : image
-      )
-    );
-  };
 
 
   // Function to open file dialog and add image
@@ -349,6 +344,19 @@ export default function WeddingCardEditor() {
   };
 
 
+  const handleResizeSmallImage = (id, newX, newY, newSize) => {
+    setSmallImages((prevImages) =>
+      prevImages.map((image) =>
+        image.id === id ? { ...image, x: newX, y: newY, size: newSize } : image
+      )
+    );
+  };
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/"); // Redirects to the home page
+  };
+
 
   return (
     <div className="container mx-auto  md:bg-gradient-to-br">
@@ -373,20 +381,12 @@ export default function WeddingCardEditor() {
           <h1 className="text-3xl font-bold text-gray-800 hidden md:block">Editing Screen</h1>
         </div>
         <button
-
+          onClick={handleClick}
           className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-download" width="20" height="20">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <path d="M7 10l5 5 5-5"></path>
-            <path d="M12 15V3"></path>
-          </svg>
 
-          Download pdf
+
+          Close Edit
         </button>
-
-
-
-
       </div>
 
       <hr className="border-gray-300 w-full " />
@@ -699,14 +699,14 @@ export default function WeddingCardEditor() {
 
 
 
-{showPreview && (
-  <Preview 
-    images={smallImages} // Pass the small images to the preview
-    textFields={textFields} // Pass the text fields to the preview
-    currentImage={imageUrl} // Pass the current image URL
-    onClose={handleClosePreview} 
-  />
-)}
+          {showPreview && (
+            <Preview
+              images={smallImages} // Pass the small images to the preview
+              textFields={textFields} // Pass the text fields to the preview
+              currentImage={imageUrl} // Pass the current image URL
+              onClose={handleClosePreview}
+            />
+          )}
 
           {showErrorMessage && (
             <div className="absolute top-2 right-10 bg-red-100 border border-red-400 text-red-700 p-2 rounded">
@@ -884,16 +884,17 @@ export default function WeddingCardEditor() {
             </div>
           </div>
           {smallImages.map(({ id, src, x, y, size }) => (
-        <SmallImage
-          key={id}
-          id={id}
-          src={src}
-          x={x}
-          y={y}
-          onDelete={handleDeleteSmallImage}
-          onResize={handleResizeSmallImage} // Pass the resize handler
-        />
-      ))}
+            <SmallImage
+              key={id}
+              id={id}
+              src={src}
+              x={x}
+              y={y}
+              size={size}
+              onDelete={handleDeleteSmallImage}
+              onResize={handleResizeSmallImage} // Pass resize handler
+            />
+          ))}
           {showImageUploadOptions && (
             <ImageUploadOptions
               onClose={handleClosePopup}
