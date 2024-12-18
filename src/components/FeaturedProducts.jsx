@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../Store/slices/productSlice";
 import { useDispatch } from "react-redux";
-import cardImg from "../assets/images/18.png";
+import cardImg from "../assets/images/productcard.jpg";
 
 export default function FeaturedProducts() {
   const { products } = useSelector((state) => state.product);
@@ -109,7 +109,7 @@ export default function FeaturedProducts() {
               cursor: pointer;
             }
             .slick-slide > div {
-              display: flex;
+              // display: flex;
               // flex-direction: column;
               // height: 100%;
               // min-height: 450px; /* Ensure each card is at least this tall */
@@ -120,18 +120,18 @@ export default function FeaturedProducts() {
               // width: 100%;
             }
             .slick-slide .card-content {
-              flex-grow: 1;
-              display: flex;
-              flex-direction: column;
-              justify-content: space-between;
-              padding-top: 16px;
+              // flex-grow: 1;
+              // display: flex;
+              // flex-direction: column;
+              // justify-content: space-between;
+              // padding-top: 16px;
             }
             `}
           </style>
 
           {/* Slider Content */}
           <Slider {...settings} ref={sliderRef}>
-            {products?.slice(20, 35).map((product, index) => (
+            {products?.slice(25, 35).map((product, index) => (
               <div
                 key={index}
                 className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
@@ -141,15 +141,16 @@ export default function FeaturedProducts() {
                   className="flex flex-col"
                   state={{product}}
                 >
-                  <div className="relative aspect-w-1 aspect-h-1">
-                    {/* <img src={cardImg} className="absolute top-0 left-0" alt="" /> */}
-                    <img
+                  <div className="relative" >
+                    <img src={cardImg} className="absolute top-0 left-0" alt="" />
+                    
+                  
+                  <div className="px-4 py-1 font-heroFont z-50 top-24 absolute flex flex-col gap- justify-around card-content">
+                  <img
                       src={product?.image[0] || placeholder}
                       alt={product?.name}
-                      className="object-cover w-full h-[200px] rounded-t-lg"
+                      className="object-cover w-full h-[130px] rounded-t-lg"
                     />
-                  </div>
-                  <div className="px-4 py-1 flex flex-col gap-2 justify-around card-content">
                     <h1
                       className="font-semibold text-xl text-primary font-heroFont"
                     >
@@ -163,23 +164,24 @@ export default function FeaturedProducts() {
                     <div className="flex items-baseline gap-4">
                       <span
                         className="text-xl font-bold text-gray-900"
-                        style={{ fontFamily: "Roboto, sans-serif" }}
+                    
                       >
                         Rs. {product?.price}
                       </span>
                       <span
                         className="text-sm text-gray-500 line-through"
-                        style={{ fontFamily: "Roboto, sans-serif" }}
+                    
                       >
                         Rs. 14
                       </span>
                       <span
                         className="text-sm text-red-500"
-                        style={{ fontFamily: "Roboto, sans-serif" }}
+                      
                       >
                         {product?.discount}% OFF
                       </span>
                     </div>
+                  </div>
                   </div>
                 </Link>
               </div>

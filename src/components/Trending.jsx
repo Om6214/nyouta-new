@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../Store/slices/productSlice";
 import Slider from "react-slick";
-import bgImg from "../assets/images/18.png";
+import bgImg from "../assets/images/mahal3.png";
 import instaLogo from "../assets/images/insta-logo.png";
 
 const Trending = () => {
@@ -66,8 +66,10 @@ const Trending = () => {
               <div className="lg:h-[250px] h-[300px]">
                 <div className="relative">
                   <img className="absolute -z-10" src={bgImg} alt="" />
-
-                  <img className="lg:w-36 w-44 lg:h-[130px] h-[150px] absolute lg:top-16 top-[75px] left-14 object-cover" src={product.image[0]} alt="" />
+                  <div className="absolute lg:top-16 top-[75px] left-4 flex flex-col items-center font-heroFont">
+                  <img className="lg:w-56 w-44 lg:h-[130px] h-[150px]  object-cover" src={product.image[0]} alt="" />
+                  <p className="">{product.subSubCategory}</p>
+                  </div>
                 </div>
               </div>
             ))}
