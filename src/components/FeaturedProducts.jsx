@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../Store/slices/productSlice";
 import { useDispatch } from "react-redux";
-import cardImg from "../assets/images/productcard.jpg";
+import cardImg from "../assets/images/mahal1.png";
 
 export default function FeaturedProducts() {
   const { products } = useSelector((state) => state.product);
@@ -141,11 +141,11 @@ export default function FeaturedProducts() {
                   className="flex flex-col"
                   state={{product}}
                 >
-                  <div className="relative" >
-                    <img src={cardImg} className="absolute top-0 left-0" alt="" />
+                  <div className="relative flex flex-col items-center justify-center" >
+                    <img src={cardImg} className="" alt="" />
                     
                   
-                  <div className="px-4 py-1 font-heroFont z-50 top-24 absolute flex flex-col gap- justify-around card-content">
+                  <div className="px-4 pt-20 absolute font-heroFont flex flex-col gap- justify-around">
                   <img
                       src={product?.image[0] || placeholder}
                       alt={product?.name}

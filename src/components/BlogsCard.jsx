@@ -1,5 +1,6 @@
 import { SquareArrowOutUpRight } from 'lucide-react'
 import React from 'react'
+import buttonBg from "../assets/images/button.png";
 
 const blogsTitle = [
     {
@@ -35,7 +36,10 @@ const BlogsCard = () => {
                     <div className='flex flex-col h-1/2 items-start justify-between px-8 py-4 gap-3'>
                         <h1 className='text-2xl lg:text-2xl font-bold'>{blog.title}</h1>
                         <p>{blog.description}</p>
-                        <a className='flex items-center gap-2 bg-primary hover:bg-secondary font-bold hover:text-white px-6 py-2 rounded-lg' href="#">Read More <span><SquareArrowOutUpRight /></span></a>
+                        <div className=' relative flex flex-col items-center justify-center'>
+                            <img className='h-8' src={buttonBg} alt="" />
+                            <a className='flex items-center text-white absolute gap-2 font-bold ' href="#">Read More <span><SquareArrowOutUpRight /></span></a>
+                        </div>
                     </div>
                 </div>
             ))}

@@ -18,6 +18,7 @@ import CategoryFeat from '../components/CategoryFeat'
 import Trending from '../components/Trending'
 import MemoryCard from '../components/MemoryCard'
 import SurpriseCard from '../components/SurpriseCard'
+import RewardCard from '../components/RewardCard'
 
 const Home = () => {
   return (
@@ -39,6 +40,7 @@ const Home = () => {
       <Testimonials/>
       <BlogsCard/>
       <PromiseCard/>
+      <RewardCard/>
     </div>
   )
 }
