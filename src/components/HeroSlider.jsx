@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import img2 from "../assets/images/home-2.webp";
 import img3 from "../assets/images/home-3.webp";
 import img4 from "../assets/images/home-4.webp";
+import cardImg from "../assets/images/herocard.png";
 const images = [
   img2,
   img3,
@@ -111,11 +112,12 @@ export default function HeroSlider() {
         ))}
       </div>
     </div>
-    <div className='lg:px-4 px-2 py-2'>
-        <div className='lg:grid lg:grid-cols-6 hidden justify-center gap-2 lg:gap-3'>
+    <div className='mx-2 py-2'>
+        <div className='lg:grid lg:grid-cols-6 hidden justify-center gap-2 lg:gap-16 overflow-x-clip'>
           {tiles.map((tile) => (
-            <div className='bg-primary rounded-full overflow-hidden'>
-              <h1 className='bg-secondary text-white font-semibold text-center'>{tile.title}</h1>
+            <div className='relative rounded-full bg-cover flex flex-col items-center justify-center' style={{ backgroundImage: `url(${cardImg})`, height: '75px', width: '255px' }}>
+              {/* <img className='absolute top-0 w-full' src={cardImg} alt="" /> */}
+              <h1 className='text-white font-semibold text-center'>{tile.title}</h1>
               <h2 className='text-center'>{tile.des}</h2>
             </div>
           ))}
