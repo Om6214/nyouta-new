@@ -49,14 +49,14 @@ const PromiseCard = () => {
         </div>
         <div className='mx-4'>
             <div className='grid grid-cols-4 lg:grid-cols-8 gap-4'>
-                <img src={img1} alt="" />
-                <img src={img2} alt="" />
-                <img src={img3} alt="" />
-                <img src={img4} alt="" />
-                <img src={img5} alt="" />
-                <img src={img6} alt="" />
-                <img src={img7} alt="" />
-                <img src={img8} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img1} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img2} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img3} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img4} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img5} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img6} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img7} alt="" />
+                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img8} alt="" />
             </div>
         </div>
     </div>

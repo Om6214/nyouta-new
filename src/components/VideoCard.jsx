@@ -32,7 +32,7 @@ const VideoCard = () => {
             the essence of every special occasion. Let Nyouta help you make
             memories that will last a lifetime.
           </h3>
-          <div className="relative flex flex-col items-center justify-center">
+          <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
             <img className="h-10" src={buttonBg} alt="" />
           <button
             className="flex absolute items-center gap-2 font-bold text-white lg:text-xl"

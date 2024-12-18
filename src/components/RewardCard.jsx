@@ -16,14 +16,14 @@ const RewardCard = () => {
             <h2 className='text-center text-xl lg:text-3xl'>Shop Now and Earn Special Award with Surprise Gift & Discount</h2>
         </div>
         <div className='grid grid-cols-4 lg:grid-cols-8 gap-4 mx-8'>
-            <img src={img11} alt="" />
-            <img src={img12} alt="" />
-            <img src={img13} alt="" />
-            <img src={img14} alt="" />
-            <img src={img15} alt="" />
-            <img src={img16} alt="" />
-            <img src={img17} alt="" />
-            <img src={img18} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img11} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img12} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img13} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img14} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img15} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img16} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img17} alt="" />
+            <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img18} alt="" />
         </div>
     </div>
   )
