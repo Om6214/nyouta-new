@@ -61,8 +61,7 @@ export const register = async (req, res) => {
 
     const email = emailorphone.includes("@") ? emailorphone : null;
     const phone = emailorphone.includes("@") ? null : emailorphone;
-    const user = new User({ email, phone, password, name, isVerified: false });
-    await user.save();
+    const user = new User({ email, partnerName:name, phone, password, name, isVerified: false });
 
     const otp = generateOTP();
     user.otp = otp;
@@ -263,6 +262,7 @@ export const googleSignup = async (req, res) => {
     const newUser = new User({
       email: jwtDecode.email,
       name: jwtDecode.name,
+      partnerName: jwtDecode.name,
       clientId: clientId,
       isVerified: true,
       avatar: jwtDecode.picture,

@@ -4,8 +4,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from './config/db.js';  // Ensure to include the .js extension if it's an ES module
 import authRoutes from './routes/authRoutes.js';  // Same as above
-import productRoutes from './routes/productRoutes.js';  // Same as above
+import productRoutes from './routes/productRoutes.js'; 
+import templateRoutes from './routes/templateRoutes.js'; 
+import weddingwebsiteRoutes from './routes/weddingwebsiteRoutes.js'; 
 import morgan from 'morgan'
+
 // Load environment variables
 dotenv.config();
 
@@ -27,7 +30,8 @@ connectDB();
 // Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/products', productRoutes);
-
+app.use('/api/v1/templates', templateRoutes);
+app.use('/api/v1/weddingwebsite', weddingwebsiteRoutes);
 // Port
 const PORT = process.env.PORT || 5000;
 
