@@ -96,18 +96,25 @@ export default function WeddingCardEditor() {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
-  const handleRedo = () => {
-    if (redoStack.length > 0) {
-      const redoChange = redoStack.pop();
-      setUndoStack((prevStack) => [...prevStack, { textFields }]);
-      setTextFields(redoChange.textFields); // Apply redo change
-    }
-  };
+  
 
   const handleDeleteImage = (index) => {
     if (index !== null) {
       setImages(images.filter((_, i) => i !== index));
       //setIsCustomizeModalOpen(false);
+    }
+  };
+  const handleUpdate = () => {
+    if (selectedField) {
+      setUndoStack((prevStack) => [...prevStack, { textFields }]); // Capture current state
+      setTextFields((prevFields) =>
+        prevFields.map((field) =>
+          field.id === selectedField ? { ...field, text: newText, size: sizeValue, font: selectedFont } : field
+        )
+      );
+      setIsModalOpen(false);
+    } else {
+      setShowErrorMessage(true);
     }
   };
 
@@ -166,19 +173,10 @@ export default function WeddingCardEditor() {
     }
   };
 
-  const handleUpdate = () => {
-    if (selectedField) {
-      setTextFields((prevFields) =>
-        prevFields.map((field) =>
-          field.id === selectedField ? { ...field, text: newText, size: sizeValue, font: selectedFont } : field
-        )
-      );
-      setIsModalOpen(false);
-    } else {
-      setShowErrorMessage(true);
-    }
-  };
 
+
+
+ 
   const handleSizeChange = (e) => {
     const newSize = parseInt(e.target.value, 10);
     setSizeValue(newSize);
@@ -188,10 +186,6 @@ export default function WeddingCardEditor() {
       )
     );
   };
-
-
-
-
   const handleUndo = () => {
     if (undoStack.length > 0) {
       const lastChange = undoStack.pop();
@@ -199,6 +193,18 @@ export default function WeddingCardEditor() {
       setTextFields(lastChange.textFields);
     }
   };
+  
+  const handleRedo = () => {
+    if (redoStack.length > 0) {
+      const redoChange = redoStack.pop();
+      setUndoStack((prevStack) => [...prevStack, { textFields }]);
+      setTextFields(redoChange.textFields);
+    }
+  };
+
+
+
+ 
 
 
 
@@ -618,7 +624,7 @@ export default function WeddingCardEditor() {
                     left: x,
                     fontSize: `${size}px`,
                     fontFamily: font,
-                    whiteSpace: 'wrap', // Prevents text wrapping
+                    whiteSpace: 'nowrap', // Prevents text wrapping
                     overflow: 'hidden',   // Optional: hide overflow if text is too long
                     transform: 'translate(-50%, -50%)',
                     cursor: 'move',
