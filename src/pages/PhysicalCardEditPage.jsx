@@ -57,7 +57,7 @@ export default function WeddingCardEditor() {
 
   useEffect(() => {
     const savedPages = JSON.parse(localStorage.getItem('savedPages')) || {};
-    if (savedPages[currentImageIndex]) {
+    if (Array.isArray(savedPages[currentImageIndex])) {
       setTextFields(savedPages[currentImageIndex]);
     } else {
       setTextFields([
