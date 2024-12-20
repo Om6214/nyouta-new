@@ -6,7 +6,7 @@ import video from "../assets/video/video.mp4"; // Ensure the correct file extens
 import SmallImage from './SmallImage';
 import ImageUploadOptions from './ImageUploadOptions';
 import { useNavigate } from "react-router-dom";
-
+import { useRef } from 'react';
 export default function WeddingCardEditor() {
   const [textFields, setTextFields] = useState([
     { id: 'mainText1', text: 'Aarav', x: 80, y: 160, size: 30, font: 'Blade Rush' },
@@ -19,7 +19,9 @@ export default function WeddingCardEditor() {
   const [selectedField, setSelectedField] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newText, setNewText] = useState('');
-  
+  const [draggingImage, setDraggingImage] = useState(null); // Tracks which image is being dragged
+  const [resizingImage, setResizingImage] = useState(null);
+
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [newTextInput, setNewTextInput] = useState('');
@@ -32,7 +34,7 @@ export default function WeddingCardEditor() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [smallImages, setSmallImages] = useState([]);
   const [showImageUploadOptions, setShowImageUploadOptions] = useState(false);
- 
+
 
 
   const location = useLocation();
@@ -58,7 +60,90 @@ export default function WeddingCardEditor() {
     }
   }, [images, currentImageIndex]);
 
+  const [draggingField, setDraggingField] = useState(null); // Tracks which field is being dragged
+  const [resizingField, setResizingField] = useState(null); // Tracks which field is being resized
 
+  const videoRef = useRef();
+  const canvasRef = useRef();
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  const handleVideoLoaded = () => {
+    setIsVideoLoaded(true); // Ensure the video is loaded before enabling download
+  };
+
+  const handleDownload = async () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    console.log("wait please");
+    if (!video || !isVideoLoaded) {
+      alert("Video is not loaded yet. Please wait!");
+      return;
+    }
+
+
+    const ctx = canvas.getContext('2d');
+    const frameRate = 30; // Adjust based on your video
+
+    // Set canvas size to match video dimensions
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    console.log(video.videoWidth);
+    // Start capturing the canvas as a stream
+    const stream = canvas.captureStream(frameRate);
+    const mediaRecorder = new MediaRecorder(stream);
+    const chunks = [];
+
+    mediaRecorder.ondataavailable = (e) => {
+      chunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(chunks, { type: 'video/mp4' });
+      const url = URL.createObjectURL(blob);
+
+      // Create a download link
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'video_with_overlays.mp4';
+      a.click();
+    };
+
+    mediaRecorder.start();
+
+    video.play();
+    const duration = video.duration;
+    const frameTime = 1 / frameRate;
+
+    const renderFrame = (time) => {
+      if (time >= duration) {
+        mediaRecorder.stop();
+        return;
+      }
+
+      // Draw video frame
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Render text fields
+      textFields.forEach(({ text, x, y, size, font }) => {
+        ctx.font = `${size}px ${font}`;
+        ctx.fillStyle = 'white';
+        ctx.fillText(text, x, y);
+      });
+
+      // Render images
+      smallImages.forEach(({ src, x, y, size }) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          ctx.drawImage(img, x - size / 2, y - size / 2, size, size);
+        };
+      });
+
+      setTimeout(() => renderFrame(time + frameTime), frameTime * 1000);
+    };
+
+    renderFrame(0);
+  };
 
   const handleResizeMouseDown = (id, e) => {
     e.stopPropagation();
@@ -86,7 +171,70 @@ export default function WeddingCardEditor() {
   };
 
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Handle dragging text
+      if (draggingField) {
+        setTextFields((prevFields) =>
+          prevFields.map((field) =>
+            field.id === draggingField.id
+              ? { ...field, x: e.clientX - draggingField.offsetX, y: e.clientY - draggingField.offsetY }
+              : field
+          )
+        );
+      }
 
+      // Handle resizing text
+      if (resizingField) {
+        const delta = e.clientX - resizingField.startX;
+        setTextFields((prevFields) =>
+          prevFields.map((field) =>
+            field.id === resizingField.id
+              ? { ...field, size: Math.max(resizingField.initialSize + delta, 10) }
+              : field
+          )
+        );
+      }
+
+      // Handle dragging image
+      if (draggingImage) {
+        setImageFields((prevFields) =>
+          prevFields.map((image) =>
+            image.id === draggingImage.id
+              ? { ...image, x: e.clientX - draggingImage.offsetX, y: e.clientY - draggingImage.offsetY }
+              : image
+          )
+        );
+      }
+
+      // Handle resizing image
+      if (resizingImage) {
+        const delta = e.clientX - resizingImage.startX;
+        setImageFields((prevFields) =>
+          prevFields.map((image) =>
+            image.id === resizingImage.id
+              ? { ...image, size: Math.max(resizingImage.initialSize + delta, 20) }
+              : image
+          )
+        );
+      }
+    };
+
+    const handleMouseUp = () => {
+      setDraggingField(null);
+      setResizingField(null);
+      setDraggingImage(null);
+      setResizingImage(null);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [draggingField, resizingField, draggingImage, resizingImage]);
   const handleDeleteImage = (index) => {
     if (index !== null) {
       setImages(images.filter((_, i) => i !== index));
@@ -106,6 +254,10 @@ export default function WeddingCardEditor() {
       setShowErrorMessage(true);
     }
   };
+  const [imageFields, setImageFields] = useState([
+    { id: 1, src: '/path/to/image.png', x: 200, y: 200, size: 50 },
+  ]);
+
 
   useEffect(() => {
     if (images && images.length > 0) {
@@ -155,7 +307,7 @@ export default function WeddingCardEditor() {
     setNewTextInput('');
   };
 
- 
+
   const handleFontSelect = (font) => {
     if (selectedField) {
       setSelectedFont(font);
@@ -201,16 +353,7 @@ export default function WeddingCardEditor() {
     setDragging(false);
   };
 
-  const handleAddSmallImage = (src) => {
-    const newImage = {
-      id: `smallImage${Date.now()}`,
-      src,
-      x: 300,
-      y: 250,
-      size: 50, // Default size for the small image
-    };
-    setSmallImages((prevImages) => [...prevImages, newImage]);
-  };
+
 
   const handleDeleteSmallImage = (id) => {
     setSmallImages((prevImages) => prevImages.filter((image) => image.id !== id));
@@ -221,37 +364,8 @@ export default function WeddingCardEditor() {
   // Function to open file dialog and add image
 
 
-  const handleAddImageClick = () => {
-    setShowImageUploadOptions(true);
-  };
-
-  const handleClosePopup = () => {
-    setShowImageUploadOptions(false);
-  };
 
 
-  const handleSelectUploadOption = (option) => {
-    console.log(`Selected upload option: ${option}`);
-    // Implement the logic for each upload option here
-    if (option === 'local') {
-      // Logic to handle local drive upload
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          handleAddSmallImage(reader.result); // Assuming this function is defined
-        };
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      };
-      input.click();
-    }
-    // Add logic for other options as needed
-  };
   const handleResizeSmallImage = (id, newX, newY, newSize) => {
     setSmallImages((prevImages) =>
       prevImages.map((image) =>
@@ -265,6 +379,110 @@ export default function WeddingCardEditor() {
     navigate("/"); // Redirects to the home page
   };
 
+  const handleAddImageClick = () => {
+    setShowImageUploadOptions(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowImageUploadOptions(false);
+  };
+
+  const handleSelectUploadOption = (option) => {
+    console.log(`Selected upload option: ${option}`);
+    if (option === 'local') {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          handleAddSmallImage(reader.result); // Add the uploaded image to the state
+        };
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
+    }
+  };
+
+  const handleAddSmallImage = (src) => {
+    const newImage = {
+      id: `smallImage${Date.now()}`,
+      src,
+      x: 200,
+      y: 250,
+      size: 50, // Default size for the small image
+    };
+    setSmallImages((prevImages) => [...prevImages, newImage]);
+  };
+
+  const handleMouseDownImage = (id, e) => {
+    e.preventDefault();
+    const image = smallImages.find((img) => img.id === id);
+    setDraggingImage({ id, offsetX: e.clientX - image.x, offsetY: e.clientY - image.y });
+  };
+
+  const handleMouseMoveImage = (e) => {
+    if (draggingImage) {
+      const newX = e.clientX - draggingImage.offsetX;
+      const newY = e.clientY - draggingImage.offsetY;
+      setSmallImages((prevImages) =>
+        prevImages.map((image) =>
+          image.id === draggingImage.id ? { ...image, x: newX, y: newY } : image
+        )
+      );
+    }
+  };
+
+  const handleResizeMouseDownImage = (id, e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const initialSize = smallImages.find((image) => image.id === id).size;
+    const initialX = e.clientX;
+
+    const handleMouseMove = (moveEvent) => {
+      const newSize = Math.max(initialSize + (moveEvent.clientX - initialX), 10); // Minimum size of 10
+      setSmallImages((prevImages) =>
+        prevImages.map((image) =>
+          image.id === id ? { ...image, size: newSize } : image
+        )
+      );
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  // Add this to your useEffect to handle mouse move for images
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Handle dragging image
+      if (draggingImage) {
+        const newX = e.clientX - draggingImage.offsetX;
+        const newY = e.clientY - draggingImage.offsetY;
+        setSmallImages((prevImages) =>
+          prevImages.map((image) =>
+            image.id === draggingImage.id ? { ...image, x: newX, y: newY } : image
+          )
+        );
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', () => setDraggingImage(null));
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [draggingImage]);
 
   return (
     <div className="container mx-auto md:bg-gradient-to-br">
@@ -290,15 +508,21 @@ export default function WeddingCardEditor() {
         </div>
         <button
 
-          className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2 ">
+          className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2 "
+          onClick={handleDownload}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-download" width="20" height="20">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <path d="M7 10l5 5 5-5"></path>
             <path d="M12 15V3"></path>
           </svg>
-
+         
           Download Video
         </button>
+
+
+  
+
+     
       </div>
 
       <hr className="border-gray-300 w-full " />
@@ -306,6 +530,32 @@ export default function WeddingCardEditor() {
       <div className="flex w-full relative">
         <div className="hidden md:block absolute top-0 bottom-0 border-l-2 border-gray-300"></div>
 
+        <div className="hidden md:block w-48 lg:w-56 flex flex-col gap-6 md:p-4 lg:p-6 h-screen overflow-y-auto bg-gray-100 border-r border-gray-300 shadow-md">
+          {/* Title */}
+          <h2 className="font-bold text-gray-800 mb-4 text-2xl text-center border-b border-gray-300 pb-2">All Pages</h2>
+
+          {/* Thumbnails */}
+          {video   ? (
+     
+                <video
+                  src={video}
+                  //alt={`Thumbnail ${index + 1}`}
+                  className={`w-full rounded-md object-cover cursor-pointer transform transition duration-300 
+                    ? 'scale-105'
+                    : ' hover:blur-none'
+                    }`}
+                  onClick={() => handleThumbnailClick(index)}
+                />
+               
+          
+          ) : (
+            <p className="text-center text-gray-500 mt-6">No images available.</p> // Message if no images are found
+          )}
+
+          {/* Fixed Customize Image Button */}
+          
+
+        </div>
 
 
 
@@ -314,7 +564,7 @@ export default function WeddingCardEditor() {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
         >
-          <div className="flex flex-col 2xl:mb-6 md:ml-0  xl:mb-6 xl:ml-96 md:mr-4 xl:mr-20 md-mr-10 lg:mr-10">
+          <div className="flex flex-col 2xl:mb-6 md:ml-0 sm:ml-0 xl:mb-6 xl:ml-56 md:mr-4 mr-8">
             <div className="relative md:w-3/5 lg:w-80 lg:h-112 flex items-center mr-8 rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden">
 
               <video
@@ -326,19 +576,24 @@ export default function WeddingCardEditor() {
               {textFields.map(({ id, text, x, y, size, font }) => (
                 <div
                   key={id}
-                  className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
+                  className="absolute"
                   style={{
                     top: y,
                     left: x,
                     fontSize: `${size}px`,
                     fontFamily: font,
-                    whiteSpace: 'nowrap', // Prevents text wrapping
-                    overflow: 'hidden',   // Optional: hide overflow if text is too long
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
                     transform: 'translate(-50%, -50%)',
                     cursor: 'move',
                     zIndex: selectedField === id ? 10 : 1,
+                    border: selectedField === id ? '2px dotted blue' : 'none',
                   }}
-                  onMouseDown={(e) => handleMouseDown(id, e)}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    setSelectedField(id);
+                    setDraggingField({ id, offsetX: e.clientX - x, offsetY: e.clientY - y });
+                  }}
                 >
                   {text}
                   {selectedField === id && (
@@ -348,14 +603,66 @@ export default function WeddingCardEditor() {
                         setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
                         setSelectedField(null);
                       }}
-                      className="absolute top-0 right-0 text-gray-1000 rounded-full transition duration-300"
+                      className="absolute top-0 right-0 bg-white rounded-full p-1 shadow"
+                      style={{ transform: 'translate(50%, -50%)' }}
                     >
-                      <FaTrash size={13} />
+                      <FaTrash size={23} />
                     </button>
                   )}
                   <div
-                    onMouseDown={(e) => handleResizeMouseDown(id, e)}
-                    className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-ew-resize"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setResizingField({ id, startX: e.clientX, startY: e.clientY, initialSize: size });
+                    }}
+                    className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-se-resize"
+                    style={{ transform: 'translate(50%, 50%)' }}
+                  />
+                </div>
+              ))}
+
+              {/* Render Image Fields */}
+              {smallImages.map(({ id, src, x, y, size }) => (
+                <div
+                  key={id}
+                  className="absolute"
+                  style={{
+                    top: y,
+                    left: x,
+                    transform: 'translate(-50%, -50%)',
+                    cursor: 'move',
+                    zIndex: 10,
+                  }}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    handleMouseDownImage(id, e); // Use the new mouse down handler
+                  }}
+                >
+                  <img
+                    src={src}
+                    alt="Small Icon"
+                    style={{
+                      width: `${size}px`,
+                      height: `${size}px`,
+                    }}
+                  />
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent triggering the mouse down event
+                      handleDeleteSmallImage(id); // Use the delete handler
+                    }}
+                    className="absolute top-0 right-0 bg-white rounded-full p-1 shadow"
+                    style={{ transform: 'translate(50%, -50%)' }}
+                  >
+                    <FaTrash size={13} />
+                  </button>
+                  <div
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleResizeMouseDownImage(id, e); // Use the resize handler
+                    }}
+                    className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-se-resize"
                     style={{ transform: 'translate(50%, 50%)' }}
                   />
                 </div>
@@ -418,43 +725,59 @@ export default function WeddingCardEditor() {
                 <h2 className="text-2xl font-bold mb-4">Preview</h2>
                 <div className="relative w-80 h-112">
                   <video src={video} controls className="w-full h-full object-cover" />
+
+                  {/* Render Text Fields */}
                   {textFields.map(({ id, text, x, y, size, font }) => (
-                                 <div
-                                   key={id}
-                                   className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
-                                   style={{
-                                     top: y,
-                                     left: x,
-                                     fontSize: `${size}px`,
-                                     fontFamily: font,
-                                     whiteSpace: 'nowrap', // Prevents text wrapping
-                                     overflow: 'hidden',   // Optional: hide overflow if text is too long
-                                     transform: 'translate(-50%, -50%)',
-                                     cursor: 'move',
-                                     zIndex: selectedField === id ? 10 : 1,
-                                   }}
-                                   onMouseDown={(e) => handleMouseDown(id, e)}
-                                 >
-                                   {text}
-                                   {selectedField === id && (
-                                     <button
-                                       onClick={(e) => {
-                                         e.stopPropagation();
-                                         setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
-                                         setSelectedField(null);
-                                       }}
-                                       className="absolute top-0 right-0 text-gray-1000 rounded-full transition duration-300"
-                                     >
-                                       <FaTrash size={13} />
-                                     </button>
-                                   )}
-                                   <div
-                                     onMouseDown={(e) => handleResizeMouseDown(id, e)}
-                                     className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-ew-resize"
-                                     style={{ transform: 'translate(50%, 50%)' }}
-                                   />
-                                 </div>
-                               ))}
+                    <div
+                      key={id}
+                      className={`absolute`}
+                      style={{
+                        top: y,
+                        left: x,
+                        fontSize: `${size}px`,
+                        fontFamily: font,
+                        whiteSpace: 'nowrap', // Prevents text wrapping
+                      
+                        overflow: 'hidden', // Optional: hide overflow if text is too long
+                        transform: 'translate(-50%, -50%)',
+                        cursor: 'move',
+                        zIndex: selectedField === id ? 10 : 1,
+                        //border: selectedField === id ? '2px dotted blue' : 'none', // Dotted border when selected
+                      }}
+
+                    >
+                      {text}
+
+
+
+                      {/* Resize Handle */}
+
+                    </div>
+                  ))}
+
+                  {/* Small Images */}
+                  {smallImages.map(({ id, src, x, y, size }) => (
+                    <div
+                      key={id}
+                      className="absolute"
+                      style={{
+                        top: y,
+                        left: x,
+                        cursor: 'move',
+                        zIndex: 10,
+                      }}
+
+                    >
+                      <img
+                        src={src}
+                        alt="Small Icon"
+                        className="object-cover"
+                        style={{ width: `${size}px`, height: `${size}px` }}
+                      />
+
+
+                    </div>
+                  ))}
                 </div>
                 <button
                   onClick={() => setIsPreviewOpen(false)}
@@ -465,13 +788,14 @@ export default function WeddingCardEditor() {
               </div>
             </div>
           )}
+
           {showErrorMessage && (
             <div className="absolute top-2 right-10 bg-red-100 border border-red-400 text-red-700 p-2 rounded">
               Please select a text field first!
             </div>
           )}
 
-          
+
 
           {isModalOpen && selectedField && (
             <div className="bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 md:absolute top-20 right-1 sm:flex-wrap">
@@ -503,7 +827,7 @@ export default function WeddingCardEditor() {
             </div>
           )}
 
-       
+
 
           {isFontModalOpen && (
             <div className="bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 md:absolute top-20 right-1 sm:flex-wrap">
@@ -643,18 +967,7 @@ export default function WeddingCardEditor() {
             </div>
           </div>
 
-          {smallImages.map(({ id, src, x, y, size }) => (
-            <SmallImage
-              key={id}
-              id={id}
-              src={src}
-              x={x}
-              y={y}
-              size={size}
-              onDelete={handleDeleteSmallImage}
-              onResize={handleResizeSmallImage} // Pass resize handler
-            />
-          ))}
+
           {showImageUploadOptions && (
             <ImageUploadOptions
               onClose={handleClosePopup}
