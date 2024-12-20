@@ -1,10 +1,13 @@
 import express from 'express';
 import { authenticateToken } from '../middlewares/authMiddleware.js';
-import { placeOrder } from '../controllers/orderController.js';
+import { placeOrder, getOrders, getOrder, deleteOrder, updateOrderStatus } from '../controllers/orderController.js';
 
 const router = express.Router();
 
-// Route to place an order
-router.post('/', authenticateToken, placeOrder);
+router.post('/place-order', authenticateToken, placeOrder);
+router.get('/get-orders', authenticateToken, getOrders);
+router.get('/get-order/:orderId', authenticateToken, getOrder);
+router.delete('/delete-order/:orderId', authenticateToken, deleteOrder);
+router.put('/update-order-status/:id', authenticateToken, updateOrderStatus);
 
 export default router;

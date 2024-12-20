@@ -69,6 +69,16 @@ const userSchema = new mongoose.Schema({
     required: false,
     unique: true,
   },
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cart',
+    required: false,
+  },
+  address: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address',
+    required: false,
+  }],
   isWebsiteCreated: {
     type: Boolean,
     default: false,

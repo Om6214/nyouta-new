@@ -12,10 +12,9 @@ const OrderSchema = new mongoose.Schema(
     ],
     totalPrice: { type: Number, required: true },
     status: { type: String, default: 'pending', enum: ['pending', 'completed', 'shipped', 'cancelled'] },
-    paymentInfo: {
-      method: { type: String, enum: ['credit_card', 'paypal', 'bank_transfer'], required: true },
-      status: { type: String, enum: ['pending', 'paid', 'failed'], default: 'pending' },
-    },
+    address: { type: mongoose.Schema.Types.ObjectId, ref: 'Address', required: true },
+    paymentStatus: { type: String, enum: ['pending', 'paid', 'failed'], default: 'pending' },
+    paymentId: { type: String, required: false, default: null },
   },
   { timestamps: true }
 );
