@@ -206,12 +206,12 @@ export default function MainNav() {
             {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
             </Link> */}
-
+            <a href="" className="text-pink-600 font-heroFont hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
             <button
               onClick={toggleCart}
               className="flex items-center gap-1 relative"
             >
-              <ShoppingBag className="h-6 w-6 hover:text-primary" />
+              <ShoppingBag size={30} className=" hover:text-primary" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 right-0 rounded-full bg-black px-2 py-1 text-[8px] text-white">
                   {totalItems}
@@ -224,7 +224,7 @@ export default function MainNav() {
                 onClick={() => handleDropdownToggle("user")}
                 className="flex items-center gap-1 rounded-md p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2"
               >
-                <User className="h-6 w-6" />
+                <User size={30} />
                 <ChevronDown className="h-4 w-4" />
               </button>
               {openDropdown === "user" && (
@@ -307,8 +307,8 @@ export default function MainNav() {
                   className="flex flex-col z-10 border-b-2 border-primary min-w-[200px] absolute p-2 gap-2 left-2 bg-priBg rounded-lg"
                   onMouseEnter={() => setIsHoveringDropdown(true)}
                   onMouseLeave={() => {
-                    setIsHoveringDropdown(false);
-                    // setIsDropdownOpen(false)
+                    // setIsHoveringDropdown(false);
+                    setIsDropdownOpen(false)
                   }}
                 >
                   {item.children.map((child, childIndex) => (

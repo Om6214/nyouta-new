@@ -34,6 +34,7 @@ const Preview = ({ images, textFields, currentImage, onClose }) => {
               className="absolute"
               style={{
                 top: y,
+                whiteSpace: 'nowrap',
                 left: x,
                 fontSize: `${size}px`,
                 fontFamily: font,
@@ -50,8 +51,8 @@ const Preview = ({ images, textFields, currentImage, onClose }) => {
               alt={`Small Image ${id}`}
               className="absolute"
               style={{
-                top: y+54,
-                left: x-180,
+                top: y ,
+                left: x ,
                 width: `${size}px`,
                 height: `${size}px`,
                 transform: 'translate(-50%, -50%)',
@@ -60,12 +61,13 @@ const Preview = ({ images, textFields, currentImage, onClose }) => {
           ))}
         </div>
         <div className="mt-4 flex gap-4">
-          <button onClick={onClose} className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300">
+          <button
+            onClick={onClose}
+            className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+          >
             Close Preview
           </button>
-          <button onClick={handleDownloadPDF} className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300">
-            Download PDF
-          </button>
+          
         </div>
       </div>
     </div>

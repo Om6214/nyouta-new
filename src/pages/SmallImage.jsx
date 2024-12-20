@@ -44,6 +44,7 @@ const SmallImage = ({ src, id, x, y, onDelete, onResize }) => {
   };
 
   const handleResizeMouseDown = (e) => {
+    //console.log("eee",e);
     e.preventDefault();
     e.stopPropagation();
     setResizing(true);
