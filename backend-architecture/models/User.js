@@ -44,6 +44,35 @@ const userSchema = new mongoose.Schema({
     type: Date, // Store the time when OTP was generated
     required: false,
   },
+  partnerName: {
+    type: String,
+    required: false,
+  },
+  weddingDate: {
+    type: Date,
+    required: false,
+  },
+  weddingLocation: {
+    type: String,
+    required: false,
+  },
+  weddingVenue: {
+    type: String,
+    required: false,
+  },
+  templateId: {
+    type: String,
+    required: false,
+  },
+  slug: {
+    type: String,
+    required: false,
+    unique: true,
+  },
+  isWebsiteCreated: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Hash password before saving the user

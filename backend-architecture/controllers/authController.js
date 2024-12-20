@@ -61,8 +61,7 @@ export const register = async (req, res) => {
 
     const email = emailorphone.includes("@") ? emailorphone : null;
     const phone = emailorphone.includes("@") ? null : emailorphone;
-    const user = new User({ email, phone, password, name, isVerified: false });
-    await user.save();
+    const user = new User({ email, partnerName:name, phone, password, name, isVerified: false });
 
     const otp = generateOTP();
     user.otp = otp;
@@ -165,12 +164,12 @@ export const login = async (req, res) => {
     return res.status(403).json({ message: 'Please verify your email to log in.' });
   }
     const token = jwt.sign(
-      { userId: user._id, role: user.role },
+      { userId: user._id, role: user.role},
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-    const { _id, name, email: userEmail, phone, role } = user;
-    res.json({ token, user: { _id, name, userEmail, phone, role } });
+    const { _id, name, email: userEmail, phone, role, isWebsiteCreated } = user;
+    res.json({ token, user: { _id, name, userEmail, phone, role, isWebsiteCreated } });
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: error.message });
@@ -216,6 +215,7 @@ export const verifyEmail = async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        isWebsiteCreated: user.isWebsiteCreated,
       },
     });
   } catch (error) {
@@ -255,6 +255,7 @@ export const googleSignup = async (req, res) => {
           phone: user.phone,
           avatar: user.avatar,
           role: user.role,
+          isWebsiteCreated: user.isWebsiteCreated,
         },
         message: "Signed in successfully",
       });
@@ -263,6 +264,7 @@ export const googleSignup = async (req, res) => {
     const newUser = new User({
       email: jwtDecode.email,
       name: jwtDecode.name,
+      partnerName: jwtDecode.name,
       clientId: clientId,
       isVerified: true,
       avatar: jwtDecode.picture,
@@ -280,6 +282,7 @@ export const googleSignup = async (req, res) => {
         phone: newUser.phone,
         avatar: newUser.avatar,
         role: newUser.role,
+        isWebsiteCreated: newUser.isWebsiteCreated,
       },
       message: "Signed up successfully",
     });
