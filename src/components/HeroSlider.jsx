@@ -6,6 +6,8 @@ import img4 from "../assets/images/home-4.webp";
 import cardImg from "../assets/images/herocard.png";
 import webImg from "../assets/images/weddingwebsites.jpg";
 import buttonBg from "../assets/images/button.png";
+import freeImg from "../assets/images/free.png";
+
 const images = [
   img2,
   img3,
@@ -119,7 +121,10 @@ export default function HeroSlider() {
         <div className='lg:px-8 flex flex-col gap-2 py-4 items-center font-heroFont'>
           <h1 className='text-4xl lg:text-5xl font-themeFont font-bold'>Wedding Website</h1>
           <h4 className='text-sm font-semibold text-center'>Create your free wedding website and share all the relevant details about your celebration with your guests.</h4>
+          <div className='flex items-center gap-4'>
           <img className='h-44' src={webImg} alt="" />
+          <img className='h-24' src={freeImg} alt="" />
+          </div>
           <div className='relative flex flex-col items-center justify-center hover:translate-x-2 duration-300'>
               <img className='h-8' src={buttonBg} alt="" />
               <button className='absolute text-xl font-semibold text-white'>Explore More</button>
