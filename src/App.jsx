@@ -26,6 +26,7 @@ import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { googleSignup } from './Store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+import CategoriesNavBar from './components/CategoriesNavBar';
 
 // gaganluthrasirji
 
@@ -50,6 +51,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/about" element={<About />} />
+
+          <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
+
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
           <Route path='/admin/dashboard' element={<DashboardLayout />}>

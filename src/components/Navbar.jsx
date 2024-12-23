@@ -16,7 +16,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const navItems = [
   {
     label: "Print Invitations",
-    url: "/print-invitations",
+    url: "/nav/print-invitations",
     children: [
       { label: "Wedding Invitations" },
       { label: "Party Invitation" },
@@ -26,7 +26,7 @@ const navItems = [
   },
   {
     label: "E Invitation",
-    url: "/e-invitations",
+    url: "/nav/e-invitations",
     children: [
       { label: "Wedding Invitations" },
       { label: "Party Invitation" },
@@ -38,7 +38,7 @@ const navItems = [
   },
   {
     label: "Photo Books",
-    url: "/photo-books",
+    url: "/nav/photo-books",
     children: [
       { label: "Soft Cover Photobook" },
       { label: "Hard Cover Photobook" },
@@ -49,7 +49,7 @@ const navItems = [
   },
   {
     label: "Itinerary",
-    url: "/itinerary",
+    url: "/nav/itinerary",
     children: [
       { label: "Wedding Itinerary" },
       { label: "Stickers" },
@@ -61,7 +61,7 @@ const navItems = [
   },
   {
     label: "Calendars 2025",
-    url: "/calendars",
+    url: "/nav/calendars",
     children: [
       { label: "Mini Desktop Calendar" },
       { label: "Wall Calendar - Potrait" },
@@ -73,7 +73,7 @@ const navItems = [
   },
   {
     label: "Free Greetings",
-    url: "/free-greetings",
+    url: "/nav/free-greetings",
     children: [
       { label: "Wishes Greeting" },
       { label: "Thanks Greeting" },
@@ -83,17 +83,17 @@ const navItems = [
   },
   {
     label: "Guest Surprising",
-    url: "/guest-surprising",
+    url: "/nav/guest-surprising",
     children: [{ label: "Newspaper" }, { label: "Magazines" }],
   },
   {
     label: "Planner Books",
-    url: "/planner-books",
+    url: "/nav/planner-books",
     children: [{ label: "Planner Books" }, { label: "Free Printables" }],
   },
   {
     label: "E-Shop",
-    url: "/e-shop",
+    url: "/nav/e-shop",
     children: [
       { label: "Shagun Envelop" },
       { label: "Photo Magnet" },
