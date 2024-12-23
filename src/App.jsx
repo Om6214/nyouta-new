@@ -27,6 +27,7 @@ import { googleSignup } from './Store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import CategoriesNavBar from './components/CategoriesNavBar';
+import CategoryLabel from './components/CategoryLabel';
 
 // gaganluthrasirji
 
@@ -53,6 +54,7 @@ function App() {
           <Route path="/about" element={<About />} />
 
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
+          <Route path="/nav/:pageName/:categories" element={<CategoryLabel />} />
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />

@@ -1,10 +1,4 @@
 import React from "react";
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
-// import 'swiper/css/zoom';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 
 import { useParams } from 'react-router-dom';
@@ -15,7 +9,7 @@ import { useState, useEffect } from "react";
 const CategoriesNavBar=()=>{
 
   const { pageName } = useParams();
-  console.log(pageName);
+ 
   
 
   const categories = {
