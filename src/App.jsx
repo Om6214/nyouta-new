@@ -26,6 +26,7 @@ import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { googleSignup } from './Store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+import WeddingWebsiteUrl from './components/WeddingWebsiteUrl';
 
 // gaganluthrasirji
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/products" element={<Category />} />
           <Route path="/wedding-website/:slug" element={<WeddingWebsite />} />
           <Route path="/wedding-website-templates" element={<WeddingWebsiteTemplates />} />
+          <Route path='/create-wedding-website' element={<WeddingWebsiteUrl/>}/>
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
