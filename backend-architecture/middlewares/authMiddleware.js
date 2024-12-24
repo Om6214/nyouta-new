@@ -3,14 +3,14 @@ import jwt from 'jsonwebtoken';
 // Authenticate JWT
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
-    console.log(authHeader);
+    // console.log(authHeader);
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         console.log("No token provided, authorization denied");
         return res.status(401).json({ message: 'No token provided, authorization denied' });
     }
 
     const token = authHeader.split(' ')[1]; // Extract the token
-    console.log(token);
+    // console.log(token);
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
@@ -22,7 +22,7 @@ const authenticateToken = (req, res, next) => {
             console.log(err);
             return res.status(401).json({ message: 'Token has expired' });
         }
-        console.log(err);
+        // console.log(err);
         return res.status(403).json({ message: 'Token is invalid' });
     }
 };

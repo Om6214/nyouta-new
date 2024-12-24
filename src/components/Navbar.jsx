@@ -216,7 +216,7 @@ export default function MainNav() {
             {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
             </Link> */}
-            <a href="" className="text-pink-600 font-heroFont hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
+            <a href="/create-wedding-website" className="text-pink-600 font-heroFont hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
             <button
               onClick={toggleCart}
               className="flex items-center gap-1 relative"
@@ -240,13 +240,13 @@ export default function MainNav() {
               {openDropdown === "user" && (
                 <div className="absolute right-0 mt-2 w-48 rounded-md bg-priBg py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
                   <Link
-                    to="/login"
+                    to="/login" onClick={()=> setOpenDropdown(null)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Log in
                   </Link>
                   <Link
-                    to="/register"
+                    to="/register" onClick={()=> setOpenDropdown(null)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Register
