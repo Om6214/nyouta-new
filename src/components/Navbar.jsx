@@ -9,24 +9,24 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useCart } from "../CartContext"; // Import your cart context
+import { useCart } from "../CartContext";
 import logo from "../assets/images/nyouta-logo2.jpg";
 import { AnimatePresence, motion } from "framer-motion";
 
 const navItems = [
   {
     label: "Print Invitations",
-    url: "/about",
+    url: "/nav/print-invitations",
     children: [
       { label: "Wedding Invitations" },
       { label: "Party Invitation" },
-      { label: "Pooja Invitation" },
-      { label: "Ceremony Invitation" },
+      { label: "Pooja Invitations" },
+      { label: "Ceremony Invitations" },
     ],
   },
   {
     label: "E Invitation",
-    url: "/products",
+    url: "/nav/e-invitations",
     children: [
       { label: "Wedding Invitations" },
       { label: "Party Invitation" },
@@ -38,18 +38,18 @@ const navItems = [
   },
   {
     label: "Photo Books",
-    url: "/categories",
+    url: "/nav/photo-books",
     children: [
       { label: "Soft Cover Photobook" },
       { label: "Hard Cover Photobook" },
       { label: "Spiral Photobook" },
       { label: "Photo Folder" },
-      { label: "Digital Photobook" },
+      { label: "Digtial Photobook > Best Seller" },
     ],
   },
   {
     label: "Itinerary",
-    url: "/contact-us",
+    url: "/nav/itinerary",
     children: [
       { label: "Wedding Itinerary" },
       { label: "Stickers" },
@@ -61,7 +61,7 @@ const navItems = [
   },
   {
     label: "Calendars 2025",
-    url: "/contact-us",
+    url: "/nav/calendars-2025",
     children: [
       { label: "Mini Desktop Calendar" },
       { label: "Wall Calendar - Potrait" },
@@ -73,7 +73,7 @@ const navItems = [
   },
   {
     label: "Free Greetings",
-    url: "/contact-us",
+    url: "/nav/free-greetings",
     children: [
       { label: "Wishes Greeting" },
       { label: "Thanks Greeting" },
@@ -83,17 +83,17 @@ const navItems = [
   },
   {
     label: "Guest Surprising",
-    url: "/contact-us",
-    children: [{ label: "Newspaper" }, { label: "Magazines" }],
+    url: "/nav/guest-surprising",
+    children: [{ label: "Newspapers" }, { label: "Magazine" }],
   },
   {
     label: "Planner Books",
-    url: "/contact-us",
+    url: "/nav/planner-books",
     children: [{ label: "Planner Books" }, { label: "Free Printables" }],
   },
   {
     label: "E-Shop",
-    url: "/contact-us",
+    url: "/nav/e-shop",
     children: [
       { label: "Shagun Envelop" },
       { label: "Photo Magnet" },
@@ -103,13 +103,12 @@ const navItems = [
   },
 ];
 export default function MainNav() {
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const [activeDropdown, setActiveDropdown] = React.useState(null);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { cartItems, toggleCart } = useCart(); // Access cartItems and toggleCart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const [isHoveringDropdown, setIsHoveringDropdown] = React.useState(false)
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -123,14 +122,25 @@ export default function MainNav() {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
 
-  const handleMouseEnter = (index) => {
-    setIsDropdownOpen(index)
+  const gridVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: (index) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: index * 0.1,
+      },
+    }),
   };
-
+  const handleMouseEnter = (index) => {
+    setIsDropdownOpen(index);
+  };
+  
   const handleMouseLeave = () => {
-   if (!isHoveringDropdown) {
-    setIsDropdownOpen(null)
-   }
+    if (!isHoveringDropdown) {
+      setIsDropdownOpen(null);
+    }
   };
 
   // React.useEffect(() => {
@@ -141,17 +151,17 @@ export default function MainNav() {
   //   };
   // }, []);
 
-  const gridVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: (index) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.2, // Staggered animation for each item
-      },
-    }),
-  };
+  // const gridVariants = {
+  //   hidden: { opacity: 0, y: -50 },
+  //   visible: (index) => ({
+  //     opacity: 1,
+  //     y: 0,
+  //     transition: {
+  //       duration: 0.5,
+  //       delay: index * 0.2, // Staggered animation for each item
+  //     },
+  //   }),
+  // };
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
@@ -284,55 +294,63 @@ export default function MainNav() {
         )}
       </div>
       <div className="hidden lg:flex py-2 justify-center">
-        <ul className="flex gap-12 justify-center  items-center text-md font-heroFont">
+        <ul className="flex gap-12 justify-center items-center text-md font-heroFont">
           {navItems.map((item, index) => (
             <li
               key={index}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-              className="relative"
+              onMouseEnter={() => setActiveDropdown(index)}
+              onMouseLeave={() => setActiveDropdown(null)}
+              className="relative py-2"
             >
-              <a
-                href={item.url}
+              <Link
+                to={item.url}
                 className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold"
               >
                 {item.label}
-              </a>
+              </Link>
               <AnimatePresence>
-              {item.children && isDropdownOpen === index && (
-                <motion.ul
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1.0 }}
-                  className="flex flex-col z-10 border-b-2 border-primary min-w-[200px] absolute p-2 gap-2 left-2 bg-priBg rounded-lg"
-                  onMouseEnter={() => setIsHoveringDropdown(true)}
-                  onMouseLeave={() => {
-                    // setIsHoveringDropdown(false);
-                    setIsDropdownOpen(false)
-                  }}
-                >
-                  {item.children.map((child, childIndex) => (
-                    <motion.li
-                      initial="hidden"
-                      animate="visible"
-                      variants={gridVariants}
-                      key={childIndex}
-                    >
-                      <a
-                        href=""
-                        className="text-md block hover:text-primary hover:border-b-2 border-primary pb-[1px]"
-                      >
-                        {child.label}
-                      </a>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              )}
+                {item.children && activeDropdown === index && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-4 shadow-lg"
+                  >
+                    <ul className="space-y-2">
+                      {item.children.map((child, childIndex) => (
+                        <motion.li
+                          key={childIndex}
+                          variants={gridVariants}
+                          initial="hidden"
+                          animate="visible"
+                          custom={childIndex}
+                        >
+                          <Link
+                            to={`${item.url}/${child.label}`}
+                            className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
+                          >
+                            {child.label}
+                          </Link>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
               </AnimatePresence>
             </li>
           ))}
         </ul>
       </div>
+
+      {/* Mobile drawer code remains the same */}
+      {isDrawerOpen && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden">
+          {/* Your existing mobile drawer code */}
+        </div>
+      )}
     </header>
+  
+
   );
 }
