@@ -54,7 +54,7 @@ function App() {
           <Route path="/about" element={<About />} />
 
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
-          <Route path="/nav/:pageName/:categories" element={<CategoryLabel />} />
+          <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />

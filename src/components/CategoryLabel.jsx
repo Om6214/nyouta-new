@@ -16,11 +16,52 @@ import { useState, useEffect } from "react";
 
 export default function CategoryLabel() {
 
-     const { pageName } = useParams();
-     const content=ProductJson[pageName] || []
+  const { pageName, "*": path } = useParams();
+  
+
+  const formatCategoryName = (name) => {
+    return name
+      .split("-")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const formatSubCategoryName = (name) => {
+    return decodeURIComponent(name)
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+      .replace(/-/g, " ");
+  };
+  if(pageName ==="e-invitations") pageName=='E-Invitations'
+
+ 
+  const formattedPageName = formatCategoryName(pageName);
+  const formattedPath = formatSubCategoryName(path);
+
+
+
+  const filteredItems = ProductJson.filter(item => {
+    const categoryMatch = 
+      item.category.toLowerCase() === formattedPageName.toLowerCase();
+    
+    const subCategoryMatch = 
+      item.subCategory.toLowerCase() === formattedPath.toLowerCase();
+    
+    return categoryMatch && subCategoryMatch;
+  });
+
+
+  console.log("Category Name:", formattedPageName);
+  console.log("SubCategory Name:", formattedPath);
+  console.log("Filtered Items:", filteredItems);
+
+
+
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
+    {filteredItems.length > 0 ? (
+    <div  className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
         <div className="mt-10">
         <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
       <Swiper
@@ -35,12 +76,7 @@ export default function CategoryLabel() {
         modules={[Zoom, Navigation, Pagination, Autoplay]}
         className="rounded-xl shadow-lg overflow-hidden"
       >
-        {[
-          'https://swiperjs.com/demos/images/nature-1.jpg',
-          'https://swiperjs.com/demos/images/nature-2.jpg',
-          'https://swiperjs.com/demos/images/nature-3.jpg',
-          'https://swiperjs.com/demos/images/nature-4.jpg',
-        ].map((src, index) => (
+        {filteredItems[0].image.map((src, index) => (
           <SwiperSlide key={index}>
             <div className="swiper-zoom-container">
               <img src={src} alt={`Slide ${index + 1}`} className="object-cover w-full h-auto" />
@@ -53,7 +89,7 @@ export default function CategoryLabel() {
         <div>
         <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
       <div className="mb-4">
-        <h1 className="text-3xl font-bold mb-2">Custom 5x7 Photo Prints</h1>
+        <h1 className="text-3xl font-bold mb-2">{filteredItems[0].name}</h1>
         <p className="text-lg text-gray-600">PHOTO PRINTS 5x7 GLOSSY</p>
         <p className="text-sm text-gray-500 mt-1">11017 units sold</p>
       </div>
@@ -79,7 +115,7 @@ export default function CategoryLabel() {
 
       {/* Price and Offer */}
       <div className="mb-6">
-        <p className="text-xl font-semibold text-gray-800 mb-1">From Rs. 322</p>
+        <p className="text-xl font-semibold text-gray-800 mb-1">From Rs. {filteredItems[0].price}</p>
         <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
         <p className="text-sm font-bold text-orange-600 mt-2">Use Code: 15FREESHIP</p>
         <p className="text-sm text-gray-600">Flat 15% off + Free economy shipping</p>
@@ -112,8 +148,54 @@ export default function CategoryLabel() {
       </div>
     </div>
         </div>
+      <div>
+      <div id="section2">
+    
+    
+    </div>
       </div>
-       <div className='mb-9' id='sdfasf'></div> 
+      </div>
+
+    ):(
+        <div className="p-8 text-center">
+          <h1 className="text-2xl font-semibold text-gray-700">
+            No products found for {formattedPageName} - {formattedPath}
+          </h1>
+        </div>
+      )}
+
+      <div className="px-[6%] pt-[1%]">
+      <div className="font-semibold text-[4vh]">Related Items</div>
+      <div className="font-normal md:text-[2.2vh] text-[2vw]">
+        {/* Create personalized gifts for Kids, Friends, Loved ones and give them the your attention of love. */}
+      </div>
+  
+      <div className="pt-5 md:max-w-[95%] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredItems.map((item) => (
+  <div
+    key={item.id}
+    className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+  >
+    <div className="relative w-full h-[40vh]">
+      <img
+        src={item.image[0]}
+        alt={item.subTitle}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+      />
+    </div>
+    <div className="p-4 text-center">
+      <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
+      {/* Optional: Price or other details */}
+      {/* <p className="text-gray-700 mt-2">₹{item.price}</p> */}
+    </div>
+  </div>
+))}
+
+        </div>
+      </div>
+    </div>
+      <div className='mb-9' id='sdfasf'></div>
     </>
   );
 }

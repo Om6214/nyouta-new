@@ -15,7 +15,7 @@ const CategoriesNavBar=()=>{
   const categories = {
     'print-invitations':{
           title: "Print Invitations",
-          url:"/print-invitations",
+          url:"Print Invitations",
           description:
             "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
           subCategory: [
@@ -254,47 +254,6 @@ const CategoriesNavBar=()=>{
 
 
 
-  const [items, setItems] = useState([]);
-
-   useEffect(() => {
-      const fetchItems = async () => {
-        const fakeAPI = [
-          {
-            id: 1,
-            title: "Personalized Mug",
-            price: 199,
-            img: "https://img.freepik.com/free-photo/orange-mug-with-writing_23-2147680333.jpg?ga=GA1.1.294575401.1734520128&semt=ais_hybrid",
-          },
-          {
-            id: 2,
-            title: "Custom T-Shirt",
-            price: 499,
-            img: "https://img.freepik.com/free-photo/young-child-making-diy-project-from-upcycled-materials_23-2149391068.jpg?ga=GA1.1.294575401.1734520128&semt=ais_hybrid",
-          },
-          {
-            id: 3,
-            title: "Photo Album",
-            price: 799,
-            img: "https://img.freepik.com/free-photo/person-holding-frame-with-open-nature-landscape-concept_23-2150063231.jpg?ga=GA1.1.294575401.1734520128&semt=ais_hybrid",
-          },
-          {
-            id: 4,
-            title: "Wall Frame",
-            price: 999,
-            img: "https://img.freepik.com/free-photo/man-s-hand-placing-picture-frame-painted-pink-wall_23-2147909911.jpg?ga=GA1.1.294575401.1734520128&semt=ais_hybrid",
-          },
-          {
-            id: 4,
-            title: "Wall Frame",
-            price: 999,
-            img: "https://img.freepik.com/free-photo/small-flowers-branches-frame-table_23-2148043943.jpg?ga=GA1.1.294575401.1734520128&semt=ais_hybrid",
-          },
-        ];
-        setItems(fakeAPI);
-      };
-  
-      fetchItems();
-    }, []);
 
 
 
@@ -362,46 +321,6 @@ const CategoriesNavBar=()=>{
               </div>
             </div>
             </div>
-
-
-
-
-
-
-    {/* <div id="section3"> <div className="px-6 md:px-16 lg:px-[7%] pt-8">
-      <div className="font-semibold text-2xl md:text-3xl lg:text-[4vh]">Customer Stories</div>
-
-      <div className="pt-6">
-        <div className="h-[50vw] md:h-[35vw] lg:h-[23vw] border border-gray-200 shadow-lg rounded-lg overflow-hidden">
-          <Swiper
-            style={{
-              '--swiper-navigation-color': '#fff',
-              '--swiper-pagination-color': '#fff',
-            }}
-            zoom={true}
-            navigation={true}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            modules={[Zoom, Navigation, Pagination, Autoplay]}
-            className="mySwiper h-full"
-          >
-            {[
-              'https://img.freepik.com/free-photo/inspirational-quote-nature_23-2149261707.jpg',
-              'https://img.freepik.com/free-photo/inspirational-quote-nature_23-2149261712.jpg',
-              'https://img.freepik.com/free-photo/inspirational-quote-nature_23-2149261711.jpg',
-              'https://img.freepik.com/free-photo/inspirational-quote-beach_23-2149261706.jpg',
-              'https://img.freepik.com/free-photo/inspirational-quote-with-delicious-beverage_23-2149261753.jpg',
-            ].map((src, index) => (
-              <SwiperSlide key={index}>
-                <div className="swiper-zoom-container h-full">
-                  <img src={src} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </div>
-    </div></div> */}
 
 
 
