@@ -260,7 +260,7 @@ export default function MainNav() {
                 {navItems.map(
                   (item) => (
                     <li key={item} className="flex flex-col gap-2 font-heroFont">
-                      <Link
+                      <Link onClick={() => setIsDrawerOpen(false)}
                         to={item.url}
                         className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
                       >
