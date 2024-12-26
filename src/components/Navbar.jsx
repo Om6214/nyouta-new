@@ -8,6 +8,7 @@ import {
   ChevronDown,
   Menu,
   X,
+  ArrowRight,
 } from "lucide-react";
 import { useCart } from "../CartContext";
 import logo from "../assets/images/nyouta-logo2.jpg";
@@ -256,14 +257,14 @@ export default function MainNav() {
                 <X />
               </button>
               <ul className="">
-                {["About", "Products", "Categories", "Contact Us"].map(
+                {navItems.map(
                   (item) => (
-                    <li key={item}>
+                    <li key={item} className="flex flex-col gap-2 font-heroFont">
                       <Link
-                        to={`/${item.toLowerCase()}`}
-                        className="py-2 hover:text-brown-600"
+                        to={item.url}
+                        className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
                       >
-                        {item}
+                        {item.label} <span><ArrowRight size={20}/></span>
                       </Link>
                     </li>
                   )
@@ -324,11 +325,7 @@ export default function MainNav() {
       </div>
 
       {/* Mobile drawer code remains the same */}
-      {isDrawerOpen && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden">
-          {/* Your existing mobile drawer code */}
-        </div>
-      )}
+  
     </header>
   
 

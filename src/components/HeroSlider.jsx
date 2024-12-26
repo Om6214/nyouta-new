@@ -133,13 +133,15 @@ export default function HeroSlider() {
         </div>
       </div>
       </div>
-    <div className='mx-2 py-2'>
-        <div className='lg:grid lg:grid-cols-6 hidden justify-center gap-2 lg:gap-16 overflow-x-clip'>
+    <div className='mx-2 py-2 flex overflow-auto'>
+        <div className='flex overflow-x-auto justify-center'>
           {tiles.map((tile) => (
-            <div className='relative rounded-full bg-cover flex flex-col items-center justify-center' style={{ backgroundImage: `url(${cardImg})`, height: '75px', width: '255px' }}>
-              {/* <img className='absolute top-0 w-full' src={cardImg} alt="" /> */}
+            <div className='relative rounded-full flex flex-col items-center justify-center'>
+              <img className='' src={cardImg} alt="" />
+              <div className='absolute'>
               <h1 className='text-white font-semibold text-center'>{tile.title}</h1>
               <h2 className='text-center'>{tile.des}</h2>
+              </div>
             </div>
           ))}
         </div>
