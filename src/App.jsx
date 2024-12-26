@@ -31,6 +31,7 @@ import CategoriesNavBar from './components/CategoriesNavBar';
 import CategoryLabel from './components/CategoryLabel';
 
 import WeddingWebsiteUrl from './components/WeddingWebsiteUrl';
+import LoginRegister from './pages/LoginRegister';
 
 
 // gaganluthrasirji
@@ -53,8 +54,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/product/:id/edit-digital-card" element={<DigitalCardEditPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<LoginRegister />} />
+          <Route path="/register" element={<LoginRegister />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/about" element={<About />} />
 
