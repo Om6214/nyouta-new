@@ -9,6 +9,7 @@ import templateRoutes from './routes/templateRoutes.js';
 import weddingwebsiteRoutes from './routes/weddingwebsiteRoutes.js'; 
 import cartRoutes from './routes/cartRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import addressRoutes from './routes/addressRoutes.js';
 import morgan from 'morgan'
 
 // Load environment variables
@@ -36,6 +37,7 @@ app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/weddingwebsite', weddingwebsiteRoutes);
 app.use('/api/v1/cart', cartRoutes);
 app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/address', addressRoutes);
 // Port
 const PORT = process.env.PORT || 5000;
 

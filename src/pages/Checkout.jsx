@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-
+import React, { useState,useEffect } from 'react'
+import { Link } from 'react-router-dom'
 const indianStates = [
     'Andhra Pradesh',
     'Arunachal Pradesh',
@@ -38,8 +38,17 @@ const indianStates = [
     'Lakshadweep',
     'Puducherry'
   ];
-
+import {getAddresses, addAddress, updateAddress, deleteAddress} from '../Store/slices/addressSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 const Checkout = () => {
+    const dispatch = useDispatch();
+    const {addresses, loading, error} = useSelector(state => state.address);
+    console.log(addresses);
+    useEffect(() => {
+        if(!addresses.length)
+        dispatch(getAddresses());
+    }, [dispatch]);
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -61,26 +70,27 @@ const Checkout = () => {
       };
 
 
+    //   console.log(localStorage.getItem('user'));
     const handleSubmit = (e)=> {
         e.preventDefault();
 
     // Validation checks (basic example)
     if (!formData.state) {
-      alert("Please select a state.");
+      toast.error("Please select a state.");
       return;
     }
     if (!/^\d{6}$/.test(formData.pincode)) {
-      alert("Please enter a valid 6-digit pincode.");
+        toast.error("Please enter a valid 6-digit pincode.");
       return;
     }
     if (!/^\d{10}$/.test(formData.contactNumber)) {
-      alert("Please enter a valid 10-digit phone number.");
+        toast.error("Please enter a valid 10-digit phone number.");
       return;
     }
-
+     dispatch(addAddress(formData));
     // Simulate form submission
-    console.log("Form submitted:", formData);
-    alert("Form submitted successfully!");
+    // console.log("Form submitted:", formData);
+    // alert("Form submitted successfully!");
     }
   return (
     <>
