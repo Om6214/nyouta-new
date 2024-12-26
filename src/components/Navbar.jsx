@@ -142,26 +142,6 @@ export default function MainNav() {
       setIsDropdownOpen(null);
     }
   };
-
-  // React.useEffect(() => {
-  //   return () => {
-  //     if (timeoutRef.current) {
-  //       clearTimeout(timeoutRef.current);
-  //     }
-  //   };
-  // }, []);
-
-  // const gridVariants = {
-  //   hidden: { opacity: 0, y: -50 },
-  //   visible: (index) => ({
-  //     opacity: 1,
-  //     y: 0,
-  //     transition: {
-  //       duration: 0.5,
-  //       delay: index * 0.2, // Staggered animation for each item
-  //     },
-  //   }),
-  // };
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
