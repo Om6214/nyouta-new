@@ -129,15 +129,15 @@ export default function HeroSlider() {
               <img className='h-8' src={buttonBg} alt="" />
               <a href='/create-wedding-website' className='absolute text-xl font-semibold text-white'>Explore More</a>
           </div>
-          <p className='text-sm font-semibold'>A simple, beautiful wedding website just for you - FREE</p>
+          <p className='text-sm font-semibold text-center'>A simple, beautiful wedding website just for you - FREE</p>
         </div>
       </div>
       </div>
-    <div className='mx-2 py-2 flex overflow-auto'>
-        <div className='flex overflow-x-auto justify-center'>
+    <div className='mx-2 py-2'>
+        <div className='flex overflow-x-auto lg:justify-center'>
           {tiles.map((tile) => (
-            <div className='relative rounded-full flex flex-col items-center justify-center'>
-              <img className='' src={cardImg} alt="" />
+            <div className='relative rounded-full flex flex-shrink-0 flex-col items-center justify-center'>
+              <img className='w-[250px]' src={cardImg} alt="" />
               <div className='absolute'>
               <h1 className='text-white font-semibold text-center'>{tile.title}</h1>
               <h2 className='text-center'>{tile.des}</h2>
