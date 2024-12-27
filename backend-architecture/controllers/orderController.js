@@ -5,18 +5,26 @@ import crypto from 'crypto';
 export const placeOrder = async (req, res) => {
     try {
         const { products, totalPrice, address } = req.body;
-        const order = new Order({ user: req.user._id, products, totalPrice, address });
+        const order = new Order({ user: req.user.userId, products, totalPrice, address });
         await order.save();
         const razorpay = new Razorpay({
             key_id: process.env.RAZORPAY_KEY_ID,
             key_secret: process.env.RAZORPAY_KEY_SECRET,
         });
-        const payment = await razorpay.orders.create({
-            amount: totalPrice * 100,
-            currency: 'INR',
-            receipt: 'order_receipt',
-        });
-        res.status(201).json({ order, payment });
+        console.log('Order:', order);
+        console.log(process.env.RAZORPAY_KEY_ID, process.env.RAZORPAY_KEY_SECRET);
+        try {
+            const payment = await razorpay.orders.create({
+                amount: totalPrice * 100, // Amount in paise
+                currency: 'INR',
+                receipt: `order_receipt_${order._id}`,
+            });
+            console.log(payment);
+            res.status(201).json({ order, payment });
+        } catch (error) {
+            console.error('Razorpay order creation failed:', error);
+            throw error; // Re-throw if needed
+        }
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }

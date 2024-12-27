@@ -36,7 +36,7 @@ app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/templates', templateRoutes);
 app.use('/api/v1/weddingwebsite', weddingwebsiteRoutes);
 app.use('/api/v1/cart', cartRoutes);
-app.use('/api/v1/orders', orderRoutes);
+app.use('/api/v1/order', orderRoutes);
 app.use('/api/v1/address', addressRoutes);
 // Port
 const PORT = process.env.PORT || 5000;
