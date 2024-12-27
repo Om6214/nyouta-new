@@ -190,7 +190,7 @@ const WeddingWebsiteUrl = () => {
                 id={`faq-answer-${faq.id}`}
                 className={`transition-all duration-200 ease-in-out ${
                   openId === faq.id
-                    ? "max-h-48 opacity-100"
+                    ? "max-h-52 opacity-100"
                     : "max-h-0 opacity-0"
                 } overflow-hidden`}
               >

@@ -39,7 +39,7 @@ const PromiseCard = () => {
             {promises.map((prom, index) => (
                 <div key={index} className=' relative flex flex-col items-center gap-2 px-4 rounded-lg hover:-translate-y-3 duration-300 ease-in cursor-pointer'>
                     <img src={bgImg} className='' alt="" />
-                    <div className='absolute flex flex-col items-center gap-4 pt-4 text-white font-heroFont'>
+                    <div className='absolute flex flex-col items-center lg:gap-4 gap-[5px] pt-4 text-white font-heroFont'>
                     <img className='w-[75px]' src={prom.icon} alt="" />
                     <h1 className='lg:text-3xl text-xl font-semibold text-center'>{prom.title}</h1>
                     <h3 className='text-center px-12 font-semibold'>{prom.description}</h3>
@@ -48,15 +48,15 @@ const PromiseCard = () => {
             ))}
         </div>
         <div className='mx-4'>
-            <div className='grid grid-cols-4 lg:grid-cols-8 gap-4'>
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img1} alt="" />
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img2} alt="" />
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img3} alt="" />
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img4} alt="" />
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img5} alt="" />
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img6} alt="" />
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img7} alt="" />
-                <img className='hover:scale-110 duration-300 ease-out cursor-pointer' src={img8} alt="" />
+            <div className='flex overflow-x-auto gap-4'>
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img1} alt="" />
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img2} alt="" />
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img3} alt="" />
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img4} alt="" />
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img5} alt="" />
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img6} alt="" />
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img7} alt="" />
+                <img className='cursor-pointer w-[150px] lg:w-[170px]' src={img8} alt="" />
             </div>
         </div>
     </div>

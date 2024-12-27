@@ -127,7 +127,7 @@ export default function HeroSlider() {
           </div>
           <div className='relative flex flex-col items-center justify-center hover:translate-x-2 duration-300'>
               <img className='h-8' src={buttonBg} alt="" />
-              <a href='' className='absolute text-xl font-semibold text-white'>Explore More</a>
+              <a href='/create-wedding-website' className='absolute text-xl font-semibold text-white'>Explore More</a>
           </div>
           <p className='text-sm font-semibold'>A simple, beautiful wedding website just for you - FREE</p>
         </div>
