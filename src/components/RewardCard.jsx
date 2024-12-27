@@ -15,7 +15,7 @@ const RewardCard = () => {
             <h1 className='text-center text-2xl lg:text-4xl font-semibold'>Exclusive Rewards Await</h1>
             <h2 className='text-center text-xl lg:text-3xl'>Shop Now and Earn Special Award with Surprise Gift & Discount</h2>
         </div>
-        <div className='flex overflow-x-auto justify-center gap-4 lg:mx-4 mx-2 scroll'>
+        <div className='flex overflow-x-auto lg:justify-center gap-4 lg:mx-4 mx-2'>
             <img className='cursor-pointer w-[150px] lg:w-[160px]' src={img11} alt="" />
             <img className='cursor-pointer w-[150px] lg:w-[160px]' src={img12} alt="" />
             <img className='cursor-pointer w-[150px] lg:w-[160px]' src={img13} alt="" />
