@@ -14,9 +14,6 @@ import Checkout from './pages/Checkout';
 import ProductsCategory from './pages/ProductsCategory';
 import Cart from './components/Cart';
 import { CartProvider } from './CartContext';
-import DashboardLayout from './dashboard/DashboardLayout';
-import Dashboard from './dashboard/Dashboard';
-import AddProduct from './dashboard/AddProduct';
 import DigitalCardEditPage from './pages/DigitalCardEditPage';
 import PhysicalCardEditPage from './pages/PhysicalCardEditPage';
 import WeddingCardEditor from './pages/WeddingCardEditor';
@@ -64,10 +61,6 @@ function App() {
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
-          <Route path='/admin/dashboard' element={<DashboardLayout />}>
-            <Route index path='/admin/dashboard' element={<Dashboard />} />
-            <Route path='/admin/dashboard/add-product' element={<AddProduct />} />
-          </Route>
           <Route path="/editor" element={<WeddingCardEditor />} />
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
         </Routes>
