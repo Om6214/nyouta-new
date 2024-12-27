@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 // import './Login.css'
 
 export default function LoginRegister(){
-  const [isRightPanelActive, setIsRightPanelActive] = useState(prop);
+  const [isRightPanelActive, setIsRightPanelActive] = useState();
 
   const location = useLocation();
   useEffect(() => {
