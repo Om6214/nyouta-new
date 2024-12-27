@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FaGooglePlusG } from "react-icons/fa";
 import { Link } from 'react-router-dom'
-
+import { useLocation } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react'
 import { GoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
@@ -11,11 +11,21 @@ import { useNavigate } from 'react-router-dom';
 // import './Login.css'
 
 export default function LoginRegister(){
-  const [isRightPanelActive, setIsRightPanelActive] = useState(false);
+  const [isRightPanelActive, setIsRightPanelActive] = useState(prop);
 
-  const handleSignUpClick = () => setIsRightPanelActive(true);
-  const handleSignInClick = () => setIsRightPanelActive(false);
-  
+  const location = useLocation();
+  useEffect(() => {
+    setIsRightPanelActive(location.pathname === '/register');
+  }, [location.pathname]);
+
+  const handleSignUpClick = () => {
+    setIsRightPanelActive(true);
+    navigate('/register');
+  };
+  const handleSignInClick = () => {
+    setIsRightPanelActive(false);
+    navigate('/login');
+  };
 
   const [formData1, setformData1] = useState({
       name: '',
@@ -186,7 +196,7 @@ export default function LoginRegister(){
 
   return (
     <div
-      className={` relative ml-[400px] my-10 max-w-[768px] min-h-[500px] rounded-lg shadow-lg overflow-hidden bg-white transition-all duration-500 ${isRightPanelActive ? "right-panel-active" : ""}`}
+      className={` relative md:mx-[25%] mx-2 my-10 max-w-[768px] min-h-[500px] rounded-lg shadow-lg overflow-hidden bg-white transition-all duration-500 ${isRightPanelActive ? "right-panel-active" : ""}`}
     >
       {/* Sign Up Section */}
       <div
@@ -235,7 +245,7 @@ export default function LoginRegister(){
           id="email-address"
                 name="email"
                 autoComplete="email"
-            type="email"
+            type="text"
             placeholder="Email"
             className="w-full p-3 mb-3 rounded-lg bg-gray-100 focus:outline-none"
             required
