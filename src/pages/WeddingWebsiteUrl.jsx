@@ -7,6 +7,11 @@ import wed1 from "../assets/images/wed1.webp";
 import wed2 from "../assets/images/wed2.jpg";
 import wed3 from "../assets/images/wed3.webp";
 import { ChevronDown } from "lucide-react";
+import { useEffect } from "react";
+import { createWeddingWebsite, updateWeddingWebsite } from "../Store/slices/weddingtemplateSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getWeddingTemplates } from "../Store/slices/weddingtemplateSlice";
 
 const items = [
   {
@@ -58,9 +63,58 @@ const faqs = [
       "Your Wedding Website is your opportunity to easily share information as well as excitement with your guests. Tell them about what they can expect to help them get ready for your big day and give them a space to leave nice comments in your Guestbook page. All in all, your Wedding Website is a place for you to document your wedding journey and to keep guests in the loop and excited about the upcoming celebration!",
   },
 ];
+
+const TemplateCard = ({ template, id }) => {
+  console.log(template);
+  console.log(id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = localStorage.getItem('user');
+  const handleTemplateClick = async (id) => {
+    if (!user.isWebsiteCreated) {
+      console.log("Website created");
+      const res = await dispatch(createWeddingWebsite(id));
+      console.log(res);
+      if (res.type === 'weddingtemplates/createWeddingWebsite/rejected') {
+        navigate('/login');
+      }
+      else if (res.type === 'weddingtemplates/createWeddingWebsite/fulfilled') {
+        console.log(res.payload);
+        navigate(`/us/${res?.payload?.slug}`);
+      }
+    } else {
+      console.log("Website not created");
+      const res = await dispatch(updateWeddingWebsite(id));
+      if (res.type === 'weddingtemplates/updateWeddingWebsite/rejected') {
+        navigate('/login');
+      }
+      else if (res.type === 'weddingtemplates/updateWeddingWebsite/fulfilled') {
+        navigate(`/us/${res?.payload?.slug}`);
+      }
+    }
+  }
+  return (
+    <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 cursor-pointer" onClick={() => handleTemplateClick(id)}>
+      <div className="p-4">
+        <div
+          className="bg-gray-50 p-4 rounded-md"
+          dangerouslySetInnerHTML={{ __html: template }}
+        />
+      </div>
+    </div>
+  );
+};
+
 const WeddingWebsiteUrl = () => {
   const [openId, setOpenId] = useState(null);
-
+  const dispatch = useDispatch();
+  const { weddingTemplates, loading, error } = useSelector((state) => state.weddingtemplates);
+  console.log(weddingTemplates);
+  useEffect(() => {
+    if (weddingTemplates.length < 1) {
+      dispatch(getWeddingTemplates());
+    }
+  }, [dispatch]);
   const toggleFaq = (id) => {
     setOpenId(openId === id ? null : id);
   };
@@ -167,6 +221,11 @@ const WeddingWebsiteUrl = () => {
           </div>
         </div>
       </section>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {weddingTemplates?.map((template) => (
+          <TemplateCard key={template.id} id={template.id} template={template.content} />
+        ))}
+      </div>
       <section id="Faqs" className="mx-4 lg:mx-24 font-heroFont">
         <div className="flex flex-col gap-2">
           <h1 className="text-xl uppercase">Frequently Asked Questions</h1>
@@ -181,21 +240,19 @@ const WeddingWebsiteUrl = () => {
               >
                 <span className="text-lg">{faq.question}</span>
                 <ChevronDown
-                  className={`transform transition-transform duration-200 ${
-                    openId === faq.id ? "rotate-180" : ""
-                  }`}
+                  className={`transform transition-transform duration-200 ${openId === faq.id ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <div
                 id={`faq-answer-${faq.id}`}
-                className={`transition-all duration-200 ease-in-out ${
-                  openId === faq.id
+                className={`transition-all duration-200 ease-in-out ${openId === faq.id
                     ? "max-h-52 opacity-100"
                     : "max-h-0 opacity-0"
-                } overflow-hidden`}
+                  } overflow-hidden`}
               >
                 <div className="lg:pl-[600px]">
-                <p className="px-6 py-4 text-gray-600 bg-amber-100 rounded-xl">{faq.answer}</p>
+                  <p className="px-6 py-4 text-gray-600 bg-amber-100 rounded-xl">{faq.answer}</p>
                 </div>
               </div>
             </div>

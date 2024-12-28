@@ -27,7 +27,7 @@ import { useEffect } from 'react';
 import CategoriesNavBar from './components/CategoriesNavBar';
 import CategoryLabel from './components/CategoryLabel';
 
-import WeddingWebsiteUrl from './components/WeddingWebsiteUrl';
+import WeddingWebsiteUrl from './pages/WeddingWebsiteUrl';
 import LoginRegister from './pages/LoginRegister';
 
 
@@ -44,8 +44,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Category />} />
-          <Route path="/wedding-website/:slug" element={<WeddingWebsite />} />
-          <Route path="/wedding-website-templates" element={<WeddingWebsiteTemplates />} />
+          <Route path="/us/:slug" element={<WeddingWebsite />} />
           <Route path='/create-wedding-website' element={<WeddingWebsiteUrl/>}/>
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart />} />
@@ -78,7 +77,7 @@ function ConditionalNavbar() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/wedding-website') || 
+  if (location.pathname.includes('/us') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
     return null;  // Don't render Navbar for these routes
@@ -92,7 +91,7 @@ function ConditionalFooter() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/wedding-website') || 
+  if (location.pathname.includes('/us') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
     return null;  // Don't render Footer for these routes

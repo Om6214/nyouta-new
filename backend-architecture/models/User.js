@@ -44,20 +44,9 @@ const userSchema = new mongoose.Schema({
     type: Date, // Store the time when OTP was generated
     required: false,
   },
-  partnerName: {
-    type: String,
-    required: false,
-  },
-  weddingDate: {
-    type: Date,
-    required: false,
-  },
-  weddingLocation: {
-    type: String,
-    required: false,
-  },
-  weddingVenue: {
-    type: String,
+  weddingWebsite: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'WeddingWebsite',
     required: false,
   },
   templateId: {
