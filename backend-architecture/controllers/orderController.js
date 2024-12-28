@@ -2,29 +2,35 @@ import Order from '../models/Order.js';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
 export const placeOrder = async (req, res) => {
     try {
         const { products, totalPrice, address } = req.body;
         const order = new Order({ user: req.user.userId, products, totalPrice, address });
         await order.save();
-        const razorpay = new Razorpay({
-            key_id: process.env.RAZORPAY_KEY_ID,
-            key_secret: process.env.RAZORPAY_KEY_SECRET,
-        });
-        console.log('Order:', order);
-        console.log(process.env.RAZORPAY_KEY_ID, process.env.RAZORPAY_KEY_SECRET);
-        try {
-            const payment = await razorpay.orders.create({
-                amount: totalPrice * 100, // Amount in paise
-                currency: 'INR',
-                receipt: `order_receipt_${order._id}`,
+        const options = {
+            amount: totalPrice * 100,
+            currency: 'INR',
+            receipt: `receipt_${Date.now()}`,
+        };
+        razorpay.orders.create(options, async (error, payment) => {
+            if (error) {
+                console.error("Error creating order:", error);
+                return res.status(500).send({ message: "Something went wrong" });
+            }
+            console.log("Payment:", payment);
+            order.orderId = payment.id;
+            await order.save();
+            res.status(201).json({
+                message: 'Order created successfully! Complete payment to confirm.',
+                payment,
+                order,
             });
-            console.log(payment);
-            res.status(201).json({ order, payment });
-        } catch (error) {
-            console.error('Razorpay order creation failed:', error);
-            throw error; // Re-throw if needed
-        }
+        });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
@@ -32,19 +38,18 @@ export const placeOrder = async (req, res) => {
 
 export const verifyPayment = async (req, res) => {
     try {
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId } = req.body;
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
         const body = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSignature = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET).update(body).digest('hex');
         if (razorpay_signature === expectedSignature) {
-            res.status(200).json({ message: 'Payment verified successfully!', orderId });
+            const order = await Order.findOne({ orderId: razorpay_order_id });
+            order.paymentStatus = 'paid';
+            order.paymentId = razorpay_payment_id;
+            await order.save();
+            res.status(200).json({ message: 'Payment verified successfully!', order });
         } else {
             res.status(400).json({ message: 'Payment verification failed!' });
         }
-        const order = await Order.findById(orderId);
-        order.paymentStatus = 'paid';
-        order.paymentId = razorpay_payment_id;
-        await order.save();
-        res.status(200).json({ message: 'Payment verified successfully!', order });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }

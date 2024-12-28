@@ -5,6 +5,8 @@ import {getCart} from '../Store/slices/productSlice';
 import { toast } from 'react-toastify';
 import { use } from 'react';
 import { placeOrder } from '../Store/slices/orderSlice';
+import axios from 'axios';
+import { BASE_URL } from '../utils/api';
 
 const indianStates = [
     'Andhra Pradesh',
@@ -50,11 +52,10 @@ const Checkout = () => {
     const [selectedAddress, setSelectedAddress] = useState(null);
     const { addresses, loading } = useSelector((state) => state.address);
     const { cart } = useSelector((state) => state.product);
-    console.log(cart);
+    const user=localStorage.getItem('user');
     useEffect(() => {
         dispatch(getCart());
     }, [dispatch]);
-    console.log(addresses)
     useEffect(() => {
         if (!addresses.length) {
             dispatch(getAddresses());
@@ -141,13 +142,58 @@ const Checkout = () => {
         const totalPrice = cart.products.reduce((acc, item) => acc + item.productId.price*item.quantity, 0);
         const address = addresses[selectedAddress]._id;
         const data={ products, totalPrice, address };
-        console.log(data);
         const res=await dispatch(placeOrder(data));
+        if(res.type==='order/placeOrder/fulfilled') {
+            initPayment(res.payload.payment);
+        }
         console.log(res);
     }
 
-    const initPayment = async () => {
-
+    const initPayment = async (data) => {
+        const options = {
+            key: 'rzp_test_S7O9aeETo3NXrl',
+            amount: data.amount,
+            currency: data.currency,
+            order_id: data.id,
+            name: "Nyouta",
+            description: "Payment for your order",
+            prefill:{
+                name: user.name,
+                email: user.email,
+            },
+            theme: {
+                color: "#3399cc",
+            },
+             handler: async (response) => {
+                    console.log(response);
+                    try {
+                      const verifyUrl = `${BASE_URL}/order/verify-payment`;
+                      const verifyData = {
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                      };
+                      const headers = {Authorization: `Bearer ${localStorage.getItem('token')}`};
+                      try {
+                        if(!localStorage.getItem('token')) {
+                            toast.error("Please login to continue");
+                            return;
+                        }
+                        const res = await axios.post(verifyUrl, verifyData, { headers });
+                        if (res.status === 200) {
+                          toast.success("Payment Successful");
+                        //   window.location.reload();
+                        }
+                      } catch (err) {
+                        toast.error(err.response.data.message);
+                      }
+                    } catch (err) {
+                      console.log(err);
+                    }
+                  },
+        }
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
     }
     return (
         <div className='flex flex-col-reverse lg:flex-row justify-evenly'>
@@ -312,7 +358,7 @@ const Checkout = () => {
             <div className='m-4 lg:w-[45%]'>
                 <h1 className='text-xl font-bold'>Your Order</h1>
                 {/* Order details */}
-                {cart.products.map((product) => (
+                {cart?.products?.map((product) => (
                     <div key={product.productId._id} className='flex justify-between mt-4'>
                         <img
                             src={product.productId.image[0]}
@@ -325,7 +371,7 @@ const Checkout = () => {
                 ))}
                 <div className='flex justify-between mt-4'>
                     <p>Items</p>
-                    <p>{cart.products.length}</p>
+                    <p>{cart?.products?.length}</p>
                 </div>
                 <div className='flex justify-between mt-4'>
                     <p>Shipping</p>
@@ -333,7 +379,7 @@ const Checkout = () => {
                 </div>
                 <div className='flex justify-between mt-4'>
                     <p>Subtotal</p>
-                    <p>{`$${cart.products.reduce((acc, item) => acc + item.productId.price*item.quantity, 0)}`}</p>
+                    <p>{`$${cart?.products?.reduce((acc, item) => acc + item.productId.price*item.quantity, 0)}`}</p>
                 </div>
 
                 <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700' onClick={handleOrder}>

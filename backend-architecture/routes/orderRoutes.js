@@ -1,10 +1,11 @@
 import express from 'express';
 import { authenticateToken } from '../middlewares/authMiddleware.js';
-import { placeOrder, getOrders, getOrder, deleteOrder, updateOrderStatus } from '../controllers/orderController.js';
+import { placeOrder, getOrders, getOrder, deleteOrder, updateOrderStatus,verifyPayment } from '../controllers/orderController.js';
 
 const router = express.Router();
 
 router.post('/place-order', authenticateToken, placeOrder);
+router.post('/verify-payment', authenticateToken,verifyPayment);
 router.get('/get-orders', authenticateToken, getOrders);
 router.get('/get-order/:orderId', authenticateToken, getOrder);
 router.delete('/delete-order/:orderId', authenticateToken, deleteOrder);
