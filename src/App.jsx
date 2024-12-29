@@ -58,7 +58,7 @@ function App() {
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
-          <Route path="/editor" element={<WeddingCardEditor />} />
+         
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
         </Routes>
 
