@@ -19,7 +19,6 @@ import Dashboard from './dashboard/Dashboard';
 import AddProduct from './dashboard/AddProduct';
 import DigitalCardEditPage from './pages/DigitalCardEditPage';
 import PhysicalCardEditPage from './pages/PhysicalCardEditPage';
-import WeddingCardEditor from './pages/WeddingCardEditor';
 import WeddingWebsite from './pages/WeddingWebsite';
 import WeddingWebsiteTemplates from './pages/WeddingWebsiteTemplates';
 import { useGoogleOneTapLogin } from '@react-oauth/google';
@@ -27,43 +26,46 @@ import { googleSignup } from './Store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 
-// gaganluthrasirji
+// Import the Editor components
+
 
 function App() {
-
   // useEffect(()=>{...}) // Your previous effect logic
 
   return (
     <CartProvider>
-      <BrowserRouter>
-        <ConditionalNavbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Category />} />
-          <Route path="/wedding-website/:slug" element={<WeddingWebsite />} />
-          <Route path="/wedding-website-templates" element={<WeddingWebsiteTemplates />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/product/:id/edit-digital-card" element={<DigitalCardEditPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/categories" element={<CategoriesPage />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/products/:category" element={<ProductsCategory />} />
-          <Route path='/admin/dashboard' element={<DashboardLayout />}>
-            <Route index path='/admin/dashboard' element={<Dashboard />} />
-            <Route path='/admin/dashboard/add-product' element={<AddProduct />} />
-          </Route>
-          <Route path="/editor" element={<WeddingCardEditor />} />
-          <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
-        </Routes>
+      
+        <BrowserRouter>
+          <ConditionalNavbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Category />} />
+            <Route path="/wedding-website/:slug" element={<WeddingWebsite />} />
+            <Route path="/wedding-website-templates" element={<WeddingWebsiteTemplates />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/product/:id/edit-digital-card" element={<DigitalCardEditPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/categories" element={<CategoriesPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/products/:category" element={<ProductsCategory />} />
+            <Route path='/admin/dashboard' element={<DashboardLayout />}>
+              <Route index path='/admin/dashboard' element={<Dashboard />} />
+              <Route path='/admin/dashboard/add-product' element={<AddProduct />} />
+            </Route>
+            <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
+          </Routes>
 
-        {/* Conditionally render Footer */}
-        <ConditionalFooter />
-      </BrowserRouter>
-      <Cart />
+          {/* Conditionally render Navbar, Toolbar, and Canvas */}
+          <ConditionalNavbar />
+        
+
+          <ConditionalFooter />
+        </BrowserRouter>
+     
     </CartProvider>
   );
 }
@@ -72,28 +74,26 @@ function App() {
 function ConditionalNavbar() {
   const location = useLocation();
 
-  // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
   if (location.pathname.includes('/wedding-website') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
-    return null;  // Don't render Navbar for these routes
+    return null;
   }
 
-  return <Navbar />;  // Render Navbar for all other routes
+  return <Navbar />;
 }
 
 // A component to conditionally render the Footer based on the route
 function ConditionalFooter() {
   const location = useLocation();
 
-  // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
   if (location.pathname.includes('/wedding-website') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
-    return null;  // Don't render Footer for these routes
+    return null;
   }
 
-  return <Footer />;  // Render Footer for all other routes
+  return <Footer />;
 }
 
 export default App;
