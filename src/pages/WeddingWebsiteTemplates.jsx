@@ -14,15 +14,21 @@ const TemplateCard = ({ template, id }) => {
             console.log("Website created");
             const res=await dispatch(createWeddingWebsite(id));
             console.log(res);
-            if(res.type==='weddingtemplates/createWeddingWebsite/fulfilled'){
+            if(res.type==='weddingtemplates/createWeddingWebsite/rejected'){
+                navigate('/login');
+            }
+            else if(res.type==='weddingtemplates/createWeddingWebsite/fulfilled'){
                 console.log(res.payload);
-                navigate(`/wedding-website/${res.payload.slug}`);
+                navigate(`/wedding-website/${res?.payload?.slug}`);
             }
         }else{
             console.log("Website not created");
             const res=await dispatch(updateWeddingWebsite(id));
-            if(res.type==='weddingtemplates/updateWeddingWebsite/fulfilled'){
-                navigate(`/wedding-website/${res.payload.slug}`);
+            if(res.type==='weddingtemplates/updateWeddingWebsite/rejected'){
+                navigate('/login');
+            }
+            else if(res.type==='weddingtemplates/updateWeddingWebsite/fulfilled'){
+                navigate(`/wedding-website/${res?.payload?.slug}`);
             }
         }
     }
@@ -47,8 +53,6 @@ const WeddingWebsiteTemplates = () => {
         weddingVenue: ''
     });
     const { weddingTemplates, loading, error } = useSelector((state) => state.weddingtemplates);
-    console.log(weddingTemplates);
-
 
     useEffect(() => {
         dispatch(getWeddingTemplates());
@@ -72,7 +76,6 @@ const WeddingWebsiteTemplates = () => {
             <h1 className="text-2xl font-bold text-center text-gray-800 mb-8">Wedding Website Templates</h1>
             <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={handleCreateYourOwn}>Create Your Own</button>
             {loading && <p className="text-center text-gray-600">Loading...</p>}
-            {error && <p className="text-center text-red-500">Error: {error}</p>}
             
             {isFormOpen && (
                 <form onSubmit={handleSubmit} className="mt-4">

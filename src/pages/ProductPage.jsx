@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
+import { useLocation, useNavigate,useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addtoCart } from "../Store/slices/productSlice";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const product = state?.product;
-
+  const {id} = useParams();
+  const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedType, setSelectedType] = useState(null);
   const [warning, setWarning] = useState("");
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
 
   const types = ["Pdf Invitation", "Video Invitation"];
 
@@ -20,8 +25,7 @@ export default function ProductPage() {
   };
 
   const handleQuantityChange = (e) => {
-    const value = parseInt(e.target.value, 10);
-    setQuantity(isNaN(value) ? 1 : Math.max(1, value));
+    setQuantity(e.target.value);
   };
 
   const handleEditImage = () => {
@@ -44,11 +48,15 @@ export default function ProductPage() {
     }
   };
 
-  const buyNow = () => {
-    console.log(`Buying ${quantity} ${product.name}(s)`);
+  const handleAddtoCart = async() => {
+    setAddToCartLoading(true);
+    console.log(id,quantity);
+    await dispatch(addtoCart({productId:id,quantity:quantity}));
+    setAddToCartLoading(false);
   };
 
   return (
+
     <div className="max-w-6xl mx-auto p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image Section */}
@@ -149,10 +157,11 @@ export default function ProductPage() {
               )}
 
               <button
-                onClick={buyNow}
+                onClick={handleAddtoCart}
+                disabled={addToCartLoading}
                 className="w-full bg-yellow-600 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-700 transition-colors"
               >
-                Buy Now
+                {addToCartLoading ? "Adding to Cart..." : "Add to Cart"}
               </button>
             </div>
           </div>

@@ -3,7 +3,7 @@ import buttonBg from "../assets/images/button.png";
 
 const SurpriseCard = () => {
   return (
-    <div className='mx-2 lg:mx-28 font-heroFont'>
+    <div className='mx-2 lg:mx-28 font-heroFont my-4'>
         <div className='grid lg:grid-cols-3 gap-10 lg:gap-0 grid-cols-1'>
             <div className='flex flex-col items-center gap-2'>
                 <h1 className='text-2xl lg:text-2xl text-pink-600'>Wedding & Event</h1>

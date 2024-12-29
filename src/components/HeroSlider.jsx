@@ -6,6 +6,8 @@ import img4 from "../assets/images/home-4.webp";
 import cardImg from "../assets/images/herocard.png";
 import webImg from "../assets/images/weddingwebsites.jpg";
 import buttonBg from "../assets/images/button.png";
+import freeImg from "../assets/images/free.png";
+
 const images = [
   img2,
   img3,
@@ -119,22 +121,27 @@ export default function HeroSlider() {
         <div className='lg:px-8 flex flex-col gap-2 py-4 items-center font-heroFont'>
           <h1 className='text-4xl lg:text-5xl font-themeFont font-bold'>Wedding Website</h1>
           <h4 className='text-sm font-semibold text-center'>Create your free wedding website and share all the relevant details about your celebration with your guests.</h4>
+          <div className='flex items-center gap-4'>
           <img className='h-44' src={webImg} alt="" />
+          <img className='h-24' src={freeImg} alt="" />
+          </div>
           <div className='relative flex flex-col items-center justify-center hover:translate-x-2 duration-300'>
               <img className='h-8' src={buttonBg} alt="" />
-              <button className='absolute text-xl font-semibold text-white'>Explore More</button>
+              <a href='/create-wedding-website' className='absolute text-xl font-semibold text-white'>Explore More</a>
           </div>
-          <p className='text-sm font-semibold'>A simple, beautiful wedding website just for you - FREE</p>
+          <p className='text-sm font-semibold text-center'>A simple, beautiful wedding website just for you - FREE</p>
         </div>
       </div>
       </div>
     <div className='mx-2 py-2'>
-        <div className='lg:grid lg:grid-cols-6 hidden justify-center gap-2 lg:gap-16 overflow-x-clip'>
+        <div className='flex overflow-x-auto lg:justify-center'>
           {tiles.map((tile) => (
-            <div className='relative rounded-full bg-cover flex flex-col items-center justify-center' style={{ backgroundImage: `url(${cardImg})`, height: '75px', width: '255px' }}>
-              {/* <img className='absolute top-0 w-full' src={cardImg} alt="" /> */}
+            <div className='relative rounded-full flex flex-shrink-0 flex-col items-center justify-center'>
+              <img className='w-[250px]' src={cardImg} alt="" />
+              <div className='absolute'>
               <h1 className='text-white font-semibold text-center'>{tile.title}</h1>
               <h2 className='text-center'>{tile.des}</h2>
+              </div>
             </div>
           ))}
         </div>

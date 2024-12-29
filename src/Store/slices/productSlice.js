@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
     products: [],
+    cart: [],
     loading: false,
     error: null,
 }
@@ -21,11 +22,66 @@ export const getProducts = createAsyncThunk(
     }
 );
 
+export const getCart = createAsyncThunk(
+    "products/getCart",
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/cart/get-cart`,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(error.response.data.message || "Something went wrong");
+        }
+    }
+);
+
+export const addtoCart = createAsyncThunk(
+    "products/addtoCart",
+    async (product, thunkAPI) => {
+        try {
+            const response = await axios.post(`${BASE_URL}/cart/add-to-cart`, product,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(error.response.data.message);
+        }
+    }
+)
+
+export const removeFromCart = createAsyncThunk(
+    "products/removeFromCart",
+    async (productId, thunkAPI) => {
+        try {
+            const response = await axios.delete(`${BASE_URL}/cart/remove-from-cart/${productId}`,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(error.response.data.message);
+        }
+    }
+)
 
 export const productSlice = createSlice({
     name: "product",
     initialState,
-    reducers: {},
+    reducers: {
+        addtoCartReducer(state, action) {
+            state.cart = [...state.cart, action.payload];
+        }
+    }, 
     extraReducers: (builder) => {
         builder.addCase(getProducts.pending, (state) => {
             state.loading = true;
@@ -38,7 +94,49 @@ export const productSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         })
+
+        // Add to Cart  
+        .addCase(getCart.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(getCart.fulfilled, (state, action) => {
+            state.loading = false;
+            state.cart = action.payload.cart;
+        })
+        .addCase(getCart.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+
+        .addCase(addtoCart.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(addtoCart.fulfilled, (state, action) => {
+            state.loading = false;
+            toast.success(action.payload.message);
+            state.cart = action.payload.cart;
+        })
+        .addCase(addtoCart.rejected, (state, action) => {
+            state.loading = false;
+            toast.error(action.payload);
+            state.error = action.payload;
+        })
+
+        // Remove from Cart
+        .addCase(removeFromCart.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(removeFromCart.fulfilled, (state, action) => {
+            state.loading = false;
+            toast.success(action.payload.message);
+            state.cart = action.payload.cart;
+        })
+        .addCase(removeFromCart.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
     }
 })
 
+export const { addtoCartReducer } = productSlice.actions;
 export default productSlice.reducer;

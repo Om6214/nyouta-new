@@ -24,6 +24,7 @@ export default function FeaturedProducts() {
   // Settings for the slider
   const settings = {
     dots: true,
+    swipeToSlide: true,
     infinite: true, // Infinite scrolling to create a continuous loop
     speed: 500, // Very slow transition speed for each slide (7 seconds)
     slidesToShow: 5,

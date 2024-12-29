@@ -272,15 +272,15 @@ const CategoryCard = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 2.0 }}
       >
-        <div className="py-2 px-4 bg-secondary shadow-md">
-          <ul className="flex flex-wrap gap-4 justify-start">
+        <div className="py-2 lg:px-4 px-1 bg-secondary shadow-md">
+          <ul className="flex gap-4 justify-start overflow-auto">
             {categories.map((cat, index) => (
               <motion.li
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
                 key={index}
-                className={`text-md font-heroFont font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform 
+                className={`text-md font-heroFont flex flex-shrink-0 font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform
                                 ${
                                   selectedCategory === cat
                                     ? "bg-violet-400 text-pink-600 shadow-lg scale-105"

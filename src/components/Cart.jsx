@@ -1,12 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import { useCart } from '../CartContext';
 import { IoClose } from 'react-icons/io5';
-import { ShoppingBag } from 'lucide-react'; // Ensure this import
-
+import { ShoppingBag } from 'lucide-react'; 
+import {getCart,removeFromCart} from '../Store/slices/productSlice';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 export default function Cart() {
-  const { cartItems, removeFromCart, isCartOpen, toggleCart } = useCart();
+  const { cartItems, isCartOpen, toggleCart } = useCart();
   const cartRef = useRef(null);
   const cartButtonRef = useRef(null);
+  const dispatch = useDispatch();
+  const {cart} = useSelector((state) => state.product);
+  console.log(cart)
+  useEffect(() => { 
+    dispatch(getCart());
+  },[dispatch])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,7 +40,10 @@ export default function Cart() {
     0
   );
   
-
+ const handleRemove = (item) => {
+  console.log(item);
+    dispatch(removeFromCart(item.productId._id));
+ }
   return (
     <div>
      
@@ -57,25 +68,25 @@ export default function Cart() {
 
     {/* Cart items list */}
     <div className="flex-1 overflow-y-auto p-4">
-      {cartItems.length > 0 ? (
+      {cart?.products?.length > 0 ? (
         <ul className="space-y-4">
-          {cartItems.map((item) => (
-            <li key={item.id} className="flex items-center space-x-4">
+          {cart?.products?.map((item) => (
+            <li key={item?.productId?._id} className="flex items-center space-x-4">
               <img
-                src={item.image[0]} // Assuming item.image is an array of images
-                alt={item.name}
+                src={item?.productId?.image&&item?.productId?.image[0]} // Assuming item.image is an array of images
+                alt={item?.productId?.name}
                 className="w-16 h-16 rounded"
               />
               <div className="flex-1">
-                <h3 className="text-sm font-semibold">{item.name}</h3>
-                <p className="text-sm text-gray-600">₹{item.price.toFixed(2)}</p>
-                <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
+                <h3 className="text-sm font-semibold">{item?.productId?.name}</h3>
+                <p className="text-sm text-gray-600">₹{item?.productId?.price?.toFixed(2)}</p>
+                <p className="text-sm text-gray-500">Quantity: {item?.quantity}</p>
                 <p className="text-sm font-semibold text-gray-800">
-                  Total: ₹{(item.price * item.quantity).toFixed(2)}
+                  Total: ₹{(item?.productId?.price * item?.quantity)?.toFixed(2)}
                 </p>
               </div>
               <button
-                onClick={() => removeFromCart(item.id)} // Remove item from cart
+                onClick={()=>handleRemove(item)} // Remove item from cart
                 className="text-red-600 text-sm hover:underline"
               >
                 Remove
@@ -92,12 +103,11 @@ export default function Cart() {
     <div className="p-4 border-t">
       <div className="flex justify-between items-center">
         <span className="font-semibold">Total</span>
-        <span className="font-semibold text-xl">₹{totalPrice.toFixed(2)}</span>
+        <span className="font-semibold text-xl">₹{cart?.totalPrice?.toFixed(2)}</span>
       </div>
     </div>
   </div>
 )}
-
     </div>
   );
 }

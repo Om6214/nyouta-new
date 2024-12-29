@@ -1,5 +1,6 @@
 import React from "react";
 import buttonBg from "../assets/images/button.png";
+import wedImg from "../assets/images/wed.png";
 
 const plans = [
   {
@@ -42,6 +43,7 @@ const plans = [
 const WeddingPlan = () => {
   return (
     <div className="bg-secondary text-white mt-8 px-4 py-6 font-heroFont">
+      <div className="flex justify-between">
       <div className="flex flex-col gap-3">
         <h1 className="lg:text-5xl text-3xl font-bold">
           Your Wedding Journey Starts Here...
@@ -51,6 +53,10 @@ const WeddingPlan = () => {
           make planning your wedding as easy as possible
         </h2>
         <h1 className="lg:text-4xl text-2xl font-bold">"Stress-Free Wedding Planning"</h1>
+      </div>
+      <div>
+        <img className="w-32" src={wedImg} alt="" />
+      </div>
       </div>
       <div>
         <div className="grid lg:grid-cols-5 grid-cols-2 gap-2 py-4">
