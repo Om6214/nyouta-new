@@ -8,7 +8,7 @@ const VideoCard = () => {
     <div>
         <div className='lg:px-16 px-4 py-8 lg:py-16 bg-priBg flex flex-col lg:flex-row gap-8 justify-around'>
             <div>
-            <iframe className='rounded-lg w-[410px] lg:w-[650px]' width="650" height="400" src="https://www.youtube.com/embed/K1WByQwJoO8" title="Nyouta, where memories are brought to life!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe className='rounded-lg object-cover w-[410px] lg:w-[650px]' width="650" height="400" src="https://www.youtube.com/embed/GVBTLJ6Fqys?si=MnaWRogQwnaYNcCD" title="Nyouta, where memories are brought to life!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <div className='flex flex-col lg:gap-12 px-10 gap-6 items-start justify-center'>
                 <h1 className='lg:text-6xl text-4xl text-primary font-primaryFont font-bold'>Print, Preserve & Cherish</h1>

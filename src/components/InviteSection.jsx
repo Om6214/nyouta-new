@@ -17,7 +17,7 @@ const InviteSection = () => {
   };
 
   return (
-    <section className='py-16 lg:px-20 px-2 bg-priBg'>
+    <section className='py-16 lg:px-56 px-2 bg-priBg'>
       <div className="text-center mb-8">
         <h1 className='lg:text-5xl text-3xl font-extrabold font-primaryFont text-primary  mb-4'>Send Invites By</h1>
       </div>
@@ -29,13 +29,13 @@ const InviteSection = () => {
             <h2 className='lg:text-4xl font-heroFont font-bold text-primary'>Surprise Party Invitation</h2>
             <button
               onClick={() => handleOpenPopup('Surprise Party')}
-              className='text-lg border-2 border-black px-6 py-3 rounded-md bg-gradient-to-r from-primary to-secondary hover:bg-gradient-to-r hover:from-secondary hover:to-primary text-white font-semibold transition duration-300'>
+              className='text-lg text-heroFont border-2 border-black px-6 py-3 rounded-md bg-gradient-to-r from-primary to-secondary hover:bg-gradient-to-r hover:from-secondary hover:to-primary text-white font-semibold transition duration-300'>
               Browse Now
             </button>
           </div>
           <div className='flex justify-end'>
             <img
-              className='lg:w-[250px] w-[175px] hover:scale-105 transition duration-300 ease-in-out transform'
+              className='lg:w-[150px] w-[175px] hover:scale-105 transition duration-300 ease-in-out transform'
               src="https://cdn.prod.website-files.com/61c4debfe6329744f06c60e1/6724123ed680ec6c940f9214_say-surprise-40_ani_envelope-p-500.webp"
               alt="Surprise Party Invitation"
             />
@@ -48,13 +48,13 @@ const InviteSection = () => {
             <h2 className='lg:text-4xl  text-primary font-heroFont font-bold'>Wedding Invitation</h2>
             <button
               onClick={() => handleOpenPopup('Wedding Invitation')}
-              className='text-lg border-2 border-black px-6 py-3 rounded-md bg-gradient-to-r from-primary to-secondary hover:bg-gradient-to-r hover:from-secondary hover:to-primary text-white font-semibold transition duration-300'>
+              className='text-lg text-heroFont border-2 border-black px-6 py-3 rounded-md bg-gradient-to-r from-primary to-secondary hover:bg-gradient-to-r hover:from-secondary hover:to-primary text-white font-semibold transition duration-300'>
               Browse Now
             </button>
           </div>
           <div className='flex justify-end'>
             <img
-              className='lg:w-[250px] w-[175px] hover:scale-105 transition duration-300 ease-in-out transform'
+              className='lg:w-[150px] w-[175px] hover:scale-105 transition duration-300 ease-in-out transform'
               src="https://cdn.prod.website-files.com/6721b27fd51e68efda3f7632/6721b27fd51e68efda3f851e_env.webp"
               alt="Wedding Invitation"
             />
