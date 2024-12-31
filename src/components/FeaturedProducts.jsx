@@ -62,7 +62,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 px-4 lg:px-8">
+    <section className="py-16 lg:pt-1 lg:pb-8 px-4 lg:px-8">
       <div className="container mx-auto gap-8">
         {/* Heading with animation and font-family */}
         <div className="my-4">

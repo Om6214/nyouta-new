@@ -4,7 +4,7 @@ import img3 from "../assets/images/home-3.webp";
 import img4 from "../assets/images/home-4.webp";
 import cardImg from "../assets/images/02.png";
 import webImg from "../assets/images/weddingwebsites.jpg";
-import buttonBg from "../assets/images/button.png";
+import buttonBg from "../assets/images/09.png";
 import freeImg from "../assets/images/free.png";
 import wedImg from "../assets/images/01.png";
 
@@ -165,10 +165,10 @@ export default function HeroSlider() {
         <div className="lg:w-[30%] flex items-center justify-center relative w-full rounded-xl">
           <img src={wedImg} alt="" />
           <div className="lg:px-8 absolute flex flex-col gap-2 pt-16 lg:pt-14 items-center justify-center font-heroFont">
-            <h1 className="text-4xl lg:text-5xl font-bold font-ttMedium uppercase text-center text-pink-600">
+            <h1 className="text-4xl lg:text-5xl font-ttMedium uppercase text-center text-pink-600">
               Wedding
             </h1>
-            <h1 className="text-4xl lg:text-5xl font-bold font-ttMedium uppercase text-center tracking-[13px] text-pink-600">
+            <h1 className="text-4xl lg:text-5xl font-ttMedium uppercase text-center tracking-[13px] text-pink-600">
               Website
             </h1>
             <h4 className="text-sm px-8 lg:px-0 font-semibold text-center">
@@ -180,12 +180,12 @@ export default function HeroSlider() {
               <img className="h-24" src={freeImg} alt="" />
             </div>
             <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300">
-              <img className="h-8" src={buttonBg} alt="" />
+              <img className="w-48" src={buttonBg} alt="" />
               <a
                 href="/create-wedding-website"
-                className="absolute text-xl font-semibold text-white"
+                className="absolute uppercase text-lg font-bol font-avalonB text-white"
               >
-                Explore More
+                Explore Designs
               </a>
             </div>
             <p className="text-sm font-semibold text-center">

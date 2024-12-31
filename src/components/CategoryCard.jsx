@@ -33,7 +33,7 @@ const categories = [
     ],
   },
   {
-    title: "E Invitations",
+    title: "E-Invitations",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus. Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had.",
     subCategory: [
@@ -257,10 +257,10 @@ const CategoryCard = () => {
         transition={{ duration: 1.8 }}
       >
         <div className="text-center mb-10">
-          <h1 className="lg:text-5xl text-3xl font-heroFont font-extrabold bg-clip-text text-primary">
+          <h1 className="lg:text-5xl text-3xl text-secondary font-heroFont font-extrabold bg-clip-text">
             Explore Our Product Categories
           </h1>
-          <p className="text-primary font-heroFont lg:text-2xl font-semibold text-xl mt-4 leading-relaxed">
+          <p className="text-secondary font-heroFont lg:text-2xl font-semibold text-xl mt-4 leading-relaxed">
             Browse through our wide range of categories to find something
             perfect for your needs!
           </p>
@@ -280,11 +280,11 @@ const CategoryCard = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
                 key={index}
-                className={`text-md font-heroFont flex flex-shrink-0 font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform
+                className={`text-md font-avalonB flex flex-shrink-0 font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform
                                 ${
                                   selectedCategory === cat
-                                    ? "bg-violet-400 text-pink-600 shadow-lg scale-105"
-                                    : "bg-gray-200 text-gray-700 hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
+                                    ? "bg-amber-50 text-pink-600 shadow-lg scale-105"
+                                    : " text-white hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
                                 }`}
                 onClick={() => setSelectedCategory(cat)}
               >
