@@ -20,8 +20,8 @@ const VideoCard = () => {
             allowfullscreen
           ></iframe>
         </div>
-        <div className="flex flex-col lg:gap-4 lg:px-10 gap-6 items-start justify-center">
-          <h1 className="lg:text-4xl text-3xl font-avalonB">
+        <div className="flex flex-col lg:gap-6 lg:px-10 gap-6 items-start justify-center">
+          <h1 className="lg:text-4xl text-3xl font-linna">
             Save, Share Memories
           </h1>
           <h1 className="lg:text-3xl font-avalonB text-2xl">

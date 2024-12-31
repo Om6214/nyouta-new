@@ -10,10 +10,10 @@ const MemoryCard = () => {
   return (
     <div className="lg:mx-8 mx-2">
       <div>
-        <h1 className="text-center text-2xl lg:text-4xl font-semibold text-primary">
+        <h1 className="text-center text-2xl lg:text-4xl font-semibold text-secondary font-avalonN">
           Let Every Memory Shine Forever
         </h1>
-        <h2 className="text-center text-xl lg:text-3xl text-primary">
+        <h2 className="text-center text-xl lg:text-3xl text-secondary font-avalonN">
           Make Every Moment Memorable with Nyouta
         </h2>
       </div>
@@ -25,7 +25,7 @@ const MemoryCard = () => {
             <span className="pl-20">Share</span>
           </h1>
           <p className="text-4xl font-ttMedium text-secondary">YOUR MEMORIES</p>
-          <p className="lg:pr-20 text-lg font-avalonN">
+          <p className="lg:pr-16 text-lg font-avalonN">
             Create Timeless Moments Endless Memories with Personalized Products
           </p>
           <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">

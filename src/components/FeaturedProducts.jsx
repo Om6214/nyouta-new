@@ -67,11 +67,11 @@ export default function FeaturedProducts() {
         {/* Heading with animation and font-family */}
         <div className="my-4">
           <h2
-            className="lg:text-5xl text-4xl font-heroFont text-center text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="lg:text-5xl text-4xl text-secondary text-center font-avalonB md:text-5xl mb-4 transition-opacity duration-700 opacity-100"
           >
             Customer Favorites
           </h2>
-          <h3 className="lg:text-4xl text-2xl text-center text-primary font-heroFont font-semibold">Top Picks Chosen by Our Happy Customers</h3>
+          <h3 className="lg:text-4xl text-2xl text-secondary text-center font-avalonN">Top Picks Chosen by Our Happy Customers</h3>
         </div>
 
         {/* Slider */}

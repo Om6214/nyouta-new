@@ -35,8 +35,8 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
   return (
     <>
     <div className="lg:py-1 pt-6">
-        <h1 className="lg:text-5xl text-3xl text-primary text-center font-heroFont font-semibold ">Your Wedding, Your Shape</h1>
-        <h2 className="lg:text-3xl text-xl text-primary py-3 font-heroFont text-center">Celebrate in Style with Our Distinctively Shaped Invitations by nyouta</h2>
+        <h1 className="lg:text-5xl text-3xl text-secondary text-center font-avalonB">Your Wedding, Your Shape</h1>
+        <h2 className="lg:text-3xl text-xl text-secondary py-3 font-avalonN text-center">Celebrate in Style with Our Distinctively Shaped Invitations by nyouta</h2>
         
     </div>
     <div className="flex flex-col lg:flex-row px-2 gap-4">

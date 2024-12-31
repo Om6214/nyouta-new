@@ -50,12 +50,12 @@ const Trending = () => {
     ],
   };
   return (
-    <div>
+    <div className="py-6">
       <div>
-        <h1 className="text-center text-xl lg:text-3xl font-semibold text-primary">
+        <h1 className="text-center text-xl lg:text-4xl font-semibold text-secondary">
           What's Trending !!
         </h1>
-        <h2 className="text-center text-lg lg:text-2xl text-primary">
+        <h2 className="text-center text-lg lg:text-3xl text-secondary">
           Find Out What's Making Waves in the Event World
         </h2>
       </div>

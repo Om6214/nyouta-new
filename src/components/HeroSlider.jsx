@@ -152,10 +152,10 @@ export default function HeroSlider() {
             <div className="relative rounded-full flex flex-shrink-0 flex-col items-center justify-center">
               <img className="w-[250px] h-[55px]" src={cardImg} alt="" />
               <div className="absolute">
-                <h1 className="text-white font-semibold text-center">
+                <h1 className="text-white font-avalonB text-center">
                   {tile.title}
                 </h1>
-                <h2 className="text-center">{tile.des}</h2>
+                <h2 className="text-center font-avalonN">{tile.des}</h2>
               </div>
             </div>
           ))}
@@ -164,7 +164,7 @@ export default function HeroSlider() {
         </div>
         <div className="lg:w-[30%] flex items-center justify-center relative w-full rounded-xl">
           <img src={wedImg} alt="" />
-          <div className="lg:px-8 absolute flex flex-col gap-2 pt-16 lg:pt-14 items-center justify-center font-heroFont">
+          <div className="lg:px-8 absolute flex flex-col gap-3 pt-16 lg:pt-14 items-center justify-center font-heroFont">
             <h1 className="text-4xl lg:text-5xl font-ttMedium uppercase text-center text-pink-600">
               Wedding
             </h1>

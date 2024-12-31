@@ -102,6 +102,9 @@ const navItems = [
       { label: "Essentials" },
     ],
   },
+  {
+    label: "Wedding Website"
+  }
 ];
 export default function MainNav() {
   const [activeDropdown, setActiveDropdown] = React.useState(null);
@@ -166,7 +169,7 @@ export default function MainNav() {
             {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
             </Link> */}
-            <a href="/create-wedding-website" className="text-pink-600 font-heroFont hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
+            <a href="/create-wedding-website" className="text-pink-600 font-avalonN hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
             <button
               onClick={toggleCart}
               className="flex items-center gap-1 relative"
@@ -228,7 +231,7 @@ export default function MainNav() {
               <ul className="">
                 {navItems.map(
                   (item) => (
-                    <li key={item} className="flex flex-col gap-2 font-heroFont">
+                    <li key={item} className="flex flex-col gap-2 font-avalonN">
                       <Link onClick={() => setIsDrawerOpen(false)}
                         to={item.url}
                         className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
@@ -244,7 +247,7 @@ export default function MainNav() {
         )}
       </div>
       <div className="hidden lg:flex py-2 justify-center">
-        <ul className="flex gap-12 justify-center items-center text-md font-heroFont">
+        <ul className="flex gap-8 justify-center items-center text-lg font-avalonB">
           {navItems.map((item, index) => (
             <li
               key={index}

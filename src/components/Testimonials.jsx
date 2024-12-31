@@ -381,7 +381,7 @@ export default function Testimonials() {
   return (
     <section className="py-16 text-primaryBlue ">
       <div className="container mx-auto lg:px-4">
-        <h2 className="mb-12 text-primary font-heroFont text-center text-3xl font-semibold tracking-tight lg:text-5xl">
+        <h2 className="mb-12 text-secondary font-avalonB text-center text-3xl tracking-tight lg:text-4xl">
           Real Stories, Real Experiences – Our Customers Speak
         </h2>
         <div className="relative mx-auto overflow-hidden">

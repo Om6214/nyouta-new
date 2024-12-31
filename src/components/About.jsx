@@ -49,17 +49,8 @@ export default function About() {
 
   return (
     <section className="relative bg-secondary font-heroFont">
-      <div className="container mx-auto px-4 py-16 lg:py-12 text-white flex flex-col gap-4">
+      <div className="container mx-auto lg:px-12 py-16 lg:py-12 text-white flex flex-col gap-4">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-          <div className="relative overflow-hidden rounded-lg">
-            <img
-              src={placeholder}
-              alt="Luxury apartment view"
-              className="object-cover w-full h-96 rounded-lg"
-              fill
-              priority
-            />
-          </div>
           <div className="flex flex-col justify-center items-start space-y-8">
             <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
               ABOUT <span className="text-amber-700">ई-न्यौता</span>
@@ -78,6 +69,15 @@ export default function About() {
                 Read More
               </a>
             </div>
+          </div>
+          <div className="relative overflow-hidden rounded-lg">
+            <img
+              src={placeholder}
+              alt="Luxury apartment view"
+              className="object-cover w-full h-96 rounded-lg"
+              fill
+              priority
+            />
           </div>
         </div>
         <div>

@@ -73,8 +73,8 @@ const CategoryFeat = () => {
   return (
     <div className="my-4 mx-4 font-heroFont">
       <div>
-        <h1 className="text-xl lg:text-3xl font-semibold text-center text-primary">Your Wedding Day, Organized & Decor to Perfection</h1>
-        <h2 className="text-lg lg:text-2xl  text-center text-primary">
+        <h1 className="text-xl lg:text-3xl font-semibold text-center text-secondary font-avalonN">Your Wedding Day, Organized & Decor to Perfection</h1>
+        <h2 className="text-lg lg:text-2xl  text-center text-secondary font-avalonN">
           Create a Smooth, Stress-Free Wedding Day with Our Itineraries Room
         </h2>
       </div>
