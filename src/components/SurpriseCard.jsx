@@ -1,5 +1,5 @@
 import React from 'react'
-import buttonBg from "../assets/images/button.png";
+import buttonBg from "../assets/images/04.png";
 
 const SurpriseCard = () => {
   return (
@@ -8,7 +8,7 @@ const SurpriseCard = () => {
             <div className='flex flex-col items-center gap-2'>
                 <h1 className='text-2xl lg:text-2xl text-pink-600'>Wedding & Event</h1>
                 <div className='relative flex flex-col items-center justify-center hover:translate-x-2 duration-300'>
-                    <img className='h-14' src={buttonBg} alt="" />
+                    <img className='' src={buttonBg} alt="" />
                     <button className='absolute text-3xl lg:text-4xl font-bold text-white'>News E-Paper</button>
                 </div>
             </div>
@@ -20,7 +20,7 @@ const SurpriseCard = () => {
             <div className='flex flex-col items-center gap-2'>
                 <h1 className='text-2xl lg:text-2xl text-pink-600'>Wedding & Event</h1>
                 <div className='relative flex flex-col items-center justify-center hover:translate-x-2 duration-300'>
-                    <img className='h-14' src={buttonBg} alt="" />
+                    <img className='' src={buttonBg} alt="" />
                     <button className='absolute text-3xl lg:text-4xl font-bold text-white'>E-Magazines</button>
                 </div>
             </div>
