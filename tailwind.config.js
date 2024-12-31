@@ -9,6 +9,9 @@ export default {
         heroFont: ['Raleway', 'sans-serif'],
         themeFont: ["Cedarville Cursive", "cursive"],
         linna: ['Linna', 'sans-serif'],
+        avalonB: ['AvalonBold', 'sans-serif'],
+        avalonN: ['AvalonNormal', 'sans-serif'],
+        ttMedium: ['TT_Medium', 'sans-serif'],
       },
       colors: {
         priBg: "#FAF0DC",
