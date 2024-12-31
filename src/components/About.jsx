@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import placeholder from "../assets/images/placeholder.jpg";
 import buttonBg from "../assets/images/05.png";
+import button from "../assets/images/07.png";
 
 export default function About() {
   const [count1, setCount1] = useState(0);
@@ -18,7 +19,7 @@ export default function About() {
     const steps2 = 2500 / (duration / interval);
     const steps3 = 100 / (duration / interval);
     const steps4 = 11800 / (duration / interval);
-    const steps5 = 32800 / (duration / interval)
+    const steps5 = 32800 / (duration / interval);
 
     const timer = setInterval(() => {
       setCount1((prev) => {
@@ -72,7 +73,7 @@ export default function About() {
               Our designs blend creativity with elegance.
             </p>
             <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300">
-              <img className="h-8" src={buttonBg} alt="" />
+              <img className="h-8" src={button} alt="" />
               <a href="#" className="absolute text-lg font-semibold">
                 Read More
               </a>
@@ -80,7 +81,7 @@ export default function About() {
           </div>
         </div>
         <div>
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-2">
             <div className="flex flex-col items-center">
               <div className="relative flex flex-col items-center justify-center">
                 <img className="" src={buttonBg} alt="" />
