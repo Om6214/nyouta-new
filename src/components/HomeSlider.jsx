@@ -39,7 +39,7 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
         
     </div>
     <div className="flex flex-col lg:flex-row px-2">
-      <div className="slider-container lg:w-[70%] rounded-lg my-auto">
+      <div className="slider-container lg:w-[65%] rounded-lg my-auto">
         <Slider {...settings} className="px-6">
           <div>
             <img className="w-full lg:h-[350px] lg:object-cover rounded-lg" src={img1} alt="" />
@@ -57,8 +57,8 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
       </div>
       <div className="">
         <div className="py-6 px-6 mt-4 flex flex-col gap-4 items-start border-2 rounded-xl bg-priBg">
-          <h1 className="text-7xl font-themeFont font-bold">new !</h1>
-          <h1 className="text-5xl font-themeFont">Shaped Wedding Invitation</h1>
+          <h1 className="text-7xl font-heroFont font-bold">new !</h1>
+          <h1 className="text-5xl font-linna">Shaped Wedding Invitation</h1>
           <h2 className="text-xl">Unique shapes that stack together in a perfect piece suite</h2>
           <div className="relative  hover:translate-x-2 duration-300">
             <img className="h-8" src={buttonBg} alt="" />

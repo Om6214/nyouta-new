@@ -135,7 +135,7 @@ export default function FeaturedProducts() {
             {products?.slice(25, 35).map((product, index) => (
               <div
                 key={index}
-                className="bg-white lg:h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
+                className="bg-white lg:h-[340px] rounded-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
                 <Link key={index}
                   to={`/product/${product?._id}`}
@@ -143,7 +143,7 @@ export default function FeaturedProducts() {
                   state={{product}}
                 >
                   <div className="relative flex flex-col items-center justify-center" >
-                    <img src={cardImg} className="" alt="" />
+                    <img src={cardImg} className="shadow-lg" alt="" />
                     
                   
                   <div className="px-4 pt-20 absolute font-heroFont flex flex-col  justify-around">

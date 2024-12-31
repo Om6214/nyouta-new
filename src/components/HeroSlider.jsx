@@ -119,7 +119,7 @@ export default function HeroSlider() {
       </div>
       <div className='lg:w-[30%] w-full rounded-xl bg-pink-200'>
         <div className='lg:px-8 flex flex-col gap-2 py-4 items-center font-heroFont'>
-          <h1 className='text-4xl lg:text-5xl font-themeFont font-bold'>Wedding Website</h1>
+          <h1 className='text-4xl lg:text-4xl font-bold'>Wedding Website</h1>
           <h4 className='text-sm font-semibold text-center'>Create your free wedding website and share all the relevant details about your celebration with your guests.</h4>
           <div className='flex items-center gap-4'>
           <img className='h-44' src={webImg} alt="" />
