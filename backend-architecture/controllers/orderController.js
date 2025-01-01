@@ -73,7 +73,7 @@ export const updateOrderStatus = async (req, res) => {
 
 export const getOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ user: req.user._id });
+        const orders = await Order.find({ user: req.user.userId });
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
