@@ -16,55 +16,186 @@ import { AnimatePresence, motion } from "framer-motion";
 const navItems = [
   {
     label: "Print Invitations",
-    url: "/nav/print-invitations",
+    url: "/nav/print invitations",
     children: [
-      { label: "Wedding Invitations" },
-      { label: "Party Invitation" },
-      { label: "Pooja Invitations" },
-      { label: "Ceremony Invitations" },
-    ],
+      { label: "Wedding Invitations",
+        Filters:[
+          {a:"Elegant Collection"},
+          {a:"Vintage  Collection"},
+          {a:"Royal Invitations"},
+          {a:"Slider Invitations"},
+          {a:"Passport Theme Invitations"},
+          {a:"Newspaper Invitations"},
+          {a:"Aadhar Card Invitations"},
+          {a:"ATM Theme Invitations"}
+        ]
+       },
+      { label: "Party Invitation",
+        Filters: [
+  { a: ' Birthday Party ' },
+  { a: ' Kitty Party ' },
+  { a: ' Retirement Party ' },
+  { a: ' Halloween Party ' },
+  { a: ' Lohri Party ' }
+]
+
+      },
+      { label: "Pooja Invitations",Filters: [
+  { a: ' Sawamani ' },
+  { a: ' Griha Pravesh ' },
+  { a: ' Shyam Jagran ' }
+] },
+      { label: "Ceremony Invitations",Filters: [
+  { a: ' Engagement Ceremony ' },
+  { a: ' Wedding Anniversary ' },
+  { a: ' Opening Ceremony ' },
+  { a: ' Kua Poojan ' }
+] },
+    ],                    
   },
   {
     label: "E Invitation",
     url: "/nav/e-invitations",
     children: [
-      { label: "Wedding Invitations" },
-      { label: "Party Invitation" },
-      { label: "Pooja Invitation" },
-      { label: "Ceremony Invitation" },
-      { label: "Short Invitation - Free" },
-      { label: "Matrimonial Biodata" },
+      { label: "Wedding Invitations",Filters: [
+  { a: ' Pre Invitations - Manuhar ' },
+  { a: ' Save the Date ' },
+  { a: ' Wedding Invitations ' },
+  { a: ' Ceremony Invitations ' },
+  { a: ' Wedding Timeline ' },
+  { a: ' Royal Collection - NEW ' }
+] },
+      { label: "Party Invitations",Filters: [
+  { a: ' Birthday Party ' },
+  { a: ' Kitty Party ' },
+  { a: ' Retirement Party ' },
+  { a: ' Halloween Party ' },
+  { a: ' Lohri Party ' }
+]
+ },
+      { label: "Pooja Invitations",Filters: [
+  { a: ' Sawamani ' },
+  { a: ' Griha Pravesh ' },
+  { a: ' Shyam Jagran ' }
+] },
+      { label: "Ceremony Invitations",Filters: [
+  { a: ' Engagement Ceremony ' },
+  { a: ' Wedding Anniversary ' },
+  { a: ' Wedding Events ' },
+  { a: ' Opening Ceremony ' },
+  { a: ' Kua Poojan ' }
+]
+ },
+      { label: "Short Invitation - Free",Filters: [
+  { a: ' Wedding Invitations ' },
+  { a: ' Party Invitations ' },
+]
+},
+      { label: "Matrimonial Biodata" ,Filters: [
+  { a: ' Marriage Biodata ' }
+]
+},
     ],
   },
   {
     label: "Photo Books",
-    url: "/nav/photo-books",
+    url: "/nav/photo books",
     children: [
-      { label: "Soft Cover Photobook" },
-      { label: "Hard Cover Photobook" },
-      { label: "Spiral Photobook" },
-      { label: "Photo Folder" },
-      { label: "Digtial Photobook > Best Seller" },
+      { label: "Soft Cover Photobook",Filters: [
+  { a: ' Wedding Photobook ' },
+  { a: ' Engagement Photobook ' },
+  { a: ' Anniversary Photobook ' },
+  { a: ' Birthday Photobook ' },
+] },
+      { label: "Hard Cover Photobook",Filters: [
+  { a: ' Wedding Photobook ' },
+  { a: ' Engagement Photobook ' },
+  { a: ' Anniversary Photobook ' },
+  { a: ' Birthday Photobook ' },
+  
+] },
+      { label: "Spiral Photobook" ,Filters: [
+  { a: ' Wedding Photobook ' },
+  { a: ' Engagement Photobook ' },
+  { a: ' Anniversary Photobook ' },
+  { a: ' Birthday Photobook ' },
+  
+]},
+      { label: "Photo Folder",Filters: [
+  { a: ' Wedding Photobook ' },
+  { a: ' Engagement Photobook ' },
+  { a: ' Anniversary Photobook ' },
+  { a: ' Birthday Photobook ' },
+] },
+      { label: "Digtial Photobook > Best Seller",Filters: [
+  { a: ' Wedding Photobook ' },
+  { a: ' Engagement Photobook ' },
+  { a: ' Anniversary Photobook ' },
+  { a: ' Birthday Photobook ' }
+] },
     ],
   },
   {
     label: "Itinerary",
     url: "/nav/itinerary",
     children: [
-      { label: "Wedding Itinerary" },
-      { label: "Stickers" },
-      { label: "Tags/Badges" },
-      { label: "Welcome Signages" },
-      { label: "Accessories" },
-      { label: "Games" },
+      { label: "Wedding Itinerary" ,Filters: [
+  { a: ' Room Itinerary ' },
+  { a: ' Check-in Itinerary ' },
+  { a: ' Room Key Enevelop ' },
+  { a: ' Thank You Cards ' },
+  { a: ' Wedding Menu ' },
+  { a: ' Table Itinerary ' },
+  { a: ' Dining Table Mats ' },
+]},
+      { label: "Stickers",Filters: [
+  { a: ' Guest Name Stickers ' },
+  { a: ' Gift Box Sticker ' },
+  { a: ' Vehicle Stickers ' },
+  { a: ' Designer Stickers ' },
+  { a: ' Vintage Stickers ' },
+] },
+      { label: "Tags / Bedges",Filters: [
+  { a: ' Luggage Tag ' },
+  { a: ' Door Handle Tag ' },
+  { a: ' Gift Tag ' },
+  { a: ' Parking Tags ' },
+  { a: ' Wedding Bedges ' },
+] },
+      { label: "Welcome Signages",Filters: [
+  { a: ' Wedding Ceremony ' },
+  { a: ' Haldi Ceremony ' },
+  { a: ' Mehandi Ceremony ' },
+  { a: ' Sangeet Ceremony ' },
+  { a: ' Direction Signage ' },
+  { a: ' Engagement Ceremony ' },
+  { a: ' Anniversary Ceremony ' },
+  { a: ' Lohri Party ' },
+  { a: ' Halloween Party ' },
+  { a: ' Birthday Party ' },
+  { a: ' Celeration Party ' }
+]},
+      { label: "Accessories",Filters: [
+  { a: ' Party Dangler ' },
+  { a: ' Coasters ' },
+  { a: ' Paper Napkins ' },
+  { a: ' Event Banner ' },
+  { a: ' Face Mask ' },
+  { a: ' Funny Poster ' },
+] },
+      { label: "Games",Filters: [
+  { a: ' Playing Cards ' },
+  { a: ' Puzzle Games ' },
+  { a: ' Fun Games ' }
+] },
     ],
   },
   {
     label: "Calendars 2025",
-    url: "/nav/calendars-2025",
+    url: "/nav/calendars 2025",
     children: [
       { label: "Mini Desktop Calendar" },
-      { label: "Wall Calendar - Potrait" },
+      { label: "Wall Calendar - Portrait" },
       { label: "Wall Calendar - Landscape" },
       { label: "Desktop Calendar" },
       { label: "Table Tent Calendar" },
@@ -73,27 +204,27 @@ const navItems = [
   },
   {
     label: "Free Greetings",
-    url: "/nav/free-greetings",
+    url: "/nav/free greetings",
     children: [
       { label: "Wishes Greeting" },
       { label: "Thanks Greeting" },
-      { label: "Feeling Greeting" },
-      { label: "Funny Greeting" },
+      { label: "Feeling Greetings" },
+      { label: "Funny Greetings" },
     ],
   },
   {
     label: "Guest Surprising",
-    url: "/nav/guest-surprising",
+    url: "/nav/guest surprising",
     children: [{ label: "Newspapers" }, { label: "Magazine" }],
   },
   {
     label: "Planner Books",
-    url: "/nav/planner-books",
-    children: [{ label: "Planner Books" }, { label: "Free Printables" }],
+    url: "/nav/planner books",
+    children: [{ label: "Planner Books" }, { label: "Free Printable" }],
   },
   {
     label: "E-Shop",
-    url: "/nav/e-shop",
+    url: "/nav/e shop",
     children: [
       { label: "Shagun Envelop" },
       { label: "Photo Magnet" },
@@ -104,6 +235,7 @@ const navItems = [
 ];
 export default function MainNav() {
   const [activeDropdown, setActiveDropdown] = React.useState(null);
+  const [activeChildDropdown, setActiveChildDropdown] = React.useState(null);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -299,7 +431,10 @@ export default function MainNav() {
             <li
               key={index}
               onMouseEnter={() => setActiveDropdown(index)}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseLeave={() => {
+                setActiveDropdown(null);
+                setActiveChildDropdown(null);
+              }}
               className="relative py-2"
             >
               <Link
@@ -325,6 +460,9 @@ export default function MainNav() {
                           initial="hidden"
                           animate="visible"
                           custom={childIndex}
+                          onMouseEnter={() => setActiveChildDropdown(childIndex)}
+                          onMouseLeave={() => setActiveChildDropdown(null)}
+                          className="relative"
                         >
                           <Link
                             to={`${item.url}/${child.label}`}
@@ -332,6 +470,36 @@ export default function MainNav() {
                           >
                             {child.label}
                           </Link>
+                          <AnimatePresence>
+                            {child.Filters && activeChildDropdown === childIndex && (
+                              <motion.div
+                                initial={{ opacity: 0, x: 10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 10 }}
+                                transition={{ duration: 0.2 }}
+                                className="absolute top-0 left-full ml-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-4 shadow-lg"
+                              >
+                                <ul className="space-y-2">
+                                  {child.Filters.map((filter, filterIndex) => (
+                                    <motion.li
+                                      key={filterIndex}
+                                      variants={gridVariants}
+                                      initial="hidden"
+                                      animate="visible"
+                                      custom={filterIndex}
+                                    >
+                                      <Link
+                                        to={`e${item.url}/${filter.a}`}
+                                        className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
+                                      >
+                                        {filter.a}
+                                      </Link>
+                                    </motion.li>
+                                  ))}
+                                </ul>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </motion.li>
                       ))}
                     </ul>

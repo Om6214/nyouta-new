@@ -13,7 +13,7 @@ const CategoriesNavBar=()=>{
   
 
   const categories = {
-    'print-invitations':{
+    'print invitations':{
           title: "Print Invitations",
           url:"Print Invitations",
           description:
@@ -73,7 +73,7 @@ const CategoriesNavBar=()=>{
             },
           ],
         },
-        "photo-books":{
+        "photo books":{
           title: "Photo Books",
           url:"/photo-books",
           description:
@@ -133,9 +133,9 @@ const CategoriesNavBar=()=>{
             },
           ],
         },
-        "calendars":{
+        "calendars 2025":{
           title: "Calendars 2025",
-          url:"/calendars",
+          url:"/calendars 2025",
           description:
             "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
           subCategory: [
@@ -165,7 +165,7 @@ const CategoriesNavBar=()=>{
             },
           ],
         },
-        'free-greetings':{
+        'free greetings':{
           title: "Free Greetings",
           url:"/free-greetings",
           description:
@@ -189,7 +189,7 @@ const CategoriesNavBar=()=>{
             },
           ],
         },
-        "guest-surprising":{
+        "guest surprising":{
           title: "Guest Surprising",
           url:"/guest-surprising",
           description:
@@ -205,7 +205,7 @@ const CategoriesNavBar=()=>{
             },
           ],
         },
-        "planner-books":{
+        "planner books":{
           title: "Planner Books",
           url:"/planner-books",
           description:
@@ -221,7 +221,7 @@ const CategoriesNavBar=()=>{
             },
           ],
         },
-        "e-shop":{
+        "e shop":{
           title: "E-Shop",
           url:"/e-shop",
           description:

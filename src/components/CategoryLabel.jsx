@@ -21,23 +21,24 @@ export default function CategoryLabel() {
 
   const formatCategoryName = (name) => {
     return name
-      .split("-")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+      // .split("-")
+      // .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      // .join(" ");
   };
 
   const formatSubCategoryName = (name) => {
     return decodeURIComponent(name)
-      .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
-      .replace(/-/g, " ");
+      // .split(" ")
+      // .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      // .join(" ")
+      // .replace(/-/g, " ");
   };
-  if(pageName ==="e-invitations") pageName=='E-Invitations'
+  // if(pageName ==="e-invitations") pageName=='E-Invitations'
 
  
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
+  console.log(formattedPageName, formattedPath);
 
 
 
@@ -50,12 +51,6 @@ export default function CategoryLabel() {
     
     return categoryMatch && subCategoryMatch;
   });
-
-
-  console.log("Category Name:", formattedPageName);
-  console.log("SubCategory Name:", formattedPath);
-  console.log("Filtered Items:", filteredItems);
-
 
 
   return (
@@ -185,7 +180,7 @@ export default function CategoryLabel() {
       />
     </div>
     <div className="p-4 text-center">
-      <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
+      <h2 className="text-lg font-bold text-gray-800">{item.subSubCategory}</h2>
       {/* Optional: Price or other details */}
       {/* <p className="text-gray-700 mt-2">₹{item.price}</p> */}
     </div>
