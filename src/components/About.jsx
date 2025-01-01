@@ -15,27 +15,27 @@ export default function About() {
     const interval = 50; // Update every 50ms
 
     // Calculate steps for each counter
-    const steps1 = 10 / (duration / interval);
-    const steps2 = 2500 / (duration / interval);
-    const steps3 = 100 / (duration / interval);
-    const steps4 = 11800 / (duration / interval);
+    const steps1 = 14 / (duration / interval);
+    const steps2 = 3200 / (duration / interval);
+    const steps3 = 110 / (duration / interval);
+    const steps4 = 26300 / (duration / interval);
     const steps5 = 32800 / (duration / interval);
 
     const timer = setInterval(() => {
       setCount1((prev) => {
-        if (prev < 10) return Math.min(prev + steps1, 10);
+        if (prev < 14) return Math.min(prev + steps1, 14);
         return prev;
       });
       setCount2((prev) => {
-        if (prev < 2500) return Math.min(prev + steps2, 2500);
+        if (prev < 3200) return Math.min(prev + steps2, 3200);
         return prev;
       });
       setCount3((prev) => {
-        if (prev < 100) return Math.min(prev + steps3, 100);
+        if (prev < 110) return Math.min(prev + steps3, 110);
         return prev;
       });
       setCount4((prev) => {
-        if (prev < 11800) return Math.min(prev + steps4, 11800);
+        if (prev < 26300) return Math.min(prev + steps4, 26300);
         return prev;
       });
       setCount5((prev) => {
@@ -101,7 +101,7 @@ export default function About() {
                 </h1>
               </div>
               <div className="mt-2 text-lg font-bold text-primaryBlue">
-                Templates
+                Design Templates
               </div>
             </div>
             <div className="flex flex-col items-center">
@@ -134,7 +134,7 @@ export default function About() {
                 </h1>
               </div>
               <div className="mt-2 font-bold text-lg text-primaryBlue">
-                Satisfied Customers
+                Products Sold
               </div>
             </div>
           </div>

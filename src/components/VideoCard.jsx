@@ -37,7 +37,7 @@ const VideoCard = () => {
             memories that will last a lifetime.
           </h3>
           <div className="relative flex flex-col mx-auto items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
-            <img className="w-56" src={buttonBg} alt="" />
+            <img className="h-8" src={buttonBg} alt="" />
           <button
             className="flex absolute items-center gap-2 font-bold text-white lg:text-xl"
             onClick={() => navigate("/products")}
