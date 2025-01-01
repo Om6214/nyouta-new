@@ -1,22 +1,32 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import placeholder from "../assets/images/placeholder.jpg";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import productsData from "../products.json";
+// import productsData from "../products.json";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProducts } from "../Store/slices/productSlice";
+import { useDispatch } from "react-redux";
 
 export default function FeaturedProducts() {
+  const { products } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
   const sliderRef = useRef(null); // Create a reference to the slider
-
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
   // Settings for the slider
   const settings = {
     dots: true,
     infinite: true, // Infinite scrolling to create a continuous loop
     speed: 500, // Very slow transition speed for each slide (7 seconds)
-    slidesToShow: 4,
-    slidesToScroll: 4, // Scroll 4 slides at a time for manual navigation
+    slidesToShow: 3,
+    slidesToScroll: 3, // Scroll 4 slides at a time for manual navigation
     autoplay: false, 
     initialSlide: 0,
     responsive: [
@@ -50,26 +60,23 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 px-4 lg:px-24 bg-priBg">
-      <div className="container mx-auto">
+    <section className="py-16 px-4 lg:px-8 bg-priBg">
+      <div className="container mx-auto flex lg:flex-row flex-col gap-8">
         {/* Heading with animation and font-family */}
-        <div className="text-center mb-12">
+        <div className="my-4">
           <h2
-            className="text-5xl font-primaryFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
+            className="text-5xl font-heroFont text-primary md:text-5xl font-semibold mb-4 transition-opacity duration-700 opacity-100"
           >
-            Featured Products
+            Customer Favorites
           </h2>
-          <h3
-            className="text-2xl font-primaryFont mt-6 font-medium text-primary transition-opacity duration-700 opacity-100"
-            
-          >
-            SEE OUR MOST POPULAR PRODUCTS
-          </h3>
-
+          <div className="flex flex-col items-start gap-10 py-4 px-8 text-heroFont">
+          <p>"Crafted with Care, Designed for You: Our curated stationary collection brings the finest artistry from around the globe to your fingertips. Each piece tells a unique story, ensuring quality, elegence and authenticity you can trust"</p>
+          <a className="bg-primary px-4 py-1 rounded-lg text-lg flex items-center gap-1" href="#">Browse all products <span><ArrowRight /></span></a>
+          </div>
         </div>
 
         {/* Slider */}
-        <div className="slider-container mx-4 relative">
+        <div className="slider-container mx-4 relative lg:w-[65%]">
           <style>
             {`
             .slick-slide {
@@ -77,6 +84,7 @@ export default function FeaturedProducts() {
             }
             .slick-list {
               margin: 0 -15px;
+              padding: 25px 0;
             }
             .slick-arrow {
               border-radius: 50%;
@@ -112,7 +120,6 @@ export default function FeaturedProducts() {
               // object-fit: contain;
               // height: 250px; /* Fixed height for the image */
               // width: 100%;
-              border-radius: 8px;
             }
             .slick-slide .card-content {
               flex-grow: 1;
@@ -126,20 +133,20 @@ export default function FeaturedProducts() {
 
           {/* Slider Content */}
           <Slider {...settings} ref={sliderRef}>
-            {productsData.slice(20, 35).map((product, index) => (
+            {products?.slice(20, 35).map((product, index) => (
               <div
                 key={index}
                 className="bg-white h-[340px] rounded-lg shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out"
               >
                 <Link key={index}
-                  to={`/product/${product.id}`}
+                  to={`/product/${product?._id}`}
                   className="flex flex-col"
                   state={{product}}
                 >
                   <div className="relative aspect-w-1 aspect-h-1">
                     <img
-                      src={product.image[0] || placeholder}
-                      alt={product.name}
+                      src={product?.image[0] || placeholder}
+                      alt={product?.name}
                       className="object-cover w-full h-[200px] rounded-t-lg"
                     />
                   </div>
@@ -147,19 +154,19 @@ export default function FeaturedProducts() {
                     <h1
                       className="font-semibold text-xl text-primary font-heroFont"
                     >
-                      {product.name}
+                      {product?.name}
                     </h1>
                     <h3
                       className="text-md font-semibold text-yhird font-heroFont"
                     >
-                      {product.subCategory}
+                      {product?.subCategory}
                     </h3>
                     <div className="flex items-baseline gap-4">
                       <span
                         className="text-xl font-bold text-gray-900"
                         style={{ fontFamily: "Roboto, sans-serif" }}
                       >
-                        Rs. {product.price}
+                        Rs. {product?.price}
                       </span>
                       <span
                         className="text-sm text-gray-500 line-through"
@@ -171,7 +178,7 @@ export default function FeaturedProducts() {
                         className="text-sm text-red-500"
                         style={{ fontFamily: "Roboto, sans-serif" }}
                       >
-                        {product.discount}% OFF
+                        {product?.discount}% OFF
                       </span>
                     </div>
                   </div>

@@ -23,7 +23,7 @@ const Home = () => {
       {/* <TopCategories/> */}
       <HomeSlider/>
       <InviteSection/>
-      <DiscountOffer/>
+      {/* <DiscountOffer/> */}
       {/* <CategorySlider/> */}
       <FeaturedProducts/>
       <VideoCard/>

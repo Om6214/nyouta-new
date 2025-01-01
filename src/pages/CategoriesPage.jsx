@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
-import productData from '../products.json';
+import { useSelector } from "react-redux";
+import { getProducts } from "../Store/slices/productSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function CategoriesPage() {
+  const { products } = useSelector((state) => state.product);
+  console.log(products);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
   // Map category names to images from the product JSON
   const categories = [
     { title: "Save the Date", imageKey: "Save the Date Floral Card" },
@@ -28,8 +37,8 @@ export default function CategoriesPage() {
 
   // Generate the categories with images from JSON
   const categoriesWithImages = categories.map((category) => {
-    const product = productData.find(
-      (item) => item.name === category.imageKey
+    const product = products?.find(
+      (item) => item?.name === category?.imageKey
     );
     return {
       ...category,
@@ -50,24 +59,24 @@ export default function CategoriesPage() {
           </h3>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {categoriesWithImages.map((category, index) => (
+          {categoriesWithImages?.map((category, index) => (
             <Link
-              to={`/products/${category.title.toLowerCase().replace(/\s+/g, '-')}`}
+              to={`/products/${category?.title?.toLowerCase()?.replace(/\s+/g, '-')}`}
               key={index}
               className="group block relative overflow-hidden rounded-xl shadow-md transform transition-all duration-300 hover:scale-105"
             >
               <div className="relative h-72 w-full">
                 {/* Image with overlay */}
                 <img
-                  src={category.image}
-                  alt={category.title}
+                  src={category?.image}
+                  alt={category?.title}
                   className="object-contain w-full h-full rounded-xl transition-transform duration-300 group-hover:scale-105"
                 />
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
                 {/* Category Title */}
                 <h4 className="absolute inset-0 flex items-center justify-center text-center text-white font-bold text-lg md:text-xl lg:text-2xl tracking-wide px-4 opacity-90 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg">
-                  {category.title}
+                  {category?.title}
                 </h4>
               </div>
             </Link>

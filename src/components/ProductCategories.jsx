@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import products from "../products.json";
-
+// import products from "../products.json";
+import { useSelector } from "react-redux";
+import { getProducts } from "../Store/slices/productSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 export default function TopCategories() {
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.product);
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
   const dropdownData = {
     "E-Invitations": {
       "Wedding Invitations": ["Pre Invitations - Manuhar","Save the Date","Wedding Invitations","Ceremony Invitations","Wedding Timeline","Royal Collection - NEW"],
@@ -108,14 +118,14 @@ export default function TopCategories() {
 
   // Filter Logic
   
-  const filteredProducts = products.filter((product) => {
+  const filteredProducts = products?.filter((product) => {
     const matchesCategory =
-      !selectedOptions.main || product.category === selectedOptions.main;
+      !selectedOptions.main || product?.category === selectedOptions.main;
     const matchesSubCategory =
-      !selectedOptions.sub || product.subCategory === selectedOptions.sub;
+      !selectedOptions.sub || product?.subCategory === selectedOptions.sub;
     const matchesSubSubCategory =
-      !selectedOptions.subSub || product.subSubCategory === selectedOptions.subSub;
-    const matchesPrice = product.price <= priceFilter;
+      !selectedOptions.subSub || product?.subSubCategory === selectedOptions.subSub;
+    const matchesPrice = product?.price <= priceFilter;
 
     return matchesCategory && matchesSubCategory && matchesSubSubCategory && matchesPrice;
   });
@@ -220,21 +230,21 @@ export default function TopCategories() {
 
           {/* Right Division */}
           <div className="lg:w-3/4">
-            {filteredProducts.length === 0 ? (
+            {filteredProducts?.length === 0 ? (
               <div>No products found</div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                {filteredProducts.map((product) => (
+                {filteredProducts?.map((product) => (
                   <Link
-                    to={`/product/${product.id}`}
-                    key={product.id}
+                    to={`/product/${product?._id}`}
+                    key={product?._id}
                     state={{ product }} // Pass product data
                     className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group"
                   >
                     <div className="relative w-full aspect-square mb-3">
                       <img
-                        src={product.image[0]}
-                        alt={product.name}
+                        src={product?.image[0]}
+                        alt={product?.name}
                         className="object-cover w-full h-72 rounded-t-xl"
                       />
                     </div>
@@ -242,14 +252,14 @@ export default function TopCategories() {
 
                    
                     <h4 className="text-center text-brown-800 font-medium text-sm md:text-base">
-                      {product.subSubCategory} 
+                      {product?.subSubCategory} 
                     </h4>
 
 
 
                     
                     <p className="text-center text-gray-700 font-medium text-sm">
-                      ₹{product.price}
+                      ₹{product?.price}
                     </p>
                     </div>
                   </Link>

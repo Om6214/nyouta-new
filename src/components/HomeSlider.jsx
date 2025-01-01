@@ -5,11 +5,21 @@ import img2 from "../assets/images/home-2.webp";
 import img3 from "../assets/images/home-3.webp";
 import img4 from "../assets/images/home-4.webp";
 import { Heart, ShieldCheck, Star } from "lucide-react";
-import products from "../products.json";
+// import products from "../products.json";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { getProducts } from "../Store/slices/productSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 const HomeSlider = () => {
-console.log(products.filter((items) => [1, 9, 14, 18].includes(items.id)));
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.product);
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
+console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
   const settings = {
     dots: true,
     infinite: true,
@@ -23,7 +33,7 @@ console.log(products.filter((items) => [1, 9, 14, 18].includes(items.id)));
   return (
     <>
     <div className="lg:py-6 pt-6 bg-priBg">
-        <h1 className="lg:text-5xl text-3xl text-primary text-center font-primaryFont font-bold ">Bring your memories to life with Nyouta</h1>
+        <h1 className="lg:text-5xl text-3xl text-primary text-center font-heroFont font-semibold ">Bring your memories to life with Nyouta</h1>
         
     </div>
     <div className="flex flex-col bg-priBg lg:flex-row">
@@ -44,12 +54,13 @@ console.log(products.filter((items) => [1, 9, 14, 18].includes(items.id)));
         </Slider>
       </div>
       <div>
-        <div className="grid grid-cols-2 gap-y-4 gap-x-2 bg-gray-300 px-6 py-4">
-          {products.filter((items) => ["1", "9", "14", "18"].includes(items.id)).map((items, index) => (
+        <h1 className="px-6 text-xl font-bold text-primary">Top Products</h1>
+        <div className="grid grid-cols-2 gap-y-4 gap-x-2  px-6 pt-2">
+          {products?.filter((items) => ["1", "9", "14", "18"].includes(items?.id)).map((items, index) => (
             <div key={items.id} className="bg-gradient-to-r shadow-lg hover:shadow-2xl from-primary to-secondary rounded-lg">
-              <Link key={index} to={`/products/${items.id}`} state={{items}}>
-              <img className="w-full lg:h-[130px] h-[100px] object-cover rounded-t-lg" src={items.image[1]} alt="" />
-                <h1 className="px-2 py-[2px] font-heroFont font-semibold">{items.name}</h1>
+              <Link key={index} to={`/products/${items?._id}`} state={{items}}>
+              <img className="w-full lg:h-[130px] h-[100px] object-cover rounded-t-lg" src={items?.image[1]} alt="" />
+                <h1 className="px-2 py-[2px] font-heroFont font-semibold">{items?.name}</h1>
                 </Link>
             </div>
           ))}

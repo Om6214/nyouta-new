@@ -2,12 +2,42 @@ import mongoose from 'mongoose';
 
 const ProductSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    price: { type: Number, required: true },
-    category: { type: String, required: true },
-    description: { type: String },
-    stock: { type: Number, required: true, default: 0 },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // References admin user
+    id: { 
+      type: String, 
+      required: true 
+    },
+    name: { 
+      type: String, 
+      required: true 
+    },
+    sku: { 
+      type: String, 
+      required: true 
+    },
+    image: { 
+      type: [String], 
+      required: true 
+    },
+    price: { 
+      type: Number, 
+      required: true 
+    },
+    tags: { 
+      type: [String], 
+      required: true 
+    },
+    category: { 
+      type: String, 
+      required: true 
+    },
+    subCategory: { 
+      type: String, 
+      required: true 
+    },
+    subSubCategory: { 
+      type: String, 
+      required: true 
+    },
   },
   { timestamps: true }
 );
