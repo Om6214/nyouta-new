@@ -59,6 +59,7 @@ function App() {
         {/* Conditionally render Footer */}
         <ConditionalFooter />
       </BrowserRouter>
+      <Cart />
     </CartProvider>
   );
 }
