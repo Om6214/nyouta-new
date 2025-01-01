@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema({
   slug: {
     type: String,
     required: false,
-    unique: true,
+    unique: false,
   },
   cart: {
     type: mongoose.Schema.Types.ObjectId,
@@ -72,7 +72,11 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
+
+userSchema.index({ slug: 1 }, { unique: true, partialFilterExpression: { slug: { $type: "string" } } });
 
 // Hash password before saving the user
 userSchema.pre("save", async function (next) {

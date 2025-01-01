@@ -383,7 +383,10 @@ const Checkout = () => {
                 </div>
 
                 <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700' onClick={handleOrder}>
-                    Place Order
+                    Place Order via Razorpay
+                </button>
+                <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700'>
+                    Place Order via Phone Pe
                 </button>
             </div>
         </div>
