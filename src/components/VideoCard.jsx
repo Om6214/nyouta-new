@@ -1,7 +1,7 @@
 import { SquareArrowOutUpRight } from "lucide-react";
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import buttonBg from "../assets/images/button.png";
+import buttonBg from "../assets/images/07.png";
 
 const VideoCard = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const VideoCard = () => {
       <div className="lg:px-16 my-4 px-4 py-8 font-heroFont text-white bg-secondary flex flex-col lg:flex-row gap-8 justify-around">
         <div>
           <iframe
-            className="rounded-lg object-cover w-[350px] lg:w-[650px]"
+            className="rounded-3xl shadow-2xl object-cover w-[350px] lg:w-[650px]"
             height="400"
             src="https://www.youtube.com/embed/GVBTLJ6Fqys?si=MnaWRogQwnaYNcCD"
             title="Nyouta, where memories are brought to life!"
@@ -20,9 +20,13 @@ const VideoCard = () => {
             allowfullscreen
           ></iframe>
         </div>
-        <div className="flex flex-col lg:gap-12 lg:px-10 gap-6 items-start justify-center">
-          <h1 className="lg:text-5xl text-4xl  font-heroFont font-semibold">
-            Save, Share & Celebrate
+        <div className="flex flex-col lg:gap-6 lg:px-10 gap-6 items-start justify-center">
+          <h1 className="lg:text-4xl text-3xl font-linna">
+            Save, Share Memories
+          </h1>
+          <h1 className="lg:text-3xl font-avalonB text-2xl">
+            "Timeless Moments <br />
+            <span className="pl-16">Endless Memories"</span>
           </h1>
           <h3 className="text-lg font-semibold">
             Every moment deserves to be remembered. With Nyouta's unique
@@ -32,8 +36,8 @@ const VideoCard = () => {
             the essence of every special occasion. Let Nyouta help you make
             memories that will last a lifetime.
           </h3>
-          <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
-            <img className="h-10" src={buttonBg} alt="" />
+          <div className="relative flex flex-col mx-auto items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
+            <img className="h-8" src={buttonBg} alt="" />
           <button
             className="flex absolute items-center gap-2 font-bold text-white lg:text-xl"
             onClick={() => navigate("/products")}

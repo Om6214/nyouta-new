@@ -4,7 +4,7 @@ import img12 from "../assets/images/promise/12.png";
 import img13 from "../assets/images/promise/13.png";
 import img14 from "../assets/images/promise/14.png";
 import img15 from "../assets/images/promise/15.png";
-import img16 from "../assets/images/promise/16.png";
+import img16 from "../assets/images/promise/R1.png";
 import img17 from "../assets/images/promise/17.png";
 import img18 from "../assets/images/promise/18.png";
 

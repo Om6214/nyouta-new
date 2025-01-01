@@ -67,7 +67,7 @@ const faqs = [
 const TemplateCard = ({ template, id }) => {
   console.log(template);
   console.log(id);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = localStorage.getItem('user');
   const handleTemplateClick = async (id) => {
@@ -94,14 +94,15 @@ const TemplateCard = ({ template, id }) => {
     }
   }
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 cursor-pointer" onClick={() => handleTemplateClick(id)}>
-      <div className="p-4">
-        <div
-          className="bg-gray-50 p-4 rounded-md"
-          dangerouslySetInnerHTML={{ __html: template }}
-        />
-      </div>
-    </div>
+    <></>
+    // <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 cursor-pointer" onClick={() => handleTemplateClick(id)}>
+    //   <div className="p-4">
+    //     <div
+    //       className="bg-gray-50 p-4 rounded-md"
+    //       dangerouslySetInnerHTML={{ __html: template }}
+    //     />
+    //   </div>
+    // </div>
   );
 };
 
