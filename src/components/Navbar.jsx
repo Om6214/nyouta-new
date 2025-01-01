@@ -83,7 +83,7 @@ const navItems = [
     ],
   },
   {
-    label: "Guest Surprising",
+    label: "Guest Surprising !!!",
     url: "/nav/guest-surprising",
     children: [{ label: "Newspapers" }, { label: "Magazine" }],
   },
@@ -103,7 +103,8 @@ const navItems = [
     ],
   },
   {
-    label: "Wedding Website"
+    label: "Wedding Website",
+    url: '/create-wedding-website'
   }
 ];
 export default function MainNav() {
@@ -169,7 +170,7 @@ export default function MainNav() {
             {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
             </Link> */}
-            <a href="/create-wedding-website" className="text-pink-600 font-avalonN hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
+            <a href="/join-e-nyouta" className="text-pink-600 font-avalonN hidden lg:flex leading-none hover:underline">Join E-Nyouta<br />Share Memories</a>
             <button
               onClick={toggleCart}
               className="flex items-center gap-1 relative"
@@ -247,7 +248,7 @@ export default function MainNav() {
         )}
       </div>
       <div className="hidden lg:flex py-2 justify-center">
-        <ul className="flex gap-8 justify-center items-center text-lg font-avalonB">
+        <ul className="flex gap-8 justify-center items-center text-md font-avalonB">
           {navItems.map((item, index) => (
             <li
               key={index}
