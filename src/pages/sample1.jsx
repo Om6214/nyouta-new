@@ -23,12 +23,12 @@ export default function WeddingCardEditor() {
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-  const [selectedField, setSelectedField] = useState(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newText, setNewText] = useState('');
   const [sizeValue, setSizeValue] = useState(30);
   const [dragging, setDragging] = useState(false);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
   const [newTextInput, setNewTextInput] = useState('');
   const [isFontModalOpen, setIsFontModalOpen] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Blade Rush');
@@ -49,7 +49,7 @@ export default function WeddingCardEditor() {
   const [isReady, setIsReady] = useState(false); // Track when data is ready
   //console.log("small images",smallImages);
   const [savedSmallImages, setSavedSmallImages] = useState({});
-
+  const [size, setSize] = useState(50);
 
 
 
@@ -71,12 +71,13 @@ export default function WeddingCardEditor() {
   }, [initialImages]);
 
   // Fetch savedPages from localStorage and set text fields for the current page
+
   useEffect(() => {
     const savedPagesFromStorage = JSON.parse(localStorage.getItem('savedPages')) || {};
     const savedSmallImagesFromStorage = JSON.parse(localStorage.getItem('savedSmallImages')) || {};
     setSavedPages(savedPagesFromStorage);
     setSavedSmallImages(savedSmallImagesFromStorage); // Store small images in state
-  
+
     // Set text fields for the current image index
     if (Array.isArray(savedPagesFromStorage[currentImageIndex])) {
       setTextFields(savedPagesFromStorage[currentImageIndex]);
@@ -88,215 +89,282 @@ export default function WeddingCardEditor() {
         { id: 'subText2', text: '12:30 AM', x: 170, y: 250, size: 20, font: 'Blade Rush' },
       ]);
     }
-  
+
     // Set small images for the current image index
     if (Array.isArray(savedSmallImagesFromStorage[currentImageIndex])) {
       setSmallImages(savedSmallImagesFromStorage[currentImageIndex]);
     } else {
       setSmallImages([
-        { id: 'smallImg1', src: 'path/to/image1.png', x: 100, y: 200, size: 50 },
-        { id: 'smallImg2', src: 'path/to/image2.png', x: 300, y: 300, size: 50 },
+        { id: 'smallImg1', src: 'path/to/image1.png', x: 100, y: 200, size: 100 },
+        { id: 'smallImg2', src: 'path/to/image2.png', x: 300, y: 300, size: 100 },
       ]);
     }
   }, [currentImageIndex]);
-  
-  
 
-const generatePDF = async () => {
-  const doc = new jsPDF();
-  console.log("Generating PDF with savedPages:", savedPages);
 
-  if (Object.keys(savedPages).length === 0 || images.length === 0) {
-    console.log("Data not ready yet!");
-    return;
-  }
+  const [selectedField, setSelectedField] = useState(null);
+  const [draggingId, setDraggingId] = useState(null);
+  const [resizingId, setResizingId] = useState(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, initialSize: 50 });
 
-  for (const pageIndex of Object.keys(savedPages)) {
-    const pageData = savedPages[pageIndex];
-    const smallImagesData = savedSmallImages[pageIndex] || [];  // Fetch small images for the current page
+  const handleMouseDown = (id, e, type) => {
+    e.preventDefault();
+    setDraggingId({ id, type });
+    const item = type === 'text'
+      ? textFields.find((field) => field.id === id)
+      : smallImages.find((image) => image.id === id);
 
-    const container = document.createElement('div');
-    container.style.position = 'relative';
-    container.style.backgroundColor = 'white';
+    setOffset({ x: e.clientX - item.x, y: e.clientY - item.y });
+  };
 
-    let imgWidth = 0;
-    let imgHeight = 0;
-    let scaleX = 1;
-    let scaleY = 1;
+  const handleResizeMouseDown = (id, e, type) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setResizingId({ id, type });
 
-    // Add main image
-    const currentImage = images[pageIndex];
-    console.log(currentImage);
+    const item = type === 'image'
+      ? smallImages.find((image) => image.id === id)
+      : textFields.find((field) => field.id === id);
 
-    if (currentImage) {
-      const imgElement = document.createElement('img');
-      imgElement.src = currentImage;
-      imgElement.crossOrigin = 'anonymous';
-      imgElement.style.position = 'absolute';
-      imgElement.style.top = '0';
-      imgElement.style.left = '0';
+    setResizeStart({ x: e.clientX, y: e.clientY, initialSize: item.size });
+  };
 
-      // Dynamically set container size based on image size
-      await new Promise((resolve) => {
-        imgElement.onload = () => {
-          imgWidth = imgElement.naturalWidth;
-          imgHeight = imgElement.naturalHeight;
-          console.log(`Image original size: ${imgWidth}x${imgHeight}`);
+  const handleMouseMove = (e) => {
+    if (draggingId) {
+      const { id, type } = draggingId;
 
-          container.style.width = `${imgWidth}px`;
-          container.style.height = `${imgHeight}px`;
-
-          // Calculate scale factors
-          const defaultWidth = 320;
-          const defaultHeight = 608;
-          scaleX = imgWidth / defaultWidth;
-          scaleY = imgHeight / defaultHeight;
-          resolve();
-        };
-      });
-
-      container.appendChild(imgElement);
-    }
-    else{
-      break;
+      if (type === 'text') {
+        setTextFields((prev) =>
+          prev.map((field) =>
+            field.id === id ? { ...field, x: e.clientX - offset.x, y: e.clientY - offset.y } : field
+          )
+        );
+      } else if (type === 'image') {
+        setSmallImages((prev) =>
+          prev.map((image) =>
+            image.id === id ? { ...image, x: e.clientX - offset.x, y: e.clientY - offset.y } : image
+          )
+        );
+      }
     }
 
-    // Add text fields with scaling
-    pageData.forEach(({ text, x, y, size, font }) => {
-      const textElement = document.createElement('div');
-      textElement.style.position = 'absolute';
-      textElement.style.top = `${y * scaleY}px`;
-      textElement.style.left = `${x * scaleX}px`;
-      textElement.style.fontSize = `${size * Math.min(scaleX, scaleY)}px`;
-      textElement.style.fontFamily = font;
-      textElement.style.transform = 'translate(-50%, -50%)';
-      textElement.innerText = text;
-      container.appendChild(textElement);
-    });
+    if (resizingId) {
+      const { id, type } = resizingId;
+      const deltaX = e.clientX - resizeStart.x;
+      const deltaY = e.clientY - resizeStart.y;
+      const delta = Math.max(deltaX, deltaY); // Use the larger delta for resizing
+      const newSize = Math.max(resizeStart.initialSize + delta, 20); // Ensure a minimum size
 
-    // Add small images with scaling
-    smallImagesData.forEach(({ src, x, y, size }) => {
-      const imgElement = document.createElement('img');
-      imgElement.src = src;
-      imgElement.style.position = 'absolute';
-      imgElement.style.top = `${y * scaleY}px`;
-      imgElement.style.left = `${x * scaleX}px`;
-      imgElement.style.width = `${size * Math.min(scaleX, scaleY)}px`;
-      imgElement.style.height = `${size * Math.min(scaleX, scaleY)}px`;
-      imgElement.style.transform = 'translate(-50%, -50%)';
-      container.appendChild(imgElement);
-    });
+      if (type === 'text') {
+        setTextFields((prev) =>
+          prev.map((field) => (field.id === id ? { ...field, size: newSize } : field))
+        );
+      } else if (type === 'image') {
+        setSmallImages((prev) =>
+          prev.map((image) => (image.id === id ? { ...image, size: newSize } : image))
+        );
+      }
+    }
+  };
 
-    // Debugging step
-    document.body.appendChild(container);
-    console.log(container);
+  const handleMouseUp = () => {
+    setDraggingId(null);
+    setResizingId(null);
+  };
 
-    try {
-      // Capture canvas with increased scale for better quality
-      const canvas = await html2canvas(container, {
-        useCORS: true,
-        logging: true,
-        scale: 2
-      });
-      const imgData = canvas.toDataURL('image/png');
+  const handleDelete = (id, type) => {
+    if (type === 'text') {
+      setTextFields((prev) => prev.filter((field) => field.id !== id));
+    } else if (type === 'image') {
+      setSmallImages((prev) => prev.filter((image) => image.id !== id));
+    }
+  };
 
-      // Add to PDF
-      if (parseInt(pageIndex) > 0) {
-        doc.addPage();
+  useEffect(() => {
+    if (draggingId || resizingId) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [draggingId, resizingId]);
+
+
+  const generatePDF = async () => {
+    const doc = new jsPDF();
+    console.log("Generating PDF with savedPages:", savedPages);
+
+    if (Object.keys(savedPages).length === 0 || images.length === 0) {
+      console.log("Data not ready yet!");
+      return;
+    }
+
+    for (const pageIndex of Object.keys(savedPages)) {
+      const pageData = savedPages[pageIndex];
+      const smallImagesData = savedSmallImages[pageIndex] || [];  // Fetch small images for the current page
+
+      const container = document.createElement('div');
+      container.style.position = 'relative';
+      container.style.backgroundColor = 'white';
+
+      let imgWidth = 0;
+      let imgHeight = 0;
+      let scaleX = 1;
+      let scaleY = 1;
+
+      // Add main image
+      const currentImage = images[pageIndex];
+      console.log(currentImage);
+
+      if (currentImage) {
+        const imgElement = document.createElement('img');
+        imgElement.src = currentImage;
+        imgElement.crossOrigin = 'anonymous';
+        imgElement.style.position = 'absolute';
+        imgElement.style.top = '0';
+        imgElement.style.left = '0';
+
+        // Dynamically set container size based on image size
+        await new Promise((resolve) => {
+          imgElement.onload = () => {
+            imgWidth = imgElement.naturalWidth;
+            imgHeight = imgElement.naturalHeight;
+            console.log(`Image original size: ${imgWidth}x${imgHeight}`);
+
+            container.style.width = `${imgWidth}px`;
+            container.style.height = `${imgHeight}px`;
+
+            // Calculate scale factors
+            const defaultWidth = 320;
+            const defaultHeight = 608;
+            scaleX = imgWidth / defaultWidth;
+            scaleY = imgHeight / defaultHeight;
+            resolve();
+          };
+        });
+
+        container.appendChild(imgElement);
+      }
+      else {
+        break;
       }
 
-      const pdfPageWidth = doc.internal.pageSize.getWidth();
-      const pdfPageHeight = doc.internal.pageSize.getHeight();
-      const scaleFactor = Math.min(pdfPageWidth / imgWidth, pdfPageHeight / imgHeight);
+      // Add text fields with scaling
+      pageData.forEach(({ text, x, y, size, font }) => {
+        const textElement = document.createElement('div');
+        textElement.style.position = 'absolute';
+        textElement.style.top = `${y * scaleY}px`;
+        textElement.style.left = `${x * scaleX}px`;
+        textElement.style.fontSize = `${size * Math.min(scaleX, scaleY)}px`;
+        textElement.style.fontFamily = font;
+        textElement.style.transform = 'translate(-50%, -50%)';
+        textElement.innerText = text;
+        container.appendChild(textElement);
+      });
 
-      const pdfImgWidth = imgWidth * scaleFactor;
-      const pdfImgHeight = imgHeight * scaleFactor;
-      const xOffset = (pdfPageWidth - pdfImgWidth) / 2;
-      const yOffset = (pdfPageHeight - pdfImgHeight) / 2;
+      // Add small images with scaling
+      smallImagesData.forEach(({ src, x, y, size }) => {
+        const imgElement = document.createElement('img');
+        imgElement.src = src;
+        imgElement.style.position = 'absolute';
+        imgElement.style.top = `${y * scaleY}px`;
+        imgElement.style.left = `${x * scaleX}px`;
+        imgElement.style.width = `${size * Math.min(scaleX, scaleY)}px`;
+        imgElement.style.height = `${size * Math.min(scaleX, scaleY)}px`;
+        imgElement.style.transform = 'translate(-50%, -50%)';
+        container.appendChild(imgElement);
+      });
 
-      doc.addImage(imgData, 'PNG', xOffset, yOffset, pdfImgWidth, pdfImgHeight);
-    } catch (error) {
-      console.error("Error rendering page:", error);
-    } finally {
-      document.body.removeChild(container); // Clean up
+      // Debugging step
+      document.body.appendChild(container);
+      console.log(container);
+
+      try {
+        // Capture canvas with increased scale for better quality
+        const canvas = await html2canvas(container, {
+          useCORS: true,
+          logging: true,
+          scale: 2
+        });
+        const imgData = canvas.toDataURL('image/png');
+
+        // Add to PDF
+        if (parseInt(pageIndex) > 0) {
+          doc.addPage();
+        }
+
+        const pdfPageWidth = doc.internal.pageSize.getWidth();
+        const pdfPageHeight = doc.internal.pageSize.getHeight();
+        const scaleFactor = Math.min(pdfPageWidth / imgWidth, pdfPageHeight / imgHeight);
+
+        const pdfImgWidth = imgWidth * scaleFactor;
+        const pdfImgHeight = imgHeight * scaleFactor;
+        const xOffset = (pdfPageWidth - pdfImgWidth) / 2;
+        const yOffset = (pdfPageHeight - pdfImgHeight) / 2;
+
+        doc.addImage(imgData, 'PNG', xOffset, yOffset, pdfImgWidth, pdfImgHeight);
+      } catch (error) {
+        console.error("Error rendering page:", error);
+      } finally {
+        document.body.removeChild(container); // Clean up
+      }
     }
-  }
 
-  doc.save('wedding-card.pdf');
-};
-
+    doc.save('wedding-card.pdf');
+  };
 
 
 
 
 
 
-const validateImage = async (src) => {
-  return new Promise((resolve) => {
+
+  const validateImage = async (src) => {
+    return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(true); // Valid image
       img.onerror = () => resolve(false); // Invalid/corrupt image
       img.src = src;
-  });
-};
+    });
+  };
 
-const convertWebPToPNG = (webpBase64) => {
-  return new Promise((resolve, reject) => {
+  const convertWebPToPNG = (webpBase64) => {
+    return new Promise((resolve, reject) => {
       const img = new Image();
       img.src = webpBase64;
 
       img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          const pngBase64 = canvas.toDataURL("image/png");
-          resolve(pngBase64);
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        const pngBase64 = canvas.toDataURL("image/png");
+        resolve(pngBase64);
       };
 
       img.onerror = () => reject(new Error("Failed to convert WebP to PNG"));
-  });
-};
+    });
+  };
 
 
 
 
-  
-  
-  
-  
+
+
+
+
   const handleDownloadPDF = () => {
     generatePDF(); // Call the PDF generation function
   };
-  
 
- 
 
-  const handleResizeMouseDown = (id, e) => {
-    e.stopPropagation();
-    e.preventDefault();
 
-    const initialWidth = textFields.find(field => field.id === id).size;
-    const initialX = e.clientX;
 
-    const handleMouseMove = (moveEvent) => {
-      const newSize = Math.max(initialWidth + (moveEvent.clientX - initialX), 10); // Minimum size of 10
-      setTextFields((prevFields) =>
-        prevFields.map((field) =>
-          field.id === id ? { ...field, size: newSize } : field
-        )
-      );
-    };
 
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
 
 
   const handleDeleteImage = (index) => {
@@ -305,6 +373,8 @@ const convertWebPToPNG = (webpBase64) => {
       //setIsCustomizeModalOpen(false);
     }
   };
+
+
   const handleUpdate = () => {
     if (selectedField) {
       setUndoStack((prevStack) => [...prevStack, { textFields }]); // Capture current state
@@ -357,17 +427,17 @@ const convertWebPToPNG = (webpBase64) => {
     const savedPages = JSON.parse(localStorage.getItem('savedPages')) || {};
     savedPages[currentImageIndex] = textFields;
     localStorage.setItem('savedPages', JSON.stringify(savedPages));
-  
+
     const savedSmallImages = JSON.parse(localStorage.getItem('savedSmallImages')) || {};
     savedSmallImages[currentImageIndex] = smallImages; // Ensure `smallImages` state is updated
     localStorage.setItem('savedSmallImages', JSON.stringify(savedSmallImages));
-    
+
     setShowSuccessMessage(true);
     setTimeout(() => {
       setShowSuccessMessage(false);
     }, 2000);
   };
-  
+
 
 
   const handleSelectTextField = (id) => {
@@ -384,16 +454,6 @@ const convertWebPToPNG = (webpBase64) => {
 
 
 
-
-  const handleSizeChange = (e) => {
-    const newSize = parseInt(e.target.value, 10);
-    setSizeValue(newSize);
-    setTextFields((prevFields) =>
-      prevFields.map((field) =>
-        field.id === selectedField ? { ...field, size: newSize } : field
-      )
-    );
-  };
   const handleUndo = () => {
     if (undoStack.length > 0) {
       const lastChange = undoStack.pop();
@@ -410,11 +470,7 @@ const convertWebPToPNG = (webpBase64) => {
     }
   };
 
-
-
-
-
-
+  console.log("parent smallimages", smallImages);
 
   const handleNextImage = () => {
     if (currentImageIndex < images.length - 1) {
@@ -470,38 +526,52 @@ const convertWebPToPNG = (webpBase64) => {
   const openCustomizeModal = () => {
     setIsCustomizeModalOpen(true);
   };
+  const [draggingField, setDraggingField] = useState(null); // Tracks which field is being dragged
+  const [resizingField, setResizingField] = useState(null);
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (draggingField) {
+        setTextFields((prevFields) =>
+          prevFields.map((field) =>
+            field.id === draggingField.id
+              ? { ...field, x: e.clientX - draggingField.offsetX, y: e.clientY - draggingField.offsetY }
+              : field
+          )
+        );
+      }
 
+      if (resizingField) {
+        const delta = e.clientX - resizingField.startX; // Horizontal resize (you can add vertical if needed)
+        setTextFields((prevFields) =>
+          prevFields.map((field) =>
+            field.id === resizingField.id
+              ? { ...field, size: Math.max(resizingField.initialSize + delta, 10) } // Min size 10px
+              : field
+          )
+        );
+      }
+    };
 
-  const handleMouseDown = (id, e) => {
-    e.preventDefault();
-    const field = textFields.find((field) => field.id === id);
-    setSelectedField(id);
-    setDragging(true);
-    setOffset({ x: e.clientX - field.x, y: e.clientY - field.y });
-  };
+    const handleMouseUp = () => {
+      setDraggingField(null);
+      setResizingField(null);
+    };
 
-  const handleMouseMove = (e) => {
-    if (dragging && selectedField) {
-      const newX = e.clientX - offset.x;
-      const newY = e.clientY - offset.y;
-      setTextFields((prevFields) =>
-        prevFields.map((field) =>
-          field.id === selectedField ? { ...field, x: newX, y: newY } : field
-        )
-      );
-    }
-  };
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
 
-  const handleMouseUp = () => {
-    setDragging(false);
-  };
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [draggingField, resizingField]);
 
   const handleAddSmallImage = (src) => {
     const newImage = {
       id: `smallImage${Date.now()}`,
       src,
-      x: 300,
+      x: 200,
       y: 250,
       size: 50, // Default size for the small image
     };
@@ -559,6 +629,7 @@ const convertWebPToPNG = (webpBase64) => {
 
 
   const handleResizeSmallImage = (id, newX, newY, newSize) => {
+    console.log("new size", newSize);
     setSmallImages((prevImages) =>
       prevImages.map((image) =>
         image.id === id ? { ...image, x: newX, y: newY, size: newSize } : image
@@ -570,9 +641,6 @@ const convertWebPToPNG = (webpBase64) => {
   const handleClick = () => {
     navigate("/"); // Redirects to the home page
   };
-
-
-
 
 
 
@@ -601,7 +669,7 @@ const convertWebPToPNG = (webpBase64) => {
         <button
           onClick={handleDownloadPDF}
           className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2">
-         Download PDF
+          Download PDF
         </button>
       </div>
 
@@ -716,7 +784,7 @@ const convertWebPToPNG = (webpBase64) => {
                     />
                   </div>
                 ))}
-                
+
               </div>
               <button
                 onClick={() => setIsCustomizeModalOpen(false)}
@@ -822,39 +890,94 @@ const convertWebPToPNG = (webpBase64) => {
 
 
 
+
+
               {textFields.map(({ id, text, x, y, size, font }) => (
                 <div
                   key={id}
-                  className={`absolute ${selectedField === id ? 'border-2 border-blue-500' : ''}`}
+                  className={`absolute`}
                   style={{
                     top: y,
                     left: x,
                     fontSize: `${size}px`,
                     fontFamily: font,
-                    whiteSpace: 'nowrap', // Prevents text wrapping
-                    overflow: 'hidden',   // Optional: hide overflow if text is too long
+                    whiteSpace: 'nowrap', // Prevent text wrapping
+                    overflow: 'visible', // Allow overflow
                     transform: 'translate(-50%, -50%)',
                     cursor: 'move',
                     zIndex: selectedField === id ? 10 : 1,
+                    border: selectedField === id ? '2px dotted blue' : 'none', // Dotted border when selected
                   }}
-                  onMouseDown={(e) => handleMouseDown(id, e)}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    setSelectedField(id); // Set the selected field
+                    setDraggingField({ id, offsetX: e.clientX - x, offsetY: e.clientY - y }); // Start dragging
+                  }}
                 >
-                  {text}
+                  {text.split('\n').map((line, index) => (
+                    <div key={index}>{line}</div> // Render each line separately
+                  ))}
+
+                  {/* Resizing Handle */}
+                  <div
+                    onMouseDown={(e) => handleResizeMouseDown(id, e, 'text')}
+                    className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-se-resize"
+                    style={{ transform: 'translate(50%, 50%)' }}
+                  />
+
+                  {/* Delete Button */}
                   {selectedField === id && (
                     <button
                       onClick={(e) => {
-                        e.stopPropagation();
-                        setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
-                        setSelectedField(null);
+                        e.stopPropagation(); // Prevent the click from bubbling up
+                        handleDelete(id, 'text'); // Call the delete function
                       }}
-                      className="absolute top-0 right-0 text-gray-1000 rounded-full transition duration-300"
+                      className="absolute top-0 right-0 bg-white rounded-full p-1 shadow"
+                      style={{
+                        transform: 'translate(50%, -50%)',
+                        zIndex: 20, // Ensures button stays above other elements
+                      }}
                     >
                       <FaTrash size={13} />
                     </button>
                   )}
+                </div>
+              ))}
+
+              {/* Small Images */}
+              {smallImages.map(({ id, src, x, y, size }) => (
+                <div
+                  key={id}
+                  className="absolute"
+                  style={{
+                    top: y,
+                    left: x,
+                    cursor: 'move',
+                    zIndex: 10,
+                  }}
+                  onMouseDown={(e) => handleMouseDown(id, e, 'image')}
+                >
+                  <img
+                    src={src}
+                    alt="Small Icon"
+                    className="object-cover"
+                    style={{ width: `${size}px`, height: `${size}px` }}
+                  />
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(id, 'image');
+                    }}
+                    className="absolute top-0 right-0 bg-white rounded-full p-1"
+                    style={{ transform: 'translate(50%, -50%)' }}
+                  >
+                    <FaTrash size={13} />
+                  </button>
+
                   <div
-                    onMouseDown={(e) => handleResizeMouseDown(id, e)}
-                    className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-ew-resize"
+                    onMouseDown={(e) => handleResizeMouseDown(id, e, 'image')}
+                    className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-se-resize"
                     style={{ transform: 'translate(50%, 50%)' }}
                   />
                 </div>
@@ -921,6 +1044,7 @@ const convertWebPToPNG = (webpBase64) => {
             />
           )}
 
+
           {showErrorMessage && (
             <div className="absolute top-2 right-10 bg-red-100 border border-red-400 text-red-700 p-2 rounded">
               Please select a text field first!
@@ -935,12 +1059,18 @@ const convertWebPToPNG = (webpBase64) => {
                 <h2 className="text-xl mb-4">Edit Text</h2>
                 <div>
                   <label htmlFor="text">Text</label>
-                  <input
-                    type="text"
+                  <textarea
                     id="text"
                     className="w-full p-2 border rounded mb-4"
                     value={newText}
                     onChange={(e) => setNewText(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault(); // Prevent the default action (new line)
+                        setNewText((prev) => prev + '\n'); // Add a new line character
+                      }
+                    }}
+                    rows={4} // Set the number of rows for the textarea
                   />
                 </div>
                 <button
@@ -1041,7 +1171,7 @@ const convertWebPToPNG = (webpBase64) => {
                     d="M12 4.5v15m7.5-7.5h-15"
                   />
                 </svg>
-                <span>New</span>
+                <span>Add Text</span>
               </button>
 
               {/* Font Button */}
@@ -1096,21 +1226,9 @@ const convertWebPToPNG = (webpBase64) => {
               </button>
             </div>
           </div>
-          
-          {smallImages.map(({ id, src, x, y, size }) => (
-            
-            <SmallImage
-              key={id}
-              id={id}
-              src={src}
-              x={x}
-              y={y}
-              size={size}
-              onDelete={handleDeleteSmallImage}
-              onResize={handleResizeSmallImage} // Pass resize handler
-            />
-          ))}
-          
+
+
+
           {showImageUploadOptions && (
             <ImageUploadOptions
               onClose={handleClosePopup}

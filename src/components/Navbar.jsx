@@ -8,6 +8,7 @@ import {
   ChevronDown,
   Menu,
   X,
+  ArrowRight,
 } from "lucide-react";
 import { useCart } from "../CartContext";
 import logo from "../assets/images/nyouta-logo2.jpg";
@@ -283,6 +284,7 @@ const navItems = [
   { a: 'E-Magazine' }
 ]
 }],
+
   },
   {
     label: "Planner Books",
@@ -333,6 +335,10 @@ const navItems = [
 ] },
     ],
   },
+  {
+    label: "Wedding Website",
+    url: '/create-wedding-website'
+  }
 ];
 export default function MainNav() {
   const [activeDropdown, setActiveDropdown] = React.useState(null);
@@ -375,26 +381,6 @@ export default function MainNav() {
       setIsDropdownOpen(null);
     }
   };
-
-  // React.useEffect(() => {
-  //   return () => {
-  //     if (timeoutRef.current) {
-  //       clearTimeout(timeoutRef.current);
-  //     }
-  //   };
-  // }, []);
-
-  // const gridVariants = {
-  //   hidden: { opacity: 0, y: -50 },
-  //   visible: (index) => ({
-  //     opacity: 1,
-  //     y: 0,
-  //     transition: {
-  //       duration: 0.5,
-  //       delay: index * 0.2, // Staggered animation for each item
-  //     },
-  //   }),
-  // };
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
@@ -404,57 +390,32 @@ export default function MainNav() {
       <div className="container mx-auto ">
         {/* Top Navigation */}
         <div className="flex h-18 items-center justify-between px-4">
-          <Link to="/" className="flex items-center pt-4 lg:pl-12 gap-2">
+          <Link to="/" className="flex items-center py-2 lg:pl-12 gap-2">
             <img className="lg:w-56 w-36" src={logo} alt="logo-imgh" />
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
           <div className="lg:flex hidden">
-            <input className="rounded-l-lg" type="search" name="search" id="search" placeholder="I'm shopping for"/>
+            <select name="" id="" className="!pr-8 border-r-0 rounded-l-lg w-[80px]">
+              <option value="">All</option>
+              {navItems.map((item) => (
+                <option value="">{item.label}</option>
+              ))}
+            </select>
+            <input className="" type="search" name="search" id="search" placeholder="I'm shopping for"/>
             <button className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont">Search</button>
           </div>
 
-          {/* Desktop Menu */}
-          {/* <div className="hidden md:flex w-full flex-1 items-center gap-2 px-4">
-            <ul className="flex w-full space-x-8 items-center justify-end font-heroFont">
-              {navItems.map((item) => (
-                <li key={item} onMouseOut={() => setIsDropdownOpen(false)}>
-                  {item.children ? (
-                    <Link to={item.url} onMouseOver={() => setIsDropdownOpen(true)} className="py-2 hover:text-primary hover:border-b-2 border-primary hover:font-semibold">
-                    {item.label}
-                  </Link>
-                  ) : (
-                    <Link to={item.url} className="py-2 hover:text-primary hover:border-b-2 border-primary hover:font-semibold">
-                    {item.label}
-                  </Link>
-                  )}
-                  {item.children && isDropdownOpen && (
-                    <motion.ul initial={{opacity: 0, x: -50}} animate={{opacity: 1, x: 0}} transition={{duration: 1.0}} className="grid grid-cols-4 gap-x-36 gap-y-8 absolute mt-2 right-20 p-8 bg-priBg rounded-lg" onMouseOver={() => setIsDropdownOpen(true)}>
-                      {item.children.map((child, childIndex) => (
-                        <motion.li 
-                        initial="hidden"
-                        animate="visible"
-                        variants={gridVariants} key={childIndex}>
-                          <a href="" className="text-md hover:text-primary hover:border-b-2 border-primary pb-[1px]">{child.label}</a>
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div> */}
-
           {/* Right Section for Icons */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1 lg:gap-4">
             {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
             </Link> */}
-            <a href="/create-wedding-website" className="text-pink-600 font-heroFont hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
+            <a href="/join-e-nyouta" className="text-pink-600 font-avalonN hidden lg:flex leading-none hover:underline">Join E-Nyouta<br />Share Memories</a>
             <button
               onClick={toggleCart}
               className="flex items-center gap-1 relative"
             >
-              <ShoppingBag size={30} className=" hover:text-primary" />
+              <ShoppingBag size={27} className=" hover:text-primary" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 right-0 rounded-full bg-black px-2 py-1 text-[8px] text-white">
                   {totalItems}
@@ -467,7 +428,7 @@ export default function MainNav() {
                 onClick={() => handleDropdownToggle("user")}
                 className="flex items-center gap-1 rounded-md p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2"
               >
-                <User size={30} />
+                <User size={27} />
                 <ChevronDown className="h-4 w-4" />
               </button>
               {openDropdown === "user" && (
@@ -493,15 +454,15 @@ export default function MainNav() {
               className="md:hidden p-2"
               onClick={() => setIsDrawerOpen(true)}
             >
-              <Menu className="h-6 w-6" />
+              <Menu size={27} />
             </button>
           </div>
         </div>
 
         {/* Mobile Drawer Menu */}
         {isDrawerOpen && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden transition-all duration-500">
-            <div className="absolute right-0 h-full w-64 bg-white p-4">
+          <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden transition-all duration-300 ease-in-out">
+            <div className="absolute right-0 h-full w-64 bg-white p-4 transition-all duration-300 ease-in-out">
               <button
                 className="mb-4 text-right"
                 onClick={() => setIsDrawerOpen(false)}
@@ -509,14 +470,14 @@ export default function MainNav() {
                 <X />
               </button>
               <ul className="">
-                {["About", "Products", "Categories", "Contact Us"].map(
+                {navItems.map(
                   (item) => (
-                    <li key={item}>
-                      <Link
-                        to={`/${item.toLowerCase()}`}
-                        className="py-2 hover:text-brown-600"
+                    <li key={item} className="flex flex-col gap-2 font-avalonN">
+                      <Link onClick={() => setIsDrawerOpen(false)}
+                        to={item.url}
+                        className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
                       >
-                        {item}
+                        {item.label} <span><ArrowRight size={20}/></span>
                       </Link>
                     </li>
                   )
@@ -526,12 +487,12 @@ export default function MainNav() {
           </div>
         )}
       </div>
+
       <div className="hidden lg:flex py-2 justify-center ">
         <ul className="flex gap-12 justify-center items-center text-md font-heroFont">
           {navItems.map((item, index) =>
           {            const isLastTwoItems = index >= navItems.length - 2;
            return (
-
             <li
               key={index}
               onMouseEnter={() => setActiveDropdown(index)}
@@ -618,11 +579,7 @@ export default function MainNav() {
       </div>
 
       {/* Mobile drawer code remains the same */}
-      {isDrawerOpen && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden">
-          {/* Your existing mobile drawer code */}
-        </div>
-      )}
+  
     </header>
   
 

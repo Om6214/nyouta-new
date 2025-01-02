@@ -1,40 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { FaTrash } from 'react-icons/fa';
 
-const SmallImage = ({ src, id, x, y, onDelete, onResize }) => {
-  const [position, setPosition] = useState({ x, y });
+const SmallImage = ({ src, id, left, top, width, height, aspectRatio, onDelete, onResize }) => {
+  const [position, setPosition] = useState({ left, top });
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [size, setSize] = useState(50); // Default size of the image
+  const [size, setSize] = useState({ width, height });
   const [resizing, setResizing] = useState(false);
-  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, initialSize: 50 });
+  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0 });
 
-  // Update position when x or y props change
+  // Update position and size when props change
   useEffect(() => {
-    setPosition({ x, y });
-  }, [x, y]);
+    setPosition({ left, top });
+    setSize({ width, height });
+  }, [left, top, width, height]);
 
   const handleMouseDown = (e) => {
     e.preventDefault();
-    setDragging(true);
-    setOffset({ x: e.clientX - position.x, y: e.clientY - position.y });
+    if (!resizing) { // Prevent dragging while resizing
+      setDragging(true);
+      setOffset({ x: e.clientX - position.left, y: e.clientY - position.top });
+    }
   };
 
   const handleMouseMove = (e) => {
     if (dragging) {
-      const newX = e.clientX - offset.x;
-      const newY = e.clientY - offset.y;
-      setPosition({ x: newX, y: newY });
-      onResize(id, newX, newY, size); // Update position in the parent, size remains the same
+      const newLeft = e.clientX - offset.x;
+      const newTop = e.clientY - offset.y;
+      setPosition({ left: newLeft, top: newTop });
+      onResize(id, newLeft, newTop, size.width, size.height); // Update position in the parent
     }
 
     if (resizing) {
       const deltaX = e.clientX - resizeStart.x;
-      const deltaY = e.clientY - resizeStart.y;
-      const delta = Math.max(deltaX, deltaY); // Choose the larger delta for resizing
-      const newSize = Math.max(resizeStart.initialSize + delta, 20); // Ensure a minimum size
-      setSize(newSize);
-      onResize(id, position.x, position.y, newSize); // Update size in the parent
+      const newWidth = Math.max(size.width + deltaX, 20); // Ensure a minimum width
+      const newHeight = newWidth / aspectRatio; // Maintain aspect ratio
+      setSize({ width: newWidth, height: newHeight });
+      onResize(id, position.left, position.top, newWidth, newHeight); // Update size in the parent
     }
   };
 
@@ -44,22 +46,24 @@ const SmallImage = ({ src, id, x, y, onDelete, onResize }) => {
   };
 
   const handleResizeMouseDown = (e) => {
-    //console.log("eee",e);
     e.preventDefault();
-    e.stopPropagation();
+    e.stopPropagation(); // Prevent the event from bubbling up
     setResizing(true);
-    setResizeStart({ x: e.clientX, y: e.clientY, initialSize: size });
+    setResizeStart({ x: e.clientX, y: e.clientY });
   };
 
   // Attach mousemove and mouseup events globally while dragging or resizing
   useEffect(() => {
+    const handleMouseMoveGlobal = (e) => handleMouseMove(e);
+    const handleMouseUpGlobal = () => handleMouseUp();
+
     if (dragging || resizing) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMoveGlobal);
+      document.addEventListener('mouseup', handleMouseUpGlobal);
     }
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMouseMoveGlobal);
+      document.removeEventListener('mouseup', handleMouseUpGlobal);
     };
   }, [dragging, resizing]);
 
@@ -67,22 +71,19 @@ const SmallImage = ({ src, id, x, y, onDelete, onResize }) => {
     <div
       className="absolute"
       style={{
-        top: position.y,
-        left: position.x,
+        top: position.top,
+        left: position.left,
         cursor: 'move',
         zIndex: 10,
       }}
       onMouseDown={handleMouseDown}
     >
-      {/* Render the small image */}
       <img
         src={src}
         alt="Small Icon"
         className="object-cover"
-        style={{ width: `${size}px`, height: `${size}px` }}
+        style={{ width: `${ size.width}px`, height: `${size.height}px` }}
       />
-
-      {/* Delete button */}
       <button
         onClick={() => onDelete(id)}
         className="absolute top-0 right-0 bg-white rounded-full p-1"
@@ -90,8 +91,6 @@ const SmallImage = ({ src, id, x, y, onDelete, onResize }) => {
       >
         <FaTrash size={13} />
       </button>
-
-      {/* Resize handle */}
       <div
         onMouseDown={handleResizeMouseDown}
         className="absolute right-0 bottom-0 w-4 h-4 bg-gray-500 cursor-se-resize"

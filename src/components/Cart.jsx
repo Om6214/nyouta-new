@@ -11,7 +11,7 @@ export default function Cart() {
   const cartButtonRef = useRef(null);
   const dispatch = useDispatch();
   const {cart} = useSelector((state) => state.product);
-  
+  console.log(cart)
   useEffect(() => { 
     dispatch(getCart());
   },[dispatch])

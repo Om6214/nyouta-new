@@ -51,12 +51,7 @@ export default function ProductPage() {
   const handleAddtoCart = async() => {
     setAddToCartLoading(true);
     console.log(id,quantity);
-    const response = await dispatch(addtoCart({productId:id,quantity:quantity}));
-    if(response.type === "fulfilled"){
-      toast.success(response.payload.message);
-    }else{
-      toast.error('Something went wrong');
-    }
+    await dispatch(addtoCart({productId:id,quantity:quantity}));
     setAddToCartLoading(false);
   };
 

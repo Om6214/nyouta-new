@@ -241,8 +241,9 @@ export const googleSignup = async (req, res) => {
     const clientId = response.clientId;
     const clientCredentials = response.credential;
     const jwtDecode = jwt.decode(clientCredentials);
-
+    console.log(jwtDecode);
     const user = await User.findOne({ email: jwtDecode.email });
+    console.log(user);
     if (user) {
       const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
       return res.status(200).json({
@@ -269,22 +270,37 @@ export const googleSignup = async (req, res) => {
       isVerified: true,
       avatar: jwtDecode.picture,
     });
-    await newUser.save();
-
-    const token = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.status(201).json({
-      success: true,
-      token,
-      user: {
-        _id: newUser._id,
-        name: newUser.name,
-        email: newUser.email,
-        phone: newUser.phone,
-        avatar: newUser.avatar,
-        role: newUser.role,
-        isWebsiteCreated: newUser.isWebsiteCreated,
-      },
-      message: "Signed up successfully",
+    console.log(newUser)
+    try {
+      await newUser.save();
+    } catch (error) {
+      console.error("Error saving user:", error.message);
+      return res.status(400).json({ success: false, message: error.message });
+    }    
+    console.log("hiii");
+    jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: false,
+          message: 'Error generating token',
+        });
+      }
+      console.log(token);
+      return res.status(201).json({
+        success: true,
+        token,
+        user: {
+          _id: newUser._id,
+          name: newUser.name,
+          email: newUser.email,
+          phone: newUser.phone,
+          avatar: newUser.avatar,
+          role: newUser.role,
+          isWebsiteCreated: newUser.isWebsiteCreated,
+        },
+        message: "Signed up successfully",
+      });
     });
   } catch (err) {
     res.status(500).json({

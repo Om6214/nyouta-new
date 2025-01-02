@@ -14,12 +14,8 @@ import Checkout from './pages/Checkout';
 import ProductsCategory from './pages/ProductsCategory';
 import Cart from './components/Cart';
 import { CartProvider } from './CartContext';
-import DashboardLayout from './dashboard/DashboardLayout';
-import Dashboard from './dashboard/Dashboard';
-import AddProduct from './dashboard/AddProduct';
 import DigitalCardEditPage from './pages/DigitalCardEditPage';
 import PhysicalCardEditPage from './pages/PhysicalCardEditPage';
-import WeddingCardEditor from './pages/WeddingCardEditor';
 import WeddingWebsite from './pages/WeddingWebsite';
 import WeddingWebsiteTemplates from './pages/WeddingWebsiteTemplates';
 import { useGoogleOneTapLogin } from '@react-oauth/google';
@@ -30,15 +26,18 @@ import { useEffect } from 'react';
 import CategoriesNavBar from './components/CategoriesNavBar';
 import CategoryLabel from './components/CategoryLabel';
 
-import WeddingWebsiteUrl from './components/WeddingWebsiteUrl';
+import WeddingWebsiteUrl from './pages/WeddingWebsiteUrl';
 import LoginRegister from './pages/LoginRegister';
+
 import CategoryFilterLabel from './components/CategoryFilterLabel';
+
+import JoinNyouta from './components/JoinNyouta';
+
 
 
 // gaganluthrasirji
 
 function App() {
-
   // useEffect(()=>{...}) // Your previous effect logic
 
   return (
@@ -48,8 +47,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Category />} />
-          <Route path="/wedding-website/:slug" element={<WeddingWebsite />} />
-          <Route path="/wedding-website-templates" element={<WeddingWebsiteTemplates />} />
+          <Route path="/us/:slug" element={<WeddingWebsite />} />
           <Route path='/create-wedding-website' element={<WeddingWebsiteUrl/>}/>
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart />} />
@@ -59,7 +57,7 @@ function App() {
           <Route path="/register" element={<LoginRegister />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/about" element={<About />} />
-
+          <Route path='/join-e-nyouta' element={<JoinNyouta/>}/>
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
           <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
           <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
@@ -67,11 +65,7 @@ function App() {
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
-          <Route path='/admin/dashboard' element={<DashboardLayout />}>
-            <Route index path='/admin/dashboard' element={<Dashboard />} />
-            <Route path='/admin/dashboard/add-product' element={<AddProduct />} />
-          </Route>
-          <Route path="/editor" element={<WeddingCardEditor />} />
+         
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
         </Routes>
 
@@ -88,13 +82,13 @@ function ConditionalNavbar() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/wedding-website') || 
+  if (location.pathname.includes('/us') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
-    return null;  // Don't render Navbar for these routes
+    return null;
   }
 
-  return <Navbar />;  // Render Navbar for all other routes
+  return <Navbar />;
 }
 
 // A component to conditionally render the Footer based on the route
@@ -102,13 +96,13 @@ function ConditionalFooter() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/wedding-website') || 
+  if (location.pathname.includes('/us') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
-    return null;  // Don't render Footer for these routes
+    return null;
   }
 
-  return <Footer />;  // Render Footer for all other routes
+  return <Footer />;
 }
 
 export default App;

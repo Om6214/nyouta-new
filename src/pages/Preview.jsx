@@ -1,65 +1,106 @@
 import React, { useRef } from 'react';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
-const Preview = ({ images, textFields, currentImage, onClose }) => {
+const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
   const previewRef = useRef();
-
-  const handleDownloadPDF = async () => {
-    const element = previewRef.current;
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      allowTaint: false,
-    });
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'px',
-      format: [canvas.width, canvas.height],
-    });
-    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-    pdf.save('preview.pdf');
-  };
+  console.log("child stickers", images);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
         <h2 className="text-2xl font-bold mb-4">Preview</h2>
-        <div ref={previewRef} className="relative w-80 h-112">
+        <div ref={previewRef} className="relative w-80 h-112 overflow-hidden">
+          {/* Main Image */}
           <img src={currentImage} alt="Preview" className="w-full h-full object-cover rounded" />
-          {textFields.map(({ id, text, x, y, size, font }) => (
-            <div
-              key={id}
-              className="absolute"
-              style={{
-                top: y,
-                whiteSpace: 'nowrap',
-                left: x,
-                fontSize: `${size}px`,
-                fontFamily: font,
-                transform: 'translate(-50%, -50%)',
-              }}
-            >
-              {text}
-            </div>
-          ))}
-          {images.map(({ id, src, x, y, size }) => (
-            <img
-              key={id}
-              src={src}
-              alt={`Small Image ${id}`}
-              className="absolute"
-              style={{
-                top: y ,
-                left: x ,
-                width: `${size}px`,
-                height: `${size}px`,
-                transform: 'translate(-50%, -50%)',
-              }}
-            />
-          ))}
+
+          {/* Text Fields */}
+          {textFields.map(({ id, text, x, y, size, font, fontColor, isBold, isItalic, textAlign, lineHeight, letterSpacing }) => {
+            const containerWidth = 320; // Container width
+            const containerHeight = 608; // Container height
+
+            // Clamping the x and y positions
+            const clampedX = Math.max(0, Math.min(x, containerWidth));
+            const clampedY = Math.max(0, Math.min(y, containerHeight));
+
+            return (
+              <div
+                key={id}
+                className="absolute"
+                style={{
+                  top: clampedY,
+                  left: clampedX,
+                  fontSize: `${size}px`,
+                  fontFamily: font,
+                  color: fontColor, // Apply dynamic font color
+                  fontWeight: isBold ? 'bold' : 'normal', // Apply bold if true
+                  fontStyle: isItalic ? 'italic' : 'normal', // Apply italic if true
+                  textAlign: textAlign, // Apply text alignment
+                  lineHeight: lineHeight, // Apply line height
+                  letterSpacing: `${letterSpacing}px`, // Apply letter spacing
+                  transform: 'translate(-50%, -50%)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {text.split('\n').map((line, index) => (
+                  <div key={index}>{line}</div> // Render each line separately
+                ))}
+              </div>
+            );
+          })}
+
+          {/* Small Images */}
+          {images.map(({ id, src, x, y, size }) => {
+            if (y > 0) {
+              y = y + 280;
+              x = x + size - 40;
+            } else {
+              x = x + size - 40;
+              y = y + 290;
+            }
+
+            return (
+              <img
+                key={id}
+                src={src}
+                alt={`Small Image ${id}`}
+                className="absolute"
+                style={{
+                  top: y,
+                  left: x,
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  transform: 'translate(-50%, -50%)',
+                }}
+              />
+            );
+          })}
+
+          {/* Stickers */}
+          {stickers.map(({ id, src, x, y, width, height, rotation }) => {
+            if (y > 0) {
+              y = y + 280;
+            } else {
+              y = y + 290;
+            }
+
+            return (
+              <img
+                key={id}
+                src={src}
+                alt={`Sticker ${id}`}
+                className="absolute"
+                style={{
+                  top: y,
+                  left: x,
+                  width: `${width}px`,
+                  height: `${height}px`,
+                  transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
+                }}
+              />
+            );
+          })}
         </div>
+
+        {/* Close Button */}
         <div className="mt-4 flex gap-4">
           <button
             onClick={onClose}
@@ -67,7 +108,6 @@ const Preview = ({ images, textFields, currentImage, onClose }) => {
           >
             Close Preview
           </button>
-          
         </div>
       </div>
     </div>

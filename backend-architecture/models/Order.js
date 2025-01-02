@@ -14,9 +14,11 @@ const OrderSchema = new mongoose.Schema(
     status: { type: String, default: 'pending', enum: ['pending', 'completed', 'shipped', 'cancelled'] },
     address: { type: mongoose.Schema.Types.ObjectId, ref: 'Address', required: true },
     paymentStatus: { type: String, enum: ['pending', 'paid', 'failed'], default: 'pending' },
+    orderId:{type:String,required:false,default:null},
     paymentId: { type: String, required: false, default: null },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
   },
-  { timestamps: true }
 );
 
 export default mongoose.model('Order', OrderSchema);
