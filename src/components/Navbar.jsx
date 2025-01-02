@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import React,{useState,useEffect} from "react";
+import { Link,useNavigate } from "react-router-dom";
 import {
   Heart,
   Search,
@@ -13,6 +13,8 @@ import {
 import { useCart } from "../CartContext";
 import logo from "../assets/images/nyouta-logo2.jpg";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector,useDispatch } from "react-redux";
+import {logout} from '../Store/slices/authSlice';
 
 const navItems = [
   {
@@ -348,8 +350,13 @@ export default function MainNav() {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { cartItems, toggleCart } = useCart(); // Access cartItems and toggleCart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  React.useEffect(() => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(null);
+  const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
@@ -381,6 +388,11 @@ export default function MainNav() {
       setIsDropdownOpen(null);
     }
   };
+  const handleLogout=()=>{
+    dispatch(logout());
+    setOpenDropdown(null);
+    navigate('/login');
+  }
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
@@ -428,12 +440,21 @@ export default function MainNav() {
                 onClick={() => handleDropdownToggle("user")}
                 className="flex items-center gap-1 rounded-md p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2"
               >
+               {user&& Object.keys(user).length > 0?
+               <div>
+                <img src={user.avatar} alt="profile-pic" className="w-10 h-10 rounded-full" />
+               </div>:
+               <>
                 <User size={27} />
                 <ChevronDown className="h-4 w-4" />
+               </>
+               }
               </button>
               {openDropdown === "user" && (
                 <div className="absolute right-0 mt-2 w-48 rounded-md bg-priBg py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-                  <Link
+                  {!(user&& Object.keys(user).length > 0) ? (
+                    <>
+                    <Link
                     to="/login" onClick={()=> setOpenDropdown(null)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
@@ -445,6 +466,17 @@ export default function MainNav() {
                   >
                     Register
                   </Link>
+                    </>
+                  ):(
+                    <>
+                    <button
+                     onClick={handleLogout}
+                    className="block px-4 py-2 text-sm text-gray-700"
+                  >
+                    Logout
+                  </button>
+                    </>
+                  )}
                 </div>
               )}
             </div>

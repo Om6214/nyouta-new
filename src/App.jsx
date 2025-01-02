@@ -69,10 +69,10 @@ function App() {
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
         </Routes>
 
+      <Cart />
         {/* Conditionally render Footer */}
         <ConditionalFooter />
       </BrowserRouter>
-      <Cart />
     </CartProvider>
   );
 }

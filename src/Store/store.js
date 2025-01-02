@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-    key: 'root',
+    key: 'nyouta',
     storage,
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
