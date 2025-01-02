@@ -11,7 +11,8 @@ export const getAllTemplates = async (req, res) => {
     try {
         const templatesDir = path.join(__dirname, '../uploads/templates'); // Path to templates
         const files = fs.readdirSync(templatesDir); // Read all files in the directory
-
+        const imagesDir = path.join(__dirname, '../uploads/images'); // Path to images
+        const images = fs.readdirSync(imagesDir); // Read all images in the directory
         // Filter only .ejs files
         const ejsFiles = files.filter(file => path.extname(file) === '.ejs');
 
@@ -31,7 +32,8 @@ export const getAllTemplates = async (req, res) => {
             const renderedContent = ejs.render(content, sampleData);
 
             const id = path.basename(file, '.ejs'); // Extract ID from file name
-            return { id, content: renderedContent }; // Send rendered HTML to frontend
+            const image=images.find((img)=>img.includes(id));
+            return { id, content: renderedContent,image }; // Send rendered HTML to frontend
         });
 
         res.status(200).json({ message: 'Templates fetched successfully', templates });

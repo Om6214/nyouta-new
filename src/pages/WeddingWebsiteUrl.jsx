@@ -8,8 +8,6 @@ import wed2 from "../assets/images/wed2.jpg";
 import wed3 from "../assets/images/wed3.webp";
 import { ChevronDown } from "lucide-react";
 import { useEffect } from "react";
-import { createWeddingWebsite, updateWeddingWebsite } from "../Store/slices/weddingtemplateSlice";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeddingTemplates } from "../Store/slices/weddingtemplateSlice";
 import TemplateSection from "../components/TemplateSection.jsx";

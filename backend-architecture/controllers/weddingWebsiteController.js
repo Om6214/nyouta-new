@@ -37,7 +37,9 @@ export const createWeddingWebsite = async (req, res) => {
         const { userId } = req.user;
         const { templateId } = req.params;
         const user = await User.findById(userId);
-        const slug = `${formatName(user.name)}-${formatName(user.partnerName)}-${userId}`;
+        const weddingWebsite = await WeddingWebsite.find();
+        const numberofWeddingWebsite = weddingWebsite.length;
+        const slug = `${formatName(user.name)}-${formatName(user.name)}-${numberofWeddingWebsite + 1}`;
         user.slug = slug;
         user.templateId = templateId;
         user.isWebsiteCreated = true;
