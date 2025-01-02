@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 
-export default function CategoryLabel() {
+export default function CategoryFilterLabel() {
 
   const { pageName, "*": path } = useParams();
   
@@ -38,7 +38,7 @@ export default function CategoryLabel() {
  
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
-  // console.log(formattedPageName, formattedPath);
+  console.log(formattedPageName, formattedPath);
 
 
 
@@ -46,17 +46,17 @@ export default function CategoryLabel() {
     const categoryMatch = 
       item.category.toLowerCase() === formattedPageName.toLowerCase();
     
-    const subCategoryMatch = item.subCategory.toLowerCase() === formattedPath.toLowerCase();
+    const subCategoryMatch = item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
     
     return categoryMatch && subCategoryMatch;
   });
-
+console.log(filteredItems)
 
   return (
     <>
     {filteredItems.length > 0 ? (
     <div  className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
-        <div className="mt-10 ">
+        <div className="mt-10">
         <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
       <Swiper
         style={{
@@ -68,7 +68,7 @@ export default function CategoryLabel() {
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         modules={[Zoom, Navigation, Pagination, Autoplay]}
-        className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh] bg-gray-200"
+        className="rounded-xl shadow-lg overflow-hidden"
       >
         {filteredItems[0].image.map((src, index) => (
           <SwiperSlide key={index}>

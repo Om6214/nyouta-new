@@ -32,24 +32,24 @@ const navItems = [
        },
       { label: "Party Invitation",
         Filters: [
-  { a: ' Birthday Party ' },
-  { a: ' Kitty Party ' },
-  { a: ' Retirement Party ' },
-  { a: ' Halloween Party ' },
-  { a: ' Lohri Party ' }
+  { a: 'Birthday Party ' },
+  { a: 'Kitty Party ' },
+  { a: 'Retirement Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Lohri Party ' }
 ]
 
       },
       { label: "Pooja Invitations",Filters: [
-  { a: ' Sawamani ' },
-  { a: ' Griha Pravesh ' },
-  { a: ' Shyam Jagran ' }
+  { a: 'Sawamani ' },
+  { a: 'Griha Pravesh ' },
+  { a: 'Shyam Jagran ' }
 ] },
       { label: "Ceremony Invitations",Filters: [
-  { a: ' Engagement Ceremony ' },
-  { a: ' Wedding Anniversary ' },
-  { a: ' Opening Ceremony ' },
-  { a: ' Kua Poojan ' }
+  { a: 'Engagement Ceremony ' },
+  { a: 'Wedding Anniversary ' },
+  { a: 'Opening Ceremony ' },
+  { a: 'Kua Poojan ' }
 ] },
     ],                    
   },
@@ -58,41 +58,41 @@ const navItems = [
     url: "/nav/e-invitations",
     children: [
       { label: "Wedding Invitations",Filters: [
-  { a: ' Pre Invitations - Manuhar ' },
-  { a: ' Save the Date ' },
-  { a: ' Wedding Invitations ' },
-  { a: ' Ceremony Invitations ' },
-  { a: ' Wedding Timeline ' },
-  { a: ' Royal Collection - NEW ' }
+  { a: 'Pre Invitations - Manuhar ' },
+  { a: 'Save the Date ' },
+  { a: 'Wedding Invitations ' },
+  { a: 'Ceremony Invitations ' },
+  { a: 'Wedding Timeline ' },
+  { a: 'Royal Collection - NEW ' }
 ] },
       { label: "Party Invitations",Filters: [
-  { a: ' Birthday Party ' },
-  { a: ' Kitty Party ' },
-  { a: ' Retirement Party ' },
-  { a: ' Halloween Party ' },
-  { a: ' Lohri Party ' }
+  { a: 'Birthday Party ' },
+  { a: 'Kitty Party ' },
+  { a: 'Retirement Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Lohri Party ' }
 ]
  },
       { label: "Pooja Invitations",Filters: [
-  { a: ' Sawamani ' },
-  { a: ' Griha Pravesh ' },
-  { a: ' Shyam Jagran ' }
+  { a: 'Sawamani ' },
+  { a: 'Griha Pravesh ' },
+  { a: 'Shyam Jagran ' }
 ] },
       { label: "Ceremony Invitations",Filters: [
-  { a: ' Engagement Ceremony ' },
-  { a: ' Wedding Anniversary ' },
-  { a: ' Wedding Events ' },
-  { a: ' Opening Ceremony ' },
-  { a: ' Kua Poojan ' }
+  { a: 'Engagement Ceremony ' },
+  { a: 'Wedding Anniversary ' },
+  { a: 'Wedding Events ' },
+  { a: 'Opening Ceremony ' },
+  { a: 'Kua Poojan ' }
 ]
  },
       { label: "Short Invitation - Free",Filters: [
-  { a: ' Wedding Invitations ' },
-  { a: ' Party Invitations ' },
+  { a: 'Wedding Invitations ' },
+  { a: 'Party Invitations ' },
 ]
 },
       { label: "Matrimonial Biodata" ,Filters: [
-  { a: ' Marriage Biodata ' }
+  { a: 'Marriage Biodata ' }
 ]
 },
     ],
@@ -102,36 +102,36 @@ const navItems = [
     url: "/nav/photo books",
     children: [
       { label: "Soft Cover Photobook",Filters: [
-  { a: ' Wedding Photobook ' },
-  { a: ' Engagement Photobook ' },
-  { a: ' Anniversary Photobook ' },
-  { a: ' Birthday Photobook ' },
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
 ] },
       { label: "Hard Cover Photobook",Filters: [
-  { a: ' Wedding Photobook ' },
-  { a: ' Engagement Photobook ' },
-  { a: ' Anniversary Photobook ' },
-  { a: ' Birthday Photobook ' },
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
   
 ] },
       { label: "Spiral Photobook" ,Filters: [
-  { a: ' Wedding Photobook ' },
-  { a: ' Engagement Photobook ' },
-  { a: ' Anniversary Photobook ' },
-  { a: ' Birthday Photobook ' },
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
   
 ]},
       { label: "Photo Folder",Filters: [
-  { a: ' Wedding Photobook ' },
-  { a: ' Engagement Photobook ' },
-  { a: ' Anniversary Photobook ' },
-  { a: ' Birthday Photobook ' },
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
 ] },
       { label: "Digtial Photobook > Best Seller",Filters: [
-  { a: ' Wedding Photobook ' },
-  { a: ' Engagement Photobook ' },
-  { a: ' Anniversary Photobook ' },
-  { a: ' Birthday Photobook ' }
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' }
 ] },
     ],
   },
@@ -140,53 +140,53 @@ const navItems = [
     url: "/nav/itinerary",
     children: [
       { label: "Wedding Itinerary" ,Filters: [
-  { a: ' Room Itinerary ' },
-  { a: ' Check-in Itinerary ' },
-  { a: ' Room Key Enevelop ' },
-  { a: ' Thank You Cards ' },
-  { a: ' Wedding Menu ' },
-  { a: ' Table Itinerary ' },
-  { a: ' Dining Table Mats ' },
+  { a: 'Room Itinerary ' },
+  { a: 'Check-in Itinerary ' },
+  { a: 'Room Key Enevelop ' },
+  { a: 'Thank You Cards ' },
+  { a: 'Wedding Menu ' },
+  { a: 'Table Itinerary ' },
+  { a: 'Dining Table Mats ' },
 ]},
       { label: "Stickers",Filters: [
-  { a: ' Guest Name Stickers ' },
-  { a: ' Gift Box Sticker ' },
-  { a: ' Vehicle Stickers ' },
-  { a: ' Designer Stickers ' },
-  { a: ' Vintage Stickers ' },
+  { a: 'Guest Name Stickers ' },
+  { a: 'Gift Box Sticker ' },
+  { a: 'Vehicle Stickers ' },
+  { a: 'Designer Stickers ' },
+  { a: 'Vintage Stickers ' },
 ] },
       { label: "Tags / Bedges",Filters: [
-  { a: ' Luggage Tag ' },
-  { a: ' Door Handle Tag ' },
-  { a: ' Gift Tag ' },
-  { a: ' Parking Tags ' },
-  { a: ' Wedding Bedges ' },
+  { a: 'Luggage Tag ' },
+  { a: 'Door Handle Tag ' },
+  { a: 'Gift Tag ' },
+  { a: 'Parking Tags ' },
+  { a: 'Wedding Bedges ' },
 ] },
       { label: "Welcome Signages",Filters: [
-  { a: ' Wedding Ceremony ' },
-  { a: ' Haldi Ceremony ' },
-  { a: ' Mehandi Ceremony ' },
-  { a: ' Sangeet Ceremony ' },
-  { a: ' Direction Signage ' },
-  { a: ' Engagement Ceremony ' },
-  { a: ' Anniversary Ceremony ' },
-  { a: ' Lohri Party ' },
-  { a: ' Halloween Party ' },
-  { a: ' Birthday Party ' },
-  { a: ' Celeration Party ' }
+  { a: 'Wedding Ceremony ' },
+  { a: 'Haldi Ceremony ' },
+  { a: 'Mehandi Ceremony ' },
+  { a: 'Sangeet Ceremony ' },
+  { a: 'Direction Signage ' },
+  { a: 'Engagement Ceremony ' },
+  { a: 'Anniversary Ceremony ' },
+  { a: 'Lohri Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Birthday Party ' },
+  { a: 'Celeration Party ' }
 ]},
       { label: "Accessories",Filters: [
-  { a: ' Party Dangler ' },
-  { a: ' Coasters ' },
-  { a: ' Paper Napkins ' },
-  { a: ' Event Banner ' },
-  { a: ' Face Mask ' },
-  { a: ' Funny Poster ' },
+  { a: 'Party Dangler ' },
+  { a: 'Coasters ' },
+  { a: 'Paper Napkins ' },
+  { a: 'Event Banner ' },
+  { a: 'Face Mask ' },
+  { a: 'Funny Poster ' },
 ] },
       { label: "Games",Filters: [
-  { a: ' Playing Cards ' },
-  { a: ' Puzzle Games ' },
-  { a: ' Fun Games ' }
+  { a: 'Playing Cards ' },
+  { a: 'Puzzle Games ' },
+  { a: 'Fun Games ' }
 ] },
     ],
   },
@@ -194,12 +194,36 @@ const navItems = [
     label: "Calendars 2025",
     url: "/nav/calendars 2025",
     children: [
-      { label: "Mini Desktop Calendar" },
-      { label: "Wall Calendar - Portrait" },
-      { label: "Wall Calendar - Landscape" },
-      { label: "Desktop Calendar" },
-      { label: "Table Tent Calendar" },
-      { label: "Poster Calendar" },
+      { label: "Mini Desktop Calendar",Filters: [
+  { a: ' Wedding Calendar ' },
+  { a: ' Birthday Calendar ' },
+  { a: ' Family & Kids ' },
+] },
+      { label: "Wall Calendar - Portrait" ,Filters: [
+  { a: ' Wedding Calendar ' },
+  { a: ' Birthday Calendar ' },
+  { a: ' Family & Kids ' },
+]},
+      { label: "Wall Calendar - Landscape",Filters: [
+  { a: ' Wedding Calendar ' },
+  { a: ' Birthday Calendar ' },
+  { a: ' Family & Kids ' },
+] },
+      { label: "Desktop Calendar",Filters: [
+  { a: ' Wedding Calendar ' },
+  { a: ' Birthday Calendar ' },
+  { a: ' Family & Kids ' },
+]  },
+      { label: "Table Tent Calendar" ,Filters: [
+  { a: ' Wedding Calendar ' },
+  { a: ' Birthday Calendar ' },
+  { a: ' Family & Kids ' },
+] },
+      { label: "Poster Calendar" ,Filters: [
+  { a: ' Wedding Calendar ' },
+  { a: ' Birthday Calendar ' },
+  { a: ' Family & Kids ' },
+] },
     ],
   },
   {
@@ -489,7 +513,7 @@ export default function MainNav() {
                                       custom={filterIndex}
                                     >
                                       <Link
-                                        to={`e${item.url}/${filter.a}`}
+                                        to={`e${item.url}/${child.label}/${filter.a}`}
                                         className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
                                       >
                                         {filter.a}

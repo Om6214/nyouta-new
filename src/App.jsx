@@ -32,6 +32,7 @@ import CategoryLabel from './components/CategoryLabel';
 
 import WeddingWebsiteUrl from './components/WeddingWebsiteUrl';
 import LoginRegister from './pages/LoginRegister';
+import CategoryFilterLabel from './components/CategoryFilterLabel';
 
 
 // gaganluthrasirji
@@ -61,6 +62,8 @@ function App() {
 
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
           <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
+          <Route path="/e/nav/:pageName/*" element={<CategoryFilterLabel />} />
+          
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
