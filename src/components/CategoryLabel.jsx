@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
+import {Link} from "react-router-dom";
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -167,7 +168,8 @@ export default function CategoryLabel() {
       <div className="pt-5 md:max-w-[95%] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredItems.map((item) => (
-  <div
+  <Link
+    to={`/e/nav/${item.category}/${item.subCategory}/${item.subSubCategory}`}
     key={item.id}
     className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
   >
@@ -183,7 +185,7 @@ export default function CategoryLabel() {
       {/* Optional: Price or other details */}
       {/* <p className="text-gray-700 mt-2">₹{item.price}</p> */}
     </div>
-  </div>
+  </Link>
 ))}
 
         </div>

@@ -195,34 +195,34 @@ const navItems = [
     url: "/nav/calendars 2025",
     children: [
       { label: "Mini Desktop Calendar",Filters: [
-  { a: ' Wedding Calendar ' },
-  { a: ' Birthday Calendar ' },
-  { a: ' Family & Kids ' },
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
 ] },
       { label: "Wall Calendar - Portrait" ,Filters: [
-  { a: ' Wedding Calendar ' },
-  { a: ' Birthday Calendar ' },
-  { a: ' Family & Kids ' },
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
 ]},
       { label: "Wall Calendar - Landscape",Filters: [
-  { a: ' Wedding Calendar ' },
-  { a: ' Birthday Calendar ' },
-  { a: ' Family & Kids ' },
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
 ] },
       { label: "Desktop Calendar",Filters: [
-  { a: ' Wedding Calendar ' },
-  { a: ' Birthday Calendar ' },
-  { a: ' Family & Kids ' },
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
 ]  },
       { label: "Table Tent Calendar" ,Filters: [
-  { a: ' Wedding Calendar ' },
-  { a: ' Birthday Calendar ' },
-  { a: ' Family & Kids ' },
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
 ] },
       { label: "Poster Calendar" ,Filters: [
-  { a: ' Wedding Calendar ' },
-  { a: ' Birthday Calendar ' },
-  { a: ' Family & Kids ' },
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
 ] },
     ],
   },
@@ -230,30 +230,107 @@ const navItems = [
     label: "Free Greetings",
     url: "/nav/free greetings",
     children: [
-      { label: "Wishes Greeting" },
-      { label: "Thanks Greeting" },
-      { label: "Feeling Greetings" },
-      { label: "Funny Greetings" },
+      { label: "Wishes Greeting",Filters: [
+  { a: 'Wishes to New Wed' },
+  { a: 'Engagement Wishes' },
+  { a: 'Anniversary Wishes' },
+  { a: 'Birthday Wishes' },
+  { a: 'Retirement Wishes' },
+  { a: 'General Wishes' },
+]
+ },
+      { label: "Thanks Greeting" ,Filters: [
+
+  { a: 'Thanks to Invitor' },
+  { a: 'Thanks to Guests' },
+  { a: 'Thanks for Wishes' },
+  { a: 'General Greetings' },
+  
+]
+},
+      { label: "Feeling Greetings",Filters: [
+  { a: 'Love Cards' },
+  { a: 'Sorry Cards' },
+  { a: 'Congrats Cards' },
+  { a: 'Miss you Card' },
+  { a: 'Good Luck Cards' },
+]
+ },
+      { label: "Funny Greetings" ,Filters: [
+  { a: 'For Wedding' },
+  { a: 'For Anniversary' },
+  { a: 'For Party' },
+  { a: 'General Greetings' }
+]
+},
     ],
   },
   {
     label: "Guest Surprising",
     url: "/nav/guest surprising",
-    children: [{ label: "Newspapers" }, { label: "Magazine" }],
+    children: [{ label: "Newspapers" ,Filters: [
+  { a: 'Wedding Newspaper' },
+  { a: 'Engagement Newspaper' },
+  { a: 'Birthday Newspaper' },
+  { a: 'Special Event' },
+  { a: 'E-Paper' },
+]
+}, { label: "Magazine" ,Filters: [
+  { a: 'Wedding Magazine' },
+  { a: 'Engagement Magazine' },
+  { a: 'Birthday Magazine' },
+  { a: 'Special Event' },
+  { a: 'E-Magazine' }
+]
+}],
   },
   {
     label: "Planner Books",
     url: "/nav/planner books",
-    children: [{ label: "Planner Books" }, { label: "Free Printable" }],
+    children: [{ label: "Planner Books",Filters: [
+  { a: 'Wedding Management' },
+  { a: 'Guest Management' },
+  { a: 'Wedding Notepad' },
+  { a: 'Guest List Booklet - Best Seller' },
+]
+ }, { label: "Free Printable" ,Filters: [
+  { a: 'Wedding Guest List-PDF' },
+  { a: 'Wedding Guest List - XLS' },
+  { a: 'Wedding Notepad - PDF' }
+]
+}],
   },
   {
     label: "E-Shop",
     url: "/nav/e shop",
     children: [
-      { label: "Shagun Envelop" },
-      { label: "Photo Magnet" },
-      { label: "Gifts" },
-      { label: "Essentials" },
+      { label: "Shagun Envelop" ,Filters: [
+  { a: 'For Wedding Guests' },
+  { a: 'For New Wed' },
+  
+]},
+      { label: "Photo Magnet",Filters: [
+  { a: 'Mini Photo Magne' },
+  { a: 'Wedding' },
+  { a: 'Family' },
+  { a: 'Birthday' },
+  { a: 'Quotes' },
+  { a: 'Travel' },
+  { a: 'Faces' },
+  { a: 'Funny' },
+  { a: 'Religious' },
+  { a: 'Feeling' },
+] },
+      { label: "Gifts",Filters: [
+  { a: 'Wedding Gift' },
+  { a: 'Party Gift' },
+  { a: 'Packaging' },
+  
+] },
+      { label: "Essentials",Filters: [
+  { a: 'Wedding Shopping' },
+  { a: 'Party Shopping' }
+] },
     ],
   },
 ];
@@ -449,9 +526,12 @@ export default function MainNav() {
           </div>
         )}
       </div>
-      <div className="hidden lg:flex py-2 justify-center">
+      <div className="hidden lg:flex py-2 justify-center ">
         <ul className="flex gap-12 justify-center items-center text-md font-heroFont">
-          {navItems.map((item, index) => (
+          {navItems.map((item, index) =>
+          {            const isLastTwoItems = index >= navItems.length - 2;
+           return (
+
             <li
               key={index}
               onMouseEnter={() => setActiveDropdown(index)}
@@ -501,7 +581,9 @@ export default function MainNav() {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 10 }}
                                 transition={{ duration: 0.2 }}
-                                className="absolute top-0 left-full ml-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-4 shadow-lg"
+                                className={`absolute top-0 ${
+                                    isLastTwoItems ? 'right-full ' : 'left-full ml-2'
+                                  } bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-3 shadow-lg`}
                               >
                                 <ul className="space-y-2">
                                   {child.Filters.map((filter, filterIndex) => (
@@ -531,7 +613,7 @@ export default function MainNav() {
                 )}
               </AnimatePresence>
             </li>
-          ))}
+          )})}
         </ul>
       </div>
 

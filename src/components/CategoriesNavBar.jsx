@@ -3,6 +3,7 @@ import React from "react";
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 
@@ -10,6 +11,23 @@ const CategoriesNavBar=()=>{
 
   const { pageName } = useParams();
  
+
+  const images = [
+    "https://img.freepik.com/free-photo/top-view-gift-wrapping-composition_23-2148455718.jpg?t=st=1734674377~exp=1734677977~hmac=84a23b1b4f2690a609ff97e6640751abef1f27a125ca0b407e9b7d38f8396c5f&w=996",
+    "https://img.freepik.com/free-photo/close-up-christmas-present-decorated-with-dried-flowers-dry-orange-wrapped-craft-paper_169016-14425.jpg?t=st=1735809332~exp=1735812932~hmac=b2f388421807280c81f6701e99b1045b5fcc18a3807238bc9534e9bf4f24c3ee&w=1060",
+    "https://img.freepik.com/free-photo/gift-box-decorated-with-ribbons-decorative-roses-knitted-items-original-gift-wrapping-valentine-s-day_169016-8851.jpg?t=st=1735809475~exp=1735813075~hmac=29fa67a9acc9e871ef0e838420c76f5c2be4707d446fb34db99cc47247a69b38&w=996",
+    "https://img.freepik.com/free-photo/top-view-hand-holding-furoshiki-package_23-2150274480.jpg?t=st=1735809508~exp=1735813108~hmac=d7588c5a3b60c924bb0cc9683c7f9528b4cae8b4f2a986f15d76ee131fbc9e56&w=996"
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, []);
   
 
   const categories = {
@@ -20,7 +38,7 @@ const CategoriesNavBar=()=>{
             "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
           subCategory: [
             {
-              subTitle: "Wedding Invitation",
+              subTitle: "Wedding Invitations",
               imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // URL from product.json
               url: "/products/wedding-invites",
             },
@@ -30,12 +48,12 @@ const CategoriesNavBar=()=>{
               url: "/products/party-invites",
             },
             {
-              subTitle: "Pooja Invitation",
+              subTitle: "Pooja Invitations",
               imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // URL from product.json
               url: "/products/pooja-invites",
             },
             {
-              subTitle: "Ceremony Invitation",
+              subTitle: "Ceremony Invitations",
               imgUrl: "https://imagizer.imageshack.com/img922/701/tU9pus.jpg", // URL from product.json
               url: "/products/ceremony-invites",
             },
@@ -48,19 +66,19 @@ const CategoriesNavBar=()=>{
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus. Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had.",
           subCategory: [
             {
-              subTitle: "Wedding Invitation",
+              subTitle: "Wedding Invitations",
               imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // URL from product.json
             },
             {
-              subTitle: "Party Invitation",
+              subTitle: "Party Invitations",
               imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // URL from product.json
             },
             {
-              subTitle: "Pooja Invitation",
+              subTitle: "Pooja Invitations",
               imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // URL from product.json
             },
             {
-              subTitle: "Ceremony Invitation",
+              subTitle: "Ceremony Invitations",
               imgUrl: "https://imagizer.imageshack.com/img922/701/tU9pus.jpg", // URL from product.json
             },
             {
@@ -96,7 +114,7 @@ const CategoriesNavBar=()=>{
               imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // Example image
             },
             {
-              subTitle: "Digital Photobook",
+              subTitle: "Digtial Photobook > Best Seller",
               imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
             },
           ],
@@ -116,7 +134,7 @@ const CategoriesNavBar=()=>{
               imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
             },
             {
-              subTitle: "Tags/Badges",
+              subTitle: "Tags / Bedges",
               imgUrl: "https://imagizer.imageshack.com/img922/3017/bflFDJ.jpg", // Example image
             },
             {
@@ -180,7 +198,7 @@ const CategoriesNavBar=()=>{
               imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
             },
             {
-              subTitle: "Feeling Greeting",
+              subTitle: "Feeling Greetings",
               imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
             },
             {
@@ -200,7 +218,7 @@ const CategoriesNavBar=()=>{
               imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
             },
             {
-              subTitle: "Magazines",
+              subTitle: "Magazine",
               imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
             },
           ],
@@ -270,18 +288,24 @@ const CategoriesNavBar=()=>{
               {content.title}
             </h1>
             <p className="text-[#7f8c8d] font-medium text-[3vw] md:text-[1.2vw] mt-4 leading-relaxed">
-             {content.description}
-             </p>
-            
+              {content.description}
+            </p>
           </div>
 
           {/* Right Section */}
-          <div className="flex justify-center">
-            <img
-              className="rounded-lg shadow-md h-auto max-h-[40vh] w-auto md:h-[22vw] md:w-[40vw] object-cover"
-              src="https://img.freepik.com/free-photo/top-view-gift-wrapping-composition_23-2148455718.jpg?t=st=1734674377~exp=1734677977~hmac=84a23b1b4f2690a609ff97e6640751abef1f27a125ca0b407e9b7d38f8396c5f&w=996"
-              alt="Personalized Gifts"
-            />
+          <div className="relative h-[40vh] md:h-[22vw]">
+            <div className="flex justify-center w-full h-full">
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt="Personalized Gifts"
+                  className={`rounded-lg shadow-md object-cover w-full h-full absolute top-0 left-0 transition-opacity duration-500 ${
+                    index === currentIndex ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -302,20 +326,20 @@ const CategoriesNavBar=()=>{
               <div className="pt-5 md:max-w-[95%] mx-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {content.subCategory.map((item) => (
-                    <div
-                      key={item.id}
-                      className="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
-                    >
-                      <img
-                        src={item.imgUrl}
-                        alt={item.subTitle}
-                        className="w-full h-[41vh] object-cover transition-transform duration-300 ease-in-out hover:scale-110"
-                      />
-                      <div className="p-4">
-                        <h2 className="text-lg font-bold">{item.subTitle}</h2>
-                        {/* <p className="text-gray-700">₹{item.price}</p> */}
-                      </div>
-                    </div>
+                    <Link 
+          to={`${item.subTitle}`}
+          key={item.id}
+          className="block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
+        >
+          <img
+            src={item.imgUrl}
+            alt={item.subTitle}
+            className="w-full h-[41vh] object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+          />
+          <div className="p-4">
+            <h2 className="text-lg font-bold">{item.subTitle}</h2>
+          </div>
+        </Link>
                   ))}
                 </div>
               </div>

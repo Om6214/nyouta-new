@@ -62,7 +62,7 @@ function App() {
 
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
           <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
-          <Route path="/e/nav/:pageName/*" element={<CategoryFilterLabel />} />
+          <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
           
 
           <Route path="/checkout" element={<Checkout />} />
