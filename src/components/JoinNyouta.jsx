@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import Banner1 from "../assets/images/Banner1.png";
 import Banner2 from "../assets/images/Banner2.png";
+import Banner3 from "../assets/images/Banner3.png";
+import Banner4 from "../assets/images/Banner4.png";
+import button from "../assets/images/07.png";
 
 const indianStates = [
   "Andhra Pradesh",
@@ -37,19 +40,19 @@ const indianStates = [
 const forms = {
   vendor: {
     name: "Register As a Vendor",
-    imgUrl: Banner1
+    imgUrl: Banner3
   },
   memories: {
     name: "Share Memories",
-    imgUrl: Banner2
+    imgUrl: Banner1
   },
   matrimony: {
     name: "Submit Matrimonial Biodata",
-    imgUrl: Banner1
+    imgUrl: Banner2
   },
   submitDesign: {
     name: "Submit Design! Earn",
-    imgUrl: Banner2
+    imgUrl: Banner4
   }
 };
 
@@ -73,27 +76,31 @@ const JoinNyouta = () => {
       <div>
         <img src={forms[currentCategory].imgUrl} className='w-full h-[250px]' alt={forms[currentCategory].name} />
       </div>
-      <div className='mx-4 lg:mx-24 my-8 flex flex-col gap-4'>
+      <div className='mx-4 lg:mx-32 my-8 flex flex-col gap-8 shadow-xl p-5'>
         <div>
         <h1 className='text-center text-3xl lg:text-4xl font-avalonN text-secondary'>{forms[currentCategory].name}</h1>
         </div>
         <form action="" method="post" className='flex flex-col gap-6'>
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
-            <input type="text" placeholder='Name*' required/>
-            <input type="email" name="" id="" placeholder='Email'/>
-            <input type="number" name="" id="" placeholder='Phone No.'/>
-            <input type="text" placeholder='Place'/>
+            <input className='rounded-md' type="text" placeholder='Name*' required/>
+            <input className='rounded-md' type="email" name="" id="" placeholder='Email' required/>
+            <input className='rounded-md' type="number" max={10} name="" id="" placeholder='Phone No.' required/>
+            <input className='rounded-md' type="text" placeholder='Place' required/>
           </div>
           <div className='flex flex-col gap-6'>
-            <select name="" id="" required>
+            <select className='rounded-md' name="" id="" required>
               <option value="" disabled>Select State</option>
               {indianStates.map((item) => (
                 <option value="">{item}</option>
               ))}
             </select>
-            <textarea name="" id="" placeholder='Write About Special Moments'></textarea>
+            <textarea className='rounded-md' name="" id="" placeholder='Write About Special Moments'></textarea>
           </div>
-          <button type="submit">Submit</button>
+          <div className='relative flex justify-center items-center'>
+            <img className='h-8 w-32' src={button} alt="" />
+            <button type="submit" className='absolute text-lg font-avalonN transition duration-200 ease-in-out hover:text-black hover:font-bold text-white'>Submit</button>
+          </div>
+         
         </form>
       </div>
     </div>
