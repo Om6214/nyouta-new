@@ -161,7 +161,13 @@ export default function MainNav() {
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
           <div className="lg:flex hidden">
-            <input className="rounded-l-lg" type="search" name="search" id="search" placeholder="I'm shopping for"/>
+            <select name="" id="" className="!pr-8 border-r-0 rounded-l-lg w-[80px]">
+              <option value="">All</option>
+              {navItems.map((item) => (
+                <option value="">{item.label}</option>
+              ))}
+            </select>
+            <input className="" type="search" name="search" id="search" placeholder="I'm shopping for"/>
             <button className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont">Search</button>
           </div>
 
