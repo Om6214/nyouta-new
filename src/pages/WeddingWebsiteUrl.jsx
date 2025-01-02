@@ -12,6 +12,7 @@ import { createWeddingWebsite, updateWeddingWebsite } from "../Store/slices/wedd
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeddingTemplates } from "../Store/slices/weddingtemplateSlice";
+import TemplateSection from "../components/TemplateSection.jsx";
 
 const items = [
   {
@@ -133,6 +134,9 @@ const WeddingWebsiteUrl = () => {
             <option value="">New</option>
             <option value="">Hot</option>
           </select>
+        </div>
+        <div>
+          <TemplateSection/>
         </div>
       </div>
       <section className="mx-2 lg:mx-16 my-4 font-heroFont">
