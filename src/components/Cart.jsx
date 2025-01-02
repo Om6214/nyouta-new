@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useCart } from '../CartContext';
 import { IoClose } from 'react-icons/io5';
-import { ShoppingBag } from 'lucide-react'; 
+import { ShoppingBag, Trash2 } from 'lucide-react'; 
 import {getCart,removeFromCart} from '../Store/slices/productSlice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -87,9 +87,9 @@ export default function Cart() {
               </div>
               <button
                 onClick={()=>handleRemove(item)} // Remove item from cart
-                className="text-red-600 text-sm hover:underline"
+                className="text-red-600 text-sm hover:text-black transition duration-300 ease-in"
               >
-                Remove
+                <Trash2 />
               </button>
             </li>
           ))}
