@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            max-width: 100%;
+            margin: 0 auto;
+            color: #555;
+            background-color: #fafafa;
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .overlay-text {
+            position: absolute;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        /* Section 1 - Sanskrit Text */
+        #sec1 .overlay-text {
+            bottom: 8%;
+            right: 50%;
+            transform: translateX(50%);
+            color: red;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: bold;
+            text-align: center;
+            width: 80%;
+        }
+
+        /* Section 2 - Names */
+        #sec2 .overlay-text {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fafafa;
+            text-align: center;
+            width: 90%;
+        }
+
+        #sec2 .names {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        #sec2 .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+        }
+
+        /* Section 3 - Story */
+        #sec3 .overlay-text {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #a55c1d;
+            text-align: center;
+            width: 80%;
+        }
+
+        #sec3 .story {
+            font-size: clamp(1rem, 2.5vw, 2rem);
+            margin-bottom: 2rem;
+        }
+
+        /* Section 4 - Bride & Groom */
+        .profile {
+            padding: 20px;
+            margin: 1rem 0;
+        }
+
+        .profile-name {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .profile-text {
+            font-size: clamp(0.9rem, 2vw, 1.4rem);
+        }
+
+        /* Section 5 - Date & Venue */
+        #sec5 .overlay-text {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+        }
+
+        .date {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .venue {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: bold;
+        }
+
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-top: 2rem;
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Section 6 - RSVP Form */
+        .form-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            background-color: #a55c1d;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #container {
+                padding: 0 10px;
+            }
+
+            .section {
+                margin-bottom: 1rem;
+            }
+
+            .profile {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header" style="width: 100%;height: 100%;background-color: #f1f1f1;">
+        
+    <div id="container" style="width:100%;height: auto;margin-left: 5%;">
+        
+        <div id="sec1" class="section">
+            <div class="overlay-text">
+                ॐ वक्रतुंड महाकाय सूर्यकोटि समप्रभ।<br/>
+                निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥
+            </div>
+            <img src="./Images/b1.png" alt="Decorative background">
+        </div>
+
+        <div id="sec2" class="section">
+            <div class="overlay-text">
+                <div class="names">Neha & Rahul</div>
+                <div class="subtitle">Are Getting Married</div>
+            </div>
+            <img src="./Images/b2.png" alt="Wedding couple">
+        </div>
+
+        <div id="sec3" style="position: relative;">
+            <div style="position: absolute; top: 25%; color: #a55c1d;text-align: center;padding-left: 15%;padding-right: 15%;">
+                <div style="font-size: 200%;margin-bottom: 5%;">Veil unity seat covers groomsman family mother church glitter tuxedo. Seat covers sparkles cake dessert groomsman family overpriced florist wedding drunk groomsman glitter father bridesmaid . Aisle first forever happy salad father bridesmaid mother guitar acoustic bass unity cheers overpriced florist beautiful, seat covers flowers.</div>
+                <div ><img style="height: 40%;width: 80%;" src="https://img.freepik.com/free-photo/holding-iindian-wedding-sacred-object-hands_8353-9779.jpg?t=st=1735543338~exp=1735546938~hmac=1761dabe279c9bf361d326dda71e4aad17c923e3e612e0f97e4f116d68b05a27&w=996" alt=""></div>
+            </div>
+            <img src="./Images/b3.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div id="sec4" style="position: relative;">
+            <div>
+                <div style="position: absolute; top: 13%; left: 70%; color: #000000;font-size: 200%;font-weight: bold;">Bride Name</div>
+                <div style="position: absolute; top: 9%; left: 16%;right: 40%; color: #000000;font-size: 140%;font-weight: bold;">Bride Info, I think the moment I knew he was “the one” was when I had a work assignment that would take me to France for 10 weeks. It was only once I was on the plane I realized how much I would miss him. I never wanted to be without him again!</div>
+                <div style="position: absolute;top: 35%;left: 32%;"><img style="height: 40%;width: 60%;" src="https://img.freepik.com/free-photo/holding-iindian-wedding-sacred-object-hands_8353-9779.jpg?t=st=1735543338~exp=1735546938~hmac=1761dabe279c9bf361d326dda71e4aad17c923e3e612e0f97e4f116d68b05a27&w=996" alt=""></div>
+                <div style="position: absolute; bottom: 23%; left: 15%; color: #000000;font-size: 200%;font-weight: bold;">Groom Name</div>
+                <div style="position: absolute; bottom: 18%; left: 46%;right: 4%; color: #000000;font-size: 140%;font-weight: bold;">What can I say, she is amazing. Brilliant, creative, and adventurous. I have always been a little bit shy, and she has shown me a whole new side of life. I never want to go back to the way life was before I met her. She is my forever. plane I realized how much I would miss him. I never wanted to be without him again!</div>
+            </div>
+            <img src="./Images/b4.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div id="sec5" style="position: relative;">
+            <div style="position: absolute;top: 33%;left: 35%;">
+                <div style=" font-weight: bold;font-size: 200%;margin-bottom: 8%;">July 14, 2025 | 3:00 PM</div>
+                    <div style=" font-weight: bold;text-align: center;font-size: 150%;">Lernerra Luxury Resort</div>
+                   <div style="font-weight: bold;text-align: center;font-size: 150%;"> 123 Anywhere St., Any City, ST</div>
+                </div>
+                <div style="position: absolute;height: 22%;width: 35%; bottom: 7%;left: 33%;">
+                    <iframe src= 
+"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.4051603706222!3d28.50292593193056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce626851f7009%3A0x621185133cfd1ad1!2sGeeksforGeeks!5e0!3m2!1sen!2sin!4v1585040658255!5m2!1sen!2sin"
+                    width="400"
+                    height="300"
+                    frameborder="0"
+                    style="border:0;"
+                    allowfullscreen=""
+                    aria-hidden="false"
+                    tabindex="0"> 
+            </iframe>
+                </div>
+                <img src="./Images/b5.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div id="sec6" style="position: relative;">
+            <div ><input style="position: absolute;top: 37.4%;height: 4.9%; width: 24.3%; left: 23.6%;background-color:transparent" type="text"></input></div>
+            <input style="position: absolute;top: 49.4%;height: 4.9%; width: 24.3%; left: 23.6%;background-color:transparent;" type="text"></input>
+            <input style="position: absolute;top: 62.5%;height: 4.9%; width: 24.3%; left: 23.6%;background-color:transparent;" type="text"></input>
+            <input style="position: absolute;top: 75.7%;height: 4.9%; width: 24.3%; left: 23.6%;background-color:transparent;" type="text"></input>
+
+
+
+            <div ><input style="position: absolute;top: 37.4%;height: 4.9%; width: 21.9%; left: 53.7%;background-color:transparent" type="text"></input></div>
+            <input style="position: absolute;top: 62.5%;height: 4.9%; width: 21.9%; left: 53.7%;background-color:transparent;" type="text"></input>
+            <input style="position: absolute;top: 75.7%;height: 4.9%; width: 21.9%; left: 53.7%;background-color:transparent;" type="text"></input>
+            <input style="position: absolute;top: 49.4%;height: 4.9%; width: 21.9%; left: 53.7%;background-color:transparent;" type="text"></input>
+
+            <button id="buttonn" style="position: absolute;height: 5.4%; width: 21.9%; bottom: 5%; left: 39%;opacity: 0.1;" ></button>
+            <img src="./Images/b6.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div id="sec7" style="position: relative;">
+        </div>
+            <img src="./Images/b7.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div id="sec8" style="position: relative;">
+            <div style="position: absolute;top: 60%;left: 63%;font-weight: bold;text-align: center;">
+                <div style="font-size: 140%;">July 14, 2025 | 3:00 PM</div>
+                <div>Lernerra Luxury Resort</div>
+                <div>123 Anywhere St., Any City, ST</div>
+                </div>
+            <img src="./Images/b8.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+        <div id="sec9">
+            <img src="./Images/b9.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+
+        <div id="sec10">
+            <img src="./Images/b10.png" alt="" style="width: 100%;height: 100%;">
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>

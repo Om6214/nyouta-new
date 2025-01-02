@@ -28,7 +28,11 @@ import CategoryLabel from './components/CategoryLabel';
 
 import WeddingWebsiteUrl from './pages/WeddingWebsiteUrl';
 import LoginRegister from './pages/LoginRegister';
+
+import CategoryFilterLabel from './components/CategoryFilterLabel';
+
 import JoinNyouta from './components/JoinNyouta';
+
 
 
 // gaganluthrasirji
@@ -56,6 +60,8 @@ function App() {
           <Route path='/join-e-nyouta' element={<JoinNyouta/>}/>
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
           <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
+          <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
+          
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />

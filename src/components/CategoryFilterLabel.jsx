@@ -9,17 +9,20 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+
+
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 
-export default function CategoryLabel() {
+export default function CategoryFilterLabel() {
 
-  const { pageName, "*": path } = useParams();
+  const { pageName,pagid, "*": path } = useParams();
+  // console.log(pageName+" , "+pagid+" , "+ path);
   
-
+console.log("B")
   const formatCategoryName = (name) => {
     return name
       // .split("-")
@@ -39,25 +42,38 @@ export default function CategoryLabel() {
  
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
-  // console.log(formattedPageName, formattedPath);
+  // console.log(formattedPageName,pagid, formattedPath);
 
 
 
   const filteredItems = ProductJson.filter(item => {
-    const categoryMatch = 
-      item.category.toLowerCase() === formattedPageName.toLowerCase();
+    const categoryMatch =  item.category.toLowerCase() === formattedPageName.toLowerCase();
+
+      const subCatego=item.subCategory.toLowerCase()===pagid.toLowerCase();
+      
+      const subCategoryMatch = item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
+      // console.log(item.subSubCategory.toLowerCase()+"==="+formattedPath.toLowerCase())
     
-    const subCategoryMatch = item.subCategory.toLowerCase() === formattedPath.toLowerCase();
-    
-    return categoryMatch && subCategoryMatch;
+    return categoryMatch && subCatego && subCategoryMatch;
   });
 
 
+  const RelatedItems = ProductJson.filter(item => {
+    const categoryMatch =  item.category.toLowerCase() === formattedPageName.toLowerCase();
+
+      const subCatego=item.subCategory.toLowerCase()===pagid.toLowerCase();
+      
+      // const subCategoryMatch = item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
+      // console.log(item.subSubCategory.toLowerCase()+"==="+formattedPath.toLowerCase())
+    
+    return categoryMatch && subCatego ;
+  });
+  console.log(RelatedItems);
   return (
     <>
     {filteredItems.length > 0 ? (
     <div  className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
-        <div className="mt-10 ">
+        <div className="mt-10">
         <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
       <Swiper
         style={{
@@ -167,9 +183,9 @@ export default function CategoryLabel() {
   
       <div className="pt-5 md:max-w-[95%] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredItems.map((item) => (
+        {RelatedItems.map((item) => (
   <Link
-    to={`/e/nav/${item.category}/${item.subCategory}/${item.subSubCategory}`}
+  to={`/e/nav/${item.category}/${item.subCategory}/${item.subSubCategory}`}
     key={item.id}
     className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
   >
