@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { X, Plus, Camera } from 'lucide-react';
-
-const WeddingPortfolioForm = () => {
+import {updateWeddingWebsitedata} from '../Store/slices/weddingwebsiteSlice';
+import { useDispatch,useSelector } from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import { toast } from 'react-toastify';
+const WeddingPortfolioForm = ({id,setShowForm}) => {
+  console.log(id);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
+    id: id,
     home: {
       name: '',
       partnerName: '',
@@ -93,9 +100,18 @@ const WeddingPortfolioForm = () => {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData);
+    const res=await dispatch(updateWeddingWebsitedata(formData));
+    if(res.payload.status===401||res.payload.status===403){
+      navigate('/login');
+    }
+    else if(res.payload.status===200){
+      setShowForm(false);
+      toast.success(res.payload.message);
+
+    }
+    console.log(res);
   }
   return (
     <div className="min-h-screen bg-[#E3E0DA] p-8">

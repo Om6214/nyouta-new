@@ -34,12 +34,10 @@ import CategoryFilterLabel from './components/CategoryFilterLabel';
 import JoinNyouta from './components/JoinNyouta';
 
 
-
 // gaganluthrasirji
 
 function App() {
   // useEffect(()=>{...}) // Your previous effect logic
-
   return (
     <CartProvider>
       <BrowserRouter>

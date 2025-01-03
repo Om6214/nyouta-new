@@ -4,7 +4,7 @@ import { createWeddingWebsite, updateWeddingWebsite } from "../Store/slices/wedd
 import { useDispatch } from 'react-redux';
 import WeddingPortfolioForm from './WeddingPortfolioForm';
 
-const TemplateCard = ({ template, id, image,setShowForm }) => {
+const TemplateCard = ({ template, id, image,setShowForm,setId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = localStorage.getItem('user');
@@ -24,9 +24,12 @@ const TemplateCard = ({ template, id, image,setShowForm }) => {
       }
     }
   }
-  const handleCreate = () => {
-    // handleTemplateClick(id);
+  const handleUpdatedetails = () => {
     setShowForm(true);
+    setId(id);
+  }
+  const handleCreate = () => {
+    handleTemplateClick(id);
   }
   return (
     <div
@@ -37,6 +40,7 @@ const TemplateCard = ({ template, id, image,setShowForm }) => {
           <img src={image} alt="Template" className="w-full h-auto transition-all duration-300 group-hover:opacity-50" />
           {/* Create Button */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-10 transition-all duration-500">
+            <button className="bg-gray-500 text-white py-2 px-4 mr-3" onClick={handleUpdatedetails}>Update Details</button>
             <button className="bg-gray-500 text-white py-2 px-4" onClick={handleCreate}>Create</button>
           </div>
         </div>
@@ -47,6 +51,7 @@ const TemplateCard = ({ template, id, image,setShowForm }) => {
 
 const TemplateSection = ({ weddingTemplates }) => {
   const [showForm, setShowForm] = useState(false);
+  const [id, setId] = useState(null);
   return (
     <>
 
@@ -58,6 +63,7 @@ const TemplateSection = ({ weddingTemplates }) => {
           template={template.content}
           image={template.image}
           setShowForm={setShowForm}
+          setId={setId}
         />
       ))}
     </div>
@@ -80,7 +86,7 @@ const TemplateSection = ({ weddingTemplates }) => {
               </button>
 
               {/* Wedding Portfolio Form */}
-              <WeddingPortfolioForm />
+              <WeddingPortfolioForm id={id} setShowForm={setShowForm}/>
             </div>
           </div>
         </>

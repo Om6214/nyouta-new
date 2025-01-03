@@ -20,6 +20,23 @@ export const getWeddingWebsite = createAsyncThunk(
     }
 );
 
+export const updateWeddingWebsitedata = createAsyncThunk(
+    "weddingwebsite/updateWeddingWebsitedata",
+    async (data, thunkAPI) => {
+        try {
+            const response = await axios.put(`${BASE_URL}/weddingwebsite/updateWeddingWebsitedata/${data.id}`, data,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
 export const weddingwebsiteSlice = createSlice({
     name: "weddingwebsite",
     initialState,
@@ -33,6 +50,17 @@ export const weddingwebsiteSlice = createSlice({
             state.weddingWebsite = action.payload;
         })
         builder.addCase(getWeddingWebsite.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+        builder.addCase(updateWeddingWebsitedata.pending, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(updateWeddingWebsitedata.fulfilled, (state, action) => {
+            state.loading = false;
+            state.weddingWebsite = action.payload.weddingWebsite;
+        })
+        builder.addCase(updateWeddingWebsitedata.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         })

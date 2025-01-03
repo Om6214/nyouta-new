@@ -442,7 +442,7 @@ export default function MainNav() {
               >
                {user&& Object.keys(user).length > 0?
                <div>
-                <img src={user.avatar} alt="profile-pic" className="w-10 h-10 rounded-full" />
+                <img src={user.avatar||'profile.jpeg'} alt="profile-pic" className="w-10 h-10 rounded-full" />
                </div>:
                <>
                 <User size={27} />

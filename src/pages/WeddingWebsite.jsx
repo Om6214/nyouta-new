@@ -18,7 +18,7 @@ const WeddingWebsite = () => {
             {error && <div>{error}</div>}
             {weddingWebsite && 
                 <div>
-                    <div dangerouslySetInnerHTML={{ __html: weddingWebsite.html }} />
+                    <div dangerouslySetInnerHTML={{ __html: weddingWebsite?.html }} />
                 </div>
             }
         </>

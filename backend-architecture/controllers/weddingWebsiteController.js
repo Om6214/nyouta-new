@@ -37,15 +37,14 @@ export const createWeddingWebsite = async (req, res) => {
         const { userId } = req.user;
         const { templateId } = req.params;
         const user = await User.findById(userId);
-        const weddingWebsite = await WeddingWebsite.find();
-        const numberofWeddingWebsite = weddingWebsite.length;
-        const slug = `${formatName(user.name)}-${formatName(user.name)}-${numberofWeddingWebsite + 1}`;
+        const slug = `${formatName(user.name)}-${formatName(user.name)}-${userId}`;
         user.slug = slug;
         user.templateId = templateId;
         user.isWebsiteCreated = true;
         await user.save();
         res.status(200).json({ message: 'Wedding website created successfully', slug });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 }
@@ -87,8 +86,9 @@ export const getWeddingWebsite = async (req, res) => {
 
 export const updateWeddingWebsitedata = async (req, res) => {
     try {
+        const {home,about,ourStory,socialLinks,tags,eventInfo} = req.body;
         const { userId } = req.user; 
-        const { id } = req.params; // Get website ID from request parameters
+        const { id } = req.params; // Get templateId from params
 
         // Check if user exists
         const user = await User.findById(userId);
@@ -97,41 +97,31 @@ export const updateWeddingWebsitedata = async (req, res) => {
         }
 
         // Check if WeddingWebsite exists
-        const weddingWebsite = await WeddingWebsite.findById(id);
+        const weddingWebsite = await WeddingWebsite.findOne({user: userId});
         if (!weddingWebsite) {
-            return res.status(404).json({ message: "Wedding website not found" });
+            const newWeddingWebsite = new WeddingWebsite({
+                user: userId,
+                ...req.body,
+            })
+            await newWeddingWebsite.save();
+            return res.status(200).json({
+                message: "Wedding website data updated successfully",
+                weddingWebsite: newWeddingWebsite,
+            });
         }
 
-        // Update the fields dynamically
-        const updateData = {};
-        const fieldsToUpdate = [
-            "name",
-            "partnerName",
-            "home",
-            "about.bride",
-            "about.groom",
-            "ourStory",
-            "eventInfo",
-            "socialLinks",
-            "tags",
-        ];
-
-        fieldsToUpdate.forEach((field) => {
-            if (req.body[field] !== undefined) {
-                updateData[field] = req.body[field];
-            }
-        });
-
-        // Perform the update
-        const updatedWeddingWebsite = await WeddingWebsite.findByIdAndUpdate(
-            id,
-            { ...updateData, updatedAt: Date.now() },
-            { new: true } // Return updated document
-        );
-
+        // Update WeddingWebsite
+        weddingWebsite.user = userId;
+        weddingWebsite.home = home;
+        weddingWebsite.about = about;
+        weddingWebsite.ourStory = ourStory;
+        weddingWebsite.socialLinks = socialLinks;
+        weddingWebsite.tags = tags;
+        weddingWebsite.eventInfo = eventInfo;
+        await weddingWebsite.save();
         res.status(200).json({
             message: "Wedding website data updated successfully",
-            data: updatedWeddingWebsite,
+            weddingWebsite,
         });
     } catch (error) {
         console.error("Error updating wedding website:", error.message);

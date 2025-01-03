@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../utils/api";
 import { toast } from "react-toastify";
+import { logout } from "./authSlice";
 
 const initialState = {
     products: [],
@@ -35,6 +36,9 @@ export const getCart = createAsyncThunk(
             return response.data;
         } catch (error) {
             console.log(error);
+            if (error.response.status === 401 || error.response.status === 403) {
+                thunkAPI.dispatch(logout()); // Use `thunkAPI.dispatch` 
+            }
             return thunkAPI.rejectWithValue(error.response.data.message || "Something went wrong");
         }
     }
