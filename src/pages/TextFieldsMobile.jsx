@@ -9,7 +9,7 @@ import { FaBold, FaItalic, FaTrash } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import translate from "translate"; // Importing translate library
 
-const TextOptions = ({ selectedText, updateTextField, onClose }) => {
+const TextFieldsMobile = ({ selectedText, updateTextField, onClose }) => {
   const {
     text,
     fontColor,
@@ -85,7 +85,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
   const fontOptions = ["Lora", "Roboto", "Arial", "Times New Roman"];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black">
+    <div className="p-6 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black sm:max-w-full">
       {/* Language and Text Area */}
       <div className="mb-4">
         <label className="block text-sm font-semibold mb-2">Language</label>
@@ -110,11 +110,11 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       </div>
 
       {/* Font Family, Bold, Italic, and Color */}
-      <div className="flex items-center justify-between gap-3 mb-4">
+      <div className="flex items-center justify-between gap-3 mb-4 sm:flex-col sm:gap-2">
         <select
           value={font}
           onChange={(e) => updateTextField(selectedText.id, "font", e.target.value)}
-          className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:w-full"
         >
           {fontOptions.map((font) => (
             <option key={font} value={font}>
@@ -124,17 +124,13 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
         </select>
         <button
           onClick={() => updateTextField(selectedText.id, "isBold", !isBold)}
-          className={`p-2 rounded-lg ${
-            isBold ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-          }`}
+          className={`p-2 rounded-lg ${isBold ? "bg-blue-500 text-white" : "border hover:bg-gray-100"}`}
         >
           <FaBold />
         </button>
         <button
           onClick={() => updateTextField(selectedText.id, "isItalic", !isItalic)}
-          className={`p-2 rounded-lg ${
-            isItalic ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-          }`}
+          className={`p-2 rounded-lg ${isItalic ? "bg-blue-500 text-white" : "border hover:bg-gray-100"}`}
         >
           <FaItalic />
         </button>
@@ -147,37 +143,31 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       </div>
 
       {/* Alignment, Letter Spacing, Uppercase */}
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <div className="flex flex-col items-center">
+      <div className="flex items-center justify-between gap-3 mb-4 sm:flex-col sm:gap-2">
+        <div className="flex flex-col items-center sm:items-start">
           <label className="text-xs text-gray-500 mb-1">Alignment</label>
           <div className="flex gap-2">
             <button
               onClick={() => updateTextField(selectedText.id, "textAlign", "left")}
-              className={`p-2 rounded-lg ${
-                textAlign === "left" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-              }`}
+              className={`p-2 rounded-lg ${textAlign === "left" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"}`}
             >
               <AiOutlineAlignLeft />
             </button>
             <button
               onClick={() => updateTextField(selectedText.id, "textAlign", "center")}
-              className={`p-2 rounded-lg ${
-                textAlign === "center" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-              }`}
+              className={`p-2 rounded-lg ${textAlign === "center" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"}`}
             >
               <AiOutlineAlignCenter />
             </button>
             <button
               onClick={() => updateTextField(selectedText.id, "textAlign", "right")}
-              className={`p-2 rounded-lg ${
-                textAlign === "right" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-              }`}
+              className={`p-2 rounded-lg ${textAlign === "right" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"}`}
             >
               <AiOutlineAlignRight />
             </button>
           </div>
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center sm:items-start">
           <label className="text-xs text-gray-500 mb-1">Letter Spacing</label>
           <input
             type="range"
@@ -186,15 +176,15 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
             step="0.1"
             value={letterSpacing}
             onChange={(e) => updateTextField(selectedText.id, "letterSpacing", e.target.value)}
-            className="w-full"
+            className="w-full sm:w-auto"
           />
         </div>
         
       </div>
 
       {/* Line Height, Curve Text, Lowercase */}
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <div className="flex flex-col items-center">
+      <div className="flex items-center justify-between gap-3 mb-4 sm:flex-col sm:gap-2">
+        <div className="flex flex-col items-center sm:items-start">
           <label className="text-xs text-gray-500 mb-1">Line Height</label>
           <input
             type="range"
@@ -203,26 +193,22 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
             step="0.1"
             value={lineHeight}
             onChange={(e) => updateTextField(selectedText.id, "lineHeight", e.target.value)}
-            className="w-full"
+            className="w-full sm:w-auto"
           />
         </div>
-        <button
-          onClick={toggleUppercase}
-          className={`p-2 rounded-lg ${
-            isUppercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-          }`}
-        >
-          Upper
-        </button>
-
-
+       
         <button
           onClick={toggleLowercase}
-          className={`p-2 rounded-lg ${
-            isLowercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-          }`}
+          className={`p-2 rounded-lg ${isLowercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"}`}
         >
           Lower
+        </button>
+
+        <button
+          onClick={toggleUppercase}
+          className={`p-2 rounded-lg ${isUppercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"}`}
+        >
+          Upper
         </button>
       </div>
 
@@ -237,4 +223,4 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
   );
 };
 
-export default TextOptions;
+export default TextFieldsMobile;
