@@ -98,18 +98,17 @@ const WeddingPortfolioForm = ({id,setShowForm}) => {
       }));
     }
   };
-
-
+  
   const handleSubmit = async(e) => {
     e.preventDefault();
     const res=await dispatch(updateWeddingWebsitedata(formData));
+    console.log(res);
     if(res.payload.status===401||res.payload.status===403){
       navigate('/login');
     }
     else if(res.payload.status===200){
       setShowForm(false);
-      toast.success(res.payload.message);
-
+      toast.success(res.payload.data.message);
     }
     console.log(res);
   }
@@ -148,7 +147,7 @@ const WeddingPortfolioForm = ({id,setShowForm}) => {
                 <label className="block text-amber-900 mb-2">Groom's Name</label>
                 <input
                   type="text"
-                  value={formData.name}
+                  value={formData.home.name}
                   onChange={(e) => handleChange(e, 'home', 'name')}
                   className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:border-amber-400"
                 />
@@ -157,7 +156,7 @@ const WeddingPortfolioForm = ({id,setShowForm}) => {
                 <label className="block text-amber-900 mb-2">Bride's Name</label>
                 <input
                   type="text"
-                  value={formData.partnerName}
+                  value={formData.home.partnerName}
                   onChange={(e) => handleChange(e, 'home', 'partnerName')}
                   className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:border-amber-400"
                 />

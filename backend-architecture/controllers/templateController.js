@@ -29,7 +29,14 @@ export const getAllTemplates = async (req, res) => {
             const content = fs.readFileSync(filePath, 'utf-8'); // Read the file content
 
             // Render the EJS template with data
-            const renderedContent = ejs.render(content, sampleData);
+            const renderedContent = ejs.render(content, {
+                home: null,
+                about: null,
+                ourStory: null,
+                socialLinks: null,
+                tags: null,
+                eventInfo: null,
+            });
 
             const id = path.basename(file, '.ejs'); // Extract ID from file name
             const image=images.find((img)=>img.includes(id));
@@ -38,6 +45,7 @@ export const getAllTemplates = async (req, res) => {
 
         res.status(200).json({ message: 'Templates fetched successfully', templates });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: error.message });
     }
 };

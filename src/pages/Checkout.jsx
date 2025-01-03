@@ -388,7 +388,7 @@ const Checkout = () => {
                 <div className='flex justify-between mt-4'>
                     <p>Subtotal</p>
                      
-                    <p>₹{cart?.products.length>0?cart?.products?.reduce((acc, item) => acc + item.productId.price * item.quantity, 0).toFixed(2):(0)}</p>
+                    <p>₹{cart?.products?.length>0?cart?.products?.reduce((acc, item) => acc + item.productId.price * item.quantity, 0).toFixed(2):(0)}</p>
                 </div>
                 <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700' onClick={handleOrder}>
                     Place Order

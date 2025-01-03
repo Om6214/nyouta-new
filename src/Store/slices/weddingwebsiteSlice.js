@@ -29,7 +29,7 @@ export const updateWeddingWebsitedata = createAsyncThunk(
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            return response.data;
+            return response;
         } catch (error) {
             console.log(error);
             return thunkAPI.rejectWithValue(error);

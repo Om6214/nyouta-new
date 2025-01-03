@@ -8,6 +8,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const product = state?.product;
+  console.log(product)
   const {id} = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

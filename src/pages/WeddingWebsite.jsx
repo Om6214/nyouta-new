@@ -14,9 +14,13 @@ const WeddingWebsite = () => {
     }, [dispatch, slug]);
     return (
         <>
-            {loading && <div>Loading...</div>}
+            {loading &&
+                <div className="flex justify-center items-center h-full">
+                    <div className="spinner-border animate-spin border-4 border-blue-500 border-t-transparent w-8 h-8 rounded-full" />
+                </div>
+            }
             {error && <div>{error}</div>}
-            {weddingWebsite && 
+            {weddingWebsite &&
                 <div>
                     <div dangerouslySetInnerHTML={{ __html: weddingWebsite?.html }} />
                 </div>
