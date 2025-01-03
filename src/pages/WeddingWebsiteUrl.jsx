@@ -104,10 +104,12 @@ const WeddingWebsiteUrl = () => {
             <option value="">Hot</option>
           </select>
         </motion.div>
-        <motion.div initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.8 }}
-        className="flex flex-col gap-6">
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.8 }}
+          className="flex flex-col gap-6"
+        >
           <div className="mt-4">
             <h1 className="text-4xl text-secondary font-avalonN">
               Choose Your Designs Here...
