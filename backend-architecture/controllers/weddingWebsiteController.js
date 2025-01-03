@@ -92,6 +92,7 @@ export const getWeddingWebsite = async (req, res) => {
                 socialLinks: null,
                 tags: null,
                 eventInfo: null,
+                gallery:null
             });
             res.status(200).json({ message: 'Wedding website fetched successfully', html });
         }
@@ -104,6 +105,7 @@ export const getWeddingWebsite = async (req, res) => {
                 socialLinks: weddingWebsite[0].socialLinks,
                 tags: weddingWebsite[0].tags,
                 eventInfo: weddingWebsite[0].eventInfo,
+                gallery: weddingWebsite[0].gallery,
             }); 
             console.log(html);
             res.status(200).json({ message: 'Wedding website fetched successfully', html });

@@ -42,6 +42,9 @@ const weddingWebsiteSchema = new mongoose.Schema({
         type: [String],
         required: false,
     },
+    gallery:[{
+        photos:[String]
+    }],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
 });

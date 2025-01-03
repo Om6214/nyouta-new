@@ -315,6 +315,24 @@ function formatDate(dateString) {
                   <%= (ourStory && ourStory.description) ? ourStory.description : "For our three year anniversary we wanted to re-create our first date. We went to the coffee shop where we met, and then to the small movie theater next door. Instead of a movie, he surprised me with a theater full of friends and family then proposed on stage. It is so meaningful to us to share this special day with our most cherished friends and family. We sincerely hope we will have the honor to dine, laugh, and dance with you on our wedding weekend. It would mean the world to us." %>
                 </div>
             </div>
+
+            <!-- New Gallery Section -->
+            <div id="gallery" style="margin-top: 40px;">
+                <h2 style="display: flex; justify-content: center;">Gallery</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;">
+                    <% if (gallery && gallery.photos && gallery.photos.length > 0) { %>
+                        <% gallery.photos.forEach(function(photo) { %>
+                            <div style="border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                                <img src="<%= photo %>" alt="Gallery Photo" style="width: 100%; height: auto;">
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div style="grid-column: span 3; text-align: center; color: #666;">
+                            No photos available in the gallery.
+                        </div>
+                    <% } %>
+                </div>
+            </div>
         
             <div style="font-size: 1.5em; font-weight: bold; text-align: center; margin: 20px 0;">Event Information</div>
             <div style="font-size: 1em; line-height: 1.8;">
