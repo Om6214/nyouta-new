@@ -1298,46 +1298,90 @@ export default function WeddingCardEditor() {
                 </div>
 
                 {stickers.map(({ id, src, x, y, width, height, rotation }) => (
-                  <Draggable key={id} position={{ x, y }} onDrag={(e, data) => {
-                    setStickers((prev) => prev.map((sticker) => sticker.id === id ? { ...sticker, x: data.x, y: data.y } : sticker));
-                  }} bounds="parent">
-                    <div style={{
-                      position: "absolute",
-                      cursor: "move",
-                      border: selectedStickerId === id ? '2px dotted blue' : 'none',
-                      zIndex: selectedStickerId === id ? 20 : 10,
-                      display: "inline-block",
-                      border: "1px solid #ccc",
-                      padding: "2px 5px",
-                    }} onClick={() => handleStickerClick(id)}>
-                      <Resizable defaultSize={{ width, height }} size={{ width, height }} lockAspectRatio onResizeStop={(e, direction, ref, d) => {
-                        setStickers((prev) => prev.map((sticker) => sticker.id === id ? { ...sticker, width: sticker.width + d.width, height: sticker.height + d.height } : sticker));
-                      }} style={{
-                        position: "absolute",
-                        zIndex: 10,
-                        border: selectedStickerId === id ? '2px dotted blue' : 'none',
-                      }}>
-                        <div className="relative">
-                          <img src={src} alt="Sticker" className="w-full h-full object-contain" />
-                          {selectedStickerId === id && (
-                            <button onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteSticker(id);
-                            }} className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center 
-                          " title="Delete Sticker">
-                              <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                            </button>
-                          )}
-                          {selectedStickerId === id && (
-                            <div className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full" style={{ transform: "translate(50%, 50%)" }} title="Resize Sticker">
-                              <i className="fas fa-arrows-alt text-white"></i>
-                            </div>
-                          )}
-                        </div>
-                      </Resizable>
-                    </div>
-                  </Draggable>
-                ))}
+                                <Draggable
+                                  key={id}
+                                  position={{ x, y }}
+                                  onDrag={(e, data) => {
+                                    setStickers((prev) =>
+                                      prev.map((sticker) =>
+                                        sticker.id === id ? { ...sticker, x: data.x, y: data.y } : sticker
+                                      )
+                                    );
+                                  }}
+                                  bounds="parent"
+                                >
+                                  <div
+                                    style={{
+                                      position: "absolute",
+                
+                                      cursor: "move",
+                                      border: selectedStickerId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
+                                      zIndex: selectedStickerId === id ? 20 : 10, // Ensure border is above other elements
+                                      display: "inline-block", // Ensure sticker stays within the border
+                                      // border: "1px solid #ccc", // Apply the border around the sticker
+                                      padding: "2px 5px", // Add padding to the border around the sticker
+                                    }}
+                                    onClick={() => handleStickerClick(id)}
+                                  >
+                                    <Resizable
+                                      defaultSize={{ width, height }}
+                                      size={{ width, height }}
+                                      lockAspectRatio
+                                      onResizeStop={(e, direction, ref, d) => {
+                                        setStickers((prev) =>
+                                          prev.map((sticker) =>
+                                            sticker.id === id
+                                              ? {
+                                                ...sticker,
+                                                width: sticker.width + d.width,
+                                                height: sticker.height + d.height,
+                                              }
+                                              : sticker
+                                          )
+                                        );
+                                      }}
+                                      style={{
+                                        position: "absolute",
+                                        zIndex: 10,
+                                        border: selectedStickerId === id ? '2px dotted blue' : 'none',
+                                      }}
+                                    >
+                                      <div className="relative">
+                                        <img
+                                          src={src}
+                                          alt="Sticker"
+                                          className="w-full h-full object-contain"
+                                        />
+                
+                                        {selectedStickerId === id && (
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleDeleteSticker(id);
+                                            }}
+                                            className="absolute top-0 right-0 w-6 h-6 shadow bg-white  border-2 border-blue-500 rounded-full flex justify-center items-center"
+                                            title="Delete Sticker"
+                                          >
+                                            <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                                          </button>
+                                        )}
+                
+                
+                
+                                        {selectedStickerId === id && (
+                                          <div
+                                            className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
+                                            style={{ transform: "translate(50%, 50%)" }}
+                                            title="Resize Sticker"
+                                          >
+                                            <i className="fas fa-arrows-alt text-white"></i> {/* Resize Icon */}
+                                          </div>
+                                        )}
+                                      </div>
+                                    </Resizable>
+                                  </div>
+                                </Draggable>
+                              ))}
 
                 {textFields.map(({ id, text, x, y, size, font, fontColor, angle, isBold, isItalic, textAlign, lineHeight, letterSpacing, isUppercase, isLowercase, curveValue }) => (
                   <div key={id} className="absolute" style={{
