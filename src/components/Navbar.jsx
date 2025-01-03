@@ -521,7 +521,7 @@ export default function MainNav() {
       </div>
 
       <div className="hidden lg:flex py-2 justify-center ">
-        <ul className="flex gap-12 justify-center items-center text-md font-heroFont">
+        <ul className="flex gap-6 justify-center items-center text-md font-avalonN">
           {navItems.map((item, index) =>
           {            const isLastTwoItems = index >= navItems.length - 2;
            return (
@@ -536,9 +536,10 @@ export default function MainNav() {
             >
               <Link
                 to={item.url}
-                className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold"
+                className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-1"
               >
                 {item.label}
+                <span><ChevronDown/></span>
               </Link>
               <AnimatePresence>
                 {item.children && activeDropdown === index && (
