@@ -30,7 +30,7 @@ const CouponCard = () => {
     infinite: true,
     autoplay: true,
     speed: 2000,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     cssEase: "linear",
     slidesToShow: 2,
     slidesToScroll: 1,
