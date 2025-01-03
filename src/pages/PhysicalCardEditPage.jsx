@@ -939,7 +939,7 @@ export default function WeddingCardEditor() {
     document.addEventListener("mouseup", handleMouseUp);
   };
 
-
+  
 
 
   if (loading) return <ShimmerSkeleton />;
