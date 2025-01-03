@@ -3,6 +3,7 @@ import invitation from "../assets/images/placeholder.jpg";
 import vinvite from "../assets/images/v-invite.webp";
 import welcome from "../assets/images/welcome sign.webp";
 import { motion, useInView } from "framer-motion";
+import btnBg from "../assets/images/08.png";
 
 const categories = [
   {
@@ -33,7 +34,7 @@ const categories = [
     ],
   },
   {
-    title: "E Invitations",
+    title: "E-Invitations",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus. Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had.",
     subCategory: [
@@ -228,14 +229,12 @@ const categories = [
       },
     ],
   },
-  
 ];
-
 
 const CategoryCard = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  const gridRef = useRef(null)
-  const isInView = useInView(gridRef, {once: true})
+  const gridRef = useRef(null);
+  const isInView = useInView(gridRef, { once: true });
   const gridVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: (index) => ({
@@ -256,11 +255,11 @@ const CategoryCard = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.8 }}
       >
-        <div className="text-center mb-10">
-          <h1 className="lg:text-5xl text-3xl font-heroFont font-extrabold bg-clip-text text-primary">
+        <div className="text-center mb-4">
+          <h1 className="lg:text-4xl text-3xl text-secondary font-avalonB bg-clip-text">
             Explore Our Product Categories
           </h1>
-          <p className="text-primary font-heroFont lg:text-2xl font-semibold text-xl mt-4 leading-relaxed">
+          <p className="text-secondary font-avalonN lg:text-2xl text-xl mt-1 leading-relaxed">
             Browse through our wide range of categories to find something
             perfect for your needs!
           </p>
@@ -280,11 +279,11 @@ const CategoryCard = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
                 key={index}
-                className={`text-md font-heroFont flex flex-shrink-0 font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform
+                className={`text-md font-avalonB flex flex-shrink-0 font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform
                                 ${
                                   selectedCategory === cat
-                                    ? "bg-violet-400 text-pink-600 shadow-lg scale-105"
-                                    : "bg-gray-200 text-gray-700 hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
+                                    ? "bg-amber-50 text-pink-600 shadow-lg scale-105"
+                                    : " text-white hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
                                 }`}
                 onClick={() => setSelectedCategory(cat)}
               >
@@ -303,7 +302,6 @@ const CategoryCard = () => {
           transition={{ duration: 1.7 }}
         >
           <div className="flex flex-col lg:flex-col gap-10 justify-between items-start mt-4">
-
             {/* Subcategories Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-4">
               {selectedCategory.subCategory.map((sub, index) => (
@@ -338,6 +336,12 @@ const CategoryCard = () => {
           </div>
         </motion.div>
       )}
+      <div className="pt-4">
+        <div className="relative flex items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
+          <img className="h-8" src={btnBg} alt="" />
+          <a className="absolute text-lg font-avalonB uppercase text-white" href="">View All Products</a>
+        </div>
+      </div>
     </div>
   );
 };

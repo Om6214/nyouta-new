@@ -4,6 +4,7 @@ import ejs from 'ejs';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import User from '../models/User.js';
+import WeddingWebsite from '../models/WeddingWebsite.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -36,7 +37,9 @@ export const createWeddingWebsite = async (req, res) => {
         const { userId } = req.user;
         const { templateId } = req.params;
         const user = await User.findById(userId);
-        const slug = `${formatName(user.name)}-${formatName(user.partnerName)}-${userId}`;
+        const weddingWebsite = await WeddingWebsite.find();
+        const numberofWeddingWebsite = weddingWebsite.length;
+        const slug = `${formatName(user.name)}-${formatName(user.name)}-${numberofWeddingWebsite + 1}`;
         user.slug = slug;
         user.templateId = templateId;
         user.isWebsiteCreated = true;
@@ -84,16 +87,55 @@ export const getWeddingWebsite = async (req, res) => {
 
 export const updateWeddingWebsitedata = async (req, res) => {
     try {
-        const { userId } = req.user;
-        const { partnerName, weddingDate, weddingVenue } = req.body;
-        console.log(req.body);
+        const { userId } = req.user; 
+        const { id } = req.params; // Get website ID from request parameters
+
+        // Check if user exists
         const user = await User.findById(userId);
-        user.partnerName = partnerName;
-        if(weddingDate) user.weddingDate = weddingDate;
-        if(weddingVenue) user.weddingVenue = weddingVenue;
-        await user.save();
-        res.status(200).json({ message: 'Wedding website data updated successfully' });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Check if WeddingWebsite exists
+        const weddingWebsite = await WeddingWebsite.findById(id);
+        if (!weddingWebsite) {
+            return res.status(404).json({ message: "Wedding website not found" });
+        }
+
+        // Update the fields dynamically
+        const updateData = {};
+        const fieldsToUpdate = [
+            "name",
+            "partnerName",
+            "home",
+            "about.bride",
+            "about.groom",
+            "ourStory",
+            "eventInfo",
+            "socialLinks",
+            "tags",
+        ];
+
+        fieldsToUpdate.forEach((field) => {
+            if (req.body[field] !== undefined) {
+                updateData[field] = req.body[field];
+            }
+        });
+
+        // Perform the update
+        const updatedWeddingWebsite = await WeddingWebsite.findByIdAndUpdate(
+            id,
+            { ...updateData, updatedAt: Date.now() },
+            { new: true } // Return updated document
+        );
+
+        res.status(200).json({
+            message: "Wedding website data updated successfully",
+            data: updatedWeddingWebsite,
+        });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error("Error updating wedding website:", error.message);
+        res.status(500).json({ message: "Server error. Please try again later." });
     }
-}
+};
+

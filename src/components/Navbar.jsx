@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import React,{useState,useEffect} from "react";
+import { Link,useNavigate } from "react-router-dom";
 import {
   Heart,
   Search,
@@ -13,105 +13,350 @@ import {
 import { useCart } from "../CartContext";
 import logo from "../assets/images/nyouta-logo2.jpg";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSelector,useDispatch } from "react-redux";
+import {logout} from '../Store/slices/authSlice';
 
 const navItems = [
   {
     label: "Print Invitations",
-    url: "/nav/print-invitations",
+    url: "/nav/print invitations",
     children: [
-      { label: "Wedding Invitations" },
-      { label: "Party Invitation" },
-      { label: "Pooja Invitations" },
-      { label: "Ceremony Invitations" },
-    ],
+      { label: "Wedding Invitations",
+        Filters:[
+          {a:"Elegant Collection"},
+          {a:"Vintage  Collection"},
+          {a:"Royal Invitations"},
+          {a:"Slider Invitations"},
+          {a:"Passport Theme Invitations"},
+          {a:"Newspaper Invitations"},
+          {a:"Aadhar Card Invitations"},
+          {a:"ATM Theme Invitations"}
+        ]
+       },
+      { label: "Party Invitation",
+        Filters: [
+  { a: 'Birthday Party ' },
+  { a: 'Kitty Party ' },
+  { a: 'Retirement Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Lohri Party ' }
+]
+
+      },
+      { label: "Pooja Invitations",Filters: [
+  { a: 'Sawamani ' },
+  { a: 'Griha Pravesh ' },
+  { a: 'Shyam Jagran ' }
+] },
+      { label: "Ceremony Invitations",Filters: [
+  { a: 'Engagement Ceremony ' },
+  { a: 'Wedding Anniversary ' },
+  { a: 'Opening Ceremony ' },
+  { a: 'Kua Poojan ' }
+] },
+    ],                    
   },
   {
     label: "E Invitation",
     url: "/nav/e-invitations",
     children: [
-      { label: "Wedding Invitations" },
-      { label: "Party Invitation" },
-      { label: "Pooja Invitation" },
-      { label: "Ceremony Invitation" },
-      { label: "Short Invitation - Free" },
-      { label: "Matrimonial Biodata" },
+      { label: "Wedding Invitations",Filters: [
+  { a: 'Pre Invitations - Manuhar ' },
+  { a: 'Save the Date ' },
+  { a: 'Wedding Invitations ' },
+  { a: 'Ceremony Invitations ' },
+  { a: 'Wedding Timeline ' },
+  { a: 'Royal Collection - NEW ' }
+] },
+      { label: "Party Invitations",Filters: [
+  { a: 'Birthday Party ' },
+  { a: 'Kitty Party ' },
+  { a: 'Retirement Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Lohri Party ' }
+]
+ },
+      { label: "Pooja Invitations",Filters: [
+  { a: 'Sawamani ' },
+  { a: 'Griha Pravesh ' },
+  { a: 'Shyam Jagran ' }
+] },
+      { label: "Ceremony Invitations",Filters: [
+  { a: 'Engagement Ceremony ' },
+  { a: 'Wedding Anniversary ' },
+  { a: 'Wedding Events ' },
+  { a: 'Opening Ceremony ' },
+  { a: 'Kua Poojan ' }
+]
+ },
+      { label: "Short Invitation - Free",Filters: [
+  { a: 'Wedding Invitations ' },
+  { a: 'Party Invitations ' },
+]
+},
+      { label: "Matrimonial Biodata" ,Filters: [
+  { a: 'Marriage Biodata ' }
+]
+},
     ],
   },
   {
     label: "Photo Books",
-    url: "/nav/photo-books",
+    url: "/nav/photo books",
     children: [
-      { label: "Soft Cover Photobook" },
-      { label: "Hard Cover Photobook" },
-      { label: "Spiral Photobook" },
-      { label: "Photo Folder" },
-      { label: "Digtial Photobook > Best Seller" },
+      { label: "Soft Cover Photobook",Filters: [
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
+] },
+      { label: "Hard Cover Photobook",Filters: [
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
+  
+] },
+      { label: "Spiral Photobook" ,Filters: [
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
+  
+]},
+      { label: "Photo Folder",Filters: [
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' },
+] },
+      { label: "Digtial Photobook > Best Seller",Filters: [
+  { a: 'Wedding Photobook ' },
+  { a: 'Engagement Photobook ' },
+  { a: 'Anniversary Photobook ' },
+  { a: 'Birthday Photobook ' }
+] },
     ],
   },
   {
     label: "Itinerary",
     url: "/nav/itinerary",
     children: [
-      { label: "Wedding Itinerary" },
-      { label: "Stickers" },
-      { label: "Tags/Badges" },
-      { label: "Welcome Signages" },
-      { label: "Accessories" },
-      { label: "Games" },
+      { label: "Wedding Itinerary" ,Filters: [
+  { a: 'Room Itinerary ' },
+  { a: 'Check-in Itinerary ' },
+  { a: 'Room Key Enevelop ' },
+  { a: 'Thank You Cards ' },
+  { a: 'Wedding Menu ' },
+  { a: 'Table Itinerary ' },
+  { a: 'Dining Table Mats ' },
+]},
+      { label: "Stickers",Filters: [
+  { a: 'Guest Name Stickers ' },
+  { a: 'Gift Box Sticker ' },
+  { a: 'Vehicle Stickers ' },
+  { a: 'Designer Stickers ' },
+  { a: 'Vintage Stickers ' },
+] },
+      { label: "Tags / Bedges",Filters: [
+  { a: 'Luggage Tag ' },
+  { a: 'Door Handle Tag ' },
+  { a: 'Gift Tag ' },
+  { a: 'Parking Tags ' },
+  { a: 'Wedding Bedges ' },
+] },
+      { label: "Welcome Signages",Filters: [
+  { a: 'Wedding Ceremony ' },
+  { a: 'Haldi Ceremony ' },
+  { a: 'Mehandi Ceremony ' },
+  { a: 'Sangeet Ceremony ' },
+  { a: 'Direction Signage ' },
+  { a: 'Engagement Ceremony ' },
+  { a: 'Anniversary Ceremony ' },
+  { a: 'Lohri Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Birthday Party ' },
+  { a: 'Celeration Party ' }
+]},
+      { label: "Accessories",Filters: [
+  { a: 'Party Dangler ' },
+  { a: 'Coasters ' },
+  { a: 'Paper Napkins ' },
+  { a: 'Event Banner ' },
+  { a: 'Face Mask ' },
+  { a: 'Funny Poster ' },
+] },
+      { label: "Games",Filters: [
+  { a: 'Playing Cards ' },
+  { a: 'Puzzle Games ' },
+  { a: 'Fun Games ' }
+] },
     ],
   },
   {
     label: "Calendars 2025",
-    url: "/nav/calendars-2025",
+    url: "/nav/calendars 2025",
     children: [
-      { label: "Mini Desktop Calendar" },
-      { label: "Wall Calendar - Potrait" },
-      { label: "Wall Calendar - Landscape" },
-      { label: "Desktop Calendar" },
-      { label: "Table Tent Calendar" },
-      { label: "Poster Calendar" },
+      { label: "Mini Desktop Calendar",Filters: [
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
+] },
+      { label: "Wall Calendar - Portrait" ,Filters: [
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
+]},
+      { label: "Wall Calendar - Landscape",Filters: [
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
+] },
+      { label: "Desktop Calendar",Filters: [
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
+]  },
+      { label: "Table Tent Calendar" ,Filters: [
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
+] },
+      { label: "Poster Calendar" ,Filters: [
+  { a: 'Wedding Calendar ' },
+  { a: 'Birthday Calendar ' },
+  { a: 'Family & Kids ' },
+] },
     ],
   },
   {
     label: "Free Greetings",
-    url: "/nav/free-greetings",
+    url: "/nav/free greetings",
     children: [
-      { label: "Wishes Greeting" },
-      { label: "Thanks Greeting" },
-      { label: "Feeling Greeting" },
-      { label: "Funny Greeting" },
+      { label: "Wishes Greeting",Filters: [
+  { a: 'Wishes to New Wed' },
+  { a: 'Engagement Wishes' },
+  { a: 'Anniversary Wishes' },
+  { a: 'Birthday Wishes' },
+  { a: 'Retirement Wishes' },
+  { a: 'General Wishes' },
+]
+ },
+      { label: "Thanks Greeting" ,Filters: [
+
+  { a: 'Thanks to Invitor' },
+  { a: 'Thanks to Guests' },
+  { a: 'Thanks for Wishes' },
+  { a: 'General Greetings' },
+  
+]
+},
+      { label: "Feeling Greetings",Filters: [
+  { a: 'Love Cards' },
+  { a: 'Sorry Cards' },
+  { a: 'Congrats Cards' },
+  { a: 'Miss you Card' },
+  { a: 'Good Luck Cards' },
+]
+ },
+      { label: "Funny Greetings" ,Filters: [
+  { a: 'For Wedding' },
+  { a: 'For Anniversary' },
+  { a: 'For Party' },
+  { a: 'General Greetings' }
+]
+},
     ],
   },
   {
     label: "Guest Surprising",
-    url: "/nav/guest-surprising",
-    children: [{ label: "Newspapers" }, { label: "Magazine" }],
+    url: "/nav/guest surprising",
+    children: [{ label: "Newspapers" ,Filters: [
+  { a: 'Wedding Newspaper' },
+  { a: 'Engagement Newspaper' },
+  { a: 'Birthday Newspaper' },
+  { a: 'Special Event' },
+  { a: 'E-Paper' },
+]
+}, { label: "Magazine" ,Filters: [
+  { a: 'Wedding Magazine' },
+  { a: 'Engagement Magazine' },
+  { a: 'Birthday Magazine' },
+  { a: 'Special Event' },
+  { a: 'E-Magazine' }
+]
+}],
+
   },
   {
     label: "Planner Books",
-    url: "/nav/planner-books",
-    children: [{ label: "Planner Books" }, { label: "Free Printables" }],
+    url: "/nav/planner books",
+    children: [{ label: "Planner Books",Filters: [
+  { a: 'Wedding Management' },
+  { a: 'Guest Management' },
+  { a: 'Wedding Notepad' },
+  { a: 'Guest List Booklet - Best Seller' },
+]
+ }, { label: "Free Printable" ,Filters: [
+  { a: 'Wedding Guest List-PDF' },
+  { a: 'Wedding Guest List - XLS' },
+  { a: 'Wedding Notepad - PDF' }
+]
+}],
   },
   {
     label: "E-Shop",
-    url: "/nav/e-shop",
+    url: "/nav/e shop",
     children: [
-      { label: "Shagun Envelop" },
-      { label: "Photo Magnet" },
-      { label: "Gifts" },
-      { label: "Essentials" },
+      { label: "Shagun Envelop" ,Filters: [
+  { a: 'For Wedding Guests' },
+  { a: 'For New Wed' },
+  
+]},
+      { label: "Photo Magnet",Filters: [
+  { a: 'Mini Photo Magne' },
+  { a: 'Wedding' },
+  { a: 'Family' },
+  { a: 'Birthday' },
+  { a: 'Quotes' },
+  { a: 'Travel' },
+  { a: 'Faces' },
+  { a: 'Funny' },
+  { a: 'Religious' },
+  { a: 'Feeling' },
+] },
+      { label: "Gifts",Filters: [
+  { a: 'Wedding Gift' },
+  { a: 'Party Gift' },
+  { a: 'Packaging' },
+  
+] },
+      { label: "Essentials",Filters: [
+  { a: 'Wedding Shopping' },
+  { a: 'Party Shopping' }
+] },
     ],
   },
+  {
+    label: "Wedding Website",
+    url: '/create-wedding-website'
+  }
 ];
 export default function MainNav() {
   const [activeDropdown, setActiveDropdown] = React.useState(null);
+  const [activeChildDropdown, setActiveChildDropdown] = React.useState(null);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [openDropdown, setOpenDropdown] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const { cartItems, toggleCart } = useCart(); // Access cartItems and toggleCart
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  React.useEffect(() => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(null);
+  const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
@@ -143,6 +388,11 @@ export default function MainNav() {
       setIsDropdownOpen(null);
     }
   };
+  const handleLogout=()=>{
+    dispatch(logout());
+    setOpenDropdown(null);
+    navigate('/login');
+  }
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
@@ -157,7 +407,13 @@ export default function MainNav() {
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
           <div className="lg:flex hidden">
-            <input className="rounded-l-lg" type="search" name="search" id="search" placeholder="I'm shopping for"/>
+            <select name="" id="" className="!pr-8 border-r-0 rounded-l-lg w-[80px]">
+              <option value="">All</option>
+              {navItems.map((item) => (
+                <option value="">{item.label}</option>
+              ))}
+            </select>
+            <input className="" type="search" name="search" id="search" placeholder="I'm shopping for"/>
             <button className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont">Search</button>
           </div>
 
@@ -166,7 +422,7 @@ export default function MainNav() {
             {/* <Link className="pr-4">
               <Search className="h-6 w-6 hover:text-primary" />
             </Link> */}
-            <a href="/create-wedding-website" className="text-pink-600 font-heroFont hidden lg:flex text-right leading-none underline">Create Personal <br />Wedding Website</a>
+            <a href="/join-e-nyouta" className="text-pink-600 font-avalonN hidden lg:flex leading-none hover:underline">Join E-Nyouta<br />Share Memories</a>
             <button
               onClick={toggleCart}
               className="flex items-center gap-1 relative"
@@ -184,12 +440,21 @@ export default function MainNav() {
                 onClick={() => handleDropdownToggle("user")}
                 className="flex items-center gap-1 rounded-md p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2"
               >
+               {user&& Object.keys(user).length > 0?
+               <div>
+                <img src={user.avatar} alt="profile-pic" className="w-10 h-10 rounded-full" />
+               </div>:
+               <>
                 <User size={27} />
                 <ChevronDown className="h-4 w-4" />
+               </>
+               }
               </button>
               {openDropdown === "user" && (
                 <div className="absolute right-0 mt-2 w-48 rounded-md bg-priBg py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-                  <Link
+                  {!(user&& Object.keys(user).length > 0) ? (
+                    <>
+                    <Link
                     to="/login" onClick={()=> setOpenDropdown(null)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
@@ -201,6 +466,17 @@ export default function MainNav() {
                   >
                     Register
                   </Link>
+                    </>
+                  ):(
+                    <>
+                    <button
+                     onClick={handleLogout}
+                    className="block px-4 py-2 text-sm text-gray-700"
+                  >
+                    Logout
+                  </button>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -228,7 +504,7 @@ export default function MainNav() {
               <ul className="">
                 {navItems.map(
                   (item) => (
-                    <li key={item} className="flex flex-col gap-2 font-heroFont">
+                    <li key={item} className="flex flex-col gap-2 font-avalonN">
                       <Link onClick={() => setIsDrawerOpen(false)}
                         to={item.url}
                         className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
@@ -243,20 +519,27 @@ export default function MainNav() {
           </div>
         )}
       </div>
-      <div className="hidden lg:flex py-2 justify-center">
-        <ul className="flex gap-12 justify-center items-center text-md font-heroFont">
-          {navItems.map((item, index) => (
+
+      <div className="hidden lg:flex py-2 justify-center ">
+        <ul className="flex gap-6 justify-center items-center text-md font-avalonN">
+          {navItems.map((item, index) =>
+          {            const isLastTwoItems = index >= navItems.length - 2;
+           return (
             <li
               key={index}
               onMouseEnter={() => setActiveDropdown(index)}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseLeave={() => {
+                setActiveDropdown(null);
+                setActiveChildDropdown(null);
+              }}
               className="relative py-2"
             >
               <Link
                 to={item.url}
-                className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold"
+                className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-1"
               >
                 {item.label}
+                <span><ChevronDown/></span>
               </Link>
               <AnimatePresence>
                 {item.children && activeDropdown === index && (
@@ -275,6 +558,9 @@ export default function MainNav() {
                           initial="hidden"
                           animate="visible"
                           custom={childIndex}
+                          onMouseEnter={() => setActiveChildDropdown(childIndex)}
+                          onMouseLeave={() => setActiveChildDropdown(null)}
+                          className="relative"
                         >
                           <Link
                             to={`${item.url}/${child.label}`}
@@ -282,6 +568,38 @@ export default function MainNav() {
                           >
                             {child.label}
                           </Link>
+                          <AnimatePresence>
+                            {child.Filters && activeChildDropdown === childIndex && (
+                              <motion.div
+                                initial={{ opacity: 0, x: 10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 10 }}
+                                transition={{ duration: 0.2 }}
+                                className={`absolute top-0 ${
+                                    isLastTwoItems ? 'right-full ' : 'left-full ml-2'
+                                  } bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-3 shadow-lg`}
+                              >
+                                <ul className="space-y-2">
+                                  {child.Filters.map((filter, filterIndex) => (
+                                    <motion.li
+                                      key={filterIndex}
+                                      variants={gridVariants}
+                                      initial="hidden"
+                                      animate="visible"
+                                      custom={filterIndex}
+                                    >
+                                      <Link
+                                        to={`e${item.url}/${child.label}/${filter.a}`}
+                                        className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
+                                      >
+                                        {filter.a}
+                                      </Link>
+                                    </motion.li>
+                                  ))}
+                                </ul>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </motion.li>
                       ))}
                     </ul>
@@ -289,7 +607,7 @@ export default function MainNav() {
                 )}
               </AnimatePresence>
             </li>
-          ))}
+          )})}
         </ul>
       </div>
 

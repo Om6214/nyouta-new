@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const initialState = {
     loading: false,
     error: null,
+    user: {},
 }
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
@@ -61,7 +62,13 @@ export const verifyEmail = createAsyncThunk("auth/verifyEmail", async (data, thu
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            state.user = {};
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state) => {
@@ -69,6 +76,7 @@ export const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
+                state.user = action.payload.user;
                 toast.success(action.payload.message);
             })
             .addCase(login.rejected, (state, action) => {
@@ -82,6 +90,7 @@ export const authSlice = createSlice({
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.loading = false;
+                state.user = action.payload.user;
                 toast.success(action.payload.message);
             })
             .addCase(register.rejected, (state, action) => {
@@ -94,6 +103,7 @@ export const authSlice = createSlice({
             })
             .addCase(googleSignup.fulfilled, (state, action) => {
                 state.loading = false;
+                state.user = action.payload.user;
                 toast.success(action.payload.message);
             })
             .addCase(googleSignup.rejected, (state, action) => {
@@ -117,4 +127,5 @@ export const authSlice = createSlice({
     },
 });
 
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

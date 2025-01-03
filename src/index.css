@@ -13,6 +13,34 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Linna';
+  src: url('./fonts/Linna-Regular_2.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvalonBold';
+  src: url('./fonts/AVALONB.TTF') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvalonNormal';
+  src: url('./fonts/AVALONN.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TT_Medium';
+  src: url('./fonts/tt0037m_.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
 
 @font-face {
   font-family: 'Angelina';

@@ -1,6 +1,6 @@
 import { SquareArrowOutUpRight } from 'lucide-react'
 import React from 'react'
-import buttonBg from "../assets/images/button.png";
+import buttonBg from "../assets/images/07.png";
 
 const blogsTitle = [
     {
@@ -28,7 +28,10 @@ const blogsTitle = [
 const BlogsCard = () => {
   return (
     <div className='px-4'>
-        <h1 className='text-5xl lg:text-6xl font-semibold pb-8 font-heroFont text-primary text-center'>Ideas and Inspiration</h1>
+        <div className='pb-6 flex flex-col gap-3'>
+        <h1 className='text-4xl lg:text-5xl font-bold font-avalonN text-secondary text-center'>Ideas and Inspiration</h1>
+        <h1 className='text-4xl text-secondary text-center font-avalonN'>"Ideas Make Real, Memories Make Forever"</h1>
+        </div>
         <div className='grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-2 font-heroFont'>
             {blogsTitle.map((blog, index) => (
                 <div key={index} className='flex flex-col items-center border-2 border-secondary rounded-lg bg-priBg'>

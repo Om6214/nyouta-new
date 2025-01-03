@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
+import {Link} from "react-router-dom";
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -21,23 +22,24 @@ export default function CategoryLabel() {
 
   const formatCategoryName = (name) => {
     return name
-      .split("-")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+      // .split("-")
+      // .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      // .join(" ");
   };
 
   const formatSubCategoryName = (name) => {
     return decodeURIComponent(name)
-      .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ")
-      .replace(/-/g, " ");
+      // .split(" ")
+      // .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      // .join(" ")
+      // .replace(/-/g, " ");
   };
-  if(pageName ==="e-invitations") pageName=='E-Invitations'
+  // if(pageName ==="e-invitations") pageName=='E-Invitations'
 
  
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
+  // console.log(formattedPageName, formattedPath);
 
 
 
@@ -45,24 +47,17 @@ export default function CategoryLabel() {
     const categoryMatch = 
       item.category.toLowerCase() === formattedPageName.toLowerCase();
     
-    const subCategoryMatch = 
-      item.subCategory.toLowerCase() === formattedPath.toLowerCase();
+    const subCategoryMatch = item.subCategory.toLowerCase() === formattedPath.toLowerCase();
     
     return categoryMatch && subCategoryMatch;
   });
-
-
-  console.log("Category Name:", formattedPageName);
-  console.log("SubCategory Name:", formattedPath);
-  console.log("Filtered Items:", filteredItems);
-
 
 
   return (
     <>
     {filteredItems.length > 0 ? (
     <div  className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
-        <div className="mt-10">
+        <div className="mt-10 ">
         <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
       <Swiper
         style={{
@@ -74,7 +69,7 @@ export default function CategoryLabel() {
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         modules={[Zoom, Navigation, Pagination, Autoplay]}
-        className="rounded-xl shadow-lg overflow-hidden"
+        className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh] bg-gray-200"
       >
         {filteredItems[0].image.map((src, index) => (
           <SwiperSlide key={index}>
@@ -173,7 +168,8 @@ export default function CategoryLabel() {
       <div className="pt-5 md:max-w-[95%] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredItems.map((item) => (
-  <div
+  <Link
+    to={`/e/nav/${item.category}/${item.subCategory}/${item.subSubCategory}`}
     key={item.id}
     className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
   >
@@ -185,11 +181,11 @@ export default function CategoryLabel() {
       />
     </div>
     <div className="p-4 text-center">
-      <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
+      <h2 className="text-lg font-bold text-gray-800">{item.subSubCategory}</h2>
       {/* Optional: Price or other details */}
       {/* <p className="text-gray-700 mt-2">₹{item.price}</p> */}
     </div>
-  </div>
+  </Link>
 ))}
 
         </div>

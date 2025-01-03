@@ -29,6 +29,11 @@ import CategoryLabel from './components/CategoryLabel';
 import WeddingWebsiteUrl from './pages/WeddingWebsiteUrl';
 import LoginRegister from './pages/LoginRegister';
 
+import CategoryFilterLabel from './components/CategoryFilterLabel';
+
+import JoinNyouta from './components/JoinNyouta';
+
+
 
 // gaganluthrasirji
 
@@ -52,9 +57,11 @@ function App() {
           <Route path="/register" element={<LoginRegister />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/about" element={<About />} />
-
+          <Route path='/join-e-nyouta' element={<JoinNyouta/>}/>
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
           <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
+          <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
+          
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
@@ -62,10 +69,10 @@ function App() {
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
         </Routes>
 
+      <Cart />
         {/* Conditionally render Footer */}
         <ConditionalFooter />
       </BrowserRouter>
-      <Cart />
     </CartProvider>
   );
 }

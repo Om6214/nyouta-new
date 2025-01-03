@@ -1,6 +1,7 @@
 import Order from '../models/Order.js';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
+import Cart from '../models/Cart.js';
 
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
@@ -46,6 +47,10 @@ export const verifyPayment = async (req, res) => {
             order.paymentStatus = 'paid';
             order.paymentId = razorpay_payment_id;
             await order.save();
+            const cart= await Cart.findOne({user:order.user});
+            cart.products = [];
+            cart.totalPrice = 0;
+            await cart.save();
             res.status(200).json({ message: 'Payment verified successfully!', order });
         } else {
             res.status(400).json({ message: 'Payment verification failed!' });
@@ -68,7 +73,7 @@ export const updateOrderStatus = async (req, res) => {
 
 export const getOrders = async (req, res) => {
     try {
-        const orders = await Order.find({ user: req.user._id });
+        const orders = await Order.find({ user: req.user.userId });
         res.status(200).json(orders);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });

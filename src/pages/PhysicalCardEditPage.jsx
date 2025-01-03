@@ -1183,11 +1183,11 @@ export default function WeddingCardEditor() {
                       position: "absolute",
 
                       cursor: "move",
-                      border: selectedStickerId === id ? '2px dotted blue' : 'none',
-                      zIndex: selectedStickerId === id ? 20 : 10,
-                      display: "inline-block",
-                      border: "1px solid #ccc",
-                      padding: "2px 5px",
+                      border: selectedStickerId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
+                      zIndex: selectedStickerId === id ? 20 : 10, // Ensure border is above other elements
+                      display: "inline-block", // Ensure sticker stays within the border
+                      // border: "1px solid #ccc", // Apply the border around the sticker
+                      padding: "2px 5px", // Add padding to the border around the sticker
                     }}
                     onClick={() => handleStickerClick(id)}
                   >
@@ -1227,7 +1227,7 @@ export default function WeddingCardEditor() {
                               e.stopPropagation();
                               handleDeleteSticker(id);
                             }}
-                            className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
+                            className="absolute top-0 right-0 w-6 h-6 shadow bg-white  border-2 border-blue-500 rounded-full flex justify-center items-center"
                             title="Delete Sticker"
                           >
                             <i className="fas fa-times-circle text-red-500 text-sm"></i>
@@ -1348,7 +1348,7 @@ export default function WeddingCardEditor() {
                           e.stopPropagation();
                           handleDelete(id);
                         }}
-                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
+                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white  border-2 border-blue-500 flex justify-center items-center"
                         style={{
                           transform: "translate(50%, -50%)",
                           zIndex: 20,
@@ -1400,10 +1400,15 @@ export default function WeddingCardEditor() {
                     style={{
                       position: "absolute",
                       cursor: "move",
-                      zIndex: selectedImageId === id ? 20 : 10,
-                      width: `${width}px`,
-                      height: `${height}px`,
-                      border: selectedImageId === id ? '2px dotted blue' : 'none',
+                      zIndex: 10,
+                      width: `${size}px`, // Make width dynamic based on size
+                      height: `${size}px`, // Make height dynamic based on size
+                      //border: "2px solid #ccc", // Border around the image
+                      borderRadius: "8px", // Optional: Add rounded corners to the border around the image
+                      border: selectedImageId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
+                      // zIndex: selectedImageId === id ? 20 : 10, // Ensure border is above other elements
+                      padding: "2px 5px",
+
                     }}
                     onClick={() => handleImageClick(id)} // Select image
                   >

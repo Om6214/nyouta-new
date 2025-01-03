@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-secondary text-amber-200 py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* User Area */}
           <div>
             <h2 className="text-xl font-semibold mb-4 text-white">User Area</h2>
@@ -22,7 +22,7 @@ export default function Footer() {
           </div>
 
          
-          <div>
+          {/* <div>
             <h2 className="text-xl font-semibold mb-4 text-white">Quick Links</h2>
             <ul className="space-y-2">
               <li><a href="/products" className="hover:text-white transition-colors">Wedding Invitations</a></li>
@@ -34,7 +34,7 @@ export default function Footer() {
               <li><a href="/blog" className="hover:text-white transition-colors">Blog</a></li>
               <li><a href="/printables" className="hover:text-white transition-colors">Free Printables</a></li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Join E-nyouta */}
           <div>
