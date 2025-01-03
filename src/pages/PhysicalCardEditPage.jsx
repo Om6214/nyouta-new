@@ -1401,8 +1401,8 @@ export default function WeddingCardEditor() {
                       position: "absolute",
                       cursor: "move",
                       zIndex: 10,
-                      width: `${size}px`, // Make width dynamic based on size
-                      height: `${size}px`, // Make height dynamic based on size
+                      width: `${width}px`, // Make width dynamic based on size
+                      height: `${height}px`, // Make height dynamic based on size
                       //border: "2px solid #ccc", // Border around the image
                       borderRadius: "8px", // Optional: Add rounded corners to the border around the image
                       border: selectedImageId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
