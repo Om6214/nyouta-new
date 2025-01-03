@@ -67,7 +67,7 @@ const JoinNyouta = () => {
     name: "",
     email: "",
     phone: "",
-    place: "",
+    member: "",
     state: "",
     specialMoments: "",
   });
@@ -117,7 +117,7 @@ const JoinNyouta = () => {
         name: "",
         email: "",
         phone: "",
-        place: "",
+        member: "",
         state: "",
         specialMoments: "",
       });
@@ -233,12 +233,12 @@ const JoinNyouta = () => {
               onChange={handleInputChange}
             />
             <input
-              name="place"
+              name="member"
               className="rounded-md"
               type="text"
-              placeholder="Place"
+              placeholder="Type of Member"
               required
-              value={formData.place}
+              value={formData.member}
               onChange={handleInputChange}
             />
           </div>
