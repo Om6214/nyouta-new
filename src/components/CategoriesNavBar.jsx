@@ -308,10 +308,12 @@ const CategoriesNavBar = () => {
       </div>
 
       <div id="section2">
-        <motion.div initial={{ opacity: 0, x: -100 }}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.8 }}
-          className="px-[6%] pt-[1%]">
+          className="px-[6%] pt-[1%]"
+        >
           <div className="font-semibold text-[4vh]">Accessories</div>
           <div className="font-normal md:text-[2.2vh] text-[2vw]">
             {/* Create personalized gifts for Kids, Friends, Loved ones and give them the your attention of love. */}
