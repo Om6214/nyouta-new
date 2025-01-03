@@ -1,16 +1,27 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 
-const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
+const PrevievVideo = ({ videos, textFields, stickers, currentVideo, onClose }) => {
   const previewRef = useRef();
-  //console.log("child stickers", images);
-
+  const images=videos;
+console.log("videos",videos);
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
         <h2 className="text-2xl font-bold mb-4">Preview</h2>
+
         <div ref={previewRef} className="relative w-80 h-112 overflow-hidden">
-          {/* Main Image */}
-          <img src={currentImage} alt="Preview" className="w-full h-full object-cover rounded" />
+          {/* Main Video */}
+          {currentVideo ? (
+            <video
+              src={currentVideo}
+              className="w-full h-full object-cover rounded"
+              autoPlay
+              loop
+              controls
+            />
+          ) : (
+            <p>No video selected</p>
+          )}
 
           {/* Text Fields */}
           {textFields.map(
@@ -27,7 +38,7 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
               textAlign,
               lineHeight,
               letterSpacing,
-              angle, // Add angle here
+              angle, // New angle property
             }) => {
               const containerWidth = 320; // Container width
               const containerHeight = 608; // Container height
@@ -46,28 +57,24 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
                     fontSize: `${size}px`,
                     fontFamily: font,
                     color: fontColor, // Apply dynamic font color
-                    fontWeight: isBold ? 'bold' : 'normal', // Apply bold if true
-                    fontStyle: isItalic ? 'italic' : 'normal', // Apply italic if true
+                    fontWeight: isBold ? "bold" : "normal", // Apply bold if true
+                    fontStyle: isItalic ? "italic" : "normal", // Apply italic if true
                     textAlign: textAlign, // Apply text alignment
                     lineHeight: lineHeight, // Apply line height
                     letterSpacing: `${letterSpacing}px`, // Apply letter spacing
                     transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply rotation
-                    whiteSpace: 'nowrap',
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  {text.split('\n').map((line, index) => (
+                  {text.split("\n").map((line, index) => (
                     <div key={index}>{line}</div> // Render each line separately
                   ))}
-
-                  {/* Rotate Button */}
-                 
                 </div>
               );
             }
           )}
 
-
-          {/* Small Images */}
+          {/* Small Videos */}
           {images.map(({ id, src, x, y, width, height }) => {
             if (y > 0) {
               y = y + 280;
@@ -96,11 +103,7 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
 
           {/* Stickers */}
           {stickers.map(({ id, src, x, y, width, height, rotation }) => {
-            if (y > 0) {
-              y = y + 280;
-            } else {
-              y = y + 290;
-            }
+            const adjustedY = y > 0 ? y + 280 : y + 290;
 
             return (
               <img
@@ -109,7 +112,7 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
                 alt={`Sticker ${id}`}
                 className="absolute"
                 style={{
-                  top: y,
+                  top: adjustedY,
                   left: x,
                   width: `${width}px`,
                   height: `${height}px`,
@@ -134,4 +137,4 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
   );
 };
 
-export default Preview;
+export default PrevievVideo;
