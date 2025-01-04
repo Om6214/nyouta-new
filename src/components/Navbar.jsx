@@ -544,15 +544,20 @@ export default function MainNav() {
                 onClick={() => handleDropdownToggle("user")}
                 className="flex items-center gap-1 rounded-md p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2"
               >
-               {user&& Object.keys(user).length > 0?
-               <div>
-                <img src={user.avatar||'profile.jpeg'} alt="profile-pic" className="w-10 h-10 rounded-full" />
-               </div>:
-               <>
-                <User size={27} />
-                <ChevronDown className="h-4 w-4" />
-               </>
-               }
+                {user && Object.keys(user).length > 0 ? (
+                  <div>
+                    <img
+                      src={user.avatar || "profile.jpeg"}
+                      alt="profile-pic"
+                      className="w-10 h-10 rounded-full"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <User size={27} />
+                    <ChevronDown className="h-4 w-4" />
+                  </>
+                )}
               </button>
               {openDropdown === "user" && (
                 <div className="absolute right-0 mt-2 w-48 rounded-md bg-priBg py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
@@ -598,34 +603,42 @@ export default function MainNav() {
         </div>
 
         {/* Mobile Drawer Menu */}
-        {isDrawerOpen && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden transition-all duration-300 ease-in-out">
-            <div className="absolute right-0 h-full w-64 bg-white p-4 transition-all duration-300 ease-in-out">
-              <button
-                className="mb-4 text-right"
-                onClick={() => setIsDrawerOpen(false)}
-              >
-                <X />
-              </button>
-              <ul className="">
-                {navItems.map((item) => (
-                  <li key={item} className="flex flex-col gap-2 font-avalonN">
-                    <Link
-                      onClick={() => setIsDrawerOpen(false)}
-                      to={item.url}
-                      className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
-                    >
-                      {item.label}{" "}
-                      <span>
-                        <ArrowRight size={20} />
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isDrawerOpen && (
+            <motion.div
+              initial={{ opacity: 0.8, x: 300 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0.8, x: 300 }}
+              transition={{ duration: 0.3, ease: "linear" }}
+              className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden"
+            >
+              <div className="absolute right-0 h-full w-64 bg-white p-4">
+                <button
+                  className="mb-4 text-right"
+                  onClick={() => setIsDrawerOpen(false)}
+                >
+                  <X />
+                </button>
+                <ul className="">
+                  {navItems.map((item) => (
+                    <li key={item} className="flex flex-col gap-2 font-avalonN">
+                      <Link
+                        onClick={() => setIsDrawerOpen(false)}
+                        to={item.url}
+                        className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
+                      >
+                        {item.label}{" "}
+                        <span>
+                          <ArrowRight size={20} />
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="hidden lg:flex py-2 justify-center ">
