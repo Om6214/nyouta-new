@@ -4,6 +4,7 @@ import { BASE_URL } from "../../utils/api";
 
 const initialState = {
     weddingWebsite: null,
+    weddingwebsiteData: null,
     loading: false,
     error: null,
 }
@@ -37,6 +38,22 @@ export const updateWeddingWebsitedata = createAsyncThunk(
     }
 );
 
+export const getWeddingWebsitedata = createAsyncThunk(
+    "weddingwebsite/getWeddingWebsitedata",
+    async (_, thunkAPI) => {
+        try {
+            const response = await axios.get(`${BASE_URL}/weddingwebsite/getweddingWebsitedata`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            return response.data.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
 export const weddingwebsiteSlice = createSlice({
     name: "weddingwebsite",
     initialState,
@@ -61,6 +78,17 @@ export const weddingwebsiteSlice = createSlice({
             state.weddingWebsite = action.payload.weddingWebsite;
         })
         builder.addCase(updateWeddingWebsitedata.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+        builder.addCase(getWeddingWebsitedata.pending, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(getWeddingWebsitedata.fulfilled, (state, action) => {
+            state.loading = false;
+            state.weddingwebsiteData = action.payload;
+        })
+        builder.addCase(getWeddingWebsitedata.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         })

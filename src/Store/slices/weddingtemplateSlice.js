@@ -47,7 +47,7 @@ export const createWeddingWebsite = createAsyncThunk("weddingtemplates/createWed
             return response.data;
         } catch (error) {
             console.log(error);
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error);
         }
     }
 );

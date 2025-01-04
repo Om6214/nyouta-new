@@ -126,7 +126,7 @@ function formatNamesAndId(name1, name2, id) {
 
 export const updateWeddingWebsitedata = async (req, res) => {
     try {
-        const {home,about,ourStory,socialLinks,tags,eventInfo} = req.body;
+        const {home,about,ourStory,socialLinks,tags,eventInfo,gallery} = req.body;
         const { userId } = req.user; 
         const { id } = req.params; // Get templateId from params
 
@@ -156,11 +156,16 @@ export const updateWeddingWebsitedata = async (req, res) => {
         // Update WeddingWebsite
         weddingWebsite.user = userId;
         weddingWebsite.home = home;
-        weddingWebsite.about = about;
+        // weddingWebsite.about = about;
+        weddingWebsite.about.bride.description=about.bride.description;
+        weddingWebsite.about.bride.image = Array.isArray(about.bride.image) ? about.bride.image[0] : about.bride.image;
+        weddingWebsite.about.groom.description=about.groom.description;
+        weddingWebsite.about.groom.image = Array.isArray(about.groom.image) ? about.groom.image[0] : about.groom.image;
         weddingWebsite.ourStory = ourStory;
         weddingWebsite.socialLinks = socialLinks;
         weddingWebsite.tags = tags;
         weddingWebsite.eventInfo = eventInfo;
+        weddingWebsite.gallery = gallery;
         await weddingWebsite.save();
         res.status(200).json({
             message: "Wedding website data updated successfully",
@@ -171,4 +176,21 @@ export const updateWeddingWebsitedata = async (req, res) => {
         res.status(500).json({ message: "Server error. Please try again later." });
     }
 };
+
+export const getweddingWebsitedata=async(req,res)=>{
+    try{
+        const { userId } = req.user;
+        const weddingWebsite = await WeddingWebsite.findOne({user: userId});
+        if (!weddingWebsite) {
+            return res.status(404).json({ message: "Wedding website not found" });
+        }
+        res.status(200).json({
+            message: "Wedding website data fetched successfully",
+            data:weddingWebsite,
+        });
+    }
+    catch(err){
+        return res.status(500).json({ message: "Server error. Please try again later." });
+    }
+}
 

@@ -14,12 +14,19 @@ const TemplateCard = ({ template, id, image,setShowForm,setId }) => {
     }
     if (!user.isWebsiteCreated) {
       const res = await dispatch(createWeddingWebsite(id));
-      if (res.type === 'weddingtemplates/createWeddingWebsite/fulfilled') {
+      if(res.status===401||res.status===403){
+        navigate('/login');
+      }
+      else if (res.type === 'weddingtemplates/createWeddingWebsite/fulfilled') {
+        console.log(res);
         navigate(`/us/${res?.payload?.slug}`);
       }
     } else {
       const res = await dispatch(updateWeddingWebsite(id));
-      if (res.type === 'weddingtemplates/updateWeddingWebsite/fulfilled') {
+      if(res.status===401||res.status===403){
+        navigate('/login');
+      }
+      else if (res.type === 'weddingtemplates/updateWeddingWebsite/fulfilled') {
         navigate(`/us/${res?.payload?.slug}`);
       }
     }

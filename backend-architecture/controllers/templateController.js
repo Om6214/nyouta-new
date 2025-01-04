@@ -36,6 +36,7 @@ export const getAllTemplates = async (req, res) => {
                 socialLinks: null,
                 tags: null,
                 eventInfo: null,
+                gallery:null
             });
 
             const id = path.basename(file, '.ejs'); // Extract ID from file name
