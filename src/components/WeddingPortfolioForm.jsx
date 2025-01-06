@@ -25,44 +25,44 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
   const [formData, setFormData] = useState({
     id: id,
     home: {
-      name: weddingwebsiteData.home.name || '',
-      partnerName: weddingwebsiteData.home.partnerName || '',
-      images: weddingwebsiteData.home.images || [],
-      weddingDate: weddingwebsiteData.home.weddingDate || '',
-      weddingLocation: weddingwebsiteData.home.weddingLocation || '',
-      text: weddingwebsiteData.home.text || ''
+      name: weddingwebsiteData?.home?.name || '',
+      partnerName: weddingwebsiteData?.home?.partnerName || '',
+      images: weddingwebsiteData?.home?.images || [],
+      weddingDate: weddingwebsiteData?.home?.weddingDate || '',
+      weddingLocation: weddingwebsiteData?.home?.weddingLocation || '',
+      text: weddingwebsiteData?.home?.text || ''
     },
     about: {
       bride: {
-        image: weddingwebsiteData.about.bride.image || [],
-        description: weddingwebsiteData.about.bride.description || ''
+        image: weddingwebsiteData?.about?.bride?.image || [],
+        description: weddingwebsiteData?.about?.bride?.description || ''
       },
       groom: {
-        image: weddingwebsiteData.about.groom.image || [],
-        description: weddingwebsiteData.about.groom.description || ''
+        image: weddingwebsiteData?.about?.groom?.image || [],
+        description: weddingwebsiteData?.about?.groom?.description || ''
       }
     },
     ourStory: {
-      description: weddingwebsiteData.ourStory.description || '',
-      images: weddingwebsiteData.ourStory.images || []
+      description: weddingwebsiteData?.ourStory?.description || '',
+      images: weddingwebsiteData?.ourStory?.images || []
     },
     eventInfo: {
-      description: weddingwebsiteData.eventInfo.description || '',
-      time: weddingwebsiteData.eventInfo.time || '',
+      description: weddingwebsiteData?.eventInfo?.description || '',
+      time: weddingwebsiteData?.eventInfo?.time || '',
       venue: {
         name: '',
-        address: weddingwebsiteData.eventInfo.venue.address || '',
-        location: weddingwebsiteData.eventInfo.venue.location || ''
+        address: weddingwebsiteData?.eventInfo?.venue?.address || '',
+        location: weddingwebsiteData?.eventInfo?.venue?.location || ''
       }
     },
     socialLinks: {
-      facebook: weddingwebsiteData.socialLinks.facebook || '',
-      instagram: weddingwebsiteData.socialLinks.instagram || '',
-      twitter: weddingwebsiteData.socialLinks.twitter || ''
+      facebook: weddingwebsiteData?.socialLinks?.facebook || '',
+      instagram: weddingwebsiteData?.socialLinks?.instagram || '',
+      twitter: weddingwebsiteData?.socialLinks?.twitter || ''
     },
-    tags: weddingwebsiteData.tags || [],
+    tags: weddingwebsiteData?.tags || [],
     gallery: {
-      photos: weddingwebsiteData.gallery.photos || []
+      photos: weddingwebsiteData?.gallery.photos || []
     }
   });
 
