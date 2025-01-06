@@ -250,11 +250,7 @@ const CategoryCard = () => {
   return (
     <div className=" py-10">
       {/* Header Section */}
-      <motion.div
-        initial={{ opacity: 0, x: -80 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.8 }}
-      >
+      <motion.div>
         <div className="text-center mb-4">
           <h1 className="lg:text-4xl text-3xl text-secondary font-avalonB bg-clip-text">
             Explore Our Product Categories
@@ -339,7 +335,12 @@ const CategoryCard = () => {
       <div className="pt-4">
         <div className="relative flex items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
           <img className="h-8" src={btnBg} alt="" />
-          <a className="absolute text-lg font-avalonB uppercase text-white" href="">View All Products</a>
+          <a
+            className="absolute text-lg font-avalonB uppercase text-white"
+            href=""
+          >
+            View All Products
+          </a>
         </div>
       </div>
     </div>
