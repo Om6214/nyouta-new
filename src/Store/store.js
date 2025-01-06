@@ -7,6 +7,7 @@ import addressReducer from "./slices/addressSlice";
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { configureStore } from "@reduxjs/toolkit";
+import { getWeddingWebsite } from './slices/weddingwebsiteSlice';
 
 
 const rootReducer = combineReducers({
@@ -23,8 +24,17 @@ const persistConfig = {
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+const forceGetWeddingWebsiteMiddleware = store => next => action => {
+    if (action.type === 'weddingwebsite/forceFetch') {
+        // Dispatch the action to fetch wedding website data
+        store.dispatch(getWeddingWebsite(action.payload));
+    }
+    return next(action);
+};
+
 const store = configureStore({
     reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(forceGetWeddingWebsiteMiddleware),
 });
 const persistor = persistStore(store);
 

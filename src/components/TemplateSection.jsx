@@ -19,7 +19,7 @@ const TemplateCard = ({ template, id, image,setShowForm,setId }) => {
       }
       else if (res.type === 'weddingtemplates/createWeddingWebsite/fulfilled') {
         console.log(res);
-        navigate(`/us/${res?.payload?.slug}`);
+        navigate(`/weds/${res?.payload?.slug}`);
       }
     } else {
       const res = await dispatch(updateWeddingWebsite(id));
@@ -27,7 +27,7 @@ const TemplateCard = ({ template, id, image,setShowForm,setId }) => {
         navigate('/login');
       }
       else if (res.type === 'weddingtemplates/updateWeddingWebsite/fulfilled') {
-        navigate(`/us/${res?.payload?.slug}`);
+        navigate(`/weds/${res?.payload?.slug}`);
       }
     }
   }
