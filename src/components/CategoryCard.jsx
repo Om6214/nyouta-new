@@ -262,11 +262,7 @@ const CategoryCard = () => {
         </div>
       </motion.div>
       {/* Categories Navigation */}
-      <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 2.0 }}
-      >
+      <motion.div>
         <div className="py-2 lg:px-4 px-1 bg-secondary shadow-md">
           <ul className="flex gap-4 justify-start overflow-auto">
             {categories.map((cat, index) => (
