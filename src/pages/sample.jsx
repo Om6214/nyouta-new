@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { FaTrash, FaUndo, FaRedo, FaFont, FaRegEdit, FaPlus, FaFileImage, FaArrowLeft, FaArrowRight, FaArrowsAlt } from 'react-icons/fa';
 import '../utils/pdf.css'; // Correctly import the external CSS file
-import SmallImage from './SmallImage';
-import ImageUploadOptions from './ImageUploadOptions';
-import Preview from './Preview';
-
-
 
 
 
@@ -17,7 +12,7 @@ export default function WeddingCardEditor() {
     { id: 'subText1', text: 'July 13, 2022 ', x: 180, y: 190, size: 20, font: 'Blade Rush' },
     { id: 'subText2', text: '12 : 30 AM ', x: 190, y: 250, size: 20, font: 'Blade Rush' },
   ]);
-  const [text, setText] = useState(''); // State for text input
+
   const [images, setImages] = useState([]); // State for images
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -38,9 +33,6 @@ export default function WeddingCardEditor() {
   const [redoStack, setRedoStack] = useState([]);
   const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [smallImages, setSmallImages] = useState([]);
-  const [showImageUploadOptions, setShowImageUploadOptions] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
 
   const location = useLocation();
   const { id } = useParams();
@@ -187,8 +179,6 @@ export default function WeddingCardEditor() {
     );
   };
 
-  
-
 
   const handleUndo = () => {
     if (undoStack.length > 0) {
@@ -281,75 +271,6 @@ export default function WeddingCardEditor() {
     setDragging(false);
   };
 
-  const handleAddSmallImage = (src) => {
-    const newImage = {
-      id: `smallImage${Date.now()}`,
-      src,
-      x: 300,
-      y: 250,
-      size: 50, // Default size for the small image
-    };
-    setSmallImages((prevImages) => [...prevImages, newImage]);
-  };
-
-  const handleDeleteSmallImage = (id) => {
-    setSmallImages((prevImages) => prevImages.filter((image) => image.id !== id));
-  };
-
-  const handleResizeSmallImage = (id, newX, newY) => {
-    setSmallImages((prevImages) =>
-      prevImages.map((image) =>
-        image.id === id ? { ...image, x: newX, y: newY } : image
-      )
-    );
-  };
-
-
-  // Function to open file dialog and add image
-
-
-  const handleAddImageClick = () => {
-    setShowImageUploadOptions(true);
-  };
-
-  const handleClosePopup = () => {
-    setShowImageUploadOptions(false);
-  };
-
-
-  const handlePreview = () => {
-    setShowPreview(true);
-  };
-
-  const handleClosePreview = () => {
-    setShowPreview(false);
-  };
-
-  const handleSelectUploadOption = (option) => {
-    console.log(`Selected upload option: ${option}`);
-    // Implement the logic for each upload option here
-    if (option === 'local') {
-      // Logic to handle local drive upload
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          handleAddSmallImage(reader.result); // Assuming this function is defined
-        };
-        if (file) {
-          reader.readAsDataURL(file);
-        }
-      };
-      input.click();
-    }
-    // Add logic for other options as needed
-  };
-
-
-
   return (
     <div className="container mx-auto  md:bg-gradient-to-br">
       <div className="w-full text-center flex justify-evenly items-center">
@@ -372,9 +293,9 @@ export default function WeddingCardEditor() {
         <div className="flex-1 text-center">
           <h1 className="text-3xl font-bold text-gray-800 hidden md:block">Editing Screen</h1>
         </div>
-        <button
-
-          className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2">
+        <button 
+        
+        className="px-4 py-1 rounded bg-[#AF7D32] text-white font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-download" width="20" height="20">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <path d="M7 10l5 5 5-5"></path>
@@ -466,7 +387,7 @@ export default function WeddingCardEditor() {
 
 
                 {/* Text Fields */}
-
+                
                 {textFields.map(({ id, text, x, y, size, font }) => (
                   <div
                     key={id}
@@ -674,7 +595,7 @@ export default function WeddingCardEditor() {
 
               {/* Preview Button */}
               <button
-                onClick={handlePreview}
+                onClick={() => setIsPreviewOpen(true)}
                 className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
@@ -698,15 +619,37 @@ export default function WeddingCardEditor() {
           </div>
 
 
-
-{showPreview && (
-  <Preview 
-    images={smallImages} // Pass the small images to the preview
-    textFields={textFields} // Pass the text fields to the preview
-    currentImage={imageUrl} // Pass the current image URL
-    onClose={handleClosePreview} 
-  />
-)}
+          {isPreviewOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+              <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col items-center overflow-y-auto">
+                <h2 className="text-2xl font-bold mb-4">Preview</h2>
+                <div className="relative w-80 h -112">
+                  <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
+                  {textFields.map(({ id, text, x, y, size, font }) => (
+                    <div
+                      key={id}
+                      className="absolute"
+                      style={{
+                        top: y,
+                        left: x,
+                        fontSize: `${size}px`,
+                        fontFamily: font,
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                    >
+                      {text}
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setIsPreviewOpen(false)}
+                  className="mt-4 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                >
+                  Close Preview
+                </button>
+              </div>
+            </div>
+          )}
 
           {showErrorMessage && (
             <div className="absolute top-2 right-10 bg-red-100 border border-red-400 text-red-700 p-2 rounded">
@@ -861,7 +804,6 @@ export default function WeddingCardEditor() {
 
               {/* Add Images Button */}
               <button
-                onClick={handleAddImageClick}
                 className="flex items-center justify-center gap-2 px-4 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-md hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
@@ -878,28 +820,11 @@ export default function WeddingCardEditor() {
                     d="M12 4.5v15m7.5-7.5h-15"
                   />
                 </svg>
-
                 <span>Add Images</span>
               </button>
             </div>
           </div>
-          {smallImages.map(({ id, src, x, y, size }) => (
-        <SmallImage
-          key={id}
-          id={id}
-          src={src}
-          x={x}
-          y={y}
-          onDelete={handleDeleteSmallImage}
-          onResize={handleResizeSmallImage} // Pass the resize handler
-        />
-      ))}
-          {showImageUploadOptions && (
-            <ImageUploadOptions
-              onClose={handleClosePopup}
-              onSelect={handleSelectUploadOption}
-            />
-          )}
+
 
           {showSuccessMessage && (
             <div className="absolute top-0 right-10 bg-green-100 border border-green-400 text-green-700 p-2 rounded">
