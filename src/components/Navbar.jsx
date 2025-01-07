@@ -642,7 +642,7 @@ export default function MainNav() {
       </div>
 
       <div className="hidden lg:flex py-2 justify-center ">
-        <ul className="flex gap-6 justify-center items-center text-md font-avalonN">
+        <ul className="flex gap-10 justify-center items-center text-md font-avalonN">
           {navItems.map((item, index) => {
             const isLastTwoItems = index >= navItems.length - 2;
             return (
@@ -657,12 +657,9 @@ export default function MainNav() {
               >
                 <Link
                   to={item.url}
-                  className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-1"
+                  className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-3"
                 >
                   {item.label}
-                  <span>
-                    <ChevronDown />
-                  </span>
                 </Link>
                 <AnimatePresence>
                   {item.children && activeDropdown === index && (
@@ -671,7 +668,7 @@ export default function MainNav() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
+                      className="absolute top-8 left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
                     >
                       <ul className="space-y-2">
                         {item.children.map((child, childIndex) => (
@@ -692,7 +689,6 @@ export default function MainNav() {
                               className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
                             >
                               {child.label}
-                              <ArrowRight size={18} />
                             </Link>
                             <AnimatePresence>
                               {child.Filters &&
