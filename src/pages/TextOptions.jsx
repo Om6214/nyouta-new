@@ -189,14 +189,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
             className="w-full"
           />
         </div>
-        <button
-          onClick={toggleUppercase}
-          className={`p-2 rounded-lg ${
-            isUppercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
-          }`}
-        >
-          Upper
-        </button>
+        
       </div>
 
       {/* Line Height, Curve Text, Lowercase */}
@@ -213,18 +206,16 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
             className="w-full"
           />
         </div>
-        <div className="flex flex-col items-center">
-          <label className="text-xs text-gray-500 mb-1">Curve Text</label>
-          <input
-            type="range"
-            min="-2"
-            max="2"
-            step="0.1"
-            value={curveValue}
-            onChange={handleCurveChange}
-            className="w-full"
-          />
-        </div>
+        <button
+          onClick={toggleUppercase}
+          className={`p-2 rounded-lg ${
+            isUppercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+          }`}
+        >
+          Upper
+        </button>
+
+
         <button
           onClick={toggleLowercase}
           className={`p-2 rounded-lg ${

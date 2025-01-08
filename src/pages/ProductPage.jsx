@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate,useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addtoCart } from "../Store/slices/productSlice";
+import { addtoCart,getCart} from "../Store/slices/productSlice";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const product = state?.product;
+  console.log(product)
   const {id} = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -52,6 +53,7 @@ export default function ProductPage() {
     setAddToCartLoading(true);
     console.log(id,quantity);
     await dispatch(addtoCart({productId:id,quantity:quantity}));
+    dispatch(getCart());
     setAddToCartLoading(false);
   };
 

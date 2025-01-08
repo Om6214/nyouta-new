@@ -15,6 +15,7 @@ import Trending from '../components/Trending'
 import MemoryCard from '../components/MemoryCard'
 import SurpriseCard from '../components/SurpriseCard'
 import RewardCard from '../components/RewardCard'
+import CouponCard from '../components/CouponCard'
 
 const Home = () => {
   return (
@@ -31,6 +32,7 @@ const Home = () => {
       <VideoCard/>
       <SurpriseCard/>
       <About/>
+      <CouponCard/>
       <Testimonials/>
       <BlogsCard/>
       <PromiseCard/>

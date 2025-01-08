@@ -1,10 +1,11 @@
 import express from 'express';
 const router = express.Router();
 import {authenticateToken} from '../middlewares/authMiddleware.js';
-import { getWeddingWebsite,createWeddingWebsite,updateWeddingWebsite,getWeddingWebsitePreview,updateWeddingWebsitedata } from '../controllers/weddingWebsiteController.js';
+import { getWeddingWebsite,createWeddingWebsite,updateWeddingWebsite,getWeddingWebsitePreview,updateWeddingWebsitedata,getweddingWebsitedata } from '../controllers/weddingWebsiteController.js';
 
 /* wedding website routes */
 router.get('/getWeddingWebsite/:slug', getWeddingWebsite);
+router.get('/getweddingWebsitedata',authenticateToken,getweddingWebsitedata);
 router.get('/getWeddingWebsite/:templateId', authenticateToken, getWeddingWebsitePreview);
 router.post('/createWeddingWebsite/:templateId', authenticateToken, createWeddingWebsite);
 router.put('/updateWeddingWebsite/:templateId', authenticateToken, updateWeddingWebsite);

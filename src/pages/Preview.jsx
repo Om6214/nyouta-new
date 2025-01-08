@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
   const previewRef = useRef();
-  console.log("child stickers", images);
+  //console.log("child stickers", images);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -13,89 +13,92 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
           <img src={currentImage} alt="Preview" className="w-full h-full object-cover rounded" />
 
           {/* Text Fields */}
-          {textFields.map(({ id, text, x, y, size, font, fontColor, isBold, isItalic, textAlign, lineHeight, letterSpacing }) => {
-            const containerWidth = 320; // Container width
-            const containerHeight = 608; // Container height
+          {textFields.map(
+            ({
+              id,
+              text,
+              x,
+              y,
+              size,
+              font,
+              fontColor,
+              isBold,
+              isItalic,
+              textAlign,
+              lineHeight,
+              letterSpacing,
+              angle, // Add angle here
+            }) => {
+              const containerWidth = 320; // Container width
+              const containerHeight = 608; // Container height
 
-            // Clamping the x and y positions
-            const clampedX = Math.max(0, Math.min(x, containerWidth));
-            const clampedY = Math.max(0, Math.min(y, containerHeight));
+              // Clamping the x and y positions
+              const clampedX = Math.max(0, Math.min(x, containerWidth));
+              const clampedY = Math.max(0, Math.min(y, containerHeight));
 
-            return (
-              <div
-                key={id}
-                className="absolute"
-                style={{
-                  top: clampedY,
-                  left: clampedX,
-                  fontSize: `${size}px`,
-                  fontFamily: font,
-                  color: fontColor, // Apply dynamic font color
-                  fontWeight: isBold ? 'bold' : 'normal', // Apply bold if true
-                  fontStyle: isItalic ? 'italic' : 'normal', // Apply italic if true
-                  textAlign: textAlign, // Apply text alignment
-                  lineHeight: lineHeight, // Apply line height
-                  letterSpacing: `${letterSpacing}px`, // Apply letter spacing
-                  transform: 'translate(-50%, -50%)',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {text.split('\n').map((line, index) => (
-                  <div key={index}>{line}</div> // Render each line separately
-                ))}
-              </div>
-            );
-          })}
+              return (
+                <div
+                  key={id}
+                  className="absolute"
+                  style={{
+                    top: clampedY,
+                    left: clampedX,
+                    fontSize: `${size}px`,
+                    fontFamily: font,
+                    color: fontColor, // Apply dynamic font color
+                    fontWeight: isBold ? 'bold' : 'normal', // Apply bold if true
+                    fontStyle: isItalic ? 'italic' : 'normal', // Apply italic if true
+                    textAlign: textAlign, // Apply text alignment
+                    lineHeight: lineHeight, // Apply line height
+                    letterSpacing: `${letterSpacing}px`, // Apply letter spacing
+                    transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply rotation
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {text.split('\n').map((line, index) => (
+                    <div key={index}>{line}</div> // Render each line separately
+                  ))}
+
+                  {/* Rotate Button */}
+
+                </div>
+              );
+            }
+          )}
+
 
           {/* Small Images */}
-          {images.map(({ id, src, x, y, size }) => {
-            if (y > 0) {
-              y = y + 280;
-              x = x + size - 40;
-            } else {
-              x = x + size - 40;
-              y = y + 290;
-            }
-
-            return (
-              <img
-                key={id}
-                src={src}
-                alt={`Small Image ${id}`}
-                className="absolute"
-                style={{
-                  top: y,
-                  left: x,
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  transform: 'translate(-50%, -50%)',
-                }}
-              />
-            );
-          })}
+          {images.map(({ id, src, x, y, width, height }) => (
+            <img
+              key={id}
+              src={src}
+              alt={`Image ${id}`}
+              style={{
+                position: "absolute",
+                left: `${x}px`,
+                top: `${y}px`,
+                width: `${width}px`,
+                height: `${height}px`,
+              }}
+            />
+          ))}
 
           {/* Stickers */}
           {stickers.map(({ id, src, x, y, width, height, rotation }) => {
-            if (y > 0) {
-              y = y + 280;
-            } else {
-              y = y + 290;
-            }
 
             return (
               <img
-                key={id}
-                src={src}
-                alt={`Sticker ${id}`}
-                className="absolute"
-                style={{
-                  top: y,
-                  left: x,
-                  width: `${width}px`,
-                  height: `${height}px`,
-                  transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                }}
-              />
+              key={id}
+              src={src}
+              alt={`Image ${id}`}
+              style={{
+                position: "absolute",
+                left: `${x}px`,
+                top: `${y}px`,
+                width: `${width}px`,
+                height: `${height}px`,
+              }}
+            />
             );
           })}
         </div>

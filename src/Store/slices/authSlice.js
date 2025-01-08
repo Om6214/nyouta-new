@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const initialState = {
     loading: false,
     error: null,
+    user: {},
 }
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
@@ -58,10 +59,34 @@ export const verifyEmail = createAsyncThunk("auth/verifyEmail", async (data, thu
     }
 });
 
+export const getUser = createAsyncThunk(
+    "auth/getUser", 
+    async (id, thunkAPI) => {
+        try {
+            console.log(id);    
+            const res = await axios.get(`${BASE_URL}/auth/getUser/${id}`,{},{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },  
+            });
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state) => {
+            state.user = {};
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state) => {
@@ -69,6 +94,7 @@ export const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.loading = false;
+                state.user = action.payload.user;
                 toast.success(action.payload.message);
             })
             .addCase(login.rejected, (state, action) => {
@@ -82,6 +108,7 @@ export const authSlice = createSlice({
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.loading = false;
+                state.user = action.payload.user;
                 toast.success(action.payload.message);
             })
             .addCase(register.rejected, (state, action) => {
@@ -94,6 +121,7 @@ export const authSlice = createSlice({
             })
             .addCase(googleSignup.fulfilled, (state, action) => {
                 state.loading = false;
+                state.user = action.payload.user;
                 toast.success(action.payload.message);
             })
             .addCase(googleSignup.rejected, (state, action) => {
@@ -114,7 +142,20 @@ export const authSlice = createSlice({
                 state.error = action.payload;
                 toast.error(action.payload.message);
             })
+
+            .addCase(getUser.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload;
+            })
+            .addCase(getUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -8,10 +8,11 @@ import wed2 from "../assets/images/wed2.jpg";
 import wed3 from "../assets/images/wed3.webp";
 import { ChevronDown } from "lucide-react";
 import { useEffect } from "react";
-import { createWeddingWebsite, updateWeddingWebsite } from "../Store/slices/weddingtemplateSlice";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeddingTemplates } from "../Store/slices/weddingtemplateSlice";
+import TemplateSection from "../components/TemplateSection.jsx";
+import btnImg from "../assets/images/09.png";
+import { motion } from "framer-motion";
 
 const items = [
   {
@@ -64,52 +65,12 @@ const faqs = [
   },
 ];
 
-const TemplateCard = ({ template, id }) => {
-  console.log(template);
-  console.log(id);
-  // const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = localStorage.getItem('user');
-  const handleTemplateClick = async (id) => {
-    if (!user.isWebsiteCreated) {
-      console.log("Website created");
-      const res = await dispatch(createWeddingWebsite(id));
-      console.log(res);
-      if (res.type === 'weddingtemplates/createWeddingWebsite/rejected') {
-        navigate('/login');
-      }
-      else if (res.type === 'weddingtemplates/createWeddingWebsite/fulfilled') {
-        console.log(res.payload);
-        navigate(`/us/${res?.payload?.slug}`);
-      }
-    } else {
-      console.log("Website not created");
-      const res = await dispatch(updateWeddingWebsite(id));
-      if (res.type === 'weddingtemplates/updateWeddingWebsite/rejected') {
-        navigate('/login');
-      }
-      else if (res.type === 'weddingtemplates/updateWeddingWebsite/fulfilled') {
-        navigate(`/us/${res?.payload?.slug}`);
-      }
-    }
-  }
-  return (
-    <></>
-    // <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 cursor-pointer" onClick={() => handleTemplateClick(id)}>
-    //   <div className="p-4">
-    //     <div
-    //       className="bg-gray-50 p-4 rounded-md"
-    //       dangerouslySetInnerHTML={{ __html: template }}
-    //     />
-    //   </div>
-    // </div>
-  );
-};
-
 const WeddingWebsiteUrl = () => {
   const [openId, setOpenId] = useState(null);
   const dispatch = useDispatch();
-  const { weddingTemplates, loading, error } = useSelector((state) => state.weddingtemplates);
+  const { weddingTemplates, loading, error } = useSelector(
+    (state) => state.weddingtemplates
+  );
   console.log(weddingTemplates);
   useEffect(() => {
     if (weddingTemplates.length < 1) {
@@ -122,10 +83,19 @@ const WeddingWebsiteUrl = () => {
   return (
     <div>
       <div className="lg:mx-24 mx-4 mt-2">
-        <div>
-          <img className="h-[350px]" src={wedBg} alt="" />
-        </div>
-        <div className="flex font-heroFont gap-2 text-gray-600 font-semibold items-center justify-center border-t-2 border-b-2 my-2 border-gray-600">
+        <motion.div
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.8 }}
+        >
+          <img className="h-[350px] w-full" src={wedBg} alt="" />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.8 }}
+          className="flex font-avalonN gap-2 text-gray-600 font-semibold items-center justify-center border-t-2 border-b-2 my-2 border-gray-600"
+        >
           <h1>Sort By</h1>
           <select name="" id="" className="border-none">
             <option value="">Trending</option>
@@ -133,7 +103,28 @@ const WeddingWebsiteUrl = () => {
             <option value="">New</option>
             <option value="">Hot</option>
           </select>
-        </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.8 }}
+          className="flex flex-col gap-6"
+        >
+          <div className="mt-4">
+            <h1 className="text-4xl text-secondary font-avalonN">
+              Choose Your Designs Here...
+            </h1>
+          </div>
+          <div>
+            <TemplateSection weddingTemplates={weddingTemplates} />
+          </div>
+          <div className="relative flex items-center justify-center">
+            <img className="h-8" src={btnImg} alt="" />
+            <a className="absolute text-lg text-white font-avalonB" href="">
+              View All Designs
+            </a>
+          </div>
+        </motion.div>
       </div>
       <section className="mx-2 lg:mx-16 my-4 font-heroFont">
         <h1 className="text-xl lg:text-2xl text-center font-semibold">
@@ -222,38 +213,42 @@ const WeddingWebsiteUrl = () => {
           </div>
         </div>
       </section>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {weddingTemplates?.map((template) => (
-          <TemplateCard key={template.id} id={template.id} template={template.content} />
-        ))}
-      </div>
       <section id="Faqs" className="mx-4 lg:mx-24 font-heroFont">
         <div className="flex flex-col gap-2">
           <h1 className="text-xl uppercase">Frequently Asked Questions</h1>
-          <h1 className="text-xl lg:text-3xl font-semibold">Wedding website questions? We're here to help.</h1>
+          <h1 className="text-xl lg:text-3xl font-semibold">
+            Wedding website questions? We're here to help.
+          </h1>
         </div>
         <div className="my-4">
           {faqs.map((faq) => (
-            <div key={faq} className="border rounded-lg shadow-sm bg-white overflow-hidden my-4 p-1">
+            <div
+              key={faq}
+              className="border rounded-lg shadow-sm bg-white overflow-hidden my-4 p-1"
+            >
               <button
                 onClick={() => toggleFaq(faq.id)}
                 className="w-full px-6 py-4 flex justify-between lg:items-center items-start text-left hover:bg-gray-100 "
               >
                 <span className="text-lg">{faq.question}</span>
                 <ChevronDown
-                  className={`transform transition-transform duration-200 ${openId === faq.id ? "rotate-180" : ""
-                    }`}
+                  className={`transform transition-transform duration-200 ${
+                    openId === faq.id ? "rotate-180" : ""
+                  }`}
                 />
               </button>
               <div
                 id={`faq-answer-${faq.id}`}
-                className={`transition-all duration-200 ease-in-out ${openId === faq.id
+                className={`transition-all duration-200 ease-in-out ${
+                  openId === faq.id
                     ? "max-h-52 opacity-100"
                     : "max-h-0 opacity-0"
-                  } overflow-hidden`}
+                } overflow-hidden`}
               >
                 <div className="lg:pl-[600px]">
-                  <p className="px-6 py-4 text-gray-600 bg-amber-100 rounded-xl">{faq.answer}</p>
+                  <p className="px-6 py-4 text-gray-600 bg-amber-100 rounded-xl">
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
             </div>

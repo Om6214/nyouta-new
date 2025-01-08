@@ -21,11 +21,11 @@ app.use(morgan("tiny"));
 // Middleware
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with your frontend URL
+    origin: '*', // Replace with your frontend URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     credentials: true, // If cookies or credentials are used
 }));
-app.options('*', cors()); // Enable preflight for all routes
+ // Enable preflight for all routes
 
 // Connect to the database
 connectDB();

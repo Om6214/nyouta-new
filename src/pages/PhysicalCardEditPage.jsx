@@ -15,7 +15,9 @@ import { FaTrashAlt, FaSyncAlt } from 'react-icons/fa';
 import { AiOutlineFileText, AiOutlinePicture } from "react-icons/ai";
 import { FaStickerMule } from "react-icons/fa";
 import watermark from '../watermark/watermark.jpg';
-
+import ShimmerSkeleton from './ShimmerSkeleton';
+import TextFieldsMobile from './TextFieldsMobile';
+import PdfGenerator from './PdfGenerator';
 
 export default function WeddingCardEditor() {
   const [selectedStickerId, setSelectedStickerId] = useState(null);
@@ -30,7 +32,7 @@ export default function WeddingCardEditor() {
   const [selectedFont, setSelectedFont] = useState('Blade Rush');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
-
+  const [generatePdf, setGeneratepdf] = useState(false);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
   const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState(false);
@@ -66,7 +68,26 @@ export default function WeddingCardEditor() {
       setSelectedField(null);
     }
   }, [initialImages]);
+  const handleCopyImage = (index) => {
+    if (index !== null) {
+      const newImage = images[index]; // Assuming you want to copy the same image
+      setImages([...images, newImage]);
+      //setIsCustomizeModalOpen(false);
+    }
+  };
+  const handleNextImage = () => {
+    setSelectedField(null);
+    if (currentImageIndex < images.length - 1) {
+      setCurrentImageIndex((prevIndex) => prevIndex + 1);
+    }
+  };
 
+  const handlePreviousImage = () => {
+    setSelectedField(null);
+    if (currentImageIndex > 0) {
+      setCurrentImageIndex((prevIndex) => prevIndex - 1);
+    }
+  };
 
   const handleAddNewText = () => {
     const newTextField = {
@@ -153,8 +174,8 @@ export default function WeddingCardEditor() {
     setSelectedField(id);
     setDraggingField({ id, offsetX: e.clientX - x, offsetY: e.clientY - y });
   };
-  const handleResizeMouseDownImage = (imageId, event, type) => {
-    event.preventDefault(); // Prevent any unwanted behavior during resize
+  const handleResizeMouseDownImage = (imageId, event) => {
+    event.preventDefault(); // Prevent default browser behavior
 
     const startX = event.clientX;
     const startY = event.clientY;
@@ -162,28 +183,39 @@ export default function WeddingCardEditor() {
 
     if (!targetImage) return;
 
-    const initialSize = targetImage.size;
+    // Initial dimensions of the image
+    const initialWidth = targetImage.width;
+    const initialHeight = targetImage.height;
 
+    // Function to handle mouse movement (resize logic)
     const handleMouseMove = (moveEvent) => {
-      const deltaX = moveEvent.clientX - startX;
-      const deltaY = moveEvent.clientY - startY;
-      const newSize = Math.max(20, initialSize + Math.max(deltaX, deltaY)); // Ensure minimum size is 20
+      const deltaX = moveEvent.clientX - startX; // Horizontal mouse movement
+      const deltaY = moveEvent.clientY - startY; // Vertical mouse movement
 
+      const newWidth = Math.max(20, initialWidth + deltaX); // Ensure minimum width is 20px
+      const newHeight = Math.max(20, initialHeight + deltaY); // Ensure minimum height is 20px
+
+      // Update the image dimensions
       setSmallImages((prev) =>
         prev.map((image) =>
-          image.id === imageId ? { ...image, size: newSize } : image
+          image.id === imageId
+            ? { ...image, width: newWidth, height: newHeight }
+            : image
         )
       );
     };
 
+    // Function to clean up after resizing
     const handleMouseUp = () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
 
+    // Attach event listeners for resizing
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   };
+
   const handleDeleteImage = (imageId) => {
     setSmallImages((prev) => prev.filter((image) => image.id !== imageId));
   };
@@ -275,8 +307,8 @@ export default function WeddingCardEditor() {
             container.style.height = `${imgHeight}px`;
 
             // Calculate scale factors
-            const defaultWidth = 320;
-            const defaultHeight = 608;
+            const defaultWidth = 350;
+            const defaultHeight = 530;
             scaleX = imgWidth / defaultWidth;
             scaleY = imgHeight / defaultHeight;
             resolve();
@@ -289,34 +321,79 @@ export default function WeddingCardEditor() {
       }
 
       // Add text fields with scaling
-      pageData.forEach(({ text, x, y, size, font }) => {
+      pageData.forEach(({
+        text,
+        x,
+        y,
+        size,
+        font,
+        fontColor,
+        angle,
+        isBold,
+        isItalic,
+        textAlign,
+        lineHeight,
+        letterSpacing,
+        isUppercase,
+        isLowercase,
+        curveValue
+      }) => {
         const textElement = document.createElement('div');
+
         textElement.style.position = 'absolute';
         textElement.style.top = `${y * scaleY}px`;
         textElement.style.left = `${x * scaleX}px`;
         textElement.style.fontSize = `${size * Math.min(scaleX, scaleY)}px`;
         textElement.style.fontFamily = font;
-        textElement.style.transform = 'translate(-50%, -50%)';
-        textElement.innerText = text;
+        textElement.style.color = fontColor || 'black';
+        textElement.style.fontWeight = isBold ? 'bold' : 'normal';
+        textElement.style.fontStyle = isItalic ? 'italic' : 'normal';
+        textElement.style.textAlign = textAlign || 'left';
+        textElement.style.lineHeight = `${lineHeight || 1.2}`;
+        textElement.style.letterSpacing = `${letterSpacing || 0}px`;
+        textElement.style.whiteSpace = 'nowrap';
+        textElement.style.transform = `translate(-50%, -50%) rotate(${angle || 0}deg)`;
+
+        // Apply transformations for Uppercase, Lowercase, and Curved Text
+        let formattedText = text;
+        if (isUppercase) {
+          formattedText = formattedText.toUpperCase();
+        } else if (isLowercase) {
+          formattedText = formattedText.toLowerCase();
+        }
+
+        // Apply curve transformation to each character based on curveValue
+        if (curveValue) {
+          formattedText = formattedText.split('')
+            .map((char, index) => {
+              const curvedAngle = (Math.PI * curveValue * (index - formattedText.length / 2)) / formattedText.length;
+              const span = document.createElement('span');
+              span.style.display = 'inline-block';
+              span.style.transform = `rotate(${curvedAngle}rad)`;
+              span.textContent = char;
+              return span.outerHTML;
+            })
+            .join('');
+        }
+
+        textElement.innerHTML = formattedText;
+
         container.appendChild(textElement);
       });
 
+
       // Add small images with scaling
-      smallImagesData.forEach(({ src, x, y, size }) => {
-        if (y > 0) {
-          y = y + 280;
-          x = x + size - 40;
-        } else {
-          x = x + size - 40;
-          y = y + 290;
-        }
+      smallImagesData.forEach(({ src, x, y, width, height }) => {
+        y=y+34;
+        x=x+80;
         const imgElement = document.createElement('img');
         imgElement.src = src;
         imgElement.style.position = 'absolute';
         imgElement.style.top = `${y * scaleY}px`;
         imgElement.style.left = `${x * scaleX}px`;
-        imgElement.style.width = `${size * Math.min(scaleX, scaleY)}px`;
-        imgElement.style.height = `${size * Math.min(scaleX, scaleY)}px`;
+        scaleX+=0.3; scaleY+=0.3;
+        imgElement.style.width = `${width * Math.min(scaleX, scaleY)}px`;
+        imgElement.style.height = `${height * Math.min(scaleX, scaleY)}px`;
         imgElement.style.transform = 'translate(-50%, -50%)';
         container.appendChild(imgElement);
       });
@@ -324,17 +401,14 @@ export default function WeddingCardEditor() {
       // Add stickers with scaling
       //console.log("page stickers", pageStickers);
       pageStickers.forEach(({ id, src, x, y, width, height, rotation }) => {
-        if (y > 0) {
-          y = y + 280;
-        } else {
-          y = y + 290;
-        }
-
+        y=y-10;
+        x=x+16;
         const imgElement = document.createElement('img');
         imgElement.src = src;
         imgElement.style.position = 'absolute';
         imgElement.style.top = `${y * scaleY}px`;
         imgElement.style.left = `${x * scaleX}px`;
+        scaleX+=0.3; scaleY+=0.3;
         imgElement.style.width = `${width * Math.min(scaleX, scaleY)}px`;
         imgElement.style.height = `${height * Math.min(scaleX, scaleY)}px`;
         imgElement.style.transform = `rotate(${rotation}deg) translate(-50%, -50%)`;  // Apply rotation
@@ -386,7 +460,7 @@ export default function WeddingCardEditor() {
             resolve();
           };
         });
-        
+
       } catch (error) {
         console.error("Error rendering page:", error);
       } finally {
@@ -400,28 +474,17 @@ export default function WeddingCardEditor() {
 
 
 
-
-
-
-
   const handleClose = () => {
     setSelectedField(null); // Close the TextOptions
   };
 
 
   const handleDownloadPDF = () => {
-    generatePDF(); // Call the PDF generation function
+    generatePDF();
+    //setGeneratepdf(true);
   };
 
 
-
-  const handleCopyImage = (index) => {
-    if (index !== null) {
-      const newImage = images[index]; // Assuming you want to copy the same image
-      setImages([...images, newImage]);
-      //setIsCustomizeModalOpen(false);
-    }
-  };
 
   const handleDragStart = (index) => {
     setDragging(true);
@@ -504,19 +567,6 @@ export default function WeddingCardEditor() {
 
   //  console.log("parent smallimages", smallImages);
 
-  const handleNextImage = () => {
-    setSelectedField(null);
-    if (currentImageIndex < images.length - 1) {
-      setCurrentImageIndex((prevIndex) => prevIndex + 1);
-    }
-  };
-
-  const handlePreviousImage = () => {
-    setSelectedField(null);
-    if (currentImageIndex > 0) {
-      setCurrentImageIndex((prevIndex) => prevIndex - 1);
-    }
-  };
 
 
 
@@ -635,7 +685,7 @@ export default function WeddingCardEditor() {
     };
     input.click();
 
-    // Add logic for other options as needed
+
   };
 
 
@@ -703,6 +753,8 @@ export default function WeddingCardEditor() {
   };
 
 
+
+
   const handleAddSmallImage = (src) => {
     // Save current state for undo
     setUndoStack((prevStack) => [
@@ -713,18 +765,35 @@ export default function WeddingCardEditor() {
     // Clear redo stack
     setRedoStack([]);
 
-    // Add the new image
+    // Calculate full size dynamically based on container dimensions
+    const container = document.getElementById("image-container"); // Replace with your actual container ID
+    const containerWidth = container ? container.offsetWidth : window.innerWidth;
+    const containerHeight = container ? container.offsetHeight : window.innerHeight;
+
     const newImage = {
-      id: `smallImage${Date.now()}`,
+      id: `fullImage${Date.now()}`,
       src,
-      x: 200,
-      y: 250,
-      size: 140,
+      x: 0, // Positioned at the top-left corner
+      y: 0,
+      width: containerWidth * 0.1, // Use 80% of container width
+      height: containerHeight * 0.1, // Use 80% of container height
     };
+
+    // Add the new image to state
     setSmallImages((prevImages) => [...prevImages, newImage]);
   };
 
 
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate data fetching
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
 
 
@@ -744,10 +813,129 @@ export default function WeddingCardEditor() {
   };
 
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      console.log("Resize event triggered"); // Log to see if the event is firing
+      setIsSmallScreen(window.innerWidth < 768);
+      console.log("Screen size check:", window.innerWidth < 768); // Log the condition
+      console.log("Yes vfvxbcbvcbcvbdbb");
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  const selectedTextField = textFields.find(field => field.id === selectedField);
+
+
+  const updateTextFieldRotation = (id, newRotationAngle) => {
+    setTextFields((prevFields) =>
+      prevFields.map((field) =>
+        field.id === id ? { ...field, rotationAngle: newRotationAngle } : field
+      )
+    );
+    console.log("newRotationAngle", newRotationAngle)
+  };
+  // A function to handle the mouse down event for rotation
+  const handleRotateMouseDown = (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const initialMouseX = e.clientX;
+    const initialMouseY = e.clientY;
+    const selectedTextField = textFields.find((field) => field.id === id);
+    let initialAngle = selectedTextField.angle || 0;
+
+    // Mouse move handler to calculate rotation angle
+    const handleMouseMove = (moveEvent) => {
+      const deltaX = moveEvent.clientX - initialMouseX;
+      const deltaY = moveEvent.clientY - initialMouseY;
+
+      // Calculate angle based on mouse movement
+      const newAngle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+      const angleDifference = newAngle;
+      const updatedTextFields = textFields.map((field) =>
+        field.id === id ? { ...field, angle: initialAngle + angleDifference } : field
+      );
+
+      // Update state with new angle
+      setTextFields(updatedTextFields);
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    // Add event listeners for mouse move and mouse up
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+  const handleRotateMouseDownSticker = (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Find the selected sticker
+    const sticker = stickers.find((sticker) => sticker.id === id);
+
+    // Calculate the center of the sticker (for rotation)
+    const centerX = sticker.x + sticker.width / 2;
+    const centerY = sticker.y + sticker.height / 2;
+
+    console.log(`Initial Center: (${centerX}, ${centerY})`);
+
+    // Store the initial mouse coordinates and initial angle
+    const initialMouseX = e.clientX;
+    const initialMouseY = e.clientY;
+    let initialAngle = sticker.rotation || 0;
+
+    // Calculate the initial angle based on mouse movement
+    const calculateAngle = (clientX, clientY) => {
+      const deltaX = clientX - centerX;
+      const deltaY = clientY - centerY;
+      return Math.atan2(deltaY, deltaX) * (180 / Math.PI); // Angle in degrees
+    };
+
+    // Mouse move handler for tracking rotation
+    const handleMouseMove = (moveEvent) => {
+      const newAngle = calculateAngle(moveEvent.clientX, moveEvent.clientY);
+      const angleDifference = newAngle - initialAngle;
+
+      console.log(`Mouse Move - New Angle: ${newAngle}, Angle Difference: ${angleDifference}`);
+
+      // Update the sticker's rotation state
+      setStickers((prevStickers) =>
+        prevStickers.map((sticker) =>
+          sticker.id === id
+            ? { ...sticker, rotation: initialAngle + angleDifference }
+            : sticker
+        )
+      );
+    };
+
+    // Mouse up handler to stop rotating
+    const handleMouseUp = () => {
+      // Remove the mousemove and mouseup event listeners
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    // Add event listeners for mouse move and mouse up
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+
+
+
+  if (loading) return <ShimmerSkeleton />;
 
   return (
     <div className="container mx-auto  md:bg-gradient-to-br">
-     
+
       <div className="w-full text-center flex justify-between items-center bg-gray-100 shadow-md">
         {/* Undo/Redo Buttons */}
         <div className="flex gap-4 z-10 relative left-14">
@@ -790,7 +978,6 @@ export default function WeddingCardEditor() {
 
 
       <hr className="border-gray-300 w-full " />
-
       <div className="flex w-full relative">
         <div className="hidden md:block absolute top-0 bottom-0 border-l-2 border-gray-300"></div>
 
@@ -869,8 +1056,6 @@ export default function WeddingCardEditor() {
             </div>
           </div>
         )}
-
-
 
 
 
@@ -985,18 +1170,17 @@ export default function WeddingCardEditor() {
                   <div
                     style={{
                       position: "absolute",
-                      transform: `rotate(${rotation}deg)`,
                       cursor: "move",
-                      border: selectedStickerId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
+                      border: selectedStickerId === id ? "2px dotted blue" : "none", // Blue dotted border if selected
                       zIndex: selectedStickerId === id ? 20 : 10, // Ensure border is above other elements
                       display: "inline-block", // Ensure sticker stays within the border
-                      // border: "1px solid #ccc", // Apply the border around the sticker
-                      padding: "2px 5px", // Add padding to the border around the sticker
+                      transform: `translate(-50%, -50%)`, // Center sticker correctly
+                      top: 0, // Ensures no offset from parent
+                      left: 0, // Ensures no offset from parent
                     }}
-                    onClick={() => handleStickerClick(id)} // Set the selected sticker on click
+                    onClick={() => handleStickerClick(id)}
                   >
                     <Resizable
-                      defaultSize={{ width, height }}
                       size={{ width, height }}
                       lockAspectRatio
                       onResizeStop={(e, direction, ref, d) => {
@@ -1013,34 +1197,31 @@ export default function WeddingCardEditor() {
                         );
                       }}
                       style={{
-                        position: "absolute",
+                        position: "relative",
                         zIndex: 10,
-                        border: selectedStickerId === id ? '2px dotted blue' : 'none',
+                        border: selectedStickerId === id ? "2px dotted blue" : "none",
                       }}
                     >
                       <div className="relative">
-                        {/* Sticker Image */}
                         <img
                           src={src}
                           alt="Sticker"
                           className="w-full h-full object-contain"
                         />
 
-                        {/* Delete Icon */}
                         {selectedStickerId === id && (
                           <button
                             onClick={(e) => {
-                              e.stopPropagation(); // Prevent triggering the sticker selection click
+                              e.stopPropagation();
                               handleDeleteSticker(id);
                             }}
-                            className="absolute top-0 right-0 w-6 h-6 shadow bg-white  border-2 border-blue-500 rounded-full flex justify-center items-center"
+                            className="absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
                             title="Delete Sticker"
                           >
-                            <i className="fas fa-times-circle text-red-500 text-sm"></i> {/* Delete Icon */}
+                            <i className="fas fa-times-circle text-red-500 text-sm"></i>
                           </button>
                         )}
 
-                        {/* Resize Handle (Resize Icon) */}
                         {selectedStickerId === id && (
                           <div
                             className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
@@ -1050,9 +1231,6 @@ export default function WeddingCardEditor() {
                             <i className="fas fa-arrows-alt text-white"></i> {/* Resize Icon */}
                           </div>
                         )}
-
-                        {/* Rotate Button */}
-
                       </div>
                     </Resizable>
                   </div>
@@ -1060,8 +1238,70 @@ export default function WeddingCardEditor() {
               ))}
 
 
+              {smallImages.map(({ id, src, x, y, width, height }) => (
+                <Draggable
+                  key={id}
+                  position={{ x, y }}
+                  onDrag={(e, data) => {
+                    setSmallImages((prev) =>
+                      prev.map((image) =>
+                        image.id === id ? { ...image, x: data.x, y: data.y } : image
+                      )
+                    );
+                  }}
+                  bounds="parent"
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      cursor: "move",
+                      zIndex: selectedImageId === id ? 20 : 10,
+                      width: `${width}px`,
+                      height: `${height}px`,
+                      border: selectedImageId === id ? "2px dotted blue" : "none",
+                      padding: "2px 5px",
+                      top: 0, // Ensures no offset from parent
+                      left: 0, // Ensures no offset from parent
+                      transform: `translate(${x}px, ${y}px)`, // Explicitly position with transform
+                    }}
+                    onClick={() => handleImageClick(id)} // Select image
+                  >
+                    {/* Image */}
+                    <img
+                      src={src}
+                      alt="Small Icon"
+                      className="object-cover w-full h-full rounded border"
+                    />
 
+                    {/* Delete Button */}
+                    {selectedImageId === id && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteImage(id);
+                        }}
+                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
+                        style={{ transform: "translate(50%, -50%)" }}
+                        title="Delete Image"
+                      >
+                        <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                      </button>
+                    )}
 
+                    {/* Resize Handle */}
+                    {selectedImageId === id && (
+                      <div
+                        onMouseDown={(e) => handleResizeMouseDownImage(id, e)}
+                        className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
+                        style={{ transform: "translate(50%, 50%)" }}
+                        title="Resize Image"
+                      >
+                        <i className="fas fa-arrows-alt text-white text-sm"></i>
+                      </div>
+                    )}
+                  </div>
+                </Draggable>
+              ))}
 
               {textFields.map(
                 ({
@@ -1072,6 +1312,7 @@ export default function WeddingCardEditor() {
                   size,
                   font,
                   fontColor,
+                  angle, // Add angle here
                   isBold,
                   isItalic,
                   textAlign,
@@ -1079,14 +1320,14 @@ export default function WeddingCardEditor() {
                   letterSpacing,
                   isUppercase,
                   isLowercase,
-                  curveValue, // Use curveValue as it was defined in TextOptions
+                  curveValue,
                 }) => (
                   <div
                     key={id}
                     className="absolute"
                     style={{
-                      top: y,
-                      left: x,
+                      top: `${y}px`,
+                      left: `${x}px`,
                       fontSize: `${size}px`,
                       fontFamily: font,
                       color: fontColor,
@@ -1094,51 +1335,42 @@ export default function WeddingCardEditor() {
                       fontStyle: isItalic ? "italic" : "normal",
                       letterSpacing: `${letterSpacing}px`,
                       lineHeight: `${lineHeight}`,
-                      whiteSpace: "nowrap", // Prevent text from wrapping
-                      overflow: "visible", // Allow overflow
+                      whiteSpace: "nowrap",
+                      overflow: "visible",
                       textAlign: textAlign,
                       cursor: "move",
                       zIndex: selectedField === id ? 10 : 1,
                       border: selectedField === id ? "2px dotted blue" : "none", // Border for selection
-                      width: "fit-content", // Ensure text content adjusts to width
-                      transform: `translate(-50%, -50%)`, // Center the text container
+                      width: "fit-content",
+                      transformOrigin: "center",
+                      transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply rotation
                     }}
-                    onMouseDown={(e) => {
-                      e.stopPropagation(); // Prevent click from propagating to parent elements
-                      handleMouseDown(e, id, x, y); // Handle the click to open text options for the selected field
-                    }}
+                    onMouseDown={(e) => handleMouseDown(e, id, x, y)}
                   >
-                    {/* Border for the text content */}
+                    {/* Render the text inside a bordered container */}
                     <div
                       style={{
-                        display: "inline-block", // Ensure text stays within the border
-                        border: "1px solid #ccc", // Apply the border around the text
-                        padding: "2px 5px", // Add padding to the border around text
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        padding: "2px 5px",
                       }}
                     >
-                      {/* Render Text with Curved Effect */}
                       {text.split("\n").map((line, index) => (
                         <div key={index}>
                           {line.split("").map((char, charIndex) => {
-                            const curve = curveValue || 0; // Ensure curve has a default value
-                            const angle =
-                              (Math.PI * curve) * (charIndex - Math.floor(line.length / 2)) /
-                              line.length;
-                            const radius = 100; // Distance from the center of the curve
+                            const curve = curveValue || 0;
+                            const angle = (Math.PI * curve) * (charIndex - Math.floor(line.length / 2)) / line.length;
+                            const radius = 100;
                             return (
                               <span
                                 key={charIndex}
                                 style={{
-                                  position: "relative", // Using inline instead of inline-block
+                                  position: "relative",
                                   transform: `rotate(${angle}rad) translateY(-${radius}px)`,
-                                  transformOrigin: "center", // Ensure rotation happens around the center
+                                  transformOrigin: "center",
                                 }}
                               >
-                                {isUppercase
-                                  ? char.toUpperCase()
-                                  : isLowercase
-                                    ? char.toLowerCase()
-                                    : char}
+                                {isUppercase ? char.toUpperCase() : isLowercase ? char.toLowerCase() : char}
                               </span>
                             );
                           })}
@@ -1149,22 +1381,20 @@ export default function WeddingCardEditor() {
                     {/* Resizing Handle */}
                     {selectedField === id && (
                       <div
-                        onMouseDown={(e) => {
-                          e.stopPropagation(); // Prevent click from propagating to parent elements
-                          handleResizeMouseDown(e, id); // Handle the resizing functionality
-                        }}
-                        className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize  border-2 border-blue-500 rounded-full flex justify-center items-center"
+                        onMouseDown={(e) => handleResizeMouseDown(e, id)}
+                        className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
                         style={{ transform: "translate(50%, 50%)" }}
                       >
                         <i className="fas fa-arrows-alt text-white text-sm"></i>
                       </div>
                     )}
+
                     {/* Delete Button */}
                     {selectedField === id && (
                       <button
                         onClick={(e) => {
-                          e.stopPropagation(); // Prevent the click from bubbling up
-                          handleDelete(id); // Delete the text field
+                          e.stopPropagation();
+                          handleDelete(id);
                         }}
                         className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white  border-2 border-blue-500 flex justify-center items-center"
                         style={{
@@ -1179,17 +1409,14 @@ export default function WeddingCardEditor() {
                     {/* Rotate Button */}
                     {selectedField === id && (
                       <div
-                        onMouseDown={(e) => {
-                          e.stopPropagation(); // Prevent click from propagating to parent elements
-                          handleRotateMouseDown(e, id); // Handle the rotation functionality
-                        }}
+                        onMouseDown={(e) => handleRotateMouseDown(e, id)}
                         className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
                         style={{
                           transform: "translate(-50%, -50%)",
                           zIndex: 20,
                         }}
                       >
-                        <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
+                        <i className="fas fa-sync-alt text-yellow-500 text-sm"></i> {/* Rotation Icon */}
                       </div>
                     )}
                   </div>
@@ -1199,72 +1426,10 @@ export default function WeddingCardEditor() {
 
 
 
-              {smallImages.map(({ id, src, x, y, size }) => (
-                <Draggable
-                  key={id}
-                  position={{ x, y }}
-                  onDrag={(e, data) => {
-                    setSmallImages((prev) =>
-                      prev.map((image) =>
-                        image.id === id ? { ...image, x: data.x, y: data.y } : image
-                      )
-                    );
-                  }}
-                  onStart={(e) => e.button === 0} // Dragging starts only when the left mouse button is pressed
-                  bounds="parent"
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      cursor: "move",
-                      zIndex: 10,
-                      width: `${size}px`, // Make width dynamic based on size
-                      height: `${size}px`, // Make height dynamic based on size
-                      //border: "2px solid #ccc", // Border around the image
-                      borderRadius: "8px", // Optional: Add rounded corners to the border around the image
-                      border: selectedImageId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
-                      // zIndex: selectedImageId === id ? 20 : 10, // Ensure border is above other elements
-                      padding: "2px 5px",
 
-                    }}
-                    onClick={() => handleImageClick(id)} // Set selected image on click
-                  >
-                    <img
-                      src={src}
-                      alt="Small Icon"
-                      className="object-cover w-full h-full rounded border" // Ensure image has rounded corners (optional)
-                    />
 
-                    {/* Render delete and resize icons only when the image is selected */}
-                    {selectedImageId === id && (
-                      <>
-                        {/* Delete Icon */}
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevent triggering the drag behavior
-                            handleDeleteImage(id); // Handle delete image
-                          }}
-                          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-                          style={{ transform: "translate(50%, -50%)" }}
-                          title="Delete Image"
-                        >
-                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                        </button>
 
-                        {/* Resize Handle (Resize Icon) */}
-                        <div
-                          onMouseDown={(e) => handleResizeMouseDownImage(id, e, 'image')}
-                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-                          style={{ transform: "translate(50%, 50%)" }}
-                          title="Resize Image"
-                        >
-                          <i className="fas fa-arrows-alt text-white text-sm"></i>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </Draggable>
-              ))}
+
 
 
 
@@ -1331,6 +1496,18 @@ export default function WeddingCardEditor() {
             />
           )}
 
+          {
+            generatePdf && (
+              <PdfGenerator
+                savedPages={savedPages}
+                savedSmallImages={savedSmallImages}
+                savedStickers={savedStickers}
+                images={images}
+                textFields={textFields}
+              />
+            )
+          }
+
 
 
           {showErrorMessage && (
@@ -1341,152 +1518,192 @@ export default function WeddingCardEditor() {
 
 
 
-          {isModalOpen && selectedField && (
-            <div className="bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 md:absolute top-20 right-1 sm:flex-wrap">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-96 ">
-                <h2 className="text-xl mb-4">Edit Text</h2>
-                <div>
-                  <label htmlFor="text">Text</label>
-                  <textarea
-                    id="text"
-                    className="w-full p-2 border rounded mb-4"
-                    value={newText}
-                    onChange={(e) => setNewText(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault(); // Prevent the default action (new line)
-                        setNewText((prev) => prev + '\n'); // Add a new line character
-                      }
-                    }}
-                    rows={4} // Set the number of rows for the textarea
-                  />
-                </div>
-                <button
-                  onClick={handleUpdate}
-                  className="px-6 py-1 rounded border border-gray-400 text-gray-800 hover:bg-gray-100 transition mr-32"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-6 py-1 rounded border border-green-400 text-green-600 hover:bg-green-100 transition"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
-
-
-
-
-
-          {isFontModalOpen && (
-            <div className="bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 md:absolute top-20 right-1 sm:flex-wrap">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-                <h2 className="text-xl mb-4">Choose Font</h2>
-                <div>
-                  {['Roboto', 'Garamond', 'Lato'].map((font) => (
+          {!isSmallScreen && (
+            <div className="relative md:absolute  gap-4 z-10 md:right-0 xl:right-10 sm:top-auto sm:pr-4 sm:-ml-0 2xl:mr-12 xl:mr-12 ">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:flex-col flex-wrap gap-4 ">
+                {/* Only show these buttons if no text is selected */}
+                {!selectedField && (
+                  <>
                     <button
-                      key={font}
-                      onClick={() => handleFontSelect(font)}
-                      className="block w-full text-left px-4 py-2 border-b hover:bg-gray-200 transition"
+                      onClick={handleAddNewText}
+                      className="flex items-center justify-center gap-2  px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300 lg:mt-36 md:mt-36 xl:mt-36 mt-4 "
                     >
-                      {font}
+                      <AiOutlineFileText className="w-6 h-6" />
+                      <span>Add Text</span>
                     </button>
-                  ))}
-                </div>
-                <button
-                  onClick={() => setIsFontModalOpen(false)}
-                  className="px-6 py-1 rounded border border-green-400 text-green-600 hover:bg-green-100 transition"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
+
+                    {/* Add Sticker Button */}
+                    <button
+                      onClick={() => setShowStickerSelector(true)}
+                      className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                    >
+                      <FaStickerMule className="w-6 h-6" />
+                      <span>Add Sticker</span>
+                    </button>
+
+                    {/* Add Image Button */}
+                    <button
+                      onClick={handleAddImageClick}
+                      className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                    >
+                      <AiOutlinePicture className="w-6 h-6" />
+                      <span>Add Images</span>
+                    </button>
+                  </>
+                )}
 
 
-          <div className="relative md:absolute  gap-4 z-10 md:right-0 xl:right-10 sm:top-auto sm:pr-4 sm:-ml-0 2xl:mr-12 xl:mr-12 ">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:flex-col flex-wrap gap-4 ">
-              {/* Only show these buttons if no text is selected */}
-              {!selectedField && (
-                <>
-                  <button
-                    onClick={handleAddNewText}
-                    className="flex items-center justify-center gap-2  px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300 lg:mt-36 md:mt-36 xl:mt-36 mt-4 "
-                  >
-                    <AiOutlineFileText className="w-6 h-6" />
-                    <span>Add Text</span>
-                  </button>
 
-                  {/* Add Sticker Button */}
-                  <button
-                    onClick={() => setShowStickerSelector(true)}
-                    className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-                  >
-                    <FaStickerMule className="w-6 h-6" />
-                    <span>Add Sticker</span>
-                  </button>
-
-                  {/* Add Image Button */}
-                  <button
-                    onClick={handleAddImageClick}
-                    className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-                  >
-                    <AiOutlinePicture className="w-6 h-6" />
-                    <span>Add Images</span>
-                  </button>
-                </>
-              )}
-
-              {/* Show TextOptions only when a text field is selected */}
-              {selectedField && textFields.some(field => field.id === selectedField) && (
-                <div className="relative flex flex-col gap-4 mt-14 left-20 mr-12">
-                  <TextOptions
-                    selectedText={textFields.find(field => field.id === selectedField)}
-                    updateTextField={updateTextField}
-                    onClose={handleClose} // Pass the close handler
-                  />
-                </div>
-              )}
-
-              {/* Sticker Selector */}
-              {showStickerSelector && (
-                <div className="z-50 fixed inset-0 bg-black bg-opacity-50 flex justify-end">
+                {selectedField && selectedTextField && (
                   <div
-                    className={`bg-white rounded-lg shadow-lg w-96 h-full p-6 transform transition-all duration-300 ${showStickerSelector ? "translate-x-0" : "translate-x-full"
+                    className={`relative flex flex-col gap-4 ${isSmallScreen ? "mr-10" : "mt-14 left-20 mr-12"
                       }`}
                   >
-                    {/* Header with Close button */}
-                    <div className="flex justify-between items-center mb-6">
-                      <h2 className="text-2xl  font-bold ">Select a Sticker</h2>
-                      <button
-                        onClick={() => setShowStickerSelector(false)}
-                        className="text-xl text-gray-500 hover:text-gray-700 transition-all duration-200"
-                      >
-                        ✕
-                      </button>
-                    </div>
+                    {isSmallScreen ? (
+                      <TextFieldsMobile
+                        selectedText={selectedTextField}
+                        updateTextField={updateTextField}
+                        onClose={handleClose}
+                      />
+                    ) : (
+                      <TextOptions
+                        selectedText={selectedTextField}
+                        updateTextField={updateTextField}
+                        onClose={handleClose}
+                      />
+                    )}
+                  </div>
+                )}
 
-                    {/* Sticker Selector */}
-                    <StickerSelector onSelect={handleStickerSelect} />
+                {/* Sticker Selector */}
+                {showStickerSelector && (
+                  <div className="z-50 fixed inset-0 bg-black bg-opacity-50 flex justify-end">
+                    <div
+                      className={`bg-white rounded-lg shadow-lg w-96 h-full p-6 transform transition-all duration-300 ${showStickerSelector ? "translate-x-0" : "translate-x-full"
+                        }`}
+                    >
+                      {/* Header with Close button */}
+                      <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-2xl  font-bold ">Select a Sticker</h2>
+                        <button
+                          onClick={() => setShowStickerSelector(false)}
+                          className="text-xl text-gray-500 hover:text-gray-700 transition-all duration-200"
+                        >
+                          ✕
+                        </button>
+                      </div>
 
-                    {/* Cancel Button */}
-                    <div className="mt-6 flex justify-center">
-                      <button
-                        onClick={() => setShowStickerSelector(false)} // Cancel action
-                        className="py-2 px-6 bg-[#AF7D32] w-full text-white rounded-lg shadow-md hover:bg-[#AF7D32] transition-all duration-300"
-                      >
-                        Cancel
-                      </button>
+                      {/* Sticker Selector */}
+                      <StickerSelector onSelect={handleStickerSelect} />
+
+                      {/* Cancel Button */}
+                      <div className="mt-6 flex justify-center">
+                        <button
+                          onClick={() => setShowStickerSelector(false)} // Cancel action
+                          className="py-2 px-6 bg-[#AF7D32] w-full text-white rounded-lg shadow-md hover:bg-[#AF7D32] transition-all duration-300"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+          )}
+          {isSmallScreen && (
+            <div className="mr-10">
+              <div className="grid gap-4">
+                {/* Only show these buttons if no text is selected */}
+                {!selectedField && (
+                  <>
+                    <div className="flex gap-4">
+                      {/* Add Text Button */}
+                      <button
+                        onClick={handleAddNewText}
+                        className="flex items-center justify-center gap-2 w-40 py-6 h-10 mt-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                      >
+                        <AiOutlineFileText className="w-6 h-6" />
+                      </button>
 
+                      {/* Add Sticker Button */}
+                      <button
+                        onClick={() => setShowStickerSelector(true)}
+                        className="flex items-center justify-center gap-2 w-40 py-6 mt-4 h-10 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                      >
+                        <FaStickerMule className="w-6 h-6" />
+                      </button>
+                    </div>
+
+                    {/* Add Image Button */}
+                    <button
+                      onClick={handleAddImageClick}
+                      className="flex items-center justify-center gap-2 w-auto h-20 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                    >
+                      <AiOutlinePicture className="w-8 h-8" />
+                      <span className="text-lg">Add Images</span>
+                    </button>
+
+                  </>
+                )}
+
+                {/* Selected Field Section */}
+                {selectedField && selectedTextField && (
+                  <div
+                    className=""
+                  >
+                    {isSmallScreen ? (
+                      <TextFieldsMobile
+                        selectedText={selectedTextField}
+                        updateTextField={updateTextField}
+                        onClose={handleClose}
+                      />
+                    ) : (
+                      <TextOptions
+                        selectedText={selectedTextField}
+                        updateTextField={updateTextField}
+                        onClose={handleClose}
+                      />
+                    )}
+                  </div>
+                )}
+
+                {/* Sticker Selector */}
+                {showStickerSelector && (
+                  <div className="z-50 fixed inset-0 bg-black bg-opacity-50 flex justify-end">
+                    <div
+                      className={`bg-white rounded-lg shadow-lg w-96 h-full p-6 transform transition-all duration-300 ${showStickerSelector ? "translate-x-0" : "translate-x-full"
+                        }`}
+                    >
+                      {/* Header with Close button */}
+                      <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-2xl font-bold">Select a Sticker</h2>
+                        <button
+                          onClick={() => setShowStickerSelector(false)}
+                          className="text-xl text-gray-500 hover:text-gray-700 transition-all duration-200"
+                        >
+                          ✕
+                        </button>
+                      </div>
+
+                      {/* Sticker Selector */}
+                      <StickerSelector onSelect={handleStickerSelect} />
+
+                      {/* Cancel Button */}
+                      <div className="mt-6 flex justify-center">
+                        <button
+                          onClick={() => setShowStickerSelector(false)} // Cancel action
+                          className="py-2 px-6 bg-[#AF7D32] w-full text-white rounded-lg shadow-md hover:bg-[#AF7D32] transition-all duration-300"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {showImageUploadOptions && (
             <ImageUploadOptions

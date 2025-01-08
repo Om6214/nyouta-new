@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const weddingWebsiteSchema = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    name: { type: String, required: false },
-    partnerName: { type: String, required: false },
     home: {
+        name: { type: String, required: false },
+        partnerName: { type: String, required: false },
         images: [{ type: String }],
         weddingDate: { type: Date, required: false },
         weddingLocation: { type: String, required: false },
@@ -41,6 +41,9 @@ const weddingWebsiteSchema = new mongoose.Schema({
     tags:{
         type: [String],
         required: false,
+    },
+    gallery:{
+        photos:[String]
     },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },

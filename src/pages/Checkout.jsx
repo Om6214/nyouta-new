@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAddresses, addAddress } from '../Store/slices/addressSlice';
-import {getCart} from '../Store/slices/productSlice';
+import { getCart } from '../Store/slices/productSlice';
 import { toast } from 'react-toastify';
 import { use } from 'react';
 import { placeOrder } from '../Store/slices/orderSlice';
+import {emptyCart} from '../Store/slices/productSlice';
 import axios from 'axios';
 import { BASE_URL } from '../utils/api';
 
@@ -52,7 +53,8 @@ const Checkout = () => {
     const [selectedAddress, setSelectedAddress] = useState(null);
     const { addresses, loading } = useSelector((state) => state.address);
     const { cart } = useSelector((state) => state.product);
-    const user=localStorage.getItem('user');
+    console.log(cart)
+    const user = localStorage.getItem('user');
     useEffect(() => {
         dispatch(getCart());
     }, [dispatch]);
@@ -60,7 +62,7 @@ const Checkout = () => {
         if (!addresses.length) {
             dispatch(getAddresses());
         }
-    }, [dispatch, addresses]);
+    }, [dispatch]);
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -86,7 +88,6 @@ const Checkout = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (!formData.state) {
             toast.error("Please select a state.");
             return;
@@ -114,22 +115,26 @@ const Checkout = () => {
             email: "",
         });
     };
- const handleAddressSelection = (address, index) => {
-    setSelectedAddress(index);
-    console.log(address, index);
- }
- const loadRazorpayScript = async () => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    script.onload = () => {};
-    document.body.appendChild(script);
-  };
-   React.useEffect(() => {
-      loadRazorpayScript();
+    const handleAddressSelection = (address, index) => {
+        setSelectedAddress(index);
+        console.log(address, index);
+    }
+    const loadRazorpayScript = async () => {
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        script.onload = () => { };
+        document.body.appendChild(script);
+    };
+    React.useEffect(() => {
+        loadRazorpayScript();
     }, []);
 
-    const handleOrder = async() => { 
+    const handleOrder = async () => {
+        if (cart.products.length === 0) {
+            toast.error("Please add product to cart.")
+            return;
+        }
         if (selectedAddress === null) {
             toast.error("Please select an address.");
             return;
@@ -139,11 +144,11 @@ const Checkout = () => {
             quantity: product.quantity,
             price: product.productId.price,
         }));
-        const totalPrice = cart.products.reduce((acc, item) => acc + item.productId.price*item.quantity, 0);
+        const totalPrice = cart.products.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
         const address = addresses[selectedAddress]._id;
-        const data={ products, totalPrice, address };
-        const res=await dispatch(placeOrder(data));
-        if(res.type==='order/placeOrder/fulfilled') {
+        const data = { products, totalPrice, address };
+        const res = await dispatch(placeOrder(data));
+        if (res.type === 'order/placeOrder/fulfilled') {
             initPayment(res.payload.payment);
         }
         console.log(res);
@@ -157,40 +162,41 @@ const Checkout = () => {
             order_id: data.id,
             name: "Nyouta",
             description: "Payment for your order",
-            prefill:{
+            prefill: {
                 name: user.name,
                 email: user.email,
             },
             theme: {
                 color: "#3399cc",
             },
-             handler: async (response) => {
-                    console.log(response);
-                    try {
-                      const verifyUrl = `${BASE_URL}/order/verify-payment`;
-                      const verifyData = {
+            handler: async (response) => {
+                console.log(response);
+                try {
+                    const verifyUrl = `${BASE_URL}/order/verify-payment`;
+                    const verifyData = {
                         razorpay_order_id: response.razorpay_order_id,
                         razorpay_payment_id: response.razorpay_payment_id,
                         razorpay_signature: response.razorpay_signature,
-                      };
-                      const headers = {Authorization: `Bearer ${localStorage.getItem('token')}`};
-                      try {
-                        if(!localStorage.getItem('token')) {
+                    };
+                    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+                    try {
+                        if (!localStorage.getItem('token')) {
                             toast.error("Please login to continue");
                             return;
                         }
                         const res = await axios.post(verifyUrl, verifyData, { headers });
                         if (res.status === 200) {
-                          toast.success("Payment Successful");
-                        //   window.location.reload();
+                            dispatch(emptyCart());
+                            toast.success("Payment Successful");
+                            //   window.location.reload();
                         }
-                      } catch (err) {
-                        toast.error(err.response.data.message);
-                      }
                     } catch (err) {
-                      console.log(err);
+                        toast.error(err.response.data.message);
                     }
-                  },
+                } catch (err) {
+                    console.log(err);
+                }
+            },
         }
         const rzp1 = new window.Razorpay(options);
         rzp1.open();
@@ -204,7 +210,7 @@ const Checkout = () => {
                         <h2 className='text-lg font-semibold'>Saved Addresses</h2>
                         <ul className='list-disc pl-5'>
                             {addresses.map((address, index) => (
-                                <li key={index} className='mb-2'>
+                                <>
                                     <input
                                         type="radio"
                                         name="selectedAddress"
@@ -212,9 +218,11 @@ const Checkout = () => {
                                         onChange={() => handleAddressSelection(address, index)}
                                         className="mr-2"
                                     />
-                                    <p>{`${address.firstName} ${address.lastName}, ${address.streetName}, ${address.apartment},${address.city}, ${address.state}, ${address.pincode}`}</p>
-                                    <p>{`Contact: ${address.contactNo}`}</p>
-                                </li>
+                                    <div key={index} className='mb-2'>
+                                        <p>{`${address.firstName} ${address.lastName}, ${address.streetName}, ${address.apartment},${address.city}, ${address.state}, ${address.pincode}`}</p>
+                                        <p>{`Contact: ${address.contactNo}`}</p>
+                                    </div>
+                                </>
                             ))}
                         </ul>
                         <button
@@ -366,7 +374,7 @@ const Checkout = () => {
                             className='w-16 h-16 object-cover'
                         />
                         <p>{product.productId.name}</p>
-                        <p>{`$${product.productId.price} x ${product.quantity}`}</p>
+                        <p>₹{`${product.productId.price} x ${product.quantity}`}</p>
                     </div>
                 ))}
                 <div className='flex justify-between mt-4'>
@@ -379,15 +387,15 @@ const Checkout = () => {
                 </div>
                 <div className='flex justify-between mt-4'>
                     <p>Subtotal</p>
-                    <p>{`$${cart?.products?.reduce((acc, item) => acc + item.productId.price*item.quantity, 0)}`}</p>
+                     
+                    <p>₹{cart?.products?.length>0?cart?.products?.reduce((acc, item) => acc + item.productId.price * item.quantity, 0).toFixed(2):(0)}</p>
                 </div>
-
                 <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700' onClick={handleOrder}>
-                    Place Order via Razorpay
+                    Place Order
                 </button>
-                <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700'>
+                {/* <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700'>
                     Place Order via Phone Pe
-                </button>
+                </button> */}
             </div>
         </div>
     );

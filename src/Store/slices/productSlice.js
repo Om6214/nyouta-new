@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../utils/api";
 import { toast } from "react-toastify";
+import { logout } from "./authSlice";
 
 const initialState = {
     products: [],
@@ -35,6 +36,9 @@ export const getCart = createAsyncThunk(
             return response.data;
         } catch (error) {
             console.log(error);
+            if (error.response.status === 401 || error.response.status === 403) {
+                thunkAPI.dispatch(logout()); // Use `thunkAPI.dispatch` 
+            }
             return thunkAPI.rejectWithValue(error.response.data.message || "Something went wrong");
         }
     }
@@ -74,12 +78,32 @@ export const removeFromCart = createAsyncThunk(
     }
 )
 
+export const updateCartQuantity = createAsyncThunk(
+    "products/updateCartQuantity",
+    async (product, thunkAPI) => {
+        try {
+            const response = await axios.put(`${BASE_URL}/cart/update-quantity`, product,{
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return thunkAPI.rejectWithValue(error.response.data.message);
+        }
+    }
+)
+
 export const productSlice = createSlice({
     name: "product",
     initialState,
     reducers: {
         addtoCartReducer(state, action) {
             state.cart = [...state.cart, action.payload];
+        },
+        emptyCart(state) {
+            state.cart = [];
         }
     }, 
     extraReducers: (builder) => {
@@ -135,8 +159,21 @@ export const productSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         })
+
+        // Update Cart Quantity
+        .addCase(updateCartQuantity.pending, (state) => {
+            state.loading = true;
+        })
+        .addCase(updateCartQuantity.fulfilled, (state, action) => {
+            state.loading = false;
+            state.cart = action.payload.cart;
+        })
+        .addCase(updateCartQuantity.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
     }
 })
 
-export const { addtoCartReducer } = productSlice.actions;
+export const { addtoCartReducer ,emptyCart} = productSlice.actions;
 export default productSlice.reducer;

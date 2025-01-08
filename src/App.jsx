@@ -36,12 +36,10 @@ import PhotoBook from './components/PhotoBook';
 import ItineraryCompo from './components/ItineraryCompo';
 
 
-
 // gaganluthrasirji
 
 function App() {
   // useEffect(()=>{...}) // Your previous effect logic
-
   return (
     <CartProvider>
       <BrowserRouter>
@@ -49,7 +47,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Category />} />
-          <Route path="/us/:slug" element={<WeddingWebsite />} />
+          <Route path="/weds/:slug" element={<WeddingWebsite />} />
           <Route path='/create-wedding-website' element={<WeddingWebsiteUrl/>}/>
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart />} />
@@ -74,10 +72,10 @@ function App() {
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
         </Routes>
 
+      <Cart />
         {/* Conditionally render Footer */}
         <ConditionalFooter />
       </BrowserRouter>
-      <Cart />
     </CartProvider>
   );
 }
@@ -87,7 +85,7 @@ function ConditionalNavbar() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/us') || 
+  if (location.pathname.includes('/weds') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
     return null;
@@ -101,7 +99,7 @@ function ConditionalFooter() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/us') || 
+  if (location.pathname.includes('/weds') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
     return null;
