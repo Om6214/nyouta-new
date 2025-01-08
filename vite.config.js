@@ -4,6 +4,13 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+
+  optimizeDeps: {
+    exclude: ["fabric"], // Prevents Vite from optimizing Fabric.js
+  },
+  ssr: {
+    noExternal: ["fabric"], // Ensures Fabric.js is not processed in SSR mode
+  },
   // build: {
   //   rollupOptions: {
   //     external: ["@ffmpeg/ffmpeg"],
@@ -17,3 +24,4 @@ export default defineConfig({
   // },
 
 })
+

@@ -168,6 +168,57 @@ const navItems = [
     label: "Itinerary",
     url: "/nav/itinerary",
     children: [
+
+      { label: "Wedding Itinerary" ,Filters: [
+  { a: 'Room Itinerary ' },
+  { a: 'Check-in Itinerary ' },
+  { a: 'Room Key Enevelop ' },
+  { a: 'Thank You Cards ' },
+  { a: 'Wedding Menu ' },
+  { a: 'Table Itinerary ' },
+  { a: 'Dining Table Mats ' },
+]},
+      { label: "Stickers",Filters: [
+  { a: 'Guest Name Stickers ' },
+  { a: 'Gift Box Sticker ' },
+  { a: 'Vehicle Stickers ' },
+  { a: 'Designer Stickers ' },
+  { a: 'Vintage Stickers ' },
+] },
+      { label: "Tags-Bedges",Filters: [
+  { a: 'Luggage Tag ' },
+  { a: 'Door Handle Tag ' },
+  { a: 'Gift Tag ' },
+  { a: 'Parking Tags ' },
+  { a: 'Wedding Bedges ' },
+] },
+      { label: "Welcome Signages",Filters: [
+  { a: 'Wedding Ceremony ' },
+  { a: 'Haldi Ceremony ' },
+  { a: 'Mehandi Ceremony ' },
+  { a: 'Sangeet Ceremony ' },
+  { a: 'Direction Signage ' },
+  { a: 'Engagement Ceremony ' },
+  { a: 'Anniversary Ceremony ' },
+  { a: 'Lohri Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Birthday Party ' },
+  { a: 'Celeration Party ' }
+]},
+      { label: "Accessories",Filters: [
+  { a: 'Party Dangler ' },
+  { a: 'Coasters ' },
+  { a: 'Paper Napkins ' },
+  { a: 'Event Banner ' },
+  { a: 'Face Mask ' },
+  { a: 'Funny Poster ' },
+] },
+      { label: "Games",Filters: [
+  { a: 'Playing Cards ' },
+  { a: 'Puzzle Games ' },
+  { a: 'Fun Games ' }
+] },
+
       {
         label: "Wedding Itinerary",
         Filters: [
@@ -235,6 +286,7 @@ const navItems = [
           { a: "Fun Games " },
         ],
       },
+
     ],
   },
   {
