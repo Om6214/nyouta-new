@@ -156,7 +156,7 @@ const navItems = [
   { a: 'Designer Stickers ' },
   { a: 'Vintage Stickers ' },
 ] },
-      { label: "Tags / Bedges",Filters: [
+      { label: "Tags-Bedges",Filters: [
   { a: 'Luggage Tag ' },
   { a: 'Door Handle Tag ' },
   { a: 'Gift Tag ' },

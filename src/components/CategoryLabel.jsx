@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -18,6 +18,7 @@ import { useState, useEffect } from "react";
 export default function CategoryLabel() {
 
   const { pageName, "*": path } = useParams();
+  const navigate = useNavigate();
   
 
   const formatCategoryName = (name) => {
@@ -51,6 +52,24 @@ export default function CategoryLabel() {
     
     return categoryMatch && subCategoryMatch;
   });
+
+  const handleButtonClick = () => {
+    if (filteredItems.length > 0) {
+      if (filteredItems[0].category === "Photo Books") {
+        // Navigate to a different component with the image as state
+        navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
+      } 
+      if (filteredItems[0].category === "Itinerary") {
+        // Navigate to a different component with the image as state
+        // console.log(filteredItems[0].image[1]);
+        navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
+      } 
+      // else {
+      //   // Navigate to the default URL
+      //   navigate("/someurl");
+      // }
+    }
+  };
 
 
   return (
@@ -97,6 +116,8 @@ export default function CategoryLabel() {
             { name: 'Matte', color: 'bg-gray-700' },
             { name: 'Black', color: 'bg-black' },
             { name: 'Beige', color: 'bg-[#FFE4A3]' },
+
+            
           ].map((finish, index) => (
             <div key={index} className="text-center">
               <div className={`h-16 w-16 ${finish.color} rounded-md mb-1`}></div>
@@ -116,9 +137,13 @@ export default function CategoryLabel() {
         <p className="text-sm text-gray-600">Flat 15% off + Free economy shipping</p>
       </div>
 
-      <button className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition">
-        ADD NOW
-      </button>
+
+      <button
+          onClick={handleButtonClick}
+          className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+        >
+          ADD NOW
+        </button>
 
       <div className="border-t border-gray-300 mt-6 mb-6"></div>
 

@@ -32,6 +32,8 @@ import LoginRegister from './pages/LoginRegister';
 import CategoryFilterLabel from './components/CategoryFilterLabel';
 
 import JoinNyouta from './components/JoinNyouta';
+import PhotoBook from './components/PhotoBook';
+import ItineraryCompo from './components/ItineraryCompo';
 
 
 
@@ -61,7 +63,10 @@ function App() {
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
           <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
           <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
+          <Route path='/edit/PhotoBook/:id' element={<PhotoBook />} />
           
+          <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
+
 
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
