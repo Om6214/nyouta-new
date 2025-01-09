@@ -64,8 +64,8 @@ const layouts = [
     id: "layout1", 
     name: "Layout 1",
     structure: [
-      { className: "text-1", style: { height: "46%", width: "50%", top: "2%", left: "30%" } },
-      { className: "text-1b", style: { height: "46%", width: "50%", bottom: "2%", left: "15%" } },
+      { className: "text-1", style: { height: "46%", width: "60%", top: "2%", left: "20%" } },
+      { className: "text-1b", style: { height: "46%", width: "60%", bottom: "2%", left: "20%" } },
     ]
   },
   { 
