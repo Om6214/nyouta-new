@@ -82,7 +82,10 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
     updateTextField(selectedText.id, "isUppercase", false); // Disable uppercase
   };
 
-  const fontOptions = ["Lora", "Roboto", "Arial", "Times New Roman"];
+  const fontOptions = ["Lora", "Roboto", "Arial", "Times New Roman","Andallan","Linna","AvalonBold","AvalonNormal","TT_Medium","Angelina",
+    "Bebas Neue","Blade Rush","Cinzel","Garden Hidaleya","Justin Hailey","Lovely Valentine","Magdelin","Mussica Swash",
+    "New Walt Disney","Nexa Bold","Quicksand","Wedding"
+  ];
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black">

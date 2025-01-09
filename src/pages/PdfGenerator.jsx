@@ -1,149 +1,174 @@
-import React, { useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import watermark from "../watermark/watermark.jpg";
 
-const PdfGenerator = ({
-  savedPages,
-  savedSmallImages,
-  savedStickers,
-  images,
-  textFields,
-}) => {
+const PdfGenerator = ({ savedPages, savedSmallImages, savedStickers, images }) => {
+  const [isDownloading, setIsDownloading] = useState(false);
+  const previewRefs = useRef([]);
+console.log("working");
+  useEffect(() => {
+    generatePDF();
+  }, []);
+
   const generatePDF = async () => {
-    console.log("PDF generation started...");
-    const doc = new jsPDF("portrait", "px", "a4");
+    setIsDownloading(true);
+    try {
+      const pdf = new jsPDF("portrait", "px", "a4");
+      const pdfWidth = pdf.internal.pageSize.getWidth() - 20;
+      const pdfHeight = pdf.internal.pageSize.getHeight();
 
-    const pdfPageWidth = doc.internal.pageSize.getWidth();
-    const pdfPageHeight = doc.internal.pageSize.getHeight();
+      for (let pageIndex = 0; pageIndex < images.length; pageIndex++) {
+        const pageRef = previewRefs.current[pageIndex];
+        if (!pageRef) continue;
 
-    // Loop through all pages and generate PDF content dynamically
-    for (const pageIndex of Object.keys(savedPages)) {
-      const pageData = savedPages[pageIndex];
-      const smallImagesData = savedSmallImages[pageIndex] || [];
-      const pageStickers = savedStickers[pageIndex] || [];
-      const currentImage = images[pageIndex];
-
-      if (currentImage) {
-        const imgElement = document.createElement("img");
-        imgElement.src = currentImage;
-        imgElement.crossOrigin = "anonymous";
-
-        let imgWidth = 0;
-        let imgHeight = 0;
-
-        await new Promise((resolve, reject) => {
-          imgElement.onload = () => {
-            imgWidth = imgElement.naturalWidth;
-            imgHeight = imgElement.naturalHeight;
-            resolve();
-          };
-          imgElement.onerror = (e) => {
-            reject(e);
-          };
+        const canvas = await html2canvas(pageRef, {
+          scale: 2,
+          useCORS: true,
         });
 
-        const scaleFactor = Math.min(pdfPageWidth / imgWidth, pdfPageHeight / imgHeight);
+        const imageData = canvas.toDataURL("image/png");
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const scaleFactor = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
 
         const pdfImgWidth = imgWidth * scaleFactor;
         const pdfImgHeight = imgHeight * scaleFactor;
-        const xOffset = (pdfPageWidth - pdfImgWidth) / 2;
-        const yOffset = (pdfPageHeight - pdfImgHeight) / 2;
 
-        doc.addImage(currentImage, "JPEG", xOffset, yOffset, pdfImgWidth, pdfImgHeight);
-      } else {
-        break;
+        const xOffset = (pdfWidth - pdfImgWidth) / 2;
+        const yOffset = (pdfHeight - pdfImgHeight) / 2;
+
+        pdf.addImage(imageData, "PNG", xOffset, yOffset, pdfImgWidth, pdfImgHeight);
+
+        if (pageIndex < images.length - 1) {
+          pdf.addPage();
+        }
       }
 
-      smallImagesData.forEach(({ src, x, y, width, height }) => {
-        if (src && typeof x === "number" && typeof y === "number" && width > 0 && height > 0) {
-          const containerWidth = 350;
-          const containerHeight = 530;
-
-          const scaleX = pdfPageWidth / containerWidth;
-          const scaleY = pdfPageHeight / containerHeight;
-
-          const scaledWidth = width * scaleX;
-          const scaledHeight = height * scaleY;
-
-          const xOffset = x * scaleX;
-          const yOffset = y * scaleY;
-
-          doc.addImage(src, "JPEG", xOffset + 28, yOffset, scaledWidth - 40, scaledHeight - 20);
-        }
-      });
-
-      pageStickers.forEach(({ src, x, y, width, height, rotation }) => {
-        if (src && typeof x === "number" && typeof y === "number" && width > 0 && height > 0) {
-          const containerWidth = 350;
-          const containerHeight = 530;
-
-          const scaleX = pdfPageWidth / containerWidth;
-          const scaleY = pdfPageHeight / containerHeight;
-
-          const scaledWidth = width * scaleX;
-          const scaledHeight = height * scaleY;
-
-          const xOffset = x * scaleX;
-          const yOffset = y * scaleY;
-
-          doc.addImage(src, "PNG", xOffset + 28, yOffset, scaledWidth - 20, scaledHeight - 20, undefined, "S", rotation || 0);
-        }
-      });
-
-      pageData.forEach(
-        ({
-          text,
-          x,
-          y,
-          size,
-          font,
-          fontColor,
-          isBold,
-          isItalic,
-          textAlign,
-          lineHeight,
-          letterSpacing,
-          angle,
-        }) => {
-          const containerWidth = 890;
-          const containerHeight = 640;
-
-          let scaleX = pdfPageWidth / containerWidth;
-          let scaleY = pdfPageHeight / containerHeight;
-
-          scaleX += 0.28;
-          scaleY += 0.16;
-          const clampedX = Math.max(0, Math.min(x, containerWidth)) * scaleX;
-          const clampedY = Math.max(0, Math.min(y, containerHeight)) * scaleY;
-          size = size + 10;
-          const scaledSize = size * Math.min(scaleX, scaleY);
-          const fontStyle = `${isBold ? "bold" : ""}${isItalic ? "italic" : ""}`;
-          const selectedFont = font || "Blade Rush";
-          doc.setFont(selectedFont, fontStyle);
-          doc.setFontSize(scaledSize);
-          doc.setTextColor(fontColor || "black");
-
-          doc.text(text, clampedX+40, clampedY, {
-            align: textAlign || "left",
-            angle: angle || 0,
-          });
-        }
-      );
-
-      if (parseInt(pageIndex, 10) < Object.keys(savedPages).length - 1) {
-        doc.addPage();
-      }
+      pdf.save("generated.pdf");
+      setIsDownloading(false);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      setIsDownloading(false);
     }
-
-    console.log("PDF generation completed.");
-    doc.save("generated.pdf");
   };
 
-  useEffect(() => {
-    generatePDF(); // Automatically generate PDF on component render
-  }, []); // Empty dependency array ensures it runs only once on mount
+  return (
+    <div>
+      {isDownloading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="text-center">
+            <div className="w-24 h-24 border-8 border-solid border-[#AF7D32] border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <p className="text-white text-lg font-semibold mt-4">PDF is being prepared, please wait...</p>
+          </div>
+        </div>
+      )}
 
-  return null; // No button or UI element needed
+      <div style={{ clip: "rect(0, 0, 0, 0)", position: "absolute" }}>
+        {images.map((currentImage, pageIndex) => {
+          const pageData = savedPages[pageIndex];
+          const smallImagesData = savedSmallImages[pageIndex] || [];
+          const pageStickers = savedStickers[pageIndex] || [];
+
+          return (
+            <div
+              key={pageIndex}
+              ref={(el) => (previewRefs.current[pageIndex] = el)}
+              className="relative w-80 h-112 overflow-hidden border border-gray-300 shadow-lg rounded-xl bg-white"
+            >
+              <img src={currentImage} alt={`Page ${pageIndex + 1}`} className="w-full h-full object-cover" />
+              <img
+                src={watermark}
+                alt="Watermark"
+                className="absolute bottom-2 right-2 opacity-90"
+                style={{
+                  width: "100px",
+                  height: "auto",
+                }}
+              />
+              {pageData.map(
+                ({
+                  id,
+                  text,
+                  x,
+                  y,
+                  size,
+                  font,
+                  fontColor,
+                  isBold,
+                  isItalic,
+                  textAlign,
+                  lineHeight,
+                  letterSpacing,
+                  angle,
+                }) => {
+                  const containerWidth = 320;
+                  const containerHeight = 608;
+
+                  const clampedX = Math.max(0, Math.min(x, containerWidth));
+                  const clampedY = Math.max(0, Math.min(y, containerHeight));
+
+                  return (
+                    <div
+                      key={id}
+                      className="absolute"
+                      style={{
+                        top: clampedY,
+                        left: clampedX,
+                        fontSize: `${size}px`,
+                        fontFamily: font,
+                        color: fontColor,
+                        fontWeight: isBold ? "bold" : "normal",
+                        fontStyle: isItalic ? "italic" : "normal",
+                        textAlign: textAlign,
+                        lineHeight: lineHeight,
+                        letterSpacing: `${letterSpacing}px`,
+                        transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {text.split("\n").map((line, index) => (
+                        <div key={index}>{line}</div>
+                      ))}
+                    </div>
+                  );
+                }
+              )}
+              {smallImagesData.map(({ id, src, x, y, width, height }) => (
+                <img
+                  key={id}
+                  src={src}
+                  alt={`Small Image ${id}`}
+                  style={{
+                    position: "absolute",
+                    left: `${x}px`,
+                    top: `${y}px`,
+                    width: `${width}px`,
+                    height: `${height}px`,
+                  }}
+                />
+              ))}
+              {pageStickers.map(({ id, src, x, y, width, height, rotation }) => (
+                <img
+                  key={id}
+                  src={src}
+                  alt={`Sticker ${id}`}
+                  style={{
+                    position: "absolute",
+                    left: `${x}px`,
+                    top: `${y}px`,
+                    width: `${width}px`,
+                    height: `${height}px`,
+                    transform: `rotate(${rotation || 0}deg)`,
+                  }}
+                />
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
-
 
 export default PdfGenerator;

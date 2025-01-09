@@ -32,6 +32,8 @@ import LoginRegister from './pages/LoginRegister';
 import CategoryFilterLabel from './components/CategoryFilterLabel';
 
 import JoinNyouta from './components/JoinNyouta';
+import PdfGenerator from './pages/PdfGenerator';
+import PdfGeneratorWaterMark from './pages/PdfGeneratorWaterMark';
 import PhotoBook from './components/PhotoBook';
 import ItineraryCompo from './components/ItineraryCompo';
 
@@ -70,6 +72,7 @@ function App() {
           <Route path="/products/:category" element={<ProductsCategory />} />
          
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
+        
         </Routes>
 
       <Cart />
