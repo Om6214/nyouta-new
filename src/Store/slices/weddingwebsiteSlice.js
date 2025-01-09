@@ -7,7 +7,7 @@ const initialState = {
     weddingwebsiteData: null,
     loading: false,
     error: null,
-}
+};
 
 export const getWeddingWebsite = createAsyncThunk(
     "weddingwebsite/getWeddingWebsite",
@@ -54,45 +54,51 @@ export const getWeddingWebsitedata = createAsyncThunk(
     }
 );
 
-export const weddingwebsiteSlice = createSlice({
+const weddingwebsiteSlice = createSlice({
     name: "weddingwebsite",
     initialState,
-    reducers: {},
+    reducers: {
+        resetState: (state) => {
+            state.weddingWebsite = null;
+            state.error = null;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(getWeddingWebsite.pending, (state) => {
             state.loading = true;
-        })
+        });
         builder.addCase(getWeddingWebsite.fulfilled, (state, action) => {
             state.loading = false;
             state.weddingWebsite = action.payload;
-        })
+        });
         builder.addCase(getWeddingWebsite.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        })
+        });
         builder.addCase(updateWeddingWebsitedata.pending, (state) => {
             state.loading = true;
-        })
+        });
         builder.addCase(updateWeddingWebsitedata.fulfilled, (state, action) => {
             state.loading = false;
             state.weddingWebsite = action.payload.weddingWebsite;
-        })
+        });
         builder.addCase(updateWeddingWebsitedata.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        })
+        });
         builder.addCase(getWeddingWebsitedata.pending, (state) => {
             state.loading = true;
-        })
+        });
         builder.addCase(getWeddingWebsitedata.fulfilled, (state, action) => {
             state.loading = false;
             state.weddingwebsiteData = action.payload;
-        })
+        });
         builder.addCase(getWeddingWebsitedata.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        })
-    }
+        });
+    },
 });
 
+export const { resetState } = weddingwebsiteSlice.actions;
 export default weddingwebsiteSlice.reducer;

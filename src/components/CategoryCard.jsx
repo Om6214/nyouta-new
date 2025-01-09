@@ -233,28 +233,11 @@ const categories = [
 
 const CategoryCard = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  const gridRef = useRef(null);
-  const isInView = useInView(gridRef, { once: true });
-  const gridVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: (index) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 1.5,
-        delay: index * 0.2, // Staggered animation for each item
-      },
-    }),
-  };
 
   return (
     <div className=" py-10">
       {/* Header Section */}
-      <motion.div
-        initial={{ opacity: 0, x: -80 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.8 }}
-      >
+      <motion.div>
         <div className="text-center mb-4">
           <h1 className="lg:text-4xl text-3xl text-secondary font-avalonB bg-clip-text">
             Explore Our Product Categories
@@ -266,18 +249,11 @@ const CategoryCard = () => {
         </div>
       </motion.div>
       {/* Categories Navigation */}
-      <motion.div
-        initial={{ opacity: 0, x: 80 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 2.0 }}
-      >
+      <motion.div>
         <div className="py-2 lg:px-4 px-1 bg-secondary shadow-md">
           <ul className="flex gap-4 justify-start overflow-auto">
             {categories.map((cat, index) => (
               <motion.li
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
                 key={index}
                 className={`text-md font-avalonB flex flex-shrink-0 font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform
                                 ${
@@ -296,20 +272,13 @@ const CategoryCard = () => {
 
       {/* Selected Category Display */}
       {selectedCategory && (
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.7 }}
-        >
+        <motion.div>
           <div className="flex flex-col lg:flex-col gap-10 justify-between items-start mt-4">
             {/* Subcategories Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 px-4">
               {selectedCategory.subCategory.map((sub, index) => (
                 <motion.div
                   custom={index}
-                  initial="hidden"
-                  animate="visible"
-                  variants={gridVariants}
                   key={index}
                   className="relative lg:w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
                 >
@@ -339,7 +308,12 @@ const CategoryCard = () => {
       <div className="pt-4">
         <div className="relative flex items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
           <img className="h-8" src={btnBg} alt="" />
-          <a className="absolute text-lg font-avalonB uppercase text-white" href="">View All Products</a>
+          <a
+            className="absolute text-lg font-avalonB uppercase text-white"
+            href=""
+          >
+            View All Products
+          </a>
         </div>
       </div>
     </div>

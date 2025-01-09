@@ -168,6 +168,57 @@ const navItems = [
     label: "Itinerary",
     url: "/nav/itinerary",
     children: [
+
+      { label: "Wedding Itinerary" ,Filters: [
+  { a: 'Room Itinerary ' },
+  { a: 'Check-in Itinerary ' },
+  { a: 'Room Key Enevelop ' },
+  { a: 'Thank You Cards ' },
+  { a: 'Wedding Menu ' },
+  { a: 'Table Itinerary ' },
+  { a: 'Dining Table Mats ' },
+]},
+      { label: "Stickers",Filters: [
+  { a: 'Guest Name Stickers ' },
+  { a: 'Gift Box Sticker ' },
+  { a: 'Vehicle Stickers ' },
+  { a: 'Designer Stickers ' },
+  { a: 'Vintage Stickers ' },
+] },
+      { label: "Tags-Bedges",Filters: [
+  { a: 'Luggage Tag ' },
+  { a: 'Door Handle Tag ' },
+  { a: 'Gift Tag ' },
+  { a: 'Parking Tags ' },
+  { a: 'Wedding Bedges ' },
+] },
+      { label: "Welcome Signages",Filters: [
+  { a: 'Wedding Ceremony ' },
+  { a: 'Haldi Ceremony ' },
+  { a: 'Mehandi Ceremony ' },
+  { a: 'Sangeet Ceremony ' },
+  { a: 'Direction Signage ' },
+  { a: 'Engagement Ceremony ' },
+  { a: 'Anniversary Ceremony ' },
+  { a: 'Lohri Party ' },
+  { a: 'Halloween Party ' },
+  { a: 'Birthday Party ' },
+  { a: 'Celeration Party ' }
+]},
+      { label: "Accessories",Filters: [
+  { a: 'Party Dangler ' },
+  { a: 'Coasters ' },
+  { a: 'Paper Napkins ' },
+  { a: 'Event Banner ' },
+  { a: 'Face Mask ' },
+  { a: 'Funny Poster ' },
+] },
+      { label: "Games",Filters: [
+  { a: 'Playing Cards ' },
+  { a: 'Puzzle Games ' },
+  { a: 'Fun Games ' }
+] },
+
       {
         label: "Wedding Itinerary",
         Filters: [
@@ -235,6 +286,7 @@ const navItems = [
           { a: "Fun Games " },
         ],
       },
+
     ],
   },
   {
@@ -642,7 +694,7 @@ export default function MainNav() {
       </div>
 
       <div className="hidden lg:flex py-2 justify-center ">
-        <ul className="flex gap-6 justify-center items-center text-md font-avalonN">
+        <ul className="flex gap-10 justify-center items-center text-md font-avalonN">
           {navItems.map((item, index) => {
             const isLastTwoItems = index >= navItems.length - 2;
             return (
@@ -657,12 +709,9 @@ export default function MainNav() {
               >
                 <Link
                   to={item.url}
-                  className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-1"
+                  className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-3"
                 >
                   {item.label}
-                  <span>
-                    <ChevronDown />
-                  </span>
                 </Link>
                 <AnimatePresence>
                   {item.children && activeDropdown === index && (
@@ -671,7 +720,7 @@ export default function MainNav() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
+                      className="absolute top-8 left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
                     >
                       <ul className="space-y-2">
                         {item.children.map((child, childIndex) => (
@@ -692,7 +741,6 @@ export default function MainNav() {
                               className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
                             >
                               {child.label}
-                              <ArrowRight size={18} />
                             </Link>
                             <AnimatePresence>
                               {child.Filters &&

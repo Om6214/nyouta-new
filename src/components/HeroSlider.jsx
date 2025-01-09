@@ -76,12 +76,7 @@ export default function HeroSlider() {
     <>
       <div className="flex lg:flex-row flex-col gap-2 m-2">
         <div className="lg:w-[70%] w-full">
-          <motion.div
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.8 }}
-            className="relative h-[400px]  rounded-xl overflow-hidden"
-          >
+          <motion.div className="relative h-[400px]  rounded-xl overflow-hidden">
             {images.map((image, index) => (
               <div
                 key={index}
@@ -153,12 +148,7 @@ export default function HeroSlider() {
             </div>
           </motion.div>
           <div>
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.8 }}
-              className="hidden md:grid md:grid-cols-4 lg:grid lg:grid-cols-4 gap-3 mt-2 lg:justify-center"
-            >
+            <motion.div className="hidden md:grid md:grid-cols-4 lg:grid lg:grid-cols-4 gap-3 mt-2 lg:justify-center">
               {tiles.map((tile) => (
                 <div className="relative rounded-full flex flex-shrink-0 flex-col items-center justify-center">
                   <img className="w-[250px] h-[55px]" src={cardImg} alt="" />
@@ -173,14 +163,9 @@ export default function HeroSlider() {
             </motion.div>
           </div>
         </div>
-        <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.8 }}
-          className="lg:w-[30%] flex items-center justify-center relative w-full rounded-xl"
-        >
-          <img className="h-[500px] lg:h-full" src={wedImg} alt="" />
-          <div className="lg:px-8 absolute flex flex-col gap-2 lg:gap-3 pt-16 lg:pt-14 items-center justify-center font-heroFont">
+        <motion.div className="lg:w-[30%] h-full flex items-center justify-center relative w-full rounded-xl">
+          {/* <img className="h-[500px] lg:h-full" src={wedImg} alt="" /> */}
+          <div className="lg:px-8 flex flex-col gap-2 lg:gap-6 py-6 items-center justify-center font-heroFont bg-pink-200 rounded-lg">
             <h1 className="text-4xl lg:text-5xl font-ttMedium uppercase text-center leading-none text-pink-600">
               Wedding
             </h1>
