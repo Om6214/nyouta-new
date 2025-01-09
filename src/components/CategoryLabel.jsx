@@ -18,6 +18,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function CategoryLabel() {
+
+
+  
   const { pageName, "*": path } = useParams();
 
   const navigate = useNavigate();
@@ -111,10 +114,6 @@ export default function CategoryLabel() {
               </Swiper>
             </div>
 
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
         </div>
         <div>
         <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
@@ -190,11 +189,9 @@ export default function CategoryLabel() {
     
     </div>
       </div>
-      </div>
+      
 
     ):(
-=======
-          </div>
           <div>
             <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
               <div className="mb-4">
