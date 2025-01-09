@@ -66,7 +66,6 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
             }
           )}
 
-
           {/* Small Images */}
           {images.map(({ id, src, x, y, width, height }) => (
             <img
@@ -85,7 +84,6 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
 
           {/* Stickers */}
           {stickers.map(({ id, src, x, y, width, height, rotation }) => {
-
             return (
               <img
               key={id}

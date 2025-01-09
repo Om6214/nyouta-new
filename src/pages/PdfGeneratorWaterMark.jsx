@@ -1,22 +1,23 @@
-import React, { useRef ,useState } from "react";
+import React, { useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useLocation } from "react-router-dom";
-import watermark from '../watermark/watermark.jpg';
 
-const PdfGenerator = () => {
+const PdfGeneratorWaterMark = () => {
   const location = useLocation();
-
+  const [isDownloading, setIsDownloading] = useState(false);
   // Destructure data passed through React Router's state
   const { savedPages, savedSmallImages, savedStickers, images } = location.state || {};
-  const [isDownloading, setIsDownloading] = useState(false);
+
   const previewRefs = useRef([]); // Store refs for each page
+
+
 
   const generatePDF = async () => {
     setIsDownloading(true);
     try {
       const pdf = new jsPDF("portrait", "px", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth() - 20;
+      const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
 
       for (let pageIndex = 0; pageIndex < images.length; pageIndex++) {
@@ -61,8 +62,10 @@ const PdfGenerator = () => {
     }
   };
 
+
   return (
     <div>
+
       {isDownloading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="text-center">
@@ -77,7 +80,6 @@ const PdfGenerator = () => {
       <div className="flex-1 text-center">
         <h1 className="text-3xl font-extrabold text-gray-900 hidden md:block tracking-wide">See Your Customized Pages</h1>
       </div>
-     
       {/* Render all pages dynamically in a single row */}
       <div className="flex flex-row flex-wrap justify-center gap-4">
         {images.map((currentImage, pageIndex) => {
@@ -86,28 +88,20 @@ const PdfGenerator = () => {
           const pageStickers = savedStickers[pageIndex] || [];
 
           return (
+
+
             <div
               key={pageIndex}
               ref={(el) => (previewRefs.current[pageIndex] = el)} // Store refs for each page
-              className="relative w-80 h-112 overflow-hidden border border-gray-300 shadow-lg rounded-xl bg-white transform hover:shadow-2xl transition-all duration-300 ease-in-out"
+              className="relative w-80 h-112 overflow-hidden border border-gray-300 shadow-lg rounded-xl bg-white transform  hover:shadow-2xl transition-all duration-300 ease-in-out"
             >
               {/* Main Image */}
               <img
                 src={currentImage}
                 alt={`Page ${pageIndex + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover "
               />
 
-              {/* Watermark */}
-              <img
-                src={watermark}
-                alt="Watermark"
-                className="absolute bottom-2 right-2 opacity-90"
-                style={{
-                  width: "100px", // Set the size of the watermark as required
-                  height: "auto",
-                }}
-              />
 
               {/* Text Fields */}
               {pageData.map(
@@ -207,6 +201,10 @@ const PdfGenerator = () => {
       </div>
     </div>
   );
-};
 
-export default PdfGenerator;
+}
+
+
+
+
+export default PdfGeneratorWaterMark;

@@ -32,6 +32,8 @@ import LoginRegister from './pages/LoginRegister';
 import CategoryFilterLabel from './components/CategoryFilterLabel';
 
 import JoinNyouta from './components/JoinNyouta';
+import PdfGenerator from './pages/PdfGenerator';
+import PdfGeneratorWaterMark from './pages/PdfGeneratorWaterMark';
 
 
 // gaganluthrasirji
@@ -65,6 +67,8 @@ function App() {
           <Route path="/products/:category" element={<ProductsCategory />} />
          
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />
+          <Route path="/product/:id/edit-physical-card/download-pdf" element={<PdfGenerator />} />
+          <Route path="/product/:id/edit-physical-card/purchase-download-pdf" element={<PdfGeneratorWaterMark />} />
         </Routes>
 
       <Cart />
