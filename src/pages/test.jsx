@@ -20,14 +20,17 @@ import TextFieldsMobile from './TextFieldsMobile';
 import PdfGenerator from './PdfGenerator';
 import welcome from "../assets/images/welcome sign.webp";
 import { Download } from 'lucide-react';
+import { Rnd } from "react-rnd";
+import PdfGeneratorWaterMark from './PdfGeneratorWaterMark';
 export default function WeddingCardEditor() {
+  
   const [selectedStickerId, setSelectedStickerId] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newText, setNewText] = useState('');
   const [sizeValue, setSizeValue] = useState(30);
   const [textFields, setTextFields] = useState([]);
-  // State to track selected field
+  
 
   const [isFontModalOpen, setIsFontModalOpen] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Blade Rush');
@@ -218,7 +221,7 @@ export default function WeddingCardEditor() {
   };
 
   const handleDeleteImagesmall = (imageId) => {
-    console.log("working");
+    //console.log("working");
     setSmallImages((prev) => prev.filter((image) => image.id !== imageId));
   };
 
@@ -952,30 +955,16 @@ export default function WeddingCardEditor() {
     });
   };
   */
-  const DownloadPurchase = () => {
-    navigate(`/product/${productId}/edit-physical-card/purchase-download-pdf`, {
-      state: {
-        savedPages,
-        savedSmallImages,
-        savedStickers,
-        images,
-        textFields,
-      },
-    });
-  }
-  const DownloadWithWatermark = () => {
-    navigate(`/product/${productId}/edit-physical-card/download-pdf`,
-      {
-        state: {
-          savedPages,
-          savedSmallImages,
-          savedStickers,
-          images,
-          textFields,
-        },
-      });
-  }
 
+  const [isDownloadWatermark, SetisDownloadWatermark] = useState(false);
+  const [isDownloadPurchase, SetisDownloadPurchase] = useState(false);
+  const DownloadWithWatermark = () => {
+    SetisDownloadWatermark(true);
+  }
+  const DownloadPurchase = () => {
+    console.log("works");
+    SetisDownloadPurchase(true);
+  }
 
   const handleDownloadPDF = () => {
     // Navigate to the PDF page
@@ -1151,6 +1140,28 @@ export default function WeddingCardEditor() {
             </div>
           )
         }
+        {
+          isDownloadWatermark && (
+            <PdfGenerator
+              savedPages={savedPages}
+              savedSmallImages={savedSmallImages}
+              savedStickers={savedStickers}
+              images={images}
+              textFields={textFields}
+            />
+          )
+        }
+        {
+          isDownloadPurchase && (
+            <PdfGeneratorWaterMark
+              savedPages={savedPages}
+              savedSmallImages={savedSmallImages}
+              savedStickers={savedStickers}
+              images={images}
+              textFields={textFields}
+            />
+          )
+        }
 
 
         {isCustomizeModalOpen && (
@@ -1199,7 +1210,7 @@ export default function WeddingCardEditor() {
               </div>
               <button
                 onClick={() => setIsCustomizeModalOpen(false)}
-                className="mt-4 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                className="mt-4 px-6 py-2 bg-[#AF7D32] hover:bg-[#643C28] text-white rounded  transition"
               >
                 Close
               </button>
@@ -1244,154 +1255,211 @@ export default function WeddingCardEditor() {
 
 
 
-              {stickers.map(({ id, src, x, y, width, height, rotation }) => (
-                <Draggable
+              {stickers.map(({ id, src, x, y, width, height }) => (
+                <Rnd
                   key={id}
+                  size={{ width, height }}
                   position={{ x, y }}
-                  onDrag={(e, data) => {
+                  onDragStart={(e) => {
+                    // Prevent dragging if interacting with the delete button
+                    if (e.target.closest(".delete-button")) {
+                      e.stopPropagation();
+                    }
+                  }}
+                  onResizeStart={(e) => {
+                    // Prevent resizing if interacting with the delete button
+                    if (e.target.closest(".delete-button")) {
+                      e.stopPropagation();
+                    }
+                  }}
+                  onDragStop={(e, d) => {
                     setStickers((prev) =>
                       prev.map((sticker) =>
-                        sticker.id === id ? { ...sticker, x: data.x, y: data.y } : sticker
+                        sticker.id === id ? { ...sticker, x: d.x, y: d.y } : sticker
+                      )
+                    );
+                  }}
+                  onResizeStop={(e, direction, ref, delta, position) => {
+                    setStickers((prev) =>
+                      prev.map((sticker) =>
+                        sticker.id === id
+                          ? {
+                            ...sticker,
+                            width: ref.offsetWidth,
+                            height: ref.offsetHeight,
+                            x: position.x,
+                            y: position.y,
+                          }
+                          : sticker
                       )
                     );
                   }}
                   bounds="parent"
+                  lockAspectRatio
+                  style={{
+                    zIndex: selectedStickerId === id ? 20 : 10,
+                    border: selectedStickerId === id ? "2px dotted blue" : "none",
+                  }}
+                  onClick={() => handleStickerClick(id)} // Desktop click
+                  onTouchStart={() => handleStickerClick(id)} // Touch click
                 >
-                  <div
-                    style={{
-                      position: "absolute",
-                      cursor: "move",
-                      border: selectedStickerId === id ? "2px dotted blue" : "none", // Blue dotted border if selected
-                      zIndex: selectedStickerId === id ? 20 : 10, // Ensure border is above other elements
-                      display: "inline-block", // Ensure sticker stays within the border
-                      transform: `translate(-50%, -50%)`, // Center sticker correctly
-                      top: 0, // Ensures no offset from parent
-                      left: 0, // Ensures no offset from parent
-                    }}
-                    onClick={() => handleStickerClick(id)}
-                  >
-                    <Resizable
-                      size={{ width, height }}
-                      lockAspectRatio
-                      onResizeStop={(e, direction, ref, d) => {
-                        setStickers((prev) =>
-                          prev.map((sticker) =>
-                            sticker.id === id
-                              ? {
-                                ...sticker,
-                                width: sticker.width + d.width,
-                                height: sticker.height + d.height,
-                              }
-                              : sticker
-                          )
-                        );
-                      }}
-                      style={{
-                        position: "relative",
-                        zIndex: 10,
-                        border: selectedStickerId === id ? "2px dotted blue" : "none",
-                      }}
-                    >
-                      <div className="relative">
-                        <img
-                          src={src}
-                          alt="Sticker"
-                          className="w-full h-full object-contain"
-                        />
+                  <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                    <img
+                      src={src}
+                      alt="Sticker"
+                      className="w-full h-full object-contain"
+                      style={{ pointerEvents: "none" }}
+                    />
 
-                        {selectedStickerId === id && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteSticker(id);
-                            }}
-                            className="absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
-                            title="Delete Sticker"
-                          >
-                            <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                          </button>
-                        )}
+                    {selectedStickerId === id && (
+                      <>
+                        {/* Delete Button */}
+                        <button
+                          className="delete-button absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent click events from propagating to the parent
+                            handleDeleteSticker(id); // Delete the sticker
+                          }}
+                          onTouchEnd={(e) => {
+                            e.stopPropagation(); // Prevent touch events from propagating to the parent
+                            handleDeleteSticker(id); // Delete the sticker
+                          }}
+                          style={{
+                            cursor: "pointer",
+                            transform: "translate(50%, -50%)",
+                            zIndex: 50, // Ensure the delete button is above other elements
+                          }}
+                          title="Delete Sticker"
+                        >
+                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                        </button>
 
-                        {selectedStickerId === id && (
-                          <div
-                            className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
-                            style={{ transform: "translate(50%, 50%)" }}
-                            title="Resize Sticker"
-                          >
-                            <i className="fas fa-arrows-alt text-white"></i> {/* Resize Icon */}
-                          </div>
-                        )}
-                      </div>
-                    </Resizable>
+                        {/* Resize Handle */}
+                        <div
+                          className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
+                          style={{
+                            transform: "translate(50%, 50%)",
+                          }}
+                          title="Resize Sticker"
+                        >
+                          <i className="fas fa-arrows-alt text-white"></i>
+                        </div>
+                      </>
+                    )}
                   </div>
-                </Draggable>
+                </Rnd>
               ))}
 
 
+
+
+
               {smallImages.map(({ id, src, x, y, width, height }) => (
-                <Draggable
+                <Rnd
                   key={id}
+                  size={{ width, height }}
                   position={{ x, y }}
-                  onDrag={(e, data) => {
+                  onDragStart={(e) => {
+                    // Prevent dragging if interacting with the delete button
+                    if (e.target.closest(".delete-button")) {
+                      e.stopPropagation();
+                    }
+                  }}
+                  onResizeStart={(e) => {
+                    // Prevent resizing if interacting with the delete button
+                    if (e.target.closest(".delete-button")) {
+                      e.stopPropagation();
+                    }
+                  }}
+                  onDragStop={(e, d) => {
                     setSmallImages((prev) =>
                       prev.map((image) =>
-                        image.id === id ? { ...image, x: data.x, y: data.y } : image
+                        image.id === id ? { ...image, x: d.x, y: d.y } : image
+                      )
+                    );
+                  }}
+                  onResizeStop={(e, direction, ref, delta, position) => {
+                    setSmallImages((prev) =>
+                      prev.map((image) =>
+                        image.id === id
+                          ? {
+                            ...image,
+                            width: ref.offsetWidth,
+                            height: ref.offsetHeight,
+                            x: position.x,
+                            y: position.y,
+                          }
+                          : image
                       )
                     );
                   }}
                   bounds="parent"
+                  lockAspectRatio
+                  style={{
+                    zIndex: selectedImageId === id ? 20 : 10,
+                    border: selectedImageId === id ? "2px dotted blue" : "none",
+                  }}
+                  onClick={() => handleImageClick(id)} // Desktop click
+                  onTouchStart={() => handleImageClick(id)} // Touch click
+                  enableResizing={{
+                    bottom: true,
+                    bottomRight: true,
+                    right: true,
+                    top: false, // Disable resizing from top (optional)
+                    topLeft: false, // Disable resizing from top left (optional)
+                    left: false, // Disable resizing from left (optional)
+                    bottomLeft: false, // Disable resizing from bottom left (optional)
+                    topRight: false, // Disable resizing from top right (optional)
+                  }}
                 >
-                  <div
-                    style={{
-                      position: "absolute",
-                      cursor: "move",
-                      zIndex: selectedImageId === id ? 20 : 10,
-                      width: `${width}px`,
-                      height: `${height}px`,
-                      border: selectedImageId === id ? "2px dotted blue" : "none",
-                      padding: "2px 5px",
-                      top: 0, // Ensures no offset from parent
-                      left: 0, // Ensures no offset from parent
-                      transform: `translate(${x}px, ${y}px)`, // Explicitly position with transform
-                    }}
-                    onClick={() => handleImageClick(id)} // Select image
-                  >
-                    {/* Image */}
+                  <div style={{ position: "relative", width: "100%", height: "100%" }}>
                     <img
                       src={src}
                       alt="Small Icon"
                       className="object-cover w-full h-full rounded border"
+                      style={{ pointerEvents: "none" }}
                     />
 
-                    {/* Delete Button */}
                     {selectedImageId === id && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteImagesmall(id);
-                        }}
-                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-                        style={{ transform: "translate(50%, -50%)" }}
-                        title="Delete Image"
-                      >
-                        <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                      </button>
-                    )}
+                      <>
+                        {/* Delete Button */}
+                        <button
+                          className="delete-button absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent click events from propagating to the parent
+                            handleDeleteImagesmall(id); // Delete the image
+                          }}
+                          onTouchEnd={(e) => {
+                            e.stopPropagation(); // Prevent touch events from propagating to the parent
+                            handleDeleteImagesmall(id); // Delete the image
+                          }}
+                          style={{
+                            cursor: "pointer",
+                            transform: "translate(50%, -50%)",
+                            zIndex: 50, // Ensure the delete button is above other elements
+                          }}
+                          title="Delete Image"
+                        >
+                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                        </button>
 
-                    {/* Resize Handle */}
-                    {selectedImageId === id && (
-                      <div
-                        onMouseDown={(e) => handleResizeMouseDownImage(id, e)}
-                        className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-                        style={{ transform: "translate(50%, 50%)" }}
-                        title="Resize Image"
-                      >
-                        <i className="fas fa-arrows-alt text-white text-sm"></i>
-                      </div>
+                        {/* Resize Handle (appears when selected) */}
+                        <div
+                          className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
+                          style={{
+                            transform: "translate(50%, 50%)",
+                          }}
+                          title="Resize Image"
+                        >
+                          <i className="fas fa-arrows-alt text-white"></i>
+                        </div>
+                      </>
                     )}
                   </div>
-                </Draggable>
+                </Rnd>
               ))}
+
+
 
               {textFields.map(
                 ({
@@ -1436,6 +1504,7 @@ export default function WeddingCardEditor() {
                       transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply rotation
                     }}
                     onMouseDown={(e) => handleMouseDown(e, id, x, y)}
+                    onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Touch event for dragging
                   >
                     {/* Render the text inside a bordered container */}
                     <div
@@ -1472,6 +1541,7 @@ export default function WeddingCardEditor() {
                     {selectedField === id && (
                       <div
                         onMouseDown={(e) => handleResizeMouseDown(e, id)}
+                        onTouchStart={(e) => handleResizeTouchStart(e, id)} // Touch event for resizing
                         className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
                         style={{ transform: "translate(50%, 50%)" }}
                       >
@@ -1486,6 +1556,10 @@ export default function WeddingCardEditor() {
                           e.stopPropagation();
                           handleDelete(id);
                         }}
+                        onTouchEnd={(e) => {
+                          e.stopPropagation();
+                          handleDelete(id); // Touch delete
+                        }} // Touch event for delete
                         className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white  border-2 border-blue-500 flex justify-center items-center"
                         style={{
                           transform: "translate(50%, -50%)",
@@ -1500,6 +1574,7 @@ export default function WeddingCardEditor() {
                     {selectedField === id && (
                       <div
                         onMouseDown={(e) => handleRotateMouseDown(e, id)}
+                        onTouchStart={(e) => handleRotateTouchStart(e, id)} // Touch rotate event
                         className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
                         style={{
                           transform: "translate(-50%, -50%)",
@@ -1512,6 +1587,9 @@ export default function WeddingCardEditor() {
                   </div>
                 )
               )}
+
+
+
 
 
 

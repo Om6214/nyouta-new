@@ -95,7 +95,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
         <select
           value={selectedLanguage}
           onChange={handleLanguageChange}
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="en">English</option>
           <option value="hi">हिंदी</option>
@@ -103,13 +103,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
           <option value="gu">ગુજરાતી</option>
           <option value="ta">தமிழ்</option>
         </select>
-        <textarea
-          value={translatedText}
-          onChange={handleTextChange}
-          placeholder="Enter Text"
-          className="w-full border rounded-lg p-3 text-sm mt-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          rows={4}
-        />
+        
       </div>
 
       {/* Font Family, Bold, Italic, and Color */}

@@ -88,14 +88,14 @@ const TextFieldsMobile = ({ selectedText, updateTextField, onClose }) => {
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black sm:max-w-full">
+    <div className="p-6 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black sm:max-w-full ">
       {/* Language and Text Area */}
       <div className="mb-4">
         <label className="block text-sm font-semibold mb-2">Language</label>
         <select
           value={selectedLanguage}
           onChange={handleLanguageChange}
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full  border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="en">English</option>
           <option value="hi">हिंदी</option>
@@ -103,13 +103,7 @@ const TextFieldsMobile = ({ selectedText, updateTextField, onClose }) => {
           <option value="gu">ગુજરાતી</option>
           <option value="ta">தமிழ்</option>
         </select>
-        <textarea
-          value={translatedText}
-          onChange={handleTextChange}
-          placeholder="Enter Text"
-          className="w-full border rounded-lg p-3 text-sm mt-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          rows={4}
-        />
+        
       </div>
 
       {/* Font Family, Bold, Italic, and Color */}
