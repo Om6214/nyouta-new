@@ -108,7 +108,7 @@ console.log("B")
         pagination={{ clickable: true }}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         modules={[Zoom, Navigation, Pagination, Autoplay]}
-        className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh] bg-gray-200"
+        className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
       >
         {filteredItems[0].image.map((src, index) => (
           <SwiperSlide key={index}>
@@ -124,8 +124,8 @@ console.log("B")
         <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
       <div className="mb-4">
         <h1 className="text-3xl font-bold mb-2">{filteredItems[0].name}</h1>
-        <p className="text-lg text-gray-600">PHOTO PRINTS 5x7 GLOSSY</p>
-        <p className="text-sm text-gray-500 mt-1">11017 units sold</p>
+        <p className="text-lg text-gray-600">{filteredItems[0].category}</p>
+        <p className="text-sm text-gray-500 mt-1">{filteredItems[0].subCategory}, { filteredItems[0].subSubCategory}</p>
       </div>
 
       {/* Select Finish */}
@@ -150,9 +150,9 @@ console.log("B")
       {/* Price and Offer */}
       <div className="mb-6">
         <p className="text-xl font-semibold text-gray-800 mb-1">From Rs. {filteredItems[0].price}</p>
-        <p className="text-sm text-gray-500">(Inclusive of all taxes)</p>
-        <p className="text-sm font-bold text-orange-600 mt-2">Use Code: 15FREESHIP</p>
-        <p className="text-sm text-gray-600">Flat 15% off + Free economy shipping</p>
+        <p className="text-sm text-gray-600">Category: {filteredItems[0].category}</p>
+        <p className="text-sm text-gray-500">Subcategory: {filteredItems[0].subCategory}</p>
+        <p className="text-sm text-gray-500">SubCategory Product: {filteredItems[0].subSubCategory}</p>
       </div>
 
        <button
@@ -165,16 +165,16 @@ console.log("B")
       <div className="border-t border-gray-300 mt-6 mb-6"></div>
 
       {/* Product Details */}
-      <div>
+      {/* <div>
         <h2 className="text-lg font-semibold mb-3">Product Details</h2>
         <p className="text-sm text-gray-600 mb-4">
           Got a photo that makes you smile every time you look at it? Make it the star of the show in any room with an
           eye-catching 6x8” print.
         </p>
-      </div>
+      </div> */}
 
       {/* Product Specifications */}
-      <div>
+      {/* <div>
         <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
         <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
           <li>Set of 15 prints, choose from coloured or patterned borders.</li>
@@ -182,7 +182,7 @@ console.log("B")
           <li>Printed on high quality Fujifilm professional photo paper.</li>
           <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.</li>
         </ul>
-      </div>
+      </div> */}
     </div>
         </div>
       <div>
@@ -213,13 +213,13 @@ console.log("B")
   <Link
   to={`/e/nav/${item.category}/${item.subCategory}/${item.subSubCategory}`}
     key={item.id}
-    className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+    className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105 hover:shadow-xl"
   >
     <div className="relative w-full h-[40vh]">
       <img
         src={item.image[0]}
         alt={item.subTitle}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 "
       />
     </div>
     <div className="p-4 text-center">
