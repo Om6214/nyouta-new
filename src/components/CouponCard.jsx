@@ -32,7 +32,7 @@ const CouponCard = () => {
     speed: 2000,
     autoplaySpeed: 3000,
     cssEase: "linear",
-    slidesToShow: 2,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     arrows: false,
@@ -40,7 +40,7 @@ const CouponCard = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           arrows: false,

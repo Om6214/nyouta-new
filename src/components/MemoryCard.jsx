@@ -30,7 +30,12 @@ const MemoryCard = () => {
           </p>
           <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
             <img className="h-8" src={buttonBg} alt="" />
-            <a href="" className="text-lg uppercase  text-white absolute font-avalonB">View All Products</a>
+            <a
+              href="/products"
+              className="text-lg uppercase  text-white absolute font-avalonB"
+            >
+              View All Products
+            </a>
           </div>
         </div>
         <div className="lg:w-[70%]">

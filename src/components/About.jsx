@@ -51,9 +51,13 @@ export default function About() {
     <section className="relative bg-secondary font-heroFont">
       <div className="container mx-auto lg:px-12 px-2 py-16 lg:py-12 text-white flex flex-col gap-4">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-          <div className="flex flex-col justify-center items-start space-y-8">
-            <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
-              ABOUT <span className="text-amber-700">ई-न्यौता</span>
+          <div className="flex flex-col justify-center items-start space-y-6">
+            <h1 className="text-2xl font-bold tracking-tight lg:text-3xl">
+              About us
+            </h1>
+            <h1 className="text-4xl font-avalonB">
+              "Nyouta <span className="text-sm">...New way of celebration</span>
+              "
             </h1>
             <p className="text-lg font-semibold">
               Nyouta is Brand of Angira Creation, we understand that every
