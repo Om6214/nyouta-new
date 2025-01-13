@@ -19,9 +19,12 @@ const MemoryCard = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-4 my-4">
-        <div className="bg-priBg lg:w-[30%] flex flex-col gap-2 items-start justify-center rounded-2xl px-8 py-4">
-          <h1 className="font-ttMedium text-6xl font-bold text-secondary">
-            Save ! & <br />
+        <div className="bg-amber-100 lg:w-[30%] relative flex flex-col gap-2 items-start justify-center rounded-2xl px-8 py-4">
+          <span className="absolute lg:top-[-15px] top-[-40px] z-10 text-white text-[9rem] font-ttMedium">
+            &
+          </span>
+          <h1 className="font-ttMedium text-6xl z-50 font-bold text-secondary">
+            Save ! <br />
             <span className="pl-20">Share</span>
           </h1>
           <p className="text-4xl font-ttMedium text-secondary">YOUR MEMORIES</p>

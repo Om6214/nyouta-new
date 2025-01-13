@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import invitation from "../assets/images/placeholder.jpg";
+import weddingImg from "../assets/images/wedding.jpg";
 import vinvite from "../assets/images/v-invite.webp";
 import welcome from "../assets/images/welcome sign.webp";
 import { motion, useInView } from "framer-motion";
@@ -13,7 +14,7 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wedding Invitation",
-        imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // URL from product.json
+        imgUrl: weddingImg, // URL from product.json
         url: "/products/wedding-invites",
       },
       {
@@ -282,7 +283,7 @@ const CategoryCard = () => {
                   key={index}
                   className="relative lg:w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="relative overflow-hidden group lg:w-[200px] lg:h-[250px]">
+                  <div className="relative overflow-hidden group lg:w-[200px] lg:h-[170px]">
                     <img
                       className="w-full object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110 "
                       src={sub.imgUrl || invitation}
@@ -296,7 +297,7 @@ const CategoryCard = () => {
                       </a>
                     </div>
                   </div>
-                  <h1 className="text-lg font-heroFont font-semibold text-center text-gray-800 py-4">
+                  <h1 className="text-md font-heroFont font-semibold text-center text-gray-800 py-1">
                     {sub.subTitle}
                   </h1>
                 </motion.div>
