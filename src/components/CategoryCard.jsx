@@ -251,14 +251,14 @@ const CategoryCard = () => {
       {/* Categories Navigation */}
       <motion.div>
         <div className="py-2 lg:px-4 px-1 bg-secondary shadow-md">
-          <ul className="flex gap-4 justify-start overflow-auto">
+          <ul className="flex gap-4 justify-start overflow-x-auto">
             {categories.map((cat, index) => (
               <motion.li
                 key={index}
                 className={`text-md font-avalonB flex flex-shrink-0 font-bold cursor-pointer px-5 py-2 rounded-lg transition-all duration-300 transform
                                 ${
                                   selectedCategory === cat
-                                    ? "bg-amber-50 text-pink-600 shadow-lg scale-105"
+                                    ? "bg-amber-50 text-pink-600 shadow-lg"
                                     : " text-white hover:bg-amber-300 hover:text-gray-900 hover:shadow-md"
                                 }`}
                 onClick={() => setSelectedCategory(cat)}

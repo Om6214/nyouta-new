@@ -19,7 +19,7 @@ const MemoryCard = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-4 my-4">
-        <div className="bg-priBg lg:w-[30%] flex flex-col gap-2 items-start justify-center rounded-2xl px-8">
+        <div className="bg-priBg lg:w-[30%] flex flex-col gap-2 items-start justify-center rounded-2xl px-8 py-4">
           <h1 className="font-ttMedium text-6xl font-bold text-secondary">
             Save ! & <br />
             <span className="pl-20">Share</span>
