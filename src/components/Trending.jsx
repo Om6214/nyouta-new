@@ -66,8 +66,8 @@ const Trending = () => {
               <div className="lg:h-[250px] h-[300px]">
                 <div className="relative flex flex-col items-center justify-center">
                   <img className="" src={bgImg} alt="" />
-                  <div className="absolute flex flex-col items-center font-heroFont">
-                    <img className="h-[170px] w-full object-cover" src={product.image[0]} alt="" />
+                  <div className="absolute flex flex-col items-center font-avalonN">
+                    <img className="lg:h-[170px] h-[150px] w-full object-cover" src={product.image[0]} alt="" />
                     <p className="font-semibold">{product.subSubCategory}</p>
                   </div>
                 </div>
