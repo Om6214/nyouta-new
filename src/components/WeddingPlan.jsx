@@ -39,7 +39,7 @@ const plans = [
       "https://lovely-cards.com/cdn/shop/products/dgs-w01-des55_4d03f059-9d45-40e9-91b5-df051ae87d67.jpg?v=1709379079",
   },
   {
-    title: "Wedding Notepad Write Wedding Notes",
+    title: "Wedding Notepad Write Wedding Notes PDF",
     format: "PDF Printable",
     btn: "Free Download",
     imgUrl:
@@ -68,7 +68,7 @@ const WeddingPlan = () => {
       <div>
         <div className="grid lg:grid-cols-6 grid-cols-2 gap-2 py-4">
           {plans.map((plan) => (
-            <div className="lg:w-[220px]">
+            <div className="lg:w-[220px] h-full">
               <img className="w-full object-cover rounded-xl" src={plan.imgUrl} alt="" />
               <div className="flex flex-col gap-2 items-center">
                 <h1 className="text-center font-semibold border-b-2 ">{plan.title}</h1>

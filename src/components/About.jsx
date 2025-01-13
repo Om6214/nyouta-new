@@ -69,7 +69,7 @@ export default function About() {
             </p>
             <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300">
               <img className="h-8" src={button} alt="" />
-              <a href="#" className="absolute text-lg font-semibold">
+              <a href="/about" className="absolute text-lg font-semibold">
                 Read More
               </a>
             </div>

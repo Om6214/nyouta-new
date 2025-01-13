@@ -283,7 +283,7 @@ const CategoryCard = () => {
                   key={index}
                   className="relative lg:w-[200px] bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="relative overflow-hidden group lg:w-[200px] lg:h-[170px]">
+                  <div className="relative overflow-hidden group lg:w-[200px] h-[170px]">
                     <img
                       className="w-full object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-110 "
                       src={sub.imgUrl || invitation}
@@ -311,7 +311,7 @@ const CategoryCard = () => {
           <img className="h-8" src={btnBg} alt="" />
           <a
             className="absolute text-lg font-avalonB uppercase text-white"
-            href=""
+            href="/products"
           >
             View All Products
           </a>
