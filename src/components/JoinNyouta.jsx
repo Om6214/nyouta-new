@@ -141,12 +141,7 @@ const JoinNyouta = () => {
   };
   return (
     <div>
-      <motion.div
-        initial={{ opacity: 0, y: -100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.8 }}
-        className="py-4"
-      >
+      <motion.div className="py-4">
         <h1 className="lg:text-4xl text-3xl text-secondary font-avalonN text-center">
           Join E-Nyouta
         </h1>
@@ -154,12 +149,7 @@ const JoinNyouta = () => {
           Choose Your type of Category Below
         </h1>
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: -100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.8 }}
-        className="flex lg:gap-8 gap-2 px-2 lg:justify-center py-4 overflow-x-auto"
-      >
+      <motion.div className="flex lg:gap-8 gap-2 px-2 lg:justify-center py-4 overflow-x-auto">
         {Object.entries(forms).map(([key, { name }]) => (
           <button
             className={`px-4 py-2 text-lg flex flex-shrink-0 font-avalonB rounded-md ${
@@ -174,23 +164,14 @@ const JoinNyouta = () => {
           </button>
         ))}
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.8 }}
-      >
+      <motion.div>
         <img
           src={forms[currentCategory].imgUrl}
           className="w-full h-[250px]"
           alt={forms[currentCategory].name}
         />
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: -100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.8 }}
-        className="mx-4 lg:mx-32 my-8 flex flex-col gap-8 shadow-xl p-5"
-      >
+      <motion.div className="mx-4 lg:mx-32 my-8 flex flex-col gap-8 shadow-xl p-5">
         <div>
           <h1 className="text-center text-3xl lg:text-4xl font-avalonN text-secondary">
             {forms[currentCategory].name}

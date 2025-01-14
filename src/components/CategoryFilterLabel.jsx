@@ -130,8 +130,8 @@ console.log("B")
 
       {/* Select Finish */}
       <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-3">Select Finish</h2>
-        <div className="flex gap-5">
+        {/* <h2 className="text-lg font-semibold mb-3">Select Finish</h2> */}
+        {/* <div className="flex gap-5">
           {[
             { name: 'Matte', color: 'bg-gray-700' },
             { name: 'Black', color: 'bg-black' },
@@ -142,7 +142,7 @@ console.log("B")
               <p className="text-sm">{finish.name}</p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
 
       <div className="border-t border-gray-300 mb-6"></div>
@@ -159,7 +159,7 @@ console.log("B")
           onClick={handleButtonClick}
           className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
         >
-          ADD NOW
+         {filteredItems.length > 0 && filteredItems[0].category === "Planner Books" ? ( "Choose Now"):("Add Now")}
         </button>
 
       <div className="border-t border-gray-300 mt-6 mb-6"></div>
@@ -174,15 +174,17 @@ console.log("B")
       </div> */}
 
       {/* Product Specifications */}
-      {/* <div>
-        <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
-        <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-          <li>Set of 15 prints, choose from coloured or patterned borders.</li>
-          <li>Choose from Glossy, Matte and Pearl finish.</li>
-          <li>Printed on high quality Fujifilm professional photo paper.</li>
-          <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.</li>
-        </ul>
-      </div> */}
+      {filteredItems.length > 0 && filteredItems[0].category === "Planner Books" ? (
+  <div>
+    <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
+    <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+      <li>Beautify your days with a planner that inspires.</li>
+      <li>Express yourself with beautiful designs and personalized touches.</li>
+      <li>High quality professional Planner Books.</li>
+      {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
+    </ul>
+  </div>
+) : null}
     </div>
         </div>
       <div>

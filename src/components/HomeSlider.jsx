@@ -40,7 +40,7 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
         
     </div>
     <div className="flex flex-col lg:flex-row px-2 gap-4">
-       <div className="h-80 lg:w-[70%] rounded-xl sm:h-64 xl:h-80 2xl:h-80">
+       <div className=" lg:w-[70%] rounded-xl">
                   <Carousel>
                     <img className="rounded-xl h-full" src={img1} alt="..." />
                     <img className="rounded-xl h-full" src={img2} alt="..." />
@@ -49,9 +49,9 @@ console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
                   </Carousel>
                 </div>
       <div className="lg:w-[30%]">
-        <div className="pb-2 px-6 mt flex flex-col gap-4 items-start border-2 rounded-xl bg-priBg">
+        <div className="py-2 px-6 mt flex flex-col gap-4 text-secondary items-start border-2 rounded-xl bg-priBg">
           <h1 className="text-8xl font-ttMedium font-bold">new !</h1>
-          <h1 className="text-4xl font-linna">Shaped Wedding Invitation</h1>
+          <h1 className="text-4xl font-linna leading-relaxed">shAped Wedding invitAtion</h1>
           <h2 className="text-xl">Unique shapes that stack together in a perfect piece suite</h2>
           <div className="relative hover:translate-x-2 duration-300">
             <img className="w-44" src={buttonBg} alt="" />

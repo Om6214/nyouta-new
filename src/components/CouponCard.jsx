@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import Slider from "react-slick";
 import img1 from "../assets/images/coupons/01.jpg";
 import img2 from "../assets/images/coupons/02.jpg";
@@ -22,7 +22,7 @@ const couponImages = {
   img8,
   img9,
   img10,
-}
+};
 
 const CouponCard = () => {
   var settings = {
@@ -32,7 +32,7 @@ const CouponCard = () => {
     speed: 2000,
     autoplaySpeed: 3000,
     cssEase: "linear",
-    slidesToShow: 2,
+    slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
     arrows: false,
@@ -40,12 +40,12 @@ const CouponCard = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           arrows: false,
-          dots: false
-        }
+          dots: false,
+        },
       },
       {
         breakpoint: 600,
@@ -53,32 +53,32 @@ const CouponCard = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           arrows: false,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
           arrows: false,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
-    <div className='lg:mx-6 mx-4'>
+    <div className="lg:mx-6 mx-4">
       <div className="slider-container">
-      <Slider {...settings}>
-        {Object.entries(couponImages).map(([key, value]) => (
-          <div key={key}>
-            <img className='h-[150px] md:h-full' src={value} alt="" />
-          </div>
-        ))}
-      </Slider>
+        <Slider {...settings}>
+          {Object.entries(couponImages).map(([key, value]) => (
+            <div key={key}>
+              <img className="h-[150px] md:h-full" src={value} alt="" />
+            </div>
+          ))}
+        </Slider>
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default CouponCard
+export default CouponCard;

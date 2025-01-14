@@ -2,6 +2,8 @@ import { SquareArrowOutUpRight } from "lucide-react";
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import buttonBg from "../assets/images/07.png";
+import video1 from "../assets/video/videoYt.mp4";
+import playBtn from "../assets/images/play.jpg";
 
 const VideoCard = () => {
   const navigate = useNavigate();
@@ -9,16 +11,7 @@ const VideoCard = () => {
     <div>
       <div className="lg:px-16 my-4 px-4 py-8 font-heroFont text-white bg-secondary flex flex-col lg:flex-row gap-8 justify-around">
         <div>
-          <iframe
-            className="rounded-3xl shadow-2xl object-cover w-[350px] lg:w-[650px]"
-            height="400"
-            src="https://www.youtube.com/embed/GVBTLJ6Fqys?si=MnaWRogQwnaYNcCD"
-            title="Nyouta, where memories are brought to life!"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen
-          ></iframe>
+          <video src={video1} className="rounded-3xl shadow-2xl lg:object-center md:object-center object-cover lg:w-[300rem] lg:h-full h-[20rem]" controls muted poster={playBtn}></video>
         </div>
         <div className="flex flex-col lg:gap-6 lg:px-10 gap-6 items-start justify-center">
           <h1 className="lg:text-4xl text-3xl font-linna">

@@ -235,7 +235,6 @@ const navItems = [
           { a: "Fun Games " },
         ],
       },
-
     ],
   },
   {
@@ -368,14 +367,17 @@ const navItems = [
     url: "/nav/planner books",
     children: [
       {
-        label: "Planner Books",
-        Filters: [
-          { a: "Wedding Management" },
-          { a: "Guest Management" },
-          { a: "Wedding Notepad" },
-          { a: "Guest List Booklet - Best Seller" },
-        ],
-      },
+        label: "Wedding Management",},{
+        label: "Guest Management",},{
+        label: "Wedding Notepad",},{
+        label: "Guest List Booklet - Best Seller",},
+      //   Filters: [
+      //     { alabel: "Wedding Management" },
+      //     { a: "Guest Management" },
+      //     { a: "Wedding Notepad" },
+      //     { a: "Guest List Booklet - Best Seller" },
+      //   ],
+     
       {
         label: "Free Printable",
         Filters: [
@@ -664,7 +666,7 @@ export default function MainNav() {
                 </Link>
                 <AnimatePresence>
                   {item.children && activeDropdown === index && (
-                    <motion.div
+                    <div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
@@ -673,7 +675,7 @@ export default function MainNav() {
                     >
                       <ul className="space-y-2">
                         {item.children.map((child, childIndex) => (
-                          <motion.li
+                          <li
                             key={childIndex}
                             // variants={gridVariants}
                             // initial="hidden"
@@ -686,19 +688,18 @@ export default function MainNav() {
                             className="relative"
                           >
                             <Link
-                              to={`${item.url}/${child.label}`}
-                              className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
-                            >
-                              {child.label}
-                            </Link>
+  to={item.url === "/nav/planner books" && child.label!="Free Printable"
+    ? `e${item.url}/Planner%20Books/${child.label}`
+    : `${item.url}/${child.label}`}
+  className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
+>
+  {child.label}
+  {console.log(item.url)}
+</Link>
                             <AnimatePresence>
                               {child.Filters &&
                                 activeChildDropdown === childIndex && (
-                                  <motion.div
-                                    initial={{ opacity: 0, x: 10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: 10 }}
-                                    transition={{ duration: 0.2 }}
+                                  <div
                                     className={`absolute top-0 ${
                                       isLastTwoItems
                                         ? "right-full "
@@ -708,7 +709,7 @@ export default function MainNav() {
                                     <ul className="space-y-2">
                                       {child.Filters.map(
                                         (filter, filterIndex) => (
-                                          <motion.li
+                                          <li
                                             key={filterIndex}
                                             // variants={gridVariants}
                                             // initial="hidden"
@@ -721,17 +722,17 @@ export default function MainNav() {
                                             >
                                               {filter.a}
                                             </Link>
-                                          </motion.li>
+                                          </li>
                                         )
                                       )}
                                     </ul>
-                                  </motion.div>
+                                  </div>
                                 )}
                             </AnimatePresence>
-                          </motion.li>
+                          </li>
                         ))}
                       </ul>
-                    </motion.div>
+                    </div>
                   )}
                 </AnimatePresence>
               </li>
