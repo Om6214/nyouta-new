@@ -191,7 +191,7 @@ const navItems = [
         ],
       },
       {
-        label: "Tags / Bedges",
+        label: "Tags / Badges",
         Filters: [
           { a: "Luggage Tag " },
           { a: "Door Handle Tag " },
@@ -213,7 +213,7 @@ const navItems = [
           { a: "Lohri Party " },
           { a: "Halloween Party " },
           { a: "Birthday Party " },
-          { a: "Celeration Party " },
+          { a: "Celebration Party " },
         ],
       },
       {
@@ -367,17 +367,24 @@ const navItems = [
     url: "/nav/planner books",
     children: [
       {
-        label: "Wedding Management",},{
-        label: "Guest Management",},{
-        label: "Wedding Notepad",},{
-        label: "Guest List Booklet - Best Seller",},
+        label: "Wedding Management",
+      },
+      {
+        label: "Guest Management",
+      },
+      {
+        label: "Wedding Notepad",
+      },
+      {
+        label: "Guest List Booklet - Best Seller",
+      },
       //   Filters: [
       //     { alabel: "Wedding Management" },
       //     { a: "Guest Management" },
       //     { a: "Wedding Notepad" },
       //     { a: "Guest List Booklet - Best Seller" },
       //   ],
-     
+
       {
         label: "Free Printable",
         Filters: [
@@ -688,14 +695,17 @@ export default function MainNav() {
                             className="relative"
                           >
                             <Link
-  to={item.url === "/nav/planner books" && child.label!="Free Printable"
-    ? `e${item.url}/Planner%20Books/${child.label}`
-    : `${item.url}/${child.label}`}
-  className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
->
-  {child.label}
-  {console.log(item.url)}
-</Link>
+                              to={
+                                item.url === "/nav/planner books" &&
+                                child.label != "Free Printable"
+                                  ? `e${item.url}/Planner%20Books/${child.label}`
+                                  : `${item.url}/${child.label}`
+                              }
+                              className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
+                            >
+                              {child.label}
+                              {console.log(item.url)}
+                            </Link>
                             <AnimatePresence>
                               {child.Filters &&
                                 activeChildDropdown === childIndex && (
