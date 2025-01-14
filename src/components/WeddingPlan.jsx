@@ -1,49 +1,49 @@
 import React from "react";
 import buttonBg from "../assets/images/08.png";
 import wedImg from "../assets/images/wed.png";
+import guestPlan from "../assets/images/stressfree/guest.jpg";
+import wedPlan from "../assets/images/stressfree/wedplanL.jpg";
+import guestList from "../assets/images/stressfree/guestlist.jpeg";
+import pdfPrint from "../assets/images/stressfree/pdfprint.jpg";
+import wedNote from "../assets/images/stressfree/wednote.jpeg";
+import wedPhoto from "../assets/images/stressfree/wednoteP.jpeg";
 
 const plans = [
   {
     title: "Wedding Management Planner Booklet",
     format: "Easy to Manage Wedding",
     btn: "Shop Now",
-    imgUrl:
-      "https://lovely-cards.com/cdn/shop/products/dgs-w01-des55_4d03f059-9d45-40e9-91b5-df051ae87d67.jpg?v=1709379079",
+    imgUrl: wedPlan,
   },
   {
     title: "Wedding Guest Management Booklet",
     format: "Easy to Manage Guests",
     btn: "Shop Now",
-    imgUrl:
-      "https://lovely-cards.com/cdn/shop/products/dgs-w01-des55_4d03f059-9d45-40e9-91b5-df051ae87d67.jpg?v=1709379079",
+    imgUrl: guestPlan,
   },
   {
     title: "Wedding Notepad(Liner) Notes for Lifetime Memory",
     format: "Write your Wedding Notes",
     btn: "Shop Now",
-    imgUrl:
-      "https://lovely-cards.com/cdn/shop/products/dgs-w01-des55_4d03f059-9d45-40e9-91b5-df051ae87d67.jpg?v=1709379079",
+    imgUrl: wedNote,
   },
   {
     title: "Wedding Notepad(Photo) Memorable Notes",
     format: "Write your Wedding Notes",
     btn: "Shop Now",
-    imgUrl:
-      "https://lovely-cards.com/cdn/shop/products/dgs-w01-des55_4d03f059-9d45-40e9-91b5-df051ae87d67.jpg?v=1709379079",
+    imgUrl: wedPhoto,
   },
   {
     title: "Download our Wedding Guest Checklist",
     format: "PDF/XLS Editable",
     btn: "Free Download",
-    imgUrl:
-      "https://lovely-cards.com/cdn/shop/products/dgs-w01-des55_4d03f059-9d45-40e9-91b5-df051ae87d67.jpg?v=1709379079",
+    imgUrl: guestList,
   },
   {
     title: "Wedding Notepad Write Wedding Notes PDF",
     format: "PDF Printable",
     btn: "Free Download",
-    imgUrl:
-      "https://lovely-cards.com/cdn/shop/products/dgs-w01-des55_4d03f059-9d45-40e9-91b5-df051ae87d67.jpg?v=1709379079",
+    imgUrl: pdfPrint,
   },
 ];
 

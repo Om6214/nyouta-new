@@ -42,7 +42,7 @@ const MemoryCard = () => {
           </div>
         </div>
         <div className="lg:w-[70%]">
-          <div className="h-80 rounded-xl sm:h-64 xl:h-80 2xl:h-96">
+          <div className="h-80 w-full rounded-xl sm:h-64 xl:h-80 2xl:h-96">
             <Carousel>
               <img className="rounded-xl h-full" src={img1} alt="..." />
               <img className="rounded-xl h-full" src={img2} alt="..." />
