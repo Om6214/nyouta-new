@@ -63,7 +63,7 @@ export default function Login() {
     } 
   }
   const OtpModal = () => (
-    <div className="fixed z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed z-100 inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-md">
         <h2 className="text-lg font-bold">Enter OTP</h2>
         <input 
