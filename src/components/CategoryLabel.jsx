@@ -103,8 +103,8 @@ export default function CategoryLabel() {
       </div>
       {/* Select Finish */}
       <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-3">Select Finish</h2>
-        <div className="flex gap-5">
+        {/* <h2 className="text-lg font-semibold mb-3">Select Finish</h2> */}
+        {/* <div className="flex gap-5">
           {[
             { name: 'Matte', color: 'bg-gray-700' },
             { name: 'Black', color: 'bg-black' },
@@ -115,7 +115,7 @@ export default function CategoryLabel() {
               <p className="text-sm">{finish.name}</p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
       <div className="border-t border-gray-300 mb-6"></div>
       {/* Price and Offer */}

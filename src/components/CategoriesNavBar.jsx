@@ -5,17 +5,25 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import i1 from '../assets/images/Navbar_Planner_Header/01.jpg'
+import i2 from '../assets/images/Navbar_Planner_Header/02.jpg'
+import i3 from '../assets/images/Navbar_Planner_Header/03.jpg'
+import i4 from '../assets/images/Navbar_Planner_Header/04.jpg'
+import i5 from '../assets/images/Navbar_Planner_Header/05.jpg'
+import i6 from '../assets/images/Navbar_Planner_Header/06.jpg'
+
 const CategoriesNavBar = () => {
   const { pageName } = useParams();
 
   const datafile = {
     "print invitations": {
-      Title: "Print Invitations",
-      Description:
-        "Design and print stunning wedding invitations that perfectly capture the essence of your special day. Our premium collection offers sophisticated designs and high-quality materials to create memorable announcements that will set the tone for your celebration.",
 
-      Details1:
-        "Our Print Invitations service combines artistry with exceptional quality to deliver wedding stationery that exceeds your expectations. We understand that your wedding invitations are the first glimpse guests receive of your celebration, which is why we offer comprehensive customization options and expert guidance throughout the design process.",
+      Title:"Print Invitations",
+      Description1: "Design and print stunning wedding invitations.",
+      Description: "Design and print stunning wedding invitations that perfectly capture the essence of your special day. Our premium collection offers sophisticated designs and high-quality materials to create memorable announcements that will set the tone for your celebration.",
+      
+      Details1: "Our Print Invitations service combines artistry with exceptional quality to deliver wedding stationery that exceeds your expectations. We understand that your wedding invitations are the first glimpse guests receive of your celebration, which is why we offer comprehensive customization options and expert guidance throughout the design process.",
+      
 
       Details2: [
         "Choose from a wide range of card styles, colors, and sizes.",
@@ -30,13 +38,14 @@ const CategoriesNavBar = () => {
     },
 
     "e-invitations": {
-      Title: "E-Invitations",
-      Description:
-        "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
 
-      Details1:
-        "Experience the future of wedding invitations with our comprehensive digital platform that revolutionizes how you connect with your guests. Our E-Invitation service combines stunning visual design with smart features to create an engaging and interactive experience that makes planning your special day easier than ever.",
+      Title:"E-Invitations",
+      Description1: "Create and send digital invitations with ease.",
 
+      Description: "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
+      
+      Details1: "Experience the future of wedding invitations with our comprehensive digital platform that revolutionizes how you connect with your guests. Our E-Invitation service combines stunning visual design with smart features to create an engaging and interactive experience that makes planning your special day easier than ever.",
+      
       Details2: [
         "Create personalized e-invitations with stunning designs.",
         "Easily share invitations via email, social media, or messaging apps.",
@@ -50,13 +59,14 @@ const CategoriesNavBar = () => {
     },
 
     "photo books": {
-      Title: "Photo Books",
-      Description:
-        "Transform your precious wedding memories into elegant, professionally crafted photo books that tell your unique love story. Our premium photo book service combines cutting-edge printing technology with artistic design to create stunning keepsakes that will preserve your special moments for generations to come.",
 
-      Details1:
-        "Discover the art of storytelling through our meticulously designed photo books that capture every beautiful moment of your wedding journey. Our Personalised Photobooks service offers an exceptional combination of professional design expertise and superior printing quality to create timeless albums that showcase your memories in their best light.",
 
+      Title:"Photo Books",
+      Description: "Transform your precious wedding memories into elegant, professionally crafted photo books that tell your unique love story. Our premium photo book service combines cutting-edge printing technology with artistic design to create stunning keepsakes that will preserve your special moments for generations to come.",
+          Description1: "Nyouta’s photo books are a sleek and modern version of the old school ‘Photo albums’.",
+
+      Details1: "Discover the art of storytelling through our meticulously designed photo books that capture every beautiful moment of your wedding journey. Our Personalised Photobooks service offers an exceptional combination of professional design expertise and superior printing quality to create timeless albums that showcase your memories in their best light.",
+      
       Details2: [
         "Nyouta's photo books are a sleek and modern way to preserve your wedding memories.",
         "Create custom layouts with your favorite wedding photos.",
@@ -69,13 +79,11 @@ const CategoriesNavBar = () => {
         "Create an enduring legacy of your wedding day with our expertly crafted photo books that combine superior quality with personalized storytelling. Each page is thoughtfully designed to capture the essence of your celebration, resulting in a treasured keepsake that will bring joy and memories for generations.",
     },
 
-    itinerary: {
-      Title: "Itinerary",
-      Description:
-        "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
-
-      Details1:
-        "Transform your wedding timeline into an engaging and informative guide that keeps your guests informed and excited about every planned moment. Our Wedding Itineraries service combines practical organization with beautiful design to create comprehensive schedules that enhance the experience for everyone involved in your celebration.",
+    "itinerary": {
+      Title:"Itinerary",
+      Description: "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
+      Description1: "Create detailed travel itineraries for your trips.",
+      Details1: "Transform your wedding timeline into an engaging and informative guide that keeps your guests informed and excited about every planned moment. Our Wedding Itineraries service combines practical organization with beautiful design to create comprehensive schedules that enhance the experience for everyone involved in your celebration.",
 
       Details2: [
         "Easily share event schedules, venue locations, and contact information.",
@@ -90,12 +98,12 @@ const CategoriesNavBar = () => {
     },
 
     "calendars 2025": {
-      Title: "calendars 2025",
-      Description:
-        "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
 
-      Details1:
-        "Embrace the excitement of your upcoming wedding with our beautifully designed 2025 calendars that transform the countdown to your special day into a memorable experience. Our Wedding Calendars service offers a perfect blend of practical planning tools and personalized design elements to help you track and celebrate every moment leading up to your wedding.",
+      Title:"calendars 2025",
+      Description: "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
+      Description1: "Design and print personalized calendars for 2025.",
+      Details1: "Embrace the excitement of your upcoming wedding with our beautifully designed 2025 calendars that transform the countdown to your special day into a memorable experience. Our Wedding Calendars service offers a perfect blend of practical planning tools and personalized design elements to help you track and celebrate every moment leading up to your wedding.",
+      
 
       Details2: [
         "Count down to your wedding day with a stylish and personalized calendar.",
@@ -110,12 +118,13 @@ const CategoriesNavBar = () => {
     },
 
     "free greetings": {
-      Title: "free greetings",
-      Description:
-        "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
 
-      Details1:
-        "Discover the perfect way to share your wedding joy with our comprehensive collection of digital greetings that combine elegant design with heartfelt sentiment. Our Free Wedding Greetings service provides a sophisticated platform for expressing your happiness and connecting with loved ones through beautifully crafted digital messages.",
+      Title:"free greetings",
+      Description: "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
+      Description1: "Send free digital greeting cards to your loved ones."
+,
+      Details1: "Discover the perfect way to share your wedding joy with our comprehensive collection of digital greetings that combine elegant design with heartfelt sentiment. Our Free Wedding Greetings service provides a sophisticated platform for expressing your happiness and connecting with loved ones through beautifully crafted digital messages.",
+      
 
       Details2: [
         "Choose from a variety of beautiful and heartfelt wedding greeting cards.",
@@ -130,12 +139,13 @@ const CategoriesNavBar = () => {
     },
 
     "guest surprising": {
-      Title: "guest surprising",
-      Description:
-        "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
 
-      Details1:
-        "Elevate your wedding celebration with our creative guest experience services that transform ordinary moments into extraordinary memories. Our Guest Surprising Ideas program offers a carefully curated selection of unique entertainment options, thoughtful gestures, and unexpected delights that will leave a lasting impression on everyone who shares in your special day.",
+      Title:"guest surprising",
+      Description: "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
+      Description1: "Find unique and memorable ways to surprise your guests."
+,
+      Details1: "Elevate your wedding celebration with our creative guest experience services that transform ordinary moments into extraordinary memories. Our Guest Surprising Ideas program offers a carefully curated selection of unique entertainment options, thoughtful gestures, and unexpected delights that will leave a lasting impression on everyone who shares in your special day.",
+      
 
       Details2: [
         "Discover creative and memorable ways to welcome and entertain your guests.",
@@ -150,12 +160,13 @@ const CategoriesNavBar = () => {
     },
 
     "planner books": {
-      Title: "planner books",
-      Description:
-        "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
 
-      Details1:
-        "Experience stress-free wedding planning with our meticulously designed planner books that guide you through every aspect of creating your perfect celebration. Our Wedding Planner Books service provides comprehensive planning tools wrapped in elegant design, ensuring you have everything you need to coordinate your dream wedding with confidence and style.",
+      Title:"planner books",
+      Description: "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
+      Description1: "Organize your life with our stylish and functional planner books."
+,
+      Details1: "Experience stress-free wedding planning with our meticulously designed planner books that guide you through every aspect of creating your perfect celebration. Our Wedding Planner Books service provides comprehensive planning tools wrapped in elegant design, ensuring you have everything you need to coordinate your dream wedding with confidence and style.",
+      
 
       Details2: [
         "Essential tools for planning every aspect of your wedding.",
@@ -170,12 +181,11 @@ const CategoriesNavBar = () => {
     },
 
     "e shop": {
-      Title: "e shop",
-      Description:
-        "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
-
-      Details1:
-        "Welcome to your ultimate wedding planning destination, where finding the perfect items for your special day is both enjoyable and convenient. Our E-Shop combines an extensive selection of premium wedding products with exceptional customer service to ensure you have everything you need to create your dream celebration.",
+      Title:"e shop",
+      Description: "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
+      Description1: "Browse and shop for a wide range of products online.",
+      Details1: "Welcome to your ultimate wedding planning destination, where finding the perfect items for your special day is both enjoyable and convenient. Our E-Shop combines an extensive selection of premium wedding products with exceptional customer service to ensure you have everything you need to create your dream celebration.",
+      
 
       Details2: [
         "Browse a wide selection of wedding decorations, favors, and accessories.",
@@ -190,12 +200,10 @@ const CategoriesNavBar = () => {
     },
   };
 
-  const images = [
-    "https://img.freepik.com/free-photo/top-view-gift-wrapping-composition_23-2148455718.jpg?t=st=1734674377~exp=1734677977~hmac=84a23b1b4f2690a609ff97e6640751abef1f27a125ca0b407e9b7d38f8396c5f&w=996",
-    "https://img.freepik.com/free-photo/close-up-christmas-present-decorated-with-dried-flowers-dry-orange-wrapped-craft-paper_169016-14425.jpg?t=st=1735809332~exp=1735812932~hmac=b2f388421807280c81f6701e99b1045b5fcc18a3807238bc9534e9bf4f24c3ee&w=1060",
-    "https://img.freepik.com/free-photo/gift-box-decorated-with-ribbons-decorative-roses-knitted-items-original-gift-wrapping-valentine-s-day_169016-8851.jpg?t=st=1735809475~exp=1735813075~hmac=29fa67a9acc9e871ef0e838420c76f5c2be4707d446fb34db99cc47247a69b38&w=996",
-    "https://img.freepik.com/free-photo/top-view-hand-holding-furoshiki-package_23-2150274480.jpg?t=st=1735809508~exp=1735813108~hmac=d7588c5a3b60c924bb0cc9683c7f9528b4cae8b4f2a986f15d76ee131fbc9e56&w=996",
-  ];
+
+
+  const images = [i1,i2,i3,i4,i5,i6 ];
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -211,8 +219,10 @@ const CategoriesNavBar = () => {
     "print invitations": {
       title: "Print Invitations",
       url: "Print Invitations",
-      Description:
-        "Design and print stunning wedding invitations that perfectly capture the essence of your special day. Our premium collection offers sophisticated designs and high-quality materials to create memorable announcements that will set the tone for your celebration.",
+      Description1: "Design and print stunning wedding invitations.",
+
+      Description: "Design and print stunning wedding invitations that perfectly capture the essence of your special day. Our premium collection offers sophisticated designs and high-quality materials to create memorable announcements that will set the tone for your celebration.",
+
       subCategory: [
         {
           subTitle: "Wedding Invitations",
@@ -239,9 +249,11 @@ const CategoriesNavBar = () => {
     "e-invitations": {
       title: "E Invitations",
       url: "/e-invitations",
-      Description:
-        "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
-      subCategory: [
+      Description1: "Create and send digital invitations with ease.",
+
+      Description: "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
+     subCategory: [
+
         {
           subTitle: "Wedding Invitations",
           imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // URL from product.json
@@ -270,6 +282,8 @@ const CategoriesNavBar = () => {
     },
     "photo books": {
       title: "Photo Books",
+      Description1: "Nyouta’s photo books are a sleek and modern version of the old school ‘Photo albums’.",
+
       url: "/photo-books",
       Description:
         "Transform your precious wedding memories into elegant, professionally crafted photo books that tell your unique love story. Our premium photo book service combines cutting-edge printing technology with artistic design to create stunning keepsakes that will preserve your special moments for generations to come.",
@@ -299,9 +313,12 @@ const CategoriesNavBar = () => {
     itinerary: {
       title: "Itinerary",
       url: "/itinerary",
-      Description:
-        "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
-      subCategory: [
+
+      Description1: "Create detailed travel itineraries for your trips.",
+
+       Description: "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
+ subCategory: [
+
         {
           subTitle: "Wedding Itinerary",
           imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
@@ -331,8 +348,11 @@ const CategoriesNavBar = () => {
     "calendars 2025": {
       title: "Calendars 2025",
       url: "/calendars 2025",
-      Description:
-        "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
+
+      Description1: "Design and print personalized calendars for 2025.",
+
+          Description: "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
+
       subCategory: [
         {
           subTitle: "Mini Desktop Calendar",
@@ -363,8 +383,10 @@ const CategoriesNavBar = () => {
     "free greetings": {
       title: "Free Greetings",
       url: "/free-greetings",
-      Description:
-        "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
+      Description1: "Send free digital greeting cards to your loved ones.",
+
+      Description: "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
+
       subCategory: [
         {
           subTitle: "Wishes Greeting",
@@ -387,9 +409,10 @@ const CategoriesNavBar = () => {
     "guest surprising": {
       title: "Guest Surprising",
       url: "/guest-surprising",
-      Description:
-        "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
-      subCategory: [
+      Description1: "Find unique and memorable ways to surprise your guests.",
+       Description: "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
+       subCategory: [
+
         {
           subTitle: "Newspaper",
           imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
@@ -403,24 +426,42 @@ const CategoriesNavBar = () => {
     "planner books": {
       title: "Planner Books",
       url: "/planner-books",
-      Description:
-        "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
-      subCategory: [
+
+     Description: "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
+     Description1: "Organize your life with our stylish and functional planner books.",
+     subCategory: [
+
         {
-          subTitle: "Planner Books",
-          imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+          subTitle: "Wedding Management",
+          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          url:"e/nav/Planner Books/Planner Books/Wedding Management"
+        }, {
+          subTitle: "Guest Management",
+          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          url:"e/nav/Planner Books/Planner Books/Guest Management"
+        }, {
+          subTitle: "Wedding Notepad",
+          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          url:"e/nav/Planner Books/Planner Books/Wedding Notepad"
+        }, {
+          subTitle: "Guest List Booklet - Best Seller",
+          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          url:"e/nav/Planner Books/Planner Books/Guest List Booklet - Best Seller"
         },
         {
           subTitle: "Free Printables",
           imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+          url:"e/nav/planner books/Free Printable/Wedding Guest List-PDF"
         },
       ],
     },
     "e shop": {
       title: "E-Shop",
       url: "/e-shop",
-      Description:
-        "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
+
+      Description1: "Browse and shop for a wide range of products online.",
+      Description: "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
+
       subCategory: [
         {
           subTitle: "Shagun Envelop",
@@ -451,36 +492,131 @@ const CategoriesNavBar = () => {
   const DetailContent = datafile[pageName] || {};
   // console.log(DetailContent);
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+    useEffect(() => {
+      console.log("rendered");
+      const interval = setInterval(() => {
+        setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
+      }, 5000); // Change slide every 5 seconds
+  
+      return () => clearInterval(interval);
+    }, []);
+  
+    const goToSlide = (index) => {
+      setCurrentSlide(index);
+    };
+  
+    const goToPrevSlide = () => {
+      setCurrentSlide(
+        (prevSlide) => (prevSlide - 1 + images.length) % images.length
+      );
+    };
+  
+    const goToNextSlide = () => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
+    };
+  
+
+
   return (
     <>
       <div>
         <div className="bg-gradient-to-r from-[#e7d8c9] to-[#eae0d5]">
           <div className="pt-4 pb-4 px-6 md:px-16">
-            <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center min-h-[30vh] w-full">
+
+            <motion.div
+              initial={{ opacity: 0, y: -100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.8 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center min-h-[28vh]  w-full"
+            >
+
               {/* Left Section */}
-              <div className="text-center md:text-left">
+              <div className="text-center col-span-1 md:text-left">
                 <h1 className="text-[#333533] font-bold text-[6vw] md:text-[3vw] font-sans leading-tight">
                   {content.title}
                 </h1>
                 <p className="text-[#7f8c8d] font-medium text-[3vw] md:text-[1.2vw] mt-4 leading-relaxed">
-                  {content.Description}
+                  {content.Description1}
                 </p>
               </div>
 
               {/* Right Section */}
-              <div className="relative h-[40vh] md:h-[22vw]">
-                <div className="flex justify-center w-full h-full">
-                  {images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt="Personalized Gifts"
-                      className={`rounded-lg shadow-md object-cover w-full h-full absolute top-0 left-0 transition-opacity duration-500 ${
-                        index === currentIndex ? "opacity-100" : "opacity-0"
-                      }`}
-                    />
-                  ))}
-                </div>
+              <div className="relative  col-span-2">
+              <div className="lg:w-full w-full">
+            <motion.div className="relative h-[380px]  rounded-xl overflow-hidden">
+                        {images.map((image, index) => (
+                          <div
+                            key={index}
+                            className={`absolute inset-0 transition-opacity duration-1000 ${
+                              index === currentSlide ? "opacity-100" : "opacity-0"
+                            }`}
+                          >
+                            <img
+                              src={image}
+                              alt={`Slide ${index + 1}`}
+                              className="h-full w-full lg:object-cover"
+                            />
+                          </div>
+                        ))}
+            
+                        <button
+                          onClick={goToPrevSlide}
+                          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
+                          aria-label="Previous slide"
+                        >
+                          <svg
+                            className="h-6 w-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 19l-7-7 7-7"
+                            />
+                          </svg>
+                        </button>
+            
+                        <button
+                          onClick={goToNextSlide}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
+                          aria-label="Next slide"
+                        >
+                          <svg
+                            className="h-6 w-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </button>
+            
+                        <div className="absolute bottom-4 left-1/2  flex -translate-x-1/2 space-x-2">
+                          {images.map((_, index) => (
+                            <button
+                              key={index}
+                              onClick={() => goToSlide(index)}
+                              className={`h-3 w-3 rounded-full m-3 ${
+                                index === currentSlide ? "bg-white" : "bg-white/50"
+                              }`}
+                              aria-label={`Go to slide ${index + 1}`}
+                            />
+                          ))}
+                        </div>
+                      </motion.div>
+          </div>
               </div>
             </motion.div>
           </div>
@@ -488,8 +624,15 @@ const CategoriesNavBar = () => {
       </div>
 
       <div id="section2">
-        <motion.div className="px-[6%] pt-[1%]">
-          <div className="font-semibold text-[4vh]">Accessories</div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.8 }}
+          className="px-[6%] pt-[1%]"
+        >
+          <div className="font-semibold text-[4vh]">Categories</div>
+
           <div className="font-normal md:text-[2.2vh] text-[2vw]">
             {/* Create personalized gifts for Kids, Friends, Loved ones and give them the your attention of love. */}
           </div>
@@ -498,10 +641,10 @@ const CategoriesNavBar = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {content.subCategory.map((item) => (
                 <Link
-                  to={`${item.subTitle}`}
-                  key={item.id}
-                  className="block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
-                >
+      to={item.url ? `/${item.url}` : `${item.subTitle}`}
+      key={item.id}
+      className="block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
+    >
                   <img
                     src={item.imgUrl}
                     alt={item.subTitle}
