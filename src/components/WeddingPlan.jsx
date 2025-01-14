@@ -51,31 +51,41 @@ const WeddingPlan = () => {
   return (
     <div className="bg-secondary text-white mt-8 px-4 py-6  font-avalonB">
       <div className="flex gap-8 flex-col lg:flex-row">
-      <div className="flex flex-col gap-3">
-        <h1 className="lg:text-5xl text-4xl font-bold  font-ttMedium">
-          Stress-Free Wedding Planning
-        </h1>
-        <h1 className="lg:text-4xl text-3xl font-ttMedium font-bold text-amber-500">"Plan with confidence"</h1>
-      </div>
-      <div className="flex border-l-8 justify-around lg:gap-[22rem] md:gap-48 border-white">
-        <h2 className="text-sm lg:text-md w-[280px] ml-6 md:ml-0 my-auto font-semibold">
-          Not sure where to start ! Here are some steps you can take today to
-          make planning your wedding as easy as possible
-        </h2>
-        <img className="w-32" src={wedImg} alt="" />
-      </div>
+        <div className="flex flex-col gap-3">
+          <h1 className="lg:text-5xl text-4xl font-bold  font-ttMedium">
+            Stress-Free Wedding Planning
+          </h1>
+          <h1 className="lg:text-4xl text-3xl font-ttMedium font-bold text-amber-500">
+            "Plan with confidence"
+          </h1>
+        </div>
+        <div className="flex md:border-l-8 lg:border-l-8 justify-around lg:gap-[22rem] md:gap-48 border-white">
+          <h2 className="text-sm lg:text-md w-[280px] lg:ml-6 md:ml-0 my-auto font-semibold">
+            Not sure where to start ! Here are some steps you can take today to
+            make planning your wedding as easy as possible
+          </h2>
+          <img className="w-32" src={wedImg} alt="" />
+        </div>
       </div>
       <div>
         <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 py-4">
           {plans.map((plan) => (
             <div className="lg:w-[220px] h-full">
-              <img className="w-full object-cover rounded-xl" src={plan.imgUrl} alt="" />
+              <img
+                className="w-full object-cover rounded-xl"
+                src={plan.imgUrl}
+                alt=""
+              />
               <div className="flex flex-col gap-2 items-center">
-                <h1 className="text-center font-semibold border-b-2 ">{plan.title}</h1>
+                <h1 className="text-center font-semibold border-b-2 ">
+                  {plan.title}
+                </h1>
                 <h2>{plan.format}</h2>
                 <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
                   <img className="h-8" src={buttonBg} alt="" />
-                  <button className="text-lg font-semibold absolute ">{plan.btn}</button>
+                  <button className="text-lg font-semibold absolute ">
+                    {plan.btn}
+                  </button>
                 </div>
               </div>
             </div>
