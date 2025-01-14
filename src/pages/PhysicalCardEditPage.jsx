@@ -22,8 +22,10 @@ import welcome from "../assets/images/welcome sign.webp";
 import { Download } from 'lucide-react';
 import { Rnd } from "react-rnd";
 import PdfGeneratorWaterMark from './PdfGeneratorWaterMark';
-export default function WeddingCardEditor() {
 
+export default function WeddingCardEditor() {
+  //const [draggingField, setDraggingField] = useState(null); // Field being dragged
+  const [touchOffset, setTouchOffset] = useState({ x: 0, y: 0 }); // Offset for touch
   const [selectedStickerId, setSelectedStickerId] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,6 +38,9 @@ export default function WeddingCardEditor() {
   const [selectedFont, setSelectedFont] = useState('Blade Rush');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
+  const [rotateState, setRotateState] = useState(null); // State to track rotation
+  const [initialTouchSize, setInitialTouchSize] = useState({ width: 0, height: 0 }); // Initial size of the field
+  const [touchStartCoords, setTouchStartCoords] = useState({ x: 0, y: 0 }); // Starting touch position
   const [generatePdf, setGeneratepdf] = useState(false);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
@@ -57,6 +62,28 @@ export default function WeddingCardEditor() {
   const { images: initialImages = [] } = location.state || {}; // Default to an empty array if images are not present
   const [selectedField, setSelectedField] = useState(null);
   console.log("parent stickers", stickers);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const startDrag = (clientX, clientY, id, x, y) => {
+    setIsDragging(true);
+    setDraggingField(id);
+    setPosition({ x: clientX - x, y: clientY - y });
+  };
+
+  const updateDrag = (clientX, clientY) => {
+    if (isDragging && draggingField) {
+      const newX = clientX - position.x;
+      const newY = clientY - position.y;
+      // Update the position of the field here, e.g., update state
+    }
+  };
+
+  const endDrag = () => {
+    setIsDragging(false);
+    setDraggingField(null);
+  };
+
+
 
   useEffect(() => {
     if (initialImages.length > 0) {
@@ -149,6 +176,7 @@ export default function WeddingCardEditor() {
     }
   }, [currentImageIndex]);
 
+  const [resizeState, setResizeState] = useState(null);
 
   const [draggingId, setDraggingId] = useState(null);
   const [resizingId, setResizingId] = useState(null);
@@ -184,6 +212,10 @@ export default function WeddingCardEditor() {
     setSelectedField(id);
     setDraggingField({ id, offsetX: e.clientX - x, offsetY: e.clientY - y });
   };
+
+
+
+
   const handleResizeMouseDownImage = (imageId, event) => {
     event.preventDefault(); // Prevent default browser behavior
 
@@ -495,6 +527,24 @@ export default function WeddingCardEditor() {
   */
 
   //const navigate = useNavigate();
+  // Create a custom event listener for drag and add passive: false
+
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      e.preventDefault(); // Prevent scrolling or other default behaviors
+      // Your custom drag logic
+    };
+
+    const handleTouchMove = (e) => {
+      e.preventDefault(); // Prevent default behavior (like scrolling)
+      // Your drag move logic
+    };
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
 
 
 
@@ -729,11 +779,20 @@ export default function WeddingCardEditor() {
     setShowStickerSelector(false);
   };
 
-
-
+/*
+  const updateTextField = (id, updates) => {
+    setTextFields((prevFields) =>
+      prevFields.map((field) =>
+        field.id === id ? { ...field, ...updates } : field
+      )
+    );
+  };
+  */
+  
 
 
   // Function to update text field properties
+  
   const updateTextField = (id, property, value) => {
     setTextFields(prev =>
       prev.map(textField =>
@@ -741,6 +800,7 @@ export default function WeddingCardEditor() {
       )
     );
   };
+  
 
   // Function to handle the deletion of a text field
   const handleDelete = (id) => {
@@ -1009,7 +1069,7 @@ export default function WeddingCardEditor() {
   const downloadFun = () => {
     setIsDownload(false);
   }
-  const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
   const handleDragStop = (e, id, x, y) => {
     e.preventDefault();
 
@@ -1040,15 +1100,115 @@ export default function WeddingCardEditor() {
       )
     );
   };
-  const updateFieldSize = (id, newWidth, newHeight) => {
+
+  const handleTouchStart = (e, id, x, y) => {
+    if (e.cancelable) e.preventDefault();
+    const touch = e.touches[0];
+    setDraggingField(id);
+    setTouchOffset({ x: touch.clientX - x, y: touch.clientY - y });
+  };
+  
+  const handleTouchMove = (e) => {
+    if (!draggingField) return;
+  
+    const touch = e.touches[0];
+    const newX = touch.clientX - touchOffset.x;
+    const newY = touch.clientY - touchOffset.y;
+  
+    e.preventDefault(); // Prevent screen scrolling
+    updateFieldPosition(draggingField, newX, newY);
+  };
+  
+  const handleTouchEnd = () => {
+    setDraggingField(null);
+  };
+
+  const handleResizeTouchStart = (e, id) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    setResizeState({
+      id,
+      startX: touch.clientX,
+      startY: touch.clientY,
+    });
+  };
+  const handleRotateTouchStart = (e, id) => {
+    if (e.cancelable) e.preventDefault(); // Prevent default behavior if allowed
+
+    const touch = e.touches[0];
+    const boundingRect = e.target.getBoundingClientRect();
+
+    // Calculate the center of the element
+    const centerX = boundingRect.left + boundingRect.width / 2;
+    const centerY = boundingRect.top + boundingRect.height / 2;
+
+    // Calculate the starting angle based on the touch position
+    const startAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+
+    setRotateState({ id, startAngle, centerX, centerY });
+  };
+
+
+  const handleResizeTouchMove = (e) => {
+    if (!resizeState) return; // Prevent errors if state is not set
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - resizeState.startX;
+    const deltaY = touch.clientY - resizeState.startY;
+
+    // Example logic to update field size
+    updateFieldSize(resizeState.id, deltaX, deltaY);
+
+    setResizeState({
+      ...resizeState,
+      startX: touch.clientX,
+      startY: touch.clientY,
+    });
+  };
+
+  const handleResizeTouchEnd = () => {
+    setResizeState(null); // Clear state after resize is complete
+  };
+  const updateFieldSize = (id, deltaX, deltaY) => {
     setTextFields((prevFields) =>
       prevFields.map((field) =>
         field.id === id
-          ? { ...field, width: newWidth, height: newHeight }
+          ? {
+            ...field,
+            size: Math.max(field.size + deltaY / 10, 10), // Example logic to adjust font size
+          }
           : field
       )
     );
   };
+
+
+
+  
+  const handleRotateTouchMove = (e) => {
+    if (!rotateState || e.touches.length !== 1) return; // Ensure a single touch point
+  
+    const touch = e.touches[0];
+    const { id, startAngle, centerX, centerY } = rotateState;
+  
+    // Calculate the current angle based on touch position
+    const currentAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+  
+    // Calculate the rotation difference
+    const angleDiff = currentAngle - startAngle;
+  
+    // Update the rotation angle of the text field
+    updateTextField(id, 'angle', (angleDiff * 180) / Math.PI); // Convert radians to degrees
+  };
+  
+
+
+  // Perform rotation
+  const handleRotateTouchEnd = () => {
+    setRotateState(null); // Clear the rotation state
+  };
+
+
+
 
   if (loading) return <ShimmerSkeleton />;
 
@@ -1532,328 +1692,189 @@ export default function WeddingCardEditor() {
                 </Rnd>
               ))}
 
-              {textFields.map(
-                ({
-                  id,
-                  text,
-                  x,
-                  y,
-                  size,
-                  font,
-                  fontColor,
-                  angle,
-                  isBold,
-                  isItalic,
-                  textAlign,
-                  lineHeight,
-                  letterSpacing,
-                  isUppercase,
-                  isLowercase,
-                  curveValue,
-                }) =>
-                  isTouchDevice ? (
-                    // Use RND for touch devices
-                    <div
-                      key={id}
-                      className="absolute"
-                      style={{
-                        top: `${y}px`,
-                        left: `${x}px`,
-                        fontSize: `${size}px`,
-                        fontFamily: font,
-                        color: fontColor,
-                        fontWeight: isBold ? "bold" : "normal",
-                        fontStyle: isItalic ? "italic" : "normal",
-                        letterSpacing: `${letterSpacing}px`,
-                        lineHeight: `${lineHeight}`,
-                        whiteSpace: "nowrap",
-                        overflow: "visible",
-                        textAlign: textAlign,
-                        cursor: editingField === id ? "default" : "move", // Move cursor unless editing
-                        zIndex: selectedField === id ? 10 : 1,
-                        border: selectedField === id && editingField !== id ? "2px dotted blue" : "none", // Border for selection
-                        width: "fit-content",
-                        transformOrigin: "center",
-                        transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply rotation
-                      }}
-                      onMouseDown={(e) => handleMouseDown(e, id, x, y)} // Handle dragging
-                      onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Touch dragging
-                      onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
-                    >
-                      {/* Editable Text */}
-                      {editingField === id ? (
-                        <textarea
-                          value={text}
-                          onChange={(e) => handleTextChange(id, e.target.value)} // Update text content
-                          onBlur={() => setEditingField(null)} // Exit edit mode on blur
-                          autoFocus
-                          className="bg-transparent border-none outline-none resize-none"
-                          style={{
-                            fontSize: `${size}px`,
-                            fontFamily: font,
-                            color: fontColor,
-                            fontWeight: isBold ? "bold" : "normal",
-                            fontStyle: isItalic ? "italic" : "normal",
-                            letterSpacing: `${letterSpacing}px`,
-                            lineHeight: `${lineHeight}`,
-                            whiteSpace: "nowrap",
-                            overflow: "hidden", // Prevent scrollbars
-                            textAlign: textAlign,
-                            zIndex: 11,
-                            border: "2px dotted blue", // Border for textarea when editing
-                            width: "fit-content",
-                            height: "auto", // Allow height to adjust dynamically
-                            minHeight: "auto",
-                            maxWidth: "fit-content",
-                          }}
-                          onInput={(e) => {
-                            e.target.style.height = "auto"; // Reset height
-                            e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height dynamically
-                          }}
-                          onFocus={(e) =>
-                            e.target.setSelectionRange(e.target.value.length, e.target.value.length)
-                          } // Place cursor at the end
-                        />
-                      ) : (
-                        <div
-                          onClick={() => setSelectedField(id)} // Select field on click
-                          onTouchStart={() => setSelectedField(id)} // Select field on touch
-                          style={{
-                            display: "inline-block",
-                            padding: "2px 5px",
-                            cursor: "text", // Text cursor for selection
-                          }}
-                        >
-                          {text.split("\n").map((line, index) => (
-                            <div key={index}>
-                              {line.split("").map((char, charIndex) => {
-                                const curve = curveValue || 0;
-                                const angle =
-                                  (Math.PI * curve * (charIndex - Math.floor(line.length / 2))) /
-                                  line.length;
-                                const radius = 100;
-                                return (
-                                  <span
-                                    key={charIndex}
-                                    style={{
-                                      position: "relative",
-                                      transform: `rotate(${angle}rad) translateY(-${radius}px)`,
-                                      transformOrigin: "center",
-                                    }}
-                                  >
-                                    {isUppercase
-                                      ? char.toUpperCase()
-                                      : isLowercase
-                                        ? char.toLowerCase()
-                                        : char}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          ))}
-                        </div>
-                      )}
+{textFields.map(
+  ({
+    id,
+    text,
+    x,
+    y,
+    size,
+    font,
+    fontColor,
+    angle, // Rotation
+    isBold,
+    isItalic,
+    textAlign,
+    lineHeight,
+    letterSpacing,
+    isUppercase,
+    isLowercase,
+    curveValue,
+  }) => (
+    <div
+      key={id}
+      className="absolute"
+      style={{
+        top: `${y}px`,
+        left: `${x}px`,
+        fontSize: `${size}px`,
+        fontFamily: font,
+        color: fontColor,
+        fontWeight: isBold ? "bold" : "normal",
+        fontStyle: isItalic ? "italic" : "normal",
+        letterSpacing: `${letterSpacing}px`,
+        lineHeight: `${lineHeight}`,
+        whiteSpace: "nowrap",
+        overflow: "visible",
+        textAlign: textAlign,
+        cursor: "move",
+        zIndex: selectedField === id ? 10 : 1,
+        border:
+          selectedField === id && editingField !== id
+            ? "2px dotted blue"
+            : "none", // Apply border only when not in edit mode
+        width: "fit-content",
+        transformOrigin: "center",
+        transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply Rotation
+        touchAction: "none", // Prevent scrolling on touch devices while dragging
+      }}
+      onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
+      onMouseDown={(e) => handleMouseDown(e, id, x, y)}
+      onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Updated for touch
+      onTouchMove={(e) => {
+        e.preventDefault(); // Prevent default scrolling behavior during drag
+        handleTouchMove(e); // Your existing touch move logic
+      }} 
+      onTouchEnd={handleTouchEnd} // Updated for touch
+    >
+      {/* Editable Text */}
+      {editingField === id ? (
+        <textarea
+          value={text}
+          onChange={(e) => handleTextChange(id, e.target.value)}
+          onBlur={() => setEditingField(null)} // Exit edit mode on blur
+          autoFocus
+          className="bg-transparent border-none outline-none resize-none"
+          style={{
+            fontSize: `${size}px`,
+            fontFamily: font,
+            color: fontColor,
+            fontWeight: isBold ? "bold" : "normal",
+            fontStyle: isItalic ? "italic" : "normal",
+            letterSpacing: `${letterSpacing}px`,
+            lineHeight: `${lineHeight}`,
+            whiteSpace: "nowrap",
+            overflow: "hidden", // Prevent scrollbars from appearing
+            textAlign: textAlign,
+            zIndex: selectedField === id ? 10 : 1,
+            border: "2px dotted blue", // Border for the textarea when editing
+            width: "fit-content", // Width based on text content
+            height: "auto", // Allow height to adjust according to the content
+            minHeight: "auto", // Ensure no minimum height
+            maxWidth: "fit-content", // Prevent it from growing too large
+          }}
+          onInput={(e) => {
+            e.target.style.height = "auto"; // Reset height before adjusting
+            e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
+          }}
+          onFocus={(e) =>
+            e.target.setSelectionRange(e.target.value.length, e.target.value.length)
+          } // Place cursor at the end when focused
+        />
+      ) : (
+        <div
+          style={{
+            display: "inline-block",
+            padding: "2px 5px",
+            cursor: "text",
+          }}
+        >
+          {text.split("\n").map((line, index) => (
+            <div key={index}>
+              {line.split("").map((char, charIndex) => {
+                const curve = curveValue || 0;
+                const angle =
+                  (Math.PI * curve * (charIndex - Math.floor(line.length / 2))) /
+                  line.length;
+                const radius = 100;
+                return (
+                  <span
+                    key={charIndex}
+                    style={{
+                      position: "relative",
+                      transform: `rotate(${angle}rad) translateY(-${radius}px)`,
+                      transformOrigin: "center",
+                    }}
+                  >
+                    {isUppercase
+                      ? char.toUpperCase()
+                      : isLowercase
+                      ? char.toLowerCase()
+                      : char}
+                  </span>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      )}
 
-                      {/* Resizing Handle */}
-                      {selectedField === id && (
-                        <div
-                          onMouseDown={(e) => handleResizeMouseDown(e, id)}
-                          onTouchStart={(e) => handleResizeTouchStart(e, id)}
-                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-                          style={{ transform: "translate(50%, 50%)" }}
-                        >
-                          <i className="fas fa-arrows-alt text-white text-sm"></i>
-                        </div>
-                      )}
+      {/* Resizing Handle */}
+      {selectedField === id && (
+        <div
+          onMouseDown={(e) => handleResizeMouseDown(e, id)}
+          onTouchStart={(e) => handleResizeTouchStart(e, id)} // Added for touch
+          onTouchMove={handleResizeTouchMove} // Added for touch
+          onTouchEnd={handleResizeTouchEnd} // Added for touch
+          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
+          style={{ transform: "translate(50%, 50%)" }}
+        >
+          <i className="fas fa-arrows-alt text-white text-sm"></i>
+        </div>
+      )}
 
-                      {/* Delete Button */}
-                      {selectedField === id && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDelete(id);
-                          }}
-                          onTouchEnd={(e) => {
-                            e.stopPropagation();
-                            handleDelete(id);
-                          }}
-                          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-                          style={{
-                            transform: "translate(50%, -50%)",
-                            zIndex: 20,
-                          }}
-                        >
-                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                        </button>
-                      )}
+      {/* Delete Button */}
+      {selectedField === id && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete(id);
+          }}
+          onTouchEnd={(e) => {
+            e.stopPropagation();
+            handleDelete(id);
+          }}
+          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
+          style={{
+            transform: "translate(50%, -50%)",
+            zIndex: 20,
+          }}
+        >
+          <i className="fas fa-times-circle text-red-500 text-sm"></i>
+        </button>
+      )}
 
-                      {/* Rotate Button */}
-                      {selectedField === id && (
-                        <div
-                          onMouseDown={(e) => handleRotateMouseDown(e, id)}
-                          onTouchStart={(e) => handleRotateTouchStart(e, id)}
-                          className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
-                          style={{
-                            transform: "translate(-50%, -50%)",
-                            zIndex: 20,
-                          }}
-                        >
-                          <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
-                        </div>
-                      )}
-                    </div>
+      {/* Rotate Button */}
+      {selectedField === id && (
+        <div
+          onMouseDown={(e) => handleRotateMouseDown(e, id)}
+          onTouchStart={(e) => handleRotateTouchStart(e, id)}
+          onTouchMove={handleRotateTouchMove} // Handle touch move
+          onTouchEnd={handleRotateTouchEnd} // Handle touch end
+          className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
+          style={{
+            transform: "translate(-50%, -50%)",
+            zIndex: 20,
+          }}
+        >
+          <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
+        </div>
+      )}
+    </div>
+  )
+)}
 
 
-
-                  ) : (
-                    // Existing Code for Mouse Devices
-                    <div
-                      key={id}
-                      className="absolute"
-                      style={{
-                        top: `${y}px`,
-                        left: `${x}px`,
-                        fontSize: `${size}px`,
-                        fontFamily: font,
-                        color: fontColor,
-                        fontWeight: isBold ? "bold" : "normal",
-                        fontStyle: isItalic ? "italic" : "normal",
-                        letterSpacing: `${letterSpacing}px`,
-                        lineHeight: `${lineHeight}`,
-                        whiteSpace: "nowrap",
-                        overflow: "visible",
-                        textAlign: textAlign,
-                        cursor: "move",
-                        zIndex: selectedField === id ? 10 : 1,
-                        border: selectedField === id && editingField !== id ? "2px dotted blue" : "none", // Apply border only when not in edit mode
-                        width: "fit-content",
-                        transformOrigin: "center",
-                        transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`,  // Apply Rotation
-                      }}
-                      onMouseDown={(e) => handleMouseDown(e, id, x, y)}
-                      onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Touch dragging
-                      onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
-                    >
-                      {/* Editable Text */}
-                      {editingField === id ? (
-                        <textarea
-                          value={text}
-                          onChange={(e) => handleTextChange(id, e.target.value)}
-                          onBlur={() => setEditingField(null)} // Exit edit mode on blur
-                          autoFocus
-                          className="bg-transparent border-none outline-none resize-none"
-                          style={{
-                            fontSize: `${size}px`,
-                            fontFamily: font,
-                            color: fontColor,
-                            fontWeight: isBold ? "bold" : "normal",
-                            fontStyle: isItalic ? "italic" : "normal",
-                            letterSpacing: `${letterSpacing}px`,
-                            lineHeight: `${lineHeight}`,
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",  // Prevent scrollbars from appearing
-                            textAlign: textAlign,
-                            zIndex: selectedField === id ? 10 : 1,
-                            border: "2px dotted blue", // Border for the textarea when editing
-                            width: "fit-content", // Width based on text content
-                            height: "auto", // Allow height to adjust according to the content
-                            minHeight: "auto", // Ensure no minimum height
-                            maxWidth: "fit-content", // Prevent it from growing too large
-                          }}
-                          onInput={(e) => {
-                            e.target.style.height = "auto"; // Reset height before adjusting
-                            e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
-                          }}
-                          onFocus={(e) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)} // Place cursor at the end when focused
-                        />
-                      ) : (
-                        <div
-                          style={{
-                            display: "inline-block",
-                            padding: "2px 5px",
-                            cursor: "text",
-                          }}
-                        >
-                          {text.split("\n").map((line, index) => (
-                            <div key={index}>
-                              {line.split("").map((char, charIndex) => {
-                                const curve = curveValue || 0;
-                                const angle =
-                                  (Math.PI * curve * (charIndex - Math.floor(line.length / 2))) /
-                                  line.length;
-                                const radius = 100;
-                                return (
-                                  <span
-                                    key={charIndex}
-                                    style={{
-                                      position: "relative",
-                                      transform: `rotate(${angle}rad) translateY(-${radius}px)`,
-                                      transformOrigin: "center",
-                                    }}
-                                  >
-                                    {isUppercase
-                                      ? char.toUpperCase()
-                                      : isLowercase
-                                        ? char.toLowerCase()
-                                        : char}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Resizing Handle */}
-                      {selectedField === id && (
-                        <div
-                          onMouseDown={(e) => handleResizeMouseDown(e, id)}
-                          onTouchStart={(e) => handleResizeTouchStart(e, id)}
-                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-                          style={{ transform: "translate(50%, 50%)" }}
-                        >
-                          <i className="fas fa-arrows-alt text-white text-sm"></i>
-                        </div>
-                      )}
-
-                      {/* Delete Button */}
-                      {selectedField === id && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDelete(id);
-                          }}
-                          onTouchEnd={(e) => {
-                            e.stopPropagation();
-                            handleDelete(id);
-                          }}
-                          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-                          style={{
-                            transform: "translate(50%, -50%)",
-                            zIndex: 20,
-                          }}
-                        >
-                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                        </button>
-                      )}
-
-                      {/* Rotate Button */}
-                      {selectedField === id && (
-                        <div
-                          onMouseDown={(e) => handleRotateMouseDown(e, id)}
-                          onTouchStart={(e) => handleRotateTouchStart(e, id)}
-                          className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
-                          style={{
-                            transform: "translate(-50%, -50%)",
-                            zIndex: 20,
-                          }}
-                        >
-                          <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
-                        </div>
-                      )}
-                    </div>
-                  )
-              )}
 
 
 
