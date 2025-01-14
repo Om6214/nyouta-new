@@ -57,8 +57,8 @@ const WeddingPlan = () => {
         </h1>
         <h1 className="lg:text-4xl text-3xl font-ttMedium font-bold text-amber-500">"Plan with confidence"</h1>
       </div>
-      <div className="flex border-l-8 justify-around lg:gap-[22rem] border-white">
-        <h2 className="text-sm lg:text-md w-[280px] ml-6 my-auto font-semibold">
+      <div className="flex border-l-8 justify-around lg:gap-[22rem] md:gap-48 border-white">
+        <h2 className="text-sm lg:text-md w-[280px] ml-6 md:ml-0 my-auto font-semibold">
           Not sure where to start ! Here are some steps you can take today to
           make planning your wedding as easy as possible
         </h2>
@@ -66,7 +66,7 @@ const WeddingPlan = () => {
       </div>
       </div>
       <div>
-        <div className="grid lg:grid-cols-6 grid-cols-2 gap-2 py-4">
+        <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 py-4">
           {plans.map((plan) => (
             <div className="lg:w-[220px] h-full">
               <img className="w-full object-cover rounded-xl" src={plan.imgUrl} alt="" />

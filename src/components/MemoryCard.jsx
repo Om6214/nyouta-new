@@ -23,7 +23,7 @@ const MemoryCard = () => {
           <span className="absolute lg:top-[-15px] top-[-40px] z-10 text-white text-[9rem] font-ttMedium">
             &
           </span>
-          <h1 className="font-ttMedium text-6xl z-50 font-bold text-secondary">
+          <h1 className="font-ttMedium text-6xl z-20 font-bold text-secondary">
             Save ! <br />
             <span className="pl-20">Share</span>
           </h1>

@@ -556,7 +556,7 @@ const CategoriesNavBar = () => {
                             <img
                               src={image}
                               alt={`Slide ${index + 1}`}
-                              className="h-full w-full lg:object-cover"
+                              className="h-full w-full lg:object-cor"
                             />
                           </div>
                         ))}
