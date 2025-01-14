@@ -1933,6 +1933,20 @@
     "subCategory": "Planner Books",
     "subSubCategory": "Wedding Notepad"
   },
+  {
+    "id": "127",
+    "name": "Ultimate Wedding Planner",
+    "sku": "ULTIMATE-020",
+    "image": [
+      "https://i.postimg.cc/L6xsPyGt/Template-17.png",
+      "https://i.postimg.cc/4N2JyYhw/Template-16.png"
+    ],
+    "price": 129.99,
+    "tags": ["planner", "ultimate", "wedding"],
+    "category": "Planner Books",
+    "subCategory": "Planner Books",
+    "subSubCategory": "Guest List Booklet - Best Seller"
+  },
 
   {
     "id": "128",
