@@ -19,36 +19,13 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/account"
-                  className="hover:text-white transition-colors"
-                >
-                  My Account
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="hover:text-white transition-colors"
-                >
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/contact"
                   className="hover:text-white transition-colors"
                 >
                   Contact Us
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/shipping"
-                  className="hover:text-white transition-colors"
-                >
-                  Shipping & Delivery
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/terms"
@@ -57,22 +34,7 @@ export default function Footer() {
                   Terms and Conditions
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/privacy"
-                  className="hover:text-white transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/refund"
-                  className="hover:text-white transition-colors"
-                >
-                  Cancellation and Refund
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/reviews"
@@ -101,40 +63,11 @@ export default function Footer() {
           {/* Join E-nyouta */}
           <div>
             <h2 className="text-xl font-semibold mb-4 text-white">
-              Join E-nyouta
+              Join Nyouta
             </h2>
             <ul className="space-y-2">
               <li>
-                <Link
-                  href="/vendor"
-                  className="hover:text-white transition-colors"
-                >
-                  Register As Vendor
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/memories"
-                  className="hover:text-white transition-colors"
-                >
-                  Share Memories
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/matrimonial"
-                  className="hover:text-white transition-colors"
-                >
-                  Submit Matrimonial Biodata
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/design"
-                  className="hover:text-white transition-colors"
-                >
-                  Submit Design ! Earn
-                </Link>
+                <Link>Submit form to join</Link>
               </li>
             </ul>
 
@@ -204,26 +137,6 @@ export default function Footer() {
               <div className="text-sm">
                 <p>{"Monday to Saturday 10am-5pm IST"}</p>
                 <p>Closed all Sunday & holidays</p>
-              </div>
-
-              <div className="mt-8">
-                <h2 className="text-xl font-semibold mb-4 text-white">
-                  Newsletter
-                </h2>
-                <form className="space-y-4">
-                  <input
-                    type="email"
-                    placeholder="Email*"
-                    className="w-full px-4 py-2 rounded bg-white/10 border border-amber-200/20 focus:outline-none focus:border-amber-200 text-white"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="w-full px-4 py-2 rounded bg-amber-200 text-black hover:bg-amber-300 transition-colors font-semibold"
-                  >
-                    Subscribe
-                  </button>
-                </form>
               </div>
             </div>
           </div>

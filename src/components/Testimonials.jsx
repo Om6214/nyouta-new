@@ -3,6 +3,7 @@
 import { Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
+import custAvatar from "../assets/images/customer.jpg";
 import bgImg from "../assets/images/mahal1.png";
 const testimonials = [
   {
@@ -340,7 +341,7 @@ export default function Testimonials() {
     speed: 500,
     autoplay: true,
     slidesToShow: 5,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
@@ -390,20 +391,22 @@ export default function Testimonials() {
               {testimonials.map((items) => (
                 <div>
                   <div className="flex flex-col gap-4 items-center relative font-heroFont overflow-hidden">
-                    <img
-                      src={bgImg}
-                      className="h-[350px]"
-                      alt=""
-                    />
-                    <div className=" flex flex-col gap-4 items-center absolute pt-12">
-                    <img className="rounded-full" src={items.avatar} alt="" />
-                    <div className="flex flex-col gap-3 px-4 pt-8 items-center">
-                      <p className="text-center px-">{items.content}</p>
-                      <h1 className="font-semibold bg-pink-600 px-4 text-white">{items.name}</h1>
-                      <blockquote className="text-center">
+                    <img src={bgImg} className="h-[320px]" alt="" />
+                    <div className=" flex flex-col gap-4 items-center justify-around absolute py-10 h-[350px]">
+                      <img
+                        className="rounded-full w-24"
+                        src={custAvatar}
+                        alt=""
+                      />
+                      <div className="flex flex-col gap-3 px-4 pt-8 items-center">
+                        <p className="text-center px-">{items.content}</p>
+                        <h1 className="font-semibold bg-pink-600 px-4 text-white">
+                          {items.name}
+                        </h1>
+                        {/* <blockquote className="text-center">
                         {items.role}
-                      </blockquote>
-                    </div>
+                      </blockquote> */}
+                      </div>
                     </div>
                   </div>
                 </div>

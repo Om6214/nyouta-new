@@ -1,5 +1,10 @@
 import React from "react";
 import giftImg from "../assets/images/gift.png";
+import giftCard from "../assets/images/featured/gift.jpg";
+import greetingCard from "../assets/images/featured/greeting.jpg";
+import luggageCard from "../assets/images/featured/luggage.jpg";
+import roomCard from "../assets/images/featured/room.jpg";
+import thankyouCard from "../assets/images/featured/thankyou.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,31 +13,31 @@ import buttonBg from "../assets/images/08.png";
 const items = [
     {
         name: 'Room Itinerary',
-        imgURL: giftImg
+        imgURL: roomCard
     },
     {
         name: 'Thank You Cards',
-        imgURL: giftImg
+        imgURL: thankyouCard
     },
     {
         name: 'Table Itinerary',
-        imgURL: giftImg
+        imgURL: roomCard
     },
     {
-        name: 'gift Stickers',
-        imgURL: giftImg
+        name: 'Gift Stickers',
+        imgURL: giftCard
     },
     {
         name: 'Luggage Tags',
-        imgURL: giftImg
+        imgURL: luggageCard
     },
     {
         name: 'Event Cards',
-        imgURL: giftImg
+        imgURL: roomCard
     },
     {
         name: 'Greetings',
-        imgURL: giftImg
+        imgURL: greetingCard
     },
 ]
 
@@ -83,11 +88,11 @@ const CategoryFeat = () => {
       <Slider {...settings}>
         {items.map((item) => (
             <div>
-                <div className="flex flex-col items-center bg-blue-100 pb-4 px-4 rounded-2xl">
-                <img src={item.imgURL} alt="" />
-                <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
-                  <img className="" src={buttonBg} alt="" />
-                  <button className="text-lg font-semibold  text-white absolute">{item.name}</button>
+                <div className="flex flex-col items-center bg-blue-100 rounded-2xl">
+                <img className="h-44 w-full rounded-t-2xl" src={item.imgURL} alt="" />
+                <div className="relative flex flex-col items-center py-3 hover:translate-x-2 duration-300">
+                  <img className="h-6" src={buttonBg} alt="" />
+                  <button className="text-md font-semibold  text-white absolute">{item.name}</button>
                 </div>
                 </div>
             </div>

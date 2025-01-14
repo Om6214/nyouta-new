@@ -83,19 +83,10 @@ const WeddingWebsiteUrl = () => {
   return (
     <div>
       <div className="lg:mx-24 mx-4 mt-2">
-        <motion.div
-          initial={{ opacity: 0, y: -100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.8 }}
-        >
+        <motion.div>
           <img className="h-[350px] w-full" src={wedBg} alt="" />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.8 }}
-          className="flex font-avalonN gap-2 text-gray-600 font-semibold items-center justify-center border-t-2 border-b-2 my-2 border-gray-600"
-        >
+        <motion.div className="flex font-avalonN gap-2 text-gray-600 font-semibold items-center justify-center border-t-2 border-b-2 my-2 border-gray-600">
           <h1>Sort By</h1>
           <select name="" id="" className="border-none">
             <option value="">Trending</option>
@@ -104,12 +95,7 @@ const WeddingWebsiteUrl = () => {
             <option value="">Hot</option>
           </select>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.8 }}
-          className="flex flex-col gap-6"
-        >
+        <motion.div className="flex flex-col gap-6">
           <div className="mt-4">
             <h1 className="text-4xl text-secondary font-avalonN">
               Choose Your Designs Here...

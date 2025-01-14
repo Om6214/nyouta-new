@@ -176,7 +176,7 @@ export default function HeroSlider() {
               Create your free wedding website and share all the relevant
               details about your celebration with your guests.
             </h4>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center flex-col sm:flex-row gap-4">
               <img className="h-44" src={webImg} alt="" />
               <img className="h-24" src={freeImg} alt="" />
             </div>
