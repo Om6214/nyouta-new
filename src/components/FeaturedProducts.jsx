@@ -42,6 +42,15 @@ export default function FeaturedProducts() {
         },
       },
       {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          dots: false,
+        },
+      },
+      {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
@@ -146,23 +155,23 @@ export default function FeaturedProducts() {
                     <img src={cardImg} className="drop-shadow-[0_0_7px_gray]" alt="" />
                     
                   
-                  <div className="px-4 pt-20 absolute font-heroFont flex flex-col  justify-around">
+                  <div className="px-4 pt-20 absolute font-heroFont flex flex-col gap-1 justify-around">
                   <img
                       src={product?.image[0] || placeholder}
                       alt={product?.name}
-                      className="object-cover w-full h-[130px] rounded-t-lg"
+                      className="object-cover w-full h-[130px] lg:h-[130px] md:h-[100px] rounded-t-lg"
                     />
                     <h1
-                      className="font-semibold text-xl text-primary font-heroFont"
+                      className="font-semibold lg:text-xl md:text-lg text-md text-primary font-heroFont"
                     >
                       {product?.name}
                     </h1>
                     <h3
-                      className="text-md font-semibold text-yhird font-heroFont"
+                      className="text-md md:text-sm lg:text-md font-semibold text-yhird font-heroFont"
                     >
                       {product?.subCategory}
                     </h3>
-                    <div className="flex items-baseline gap-4">
+                    <div className="flex items-baseline lg:gap-4 md:gap-2">
                       <span
                         className="text-xl font-bold text-gray-900"
                     
