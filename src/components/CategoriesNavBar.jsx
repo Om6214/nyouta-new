@@ -15,15 +15,18 @@ import i6 from '../assets/images/Navbar_Planner_Header/06.jpg'
 const CategoriesNavBar = () => {
   const { pageName } = useParams();
 
+  
+  
+  
   const datafile = {
     "print invitations": {
 
-      Title:"Print Invitations",
+      Title: "Print Invitations",
       Description1: "Design and print stunning wedding invitations.",
       Description: "Design and print stunning wedding invitations that perfectly capture the essence of your special day. Our premium collection offers sophisticated designs and high-quality materials to create memorable announcements that will set the tone for your celebration.",
-      
+
       Details1: "Our Print Invitations service combines artistry with exceptional quality to deliver wedding stationery that exceeds your expectations. We understand that your wedding invitations are the first glimpse guests receive of your celebration, which is why we offer comprehensive customization options and expert guidance throughout the design process.",
-      
+
 
       Details2: [
         "Choose from a wide range of card styles, colors, and sizes.",
@@ -39,13 +42,13 @@ const CategoriesNavBar = () => {
 
     "e-invitations": {
 
-      Title:"E-Invitations",
+      Title: "E-Invitations",
       Description1: "Create and send digital invitations with ease.",
 
       Description: "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
-      
+
       Details1: "Experience the future of wedding invitations with our comprehensive digital platform that revolutionizes how you connect with your guests. Our E-Invitation service combines stunning visual design with smart features to create an engaging and interactive experience that makes planning your special day easier than ever.",
-      
+
       Details2: [
         "Create personalized e-invitations with stunning designs.",
         "Easily share invitations via email, social media, or messaging apps.",
@@ -61,12 +64,12 @@ const CategoriesNavBar = () => {
     "photo books": {
 
 
-      Title:"Photo Books",
+      Title: "Photo Books",
       Description: "Transform your precious wedding memories into elegant, professionally crafted photo books that tell your unique love story. Our premium photo book service combines cutting-edge printing technology with artistic design to create stunning keepsakes that will preserve your special moments for generations to come.",
-          Description1: "Nyouta’s photo books are a sleek and modern version of the old school ‘Photo albums’.",
+      Description1: "Nyouta’s photo books are a sleek and modern version of the old school ‘Photo albums’.",
 
       Details1: "Discover the art of storytelling through our meticulously designed photo books that capture every beautiful moment of your wedding journey. Our Personalised Photobooks service offers an exceptional combination of professional design expertise and superior printing quality to create timeless albums that showcase your memories in their best light.",
-      
+
       Details2: [
         "Nyouta's photo books are a sleek and modern way to preserve your wedding memories.",
         "Create custom layouts with your favorite wedding photos.",
@@ -80,7 +83,7 @@ const CategoriesNavBar = () => {
     },
 
     "itinerary": {
-      Title:"Itinerary",
+      Title: "Itinerary",
       Description: "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
       Description1: "Create detailed travel itineraries for your trips.",
       Details1: "Transform your wedding timeline into an engaging and informative guide that keeps your guests informed and excited about every planned moment. Our Wedding Itineraries service combines practical organization with beautiful design to create comprehensive schedules that enhance the experience for everyone involved in your celebration.",
@@ -99,11 +102,11 @@ const CategoriesNavBar = () => {
 
     "calendars 2025": {
 
-      Title:"calendars 2025",
+      Title: "calendars 2025",
       Description: "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
       Description1: "Design and print personalized calendars for 2025.",
       Details1: "Embrace the excitement of your upcoming wedding with our beautifully designed 2025 calendars that transform the countdown to your special day into a memorable experience. Our Wedding Calendars service offers a perfect blend of practical planning tools and personalized design elements to help you track and celebrate every moment leading up to your wedding.",
-      
+
 
       Details2: [
         "Count down to your wedding day with a stylish and personalized calendar.",
@@ -119,12 +122,12 @@ const CategoriesNavBar = () => {
 
     "free greetings": {
 
-      Title:"free greetings",
+      Title: "free greetings",
       Description: "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
       Description1: "Send free digital greeting cards to your loved ones."
-,
+      ,
       Details1: "Discover the perfect way to share your wedding joy with our comprehensive collection of digital greetings that combine elegant design with heartfelt sentiment. Our Free Wedding Greetings service provides a sophisticated platform for expressing your happiness and connecting with loved ones through beautifully crafted digital messages.",
-      
+
 
       Details2: [
         "Choose from a variety of beautiful and heartfelt wedding greeting cards.",
@@ -140,12 +143,12 @@ const CategoriesNavBar = () => {
 
     "guest surprising": {
 
-      Title:"guest surprising",
+      Title: "guest surprising",
       Description: "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
       Description1: "Find unique and memorable ways to surprise your guests."
-,
+      ,
       Details1: "Elevate your wedding celebration with our creative guest experience services that transform ordinary moments into extraordinary memories. Our Guest Surprising Ideas program offers a carefully curated selection of unique entertainment options, thoughtful gestures, and unexpected delights that will leave a lasting impression on everyone who shares in your special day.",
-      
+
 
       Details2: [
         "Discover creative and memorable ways to welcome and entertain your guests.",
@@ -161,12 +164,12 @@ const CategoriesNavBar = () => {
 
     "planner books": {
 
-      Title:"planner books",
+      Title: "planner books",
       Description: "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
       Description1: "Organize your life with our stylish and functional planner books."
-,
+      ,
       Details1: "Experience stress-free wedding planning with our meticulously designed planner books that guide you through every aspect of creating your perfect celebration. Our Wedding Planner Books service provides comprehensive planning tools wrapped in elegant design, ensuring you have everything you need to coordinate your dream wedding with confidence and style.",
-      
+
 
       Details2: [
         "Essential tools for planning every aspect of your wedding.",
@@ -181,11 +184,11 @@ const CategoriesNavBar = () => {
     },
 
     "e shop": {
-      Title:"e shop",
+      Title: "e shop",
       Description: "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
       Description1: "Browse and shop for a wide range of products online.",
       Details1: "Welcome to your ultimate wedding planning destination, where finding the perfect items for your special day is both enjoyable and convenient. Our E-Shop combines an extensive selection of premium wedding products with exceptional customer service to ensure you have everything you need to create your dream celebration.",
-      
+
 
       Details2: [
         "Browse a wide selection of wedding decorations, favors, and accessories.",
@@ -202,7 +205,7 @@ const CategoriesNavBar = () => {
 
 
 
-  const images = [i1,i2,i3,i4,i5,i6 ];
+  const images = [i1, i2, i3, i4, i5, i6];
 
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -252,7 +255,7 @@ const CategoriesNavBar = () => {
       Description1: "Create and send digital invitations with ease.",
 
       Description: "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
-     subCategory: [
+      subCategory: [
 
         {
           subTitle: "Wedding Invitations",
@@ -316,8 +319,8 @@ const CategoriesNavBar = () => {
 
       Description1: "Create detailed travel itineraries for your trips.",
 
-       Description: "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
- subCategory: [
+      Description: "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
+      subCategory: [
 
         {
           subTitle: "Wedding Itinerary",
@@ -351,7 +354,7 @@ const CategoriesNavBar = () => {
 
       Description1: "Design and print personalized calendars for 2025.",
 
-          Description: "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
+      Description: "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
 
       subCategory: [
         {
@@ -410,8 +413,8 @@ const CategoriesNavBar = () => {
       title: "Guest Surprising",
       url: "/guest-surprising",
       Description1: "Find unique and memorable ways to surprise your guests.",
-       Description: "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
-       subCategory: [
+      Description: "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
+      subCategory: [
 
         {
           subTitle: "Newspaper",
@@ -427,31 +430,31 @@ const CategoriesNavBar = () => {
       title: "Planner Books",
       url: "/planner-books",
 
-     Description: "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
-     Description1: "Organize your life with our stylish and functional planner books.",
-     subCategory: [
+      Description: "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
+      Description1: "Organize your life with our stylish and functional planner books.",
+      subCategory: [
 
         {
           subTitle: "Wedding Management",
           imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
-          url:"e/nav/Planner Books/Planner Books/Wedding Management"
+          url: "e/nav/Planner Books/Planner Books/Wedding Management"
         }, {
           subTitle: "Guest Management",
           imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
-          url:"e/nav/Planner Books/Planner Books/Guest Management"
+          url: "e/nav/Planner Books/Planner Books/Guest Management"
         }, {
           subTitle: "Wedding Notepad",
           imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
-          url:"e/nav/Planner Books/Planner Books/Wedding Notepad"
+          url: "e/nav/Planner Books/Planner Books/Wedding Notepad"
         }, {
           subTitle: "Guest List Booklet - Best Seller",
           imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
-          url:"e/nav/Planner Books/Planner Books/Guest List Booklet - Best Seller"
+          url: "e/nav/Planner Books/Planner Books/Guest List Booklet - Best Seller"
         },
         {
           subTitle: "Free Printables",
           imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
-          url:"e/nav/planner books/Free Printable/Wedding Guest List-PDF"
+          url: "e/nav/planner books/Free Printable/Wedding Guest List-PDF"
         },
       ],
     },
@@ -493,30 +496,30 @@ const CategoriesNavBar = () => {
   // console.log(DetailContent);
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  
-    useEffect(() => {
-      console.log("rendered");
-      const interval = setInterval(() => {
-        setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
-      }, 5000); // Change slide every 5 seconds
-  
-      return () => clearInterval(interval);
-    }, []);
-  
-    const goToSlide = (index) => {
-      setCurrentSlide(index);
-    };
-  
-    const goToPrevSlide = () => {
-      setCurrentSlide(
-        (prevSlide) => (prevSlide - 1 + images.length) % images.length
-      );
-    };
-  
-    const goToNextSlide = () => {
+
+  useEffect(() => {
+    console.log("rendered");
+    const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
-    };
-  
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide(
+      (prevSlide) => (prevSlide - 1 + images.length) % images.length
+    );
+  };
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
+  };
+
 
 
   return (
@@ -544,79 +547,77 @@ const CategoriesNavBar = () => {
 
               {/* Right Section */}
               <div className="relative  col-span-2">
-              <div className="lg:w-full w-full">
-            <motion.div className="relative h-[380px]  rounded-xl overflow-hidden">
-                        {images.map((image, index) => (
-                          <div
-                            key={index}
-                            className={`absolute inset-0 transition-opacity duration-1000 ${
-                              index === currentSlide ? "opacity-100" : "opacity-0"
+                <div className="lg:w-full w-full">
+                  <motion.div className="relative h-[380px]  rounded-xl overflow-hidden">
+                    {images.map((image, index) => (
+                      <div
+                        key={index}
+                        className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
+                          }`}
+                      >
+                        <img
+                          src={image}
+                          alt={`Slide ${index + 1}`}
+                          className="h-full w-full lg:object-cor"
+                        />
+                      </div>
+                    ))}
+
+                    <button
+                      onClick={goToPrevSlide}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
+                      aria-label="Previous slide"
+                    >
+                      <svg
+                        className="h-6 w-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </button>
+
+                    <button
+                      onClick={goToNextSlide}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
+                      aria-label="Next slide"
+                    >
+                      <svg
+                        className="h-6 w-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+
+                    <div className="absolute bottom-4 left-1/2  flex -translate-x-1/2 space-x-2">
+                      {images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => goToSlide(index)}
+                          className={`h-3 w-3 rounded-full m-3 ${index === currentSlide ? "bg-white" : "bg-white/50"
                             }`}
-                          >
-                            <img
-                              src={image}
-                              alt={`Slide ${index + 1}`}
-                              className="h-full w-full lg:object-cor"
-                            />
-                          </div>
-                        ))}
-            
-                        <button
-                          onClick={goToPrevSlide}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
-                          aria-label="Previous slide"
-                        >
-                          <svg
-                            className="h-6 w-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M15 19l-7-7 7-7"
-                            />
-                          </svg>
-                        </button>
-            
-                        <button
-                          onClick={goToNextSlide}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white"
-                          aria-label="Next slide"
-                        >
-                          <svg
-                            className="h-6 w-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </button>
-            
-                        <div className="absolute bottom-4 left-1/2  flex -translate-x-1/2 space-x-2">
-                          {images.map((_, index) => (
-                            <button
-                              key={index}
-                              onClick={() => goToSlide(index)}
-                              className={`h-3 w-3 rounded-full m-3 ${
-                                index === currentSlide ? "bg-white" : "bg-white/50"
-                              }`}
-                              aria-label={`Go to slide ${index + 1}`}
-                            />
-                          ))}
-                        </div>
-                      </motion.div>
-          </div>
+                          aria-label={`Go to slide ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -641,10 +642,10 @@ const CategoriesNavBar = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {content.subCategory.map((item) => (
                 <Link
-      to={item.url ? `/${item.url}` : `${item.subTitle}`}
-      key={item.id}
-      className="block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
-    >
+                  to={item.url ? `/${item.url}` : `${item.subTitle}`}
+                  key={item.id}
+                  className="block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
+                >
                   <img
                     src={item.imgUrl}
                     alt={item.subTitle}

@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import axios from "axios";
 import { Zoom, Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,8 +13,24 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 export default function CategoryLabel() {
 
-
+  async function fetchProducts() {
+    const url = "https://nyouta.onrender.com/api/v1/products/products";
   
+    try {
+      const response = await axios.get(url);
+      console.log(response.data); // Handle the fetched data
+      console.log("response",response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  }
+  
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+  
+  console.log("filteredItems",filteredItems)
   const { pageName, "*": path } = useParams();
   const navigate = useNavigate();
   const formatCategoryName = (name) => {
@@ -145,6 +162,7 @@ export default function CategoryLabel() {
         </div>
       )}
       <div className="px-[6%] pt-[1%]">
+
         <div className="font-semibold text-[4vh]">Related Items</div>
         <div className="font-normal md:text-[2.2vh] text-[2vw]">
           {/* Create personalized gifts for Kids, Friends, Loved ones and give them the your attention of love. */}
