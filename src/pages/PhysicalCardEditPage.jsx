@@ -31,7 +31,9 @@ export default function WeddingCardEditor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newText, setNewText] = useState('');
   const [sizeValue, setSizeValue] = useState(30);
-  const [textFields, setTextFields] = useState([]);
+  const [textFields, setTextFields] = useState([
+  
+  ]);
   const [dragging, setDragging] = useState(false);
   const [editingField, setEditingField] = useState(null);
   const [isFontModalOpen, setIsFontModalOpen] = useState(false);
@@ -119,7 +121,7 @@ export default function WeddingCardEditor() {
       setCurrentImageIndex((prevIndex) => prevIndex - 1);
     }
   };
-
+  
   const handleAddNewText = () => {
     const newTextField = {
       id: Date.now(), // Unique ID based on timestamp
@@ -135,9 +137,9 @@ export default function WeddingCardEditor() {
       lineHeight: 1.5,
       letterSpacing: 1,
     };
-
     setTextFields([...textFields, newTextField]);
   };
+ 
   const handleImageClick = (id) => {
     // Set the selected image when clicked
     setSelectedImageId(id);

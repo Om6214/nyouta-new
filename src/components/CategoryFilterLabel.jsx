@@ -172,7 +172,8 @@ export default function CategoryFilterLabel() {
         <div className="pt-5 md:max-w-[95%] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredResponseData.map((filteredItem) => (
-              <Link to={`/product/${filteredItem.id}`} state={{ product: filteredItem }} key={filteredItem.id}>
+              
+              <Link  state={{ product: filteredItem }} key={filteredItem.id}>
                 <div className="relative w-full h-[40vh]">
                   <img
                     src={filteredItem.image[0]}

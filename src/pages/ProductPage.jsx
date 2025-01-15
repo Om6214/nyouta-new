@@ -19,7 +19,7 @@ export default function ProductPage() {
   const [warning, setWarning] = useState("");
   const [addToCartLoading, setAddToCartLoading] = useState(false);
   
-  const types = ["Pdf Invitation", "Video Invitation"];
+  const types = ["Pdf Invitation"];
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
 
@@ -40,9 +40,7 @@ export default function ProductPage() {
       // Append the selected type to the route
       if (selectedType === "Pdf Invitation") {
         route += "-physical-card";
-      } else if (selectedType === "Video Invitation") {
-        route += "-digital-card";
-      }
+      } 
 
       // Pass the entire array of images to the next page
       navigate(route, {
