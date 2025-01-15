@@ -15,10 +15,9 @@ export default function CategoryLabel() {
 
   async function fetchProducts() {
     const url = "https://nyouta.onrender.com/api/v1/products/products";
-  
     try {
       const response = await axios.get(url);
-      console.log(response.data); // Handle the fetched data
+      console.log(response.data);
       console.log("response",response.data);
       return response.data;
     } catch (error) {
@@ -30,7 +29,7 @@ export default function CategoryLabel() {
     fetchProducts();
   }, []);
   
-  console.log("filteredItems",filteredItems)
+ // console.log("filteredItems",filteredItems)
   const { pageName, "*": path } = useParams();
   const navigate = useNavigate();
   const formatCategoryName = (name) => {

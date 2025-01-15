@@ -14,9 +14,6 @@ import i6 from '../assets/images/Navbar_Planner_Header/06.jpg'
 
 const CategoriesNavBar = () => {
   const { pageName } = useParams();
-
-  
-  
   
   const datafile = {
     "print invitations": {
@@ -203,7 +200,7 @@ const CategoriesNavBar = () => {
     },
   };
 
-
+  
 
   const images = [i1, i2, i3, i4, i5, i6];
 
@@ -436,24 +433,24 @@ const CategoriesNavBar = () => {
 
         {
           subTitle: "Wedding Management",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847773/phewexsfhaijro3dzxd8.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Management"
         }, {
           subTitle: "Guest Management",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847362/n2ppyskd7modih1qznm3.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Guest Management"
         }, {
           subTitle: "Wedding Notepad",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Notepad"
         }, {
           subTitle: "Guest List Booklet - Best Seller",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848346/quntb8uznw1eg81xkrff.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Guest List Booklet - Best Seller"
         },
         {
           subTitle: "Free Printables",
-          imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848578/uenbld7atg2lqufivgyc.jpg", // Example image
           url: "e/nav/planner books/Free Printable/Wedding Guest List-PDF"
         },
       ],
