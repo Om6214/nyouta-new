@@ -64,7 +64,7 @@ const Trending = () => {
           <Slider {...settings}>
             {products.slice(100, 120).map((product) => (
               <div className="lg:h-[250px] h-[300px]">
-                <div className="relative flex flex-col items-center justify-center">
+                <div className="relative flex flex-col items-center justify-center font-avalonN">
                   <img className="" src={bgImg} alt="" />
                   <div className="absolute flex flex-col items-center font-avalonN">
                     <img className="lg:h-[170px] h-[150px] w-full object-cover" src={product.image[0]} alt="" />
