@@ -46,8 +46,8 @@ const CategoryFeat = () => {
         infinite: true,
         speed: 500,
         swipeToSlide: true,
-        slidesToShow: 5,
-        // slidesToScroll: 4,
+        slidesToShow: 6,
+        slidesToScroll: 1,
         initialSlide: 0,
         responsive: [
           {
@@ -56,6 +56,14 @@ const CategoryFeat = () => {
               slidesToShow: 5,
               slidesToScroll: 1,
               infinite: true,
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              initialSlide: 2
             }
           },
           {
@@ -89,7 +97,7 @@ const CategoryFeat = () => {
         {items.map((item) => (
             <div>
                 <div className="flex flex-col items-center bg-blue-100 rounded-2xl">
-                <img className="h-44 w-full rounded-t-2xl" src={item.imgURL} alt="" />
+                <img className="h-40 object-cover w-full rounded-t-2xl" src={item.imgURL} alt="" />
                 <div className="relative flex flex-col items-center py-3 hover:translate-x-2 duration-300">
                   <img className="h-6" src={buttonBg} alt="" />
                   <button className="text-md font-semibold  text-white absolute">{item.name}</button>

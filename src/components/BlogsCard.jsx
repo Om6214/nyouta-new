@@ -29,8 +29,8 @@ const BlogsCard = () => {
   return (
     <div className='px-4'>
         <div className='pb-6 flex flex-col gap-3'>
-        <h1 className='text-4xl lg:text-5xl font-bold font-avalonN text-secondary text-center'>Ideas and Inspiration</h1>
-        <h1 className='text-4xl text-secondary text-center font-avalonN'>"Ideas Make Real, Memories Make Forever"</h1>
+        <h1 className='text-3xl lg:text-5xl font-bold font-avalonN text-secondary text-center'>Ideas and Inspiration</h1>
+        <h1 className='text-3xl text-secondary text-center font-avalonN'>"Ideas Make Real, Memories Make Forever"</h1>
         </div>
         <div className='grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-2 font-heroFont'>
             {blogsTitle.map((blog, index) => (
@@ -39,7 +39,7 @@ const BlogsCard = () => {
                     <div className='flex flex-col h-full items-start justify-between px-8 py-4 gap-2'>
                         <h1 className='text-2xl lg:text-2xl font-bold'>{blog.title}</h1>
                         <p>{blog.description}</p>
-                        <div className=' relative flex flex-col items-center justify-center hover:translate-x-2 duration-300 ease-in-out'>
+                        <div className=' relative flex flex-col items-center justify-center'>
                             <img className='h-8' src={buttonBg} alt="" />
                             <a className='flex items-center text-white absolute gap-2 font-bold ' href="#">Read More <span><SquareArrowOutUpRight /></span></a>
                         </div>

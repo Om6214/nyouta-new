@@ -114,6 +114,79 @@ const navItems = [
     ],
   },
   {
+    label: "Itinerary",
+    url: "/nav/itinerary",
+    children: [
+      {
+        label: "Wedding Itinerary",
+        Filters: [
+          { a: "Room Itinerary " },
+          { a: "Check-in Itinerary " },
+          { a: "Room Key Enevelop " },
+          { a: "Thank You Cards " },
+          { a: "Wedding Menu " },
+          { a: "Table Itinerary " },
+          { a: "Dining Table Mats " },
+        ],
+      },
+      {
+        label: "Stickers",
+        Filters: [
+          { a: "Guest Name Stickers " },
+          { a: "Gift Box Sticker " },
+          { a: "Vehicle Stickers " },
+          { a: "Designer Stickers " },
+          { a: "Vintage Stickers " },
+        ],
+      },
+      {
+        label: "Tags / Badges",
+        Filters: [
+          { a: "Luggage Tag " },
+          { a: "Door Handle Tag " },
+          { a: "Gift Tag " },
+          { a: "Parking Tags " },
+          { a: "Wedding Bedges " },
+        ],
+      },
+      {
+        label: "Welcome Signages",
+        Filters: [
+          { a: "Wedding Ceremony " },
+          { a: "Haldi Ceremony " },
+          { a: "Mehandi Ceremony " },
+          { a: "Sangeet Ceremony " },
+          { a: "Direction Signage " },
+          { a: "Engagement Ceremony " },
+          { a: "Anniversary Ceremony " },
+          { a: "Lohri Party " },
+          { a: "Halloween Party " },
+          { a: "Birthday Party " },
+          { a: "Celebration Party " },
+        ],
+      },
+      {
+        label: "Accessories",
+        Filters: [
+          { a: "Party Dangler " },
+          { a: "Coasters " },
+          { a: "Paper Napkins " },
+          { a: "Event Banner " },
+          { a: "Face Mask " },
+          { a: "Funny Poster " },
+        ],
+      },
+      {
+        label: "Games",
+        Filters: [
+          { a: "Playing Cards " },
+          { a: "Puzzle Games " },
+          { a: "Fun Games " },
+        ],
+      },
+    ],
+  },
+  {
     label: "Photo Books",
     url: "/nav/photo books",
     children: [
@@ -160,79 +233,6 @@ const navItems = [
           { a: "Engagement Photobook " },
           { a: "Anniversary Photobook " },
           { a: "Birthday Photobook " },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Itinerary",
-    url: "/nav/itinerary",
-    children: [
-      {
-        label: "Wedding Itinerary",
-        Filters: [
-          { a: "Room Itinerary " },
-          { a: "Check-in Itinerary " },
-          { a: "Room Key Enevelop " },
-          { a: "Thank You Cards " },
-          { a: "Wedding Menu " },
-          { a: "Table Itinerary " },
-          { a: "Dining Table Mats " },
-        ],
-      },
-      {
-        label: "Stickers",
-        Filters: [
-          { a: "Guest Name Stickers " },
-          { a: "Gift Box Sticker " },
-          { a: "Vehicle Stickers " },
-          { a: "Designer Stickers " },
-          { a: "Vintage Stickers " },
-        ],
-      },
-      {
-        label: "Tags / Bedges",
-        Filters: [
-          { a: "Luggage Tag " },
-          { a: "Door Handle Tag " },
-          { a: "Gift Tag " },
-          { a: "Parking Tags " },
-          { a: "Wedding Bedges " },
-        ],
-      },
-      {
-        label: "Welcome Signages",
-        Filters: [
-          { a: "Wedding Ceremony " },
-          { a: "Haldi Ceremony " },
-          { a: "Mehandi Ceremony " },
-          { a: "Sangeet Ceremony " },
-          { a: "Direction Signage " },
-          { a: "Engagement Ceremony " },
-          { a: "Anniversary Ceremony " },
-          { a: "Lohri Party " },
-          { a: "Halloween Party " },
-          { a: "Birthday Party " },
-          { a: "Celeration Party " },
-        ],
-      },
-      {
-        label: "Accessories",
-        Filters: [
-          { a: "Party Dangler " },
-          { a: "Coasters " },
-          { a: "Paper Napkins " },
-          { a: "Event Banner " },
-          { a: "Face Mask " },
-          { a: "Funny Poster " },
-        ],
-      },
-      {
-        label: "Games",
-        Filters: [
-          { a: "Playing Cards " },
-          { a: "Puzzle Games " },
-          { a: "Fun Games " },
         ],
       },
     ],
@@ -292,6 +292,65 @@ const navItems = [
     ],
   },
   {
+    label: "Planner Books",
+    url: "/nav/planner books",
+    children: [
+      {
+        label: "Wedding Management",
+      },
+      {
+        label: "Guest Management",
+      },
+      {
+        label: "Wedding Notepad",
+      },
+      {
+        label: "Guest List Booklet - Best Seller",
+      },
+      //   Filters: [
+      //     { alabel: "Wedding Management" },
+      //     { a: "Guest Management" },
+      //     { a: "Wedding Notepad" },
+      //     { a: "Guest List Booklet - Best Seller" },
+      //   ],
+
+      {
+        label: "Free Printable",
+        Filters: [
+          { a: "Wedding Guest List-PDF" },
+          { a: "Wedding Guest List - XLS" },
+          { a: "Wedding Notepad - PDF" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Guest Surprising",
+    url: "/nav/guest surprising",
+    children: [
+      {
+        label: "Newspapers",
+        Filters: [
+          { a: "Wedding Newspaper" },
+          { a: "Engagement Newspaper" },
+          { a: "Birthday Newspaper" },
+          { a: "Special Event" },
+          { a: "E-Paper" },
+        ],
+      },
+      {
+        label: "Magazine",
+        Filters: [
+          { a: "Wedding Magazine" },
+          { a: "Engagement Magazine" },
+          { a: "Birthday Magazine" },
+          { a: "Special Event" },
+          { a: "E-Magazine" },
+        ],
+      },
+    ],
+  },
+  {
     label: "Free Greetings",
     url: "/nav/free greetings",
     children: [
@@ -336,58 +395,7 @@ const navItems = [
       },
     ],
   },
-  {
-    label: "Guest Surprising",
-    url: "/nav/guest surprising",
-    children: [
-      {
-        label: "Newspapers",
-        Filters: [
-          { a: "Wedding Newspaper" },
-          { a: "Engagement Newspaper" },
-          { a: "Birthday Newspaper" },
-          { a: "Special Event" },
-          { a: "E-Paper" },
-        ],
-      },
-      {
-        label: "Magazine",
-        Filters: [
-          { a: "Wedding Magazine" },
-          { a: "Engagement Magazine" },
-          { a: "Birthday Magazine" },
-          { a: "Special Event" },
-          { a: "E-Magazine" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Planner Books",
-    url: "/nav/planner books",
-    children: [
-      {
-        label: "Wedding Management",},{
-        label: "Guest Management",},{
-        label: "Wedding Notepad",},{
-        label: "Guest List Booklet - Best Seller",},
-      //   Filters: [
-      //     { alabel: "Wedding Management" },
-      //     { a: "Guest Management" },
-      //     { a: "Wedding Notepad" },
-      //     { a: "Guest List Booklet - Best Seller" },
-      //   ],
-     
-      {
-        label: "Free Printable",
-        Filters: [
-          { a: "Wedding Guest List-PDF" },
-          { a: "Wedding Guest List - XLS" },
-          { a: "Wedding Notepad - PDF" },
-        ],
-      },
-    ],
-  },
+
   {
     label: "E-Shop",
     url: "/nav/e shop",
@@ -443,7 +451,7 @@ export default function MainNav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -597,7 +605,7 @@ export default function MainNav() {
 
             {/* Mobile Drawer Button */}
             <button
-              className="md:hidden p-2"
+              className="lg:hidden p-2"
               onClick={() => setIsDrawerOpen(true)}
             >
               <Menu size={27} />
@@ -613,7 +621,7 @@ export default function MainNav() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0.8, x: 300 }}
               transition={{ duration: 0.3, ease: "linear" }}
-              className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden"
+              className="fixed inset-0 z-50 bg-black bg-opacity-50 lg:hidden"
             >
               <div className="absolute right-0 h-full w-64 bg-white p-4">
                 <button
@@ -688,14 +696,17 @@ export default function MainNav() {
                             className="relative"
                           >
                             <Link
-  to={item.url === "/nav/planner books" && child.label!="Free Printable"
-    ? `e${item.url}/Planner%20Books/${child.label}`
-    : `${item.url}/${child.label}`}
-  className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
->
-  {child.label}
-  {console.log(item.url)}
-</Link>
+                              to={
+                                item.url === "/nav/planner books" &&
+                                child.label != "Free Printable"
+                                  ? `e${item.url}/Planner%20Books/${child.label}`
+                                  : `${item.url}/${child.label}`
+                              }
+                              className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
+                            >
+                              {child.label}
+                              {console.log(item.url)}
+                            </Link>
                             <AnimatePresence>
                               {child.Filters &&
                                 activeChildDropdown === childIndex && (

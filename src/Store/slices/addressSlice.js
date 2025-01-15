@@ -101,7 +101,7 @@ const addressSlice = createSlice({
             .addCase(addAddress.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-                console.log(action.payload);
+                // console.log(action.payload);
                 toast.error(action.payload.message);
             })
             .addCase(updateAddress.pending, (state) => {

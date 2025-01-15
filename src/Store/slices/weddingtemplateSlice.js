@@ -10,12 +10,12 @@ const initialState = {
 }
 
 const token = localStorage.getItem('token');
-console.log(token);
+// console.log(token);
 
 export const getWeddingTemplates = createAsyncThunk("weddingtemplates/getWeddingTemplates", 
     async (_, thunkAPI) => {
         try {
-            console.log("gvdubehvnjer");
+            // console.log("gvdubehvnjer");
             const response = await axios.get(`${BASE_URL}/templates/getAllTemplates`,
                 {
                     headers: {
@@ -23,10 +23,10 @@ export const getWeddingTemplates = createAsyncThunk("weddingtemplates/getWedding
                     }
                 }
             );
-            console.log(response.data.templates);
+            // console.log(response.data.templates);
             return response.data.templates;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }
@@ -46,7 +46,7 @@ export const createWeddingWebsite = createAsyncThunk("weddingtemplates/createWed
             );
             return response.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -66,7 +66,7 @@ export const updateWeddingWebsite = createAsyncThunk("weddingtemplates/updateWed
             );
             return response.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }

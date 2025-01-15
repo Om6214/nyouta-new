@@ -23,7 +23,7 @@ const MemoryCard = () => {
           <span className="absolute lg:top-[-15px] top-[-40px] z-10 text-white text-[9rem] font-ttMedium">
             &
           </span>
-          <h1 className="font-ttMedium text-6xl z-50 font-bold text-secondary">
+          <h1 className="font-ttMedium text-6xl z-20 font-bold text-secondary">
             Save ! <br />
             <span className="pl-20">Share</span>
           </h1>
@@ -42,7 +42,7 @@ const MemoryCard = () => {
           </div>
         </div>
         <div className="lg:w-[70%]">
-          <div className="h-80 rounded-xl sm:h-64 xl:h-80 2xl:h-96">
+          <div className="h-80 w-full rounded-xl sm:h-64 xl:h-80 2xl:h-96">
             <Carousel>
               <img className="rounded-xl h-full" src={img1} alt="..." />
               <img className="rounded-xl h-full" src={img2} alt="..." />

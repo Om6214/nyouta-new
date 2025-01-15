@@ -30,7 +30,7 @@ export default function Login() {
     }
     const res = await dispatch(login(data));
     if (res.type === 'auth/login/fulfilled') {
-      console.log(res.payload);
+      // console.log(res.payload);
       if (res.payload.requiresOtp) {
         setIsOtpModalOpen(true);
       } else {
@@ -63,7 +63,7 @@ export default function Login() {
     } 
   }
   const OtpModal = () => (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed z-100 inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-md">
         <h2 className="text-lg font-bold">Enter OTP</h2>
         <input 
@@ -160,7 +160,7 @@ export default function Login() {
                 handleGoogleLogin(response);
               }}
               onError={() => {
-                console.log("Login failed");
+                // console.log("Login failed");
               }}
               type="standard"
               text="continue_with"
