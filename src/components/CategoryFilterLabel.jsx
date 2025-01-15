@@ -82,16 +82,25 @@ export default function CategoryFilterLabel() {
 
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
-      const selectedItem = filteredItems[0];
-      if (selectedItem.category === "Photo Books") {
-        navigate(`/edit/PhotoBook/${selectedItem.subSubCategory}`, {
-          state: { image: selectedItem.image[0] },
-        });
-      } else if (selectedItem.category === "Itinerary") {
-        navigate(`/edit/Itinerary/${selectedItem.subSubCategory}`, {
-          state: { image: selectedItem.image[0] },
-        });
+
+      if (filteredItems[0].category === "Photo Books") {
+        // Navigate to a different component with the image as state
+        navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
+      } 
+      if (filteredItems[0].category === "Itinerary") {
+        // Navigate to a different component with the image as state
+        // console.log(filteredItems[0].image[1]);
+        navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
+      } 
+      if (filteredItems[0].category === "Calendars 2025") {
+        // Navigate to a different component with the image as state
+        // console.log(filteredItems[0].image[1]);
+        navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
       }
+      // else {
+      //   // Navigate to the default URL
+      //   navigate("/someurl");
+      // }
     }
   };
 
