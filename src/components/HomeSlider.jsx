@@ -42,8 +42,8 @@ const HomeSlider = () => {
           </Carousel>
         </div>
         <div className="lg:w-[30%]">
-          <div className="py-2 px-6 mt flex flex-col lg:gap-5 gap-3 text-secondary items-start border-2 rounded-xl bg-priBg">
-            <h1 className="text-8xl font-ttMedium font-bold">new !</h1>
+          <div className="py-6 px-6 mt flex flex-col lg:gap-4 gap-3 text-secondary items-start border-2 rounded-xl bg-priBg">
+            <h1 className="text-7xl font-ttMedium font-bold">new !</h1>
             <h1 className="text-4xl font-linna leading-relaxed">
               shAped Wedding invitAtion
             </h1>

@@ -526,9 +526,6 @@ const CategoriesNavBar = () => {
           <div className="pt-4 pb-4 px-6 md:px-16">
 
             <motion.div
-              initial={{ opacity: 0, y: -100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.8 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center min-h-[28vh]  w-full"
             >
 
@@ -624,9 +621,6 @@ const CategoriesNavBar = () => {
       <div id="section2">
 
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.8 }}
           className="px-[6%] pt-[1%]"
         >
           <div className="font-semibold text-[4vh]">Categories</div>
