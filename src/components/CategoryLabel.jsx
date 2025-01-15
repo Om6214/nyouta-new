@@ -51,6 +51,11 @@ export default function CategoryLabel() {
         // console.log(filteredItems[0].image[1]);
         navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
       }
+      if (filteredItems[0].category === "Calendars 2025") {
+        // Navigate to a different component with the image as state
+        // console.log(filteredItems[0].image[1]);
+        navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
+      }
       // else {
       //   // Navigate to the default URL
       //   navigate("/someurl");
