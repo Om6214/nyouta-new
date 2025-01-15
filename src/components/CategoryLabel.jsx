@@ -77,9 +77,6 @@ export default function CategoryLabel() {
     <>
       {filteredItems.length > 0 ? (
         <motion.div
-          initial={{ opacity: 0, y: -100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.8 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white"
         >
           <div className="mt-10 ">
