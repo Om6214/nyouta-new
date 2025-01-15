@@ -114,57 +114,6 @@ const navItems = [
     ],
   },
   {
-    label: "Photo Books",
-    url: "/nav/photo books",
-    children: [
-      {
-        label: "Soft Cover Photobook",
-        Filters: [
-          { a: "Wedding Photobook " },
-          { a: "Engagement Photobook " },
-          { a: "Anniversary Photobook " },
-          { a: "Birthday Photobook " },
-        ],
-      },
-      {
-        label: "Hard Cover Photobook",
-        Filters: [
-          { a: "Wedding Photobook " },
-          { a: "Engagement Photobook " },
-          { a: "Anniversary Photobook " },
-          { a: "Birthday Photobook " },
-        ],
-      },
-      {
-        label: "Spiral Photobook",
-        Filters: [
-          { a: "Wedding Photobook " },
-          { a: "Engagement Photobook " },
-          { a: "Anniversary Photobook " },
-          { a: "Birthday Photobook " },
-        ],
-      },
-      {
-        label: "Photo Folder",
-        Filters: [
-          { a: "Wedding Photobook " },
-          { a: "Engagement Photobook " },
-          { a: "Anniversary Photobook " },
-          { a: "Birthday Photobook " },
-        ],
-      },
-      {
-        label: "Digtial Photobook > Best Seller",
-        Filters: [
-          { a: "Wedding Photobook " },
-          { a: "Engagement Photobook " },
-          { a: "Anniversary Photobook " },
-          { a: "Birthday Photobook " },
-        ],
-      },
-    ],
-  },
-  {
     label: "Itinerary",
     url: "/nav/itinerary",
     children: [
@@ -238,6 +187,57 @@ const navItems = [
     ],
   },
   {
+    label: "Photo Books",
+    url: "/nav/photo books",
+    children: [
+      {
+        label: "Soft Cover Photobook",
+        Filters: [
+          { a: "Wedding Photobook " },
+          { a: "Engagement Photobook " },
+          { a: "Anniversary Photobook " },
+          { a: "Birthday Photobook " },
+        ],
+      },
+      {
+        label: "Hard Cover Photobook",
+        Filters: [
+          { a: "Wedding Photobook " },
+          { a: "Engagement Photobook " },
+          { a: "Anniversary Photobook " },
+          { a: "Birthday Photobook " },
+        ],
+      },
+      {
+        label: "Spiral Photobook",
+        Filters: [
+          { a: "Wedding Photobook " },
+          { a: "Engagement Photobook " },
+          { a: "Anniversary Photobook " },
+          { a: "Birthday Photobook " },
+        ],
+      },
+      {
+        label: "Photo Folder",
+        Filters: [
+          { a: "Wedding Photobook " },
+          { a: "Engagement Photobook " },
+          { a: "Anniversary Photobook " },
+          { a: "Birthday Photobook " },
+        ],
+      },
+      {
+        label: "Digtial Photobook > Best Seller",
+        Filters: [
+          { a: "Wedding Photobook " },
+          { a: "Engagement Photobook " },
+          { a: "Anniversary Photobook " },
+          { a: "Birthday Photobook " },
+        ],
+      },
+    ],
+  },
+  {
     label: "Calendars 2025",
     url: "/nav/calendars 2025",
     children: [
@@ -292,6 +292,65 @@ const navItems = [
     ],
   },
   {
+    label: "Planner Books",
+    url: "/nav/planner books",
+    children: [
+      {
+        label: "Wedding Management",
+      },
+      {
+        label: "Guest Management",
+      },
+      {
+        label: "Wedding Notepad",
+      },
+      {
+        label: "Guest List Booklet - Best Seller",
+      },
+      //   Filters: [
+      //     { alabel: "Wedding Management" },
+      //     { a: "Guest Management" },
+      //     { a: "Wedding Notepad" },
+      //     { a: "Guest List Booklet - Best Seller" },
+      //   ],
+
+      {
+        label: "Free Printable",
+        Filters: [
+          { a: "Wedding Guest List-PDF" },
+          { a: "Wedding Guest List - XLS" },
+          { a: "Wedding Notepad - PDF" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Guest Surprising",
+    url: "/nav/guest surprising",
+    children: [
+      {
+        label: "Newspapers",
+        Filters: [
+          { a: "Wedding Newspaper" },
+          { a: "Engagement Newspaper" },
+          { a: "Birthday Newspaper" },
+          { a: "Special Event" },
+          { a: "E-Paper" },
+        ],
+      },
+      {
+        label: "Magazine",
+        Filters: [
+          { a: "Wedding Magazine" },
+          { a: "Engagement Magazine" },
+          { a: "Birthday Magazine" },
+          { a: "Special Event" },
+          { a: "E-Magazine" },
+        ],
+      },
+    ],
+  },
+  {
     label: "Free Greetings",
     url: "/nav/free greetings",
     children: [
@@ -336,65 +395,7 @@ const navItems = [
       },
     ],
   },
-  {
-    label: "Guest Surprising",
-    url: "/nav/guest surprising",
-    children: [
-      {
-        label: "Newspapers",
-        Filters: [
-          { a: "Wedding Newspaper" },
-          { a: "Engagement Newspaper" },
-          { a: "Birthday Newspaper" },
-          { a: "Special Event" },
-          { a: "E-Paper" },
-        ],
-      },
-      {
-        label: "Magazine",
-        Filters: [
-          { a: "Wedding Magazine" },
-          { a: "Engagement Magazine" },
-          { a: "Birthday Magazine" },
-          { a: "Special Event" },
-          { a: "E-Magazine" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Planner Books",
-    url: "/nav/planner books",
-    children: [
-      {
-        label: "Wedding Management",
-      },
-      {
-        label: "Guest Management",
-      },
-      {
-        label: "Wedding Notepad",
-      },
-      {
-        label: "Guest List Booklet - Best Seller",
-      },
-      //   Filters: [
-      //     { alabel: "Wedding Management" },
-      //     { a: "Guest Management" },
-      //     { a: "Wedding Notepad" },
-      //     { a: "Guest List Booklet - Best Seller" },
-      //   ],
 
-      {
-        label: "Free Printable",
-        Filters: [
-          { a: "Wedding Guest List-PDF" },
-          { a: "Wedding Guest List - XLS" },
-          { a: "Wedding Notepad - PDF" },
-        ],
-      },
-    ],
-  },
   {
     label: "E-Shop",
     url: "/nav/e shop",
