@@ -75,7 +75,7 @@ export default function Register() {
       otp: otp,
       emailorphone: formData.email,
     }
-    console.log(data);
+    // console.log(data);
     const res = await dispatch(verifyEmail(data));
     if (res.type === 'auth/verifyEmail/fulfilled') {
       setIsOtpModalOpen(false);
@@ -213,7 +213,7 @@ export default function Register() {
                 handleGoogleLogin(response);
               }}
               onError={() => {
-                console.log("Login failed");
+                // console.log("Login failed");
               }}
               type="standard"
               text="continue_with"

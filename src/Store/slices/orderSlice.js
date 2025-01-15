@@ -12,7 +12,7 @@ export const placeOrder = createAsyncThunk(
     "order/placeOrder", 
     async (data, thunkAPI) => {
     try {
-        console.log(data);
+        // console.log(data);
         const res = await axios.post(`${BASE_URL}/order/place-order`, data,{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

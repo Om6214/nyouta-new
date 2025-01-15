@@ -66,7 +66,7 @@ export const register = async (req, res) => {
     const otp = generateOTP();
     user.otp = otp;
     await user.save();
-   console.log(user.otp);
+  //  console.log(user.otp);
     if (email) {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
@@ -241,9 +241,9 @@ export const googleSignup = async (req, res) => {
     const clientId = response.clientId;
     const clientCredentials = response.credential;
     const jwtDecode = jwt.decode(clientCredentials);
-    console.log(jwtDecode);
+    // console.log(jwtDecode);
     const user = await User.findOne({ email: jwtDecode.email });
-    console.log(user);
+    // console.log(user);
     if (user) {
       const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
       return res.status(200).json({
@@ -270,23 +270,23 @@ export const googleSignup = async (req, res) => {
       isVerified: true,
       avatar: jwtDecode.picture,
     });
-    console.log(newUser)
+    // console.log(newUser)
     try {
       await newUser.save();
     } catch (error) {
       console.error("Error saving user:", error.message);
       return res.status(400).json({ success: false, message: error.message });
     }    
-    console.log("hiii");
+    // console.log("hiii");
     jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
       if (err) {
-        console.log(err);
+        // console.log(err);
         return res.status(500).json({
           success: false,
           message: 'Error generating token',
         });
       }
-      console.log(token);
+      // console.log(token);
       return res.status(201).json({
         success: true,
         token,

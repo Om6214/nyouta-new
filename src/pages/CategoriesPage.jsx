@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 export default function CategoriesPage() {
   const { products } = useSelector((state) => state.product);
-  console.log(products);
+  // console.log(products);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());

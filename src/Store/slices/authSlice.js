@@ -11,37 +11,37 @@ const initialState = {
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
     try {
-        console.log(data);
+        // console.log(data);
         const res = await axios.post(`${BASE_URL}/auth/login`, data);
-        console.log(res);
+        // console.log(res);
         localStorage.setItem("token",res.data.token);  
         localStorage.setItem("user",JSON.stringify(res.data.user));
         return res.data;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
 export const register = createAsyncThunk("auth/register", async (data, thunkAPI) => {
     try {
-        console.log(data);
+        // console.log(data);
         const res = await axios.post(`${BASE_URL}/auth/register`, data);
-        console.log(res);
+        // console.log(res);
         localStorage.setItem("token",res.data.token);  
         localStorage.setItem("user",JSON.stringify(res.data.user));
         return res.data;
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
 export const googleSignup = createAsyncThunk("auth/googleSignup", async (response, thunkAPI) => {
     try {
-        console.log(response);
+        // console.log(response);
         const res = await axios.post(`${BASE_URL}/auth/google-signup`, response);
-        console.log(res);
+        // console.log(res);
         localStorage.setItem("token",res.data.token);
         localStorage.setItem("user",JSON.stringify(res.data.user));
         return res.data;
@@ -63,7 +63,7 @@ export const getUser = createAsyncThunk(
     "auth/getUser", 
     async (id, thunkAPI) => {
         try {
-            console.log(id);    
+            // console.log(id);    
             const res = await axios.get(`${BASE_URL}/auth/getUser/${id}`,{},{
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -71,7 +71,7 @@ export const getUser = createAsyncThunk(
             });
             return res.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }

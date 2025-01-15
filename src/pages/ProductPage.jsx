@@ -9,8 +9,8 @@ export default function ProductPage() {
   const { state } = useLocation();
   
   const product = state?.product;
-  console.log("product",product)
-  console.log("state",state)
+  // console.log("product",product)
+  // console.log("state",state)
   const {id} = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -51,7 +51,7 @@ export default function ProductPage() {
 
   const handleAddtoCart = async() => {
     setAddToCartLoading(true);
-    console.log(id,quantity);
+    // console.log(id,quantity);
     await dispatch(addtoCart({productId:id,quantity:quantity}));
     dispatch(getCart());
     setAddToCartLoading(false);

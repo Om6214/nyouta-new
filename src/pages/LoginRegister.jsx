@@ -71,7 +71,7 @@ export default function LoginRegister(){
       }
       const res = await dispatch(login(data));
       if (res.type === 'auth/login/fulfilled') {
-        console.log(res.payload);
+        // console.log(res.payload);
         if (res.payload.requiresOtp) {
           setIsOtpModalOpen(true);
         } else {
@@ -169,7 +169,7 @@ export default function LoginRegister(){
           otp1: otp1,
           emailorphone: formData1.email,
         }
-        console.log(data1);
+        // console.log(data1);
         const res = await dispatch1(verifyEmail(data1));
         if (res.type === 'auth/verifyEmail/fulfilled') {
           setIsotp1ModalOpen(false);
@@ -216,7 +216,7 @@ export default function LoginRegister(){
                               handleGoogleLogin1(response);
                             }}
                             onerror1={() => {
-                              console.log("Login failed");
+                              // console.log("Login failed");
                             }}
                             type="standard"
                             text="continue_with"
@@ -329,7 +329,7 @@ export default function LoginRegister(){
                               handleGoogleLogin(response);
                             }}
                             onError={() => {
-                              console.log("Login failed");
+                              // console.log("Login failed");
                             }}
                             type="standard"
                             text="continue_with"

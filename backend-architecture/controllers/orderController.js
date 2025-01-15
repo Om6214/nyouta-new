@@ -23,7 +23,7 @@ export const placeOrder = async (req, res) => {
                 console.error("Error creating order:", error);
                 return res.status(500).send({ message: "Something went wrong" });
             }
-            console.log("Payment:", payment);
+            // console.log("Payment:", payment);
             order.orderId = payment.id;
             await order.save();
             res.status(201).json({

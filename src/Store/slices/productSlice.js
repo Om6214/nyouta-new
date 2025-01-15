@@ -32,10 +32,10 @@ export const getCart = createAsyncThunk(
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            console.log(response.data);
+          
             return response.data;
         } catch (error) {
-            console.log(error);
+            
             if (error.response.status === 401 || error.response.status === 403) {
                 thunkAPI.dispatch(logout()); // Use `thunkAPI.dispatch` 
             }
@@ -55,7 +55,7 @@ export const addtoCart = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            console.log(error);
+            
             return thunkAPI.rejectWithValue(error.response.data.message);
         }
     }
@@ -72,7 +72,7 @@ export const removeFromCart = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            console.log(error);
+            
             return thunkAPI.rejectWithValue(error.response.data.message);
         }
     }
@@ -89,7 +89,7 @@ export const updateCartQuantity = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return thunkAPI.rejectWithValue(error.response.data.message);
         }
     }

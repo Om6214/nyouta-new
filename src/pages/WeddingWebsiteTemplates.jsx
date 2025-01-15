@@ -8,21 +8,19 @@ const TemplateCard = ({ template, id }) => {
     const navigate = useNavigate();
     const user = localStorage.getItem('user');
     const handleTemplateClick = async(id) => {
-        console.log(id);
-        console.log(user);
         if(!user.isWebsiteCreated){
-            console.log("Website created");
+            // console.log("Website created");
             const res=await dispatch(createWeddingWebsite(id));
-            console.log(res);
+            // console.log(res);
             if(res.type==='weddingtemplates/createWeddingWebsite/rejected'){
                 navigate('/login');
             }
             else if(res.type==='weddingtemplates/createWeddingWebsite/fulfilled'){
-                console.log(res.payload);
+                // console.log(res.payload);
                 navigate(`/wedding-website/${res?.payload?.slug}`);
             }
         }else{
-            console.log("Website not created");
+            // console.log("Website not created");
             const res=await dispatch(updateWeddingWebsite(id));
             if(res.type==='weddingtemplates/updateWeddingWebsite/rejected'){
                 navigate('/login');
