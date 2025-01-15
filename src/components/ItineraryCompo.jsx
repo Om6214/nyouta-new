@@ -7,7 +7,6 @@ import { jsPDF } from 'jspdf';
 const ItineraryCompo = () => {
   const location = useLocation();
   const templateImage = location.state?.image;
-
   const [textElements, setTextElements] = useState([]);
   const [imageElements, setImageElements] = useState([]);
   const [selectedElement, setSelectedElement] = useState(null);
