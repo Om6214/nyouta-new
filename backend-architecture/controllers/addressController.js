@@ -4,8 +4,8 @@ export const addAddress = async (req, res) => {
     try {
         const { firstName, lastName, addressLine1, addressLine2, city, state, pincode, contactNumber, email } = req.body;
         const user = req.user.userId;
-        console.log(user);
-        console.log(req.body);
+        // console.log(user);
+        // console.log(req.body);
         const address = new Address({ user, firstName, lastName, streetName:addressLine1, apartment:addressLine2, city, state, pincode, contactNo:contactNumber, email });
         await address.save();
         res.status(201).json({ message: 'Address added successfully', address });

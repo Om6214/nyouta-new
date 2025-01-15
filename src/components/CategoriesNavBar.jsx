@@ -495,7 +495,7 @@ const CategoriesNavBar = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    console.log("rendered");
+    // console.log("rendered");
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
     }, 5000); // Change slide every 5 seconds

@@ -25,7 +25,7 @@ export const getWeddingWebsitePreview = async (req, res) => {
             partnerName: user.partnerName,
             weddingDate: user.weddingDate,
         });
-        console.log(html);
+        // console.log(html);
         res.status(200).json({ message: 'Wedding website fetched successfully', html });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -51,7 +51,7 @@ export const createWeddingWebsite = async (req, res) => {
         await user.save();
         res.status(200).json({ message: 'Wedding website created successfully', slug });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({ message: error.message });
     }
 }
@@ -72,14 +72,14 @@ export const updateWeddingWebsite = async (req, res) => {
 export const getWeddingWebsite = async (req, res) => {
     try {
         const { slug } = req.params;
-        console.log(slug);
+        // console.log(slug);
         const user = await User.findOne({ slug });
-        console.log(user);
+        // console.log(user);
         if (!user) {
             return res.status(404).json({ message: 'Wedding website not found' });
         }
         const weddingWebsite= await WeddingWebsite.find({user: user._id});
-        console.log(weddingWebsite);
+        // console.log(weddingWebsite);
         const templateId = user.templateId;
         const templatesDir = path.join(__dirname, '../uploads/templates');
         const filePath = path.join(templatesDir, `${templateId}.ejs`);
@@ -97,7 +97,7 @@ export const getWeddingWebsite = async (req, res) => {
             res.status(200).json({ message: 'Wedding website fetched successfully', html });
         }
         else{
-            console.log(weddingWebsite)
+            // console.log(weddingWebsite)
             const html = await ejs.render(content,{
                 home: weddingWebsite[0].home,
                 about: weddingWebsite[0].about,
@@ -107,11 +107,11 @@ export const getWeddingWebsite = async (req, res) => {
                 eventInfo: weddingWebsite[0].eventInfo,
                 gallery: weddingWebsite[0].gallery,
             }); 
-            console.log(html);
+            // console.log(html);
             res.status(200).json({ message: 'Wedding website fetched successfully', html });
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({ message: error.message });
     }
 }
@@ -135,9 +135,9 @@ export const updateWeddingWebsitedata = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-        console.log(user.slug);
+        // console.log(user.slug);
         user.slug=formatNamesAndId(home.name,home.partnerName,user._id);
-        console.log(user.slug);
+        // console.log(user.slug);
         await user.save();
         // Check if WeddingWebsite exists
         const weddingWebsite = await WeddingWebsite.findOne({user: userId});

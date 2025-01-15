@@ -32,7 +32,7 @@ export const updateWeddingWebsitedata = createAsyncThunk(
             });
             return response;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return thunkAPI.rejectWithValue(error);
         }
     }

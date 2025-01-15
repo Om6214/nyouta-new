@@ -53,7 +53,7 @@ const Checkout = () => {
     const [selectedAddress, setSelectedAddress] = useState(null);
     const { addresses, loading } = useSelector((state) => state.address);
     const { cart } = useSelector((state) => state.product);
-    console.log(cart)
+    // console.log(cart)
     const user = localStorage.getItem('user');
     useEffect(() => {
         dispatch(getCart());
@@ -117,7 +117,7 @@ const Checkout = () => {
     };
     const handleAddressSelection = (address, index) => {
         setSelectedAddress(index);
-        console.log(address, index);
+        // console.log(address, index);
     }
     const loadRazorpayScript = async () => {
         const script = document.createElement("script");
@@ -151,7 +151,7 @@ const Checkout = () => {
         if (res.type === 'order/placeOrder/fulfilled') {
             initPayment(res.payload.payment);
         }
-        console.log(res);
+        // console.log(res);
     }
 
     const initPayment = async (data) => {
@@ -170,7 +170,7 @@ const Checkout = () => {
                 color: "#3399cc",
             },
             handler: async (response) => {
-                console.log(response);
+                // console.log(response);
                 try {
                     const verifyUrl = `${BASE_URL}/order/verify-payment`;
                     const verifyData = {
@@ -194,7 +194,7 @@ const Checkout = () => {
                         toast.error(err.response.data.message);
                     }
                 } catch (err) {
-                    console.log(err);
+                    // console.log(err);
                 }
             },
         }

@@ -30,7 +30,7 @@ export default function Login() {
     }
     const res = await dispatch(login(data));
     if (res.type === 'auth/login/fulfilled') {
-      console.log(res.payload);
+      // console.log(res.payload);
       if (res.payload.requiresOtp) {
         setIsOtpModalOpen(true);
       } else {
@@ -160,7 +160,7 @@ export default function Login() {
                 handleGoogleLogin(response);
               }}
               onError={() => {
-                console.log("Login failed");
+                // console.log("Login failed");
               }}
               type="standard"
               text="continue_with"
