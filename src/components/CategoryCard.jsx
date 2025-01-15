@@ -252,7 +252,7 @@ const CategoryCard = () => {
       {/* Categories Navigation */}
       <motion.div>
         <div className="py-2 lg:px-4 px-1 bg-secondary shadow-md">
-          <ul className="flex gap-4 justify-start overflow-x-auto">
+          <ul className="flex gap-4 justify-start overflow-x-auto no-scrollbar">
             {categories.map((cat, index) => (
               <motion.li
                 key={index}

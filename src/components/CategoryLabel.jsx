@@ -18,8 +18,6 @@ export default function CategoryLabel() {
   
     try {
       const response = await axios.get(url);
-      console.log(response.data); // Handle the fetched data
-      console.log("response",response.data);
       return response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -30,7 +28,6 @@ export default function CategoryLabel() {
     fetchProducts();
   }, []);
   
-  console.log("filteredItems",filteredItems)
   const { pageName, "*": path } = useParams();
   const navigate = useNavigate();
   const formatCategoryName = (name) => {

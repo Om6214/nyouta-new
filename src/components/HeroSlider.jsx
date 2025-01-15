@@ -148,7 +148,7 @@ export default function HeroSlider() {
             </div>
           </motion.div>
           <div>
-            <motion.div className="hidden md:grid md:grid-cols-4 lg:grid lg:grid-cols-4 gap-3 mt-2 lg:justify-center">
+            <motion.div className="hidden lg:grid lg:grid-cols-4 gap-3 mt-2 lg:justify-center">
               {tiles.map((tile) => (
                 <div className="relative rounded-full flex flex-shrink-0 flex-col items-center justify-center">
                   <img className="w-[250px] h-[55px]" src={cardImg} alt="" />
@@ -195,8 +195,8 @@ export default function HeroSlider() {
           </div>
         </motion.div>
       </div>
-      <div className="mx-2 py-2 md:hidden lg:hidden">
-        <div className="flex overflow-x-auto lg:justify-center">
+      <div className="mx-2 py-2  lg:hidden">
+        <div className="flex overflow-x-auto no-scrollbar lg:justify-center">
           {tiles.map((tile) => (
             <div className="relative rounded-full flex flex-shrink-0 flex-col items-center justify-center">
               <img className="w-[250px]" src={cardImg} alt="" />

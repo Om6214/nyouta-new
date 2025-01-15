@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import products from "../products.json";
 import { useSelector } from "react-redux";
 import { getProducts } from "../Store/slices/productSlice";
@@ -84,6 +84,12 @@ export default function TopCategories() {
   });
 
   const [priceFilter, setPriceFilter] = useState(3000);
+  const location = useLocation();
+
+  // Parse query parameters
+  const params = new URLSearchParams(location.search);
+  const searchTerm = params.get('term') || '';
+  const category = params.get('category') || 'All';
 
   const handleMainChange = (event) => {
     const { value } = event.target;
