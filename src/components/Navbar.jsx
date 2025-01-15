@@ -604,7 +604,7 @@ export default function MainNav() {
 
             {/* Mobile Drawer Button */}
             <button
-              className="md:hidden p-2"
+              className="lg:hidden p-2"
               onClick={() => setIsDrawerOpen(true)}
             >
               <Menu size={27} />
@@ -620,7 +620,7 @@ export default function MainNav() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0.8, x: 300 }}
               transition={{ duration: 0.3, ease: "linear" }}
-              className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden"
+              className="fixed inset-0 z-50 bg-black bg-opacity-50 lg:hidden"
             >
               <div className="absolute right-0 h-full w-64 bg-white p-4">
                 <button
