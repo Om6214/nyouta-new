@@ -380,7 +380,6 @@ export default function Testimonials() {
   }, []);
 
 
-  console.log(settings);
   
   return (
     <section className="py-16 text-primaryBlue ">
@@ -390,7 +389,7 @@ export default function Testimonials() {
         </h2>
         <div className="relative mx-auto  overflow-hidden">
           <div className="slider-container mx-16">
-            <Slider {...settings}>
+            <Slider {...settings} >
               {testimonials.map((items) => (
                 <div>
                   <div className="flex flex-col gap-4 items-center relative font-heroFont overflow-hidden">
@@ -401,9 +400,9 @@ export default function Testimonials() {
                         src={items.avatar}
                         alt=""
                       />
-                      <div className="flex flex-col gap-3 px-4 pt-8 items-center">
-                        <p className="text-center px-">{items.content}</p>
-                        <h1 className="font-semibold bg-pink-600 px-4 text-white">
+                      <div className="flex flex-col gap-3 pt-4 items-center h-[150px]">
+                        <p className="text-center h-[80%] px-3  ">{items.content}</p>
+                        <h1 className="font-semibold h-[20%] bg-pink-600 px-4 text-white">
                           {items.name}
                         </h1>
                         {/* <blockquote className="text-center">
