@@ -67,7 +67,12 @@ export default function Footer() {
             </h2>
             <ul className="space-y-2">
               <li>
-                <Link>Submit form to join</Link>
+                <Link
+                  className="hover:text-white transition-colors"
+                  to={`/join-e-nyouta`}
+                >
+                  Submit form to join
+                </Link>
               </li>
             </ul>
 
