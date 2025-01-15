@@ -81,7 +81,7 @@ const WeddingPlan = () => {
                   {plan.title}
                 </h1>
                 <h2>{plan.format}</h2>
-                <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
+                <div className="relative flex flex-col items-center">
                   <img className="h-8" src={buttonBg} alt="" />
                   <button className="text-lg font-semibold absolute ">
                     {plan.btn}

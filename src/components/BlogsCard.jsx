@@ -39,7 +39,7 @@ const BlogsCard = () => {
                     <div className='flex flex-col h-full items-start justify-between px-8 py-4 gap-2'>
                         <h1 className='text-2xl lg:text-2xl font-bold'>{blog.title}</h1>
                         <p>{blog.description}</p>
-                        <div className=' relative flex flex-col items-center justify-center hover:translate-x-2 duration-300 ease-in-out'>
+                        <div className=' relative flex flex-col items-center justify-center'>
                             <img className='h-8' src={buttonBg} alt="" />
                             <a className='flex items-center text-white absolute gap-2 font-bold ' href="#">Read More <span><SquareArrowOutUpRight /></span></a>
                         </div>

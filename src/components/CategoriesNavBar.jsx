@@ -14,9 +14,6 @@ import i6 from '../assets/images/Navbar_Planner_Header/06.jpg'
 
 const CategoriesNavBar = () => {
   const { pageName } = useParams();
-
-  
-  
   
   const datafile = {
     "print invitations": {
@@ -203,7 +200,7 @@ const CategoriesNavBar = () => {
     },
   };
 
-
+  
 
   const images = [i1, i2, i3, i4, i5, i6];
 
@@ -436,24 +433,24 @@ const CategoriesNavBar = () => {
 
         {
           subTitle: "Wedding Management",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847773/phewexsfhaijro3dzxd8.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Management"
         }, {
           subTitle: "Guest Management",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847362/n2ppyskd7modih1qznm3.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Guest Management"
         }, {
           subTitle: "Wedding Notepad",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Notepad"
         }, {
           subTitle: "Guest List Booklet - Best Seller",
-          imgUrl: "https://i.postimg.cc/L6xsPyGt/Template-17.png", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848346/quntb8uznw1eg81xkrff.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Guest List Booklet - Best Seller"
         },
         {
           subTitle: "Free Printables",
-          imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848578/uenbld7atg2lqufivgyc.jpg", // Example image
           url: "e/nav/planner books/Free Printable/Wedding Guest List-PDF"
         },
       ],
@@ -498,7 +495,7 @@ const CategoriesNavBar = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    console.log("rendered");
+    // console.log("rendered");
     const interval = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
     }, 5000); // Change slide every 5 seconds
@@ -529,9 +526,6 @@ const CategoriesNavBar = () => {
           <div className="pt-4 pb-4 px-6 md:px-16">
 
             <motion.div
-              initial={{ opacity: 0, y: -100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.8 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center min-h-[28vh]  w-full"
             >
 
@@ -627,9 +621,6 @@ const CategoriesNavBar = () => {
       <div id="section2">
 
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.8 }}
           className="px-[6%] pt-[1%]"
         >
           <div className="font-semibold text-[4vh]">Categories</div>

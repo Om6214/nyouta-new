@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  
   const product = state?.product;
-  console.log(product)
+  // console.log("product",product)
+  // console.log("state",state)
   const {id} = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -16,8 +18,8 @@ export default function ProductPage() {
   const [selectedType, setSelectedType] = useState(null);
   const [warning, setWarning] = useState("");
   const [addToCartLoading, setAddToCartLoading] = useState(false);
-
-  const types = ["Pdf Invitation", "Video Invitation"];
+  
+  const types = ["Pdf Invitation"];
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
 
@@ -38,9 +40,7 @@ export default function ProductPage() {
       // Append the selected type to the route
       if (selectedType === "Pdf Invitation") {
         route += "-physical-card";
-      } else if (selectedType === "Video Invitation") {
-        route += "-digital-card";
-      }
+      } 
 
       // Pass the entire array of images to the next page
       navigate(route, {
@@ -51,7 +51,7 @@ export default function ProductPage() {
 
   const handleAddtoCart = async() => {
     setAddToCartLoading(true);
-    console.log(id,quantity);
+    // console.log(id,quantity);
     await dispatch(addtoCart({productId:id,quantity:quantity}));
     dispatch(getCart());
     setAddToCartLoading(false);
@@ -59,7 +59,7 @@ export default function ProductPage() {
 
   return (
 
-    <div className="max-w-6xl mx-auto p-8">
+    <div className="max-w-6xl mx-auto mb-10 p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image Section */}
         <div className="relative">
@@ -139,13 +139,13 @@ export default function ProductPage() {
               </div>
             )}
 
-            <div className="space-x-4 flex flex-col md:flex-row mt-12 gap-4">
+            <div className="space-x-4 flex md:flex-row mt-12 gap-4">
               {selectedType !== "Photobook" && (
                 <button
                   onClick={handleEditImage}
                   className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
                 >
-                  Edit Image Card
+                  Edit PDF
                 </button>
               )}
 
@@ -161,7 +161,7 @@ export default function ProductPage() {
               <button
                 onClick={handleAddtoCart}
                 disabled={addToCartLoading}
-                className="w-full bg-yellow-600 text-white py-3 px-6 rounded-full shadow-lg hover:bg-yellow-700 transition-colors"
+                className="w-full bg-yellow-600 text-white py-3 px-6 mr-6 rounded-full shadow-lg hover:bg-yellow-700 transition-colors"
               >
                 {addToCartLoading ? "Adding to Cart..." : "Add to Cart"}
               </button>

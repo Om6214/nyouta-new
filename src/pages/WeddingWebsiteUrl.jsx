@@ -71,7 +71,7 @@ const WeddingWebsiteUrl = () => {
   const { weddingTemplates, loading, error } = useSelector(
     (state) => state.weddingtemplates
   );
-  console.log(weddingTemplates);
+  // console.log(weddingTemplates);
   useEffect(() => {
     if (weddingTemplates.length < 1) {
       dispatch(getWeddingTemplates());

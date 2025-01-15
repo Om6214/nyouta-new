@@ -15,9 +15,10 @@ export default function CategoryLabel() {
 
   async function fetchProducts() {
     const url = "https://nyouta.onrender.com/api/v1/products/products";
-  
     try {
       const response = await axios.get(url);
+      console.log(response.data); // Handle the fetched data
+      console.log("response",response.data);
       return response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -28,6 +29,7 @@ export default function CategoryLabel() {
     fetchProducts();
   }, []);
   
+  console.log("filteredItems",filteredItems)
   const { pageName, "*": path } = useParams();
   const navigate = useNavigate();
   const formatCategoryName = (name) => {
@@ -65,6 +67,11 @@ export default function CategoryLabel() {
         // console.log(filteredItems[0].image[1]);
         navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
       }
+      if (filteredItems[0].category === "Calendars 2025") {
+        // Navigate to a different component with the image as state
+        // console.log(filteredItems[0].image[1]);
+        navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
+      }
       // else {
       //   // Navigate to the default URL
       //   navigate("/someurl");
@@ -75,9 +82,6 @@ export default function CategoryLabel() {
     <>
       {filteredItems.length > 0 ? (
         <motion.div
-          initial={{ opacity: 0, y: -100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.8 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white"
         >
           <div className="mt-10 ">

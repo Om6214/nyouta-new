@@ -14,11 +14,11 @@ import { use } from 'react';
 const cloudinary = new Cloudinary({ cloud_name: 'dr6qk9jr8', secure: false });
 
 const WeddingPortfolioForm = ({ id, setShowForm }) => {
-  console.log(id);
+  // console.log(id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { weddingwebsiteData } = useSelector((state) => state.weddingwebsite);
-  console.log(weddingwebsiteData);
+  // console.log(weddingwebsiteData);
   useEffect(() => {
     dispatch(getWeddingWebsitedata());
   }, [dispatch]);
@@ -66,7 +66,7 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
     }
   });
 
-  console.log(formData);
+  // console.log(formData);
   const [sections, setSections] = useState({
     basic: true,
     quotes: true,
@@ -108,7 +108,7 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
   };
 
   const handleImageUpload = async (e, section, field, subfield = null) => {
-    console.log("handleImageUpload called");
+    // console.log("handleImageUpload called");
     const files = e.target.files;
     if (!files.length) {
       console.error("No files selected");
@@ -142,7 +142,7 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
         });
         const data = await response.json();
         const imageUrl = data.secure_url;
-        console.log("Image uploaded to Cloudinary:", imageUrl);
+        // console.log("Image uploaded to Cloudinary:", imageUrl);
         uploadedImages.push(imageUrl);
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -189,7 +189,7 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
     e.preventDefault();
     try {
       const res = await dispatch(updateWeddingWebsitedata(formData));
-      console.log(res);
+      // console.log(res);
 
       if (res.payload.status === 401 || res.payload.status === 403) {
         navigate('/login');

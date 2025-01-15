@@ -58,7 +58,7 @@ export const removeFromCart = async (req, res) => {
         }
         const price = product.price;
         const cart = await Cart.findOne({ user: userId });
-        console.log(cart);
+        // console.log(cart);
         const quantity=cart.products.find((item) => item.productId.toString() === productId).quantity;
         cart.products = cart.products.filter(
             (item) => item.productId.toString() !== productId
@@ -74,14 +74,14 @@ export const removeFromCart = async (req, res) => {
 export const updateCart = async (req, res) => {
     try {
         const { productId, quantity , operation} = req.body;
-        console.log(productId);
-        console.log(quantity);
+        // console.log(productId);
+        // console.log(quantity);
         const userId = req.user.userId;
         const product = await Product.findById(productId);
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
-        console.log(product.price);
+        // console.log(product.price);
         const cart = await Cart.findOne({ user: userId });
         const existingProduct = cart.products.find(
             (item) => item.productId.toString() === productId

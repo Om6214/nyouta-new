@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F5F5F5;
+        }
+        .image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .background-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .text-overlay {
+            position: absolute;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+        /* Example text positions - adjust these values based on your needs */
+        .text-1 {
+            top: 20%;
+            left: 0;
+            text-align: center;
+        }
+        .text-2 {
+            top: 50%;
+            left: 0;
+            text-align: center;
+            transform: translateY(-50%);
+        }
+        .text-3 {
+            bottom: 20%;
+            left: 0;
+            text-align: center;
+        }
+        /* Responsive text sizes */
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin: 0;
+        }
+        p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin: 10px 0;
+        }
+        @media (max-width: 850px) {
+            .image-container {
+                max-width: 90%;
+            }
+            .text-overlay {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container"  >
+        <img src="./1.png" alt="Background 1" class="background-image">
+        
+    </div>
+    <div class="image-container">
+        <img src="./2.png" alt="Background 2" class="background-image">
+        <div class="text-overlay text-3">
+            <h2>Gurpreet & Sakshi</h2>
+            <p>We Are Getting Married june 15,2025</p>
+        </div>
+        
+    </div>
+    <div class="image-container">
+        <img src="./3.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            
+            <p style="text-shadow: none; color: #FF5D5C; position: absolute; width: 700px; margin-left: 40px;">Veil unity seat covers groomsman family mother church glitter tuxedo. Seat covers sparkles cake dessert groomsman family overpriced florist wedding drunk groomsman glitter father bridesmaid . Aisle first forever happy salad father bridesmaid mother guitar acoustic bass unity cheers overpriced florist beautiful, seat covers flowers.</p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="./4.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            <p style="text-shadow: none ; text-align: start; color: #F48034; width: 300px; position: absolute; top: -360px; left: 385px;" >Veil unity seat covers groomsman family mother church glitter tuxedo. Seat covers sparkles cake dessert groomsman family overpriced florist wedding drunk groomsman glitter father bridesmaid . Aisle first forever happy salad father bridesmaid mother guitar acous</p>
+            <p style="text-shadow: none ; text-align: start; color: #F48034; width: 300px; position: absolute; top: -100px; left:78px ;" >
+                Veil unity seat covers groomsman family mother church glitter tuxedo. Seat covers sparkles cake dessert groomsman family overpriced florist wedding drunk groomsman glitter father bridesmaid . Aisle first forever happy salad father bridesmaid mother guitar acous
+            </p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="./5.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            <p style="text-shadow: none; font-size: 14px; width: 180px; position: absolute; left: 195px; top: -100px;">July 14, 2025 | 3:00 PM
+                Lernerra Luxury Resort
+                123 Anywhere St., Any City, ST
+                </p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="./6.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            <input type="text" class="recipient-name" style=" border: none; background: transparent; position: absolute; top: -255px; left: 188px ; width: 200px; height: 40px;">
+            <input type="text" class="street" style=" border: none; background: transparent; position: absolute; top: -180px; left: 188px ; width: 200px; height: 40px;">
+            <input type="text" class="City" style=" border: none; background: transparent; position: absolute; top: -100px; left: 188px ; width: 200px; height: 40px;">
+            <input type="text" class="email" style=" border: none; background: transparent; position: absolute; top: -25px; left: 188px ; width: 200px; height: 40px;">
+            <input type="text" class="phone" style=" border: none; background: transparent; position: absolute; top: -25px; left: 430px ; width: 200px; height: 40px;">
+            <input type="text" class="zip" style=" border: none; background: transparent;  position: absolute; top: -100px; left: 430px ; width: 200px; height: 40px;">
+            <input type="text" class="state" style=" border: none; background: transparent; position: absolute; top: -180px; left: 430px ; width: 200px; height: 40px;">
+            <input type="text" class="apt" style=" border: none; background: transparent; position: absolute; top: -255px; left: 430px ; width: 200px; height: 40px;">
+
+            <button style="position: absolute;  width: 200px; left: 300px; height: 60px; top: 70px; background: transparent; color: transparent; border: none;"  > submit</button>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="./Details.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            <input type="text" style="height: 80px; width: 430px; position: absolute; top: -80px; left: 210px; background: transparent; border: none;">
+            <button style="position: absolute; width: 200px; left: 320px; height: 60px; top: 50px; background: transparent;  color: transparent; border: none;"  > submit</button>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="./8.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            <p style="text-shadow: none; font-size: 14px; width: 180px; position: absolute; left: 443px; top: -100px;">July 14, 2025 | 3:00 PM
+                Lernerra Luxury Resort
+                123 Anywhere St., Any City, ST
+                </p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="./9.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="./10.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+        </div>
+    </div>
+    <!-- Repeat similar structure for remaining images -->
+</body>
+</html>
