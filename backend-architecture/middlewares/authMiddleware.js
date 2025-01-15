@@ -5,7 +5,7 @@ const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     // console.log(authHeader);
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        console.log("No token provided, authorization denied");
+        // console.log("No token provided, authorization denied");
         return res.status(401).json({ message: 'No token provided, authorization denied' });
     }
 
@@ -14,12 +14,12 @@ const authenticateToken = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
-        console.log(req.user);
+        // console.log(req.user);
          // Attach decoded user data to request object
         next();
     } catch (err) {
         if (err.name === 'TokenExpiredError') {
-            console.log(err);
+            // console.log(err);
             return res.status(401).json({ message: 'Token has expired, Please Login' });
         }
         // console.log(err);

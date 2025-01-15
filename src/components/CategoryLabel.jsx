@@ -17,8 +17,8 @@ export default function CategoryLabel() {
     const url = "https://nyouta.onrender.com/api/v1/products/products";
     try {
       const response = await axios.get(url);
-      console.log(response.data);
-      console.log("response",response.data);
+      // console.log(response.data);
+      // console.log("response",response.data);
       return response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
