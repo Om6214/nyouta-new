@@ -37,7 +37,7 @@ const PromiseCard = () => {
         <h1 className='text-center text-primary font-heroFont text-2xl lg:text-4xl font-semibold pt-8'>Our Promise : Quality, Personalization, and a Heartfelt Experience</h1>
         <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-8 gap-6 lg:px-16 px-2 py-1'>
             {promises.map((prom, index) => (
-                <div key={index} className=' relative flex flex-col items-center gap-2 px-4 rounded-lg hover:-translate-y-3 duration-300 ease-in cursor-pointer'>
+                <div key={index} className=' relative flex flex-col items-center gap-2 px-4 rounded-lg cursor-pointer'>
                     <img src={bgImg} className='' alt="" />
                     <div className='absolute flex flex-col items-center lg:gap-4 gap-[5px] pt-4 text-white font-heroFont'>
                     <img className='w-[75px]' src={prom.icon} alt="" />
