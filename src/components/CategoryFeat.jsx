@@ -21,7 +21,7 @@ const items = [
     },
     {
         name: 'Table Itinerary',
-        imgURL: roomCard
+        imgURL: "https://img.freepik.com/free-photo/christmas-composition-with-present-pine-cones_23-2147712286.jpg?t=st=1736938319~exp=1736941919~hmac=efcaeb30ac0edf373299ad90a59e671fd516ca490be1835c87db39da64177336&w=996"
     },
     {
         name: 'Gift Stickers',
@@ -33,7 +33,7 @@ const items = [
     },
     {
         name: 'Event Cards',
-        imgURL: roomCard
+        imgURL: "https://img.freepik.com/free-photo/top-view-amazing-flowers-such-as-lilac-roses-daisy-with-white-gift-box-wooden-background_141793-51743.jpg?t=st=1736938400~exp=1736942000~hmac=371d335b3131968cb66a5c8d9e0cfba3b8bb3f3b21c5badf651194f917fafae8&w=996"
     },
     {
         name: 'Greetings',
