@@ -507,8 +507,8 @@ export default function MainNav() {
   return (
 
     <div className="flex flex-col">
-      <div className="h-[40px] flex justify-between px-60 bg-[#FAF0DC]">
-        <div className="bg-[#af7d32] rounded-b-2xl font-semibold text-white font-avalonN  flex items-center justify-center px-4">NYOUTA</div>
+      <div className="h-[30px] flex justify-between px-56 bg-[#FAF0DC]">
+        <div className="bg-[#af7d32] rounded-b-2xl  text-white font-avalonN  flex items-center justify-center px-4 tracking-widest text-xl">NYOUTA</div>
         <div className="flex items-center me-10"> <h1 className="text-[#643C28] font-bold " >Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc. &gt;&gt;&gt;&gt; Scrolling </h1></div>
       </div>
       <header
