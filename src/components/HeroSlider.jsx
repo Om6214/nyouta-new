@@ -166,7 +166,9 @@ export default function HeroSlider() {
         <motion.div className="lg:w-[30%] h-full flex items-center justify-center relative w-full rounded-xl">
           {/* <img className="h-[500px] lg:h-full" src={wedImg} alt="" /> */}
           <div className="lg:px-8 flex flex-col gap-2 lg:gap-3 py-3 md:w-full items-center justify-center font-heroFont bg-pink-200 rounded-lg">
-            <h1 className="font-ttMedium text-4xl text-secondary">make your own </h1>
+            <h1 className="font-ttMedium text-4xl text-secondary">
+              make your own{" "}
+            </h1>
             <h1 className="text-4xl lg:text-4xl font-ttMedium uppercase text-center leading-none text-pink-600">
               Wedding Website
             </h1>
