@@ -207,7 +207,9 @@ export default function CategoryFilterLabel() {
           {filteredItems[0]?.category === "Planner Books" ?
          ( filteredResponseData.map((filteredItem,index) => (
               
-              <Link  state={{ product: filteredItem }} key={index}>
+              <Link 
+  to={`/edit/PlannerBook/${filteredItems[0].subSubCategory}`} 
+  state={{ image: filteredItem.image[0] }} key={index}>
                 <div className="relative w-full h-[40vh]">
                   <img
                     src={filteredItem.image[0]}
