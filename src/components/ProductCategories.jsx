@@ -121,37 +121,42 @@ export default function TopCategories() {
     setPriceFilter(event.target.value);
   };
 
-  // Parse query parameters
-  const params = new URLSearchParams(location.search);
-  const searchTerm = params.get('term') || '';
-  const category = params.get('category') || 'All';
-  console.log(products)
-  // Filter Logic
-  
-  const filteredProducts = products?.filter((product) => {
-    const matchesCategory =
-      (!selectedOptions.main || product?.category === selectedOptions.main) &&
-      (!category || product?.category === category);
-  
-    const matchesSubCategory =
-      !selectedOptions.sub || product?.subCategory === selectedOptions.sub;
-  
-    const matchesSubSubCategory =
-      !selectedOptions.subSub || product?.subSubCategory === selectedOptions.subSub;
-  
-    const matchesPrice = product?.price <= priceFilter;
-  
-    const matchesSearchTerm =
-      !searchTerm || product?.name?.toLowerCase().includes(searchTerm.toLowerCase()) 
-    return (
-      matchesCategory &&
-      matchesSubCategory &&
-      matchesSubSubCategory &&
-      matchesPrice &&
-      matchesSearchTerm
-    );
-  });
-  
+// Parse query parameters
+const params = new URLSearchParams(location.search);
+const searchTerm = params.get('term') || '';
+const category = params.get('category') || 'All';
+
+// Filter Logic
+const filteredProducts = products?.filter((product) => {
+  // If both searchTerm and category have no meaningful values, return all products
+  if (!searchTerm && (category === 'All' || !category)) {
+    return true; // Include all products
+  }
+
+  const matchesCategory =
+    (!selectedOptions.main || product?.category === selectedOptions.main) &&
+    (!category || category === 'All' || product?.category === category);
+
+  const matchesSubCategory =
+    !selectedOptions.sub || product?.subCategory === selectedOptions.sub;
+
+  const matchesSubSubCategory =
+    !selectedOptions.subSub || product?.subSubCategory === selectedOptions.subSub;
+
+  const matchesPrice = product?.price <= priceFilter;
+
+  const matchesSearchTerm =
+    !searchTerm || product?.name?.toLowerCase().includes(searchTerm.toLowerCase());
+
+  return (
+    matchesCategory &&
+    matchesSubCategory &&
+    matchesSubSubCategory &&
+    matchesPrice &&
+    matchesSearchTerm
+  );
+});
+
 
   return (
     <section className="py-16 px-4 bg-priBg">
