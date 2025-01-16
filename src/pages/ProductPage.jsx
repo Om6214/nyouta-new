@@ -1,25 +1,18 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate,useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addtoCart,getCart} from "../Store/slices/productSlice";
+import { addtoCart, getCart } from "../Store/slices/productSlice";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  
   const product = state?.product;
-  // console.log("product",product)
-  // console.log("state",state)
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [selectedType, setSelectedType] = useState(null);
-  const [warning, setWarning] = useState("");
   const [addToCartLoading, setAddToCartLoading] = useState(false);
-  
-  const types = ["Pdf Invitation"];
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
 
@@ -32,34 +25,21 @@ export default function ProductPage() {
   };
 
   const handleEditImage = () => {
-    if (!selectedType) {
-      setWarning("Please select a card type to edit the image.");
-    } else {
-      let route = `/product/${product.id}/edit`;
-
-      // Append the selected type to the route
-      if (selectedType === "Pdf Invitation") {
-        route += "-physical-card";
-      } 
-
-      // Pass the entire array of images to the next page
-      navigate(route, {
-        state: { images: product.image, selectedType },
-      });
-    }
+    const route = `/product/${product.id}/edit-physical-card`;
+    navigate(route, {
+      state: { images: product.image },
+    });
   };
 
-  const handleAddtoCart = async() => {
+  const handleAddtoCart = async () => {
     setAddToCartLoading(true);
-    // console.log(id,quantity);
-    await dispatch(addtoCart({productId:id,quantity:quantity}));
+    await dispatch(addtoCart({ productId: id, quantity: quantity }));
     dispatch(getCart());
     setAddToCartLoading(false);
   };
 
   return (
-
-    <div className="max-w-6xl mx-auto mb-10 p-6">
+    <div className="max-w-6xl mx-auto p-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image Section */}
         <div className="relative">
@@ -91,23 +71,6 @@ export default function ProductPage() {
             <p className="mb-4 text-gray-600">SKU: {product.sku}</p>
 
             <div className="mb-4">
-              <p className="text-base font-medium mb-2 text-black">Select Type</p>
-              <div className="flex gap-3 flex-wrap">
-                {types.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setSelectedType(type)}
-                    className={`px-4 py-2 text-sm bg-white text-black rounded-full border-2 shadow-md transition-all focus:outline-none hover:bg-gray-100 ${
-                      selectedType === type ? "border-green-500 bg-green-50" : "border-gray-300"
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-4">
               <label
                 htmlFor="quantity"
                 className="block mb-2 text-sm font-medium text-gray-600"
@@ -133,30 +96,13 @@ export default function ProductPage() {
               </ul>
             </div>
 
-            {warning && (
-              <div className="text-red-500 font-semibold mt-4 p-3 border border-red-500 rounded-lg bg-red-100">
-                {warning}
-              </div>
-            )}
-
             <div className="space-x-4 flex md:flex-row mt-12 gap-4">
-              {selectedType !== "Photobook" && (
-                <button
-                  onClick={handleEditImage}
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
-                >
-                  Edit PDF
-                </button>
-              )}
-
-              {selectedType === "Photobook" && (
-                <button
-                  onClick={() => alert("Uploading photos for Photobook")}
-                  className="w-full bg-gray-200 text-black py-3 px-6 rounded-full border border-gray-300 hover:bg-gray-300 transition-colors shadow-md"
-                >
-                  Upload Photos
-                </button>
-              )}
+              <button
+                onClick={handleEditImage}
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
+              >
+                Edit PDF
+              </button>
 
               <button
                 onClick={handleAddtoCart}
