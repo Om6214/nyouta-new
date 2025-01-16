@@ -47,6 +47,14 @@ const Trending = () => {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 780,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
     ],
   };
   return (
