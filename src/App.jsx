@@ -66,6 +66,7 @@ function App() {
           <Route path='/edit/PhotoBook/:id' element={<PhotoBook />} />
           
           <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
+          <Route path='/edit/PlannerBook/:id' element={<ItineraryCompo />} />
 
 
           <Route path="/checkout" element={<Checkout />} />
