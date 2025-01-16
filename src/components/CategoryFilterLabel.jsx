@@ -80,6 +80,19 @@ export default function CategoryFilterLabel() {
     return categoryMatch && subCategoryMatch && subSubCategoryMatch;
   });
 
+
+  const RelatedItems = ProductJson.filter(item => {
+    const categoryMatch =  item.category.toLowerCase() === formattedPageName.toLowerCase();
+
+      const subCatego=item.subCategory.toLowerCase()===pagid.toLowerCase();
+      
+      // const subCategoryMatch = item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
+      // console.log(item.subSubCategory.toLowerCase()+"==="+formattedPath.toLowerCase())
+    
+    return categoryMatch && subCatego ;
+  });
+  console.log(RelatedItems)
+
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
 
@@ -126,15 +139,26 @@ export default function CategoryFilterLabel() {
                 modules={[Zoom, Navigation, Pagination, Autoplay]}
                 className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
               >
-                {filteredResponseData.slice(0, 4).map((item, index) => (
-                  item.image.map((src, imgIndex) => (
-                    <SwiperSlide key={`${index}-${imgIndex}`}>
-                      <div className="swiper-zoom-container">
-                        <img src={src} alt={`Slide ${index + 1}`} className="object-cover w-full h-auto" />
-                      </div>
-                    </SwiperSlide>
-                  ))
-                ))}
+                {filteredItems[0]?.category === "Planner Books" ?
+              (
+  filteredResponseData.slice(0, 4).map((item, index) =>
+    item?.image?.map((src, imgIndex) => (
+      <SwiperSlide key={`${index}-${imgIndex}`}>
+        <div className="swiper-zoom-container">
+          <img src={src} alt={`Slide ${imgIndex + 1}`} className="object-cover w-full h-auto" />
+        </div>
+      </SwiperSlide>
+    ))
+  )
+) : (
+  filteredItems[0]?.image?.map((src, index) => (
+    <SwiperSlide key={index}>
+      <div className="swiper-zoom-container">
+        <img src={src} alt={`Slide ${index + 1}`} className="object-cover w-full h-auto" />
+      </div>
+    </SwiperSlide>
+  ))
+)}
               </Swiper>
             </div>
           </div>
@@ -180,9 +204,10 @@ export default function CategoryFilterLabel() {
 
         <div className="pt-5 md:max-w-[95%] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredResponseData.map((filteredItem) => (
+          {filteredItems[0]?.category === "Planner Books" ?
+         ( filteredResponseData.map((filteredItem,index) => (
               
-              <Link  state={{ product: filteredItem }} key={filteredItem.id}>
+              <Link  state={{ product: filteredItem }} key={index}>
                 <div className="relative w-full h-[40vh]">
                   <img
                     src={filteredItem.image[0]}
@@ -194,7 +219,27 @@ export default function CategoryFilterLabel() {
                   <h2 className="text-lg font-bold text-gray-800">{filteredItem.name}</h2>
                 </div>
               </Link>
-            ))}
+            ))):(
+          RelatedItems.map((item) => (
+  <Link
+  to={`/e/nav/${item.category}/${item.subCategory}/${item.subSubCategory}`}
+    key={item.id}
+    className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+  >
+    <div className="relative w-full h-[40vh]">
+      <img
+        src={item.image[0]}
+        alt={item.subTitle}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 "
+      />
+    </div>
+    <div className="p-4 text-center">
+      <h2 className="text-lg font-bold text-gray-800">{item.subSubCategory}</h2>
+      {/* Optional: Price or other details */}
+      {/* <p className="text-gray-700 mt-2">₹{item.price}</p> */}
+    </div>
+  </Link>
+)))}
           </div>
         </div>
       </div>

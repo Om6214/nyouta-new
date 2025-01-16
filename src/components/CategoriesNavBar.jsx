@@ -540,9 +540,11 @@ const CategoriesNavBar = () => {
               </div>
 
               {/* Right Section */}
+
               <div className="relative  col-span-2 ">
                 <div className="lg:w-full w-full">
                   <motion.div className="relative h-[200px] lg:h-[380px] sm:h-[250px]   rounded-xl overflow-hidden">
+
                     {images.map((image, index) => (
                       <div
                         key={index}
