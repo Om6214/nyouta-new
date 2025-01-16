@@ -302,7 +302,10 @@ const navItems = [
         label: "Guest Management",
       },
       {
-        label: "Wedding Notepad",
+        label: "Wedding Notepad (Linear)",
+      },
+      {
+        label: "Wedding Notepad (Photo)",
       },
       {
         label: "Guest List Booklet - Best Seller",
