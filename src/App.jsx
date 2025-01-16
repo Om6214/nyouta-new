@@ -30,7 +30,7 @@ import WeddingWebsiteUrl from './pages/WeddingWebsiteUrl';
 import LoginRegister from './pages/LoginRegister';
 
 import CategoryFilterLabel from './components/CategoryFilterLabel';
-
+import Terms from "./pages/Terms";
 import JoinNyouta from './components/JoinNyouta';
 import PdfGenerator from './pages/PdfGenerator';
 import PdfGeneratorWaterMark from './pages/PdfGeneratorWaterMark';
@@ -53,6 +53,7 @@ function App() {
           <Route path='/create-wedding-website' element={<WeddingWebsiteUrl/>}/>
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/product/:id/edit-digital-card" element={<DigitalCardEditPage />} />
           <Route path="/login" element={<LoginRegister />} />
