@@ -505,7 +505,13 @@ export default function MainNav() {
     navigate("/login");
   };
   return (
-    <header
+
+    <div className="flex flex-col">
+      <div className="h-[40px] flex justify-between px-60 bg-[#FAF0DC]">
+        <div className="bg-[#af7d32] rounded-b-2xl font-semibold text-white font-avalonN  flex items-center justify-center px-4">NYOUTA</div>
+        <div className="flex items-center me-10"> <h1 className="text-[#643C28] font-bold " >Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc. &gt;&gt;&gt;&gt; Scrolling </h1></div>
+      </div>
+      <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
         isScrolled ? "bg-white shadow-md" : "bg-white"
       }`}
@@ -777,5 +783,7 @@ export default function MainNav() {
 
       {/* Mobile drawer code remains the same */}
     </header>
+    </div>
+    
   );
 }
