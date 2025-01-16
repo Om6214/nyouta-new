@@ -12,17 +12,11 @@ export const getAllTemplates = async (req, res) => {
         const templatesDir = path.join(__dirname, '../uploads/templates'); // Path to templates
         const files = fs.readdirSync(templatesDir); // Read all files in the directory
         const imagesDir = path.join(__dirname, '../uploads/images'); // Path to images
-        const images = fs.readdirSync(imagesDir); // Read all images in the directory
+        const images = fs.readdirSync(imagesDir);
+        console.log(images); // Read all images in the directory
         // Filter only .ejs files
         const ejsFiles = files.filter(file => path.extname(file) === '.ejs');
-
-        // Sample data for rendering
-        const sampleData = {
-            name: "Blake",
-            partnerName: "Sam",
-            weddingDate: "2024-12-25",
-        };
-
+        console.log(ejsFiles);
         // Render each EJS file with sample data
         const templates = ejsFiles.map(file => {
             const filePath = path.join(templatesDir, file);
@@ -41,12 +35,13 @@ export const getAllTemplates = async (req, res) => {
 
             const id = path.basename(file, '.ejs'); // Extract ID from file name
             const image=images.find((img)=>img.includes(id));
+            console.log(id,image)
             return { id, content: renderedContent,image }; // Send rendered HTML to frontend
         });
 
         res.status(200).json({ message: 'Templates fetched successfully', templates });
     } catch (error) {
-        // console.log(error)
+        console.log(error)
         res.status(500).json({ message: error.message });
     }
 };

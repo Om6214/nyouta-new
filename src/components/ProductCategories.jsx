@@ -302,9 +302,16 @@ export default function TopCategories() {
   // Filter Logic
   
   const filteredProducts = products?.filter((product) => {
+
+     // If both searchTerm and category have no meaningful values, return all products
+     if (!searchTerm && (category === 'All' || !category)) {
+      return true; // Include all products
+    }
+
+
     const matchesCategory =
       (!selectedOptions.main || product?.category === selectedOptions.main) &&
-      (!category || product?.category === category);
+      (!category || category === 'All' || product?.category === category);
   
     const matchesSubCategory =
       !selectedOptions.sub || product?.subCategory === selectedOptions.sub;

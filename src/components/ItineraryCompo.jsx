@@ -182,7 +182,7 @@ const ItineraryCompo = () => {
   return (
     <div className="w-full h-full min-h-screen bg-gray-100" tabIndex={0} onKeyDown={handleKeyDown}>
       {/* Toolbar */}
-      <div className="fixed bg-white shadow-md p-4 z-10 w-full">
+      <div className=" bg-white shadow-md p-4 z-10 w-full">
         <div className="flex items-center gap-4 flex-wrap">
           {/* Text Controls - Only show when text is selected */}
           {selectedElement?.type === 'text' && (
@@ -253,7 +253,7 @@ const ItineraryCompo = () => {
       </div>
 
       {/* Canvas */}
-      <div className="flex justify-center text-xl mb-5 pt-24">Edit Your Template</div>
+      <div className="flex justify-center text-xl mb-5 pt-5">Edit Your Template</div>
       <div 
         className="relative w-full min-h-[calc(100vh-4rem)] canvas-container"
         style={{
