@@ -147,7 +147,7 @@ export default function HeroSlider() {
               ))}
             </div>
           </motion.div>
-          <div>
+          {/* <div>
             <motion.div className="hidden lg:grid lg:grid-cols-4 gap-3 mt-2 lg:justify-center">
               {tiles.map((tile) => (
                 <div className="relative rounded-full flex flex-shrink-0 flex-col items-center justify-center">
@@ -161,21 +161,15 @@ export default function HeroSlider() {
                 </div>
               ))}
             </motion.div>
-          </div>
+          </div> */}
         </div>
         <motion.div className="lg:w-[30%] h-full flex items-center justify-center relative w-full rounded-xl">
           {/* <img className="h-[500px] lg:h-full" src={wedImg} alt="" /> */}
-          <div className="lg:px-8 flex flex-col gap-2 lg:gap-5 py-6 items-center justify-center font-heroFont bg-pink-200 rounded-lg">
-            <h1 className="text-4xl lg:text-5xl font-ttMedium uppercase text-center leading-none text-pink-600">
-              Wedding
+          <div className="lg:px-8 flex flex-col gap-2 lg:gap-3 py-3 md:w-full items-center justify-center font-heroFont bg-pink-200 rounded-lg">
+            <h1 className="font-ttMedium text-4xl text-secondary">make your own </h1>
+            <h1 className="text-4xl lg:text-4xl font-ttMedium uppercase text-center leading-none text-pink-600">
+              Wedding Website
             </h1>
-            <h1 className="text-4xl lg:text-5xl font-ttMedium uppercase text-center leading-none tracking-[13px] text-pink-600">
-              Website
-            </h1>
-            <h4 className="text-sm px-8 lg:px-0 font-semibold text-center">
-              Create your free wedding website and share all the relevant
-              details about your celebration with your guests.
-            </h4>
             <div className="flex items-center flex-col sm:flex-row gap-4">
               <img className="h-44" src={webImg} alt="" />
               <img className="h-24" src={freeImg} alt="" />
@@ -195,7 +189,7 @@ export default function HeroSlider() {
           </div>
         </motion.div>
       </div>
-      <div className="mx-2 py-2  lg:hidden">
+      <div className="mx-2 py-2">
         <div className="flex overflow-x-auto no-scrollbar lg:justify-center">
           {tiles.map((tile) => (
             <div className="relative rounded-full flex flex-shrink-0 flex-col items-center justify-center">

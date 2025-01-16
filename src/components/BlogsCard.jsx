@@ -35,7 +35,7 @@ const BlogsCard = () => {
         <div className='grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-2 font-heroFont'>
             {blogsTitle.map((blog, index) => (
                 <div key={index} className='flex flex-col items-center border-2 border-secondary rounded-lg bg-priBg'>
-                    <img className='lg:w-full object-cover lg:h-[170px] rounded-t-lg' src={blog.imgURL} alt="" />
+                    <img className='w-full object-cover h-[170px] rounded-t-lg' src={blog.imgURL} alt="" />
                     <div className='flex flex-col h-full items-start justify-between px-8 py-4 gap-2'>
                         <h1 className='text-2xl lg:text-2xl font-bold'>{blog.title}</h1>
                         <p>{blog.description}</p>
