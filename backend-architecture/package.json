@@ -9,7 +9,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm install"
-  },  
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
+    "ejs-lint": "^2.0.1",
     "express": "^4.21.1",
     "fabric": "^6.5.3",
     "jsonwebtoken": "^9.0.2",
