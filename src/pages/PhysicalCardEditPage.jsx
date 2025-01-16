@@ -188,7 +188,20 @@ export default function WeddingCardEditor() {
     setSelectedStickerId(id);
   };
 
+  const [lastTouchTime, setLastTouchTime] = useState(0);
 
+  const handleTouchEnd = (e, id) => {
+    const currentTime = new Date().getTime();
+    const timeSinceLastTouch = currentTime - lastTouchTime;
+  
+    if (timeSinceLastTouch < 300 && timeSinceLastTouch > 0) {
+      // Detected a double touch
+      setEditingField(id);
+    }
+  
+    setLastTouchTime(currentTime);
+  };
+  
 
   useEffect(() => {
     if (draggingId || resizingId) {
@@ -1121,9 +1134,7 @@ export default function WeddingCardEditor() {
     updateFieldPosition(draggingField, newX, newY);
   };
   
-  const handleTouchEnd = () => {
-    setDraggingField(null);
-  };
+ 
 
   const handleResizeTouchStart = (e, id) => {
     e.preventDefault();
@@ -1747,7 +1758,8 @@ export default function WeddingCardEditor() {
         e.preventDefault(); // Prevent default scrolling behavior during drag
         handleTouchMove(e); // Your existing touch move logic
       }} 
-      onTouchEnd={handleTouchEnd} // Updated for touch
+      //onTouchEnd={handleTouchEnd} // Updated for touch
+      onTouchEnd={(e) => handleTouchEnd(e, id)}
     >
       {/* Editable Text */}
       {editingField === id ? (
@@ -1771,8 +1783,8 @@ export default function WeddingCardEditor() {
             zIndex: selectedField === id ? 10 : 1,
             border: "2px dotted blue", // Border for the textarea when editing
             width: "fit-content", // Width based on text content
-            height: "auto", // Allow height to adjust according to the content
-            minHeight: "auto", // Ensure no minimum height
+            height: "fit-content", // Allow height to adjust according to the content
+            minHeight: "fit-content", // Ensure no minimum height
             maxWidth: "fit-content", // Prevent it from growing too large
           }}
           onInput={(e) => {
@@ -2260,3 +2272,4 @@ export default function WeddingCardEditor() {
     </div>
   );
 }
+
