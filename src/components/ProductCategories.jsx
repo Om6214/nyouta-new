@@ -86,10 +86,9 @@ export default function TopCategories() {
   const [priceFilter, setPriceFilter] = useState(3000);
   const location = useLocation();
 
-  // Parse query parameters
-  const params = new URLSearchParams(location.search);
-  const searchTerm = params.get('term') || '';
-  const category = params.get('category') || 'All';
+  
+
+
 
   const handleMainChange = (event) => {
     const { value } = event.target;
@@ -122,19 +121,37 @@ export default function TopCategories() {
     setPriceFilter(event.target.value);
   };
 
+  // Parse query parameters
+  const params = new URLSearchParams(location.search);
+  const searchTerm = params.get('term') || '';
+  const category = params.get('category') || 'All';
+  console.log(products)
   // Filter Logic
   
   const filteredProducts = products?.filter((product) => {
     const matchesCategory =
-      !selectedOptions.main || product?.category === selectedOptions.main;
+      (!selectedOptions.main || product?.category === selectedOptions.main) &&
+      (!category || product?.category === category);
+  
     const matchesSubCategory =
       !selectedOptions.sub || product?.subCategory === selectedOptions.sub;
+  
     const matchesSubSubCategory =
       !selectedOptions.subSub || product?.subSubCategory === selectedOptions.subSub;
+  
     const matchesPrice = product?.price <= priceFilter;
-
-    return matchesCategory && matchesSubCategory && matchesSubSubCategory && matchesPrice;
+  
+    const matchesSearchTerm =
+      !searchTerm || product?.name?.toLowerCase().includes(searchTerm.toLowerCase()) 
+    return (
+      matchesCategory &&
+      matchesSubCategory &&
+      matchesSubSubCategory &&
+      matchesPrice &&
+      matchesSearchTerm
+    );
   });
+  
 
   return (
     <section className="py-16 px-4 bg-priBg">
