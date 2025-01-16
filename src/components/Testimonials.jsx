@@ -368,6 +368,14 @@ export default function Testimonials() {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 780,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          initialSlide: 3,
+        },
+      },
     ],
   };
 
