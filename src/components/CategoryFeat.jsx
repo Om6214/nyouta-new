@@ -1,5 +1,4 @@
 import React from "react";
-import giftImg from "../assets/images/gift.png";
 import giftCard from "../assets/images/featured/gift.jpg";
 import greetingCard from "../assets/images/featured/greeting.jpg";
 import luggageCard from "../assets/images/featured/luggage.jpg";

@@ -1,47 +1,47 @@
 import React from "react";
 import buttonBg from "../assets/images/08.png";
 import wedImg from "../assets/images/wed.png";
-import guestPlan from "../assets/images/stressfree/guest.jpg";
-import wedPlan from "../assets/images/stressfree/wedplanL.jpg";
-import guestList from "../assets/images/stressfree/guestlist.jpeg";
-import pdfPrint from "../assets/images/stressfree/pdfprint.jpg";
-import wedNote from "../assets/images/stressfree/wednote.jpeg";
-import wedPhoto from "../assets/images/stressfree/wednoteP.jpeg";
+import guestPlan from "../assets/images/stressfree/guestplan.jpeg";
+import wedPlan from "../assets/images/stressfree/wedplan.jpg";
+import guestList from "../assets/images/stressfree/guestlist.jpg";
+import pdfPrint from "../assets/images/stressfree/checklist.jpg";
+import wedNote from "../assets/images/stressfree/wednoteliner.jpg";
+import wedPhoto from "../assets/images/stressfree/wednotephoto.jpeg";
 
 const plans = [
   {
-    title: "Wedding Management Planner Booklet",
+    title: "Management Planner",
     format: "Easy to Manage Wedding",
     btn: "Shop Now",
     imgUrl: wedPlan,
   },
   {
-    title: "Wedding Guest Management Booklet",
+    title: "Guest Management",
     format: "Easy to Manage Guests",
     btn: "Shop Now",
     imgUrl: guestPlan,
   },
   {
-    title: "Wedding Notepad(Liner) Notes for Lifetime Memory",
+    title: "Notepad (Liner)",
     format: "Write your Wedding Notes",
     btn: "Shop Now",
     imgUrl: wedNote,
   },
   {
-    title: "Wedding Notepad(Photo) Memorable Notes",
+    title: "Notepad (Photo)",
     format: "Write your Wedding Notes",
     btn: "Shop Now",
     imgUrl: wedPhoto,
   },
   {
-    title: "Download our Wedding Guest Checklist",
-    format: "PDF/XLS Editable",
+    title: "Guest Checklist Booklet",
+    format: "Easy to Manage Guests",
     btn: "Free Download",
     imgUrl: guestList,
   },
   {
-    title: "Wedding Notepad Write Wedding Notes PDF",
-    format: "PDF Printable",
+    title: "Checklist Printable",
+    format: "PDF/XLS Printable",
     btn: "Free Download",
     imgUrl: pdfPrint,
   },
@@ -76,11 +76,13 @@ const WeddingPlan = () => {
                 src={plan.imgUrl}
                 alt=""
               />
-              <div className="flex flex-col gap-2 items-center">
-                <h1 className="text-center font-semibold border-b-2 ">
+              <div className="flex flex-col gap-2 pt-1 items-center">
+                <h1 className="text-center font-semibold h-[75px] md:h-full">
+                  <span>Wedding</span> <br />
                   {plan.title}
                 </h1>
-                <h2>{plan.format}</h2>
+                <div className="w-full border-2"></div>
+                <h2 className="h-[50px] md:h-full">{plan.format}</h2>
                 <div className="relative flex flex-col items-center">
                   <img className="h-8" src={buttonBg} alt="" />
                   <button className="text-lg font-semibold absolute ">
