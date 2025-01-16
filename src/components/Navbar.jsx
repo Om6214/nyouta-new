@@ -140,7 +140,7 @@ const navItems = [
         ],
       },
       {
-        label: "Tags / Badges",
+        label: "Badges",
         Filters: [
           { a: "Luggage Tag " },
           { a: "Door Handle Tag " },
@@ -407,7 +407,7 @@ const navItems = [
       {
         label: "Photo Magnet",
         Filters: [
-          { a: "Mini Photo Magne" },
+          { a: "Mini Photo Magnet" },
           { a: "Wedding" },
           { a: "Family" },
           { a: "Birthday" },
@@ -448,10 +448,12 @@ export default function MainNav() {
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(null);
   const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [category, setCategory] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  // console.log(user);
+  console.log(user);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -462,6 +464,19 @@ export default function MainNav() {
 
   const handleDropdownToggle = (dropdown) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
+  };
+
+  const handleSearch = () => {
+    // Construct query parameters
+    const params = new URLSearchParams();
+    if (searchTerm) params.append('term', searchTerm);
+    if (category) params.append('category', category);
+
+    console.log(params.toString());
+    
+
+    // Redirect to the products page with query parameters
+    navigate(`/products?${params.toString()}`);
   };
 
   const gridVariants = {
@@ -490,7 +505,13 @@ export default function MainNav() {
     navigate("/login");
   };
   return (
-    <header
+
+    <div className="flex flex-col">
+      <div className="h-[40px] flex justify-between px-60 bg-[#FAF0DC]">
+        <div className="bg-[#af7d32] rounded-b-2xl font-semibold text-white font-avalonN  flex items-center justify-center px-4">NYOUTA</div>
+        <div className="flex items-center me-10"> <h1 className="text-[#643C28] font-bold " >Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc. &gt;&gt;&gt;&gt; Scrolling </h1></div>
+      </div>
+      <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
         isScrolled ? "bg-white shadow-md" : "bg-white"
       }`}
@@ -503,27 +524,35 @@ export default function MainNav() {
             {/* <span className="text-xl font-bold">न्यौता</span> */}
           </Link>
           <div className="lg:flex hidden">
-            <select
-              name=""
-              id=""
-              className="!pr-8 border-r-0 rounded-l-lg w-[80px]"
-            >
-              <option value="">All</option>
-              {navItems.map((item) => (
-                <option value="">{item.label}</option>
-              ))}
-            </select>
-            <input
-              className=""
-              type="search"
-              name="search"
-              id="search"
-              placeholder="I'm shopping for"
-            />
-            <button className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont">
-              Search
-            </button>
-          </div>
+      <select
+        name="category"
+        id="category"
+        className="!pr-8 border-r-0 rounded-l-lg w-[80px]"
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="">All</option>
+        {navItems.map((item, index) => (
+          <option value={item.value} key={index}>
+            {item.label}
+          </option>
+        ))}
+      </select>
+      <input
+        className="flex-1 px-4 border-t border-b border-r rounded-none focus:outline-none"
+        type="search"
+        name="search"
+        id="search"
+        placeholder="I'm shopping for..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button
+        className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont"
+        onClick={handleSearch}
+      >
+        Search
+      </button>
+    </div>
 
           {/* Right Section for Icons */}
           <div className="flex items-center gap-1 lg:gap-4">
@@ -623,7 +652,7 @@ export default function MainNav() {
               transition={{ duration: 0.3, ease: "linear" }}
               className="fixed inset-0 z-50 bg-black bg-opacity-50 lg:hidden"
             >
-              <div className="absolute right-0 h-full w-64 bg-white p-4">
+              <div className="absolute right-0 h-full w-64  bg-white p-4">
                 <button
                   className="mb-4 text-right"
                   onClick={() => setIsDrawerOpen(false)}
@@ -754,5 +783,7 @@ export default function MainNav() {
 
       {/* Mobile drawer code remains the same */}
     </header>
+    </div>
+    
   );
 }

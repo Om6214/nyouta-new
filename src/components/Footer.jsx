@@ -19,7 +19,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="hover:text-white transition-colors"
                 >
                   Contact Us

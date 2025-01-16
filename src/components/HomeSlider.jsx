@@ -32,8 +32,8 @@ const HomeSlider = () => {
           Celebrate in Style with Our Distinctively Shaped Invitations by nyouta
         </h2>
       </div>
-      <div className="flex flex-col lg:flex-row px-2 gap-4">
-        <div className=" lg:w-[70%] w-full h-full lg:h-[380px] rounded-xl">
+      <div className="flex flex-col lg:flex-row h-auto px-2 gap-4">
+        <div className=" lg:w-[70%] w-full h-[200px] sm:h-[350px]  lg:h-[380px] rounded-xl">
           <Carousel>
             <img className="rounded-xl h-full" src={img1} alt="..." />
             <img className="rounded-xl h-full" src={img2} alt="..." />

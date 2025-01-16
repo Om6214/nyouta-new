@@ -195,7 +195,9 @@ export default function LoginRegister(){
       );
 
   return (
-    <div
+
+    
+       <div
       className={` relative md:mx-[25%] mx-2 my-10 max-w-[768px] min-h-[500px] rounded-lg shadow-lg overflow-hidden bg-white transition-all duration-500 ${isRightPanelActive ? "right-panel-active" : ""}`}
     >
       {/* Sign Up Section */}
@@ -427,5 +429,6 @@ export default function LoginRegister(){
       </div>
       
     </div>
+   
   );
 };

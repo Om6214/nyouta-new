@@ -48,8 +48,8 @@ export default function About() {
   }, []);
 
   return (
-    <section className="relative bg-secondary font-heroFont">
-      <div className="container mx-auto lg:px-12 px-2 py-16 lg:py-12 text-white flex flex-col gap-4">
+    <section className="relative bg-secondary font-heroFont ">
+      <div className="container mx-auto sm:px-4 lg:px-12 px-2 py-16 lg:py-12 text-white flex flex-col gap-4">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col justify-center items-start space-y-6">
             <h1 className="text-2xl font-bold tracking-tight lg:text-3xl">
