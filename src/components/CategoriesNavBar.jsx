@@ -526,7 +526,7 @@ const CategoriesNavBar = () => {
           <div className="pt-4 pb-4 px-6 md:px-16">
 
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center min-h-[28vh] sm:h-[300px]  w-full"
+              className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center min-h-[28vh] sm:h-[300px] lg:h-[400px] w-full"
             >
 
               {/* Left Section */}
@@ -540,9 +540,11 @@ const CategoriesNavBar = () => {
               </div>
 
               {/* Right Section */}
+
               <div className="relative  col-span-2 ">
                 <div className="lg:w-full w-full">
-                  <motion.div className="relative h-[380px] sm:h-[250px]  rounded-xl overflow-hidden">
+                  <motion.div className="relative h-[200px] lg:h-[380px] sm:h-[250px]   rounded-xl overflow-hidden">
+
                     {images.map((image, index) => (
                       <div
                         key={index}
@@ -643,7 +645,7 @@ const CategoriesNavBar = () => {
                     className="w-full  h-[90%]  object-cover transition-transform duration-300 ease-in-out "
                   />
                   <div className="p-4 h-[10%] w-full flex justify-center items-center">
-                    <h2 className="text-md font-semibold text-nowrap ">{item.subTitle.length > 20 ? `${item.subTitle.slice(0, 10)}...` : item.subTitle}</h2>
+                    <h2 className="text-lg sm:text-md  font-semibold text-nowrap py-2 ">{item.subTitle.length > 21 ? `${item.subTitle.slice(0, 21)}...` : item.subTitle}</h2>
                   </div>
                 </Link>
               ))}
