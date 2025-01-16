@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Plus, Camera } from 'lucide-react';
+import { X, Plus, Camera, User } from 'lucide-react';
 import { updateWeddingWebsitedata, getWeddingWebsitedata } from '../Store/slices/weddingwebsiteSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,8 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
   // console.log(id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const { weddingwebsiteData } = useSelector((state) => state.weddingwebsite);
   // console.log(weddingwebsiteData);
   useEffect(() => {
@@ -63,10 +65,11 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
     tags: weddingwebsiteData?.tags || [],
     gallery: {
       photos: weddingwebsiteData?.gallery.photos || []
-    }
+    },
+    websitePassword: user?.websitePassword || ''
   });
-
-  // console.log(formData);
+  
+  console.log(formData);
   const [sections, setSections] = useState({
     basic: true,
     quotes: true,
@@ -161,7 +164,6 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
       }
     }));
   };
-
   const handleChange = (e, section, field, subfield = null) => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
@@ -184,6 +186,14 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
       }));
     }
   };
+
+  const setPassword=async(e)=>{
+    const { value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      websitePassword: value
+    }));
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -695,6 +705,18 @@ const WeddingPortfolioForm = ({ id, setShowForm }) => {
             </div>
           </div>
         )}
+
+        {/* Website Password Section */}
+        <div className="bg-white/80 p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-serif text-amber-800 mb-6">Website Password (Optional)</h2>
+          <input
+            type="password"
+            value={formData.websitePassword}
+            onChange={setPassword}
+            className="w-full p-2 border border-slate-300 rounded focus:outline-none focus:border-amber-400"
+            placeholder="Enter website password (optional)"
+          />
+        </div>
 
         {/* Submit Button */}
         <div className="text-center">

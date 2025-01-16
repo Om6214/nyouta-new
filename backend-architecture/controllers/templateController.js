@@ -13,35 +13,40 @@ export const getAllTemplates = async (req, res) => {
         const files = fs.readdirSync(templatesDir); // Read all files in the directory
         const imagesDir = path.join(__dirname, '../uploads/images'); // Path to images
         const images = fs.readdirSync(imagesDir);
-        console.log(images); // Read all images in the directory
+        // console.log(images); // Read all images in the directory
         // Filter only .ejs files
         const ejsFiles = files.filter(file => path.extname(file) === '.ejs');
-        console.log(ejsFiles);
+        // console.log(ejsFiles);
         // Render each EJS file with sample data
         const templates = ejsFiles.map(file => {
             const filePath = path.join(templatesDir, file);
             const content = fs.readFileSync(filePath, 'utf-8'); // Read the file content
 
-            // Render the EJS template with data
-            const renderedContent = ejs.render(content, {
-                home: null,
-                about: null,
-                ourStory: null,
-                socialLinks: null,
-                tags: null,
-                eventInfo: null,
-                gallery:null
-            });
+            try {
+                // Render the EJS template with data
+                const renderedContent = ejs.render(content, {
+                    home: null,
+                    about: null,
+                    ourStory: null,
+                    socialLinks: null,
+                    tags: null,
+                    eventInfo: null,
+                    gallery: null
+                }); // Enable debug mode
 
-            const id = path.basename(file, '.ejs'); // Extract ID from file name
-            const image=images.find((img)=>img.includes(id));
-            console.log(id,image)
-            return { id, content: renderedContent,image }; // Send rendered HTML to frontend
+                const id = path.basename(file, '.ejs'); // Extract ID from file name
+                const image = images.find((img) => img.includes(id));
+                // console.log(id, image);
+                return { id, content: renderedContent, image }; // Send rendered HTML to frontend
+            } catch (error) {
+                // console.error('Error rendering EJS template:', error.message); // Log the error message
+                throw error; // Rethrow the error for further handling
+            }
         });
 
         res.status(200).json({ message: 'Templates fetched successfully', templates });
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.status(500).json({ message: error.message });
     }
 };

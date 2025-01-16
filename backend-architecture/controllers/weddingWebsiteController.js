@@ -79,6 +79,9 @@ export const getWeddingWebsite = async (req, res) => {
             return res.status(404).json({ message: 'Wedding website not found' });
         }
         const weddingWebsite= await WeddingWebsite.find({user: user._id});
+        if(weddingWebsite&&user.websitePassword){
+            return res.status(401).json({ message: 'Password Required' });
+        }
         // console.log(weddingWebsite);
         const templateId = user.templateId;
         const templatesDir = path.join(__dirname, '../uploads/templates');
@@ -126,7 +129,7 @@ function formatNamesAndId(name1, name2, id) {
 
 export const updateWeddingWebsitedata = async (req, res) => {
     try {
-        const {home,about,ourStory,socialLinks,tags,eventInfo,gallery} = req.body;
+        const {home,about,ourStory,socialLinks,tags,eventInfo,gallery,websitePassword} = req.body;
         const { userId } = req.user; 
         const { id } = req.params; // Get templateId from params
 
@@ -137,6 +140,7 @@ export const updateWeddingWebsitedata = async (req, res) => {
         }
         // console.log(user.slug);
         user.slug=formatNamesAndId(home.name,home.partnerName,user._id);
+        user.websitePassword=websitePassword;
         // console.log(user.slug);
         await user.save();
         // Check if WeddingWebsite exists
@@ -194,3 +198,48 @@ export const getweddingWebsitedata=async(req,res)=>{
     }
 }
 
+export const verifyWeddingWebsite = async (req, res) => {
+    try {
+        const { password, slug } = req.body;
+        const user = await User.findOne({ slug });
+        if (!user) {
+            return res.status(404).json({ message: "Wedding website not found" });
+        }
+        if (user.websitePassword === password) {
+            // Fetch the wedding website data
+            const weddingWebsite = await WeddingWebsite.find({ user: user._id });
+            const templateId = user.templateId;
+            const templatesDir = path.join(__dirname, '../uploads/templates');
+            const filePath = path.join(templatesDir, `${templateId}.ejs`);
+            const content = fs.readFileSync(filePath, 'utf-8');
+
+            let html;
+            if (!weddingWebsite) {
+                html = await ejs.render(content, {
+                    home: null,
+                    about: null,
+                    ourStory: null,
+                    socialLinks: null,
+                    tags: null,
+                    eventInfo: null,
+                    gallery: null
+                });
+            } else {
+                html = await ejs.render(content, {
+                    home: weddingWebsite[0].home,
+                    about: weddingWebsite[0].about,
+                    ourStory: weddingWebsite[0].ourStory,
+                    socialLinks: weddingWebsite[0].socialLinks,
+                    tags: weddingWebsite[0].tags,
+                    eventInfo: weddingWebsite[0].eventInfo,
+                    gallery: weddingWebsite[0].gallery,
+                });
+            }
+            res.status(200).json({ message: 'Password Matched', html });
+        } else {
+            res.status(401).json({ message: 'Password Not Matched' });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Server error. Please try again later." });
+    }
+}

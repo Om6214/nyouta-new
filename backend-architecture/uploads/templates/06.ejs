@@ -4,9 +4,8 @@
     <style>
     @font-face { font-family: AlexBrushReg; src: url('./fonts/AlexBrush-Regular.ttf'); } 
     @font-face { font-family: Gistesy; src: url('./fonts/Gistesy.ttf'); } 
-    @font-face { font-family: GreatVIbe; src: url('./great-vibes/GreatVibes-Regular.ttf'); } 
+    @font-face { font-family: GreatVIbe; src: url('./assets/great-vibes/GreatVibes-Regular.ttf'); } 
     
-
         body {
             margin: 0;
             padding: 20px;
@@ -268,12 +267,40 @@
         
         </div>
     </div>
+    <% 
+function formatTime(timeString) {
+    const [hour, minute] = timeString.split(':').map(Number);
+    const period = hour >= 12 ? 'PM' : 'AM'; // Change to 'PM'/'AM'
+    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
+    return `${formattedHour}:${minute.toString().padStart(2, '0')} ${period}`; // Format to "HH:MM AM/PM"
+}
+%>
+    <% 
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = {  month: 'long' };
+            const day = date.getDate();
+            // Function to get the ordinal suffix
+            function getOrdinalSuffix(day) {
+                if (day > 3 && day < 21) return 'th'; // Covers 11th to 19th
+                switch (day % 10) {
+                    case 1: return 'st';
+                    case 2: return 'nd';
+                    case 3: return 'rd';
+                    default: return 'th';
+                }
+            }
+        
+            const dayWithSuffix = day + getOrdinalSuffix(day);
+            return `${date.toLocaleDateString('en-US', options)} ${dayWithSuffix}, ${date.getFullYear()}`;
+        }
+        %>
     <div class="image-container">
         <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920737/Template4/sk9bcqtmgsuna9pyhjon.png" alt="Background 1" class="background-image" style="">
-        <div class="text-overlay text-1e" style="color: #0b2057; font-family: 'AlexBrushReg';"> <h3>12/03/2025</h3></div>
-        <div class="text-overlay text-1" style="color: #705953; font-family: 'GreatVIbe';"> <h2>Groom</h2></div>
+        <div class="text-overlay text-1e" style="color: #0b2057; font-family: 'AlexBrushReg';"> <h3><%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%></h3></div>
+        <div class="text-overlay text-1" style="color: #705953; font-family: 'GreatVIbe';"> <h2><%= (home && home.name) ? home.name:"Groom"%></h2></div>
         <div class="text-overlay text-1b" style="color: #705953;font-family: 'GreatVIbe'"> <h3>Weds</h3></div>
-        <div class="text-overlay text-1c" style="color: #705953; font-family: 'GreatVIbe'"> <h2>Bride</h2></div>
+        <div class="text-overlay text-1c" style="color: #705953; font-family: 'GreatVIbe'"> <h2><%= (home && home.partnerName)? home.partnerName:"Bride" %></h2></div>
             
         </div>
     </div>
@@ -284,23 +311,23 @@
         <div class="text-overlay text-2ar"><img src="https://img.freepik.com/free-photo/wedding-ritual-putting-ring-finger-india_8353-10048.jpg?t=st=1736498720~exp=1736502320~hmac=7393ce11b05a7acf8635f5af31c6850b4a47fa1c1bae7757f994177578390987&w=996" alt="Bg image" style="height: 10rem;" ></div>
 
         <div class="text-overlay text-2a">
-            <h2 id="text2a" style="font-family: Gistesy; font-size: 4rem;font-weight:300;color: #be7329;">Groom</h2>
+            <h2 id="text2a" style="font-family: Gistesy; font-size: 4rem;font-weight:300;color: #be7329;"><%= (home && home.name) ? home.name:"Groom"%></h2>
         </div>
         <div class="text-overlay text-2b">
-            <h2 id="text2b" style="font-family: Gistesy; font-size: 4rem;font-weight:300;color: #be7329;">Bride</h2>
+            <h2 id="text2b" style="font-family: Gistesy; font-size: 4rem;font-weight:300;color: #be7329;"><%= (home && home.partnerName)? home.partnerName:"Bride" %></h2>
         </div>
             <div class="text-overlay text-2c">
-            <p id="text2c">Veil unity seat covers groomsman family mother church glitter tuxedo. Seat covers sparkles cake dessert groomsman family overpriced florist wedding drunk groomsman glitter father bridesmaid ..</p>
+            <p id="text2c"><%=(about && about.groom && about.groom.description) ? about.groom.description : "What can I say, she is amazing. Brilliant, creative, and adventurous. I have always been a little bit shy, and she has shown me a whole new side of life. I never want to go back to the way life was before I met her. She is my forever." %></p>
         </div>
         <div class="text-overlay text-2d">
-            <p id="text2c">Veil unity seat covers groomsman family mother church glitter tuxedo. Seat covers sparkles cake dessert groomsman family overpriced florist wedding drunk groomsman glitter father bridesmaid ..</p>
+            <p id="text2c"><%=(about && about.bride && about.bride.description) ? about.bride.description : "I think the moment I knew he was 'the one' was when I had a work assignment that would take me to France for 10 weeks.It was only once I was on the plane I realized how much I would miss him. I never wanted to be without him again!" %></p>
         </div>
     </div>
 
     <div class="image-container">
         <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920736/Template4/wwuqyrmwmh1skj0bfqkq.png" alt="Background 1" class="background-image">
         <div class="text-overlay text-1d" style="color: black;">
-                        <p id="text2c">Veil unity seat covers groomsman family mother church glitter tuxedo. Seat covers sparkles cake dessert groomsman family overpriced florist wedding drunk groomsman glitter father bridesmaid . Aisle first forever happy salad father bridesmaid mother guitar acoustic bass unity cheers overpriced florist beautiful, seat covers flowers.</p>
+                        <p id="text2c"><%= (ourStory && ourStory.description) ? ourStory.description : "For our three year anniversary we wanted to re-create our first date. We went to the coffee shop where we met, and then to the small movie theater next door. Instead of a movie, he surprised me with a theater full of friends and family then proposed on stage. It is so meaningful to us to share this special day with our most cherished friends and family. We sincerely hope we will have the honor to dine, laugh, and dance with you on our wedding weekend. It would mean the world to us." %></p>
 
         </div>
     </div>
@@ -311,19 +338,11 @@
     <div class="image-container">
         <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920735/Template4/ft5mkux6gc2lmtmpgrvm.png" alt="Background 3" class="background-image">
         <div class="text-overlay text-3">
-            <h3 >July 14, 2025 | 3:00 PM</h3>
-             <h4>Lernerra Luxury Resort
-                123 Anywhere St., Any City, ST</h4>
+            <h3 >Date: <%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%></h3><h3>Time: <%= ((eventInfo && eventInfo.time) ? formatTime(eventInfo.time) : '3:00 PM') %></h3>
+            <h4>Venue: <%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) ?eventInfo.venue.address:'Lernerra Luxury Resort 123 Anywhere St., Any City, ST' %> </h4>
             </div>
             <div class="text-overlay text-5a">
-                <iframe style="height: 35%;max-width: 35%;" src="https://www.google.com/maps/embed?pb
-    =!1m18!1m12!1m3!1d4291.745453141256!2d
-    77.39914006293347!3d28.504393188935435!
-    2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1
-    !3m3!1m2!1s0x390ce626851f7009%3A0x62118
-    5133cfd1ad1!2sGeeksforGeeks%20%7C%20
-    Coding%20Classes%20%7C%20Noida!5e0!3m2!1
-    sen!2sin!4v1725395799894!5m2!1sen!2sin" width="600" height="450" style="border: 0" allowfullscreen=""
+                <iframe style="height: 35%;max-width: 35%;" src="<%=(eventInfo&&eventInfo.venue&&eventInfo.venue.location)? eventInfo.venue.location :'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.4051603706222!3d28.50292593193056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce626851f7009%3A0x621185133cfd1ad1!2sGeeksforGeeks!5e0!3m2!1sen!2sin!4v1585040658255!5m2!1sen!2sin'%>"  width="600" height="450" style="border: 0" allowfullscreen=""
         loading="lazy" referrerpolicy="no-referrer-when-downgrade">
     </iframe>
             </div>
@@ -362,9 +381,8 @@
             
         </div>
         <div class="text-overlay text-5" style="color: rgb(0, 0, 0); font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-            <h4 >July 14, 2025 |<br/> 3:00 PM</h4>
-             <h4>Lernerra Luxury Resort
-                123 Anywhere St., Any City, ST</h4>
+            <h4 ><%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%> |<br/> <%= ((eventInfo && eventInfo.time) ? formatTime(eventInfo.time) : '3:00 PM') %></h4>
+             <h4><%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) ?eventInfo.venue.address:'Lernerra Luxury Resort 123 Anywhere St., Any City, ST' %></h4>
             </div>
     </div>
 
@@ -376,11 +394,19 @@
 
     <div class="image-container">
         <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920737/Template4/j1axf8b0dbtoxle4dgqr.png" alt="Background 1" class="background-image">
-        <div class="text-overlay image-5a"><img style="width: 40%;" src="https://img.freepik.com/free-photo/hands-indian-bride-groom-intertwined-together-making-authentic-wedding-ritual_8353-10047.jpg?t=st=1736511790~exp=1736515390~hmac=b29959ea96b1d013e147d78fd2cad2ef63a2aadea354c29248791113f27674e7&w=996"></div>
+        <% if (gallery && gallery.photos && gallery.photos.length > 0) { %>
+            <% gallery.photos.forEach(function(photo) { %>
+                <div class="text-overlay image-5a"><img style="width: 40%;" src="<%= photo %>"></div>
+            <% }); %>
+        <% } else { %>
+            <div class="text-overlay image-5a"><img style="width: 40%;" src="https://img.freepik.com/free-photo/hands-indian-bride-groom-intertwined-together-making-authentic-wedding-ritual_8353-10047.jpg?t=st=1736511790~exp=1736515390~hmac=b29959ea96b1d013e147d78fd2cad2ef63a2aadea354c29248791113f27674e7&w=996"></div>
         <div class="text-overlay image-5b"><img style="width: 40%;" src="https://img.freepik.com/free-photo/wedding-ritual-putting-ring-finger-india_8353-10048.jpg?t=st=1736511808~exp=1736515408~hmac=5d264b6af63ac33e67e5bc8a6464b4c004a0e158bc1ca2fdc70a0e3b33825a94&w=996"></div>
         <div class="text-overlay image-5bc"><img style="width: 40%;" src="https://img.freepik.com/free-photo/groom-putting-ring-bride-s-finger_1157-338.jpg?t=st=1736921469~exp=1736925069~hmac=e7965d7cfcaa53b515219a0b86e926d27ee83c64edb2f6671939351ff5a35e87&w=996"></div>
         <div class="text-overlay image-5c"><img style="width: 40%;" src="https://img.freepik.com/free-photo/mehndi-wedding-ornament-hands-drawn-by-henna_8353-9769.jpg?t=st=1736511824~exp=1736515424~hmac=17f818d726cf191970c138c4e0a8733c65479f07314e9c323b1f02e586985619&w=996"></div>
         <div class="text-overlay image-5d"><img style="width: 40%;" src="https://img.freepik.com/free-photo/mehndi-designs-hands-beautiful-traditional-indian-jewelry_8353-9766.jpg?t=st=1736511847~exp=1736515447~hmac=152b98dde4c3c78d27638abb1815f4332404ceb7b3751aef185ce3417adc4222&w=996"></div>
+    
+        <% } %>
+        
          
          </div>
 

@@ -168,8 +168,8 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-    const { _id, name, email: userEmail, phone, role, isWebsiteCreated } = user;
-    res.json({ token, user: { _id, name, userEmail, phone, role, isWebsiteCreated } });
+    const { _id, name, email: userEmail, phone, role, isWebsiteCreated,websitePassword } = user;
+    res.json({ token, user: { _id, name, userEmail, phone, role, isWebsiteCreated,websitePassword } });
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: error.message });
@@ -216,6 +216,7 @@ export const verifyEmail = async (req, res) => {
         phone: user.phone,
         role: user.role,
         isWebsiteCreated: user.isWebsiteCreated,
+        websitePassword: user.websitePassword,
       },
     });
   } catch (error) {
@@ -257,6 +258,7 @@ export const googleSignup = async (req, res) => {
           avatar: user.avatar,
           role: user.role,
           isWebsiteCreated: user.isWebsiteCreated,
+          websitePassword: user.websitePassword,
         },
         message: "Signed in successfully",
       });
@@ -298,6 +300,7 @@ export const googleSignup = async (req, res) => {
           avatar: newUser.avatar,
           role: newUser.role,
           isWebsiteCreated: newUser.isWebsiteCreated,
+          websitePassword: newUser.websitePassword,
         },
         message: "Signed up successfully",
       });

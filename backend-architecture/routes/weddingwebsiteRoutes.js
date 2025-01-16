@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import {authenticateToken} from '../middlewares/authMiddleware.js';
-import { getWeddingWebsite,createWeddingWebsite,updateWeddingWebsite,getWeddingWebsitePreview,updateWeddingWebsitedata,getweddingWebsitedata } from '../controllers/weddingWebsiteController.js';
+import { getWeddingWebsite,createWeddingWebsite,updateWeddingWebsite,getWeddingWebsitePreview,updateWeddingWebsitedata,getweddingWebsitedata,verifyWeddingWebsite } from '../controllers/weddingWebsiteController.js';
 
 /* wedding website routes */
 router.get('/getWeddingWebsite/:slug', getWeddingWebsite);
@@ -10,6 +10,7 @@ router.get('/getWeddingWebsite/:templateId', authenticateToken, getWeddingWebsit
 router.post('/createWeddingWebsite/:templateId', authenticateToken, createWeddingWebsite);
 router.put('/updateWeddingWebsite/:templateId', authenticateToken, updateWeddingWebsite);
 router.put('/updateWeddingWebsitedata/:id', authenticateToken, updateWeddingWebsitedata);
+router.post('/verify-wedding-website',verifyWeddingWebsite);
 // router.delete('/deleteWeddingWebsite/:id', deleteWeddingWebsite);
 
 export default router;

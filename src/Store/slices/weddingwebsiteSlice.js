@@ -16,7 +16,25 @@ export const getWeddingWebsite = createAsyncThunk(
             const response = await axios.get(`${BASE_URL}/weddingwebsite/getWeddingWebsite/${slug}`);
             return response.data;
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue({
+                message: error.message,
+                status: error.response ? error.response.status : null,
+            });
+        }
+    }
+);
+
+export const verifyWeddingWebsite = createAsyncThunk(
+    "weddingwebsite/verifyWeddingWebsite",
+    async (data, thunkAPI) => {
+        try {
+            const response = await axios.post(`${BASE_URL}/weddingwebsite/verify-wedding-website`, data);
+            return response;
+        } catch (error) {
+            return thunkAPI.rejectWithValue({
+                message: error.message,
+                status: error.response ? error.response.status : null,
+            });
         }
     }
 );
@@ -94,6 +112,18 @@ const weddingwebsiteSlice = createSlice({
             state.weddingwebsiteData = action.payload;
         });
         builder.addCase(getWeddingWebsitedata.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+
+        builder.addCase(verifyWeddingWebsite.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(verifyWeddingWebsite.fulfilled, (state, action) => {
+            state.loading = false;
+            state.weddingWebsite = action.payload.data;
+        });
+        builder.addCase(verifyWeddingWebsite.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         });
