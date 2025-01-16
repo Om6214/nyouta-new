@@ -16,6 +16,7 @@ import MemoryCard from '../components/MemoryCard'
 import SurpriseCard from '../components/SurpriseCard'
 import RewardCard from '../components/RewardCard'
 import CouponCard from '../components/CouponCard'
+import TopProducts from '../components/TopProducts'
 
 const Home = () => {
   return (
@@ -23,7 +24,8 @@ const Home = () => {
       <HeroSlider/>
       {/* <HeroBanner/> */}
       <CategoryCard/>
-      <FeaturedProducts/>
+      {/* <FeaturedProducts/> */}
+      <TopProducts/>
       <HomeSlider/>
       <WeddingPlan/>
       <CategoryFeat/>

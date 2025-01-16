@@ -32,7 +32,7 @@ export default function WeddingCardEditor() {
   const [newText, setNewText] = useState('');
   const [sizeValue, setSizeValue] = useState(30);
   const [textFields, setTextFields] = useState([
-  
+
   ]);
   const [dragging, setDragging] = useState(false);
   const [editingField, setEditingField] = useState(null);
@@ -121,7 +121,7 @@ export default function WeddingCardEditor() {
       setCurrentImageIndex((prevIndex) => prevIndex - 1);
     }
   };
-  
+
   const handleAddNewText = () => {
     const newTextField = {
       id: Date.now(), // Unique ID based on timestamp
@@ -139,7 +139,7 @@ export default function WeddingCardEditor() {
     };
     setTextFields([...textFields, newTextField]);
   };
- 
+
   const handleImageClick = (id) => {
     // Set the selected image when clicked
     setSelectedImageId(id);
@@ -193,15 +193,15 @@ export default function WeddingCardEditor() {
   const handleTouchEnd = (e, id) => {
     const currentTime = new Date().getTime();
     const timeSinceLastTouch = currentTime - lastTouchTime;
-  
+
     if (timeSinceLastTouch < 300 && timeSinceLastTouch > 0) {
       // Detected a double touch
       setEditingField(id);
     }
-  
+
     setLastTouchTime(currentTime);
   };
-  
+
 
   useEffect(() => {
     if (draggingId || resizingId) {
@@ -794,20 +794,20 @@ export default function WeddingCardEditor() {
     setShowStickerSelector(false);
   };
 
-/*
-  const updateTextField = (id, updates) => {
-    setTextFields((prevFields) =>
-      prevFields.map((field) =>
-        field.id === id ? { ...field, ...updates } : field
-      )
-    );
-  };
-  */
-  
+  /*
+    const updateTextField = (id, updates) => {
+      setTextFields((prevFields) =>
+        prevFields.map((field) =>
+          field.id === id ? { ...field, ...updates } : field
+        )
+      );
+    };
+    */
+
 
 
   // Function to update text field properties
-  
+
   const updateTextField = (id, property, value) => {
     setTextFields(prev =>
       prev.map(textField =>
@@ -815,7 +815,7 @@ export default function WeddingCardEditor() {
       )
     );
   };
-  
+
 
   // Function to handle the deletion of a text field
   const handleDelete = (id) => {
@@ -1122,19 +1122,19 @@ export default function WeddingCardEditor() {
     setDraggingField(id);
     setTouchOffset({ x: touch.clientX - x, y: touch.clientY - y });
   };
-  
+
   const handleTouchMove = (e) => {
     if (!draggingField) return;
-  
+
     const touch = e.touches[0];
     const newX = touch.clientX - touchOffset.x;
     const newY = touch.clientY - touchOffset.y;
-  
+
     e.preventDefault(); // Prevent screen scrolling
     updateFieldPosition(draggingField, newX, newY);
   };
-  
- 
+
+
 
   const handleResizeTouchStart = (e, id) => {
     e.preventDefault();
@@ -1196,23 +1196,23 @@ export default function WeddingCardEditor() {
 
 
 
-  
+
   const handleRotateTouchMove = (e) => {
     if (!rotateState || e.touches.length !== 1) return; // Ensure a single touch point
-  
+
     const touch = e.touches[0];
     const { id, startAngle, centerX, centerY } = rotateState;
-  
+
     // Calculate the current angle based on touch position
     const currentAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
-  
+
     // Calculate the rotation difference
     const angleDiff = currentAngle - startAngle;
-  
+
     // Update the rotation angle of the text field
     updateTextField(id, 'angle', (angleDiff * 180) / Math.PI); // Convert radians to degrees
   };
-  
+
 
 
   // Perform rotation
@@ -1226,7 +1226,7 @@ export default function WeddingCardEditor() {
   if (loading) return <ShimmerSkeleton />;
 
   return (
-    <div className="container mx-auto  md:bg-gradient-to-br">
+    <div className="w-screen h-screen  container mx-auto  md:bg-gradient-to-br ">
 
       <div className="w-full text-center flex justify-between items-center bg-gray-100 shadow-md">
         {/* Undo/Redo Buttons */}
@@ -1251,7 +1251,7 @@ export default function WeddingCardEditor() {
 
         {/* Header */}
         <div className="flex-1 text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900 hidden md:block tracking-wide">
+          <h1 className="text-3xl font-extrabold text-gray-900 hidden md:block tracking-wide">
             Editing Screen
           </h1>
         </div>
@@ -1260,7 +1260,7 @@ export default function WeddingCardEditor() {
         <button
           onClick={handleDownloadPDF}
           disabled={isDownloading}
-          className="px-6 py-2 lg:mt-3 md:mt-4 lg:mb-3 mb-3 rounded-full bg-[#AF7D32] text-white font-semibold text-lg shadow-lg transition-all duration-300 transform hover:scale-110 hover:bg-[#643C28] focus:ring-4 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-3"
+          className="px-4 py-2 lg:mt-1 md:mt-1 lg:mb-1 mb-1 rounded-full bg-[#AF7D32] text-white font-semibold text-lg shadow-lg transition-all duration-300 transform hover:scale-110 hover:bg-[#643C28] focus:ring-4 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-3"
         >
 
           <FaFilePdf size={24} />
@@ -1309,11 +1309,11 @@ export default function WeddingCardEditor() {
           )}
 
           {/* Fixed Customize Image Button */}
-          <div className="fixed bottom-4 left-20  sm:left-10 md:left-16 lg:left-20 xl:left-24  z-5">
+          <div className="fixed bottom-4 left-20  sm:left-10 md:left-16 lg:left-20 xl:left-14  z-5">
 
             <button
               onClick={openCustomizeModal}
-              className="flex items-center justify-center gap-2 px-6 py-4 bg-[#AF7D32] text-white 
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-[#AF7D32] text-white 
               font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 
               transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none "
             >
@@ -1353,13 +1353,14 @@ export default function WeddingCardEditor() {
           isDownload && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 flex items-center justify-center min-h-screen bg-gray-200">
               <div className="bg-white rounded-lg shadow-lg p-6 w-[400px] relative">
-                <div className=" rounded-t-lg text-center text-white py-4 w-54">
+                <div className="rounded-t-lg text-center text-white cover w-80 h-60 ml-4">
                   <img
-                    src={welcome} // Replace with the actual image URL
+                    src={imageUrl} // Replace with the actual image URL
                     alt="Design Preview"
-                    className="mx-auto rounded-md"
+                    className="h-full w-full rounded-md object-cover"
                   />
                 </div>
+
                 <div className="mt-6 text-center">
                   <p className="text-lg font-semibold">
                     Would you like to remove the watermark from your design?
@@ -1705,188 +1706,188 @@ export default function WeddingCardEditor() {
                 </Rnd>
               ))}
 
-{textFields.map(
-  ({
-    id,
-    text,
-    x,
-    y,
-    size,
-    font,
-    fontColor,
-    angle, // Rotation
-    isBold,
-    isItalic,
-    textAlign,
-    lineHeight,
-    letterSpacing,
-    isUppercase,
-    isLowercase,
-    curveValue,
-  }) => (
-    <div
-      key={id}
-      className="absolute"
-      style={{
-        top: `${y}px`,
-        left: `${x}px`,
-        fontSize: `${size}px`,
-        fontFamily: font,
-        color: fontColor,
-        fontWeight: isBold ? "bold" : "normal",
-        fontStyle: isItalic ? "italic" : "normal",
-        letterSpacing: `${letterSpacing}px`,
-        lineHeight: `${lineHeight}`,
-        whiteSpace: "nowrap",
-        overflow: "visible",
-        textAlign: textAlign,
-        cursor: "move",
-        zIndex: selectedField === id ? 10 : 1,
-        border:
-          selectedField === id && editingField !== id
-            ? "2px dotted blue"
-            : "none", // Apply border only when not in edit mode
-        width: "fit-content",
-        transformOrigin: "center",
-        transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply Rotation
-        touchAction: "none", // Prevent scrolling on touch devices while dragging
-      }}
-      onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
-      onMouseDown={(e) => handleMouseDown(e, id, x, y)}
-      onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Updated for touch
-      onTouchMove={(e) => {
-        e.preventDefault(); // Prevent default scrolling behavior during drag
-        handleTouchMove(e); // Your existing touch move logic
-      }} 
-      //onTouchEnd={handleTouchEnd} // Updated for touch
-      onTouchEnd={(e) => handleTouchEnd(e, id)}
-    >
-      {/* Editable Text */}
-      {editingField === id ? (
-        <textarea
-          value={text}
-          onChange={(e) => handleTextChange(id, e.target.value)}
-          onBlur={() => setEditingField(null)} // Exit edit mode on blur
-          autoFocus
-          className="bg-transparent border-none outline-none resize-none"
-          style={{
-            fontSize: `${size}px`,
-            fontFamily: font,
-            color: fontColor,
-            fontWeight: isBold ? "bold" : "normal",
-            fontStyle: isItalic ? "italic" : "normal",
-            letterSpacing: `${letterSpacing}px`,
-            lineHeight: `${lineHeight}`,
-            whiteSpace: "nowrap",
-            overflow: "hidden", // Prevent scrollbars from appearing
-            textAlign: textAlign,
-            zIndex: selectedField === id ? 10 : 1,
-            border: "2px dotted blue", // Border for the textarea when editing
-            width: "fit-content", // Width based on text content
-            height: "fit-content", // Allow height to adjust according to the content
-            minHeight: "fit-content", // Ensure no minimum height
-            maxWidth: "fit-content", // Prevent it from growing too large
-          }}
-          onInput={(e) => {
-            e.target.style.height = "auto"; // Reset height before adjusting
-            e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
-          }}
-          onFocus={(e) =>
-            e.target.setSelectionRange(e.target.value.length, e.target.value.length)
-          } // Place cursor at the end when focused
-        />
-      ) : (
-        <div
-          style={{
-            display: "inline-block",
-            padding: "2px 5px",
-            cursor: "text",
-          }}
-        >
-          {text.split("\n").map((line, index) => (
-            <div key={index}>
-              {line.split("").map((char, charIndex) => {
-                const curve = curveValue || 0;
-                const angle =
-                  (Math.PI * curve * (charIndex - Math.floor(line.length / 2))) /
-                  line.length;
-                const radius = 100;
-                return (
-                  <span
-                    key={charIndex}
+              {textFields.map(
+                ({
+                  id,
+                  text,
+                  x,
+                  y,
+                  size,
+                  font,
+                  fontColor,
+                  angle, // Rotation
+                  isBold,
+                  isItalic,
+                  textAlign,
+                  lineHeight,
+                  letterSpacing,
+                  isUppercase,
+                  isLowercase,
+                  curveValue,
+                }) => (
+                  <div
+                    key={id}
+                    className="absolute"
                     style={{
-                      position: "relative",
-                      transform: `rotate(${angle}rad) translateY(-${radius}px)`,
+                      top: `${y}px`,
+                      left: `${x}px`,
+                      fontSize: `${size}px`,
+                      fontFamily: font,
+                      color: fontColor,
+                      fontWeight: isBold ? "bold" : "normal",
+                      fontStyle: isItalic ? "italic" : "normal",
+                      letterSpacing: `${letterSpacing}px`,
+                      lineHeight: `${lineHeight}`,
+                      whiteSpace: "nowrap",
+                      overflow: "visible",
+                      textAlign: textAlign,
+                      cursor: "move",
+                      zIndex: selectedField === id ? 10 : 1,
+                      border:
+                        selectedField === id && editingField !== id
+                          ? "2px dotted blue"
+                          : "none", // Apply border only when not in edit mode
+                      width: "fit-content",
                       transformOrigin: "center",
+                      transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply Rotation
+                      touchAction: "none", // Prevent scrolling on touch devices while dragging
                     }}
+                    onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
+                    onMouseDown={(e) => handleMouseDown(e, id, x, y)}
+                    onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Updated for touch
+                    onTouchMove={(e) => {
+                      e.preventDefault(); // Prevent default scrolling behavior during drag
+                      handleTouchMove(e); // Your existing touch move logic
+                    }}
+                    //onTouchEnd={handleTouchEnd} // Updated for touch
+                    onTouchEnd={(e) => handleTouchEnd(e, id)}
                   >
-                    {isUppercase
-                      ? char.toUpperCase()
-                      : isLowercase
-                      ? char.toLowerCase()
-                      : char}
-                  </span>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      )}
+                    {/* Editable Text */}
+                    {editingField === id ? (
+                      <textarea
+                        value={text}
+                        onChange={(e) => handleTextChange(id, e.target.value)}
+                        onBlur={() => setEditingField(null)} // Exit edit mode on blur
+                        autoFocus
+                        className="bg-transparent border-none outline-none resize-none"
+                        style={{
+                          fontSize: `${size}px`,
+                          fontFamily: font,
+                          color: fontColor,
+                          fontWeight: isBold ? "bold" : "normal",
+                          fontStyle: isItalic ? "italic" : "normal",
+                          letterSpacing: `${letterSpacing}px`,
+                          lineHeight: `${lineHeight}`,
+                          whiteSpace: "nowrap",
+                          overflow: "hidden", // Prevent scrollbars from appearing
+                          textAlign: textAlign,
+                          zIndex: selectedField === id ? 10 : 1,
+                          border: "2px dotted blue", // Border for the textarea when editing
+                          width: "fit-content", // Width based on text content
+                          height: "fit-content", // Allow height to adjust according to the content
+                          minHeight: "fit-content", // Ensure no minimum height
+                          maxWidth: "fit-content", // Prevent it from growing too large
+                        }}
+                        onInput={(e) => {
+                          e.target.style.height = "auto"; // Reset height before adjusting
+                          e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
+                        }}
+                        onFocus={(e) =>
+                          e.target.setSelectionRange(e.target.value.length, e.target.value.length)
+                        } // Place cursor at the end when focused
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          display: "inline-block",
+                          padding: "2px 5px",
+                          cursor: "text",
+                        }}
+                      >
+                        {text.split("\n").map((line, index) => (
+                          <div key={index}>
+                            {line.split("").map((char, charIndex) => {
+                              const curve = curveValue || 0;
+                              const angle =
+                                (Math.PI * curve * (charIndex - Math.floor(line.length / 2))) /
+                                line.length;
+                              const radius = 100;
+                              return (
+                                <span
+                                  key={charIndex}
+                                  style={{
+                                    position: "relative",
+                                    transform: `rotate(${angle}rad) translateY(-${radius}px)`,
+                                    transformOrigin: "center",
+                                  }}
+                                >
+                                  {isUppercase
+                                    ? char.toUpperCase()
+                                    : isLowercase
+                                      ? char.toLowerCase()
+                                      : char}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
-      {/* Resizing Handle */}
-      {selectedField === id && (
-        <div
-          onMouseDown={(e) => handleResizeMouseDown(e, id)}
-          onTouchStart={(e) => handleResizeTouchStart(e, id)} // Added for touch
-          onTouchMove={handleResizeTouchMove} // Added for touch
-          onTouchEnd={handleResizeTouchEnd} // Added for touch
-          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-          style={{ transform: "translate(50%, 50%)" }}
-        >
-          <i className="fas fa-arrows-alt text-white text-sm"></i>
-        </div>
-      )}
+                    {/* Resizing Handle */}
+                    {selectedField === id && (
+                      <div
+                        onMouseDown={(e) => handleResizeMouseDown(e, id)}
+                        onTouchStart={(e) => handleResizeTouchStart(e, id)} // Added for touch
+                        onTouchMove={handleResizeTouchMove} // Added for touch
+                        onTouchEnd={handleResizeTouchEnd} // Added for touch
+                        className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
+                        style={{ transform: "translate(50%, 50%)" }}
+                      >
+                        <i className="fas fa-arrows-alt text-white text-sm"></i>
+                      </div>
+                    )}
 
-      {/* Delete Button */}
-      {selectedField === id && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDelete(id);
-          }}
-          onTouchEnd={(e) => {
-            e.stopPropagation();
-            handleDelete(id);
-          }}
-          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-          style={{
-            transform: "translate(50%, -50%)",
-            zIndex: 20,
-          }}
-        >
-          <i className="fas fa-times-circle text-red-500 text-sm"></i>
-        </button>
-      )}
+                    {/* Delete Button */}
+                    {selectedField === id && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(id);
+                        }}
+                        onTouchEnd={(e) => {
+                          e.stopPropagation();
+                          handleDelete(id);
+                        }}
+                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
+                        style={{
+                          transform: "translate(50%, -50%)",
+                          zIndex: 20,
+                        }}
+                      >
+                        <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                      </button>
+                    )}
 
-      {/* Rotate Button */}
-      {selectedField === id && (
-        <div
-          onMouseDown={(e) => handleRotateMouseDown(e, id)}
-          onTouchStart={(e) => handleRotateTouchStart(e, id)}
-          onTouchMove={handleRotateTouchMove} // Handle touch move
-          onTouchEnd={handleRotateTouchEnd} // Handle touch end
-          className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
-          style={{
-            transform: "translate(-50%, -50%)",
-            zIndex: 20,
-          }}
-        >
-          <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
-        </div>
-      )}
-    </div>
-  )
-)}
+                    {/* Rotate Button */}
+                    {selectedField === id && (
+                      <div
+                        onMouseDown={(e) => handleRotateMouseDown(e, id)}
+                        onTouchStart={(e) => handleRotateTouchStart(e, id)}
+                        onTouchMove={handleRotateTouchMove} // Handle touch move
+                        onTouchEnd={handleRotateTouchEnd} // Handle touch end
+                        className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
+                        style={{
+                          transform: "translate(-50%, -50%)",
+                          zIndex: 20,
+                        }}
+                      >
+                        <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
+                      </div>
+                    )}
+                  </div>
+                )
+              )}
 
 
 
@@ -1896,11 +1897,11 @@ export default function WeddingCardEditor() {
 
 
             {/* Buttons Below the Image */}
-            <div className="flex lg:gap-4 md:mt-4 lg:mt-1 gap-4 sm:mt-4 mt-6 ">
+            <div className="flex lg:gap-5 md:mt-4 lg:mt-1 gap-4 sm:mt-4 mt-6 ">
               {/* Save Button */}
               <button
                 onClick={handleSaveChanges}
-                className="flex items-center justify-center gap-2 px-10 py-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1922,7 +1923,7 @@ export default function WeddingCardEditor() {
               {/* Preview Button */}
               <button
                 onClick={handlePreview}
-                className="flex items-center justify-center gap-2 px-8 py-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                className="flex items-center justify-center gap-2  px-8 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1949,11 +1950,11 @@ export default function WeddingCardEditor() {
                 {/* Only show these buttons if no text is selected */}
                 {!selectedField && (
                   <>
-                    <div className="flex gap-8">
+                    <div className="flex gap-3">
                       {/* Add Text Button */}
                       <button
                         onClick={handleAddNewText}
-                        className="flex items-center justify-center gap-2  px-14 py-4  mt-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                        className="flex items-center justify-center gap-2  px-16 py-4  mt-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                       >
                         <AiOutlineFileText className="w-6 h-6" />
                       </button>
@@ -1961,7 +1962,7 @@ export default function WeddingCardEditor() {
                       {/* Add Sticker Button */}
                       <button
                         onClick={() => setShowStickerSelector(true)}
-                        className="flex items-center justify-center gap-3 px-14 py-4 mt-4  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                        className="flex items-center justify-center gap-3 px-16 py-4 mt-4  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                       >
                         <FaStickerMule className="w-6 h-6" />
                       </button>
@@ -1970,7 +1971,7 @@ export default function WeddingCardEditor() {
                     {/* Add Image Button */}
                     <button
                       onClick={handleAddImageClick}
-                      className="flex items-center justify-center gap-2  w-auto h-20 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                      className="flex items-center justify-center gap-2  w-80 h-20 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                     >
                       <AiOutlinePicture className="w-8 h-8" />
                       <span className="text-lg">Add Images</span>
@@ -2165,7 +2166,7 @@ export default function WeddingCardEditor() {
                   <>
                     <button
                       onClick={handleAddNewText}
-                      className="flex items-center justify-center gap-2 md:px-10 px-14 py-5 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300 lg:mt-36 md:mt-36 xl:mt-36 mt-4 "
+                      className="flex items-center justify-center gap-2 md:px-10 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300 lg:mt-36 md:mt-36 xl:mt-36 mt-4 "
                     >
                       <AiOutlineFileText className="w-6 h-6" />
                       <span>Add Text</span>
@@ -2174,7 +2175,7 @@ export default function WeddingCardEditor() {
                     {/* Add Sticker Button */}
                     <button
                       onClick={() => setShowStickerSelector(true)}
-                      className="flex items-center justify-center gap-2 px-14 py-5  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                      className="flex items-center justify-center gap-2 px-10 py-3  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                     >
                       <FaStickerMule className="w-6 h-6" />
                       <span>Add Sticker</span>
@@ -2183,7 +2184,7 @@ export default function WeddingCardEditor() {
                     {/* Add Image Button */}
                     <button
                       onClick={handleAddImageClick}
-                      className="flex items-center justify-center gap-2 px-14 py-5  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                      className="flex items-center justify-center gap-2 px-10 py-3  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                     >
                       <AiOutlinePicture className="w-6 h-6" />
                       <span>Add Images</span>
