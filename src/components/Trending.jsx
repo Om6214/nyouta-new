@@ -4,6 +4,45 @@ import { getProducts } from "../Store/slices/productSlice";
 import Slider from "react-slick";
 import bgImg from "../assets/images/mahal3.png";
 import instaLogo from "../assets/images/insta-logo.png";
+import img1 from "../assets/images/trending/1.jpg";
+import img2 from "../assets/images/trending/2.png";
+import img3 from "../assets/images/trending/3.png";
+import img4 from "../assets/images/trending/4.png";
+import img5 from "../assets/images/trending/5.jpg";
+import img6 from "../assets/images/trending/6.jpg";
+import img7 from "../assets/images/trending/7.jpg";
+import img8 from "../assets/images/trending/8.jpeg";
+import img9 from "../assets/images/trending/9.jpeg";
+
+const items = [
+  {
+    imgUrl: img1,
+  },
+  {
+    imgUrl: img2,
+  },
+  {
+    imgUrl: img3,
+  },
+  {
+    imgUrl: img4,
+  },
+  {
+    imgUrl: img5,
+  },
+  {
+    imgUrl: img6,
+  },
+  {
+    imgUrl: img7,
+  },
+  {
+    imgUrl: img8,
+  },
+  {
+    imgUrl: img9,
+  },
+];
 
 const Trending = () => {
   const { products } = useSelector((state) => state.product);
@@ -14,22 +53,20 @@ const Trending = () => {
     }
   }, [dispatch, products]);
   console.log(products);
-  
 
   var settings = {
-    infinite: false,
+    infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 6,
     slidesToScroll: 4,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 5,
           slidesToScroll: 3,
           infinite: true,
-
         },
       },
       {
@@ -50,7 +87,7 @@ const Trending = () => {
       {
         breakpoint: 780,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 2,
           initialSlide: 2,
         },
@@ -70,14 +107,10 @@ const Trending = () => {
       <div className="mx-16">
         <div className="slider-container">
           <Slider {...settings}>
-            {products.slice(100, 120).map((product) => (
-              <div className="lg:h-[250px] h-[300px]">
-                <div className="relative flex flex-col items-center justify-center font-avalonN">
-                  <img className="" src={bgImg} alt="" />
-                  <div className="absolute flex flex-col items-center font-avalonN">
-                    <img className="lg:h-[170px] h-[150px] w-full object-cover" src={product.image[0]} alt="" />
-                    <p className="font-semibold">{product.subSubCategory}</p>
-                  </div>
+            {items.map((item) => (
+              <div>
+                <div>
+                  <img className="rounded-2xl border-2 border-pink-400" src={item.imgUrl} alt="" />
                 </div>
               </div>
             ))}
@@ -85,8 +118,10 @@ const Trending = () => {
         </div>
       </div>
       <div className="flex flex-col items-center">
-          <h1 className="text-xl font-semibold">Follow Us On</h1>
-          <a href=""><img className="w-16" src={instaLogo} alt="Instagram Logo" /></a>
+        <h1 className="text-xl font-semibold">Follow Us On</h1>
+        <a href="">
+          <img className="w-16" src={instaLogo} alt="Instagram Logo" />
+        </a>
       </div>
     </div>
   );

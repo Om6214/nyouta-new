@@ -96,8 +96,8 @@
 
 @font-face {
   font-family: 'Justin Hailey';
-  src: url('./fonts/justin-hailey-regular.otf') format('opentype');
-  font-weight: normal;
+  src: url('./fonts/justin-hailey-justin-hailey-regular-400.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
 }
 
