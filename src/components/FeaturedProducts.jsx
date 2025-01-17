@@ -16,6 +16,26 @@ import atmPass from "../assets/images/products/ATM-Pass-Invites.png";
 import coasters from "../assets/images/products/Coasters.jpg";
 import diningmats from "../assets/images/products/DiningMats.jpg";
 import doorHandle from "../assets/images/products/Door-Handle-tags.jpg";
+import giftEnvelops from "../assets/images/products/Gift-Envelops.jpg";
+import giftStickers from "../assets/images/products/Gift-Stickers.jpg";
+import gifttags from "../assets/images/products/Gift-Tags.png";
+import luggageTags from "../assets/images/products/Luggage-Tags.jpg";
+import miniCalendars from "../assets/images/products/Mini-Calendars.jpg";
+import newsPaper from "../assets/images/products/NewsPaper-Invites.jpg";
+import passport from "../assets/images/products/Passport-Invites.jpeg";
+import photoMagnet from "../assets/images/products/Photo-magnet.jpg";
+import plannerBooks from "../assets/images/products/Planner-books.jpg";
+import playingcard from "../assets/images/products/Playing-cards.jpg";
+import poster from "../assets/images/products/Poster-calendars.png";
+import puzzleGames from "../assets/images/products/Puzzle-games.jpg";
+import table from "../assets/images/products/Table-itinerary.jpg";
+import thankyou from "../assets/images/products/Thankyou.jpg";
+import vintage from "../assets/images/products/Vintage.png";
+import wall from "../assets/images/products/Wall-calendars.jpg";
+import wedBadges from "../assets/images/products/Wedding-badges.jpg";
+import wedBooks from "../assets/images/products/Wedding-books.jpeg";
+import wedNews from "../assets/images/products/Wedding-newspaper.jpg";
+import wedNote from "../assets/images/products/Wedding-notepad.jpeg";
 
 const productItems = [
   {
@@ -36,83 +56,83 @@ const productItems = [
   },
   {
     name: "Gift Envelopes",
-    imgUrl: atmPass,
+    imgUrl: giftEnvelops,
   },
   {
     name: "Gift Stickers",
-    imgUrl: atmPass,
+    imgUrl: giftStickers,
   },
   {
     name: "Gift Tags",
-    imgUrl: atmPass,
+    imgUrl: gifttags,
   },
   {
     name: "Luggage Tags",
-    imgUrl: atmPass,
+    imgUrl: luggageTags,
   },
   {
     name: "Mini Calendars",
-    imgUrl: atmPass,
+    imgUrl: miniCalendars,
   },
   {
     name: "Newspaper Invites",
-    imgUrl: atmPass,
+    imgUrl: newsPaper,
   },
   {
     name: "Passport Invites",
-    imgUrl: atmPass,
+    imgUrl: passport,
   },
   {
     name: "Photo Magnet",
-    imgUrl: atmPass,
+    imgUrl: photoMagnet,
   },
   {
     name: "Planner Books",
-    imgUrl: atmPass,
+    imgUrl: plannerBooks,
   },
   {
     name: "Playing Cards",
-    imgUrl: atmPass,
+    imgUrl: playingcard,
   },
   {
     name: "Poster Calendars",
-    imgUrl: atmPass,
+    imgUrl: poster,
   },
   {
     name: "Puzzle Games",
-    imgUrl: atmPass,
+    imgUrl: puzzleGames,
   },
   {
     name: "Table Itinerary",
-    imgUrl: atmPass,
+    imgUrl: table,
   },
   {
     name: "Thank You Cards",
-    imgUrl: atmPass,
+    imgUrl: thankyou,
   },
   {
     name: "Vintage Invites",
-    imgUrl: atmPass,
+    imgUrl: vintage,
   },
   {
     name: "Wall Calenders",
-    imgUrl: atmPass,
+    imgUrl: wall,
   },
   {
     name: "Wedding Badges",
-    imgUrl: atmPass,
+    imgUrl: wedBadges,
   },
   {
     name: "Wedding Newspaper",
-    imgUrl: atmPass,
+    imgUrl: wedNews,
   },
   {
     name: "Wedding Notepad",
-    imgUrl: atmPass,
+    imgUrl: wedNote,
   },
   {
     name: "Wedding Photo Books",
-    imgUrl: atmPass,
+    imgUrl: wedBooks,
   },
 ];
 
@@ -133,7 +153,7 @@ export default function FeaturedProducts() {
     speed: 500, // Very slow transition speed for each slide (7 seconds)
     slidesToShow: 6,
     slidesToScroll: 3, // Scroll 4 slides at a time for manual navigation
-    autoplay: false, 
+    autoplay: false,
     initialSlide: 0,
     responsive: [
       {
@@ -171,21 +191,20 @@ export default function FeaturedProducts() {
           dots: false,
         },
       },
-     
     ],
   };
 
   return (
-    <section className="py-16 lg:pt-1 lg:pb-8 px-6 lg:px-8 bg-pink-200">
+    <section className="py-16 lg:pt-1 lg:pb-8 px-4 md:px-8 lg:px-8 bg-pink-200">
       <div className="container mx-auto gap-8">
         {/* Heading with animation and font-family */}
         <div className="my-4">
-          <h2
-            className="lg:text-5xl text-4xl text-secondary text-center font-avalonB md:text-5xl mb-4 transition-opacity duration-700 opacity-100"
-          >
+          <h2 className="lg:text-5xl text-4xl text-secondary text-center font-avalonB md:text-5xl mb-4 transition-opacity duration-700 opacity-100">
             Customer Favorites
           </h2>
-          <h3 className="lg:text-4xl text-2xl text-secondary text-center font-avalonN">Top Picks Chosen by Our Happy Customers</h3>
+          <h3 className="lg:text-4xl text-2xl text-secondary text-center font-avalonN">
+            Top Picks Chosen by Our Happy Customers
+          </h3>
         </div>
 
         {/* Slider */}
@@ -305,10 +324,14 @@ export default function FeaturedProducts() {
               <div className="">
                 <img className="rounded-2xl" src={item.imgUrl} alt="" />
                 <div className="py-2 space-y-2">
-                  <h1 className="font-avalonB text-secondary text-center">{item.name}</h1>
+                  <h1 className="font-avalonB text-secondary text-center">
+                    {item.name}
+                  </h1>
                   <div className="relative flex items-center justify-center">
-                  <img className="h-6" src={button} alt="" />
-                  <a href="#" className="absolute text-white font-avalonB">Shop Now</a>
+                    <img className="h-6" src={button} alt="" />
+                    <a href="#" className="absolute text-white font-avalonB">
+                      Shop Now
+                    </a>
                   </div>
                 </div>
               </div>
