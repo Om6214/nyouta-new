@@ -510,9 +510,10 @@ export default function MainNav() {
   return (
 
     <div className="flex flex-col">
-      <div className="h-[30px] flex justify-between px-56 bg-[#FAF0DC]">
-        <div className="bg-[#af7d32] rounded-b-2xl  text-white font-avalonN  flex items-center justify-center px-4 tracking-widest text-xl">NYOUTA</div>
-        <div className="flex items-center me-10"> <h1 className="text-[#643C28] font-bold " >Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc. &gt;&gt;&gt;&gt; Scrolling </h1></div>
+      <div className="h-[30px] flex justify-between px-6 lg:px-56 sm:px-8  bg-[#FAF0DC] ">
+        <div className="bg-[#af7d32] rounded-b-2xl  text-white font-avalonN ms-4 sm:ms-0  flex items-center justify-center px-2 sm:px-4 tracking-widest text-md    sm:text-xl">NYOUTA</div>
+        <div className="sm:flex hidden items-center sm:me-0  lg:me-10"> <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md " >Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc. &gt;&gt;&gt;&gt; Scrolling </h1></div>
+        <div className="flex sm:hidden items-center sm:me-0  lg:me-10"> <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md " >Scrolling Offers | Discount Coupons | etc. </h1></div>
       </div>
       <header
       className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
