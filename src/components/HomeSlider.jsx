@@ -24,7 +24,7 @@ const HomeSlider = () => {
   console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
   return (
     <>
-      <div className="lg:py-1 pt-6">
+      <div className="lg:my-4 pt-6">
         <h1 className="lg:text-5xl text-3xl text-secondary text-center font-avalonB">
           Your Wedding, Your Shape
         </h1>
@@ -42,7 +42,7 @@ const HomeSlider = () => {
           </Carousel>
         </div>
         <div className="lg:w-[30%]">
-          <div className="py-6 px-6 mt flex flex-col lg:gap-4 gap-3 text-secondary items-start border-2 rounded-xl bg-priBg">
+          <div className="py-6 px-6 lg:h-full flex flex-col lg:gap-4 gap-3 text-secondary items-start border-2 rounded-xl bg-priBg">
             <h1 className="text-7xl font-ttMedium font-bold">new !</h1>
             <h1 className="text-4xl font-linna leading-relaxed">
               shAped Wedding invitAtion
