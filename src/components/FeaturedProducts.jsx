@@ -15,7 +15,7 @@ import cardImg from "../assets/images/mahal1.png";
 import atmPass from "../assets/images/products/ATM-Pass-Invites.png";
 import coasters from "../assets/images/products/Coasters.jpg";
 import diningmats from "../assets/images/products/DiningMats.jpg";
-import doorHandle from "../assets/images/products/DoorHandletags.jpg";
+import door from "../assets/images/products/DoorHandleTags.jpg";
 import giftEnvelops from "../assets/images/products/Gift-Envelops.jpg";
 import giftStickers from "../assets/images/products/Gift-Stickers.jpg";
 import gifttags from "../assets/images/products/Gift-Tags.png";
@@ -52,7 +52,7 @@ const productItems = [
   },
   {
     name: "Door Handle Tags",
-    imgUrl: doorHandle,
+    imgUrl: door,
   },
   {
     name: "Gift Envelopes",
