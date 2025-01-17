@@ -10,7 +10,111 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../Store/slices/productSlice";
 import { useDispatch } from "react-redux";
+import button from "../assets/images/09.png";
 import cardImg from "../assets/images/mahal1.png";
+import atmPass from "../assets/images/products/ATM-Pass-Invites.png";
+import coasters from "../assets/images/products/Coasters.jpg";
+import diningmats from "../assets/images/products/DiningMats.jpg";
+import doorHandle from "../assets/images/products/Door-Handle-tags.jpg";
+
+const productItems = [
+  {
+    name: "ATM Pass Invites",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Coasters",
+    imgUrl: coasters,
+  },
+  {
+    name: "Dining Mats",
+    imgUrl: diningmats,
+  },
+  {
+    name: "Door Handle Tags",
+    imgUrl: doorHandle,
+  },
+  {
+    name: "Gift Envelopes",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Gift Stickers",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Gift Tags",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Luggage Tags",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Mini Calendars",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Newspaper Invites",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Passport Invites",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Photo Magnet",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Planner Books",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Playing Cards",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Poster Calendars",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Puzzle Games",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Table Itinerary",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Thank You Cards",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Vintage Invites",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Wall Calenders",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Wedding Badges",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Wedding Newspaper",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Wedding Notepad",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Wedding Photo Books",
+    imgUrl: atmPass,
+  },
+];
 
 export default function FeaturedProducts() {
   const { products } = useSelector((state) => state.product);
@@ -27,7 +131,7 @@ export default function FeaturedProducts() {
     swipeToSlide: true,
     infinite: true, // Infinite scrolling to create a continuous loop
     speed: 500, // Very slow transition speed for each slide (7 seconds)
-    slidesToShow: 5,
+    slidesToShow: 6,
     slidesToScroll: 3, // Scroll 4 slides at a time for manual navigation
     autoplay: false, 
     initialSlide: 0,
@@ -35,7 +139,7 @@ export default function FeaturedProducts() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 5,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
@@ -72,7 +176,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 lg:pt-1 lg:pb-8 px-4 lg:px-8">
+    <section className="py-16 lg:pt-1 lg:pb-8 px-6 lg:px-8 bg-pink-200">
       <div className="container mx-auto gap-8">
         {/* Heading with animation and font-family */}
         <div className="my-4">
@@ -142,7 +246,7 @@ export default function FeaturedProducts() {
 
           {/* Slider Content */}
           <Slider {...settings} ref={sliderRef}>
-            {products?.slice(25, 35).map((product, index) => (
+            {/* {products?.slice(25, 35).map((product, index) => (
               <div
                 key={index}
                 className="bg-white lg:h-[340px] rounded-lg hover:scale-105 transition duration-300 ease-in-out"
@@ -195,6 +299,18 @@ export default function FeaturedProducts() {
                   </div>
                   </div>
                 </Link>
+              </div>
+            ))} */}
+            {productItems.map((item) => (
+              <div className="">
+                <img className="rounded-2xl" src={item.imgUrl} alt="" />
+                <div className="py-2 space-y-2">
+                  <h1 className="font-avalonB text-secondary text-center">{item.name}</h1>
+                  <div className="relative flex items-center justify-center">
+                  <img className="h-6" src={button} alt="" />
+                  <a href="#" className="absolute text-white font-avalonB">Shop Now</a>
+                  </div>
+                </div>
               </div>
             ))}
           </Slider>

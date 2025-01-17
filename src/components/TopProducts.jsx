@@ -107,7 +107,7 @@ const TopProducts = () => {
       <div className="slider-container">
         <Slider {...settings}>
           {productItems.map((item) => (
-            <div className="px-4">
+            <div className="">
               <img src={item.imgUrl} alt="" />
               <div className="">
                 <h1 className="text-center">{item.name}</h1>

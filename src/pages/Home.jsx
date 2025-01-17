@@ -24,7 +24,7 @@ const Home = () => {
       <HeroSlider/>
       {/* <HeroBanner/> */}
       <CategoryCard/>
-      {/* <FeaturedProducts/> */}
+      <FeaturedProducts/>
       <TopProducts/>
       <HomeSlider/>
       <WeddingPlan/>
