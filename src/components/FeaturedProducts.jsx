@@ -208,7 +208,7 @@ export default function FeaturedProducts() {
         </div>
 
         {/* Slider */}
-        <div className="slider-container mx-4 relative">
+        <div className="slider-container mx-8 relative">
           <style>
             {`
             .slick-slide {
@@ -324,7 +324,7 @@ export default function FeaturedProducts() {
               <div className="">
                 <img className="rounded-2xl" src={item.imgUrl} alt="" />
                 <div className="py-2 space-y-2">
-                  <h1 className="font-avalonB text-secondary text-center">
+                  <h1 className="font-avalonB text-xl text-secondary text-center">
                     {item.name}
                   </h1>
                   <div className="relative flex items-center justify-center">

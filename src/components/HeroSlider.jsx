@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import img2 from "../assets/images/home-2.webp";
-import img3 from "../assets/images/home-3.webp";
-import img4 from "../assets/images/home-4.webp";
+import img2 from "../assets/images/sliders/1.png";
+import img3 from "../assets/images/sliders/2.png";
+import img4 from "../assets/images/sliders/3.png";
 import cardImg from "../assets/images/02.png";
 import webImg from "../assets/images/weddingwebsites.jpg";
 import buttonBg from "../assets/images/09.png";
@@ -91,7 +91,7 @@ export default function HeroSlider() {
                 <img
                   src={image}
                   alt={`Slide ${index + 1}`}
-                  className="h-full w-full lg:object-cover"
+                  className="h-full w-full lg:object-cov"
                 />
               </div>
             ))}
@@ -169,7 +169,7 @@ export default function HeroSlider() {
         </div>
         <motion.div className="lg:w-[30%] h-full flex items-center justify-center relative w-full rounded-xl">
           {/* <img className="h-[500px] lg:h-full" src={wedImg} alt="" /> */}
-          <div className="flex flex-col gap-2 lg:gap-2 py-1 md:w-full items-center justify-center bg-pink-200 rounded-lg">
+          <div className="flex flex-col gap-2 lg:gap-[7px] py-1 md:w-full items-center justify-center bg-pink-200 rounded-lg">
             <h1 className="font-justinhailey text-7xl text-secondary">
               make your own
             </h1>
