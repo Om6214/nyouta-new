@@ -21,7 +21,6 @@ const Home = () => {
   return (
     <div className="bg-white">
       <HeroSlider />
-      {/* <HeroBanner/> */}
       <CategoryCard />
       <FeaturedProducts />
       <HomeSlider />

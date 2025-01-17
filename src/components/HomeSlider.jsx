@@ -1,9 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
-import img1 from "../assets/images/home-1.webp";
-import img2 from "../assets/images/home-2.webp";
-import img3 from "../assets/images/home-3.webp";
-import img4 from "../assets/images/home-4.webp";
+import img1 from "../assets/images/sliders/4.png";
+import img2 from "../assets/images/sliders/5.png";
+import img3 from "../assets/images/sliders/6.png";
 import buttonBg from "../assets/images/09.png";
 import { Heart, ShieldCheck, Star } from "lucide-react";
 // import products from "../products.json";
@@ -38,7 +37,6 @@ const HomeSlider = () => {
             <img className="rounded-xl h-full" src={img1} alt="..." />
             <img className="rounded-xl h-full" src={img2} alt="..." />
             <img className="rounded-xl h-full" src={img3} alt="..." />
-            <img className="rounded-xl h-full" src={img4} alt="..." />
           </Carousel>
         </div>
         <div className="lg:w-[30%]">
