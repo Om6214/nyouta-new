@@ -119,7 +119,7 @@ const Trending = () => {
       </div>
       <div className="flex flex-col items-center">
         <h1 className="text-xl font-semibold">Follow Us On</h1>
-        <a href="">
+        <a href="https://www.instagram.com/nyoutastore/" target="_blank">
           <img className="w-16" src={instaLogo} alt="Instagram Logo" />
         </a>
       </div>
