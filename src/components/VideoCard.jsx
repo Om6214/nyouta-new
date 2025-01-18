@@ -11,7 +11,13 @@ const VideoCard = () => {
     <div>
       <div className="lg:px-16 my-4 px-4 py-8 font-heroFont text-white bg-secondary flex flex-col items-center lg:flex-row gap-8 justify-around">
         <div>
-          <video src={video1} className="rounded-3xl shadow-2xl lg:object-center md:object-center object-cover lg:w-[300rem] lg:h-full h-[20rem]" controls muted poster={playBtn}></video>
+          <video
+            src={video1}
+            className="rounded-3xl shadow-2xl lg:object-center md:object-center object-cover lg:w-[300rem] lg:h-full h-[20rem]"
+            controls
+            muted
+            poster={playBtn}
+          ></video>
         </div>
         <div className="flex flex-col  lg:gap-6 lg:px-10 gap-6 sm:items-center lg:items-start justify-center">
           <h1 className="lg:text-4xl text-3xl font-linna">
@@ -31,15 +37,15 @@ const VideoCard = () => {
           </h3>
           <div className="relative flex flex-col mx-auto items-center justify-center hover:translate-x-2 duration-300 ease-in-out">
             <img className="h-8" src={buttonBg} alt="" />
-          <button
-            className="flex absolute items-center gap-2 font-bold text-white lg:text-xl"
-            onClick={() => navigate("/products")}
-          >
-            Shop Now{" "}
-            <span>
-              <SquareArrowOutUpRight />
-            </span>
-          </button>
+            <button
+              className="flex absolute items-center gap-2 font-bold text-white lg:text-xl"
+              onClick={() => navigate("/products")}
+            >
+              Shop Now{" "}
+              <span>
+                <SquareArrowOutUpRight />
+              </span>
+            </button>
           </div>
         </div>
       </div>

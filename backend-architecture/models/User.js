@@ -72,6 +72,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  websitePassword:{
+    type:String,
+    required:false
+  },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

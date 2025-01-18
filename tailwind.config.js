@@ -12,6 +12,7 @@ export default {
         avalonB: ['AvalonBold', 'sans-serif'],
         avalonN: ['AvalonNormal', 'sans-serif'],
         ttMedium: ['TT_Medium', 'sans-serif'],
+        'justinhailey': ['"Justin Hailey"', 'sans-serif']
       },
       colors: {
         priBg: "#FAF0DC",

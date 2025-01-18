@@ -1,420 +1,413 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><%= (home && home.name) ? home.name: "Kacey & Sebastian" %> & <%= (home && home.partnerName) && home.partnerName %></title>
-        <style>
-            #container1{
-                margin-left: 10%;
-                margin-right: 10%;
-                padding: 0;
-                background-color: #f8f6f4;
-            }
-            #topImg{
-            }
-            #topImg img{
-                width: 80%;
-                height: 80%;
-                object-fit: cover;
-                display: flex;
-                justify-content: center;
-            }
-
-            body {
-                font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
-
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #555;
-      background-color: #fafafa;
-
-    }
-
-    .container {
-      background-color: white;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-      font-size: 28px;
-      font-weight: normal;
-      margin-bottom: 40px;
-    }
-
-    .form-group {
-      margin-bottom: 25px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-
-    .ceremony-time {
-      font-size: 18px;
-      color: #333;
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .location-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .map-container {
-      margin-top: 30px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .map-container img {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-    }
-
-    textarea {
-      width: 100%;
-      height: 100px;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      resize: vertical;
-    }
-
-    .checkbox-container {
-      margin-top: 20px;
-    }
-
-    select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-    
-
-    .registry-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .image-container {
-      position: relative;
-    }
-
-    .featured-image {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      background-color: #1a2f23;
-    }
-
-    .date-overlay {
-      position: absolute;
-      bottom: 40px;
-      left: 20px;
-      color: #d4b88c;
-      font-size: 18px;
-    }
-
-    .powered-by {
-      margin-top: 10px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .form-container {
-      padding: 20px;
-    }
-
-    h1 {
-      color: #2c3e50;
-      font-size: 32px;
-      font-weight: normal;
-      margin-bottom: 40px;
-    }
-
-    .form-group {
-      margin-bottom: 30px;
-    }
-
-    label {
-      display: block;
-      color: #2c3e50;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    .helper-text {
-      color: #999;
-      font-size: 14px;
-      margin-top: 4px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 40px;
-    }
-
-    .btn {
-      padding: 12px 40px;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .btn-cancel {
-      background-color: #fff;
-      color: #333;
-      border: 1px solid #ddd;
-    }
-
-    .btn-save {
-      background-color: #a88f77;
-      color: white;
-    }
-
-    .btn-save:hover {
-      background-color: #957c64;
-    }
-    #diver{
-        background-color: #f8f6f4;
+    <style>
+        @font-face { font-family: Lovelace; src: url('./assets/Lovelace/Zetafonts\ -\ Lovelace\ Text\ Regular.otf'); }
+        @font-face { font-family: Lovelace-Bold; src: url('./assets/Lovelace-Bold.ttf'); }
+        @font-face { font-family: Publicreg; src: url('./assets/public-sans/public-sans-v1.003/otf/PublicSans-Regular.otf'); }
+        @font-face { font-family: GreatVibe; src: url('./assets/great-vibes/GreatVibes-Regular.ttf'); }
         
-    }
-        </style>
+
+        body {
+            margin: 0;
+            /* padding: 20px; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family:'Publicreg','Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .background-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-overlay {
+            position: absolute;
+            color: white;
+            /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        /* Example text positions - adjust these values based on your needs */
+        .text-1 {
+            font-family: 'GreatVibe';
+            top: 46%;
+            left: 15%;
+            text-align: center;
+            max-width: 40%;
+            letter-spacing: 0%;
+            line-height: 1rem;
+            font-weight: lighter;
+        
+        }
+        .text-1 h2{
+            font-size: 3.5rem;
+        }
+        .text-1 h3{
+            font-size: 3.1rem;
+        }
+        .text-1a{
+            bottom: 3.1%;
+            left: 22.4%;
+            color: #ffffff;
+        }
+        .text-1b{
+            left: 40%;
+            top: 30%;
+        }
+
+        .text-2a {
+            color: #000;
+            top: 15%;
+            
+            text-align: center;
+        }
+        
+        .text-2b {
+    color: #000;
+    right: 11%; /* Changed from -70% to a positive percentage */
+    top: 10%;
+    width: auto; /* Add this to prevent full width */
+    text-align: right; /* Align text to the right */
+    max-width: 20%; /* Limit the width of text container */
+}
+        .text-2c {
+            color: #000;
+            top: 68%;
+            left: 5%;
+            max-width: 90%;
+           text-align: center;
+           font-size: 1rem;
+        }
+
+        .text-3 {
+            top: 22%;
+            right: 17%;
+            max-width:28%;
+            text-align: left;
+            color: #14627b;
+            font-family: "Publicreg";
+
+            /* line-height: 0%; */
+        }
+
+        .text-3a1{
+            bottom: 18%;
+            left: 8%;
+            max-width:38%;
+            text-align: center;
+            color: #14627b;
+            font-family: "Publicreg";
+
+        }
+        .text-3a2{
+            bottom: 19%;
+            right: 10%;
+            text-align: right;
+            
+        }
+
+        .text-4a{
+            top: 24%;
+            left: 20%;  
+        }
+        .text-4e{
+            top: 24%;
+            right: 18.8%; 
+            width: auto; 
+    text-align: right;
+        }
+        .text-4b{
+            top: 38%;
+            left: 20%;  
+        }
+        .text-4f{
+            top: 38%;
+            right: 18.8%; 
+            width: auto; 
+    text-align: right;
+        }
+        .text-4c{
+            top: 52%;
+            left: 20%;  
+        }
+        .text-4g{
+            top: 52%;
+            right: 18.8%; 
+            width: auto; 
+    text-align: right;        }
+        .text-4d{
+            top: 68%;
+            left: 20%;
+        }
+        .text-4h{
+            top: 68%;
+            right: 18.8%; 
+            width: auto; 
+    text-align: right;        }
+        .button-a{
+            top: 82%;
+            left: 36%;  
+        }
+        .button-3d{
+            bottom: 6%;
+            left: 34.5%;
+        }
+        .button-3t{
+            bottom: 2%;
+
+            left: 36%;
+        }
+        .input-3a{
+            top: 30%;
+            left: 28%;
+        }
+        .input-3b{
+            top: 43%;
+            left: 28%;
+        }
+        .input-3c{
+            top: 55%;
+            left: 28%;
+        }
+        .input-3c2{
+            top: 55%;
+            left: 49%;
+        }
+        .text-img{
+            top: 25%;
+            left: 46%;
+            /* height: 20%; */
+            /* max-width: 50%; */
+        }
+        .input-3d{
+            top: 72%;
+            left: 35%;
+        }
+        .input-3e{
+            top: 62.5%;
+            left: 35%;
+        }
+        .text-5{
+            top: 35%;
+            left: 22.4%;
+            max-width: 23%;
+        }
+        .text-5a{
+            top: 26%;
+            left: 10%;
+            /* text-align: center; */
+            
+        }
+        .text-1t{
+            left: 60%;
+            top: 2%;
+            color: #8d0d0d;
+        }
+        .text-6{
+            top: 32.9%;
+            left: 20.6%;
+            max-width: 23%;
+        }
+        .text-6b{
+            top: 32.9%;
+            left: 51.2%;
+            max-width: 23%;
+        }
+        .text-6c{
+            bottom: 20%;
+            left: 24.2%;
+            /* max-width: 23%; */
+        }
+        .image-5a{
+           top: 24%;
+           left: 12%;
+        }
+        .image-5b{
+            bottom: 4%;
+            left:12%
+            
+        }
+        .image-5c{
+            left: 55%;
+            bottom: 4%;
+        }
+        .image-5d{
+            left: 55%;
+            top: 24%;
+        }
+
+        .text-fin{
+            bottom: 4%;
+            left: 39%;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        /* Responsive text sizes */
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin: 0;
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin: 10px 0;
+        }
+
+        @media (max-width: 850px) {
+            .image-container {
+                max-width: 90%;
+            }
+
+            .text-overlay {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="container">
-    <div id="diver">
-            <div style="font-family: Arial, sans-serif; text-transform: uppercase;display: flex; justify-content: center; letter-spacing: 3px; font-size: 14px; color: #333; margin-bottom: 10px;">
-              THE WEDDING OF
-            </div>
-            <h1 style="font-family: 'Dancing Script', cursive; font-size: 4vw; color: #C4722C; margin: 0; line-height: 1.2;">
-              <%= (home && home.name) ? home.name: "Kacey & Sebastian" %> & <%= (home && home.partnerName) && home.partnerName %>
-            </h1>
-          
-        <div>
-    <div id="topImg" style="display: flex; justify-content: center;">
-        <img src="<%= (home && home.images && home.images.length > 0) ? home.images[0] : 'https://img.freepik.com/free-photo/front-view-happy-bride-groom-holding-together-knife-concentrating-cutting-wedding-cake-while-standing-background_8353-11868.jpg?t=st=1735212664~exp=1735216264~hmac=13194d8fda81d32b1f6f67bdf5c262c42bc6c9a05ae0beac830da36682351628&w=900' %>" alt="Wedding Cover" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-    </div>
-    
     <% 
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const options = {  month: 'long' };
-    const day = date.getDate();
-    // Function to get the ordinal suffix
-    function getOrdinalSuffix(day) {
-        if (day > 3 && day < 21) return 'th'; // Covers 11th to 19th
-        switch (day % 10) {
-            case 1: return 'st';
-            case 2: return 'nd';
-            case 3: return 'rd';
-            default: return 'th';
-        }
-    }
-
-    const dayWithSuffix = day + getOrdinalSuffix(day);
-    return `${date.toLocaleDateString('en-US', options)} ${dayWithSuffix}, ${date.getFullYear()}`;
-}
-%>
-        <div style=" font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
-        ; margin: 20px;">
-            <div style="text-align: center; font-size: 2.2em; font-weight: bold;">
-              " <%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%> - <%=(home&&home.weddingLocation)?home.weddingLocation:'Chicago'%>"
-            </div>
-            <div style="margin: 10px 0; font-size: 1.1em; text-align: center;">
-              "<%= (home&&home.text)?home.text:'Take a moment to complete your introduction for your website'%>"
-            </div>
-        
-            <div style="font-family: Palatino, 'Palatino Linotype', 'Palatino LT STD', 'Book Antiqua', Georgia, serif; margin: 20px;">
-                <div style="font-size: 1.5em; font-weight: bold; text-align: center; margin-bottom: 20px;">About the Couple</div>
-            
-                <div style="
-                    display: grid; 
-                    grid-template-columns: 1fr 1fr; 
-                    gap: 20px; 
-                    max-width: 1200px; 
-                    margin: 0 auto;">
-            
-                    <!-- Grid A1: Bride Picture -->
-                    <div style="grid-column: 1; grid-row: 1; height: 25.5rem;">
-                        <img src="<%=(about&&about.bride&&about.bride.image)?about.bride.image:'https://img.freepik.com/free-photo/bride-swing-with-flowers_144627-37795.jpg?t=st=1735209187~exp=1735212787~hmac=c8e1173cbf811970197d9aa055b00526ce555e9050b23a9e48149aa6ea90958a&w=1060'%>" 
-                             alt="Bride" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    </div>
-            
-                    <!-- Grid A2: Bride Info -->
-                    <div style="grid-column: 2; grid-row: 1; font-size: 1em; line-height: 1.6;">
-                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">The Bride</div>
-                        <div>
-                          <%=(about && about.bride && about.bride.description) ? about.bride.description : "I think the moment I knew he was 'the one' was when I had a work assignment that would take me to France for 10 weeks.It was only once I was on the plane I realized how much I would miss him. I never wanted to be without him again!" %>
-                            
-                        </div>
-                    </div>
-            
-                    <!-- Grid B1: Groom Info -->
-                    <div style="grid-column: 1; grid-row: 2; font-size: 1em; line-height: 1.6;">
-                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">The Groom</div>
-                        <div>
-                          <%=(about && about.groom && about.groom.description) ? about.groom.description : "What can I say, she is amazing. Brilliant, creative, and adventurous. I have always been a little bit shy, and she has shown me a whole new side of life. I never want to go back to the way life was before I met her. She is my forever." %>
-                        </div>
-                    </div>
-            
-                    <!-- Grid B2: Groom Picture -->
-                    <div style="grid-column: 2; grid-row: 2;height: 25.5rem">
-                      
-                        <img 
-                        src="<%=(about&&about.groom&&about.groom.image)?about.groom.image:'https://img.freepik.com/free-photo/stylish-elegant-bridegroom-is-hotel-room-with-bouquet-flowers_1157-13806.jpg?t=st=1735209118~exp=1735212718~hmac=9c80adb96e4d7453986fbaf3fd6c3111df9c24643968be890f0178907290fff8&w=1060'%>"  
-                             alt="Groom" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    </div>
-                </div>
-
-            
-            <div id="topImg" style="margin-top: 0px;">
-                <h2 style="display: flex; justify-content: center;">Our Story</h2>
-                <img src="<%= (ourStory && ourStory.images && ourStory.images.length > 0) ? ourStory.images[0] : 'https://img.freepik.com/free-photo/elegant-indian-wedding_1157-17827.jpg?t=st=1735212583~exp=1735216183~hmac=4cbf4ef97c26ef467a432423abb98f6ba88ed18bc70ad94ab716cf285a490007&w=996' %>"
-                alt="Our Story" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <div style="font-size: 1em; line-height: 1.8; margin-bottom: 20px;">
-                  <%= (ourStory && ourStory.description) ? ourStory.description : "For our three year anniversary we wanted to re-create our first date. We went to the coffee shop where we met, and then to the small movie theater next door. Instead of a movie, he surprised me with a theater full of friends and family then proposed on stage. It is so meaningful to us to share this special day with our most cherished friends and family. We sincerely hope we will have the honor to dine, laugh, and dance with you on our wedding weekend. It would mean the world to us." %>
-                </div>
-            </div>
-        
-            <div style="font-size: 1.5em; font-weight: bold; text-align: center; margin: 20px 0;">Event Information</div>
-            <div style="font-size: 1em; line-height: 1.8;">
-              <%= (eventInfo && eventInfo.description) ? eventInfo.description : "We have set up a wedding website that covers all of the travel, hotel, and event information that you will find useful for attending our wedding weekend. After submitting your RSVP, please take a moment to visit our website and see our engagement photos!" %>
-            </div>
-        </div>
-        <% 
 function formatTime(timeString) {
     const [hour, minute] = timeString.split(':').map(Number);
-    const period = hour >= 12 ? 'in the evening' : 'in the morning';
+    const period = hour >= 12 ? 'PM' : 'AM'; // Change to 'PM'/'AM'
     const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
-    return `${formattedHour} o'clock ${period}`;
+    return `${formattedHour}:${minute.toString().padStart(2, '0')} ${period}`; // Format to "HH:MM AM/PM"
 }
 %>
-     <div class="container">
-        <h1>DIRECTIONS</h1>
+<% 
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = {  month: 'long' };
+            const day = date.getDate();
+            // Function to get the ordinal suffix
+            function getOrdinalSuffix(day) {
+                if (day > 3 && day < 21) return 'th'; // Covers 11th to 19th
+                switch (day % 10) {
+                    case 1: return 'st';
+                    case 2: return 'nd';
+                    case 3: return 'rd';
+                    default: return 'th';
+                }
+            }
         
-        <div class="form-group">
-          <label>Ceremony</label>
-          <div class="ceremony-time">
-            <%= ((eventInfo && eventInfo.time) ? formatTime(eventInfo.time) : "5 o'clock in the evening") %>
-          </div>
+            const dayWithSuffix = day + getOrdinalSuffix(day);
+            return `${date.toLocaleDateString('en-US', options)} ${dayWithSuffix}, ${date.getFullYear()}`;
+        }
+        %>
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920366/Template3/bxpwgcsc7jmxgllqsyxh.png" alt="Background 1" class="background-image">
+        <div class="text-overlay text-1" style="color: #ffffff">
+            <h2><%= (home && home.name) ? home.name:"Groom"%></h2>
+            <h3>Weds</h3>
+            <h2><%= (home && home.partnerName)? home.partnerName:"Bride" %></h2>
         </div>
-    
-        <div class="form-group">
-          <label>Address</label>
-          <div class="address">
-            <%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) &&eventInfo.venue.address %>
-            <%=(home&&home.weddingLocation&&(!eventInfo || !eventInfo.venue||!eventInfo.venue.address))?home.weddingLocation:'Chicago'%>
-          </div>
-        </div>
+       <!-- <h2 class="text-overlay text-1t">12/3/25</h2> -->
+     
+    </div>
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920364/Template3/vvjvzz2dwsfz5ipnc5le.png" alt="Background 2" class="background-image">
+        <div class="text-overlay text-2a"><img src="https://img.freepik.com/free-photo/wedding-ritual-putting-ring-finger-india_8353-10048.jpg?t=st=1736498720~exp=1736502320~hmac=7393ce11b05a7acf8635f5af31c6850b4a47fa1c1bae7757f994177578390987&w=996" alt="Bg image" style="height: 22rem;" ></div>
 
-        <div class="map-container">
-            <iframe src= 
-            "<%=(eventInfo&&eventInfo.venue&&eventInfo.venue.location)? eventInfo.venue.location :"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.4051603706222!3d28.50292593193056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce626851f7009%3A0x621185133cfd1ad1!2sGeeksforGeeks!5e0!3m2!1sen!2sin!4v1585040658255!5m2!1sen!2sin"%>"
-                                width="400"
-                                height="300"
-                                frameborder="0"
-                                style="border:0;"
-                                allowfullscreen=""
-                                aria-hidden="false"
-                                tabindex="0"> 
-                        </iframe> 
+            <div class="text-overlay text-2c">
+            <p id="text2c"><%= (ourStory && ourStory.description) ? ourStory.description : "For our three year anniversary we wanted to re-create our first date. We went to the coffee shop where we met, and then to the small movie theater next door. Instead of a movie, he surprised me with a theater full of friends and family then proposed on stage. It is so meaningful to us to share this special day with our most cherished friends and family. We sincerely hope we will have the honor to dine, laugh, and dance with you on our wedding weekend. It would mean the world to us." %></p>
         </div>
-      </div>
-      <div style="max-width: 800px; margin: 0 auto; font-family: Georgia, serif; color: #555;">
-        <div style="text-align: center; margin-bottom: 40px;">
-          <h2 style="color: #666; font-size: 24px; font-weight: normal; letter-spacing: 2px; border-bottom: 1px solid #ddd; padding-bottom: 15px;">FOLLOW US!</h2>
-          
-          <p style="color: #666; font-size: 16px; margin: 20px 0;">
-            Stay up to date with the happy couple. Tag wedding related posts with the hashtag 
-            <%=(tags && tags.type && tags.type.length > 0) ? tags.type.map(t => `#${t}`).join(' ') : "#ourweddingtag"%>
-          </p>
-    
-          <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
-            <div style="border: 1px dotted #ddd; padding: 15px; width: 200px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="color: #c66; font-size: 20px;">−</span>
-                <span style="color: #666;">Facebook</span>
-              </div>
-              <a href="<%=(socialLinks&&socialLinks.facebook)?socialLinks.facebook:"http://www.facebook.com"%>" style="color: #888; text-decoration: none; font-size: 14px;">
-                <%=(socialLinks&&socialLinks.facebook)?socialLinks.facebook:"http://www.facebook.com"%>
-              </a>
+    </div>
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920365/Template3/ulqnwfbpvof8zei9rani.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            <h3 >Date: <%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%></h3><h3>Time: <%= ((eventInfo && eventInfo.time) ? formatTime(eventInfo.time) : '3:00 PM') %></h3>
+             <h4>Venue: <%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) ?eventInfo.venue.address:'Lernerra Luxury Resort 123 Anywhere St., Any City, ST' %></h4>
+            <h4>Dress Code: Traditional Attire</h4>
             </div>
-    
-            <div style="border: 1px dotted #ddd; padding: 15px; width: 200px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="color: #c66; font-size: 20px;">−</span>
-                <span style="color: #666;">Instagram</span>
-              </div>
-              <a href="<%=(socialLinks&&socialLinks.instagram)?socialLinks.instagram:"http://www.instagram.com"%>" style="color: #888; text-decoration: none; font-size: 14px;">
-                <%=(socialLinks&&socialLinks.facebook)?socialLinks.facebook:"http://www.instagram.com"%>
-              </a>
+            <div class="text-overlay text-5a">
+                <iframe style="height: 35%;max-width: 35%;" src="<%=(eventInfo&&eventInfo.venue&&eventInfo.venue.location)? eventInfo.venue.location :'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.4051603706222!3d28.50292593193056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce626851f7009%3A0x621185133cfd1ad1!2sGeeksforGeeks!5e0!3m2!1sen!2sin!4v1585040658255!5m2!1sen!2sin'%>" width="600" height="450" style="border: 0" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
             </div>
-    
-            <div style="border: 1px dotted #ddd; padding: 15px; width: 200px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="color: #c66; font-size: 20px;">−</span>
-                <span style="color: #666;">Twitter</span>
-              </div>
-              <a href="<%=(socialLinks&&socialLinks.twitter)?socialLinks.twitter:"http://www.twitter.com"%>" style="color: #888; text-decoration: none; font-size: 14px;">
-                <%=(socialLinks&&socialLinks.facebook)?socialLinks.facebook:"http://www.twitter.com"%>
-              </a>
+            <div class="text-overlay text-3a1">
+                <h3 >Date: <%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%></h3><h3>Time: <%= ((eventInfo && eventInfo.time) ? formatTime(eventInfo.time) : '3:00 PM') %></h3>
+                <h4>Venue: <%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) ?eventInfo.venue.address:'Lernerra Luxury Resort 123 Anywhere St., Any City, ST' %></h4>
+                <h4>Dress Code: Traditional Attire</h4>
+                </div>
+
+                <div class="text-overlay text-3a2">
+                    <iframe style="height: 35%;max-width: 35%;" src="<%=(eventInfo&&eventInfo.venue&&eventInfo.venue.location)? eventInfo.venue.location :'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.4051603706222!3d28.50292593193056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce626851f7009%3A0x621185133cfd1ad1!2sGeeksforGeeks!5e0!3m2!1sen!2sin!4v1585040658255!5m2!1sen!2sin'%>" width="600" height="450" style="border: 0" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+                </div>
+
+                <div class="text-overlay button-3t"><button style="border-radius: 500px;; width: 27%; font-size: 2.9rem; color: #ffffff; background-color: rgb(230, 90, 193);">RSVP</button></div>
+
+        </div>
+        
+    </div>
+
+
+
+        <div class="image-container">
+            <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920365/Template3/mfhvxdoctshmk5tdmhia.png" alt="Background 3" class="background-image">
+
+                <div class="text-overlay input-3a"><textarea placeholder="Recipient Name" type="text" id="a" style="width: 40%; height: auto;border: none; background-color: white; font-size: 1.7rem" ></textarea></div>
+                <div class="text-overlay input-3b"><textarea placeholder="Address" type="text" id="a" style="width: 40%; height: 33%;border: none; background-color: white; font-size: 1.5rem" ></textarea></div>
+                <div class="text-overlay input-3c"><textarea placeholder="City" type="text" id="a" style="width: 19%; height: 27%;border: none; background-color: white; font-size: 0.8rem" ></textarea></div>
+                <div class="text-overlay input-3c2"><textarea placeholder="Zip code" type="text" id="a" style="width: 19%; height: 27%;border: none; background-color: white; font-size: 0.8rem" ></textarea></div>
+                <div class="text-overlay input-3d"><textarea placeholder="Email" type="text" id="a" style="width: 27%; height: 31%;border: none; background-color: white; font-size: 1rem" ></textarea></div>
+                <div class="text-overlay input-3e"><textarea placeholder="Phone no." type="text" id="a" style="width: 27%; height: 31%;border: none; background-color: white; font-size: 1rem" ></textarea></div>
+                 
+                <div class="text-overlay button-3d"><button style="border-radius: 500px;border: none; width: 29%; font-size: 3rem; color: #14627b;background-color: pink;">Submit ></button></div>
             </div>
+
+   
+
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920365/Template3/dxw4spidmoxegjl9m493.png" alt="Background 4" class="background-image">
+
+        <% if (gallery && gallery.photos && gallery.photos.length > 0) { %>
+            <% gallery.photos.forEach(function(photo) { %>
+                <div class="text-overlay image-5a"><img style="width: 40%;" src="<%= photo %>"></div>
+            <% }); %>
+        <% } else { %>
+            
+            <div class="text-overlay image-5a"><img style="width: 40%;" src="https://img.freepik.com/free-photo/hands-indian-bride-groom-intertwined-together-making-authentic-wedding-ritual_8353-10047.jpg?t=st=1736511790~exp=1736515390~hmac=b29959ea96b1d013e147d78fd2cad2ef63a2aadea354c29248791113f27674e7&w=996"></div>
+       <div class="text-overlay image-5b"><img style="width: 40%;" src="https://img.freepik.com/free-photo/wedding-ritual-putting-ring-finger-india_8353-10048.jpg?t=st=1736511808~exp=1736515408~hmac=5d264b6af63ac33e67e5bc8a6464b4c004a0e158bc1ca2fdc70a0e3b33825a94&w=996"></div>
+       <div class="text-overlay image-5c"><img style="width: 40%;" src="https://img.freepik.com/free-photo/mehndi-wedding-ornament-hands-drawn-by-henna_8353-9769.jpg?t=st=1736511824~exp=1736515424~hmac=17f818d726cf191970c138c4e0a8733c65479f07314e9c323b1f02e586985619&w=996"></div>
+       <div class="text-overlay image-5d"><img style="width: 40%;" src="https://img.freepik.com/free-photo/mehndi-designs-hands-beautiful-traditional-indian-jewelry_8353-9766.jpg?t=st=1736511847~exp=1736515447~hmac=152b98dde4c3c78d27638abb1815f4332404ceb7b3751aef185ce3417adc4222&w=996"></div>
+            </div>
+
+        <% } %>
+
+       
+
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920366/Template3/dv1fn7s5xexghak8kqsn.png" alt="Background 1" class="background-image">
+        <div class="text-overlay text-img" style="color: black;">
+            <!-- <img style="width: 50%;" src="https://img.freepik.com/free-photo/composition-flowers-stand-table_8353-10452.jpg?t=st=1736512531~exp=1736516131~hmac=73635d006dbc975f91a0c79dbe1397d794e496274fdc69c71f149392d8488719&w=996" alt="flowers"> -->
+
+        </div>
+        <h2 class="text-overlay text-fin">RSVP</h2>
+    </div>
+
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920365/Template3/mtacmpif7edammfhmnbm.png" alt="Background 1" class="background-image">
           </div>
-        </div>
-    
-        <!-- <div style="text-align: center; margin-top: 40px;">
-          <h2 style="color: #666; font-size: 24px; font-weight: normal; letter-spacing: 2px; border-bottom: 1px solid #ddd; padding-bottom: 15px;">RESPONSES</h2>
-          
-          <p style="color: #666; font-size: 16px; margin: 20px 0;">
-            Responses are private and only visible by you while logged into your website
-          </p>
-          
-          <p style="color: #888; font-style: italic;">
-            No Responses Yet
-          </p>
-        </div> -->
-      </div>
-</div>
+
+    <!-- Repeat similar structure for remaining images -->
 </body>
 </html>
-

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    @font-face { font-family: AlexBrushReg; src: url('./fonts/AlexBrush-Regular.ttf'); } 
+    @font-face { font-family: Gistesy; src: url('./fonts/Gistesy.ttf'); } 
+    @font-face { font-family: GreatVIbe; src: url('./assets/great-vibes/GreatVibes-Regular.ttf'); } 
+    
+
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #e6d5da;
+        }
+
+        .image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .background-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-overlay {
+            position: absolute;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        /* Example text positions - adjust these values based on your needs */
+        .text-1 {
+            top: 66%;
+            /* left: %; */
+            text-align: center;
+            right: 14%;
+            text-shadow: none;
+            /* height: 1.2vw; */
+            font-size: 1.2rem;
+            font-family: GreatVIbe;
+        }
+        .text-1b {
+            top: 66%;
+            /* left: 6%; */
+            text-align: center;
+        }
+        .text-1c {
+            top: 66%;
+            left: 13%;
+            text-align: center;
+            font-size: 1.rem;
+            text-shadow: none;
+        }
+        .text-1e{
+            top: 75%;
+            text-align: center;
+        }
+        .text-1d {
+            color: #000;
+            top: 32%;
+            max-width: 80%;
+           text-align: center;
+        }
+
+        .text-2a {
+            color: #000;
+            top: 41%;
+            left: 20%;
+            /* text-align: center; */
+        }
+        
+        .text-2b {
+    color: #000;
+    right: 18%; /* Changed from -70% to a positive percentage */
+    top: 41%;
+    width: auto; /* Add this to prevent full width */
+    text-align: right; /* Align text to the right */
+    max-width: 50%; /* Limit the width of text container */
+}
+        .text-2c {
+            color: #000;
+            top: 54%;
+            left: 8%;
+            max-width: 40%;
+           text-align: center;
+        }
+        .text-2d {
+            color: #000;
+            top: 54%;
+            right: 8%;
+            max-width: 40%;
+           text-align: center;
+        }
+
+        .text-3 {
+            top: 30%;
+            right: 17%;
+            max-width:28%;
+            text-align: left;
+            color: #14627b;
+            font-family: "Publicreg";
+
+            /* line-height: 0%; */
+        }
+
+        .text-3a1{
+            bottom: 11%;
+            left: 8%;
+            max-width:38%;
+            text-align: center;
+            color: #14627b;
+            font-family: "Publicreg";
+
+        }
+        .text-3a2{
+            bottom: 14%;
+            right: 10%;
+            text-align: right;
+            
+        }
+        .button-3t{
+            bottom: 1%;
+
+            left: 36%;
+        }
+        .text-5a{
+            top: 34%;
+            left: 10%;
+            /* text-align: center; */
+            
+        }
+        .text-2ap {
+            color: #000;
+            top: 15%;
+            left: 14%;
+            text-align: left;
+        }
+        .text-2ar {
+            color: #000;
+            top: 15%;
+            right: 8%;
+            text-align: right;
+        }
+
+        .text-4a{
+            top: 22%;
+            left: 32%;  
+        }
+        .text-4e{
+            top: 60%;
+            left: 32%;  
+            width: auto; 
+        }
+       
+        
+        .text-4b{
+            top: 31%;
+            left: 32%;
+        }
+        .text-4f{
+            top: 69.5%;
+            left: 32%;
+            width: auto; 
+    /* text-align: right; */
+        }
+        .text-4c{
+            top: 40%;
+            left: 32%; 
+        }
+        .text-4g{
+            top: 53.6%;
+            left: 32%;
+            width: auto; 
+    text-align: right;        }
+        .text-4d{
+            top: 50%;
+            left: 32%;
+        }
+        .text-4h{
+            top: 63.6%;
+            left: 32%; 
+            width: auto; 
+    text-align: right;        }
+        .button-a{
+            top: 80%;
+            left: 33.5%;  
+        }
+        .button-aa{
+            top: 78%;
+            left: 32%;  
+        }
+        .text-fin{
+            bottom: 18%;
+            left: 42%;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .image-5a{
+           top: 18%;
+           left: 12%;
+        }
+        .image-5b{
+            bottom: 0%;
+            left:12%
+            
+        }
+        .image-5c{
+            left: 52%;
+            bottom: 0%;
+        }
+        .image-5d{
+            left: 52%;
+            top: 18%;
+        }
+        .image-5bc{
+            top: 43%;
+            left: 32%;
+        }
+
+        .text-5{
+            top: 38%;
+            left: 21.4%;
+            max-width: 26%;
+            font-size: 1.1rem;
+        }
+       
+        .text-6{
+            top: 50%;
+            left: 34%;
+            max-width: 23%;
+        }
+        .text-6b{
+            top: 62%;
+            left: 34%;
+            max-width: 23%;
+        }
+        .text-6c{
+            bottom: 25%;
+            left: 21%;
+            /* max-width: 23%; */
+        }
+
+
+        .img1{
+            bottom: 52%;
+            left: 34%;
+            width: 31%;
+            height: 30%;
+            background-image: url('../1.png');
+            background-size: cover;
+            background-position: center;
+            border: #000 1px solid;
+            border-radius: 3px 3px 0 0; 
+        }
+
+
+        /* Responsive text sizes */
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin: 0;
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin: 10px 0;
+        }
+
+        @media (max-width: 850px) {
+            .image-container {
+                max-width: 90%;
+            }
+
+            .text-overlay {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <% 
+function formatTime(timeString) {
+    const [hour, minute] = timeString.split(':').map(Number);
+    const period = hour >= 12 ? 'PM' : 'AM'; // Change to 'PM'/'AM'
+    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12-hour format
+    return `${formattedHour}:${minute.toString().padStart(2, '0')} ${period}`; // Format to "HH:MM AM/PM"
+}
+%>
+    
+    <% 
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = {  month: 'long' };
+            const day = date.getDate();
+            // Function to get the ordinal suffix
+            function getOrdinalSuffix(day) {
+                if (day > 3 && day < 21) return 'th'; // Covers 11th to 19th
+                switch (day % 10) {
+                    case 1: return 'st';
+                    case 2: return 'nd';
+                    case 3: return 'rd';
+                    default: return 'th';
+                }
+            }
+        
+            const dayWithSuffix = day + getOrdinalSuffix(day);
+            return `${date.toLocaleDateString('en-US', options)} ${dayWithSuffix}, ${date.getFullYear()}`;
+        }
+        %>
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736926133/Template6/u9avb88gf3khkxnjhrrf.jpg" alt="Background 1" class="background-image" style="">
+        <div class="text-overlay text-1" style="color: #705953; font-family: 'GreatVIbe';"> <h2><%= (home && home.name) ? home.name:"Groom"%></h2></div>
+        <div class="text-overlay text-1b" style="color: #705953;font-family: 'GreatVIbe'"> <h3>Weds</h3></div>
+        <div class="text-overlay text-1c" style="color: #705953; font-family: 'GreatVIbe'"> <h2><%= (home && home.partnerName)? home.partnerName:"Bride" %></h2></div>
+        <div class="text-overlay text-1e" style="color: #0b2057; font-family: 'AlexBrushReg';"> <h3><%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%></h3></div>
+            
+        </div>
+    </div>
+
+
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736920736/Template4/wwuqyrmwmh1skj0bfqkq.png" alt="Background 1" class="background-image">
+        <div class="text-overlay text-1d" style="background-image: 'https://img.freepik.com/free-photo/wedding-ritual-putting-ring-finger-india_8353-10048.jpg?t=st=1736511808~exp=1736515408~hmac=5d264b6af63ac33e67e5bc8a6464b4c004a0e158bc1ca2fdc70a0e3b33825a94&w=996'">
+                        <p id="text2c"><%= (ourStory && ourStory.description) ? ourStory.description : "For our three year anniversary we wanted to re-create our first date. We went to the coffee shop where we met, and then to the small movie theater next door. Instead of a movie, he surprised me with a theater full of friends and family then proposed on stage. It is so meaningful to us to share this special day with our most cherished friends and family. We sincerely hope we will have the honor to dine, laugh, and dance with you on our wedding weekend. It would mean the world to us." %></p>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736926132/Template6/mg1t7psou9vp2fhtovw8.png" alt="Background 3" class="background-image">
+        <div class="text-overlay text-3">
+            <h3 >Date: <%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%></h3><h3>Time: <%= ((eventInfo && eventInfo.time) ? formatTime(eventInfo.time) : '3:00 PM') %></h3>
+            <h4>Venue: <%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) ?eventInfo.venue.address:'Lernerra Luxury Resort 123 Anywhere St., Any City, ST' %> </h4>
+            <h4>Dress Code: Traditional Attire</h4>
+            </div>
+            <div class="text-overlay text-5a">
+                <iframe style="height: 35%;max-width: 35%;" src="<%=(eventInfo&&eventInfo.venue&&eventInfo.venue.location)? eventInfo.venue.location :'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.4051603706222!3d28.50292593193056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce626851f7009%3A0x621185133cfd1ad1!2sGeeksforGeeks!5e0!3m2!1sen!2sin!4v1585040658255!5m2!1sen!2sin'%>"  width="600" height="450" style="border: 0" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+            </div>
+            <div class="text-overlay text-3a1">
+                <h3 >Date: <%=(home&&home.weddingDate)?formatDate(home.weddingDate):'October 23rd, 2025'%></h3><h3>Time: <%= ((eventInfo && eventInfo.time) ? formatTime(eventInfo.time) : '3:00 PM') %></h3>
+                <h4>Venue: <%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) ?eventInfo.venue.address:'Lernerra Luxury Resort 123 Anywhere St., Any City, ST' %> </h4>
+                <h4>Dress Code: Traditional Attire</h4>
+                </div>
+
+                <div class="text-overlay text-3a2">
+                    <iframe style="height: 35%;max-width: 35%;" src="<%=(eventInfo&&eventInfo.venue&&eventInfo.venue.location)? eventInfo.venue.location :'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.2233913121413!2d77.4051603706222!3d28.50292593193056!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce626851f7009%3A0x621185133cfd1ad1!2sGeeksforGeeks!5e0!3m2!1sen!2sin!4v1585040658255!5m2!1sen!2sin'%>"  width="600" height="450" style="border: 0" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+                </div>
+
+                <div class="text-overlay button-3t"><button style="border-radius: 500px;; width: 27%; font-size: 2.9rem; color: #ffffff; background-color: rgb(230, 174, 90);">RSVP</button></div>
+
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736926132/Template6/kjh5ltlhljy2k99efaio.png" alt="Background 4" class="background-image">
+        <div class="text-overlay text-4a"><input placeholder="Name" type="text" id="a" style="width: 29%; height: 37%;border: none; background-color: transparent; font-size: 1.5rem" ></div>
+        <div class="text-overlay text-4b"><input placeholder="Address" type="text" id="a" style="width: 29%; height: 37%;border: none; background-color: transparent; font-size: 1.5rem; padding-top:1% ;" ></div>
+        <div class="text-overlay text-4c"><input placeholder="City" type="text" id="a" style="width: 29%; height: 37%;border: none; background-color: transparent; font-size: 1.5rem; padding-top:1% ;" ></div>
+        <div class="text-overlay text-4d"><input placeholder="Zip code" type="text" id="a" style="width: 29%; height: 37%;border: none; background-color: transparent; font-size: 1.5rem; padding-top:1% ;" ></div>
+        <div class="text-overlay text-4e"><input placeholder="Phone no." type="text" id="a" style="width: 69%; height: 37%;border: none; background-color: transparent; font-size: 1.5rem; padding-top: 1%;" ></div>
+        <div class="text-overlay text-4f"><input placeholder="Email" type="text" id="a" style="width: 69%; height: 37%;border: none; background-color: transparent; font-size: 1.5rem;padding-top: 1% ;" ></div>
+        <!-- <div class="text-overlay text-4g"><input placeholder="Zip Code" type="text" id="a" style="width: 60%; height: 37%;; background-color: transparent; font-size: 1.5rem;padding-top: 1% ;" ></div>
+        <div class="text-overlay text-4h"><input placeholder="Ph. number" type="text" id="a" style="width: 60%; height: 37%;; background-color: transparent; font-size: 1.5rem; padding-top: 1%;" ></div> -->
+
+        <div class="text-overlay button-a" style="border-radius: 500px;background-color: #b68618;width: 30%; height: 10%;"><button style="margin-left: 15%;margin-bottom: 2%; background-color: transparent;color: rgb(255, 255, 255);border: none; font-size: 1.8rem;">SUBMIT</button></div>
+    </div>
+
+
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736926133/Template6/wx44tj7ajtzy1cxgnmun.png" alt="Background 1" class="background-image">
+        <div class="text-overlay text-6" style="color: black;"><input type="radio" name="select" value="Yes"></div>
+        <div class="text-overlay text-6b" style="color: black;"><input type="radio" name="select" value="No"></div>   
+        <div class="text-overlay button-aa"><button style="width: 33%; height: 35%; background-color: transparent;color: red;border: none; font-size: 1.8rem;">SUBMIT</button></div>
+        </div>
+    </div>
+
+
+    
+
+    <!-- <div class="image-container">
+        <img src="./template 5.png" alt="Background 1" class="background-image">
+        <div class="text-overlay img1"></div>
+         </div> -->
+
+
+    <div class="image-container">
+        <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736926133/Template6/eqqiviu37a57yrtrvsoc.png" alt="Background 1" class="background-image">
+
+        <% if (gallery && gallery.photos && gallery.photos.length > 0) { %>
+            <% gallery.photos.forEach(function(photo) { %>
+                <div class="text-overlay image-5a"><img style="width: 40%;" src="<%= photo %>"></div>
+            <% }); %>
+        <% } else { %>
+            <div class="text-overlay image-5a"><img style="width: 35%;" src="https://img.freepik.com/free-photo/hands-indian-bride-groom-intertwined-together-making-authentic-wedding-ritual_8353-10047.jpg?t=st=1736511790~exp=1736515390~hmac=b29959ea96b1d013e147d78fd2cad2ef63a2aadea354c29248791113f27674e7&w=996"></div>
+            <div class="text-overlay image-5b"><img style="width: 35%;" src="https://img.freepik.com/free-photo/wedding-ritual-putting-ring-finger-india_8353-10048.jpg?t=st=1736511808~exp=1736515408~hmac=5d264b6af63ac33e67e5bc8a6464b4c004a0e158bc1ca2fdc70a0e3b33825a94&w=996"></div>
+            <div class="text-overlay image-5c"><img style="width: 35%;" src="https://img.freepik.com/free-photo/mehndi-wedding-ornament-hands-drawn-by-henna_8353-9769.jpg?t=st=1736511824~exp=1736515424~hmac=17f818d726cf191970c138c4e0a8733c65479f07314e9c323b1f02e586985619&w=996"></div>
+            <div class="text-overlay image-5d"><img style="width: 35%;" src="https://img.freepik.com/free-photo/mehndi-designs-hands-beautiful-traditional-indian-jewelry_8353-9766.jpg?t=st=1736511847~exp=1736515447~hmac=152b98dde4c3c78d27638abb1815f4332404ceb7b3751aef185ce3417adc4222&w=996"></div>
+    
+        <% } %>
+         
+         </div>
+         <div class="image-container">
+            <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736926133/Template6/t07onbgx7wyhadjvuuns.png" alt="Background 1" class="background-image">
+            <div class="text-overlay text-img" style="color: black;">
+                <!-- <img style="width: 50%;" src="https://img.freepik.com/free-photo/composition-flowers-stand-table_8353-10452.jpg?t=st=1736512531~exp=1736516131~hmac=73635d006dbc975f91a0c79dbe1397d794e496274fdc69c71f149392d8488719&w=996" alt="flowers"> -->
+    
+            </div>
+            <h2 class="text-overlay text-fin" style="color: transparent;             text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+">RSVP</h2>
+        </div>
+
+         <div class="image-container">
+            <img src="https://res.cloudinary.com/dvvjiaj5u/image/upload/v1736926133/Template6/x2uqycsmwrtdak3efucw.png" alt="Background 1" class="background-image">
+             </div>
+    <!-- Repeat similar structure for remaining images -->
+</body>
+</html>

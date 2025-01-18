@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import img2 from "../assets/images/home-2.webp";
-import img3 from "../assets/images/home-3.webp";
-import img4 from "../assets/images/home-4.webp";
+import img2 from "../assets/images/sliders/1.png";
+import img3 from "../assets/images/sliders/2.png";
+import img4 from "../assets/images/sliders/3.png";
 import cardImg from "../assets/images/02.png";
 import webImg from "../assets/images/weddingwebsites.jpg";
 import buttonBg from "../assets/images/09.png";
 import freeImg from "../assets/images/free.png";
 import wedImg from "../assets/images/01.png";
 import { motion } from "framer-motion";
+import { Carousel } from "flowbite-react";
+import wedImg1 from "../assets/images/weddingurl/w5.png";
+import wedImg2 from "../assets/images/weddingurl/w6.png";
+import wedImg3 from "../assets/images/weddingurl/w7.png";
 
 const images = [img2, img3, img4];
 
@@ -87,7 +91,7 @@ export default function HeroSlider() {
                 <img
                   src={image}
                   alt={`Slide ${index + 1}`}
-                  className="h-full w-full lg:object-cover"
+                  className="h-full w-full lg:object-cov"
                 />
               </div>
             ))}
@@ -165,16 +169,18 @@ export default function HeroSlider() {
         </div>
         <motion.div className="lg:w-[30%] h-full flex items-center justify-center relative w-full rounded-xl">
           {/* <img className="h-[500px] lg:h-full" src={wedImg} alt="" /> */}
-          <div className="lg:px-8 flex flex-col gap-2 lg:gap-3 py-3 md:w-full items-center justify-center font-heroFont bg-pink-200 rounded-lg">
-            <h1 className="font-ttMedium text-4xl text-secondary">make your own </h1>
+          <div className="flex flex-col gap-2 lg:gap-[7px] py-1 md:w-full items-center justify-center bg-pink-200 rounded-lg">
+            <h1 className="font-justinhailey text-7xl text-secondary">
+              make your own
+            </h1>
             <h1 className="text-4xl lg:text-4xl font-ttMedium uppercase text-center leading-none text-pink-600">
               Wedding Website
             </h1>
             <div className="flex items-center flex-col sm:flex-row gap-4">
-              <img className="h-44" src={webImg} alt="" />
               <img className="h-24" src={freeImg} alt="" />
+              <img className="h-44" src={wedImg2} alt="" />
             </div>
-            <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300">
+            <div className="relative flex flex-col items-center justify-center">
               <img className="w-48" src={buttonBg} alt="" />
               <a
                 href="/create-wedding-website"
@@ -183,7 +189,7 @@ export default function HeroSlider() {
                 Explore Designs
               </a>
             </div>
-            <p className="text-sm font-semibold text-center">
+            <p className="text-md font-avalonB text-secondary text-center">
               A simple, beautiful wedding website just for you - FREE
             </p>
           </div>

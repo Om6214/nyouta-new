@@ -1,9 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
-import img1 from "../assets/images/home-1.webp";
-import img2 from "../assets/images/home-2.webp";
-import img3 from "../assets/images/home-3.webp";
-import img4 from "../assets/images/home-4.webp";
+import img1 from "../assets/images/sliders/4.png";
+import img2 from "../assets/images/sliders/5.png";
+import img3 from "../assets/images/sliders/6.png";
 import buttonBg from "../assets/images/09.png";
 import { Heart, ShieldCheck, Star } from "lucide-react";
 // import products from "../products.json";
@@ -24,7 +23,7 @@ const HomeSlider = () => {
   console.log(products?.filter((items) => [1, 9, 14, 18].includes(items?._id)));
   return (
     <>
-      <div className="lg:py-1 pt-6">
+      <div className="lg:my-4 pt-6">
         <h1 className="lg:text-5xl text-3xl text-secondary text-center font-avalonB">
           Your Wedding, Your Shape
         </h1>
@@ -38,11 +37,10 @@ const HomeSlider = () => {
             <img className="rounded-xl h-full" src={img1} alt="..." />
             <img className="rounded-xl h-full" src={img2} alt="..." />
             <img className="rounded-xl h-full" src={img3} alt="..." />
-            <img className="rounded-xl h-full" src={img4} alt="..." />
           </Carousel>
         </div>
         <div className="lg:w-[30%]">
-          <div className="py-6 px-6 mt flex flex-col lg:gap-4 gap-3 text-secondary items-start border-2 rounded-xl bg-priBg">
+          <div className="py-6 px-6 lg:h-full flex flex-col lg:gap-4 gap-3 text-secondary items-start border-2 rounded-xl bg-priBg">
             <h1 className="text-7xl font-ttMedium font-bold">new !</h1>
             <h1 className="text-4xl font-linna leading-relaxed">
               shAped Wedding invitAtion

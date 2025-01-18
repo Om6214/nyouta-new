@@ -3,7 +3,6 @@
 import { Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
-import custAvatar from "../assets/images/customer.jpg";
 import bgImg from "../assets/images/mahal1.png";
 const testimonials = [
   {
