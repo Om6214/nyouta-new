@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 export default function TopCategories() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
+  console.log("producs",products);
   useEffect(() => {
     if (!products.length) {
       dispatch(getProducts());
@@ -296,42 +297,41 @@ export default function TopCategories() {
 
   // Parse query parameters
   const params = new URLSearchParams(location.search);
-  const searchTerm = params.get('term') || '';
-  const category = params.get('category') || 'All';
-  console.log(products)
+  const searchTerm = params.get("term") || "";
+  const category = params.get("category") || "All";
+  console.log(products);
   // Filter Logic
-  
-  const filteredProducts = products?.filter((product) => {
 
-     // If both searchTerm and category have no meaningful values, return all products
-     if (!searchTerm && (category === 'All' || !category)) {
-      return true; // Include all products
-    }
+ const filteredProducts = products?.filter((product) => {
+  // Matches the main category
+  const matchesCategory =
+    !selectedOptions.main || product.category === selectedOptions.main;
 
+  // Matches the sub-category
+  const matchesSubCategory =
+    !selectedOptions.sub || product.subCategory === selectedOptions.sub;
 
-    const matchesCategory =
-      (!selectedOptions.main || product?.category === selectedOptions.main) &&
-      (!category || category === 'All' || product?.category === category);
-  
-    const matchesSubCategory =
-      !selectedOptions.sub || product?.subCategory === selectedOptions.sub;
-  
-    const matchesSubSubCategory =
-      !selectedOptions.subSub || product?.subSubCategory === selectedOptions.subSub;
-  
-    const matchesPrice = product?.price <= priceFilter;
-  
-    const matchesSearchTerm =
-      !searchTerm || product?.name?.toLowerCase().includes(searchTerm.toLowerCase()) 
-    return (
-      matchesCategory &&
-      matchesSubCategory &&
-      matchesSubSubCategory &&
-      matchesPrice &&
-      matchesSearchTerm
-    );
-  });
-  
+  // Matches the sub-sub-category
+  const matchesSubSubCategory =
+    !selectedOptions.subSub || product.subSubCategory === selectedOptions.subSub;
+
+  // Matches the price filter
+  const matchesPrice = product.price <= priceFilter;
+
+  // Matches the search term
+  const matchesSearchTerm =
+    !searchTerm ||
+    product.name?.toLowerCase().includes(searchTerm.toLowerCase());
+
+  return (
+    matchesCategory &&
+    matchesSubCategory &&
+    matchesSubSubCategory &&
+    matchesPrice &&
+    matchesSearchTerm
+  );
+});
+
 
   return (
     <section className="py-16 px-4 bg-priBg">
@@ -442,9 +442,9 @@ export default function TopCategories() {
                     to={`/product/${product?._id}`}
                     key={product?._id}
                     state={{ product }} // Pass product data
-                    className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group"
+                    className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group border border-gray-400"
                   >
-                    <div className="relative w-full aspect-square mb-3">
+                    <div className="relative w-full aspect-square mb-3  ">
                       <img
                         src={product?.image[0]}
                         alt={product?.name}

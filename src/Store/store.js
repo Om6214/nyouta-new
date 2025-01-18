@@ -8,6 +8,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { configureStore } from "@reduxjs/toolkit";
 import { getWeddingWebsite } from './slices/weddingwebsiteSlice';
+import { isPlain } from 'lodash';
 
 
 const rootReducer = combineReducers({
@@ -26,8 +27,11 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const forceGetWeddingWebsiteMiddleware = store => next => action => {
     if (action.type === 'weddingwebsite/forceFetch') {
-        // Dispatch the action to fetch wedding website data
-        store.dispatch(getWeddingWebsite(action.payload));
+        if (isPlain(action.payload)) {
+            store.dispatch(getWeddingWebsite(action.payload));
+        } else {
+            console.warn('Non-serializable value detected in action payload:', action.payload);
+        }
     }
     return next(action);
 };

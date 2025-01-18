@@ -66,33 +66,6 @@ const categories = [
     ],
   },
   {
-    title: "Photo Books",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus.Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had.",
-    subCategory: [
-      {
-        subTitle: "Soft Cover Photobook",
-        imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // Example image
-      },
-      {
-        subTitle: "Hard Cover Photobook",
-        imgUrl: "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg", // Example image
-      },
-      {
-        subTitle: "Spiral Photobook",
-        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
-      },
-      {
-        subTitle: "Photo Folder",
-        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // Example image
-      },
-      {
-        subTitle: "Digital Photobook",
-        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
-      },
-    ],
-  },
-  {
     title: "Itinerary",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus.",
@@ -123,6 +96,34 @@ const categories = [
       },
     ],
   },
+  {
+    title: "Photo Books",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus.Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had.",
+    subCategory: [
+      {
+        subTitle: "Soft Cover Photobook",
+        imgUrl: "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg", // Example image
+      },
+      {
+        subTitle: "Hard Cover Photobook",
+        imgUrl: "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg", // Example image
+      },
+      {
+        subTitle: "Spiral Photobook",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
+      {
+        subTitle: "Photo Folder",
+        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // Example image
+      },
+      {
+        subTitle: "Digital Photobook",
+        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+      },
+    ],
+  },
+
   {
     title: "Calendars 2025",
     description:
@@ -155,6 +156,52 @@ const categories = [
     ],
   },
   {
+    title: "Planner Books",
+    description:
+      "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
+    subCategory: [
+      {
+        subTitle: "Wedding Management",
+        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // Example image
+      },
+      {
+        subTitle: "Guest Management",
+        imgUrl: "https://i.postimg.cc/jjw6mny1/Template-1.jpg", // Example image
+      },
+      {
+        subTitle: "Wedding Notepad (Liner)",
+        imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847474/ejfowniluyydeqncdllk.jpg", // Example image
+      },
+      {
+        subTitle: "Wedding Notepad (Photo)",
+        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737117643/dvamzguzug7ln0e9klqt.jpg", // Example image
+      },
+      {
+        subTitle: "Guest List Booklet",
+        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737118253/tnjlkyq36ipgxcsmwsfc.jpg", // Example image
+      },
+      {
+        subTitle: "Free Printables",
+        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737117907/zbb7kdai0zc1et7o1qn4.jpg", // Example image
+      },
+    ],
+  },
+  {
+    title: "Guest Surprising",
+    description:
+      "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
+    subCategory: [
+      {
+        subTitle: "Newspaper",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+      },
+      {
+        subTitle: "Magazines",
+        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+      },
+    ],
+  },
+  {
     title: "Free Greetings",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, voluptatibus. ",
@@ -177,36 +224,7 @@ const categories = [
       },
     ],
   },
-  {
-    title: "Guest Surprising",
-    description:
-      "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
-    subCategory: [
-      {
-        subTitle: "Newspaper",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
-      },
-      {
-        subTitle: "Magazines",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
-      },
-    ],
-  },
-  {
-    title: "Planner Books",
-    description:
-      "Nothing is more rewarding than going over pictures from the past, reflecting on the fun times you’ve had. With Zoomin you can make a stylish photo book that is a perfect way for displaying the pictures you've taken—of your loved ones, pets, family holidays, travels, and the little life moments that make you smile. Our huge collection of designer themes, customized layout options & cute stickers will leave you spoilt for choice!",
-    subCategory: [
-      {
-        subTitle: "Planner Books",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
-      },
-      {
-        subTitle: "Free Printables",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
-      },
-    ],
-  },
+
   {
     title: "E-Shop",
     description:
