@@ -322,8 +322,8 @@ export default function CategoryFilterLabel() {
             filteredResponseData.map((item, index) => (
               <Link
                 key={index}
-                to={`/edit/${item.category}/${item.subSubCategory}`}
-                state={{ image: item.image[0] }}
+                to={`/edit/PlannerBooks/${item.subSubCategory}`}
+                state={{ image: item.image[0],ider:item._id}}
                 className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
               >
                 <div className="relative w-full h-[30vh]">
