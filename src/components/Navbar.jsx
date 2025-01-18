@@ -456,7 +456,7 @@ export default function MainNav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
@@ -475,7 +475,7 @@ export default function MainNav() {
     if (searchTerm) params.append('term', searchTerm);
     if (category) params.append('category', category);
 
-    console.log(params.toString());
+    // console.log(params.toString());
     
 
     // Redirect to the products page with query parameters
@@ -737,7 +737,7 @@ export default function MainNav() {
                               className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
                             >
                               {child.label}
-                              {console.log(item.url)}
+                              {/* {console.log(item.url)} */}
                             </Link>
                             <AnimatePresence>
                               {child.Filters &&
