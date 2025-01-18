@@ -36,6 +36,7 @@ import PdfGenerator from './pages/PdfGenerator';
 import PdfGeneratorWaterMark from './pages/PdfGeneratorWaterMark';
 import PhotoBook from './components/PhotoBook';
 import ItineraryCompo from './components/ItineraryCompo';
+import DesignEdit from './components/DesignEdit';
 
 
 // gaganluthrasirji
@@ -67,7 +68,7 @@ function App() {
           <Route path='/edit/PhotoBook/:id' element={<PhotoBook />} />
           
           <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
-          <Route path='/edit/PlannerBook/:id' element={<ItineraryCompo />} />
+          <Route path='/edit/PlannerBooks/:pageid' element={<DesignEdit />} />
 
 
           <Route path="/checkout" element={<Checkout />} />
