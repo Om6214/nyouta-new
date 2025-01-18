@@ -590,11 +590,14 @@ export default function WeddingCardEditor() {
     }
   }, [images, currentImageIndex]);
 
+ 
+
   const handleSaveChanges = () => {
+    
     const savedPages = JSON.parse(localStorage.getItem('savedPages')) || {};
     savedPages[currentImageIndex] = textFields;
     localStorage.setItem('savedPages', JSON.stringify(savedPages));
-
+ 
     const savedSmallImages = JSON.parse(localStorage.getItem('savedSmallImages')) || {};
     savedSmallImages[currentImageIndex] = smallImages;
     localStorage.setItem('savedSmallImages', JSON.stringify(savedSmallImages));
@@ -604,6 +607,7 @@ export default function WeddingCardEditor() {
     localStorage.setItem('savedStickers', JSON.stringify(savedStickers));
 
     setShowSuccessMessage(true);
+    setCurrentImageIndex(index);
     setTimeout(() => {
       setShowSuccessMessage(false);
     }, 2000);
@@ -1476,16 +1480,16 @@ export default function WeddingCardEditor() {
         >
           <div className="flex flex-col 2xl:mb-6   sm:ml-0 xl:mb-6 xl:ml-56 md:mr-4 mr-8">
             {/* Image Container */}
-            <div className="relative  flex items-center mr-8 rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden" 
-            style={{width:"270px"}}>
+            <div className="relative  flex items-center mr-8 rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden"
+              style={{ width: "270px" }}>
               <img
                 src={imageUrl}
                 alt="Background"
                 className="w-full h-auto object-cover "
-                
+
 
               />
-              
+
               {/* Left Arrow */}
               <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
                 <button
@@ -1975,7 +1979,7 @@ export default function WeddingCardEditor() {
                     <button
                       onClick={handleAddImageClick}
                       className="flex items-center justify-center gap-2  h-20 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-                      style={{width:"270px"}}
+                      style={{ width: "270px" }}
                     >
                       <AiOutlinePicture className="w-8 h-8" />
                       <span className="text-lg">Add Images</span>

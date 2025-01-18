@@ -42,13 +42,13 @@ export default function ProductPage() {
     <div className="max-w-6xl mx-auto p-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image Section */}
-        <div className="relative">
+        <div className="lg:ml-40 xl:ml-40 ml-auto mr-10">
           <img
             src={product.image[currentImageIndex]}
             alt={product.name}
-            className="w-64 h-112 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="w-60 h-112  object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
-          <div className="grid grid-cols-5 gap-3 mt-4">
+          <div className="grid grid-cols-5 gap-3 mt-1">
             {product.image.map((img, index) => (
               <img
                 key={index}
@@ -66,14 +66,14 @@ export default function ProductPage() {
         {/* Product Details Section */}
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-4 text-gray-800">{product.name}</h1>
-            <p className="text-xl font-semibold mb-4 text-gray-700">₹{product.price.toFixed(2)}</p>
-            <p className="mb-4 text-gray-600">SKU: {product.sku}</p>
+            <h1 className="text-3xl font-bold mb-2 text-gray-800">{product.name}</h1>
+            <p className="text-xl font-semibold mb-2 text-gray-700">₹{product.price.toFixed(2)}</p>
+            <p className="mb-2 text-gray-600">SKU: {product.sku}</p>
 
-            <div className="mb-4">
+            <div className="mb-2">
               <label
                 htmlFor="quantity"
-                className="block mb-2 text-sm font-medium text-gray-600"
+                className="block mb-1 text-sm font-medium text-gray-600"
               >
                 Quantity:
               </label>
@@ -83,11 +83,11 @@ export default function ProductPage() {
                 value={quantity}
                 onChange={handleQuantityChange}
                 min="1"
-                className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
+                className="border rounded-lg px-1 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className="mt-8">
+            <div className="">
               <h2 className="text-2xl font-bold mb-4 text-gray-800">Product Details</h2>
               <ul className="list-disc list-inside text-gray-700">
                 <li>Category: {product.category}</li>
@@ -96,7 +96,7 @@ export default function ProductPage() {
               </ul>
             </div>
 
-            <div className="space-x-4 flex md:flex-row mt-12 gap-4">
+            <div className="space-x-4 flex md:flex-row mt-6 gap-4">
               <button
                 onClick={handleEditImage}
                 className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
