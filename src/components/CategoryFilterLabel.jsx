@@ -14,6 +14,7 @@ export default function CategoryFilterLabel() {
   const [loading, setLoading] = useState(true);
   const [responseData, setResponseData] = useState([]);
   const { pageName, pagid, "*": path } = useParams();
+  const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -119,15 +120,33 @@ export default function CategoryFilterLabel() {
     }
   };
 
-  const filteredResponseData = responseData.filter((item) =>
-    item.subSubCategory && item.subSubCategory.includes(path)
-  );
+  // const filteredResponseData = responseData.filter((item) =>
+  //   item.subSubCategory && item.subSubCategory.includes(path)
+  // );
+
+
+  // Filtering logic based on timestamps
+  const filteredResponseData = responseData.filter((item) => {
+    if (filter === "royal") {
+      return (
+        new Date(item.createdAt) >= new Date("2025-01-01T11:58:23.284Z") &&
+        new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z")
+      );
+    }
+    if (filter === "popular") {
+      return (
+        new Date(item.createdAt) >= new Date("2025-01-14T09:52:06.843Z") &&
+        new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z")
+      );
+    }
+    return true; // Return all items if no filter is applied
+  });
 
   return (
     <>
       {filteredItems.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
-          <div className="mt-10">
+          <div className="mt-0">
             <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
               <Swiper
                 style={{
@@ -187,6 +206,18 @@ export default function CategoryFilterLabel() {
               >
                 {filteredItems[0].category === "Planner Books" ? "Choose Now" : "Add Now"}
               </button>
+
+              {filteredItems.length > 0 && filteredItems[0].category === "Planner Books" ? (
+  <div>
+    <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
+    <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+      <li>Beautify your days with a planner that inspires.</li>
+      <li>Express yourself with beautiful designs and personalized touches.</li>
+      <li>High quality professional Planner Books.</li>
+      {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
+    </ul>
+  </div>
+) : null}
             </div>
           </div>
         </div>
@@ -198,55 +229,117 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      <div className="px-[6%] pt-[1%]">
-        <div className="font-semibold text-[4vh]">Choose a Design</div>
-        <div className="font-normal md:text-[2.2vh] text-[2vw]">
-          {/* Subtitle or description here */}
-        </div>
 
-        <div className="pt-5 md:max-w-[95%] mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredItems[0]?.category === "Planner Books" ?
-         ( filteredResponseData.map((filteredItem,index) => (
-              
-              <Link 
-  to={`/edit/PlannerBook/${filteredItems[0].subSubCategory}`} 
-  state={{ image: filteredItem.image[0] }} key={index}>
-                <div className="relative w-full h-[40vh]">
+      {filteredItems[0].category === "Planner Books" ?(
+
+      <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
+      {/* Left column: Filter options */}
+      <div className="col-span-1">
+      Filter By
+        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+        <div className='flex justify-between'>
+          <h2 className="text-lg font-semibold mb-4">Variations</h2>
+          <button
+            className={`py-2 mb-2 text-left rounded-md ${
+              filter === "all"
+            }`}
+            onClick={() => setFilter("all")}
+          >
+            Clear all
+          </button>
+          </div>
+          <button
+            className={`block w-full py-2 mb-2 px-2 text-left rounded-md border-2 ${
+              filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
+            }`}
+            onClick={() => setFilter("royal")}
+          >
+            Royal
+          </button>
+          
+          <button
+            className={`block w-full py-2 px-2 text-left rounded-md ${
+              filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
+            }`}
+            onClick={() => setFilter("popular")}
+          >
+            Popular
+            
+          </button>
+          
+        </div>
+      </div>
+
+      {/* Right column: Filtered results */}
+      <div className="col-span-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredResponseData.length > 0 ? (
+            filteredResponseData.map((item, index) => (
+              <Link
+                key={index}
+                to={`/edit/${item.category}/${item.subSubCategory}`}
+                state={{ image: item.image[0] }}
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
+              >
+                <div className="relative w-full h-[30vh]">
                   <img
-                    src={filteredItem.image[0]}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
-                    alt={filteredItem.name}
+                    src={item.image[0]}
+                    alt={item.name}
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <h2 className="text-lg font-bold text-gray-800">{filteredItem.name}</h2>
+                  <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
                 </div>
               </Link>
-            ))):(
-          RelatedItems.map((item) => (
-  <Link
-  to={`/e/nav/${item.category}/${item.subCategory}/${item.subSubCategory}`}
-    key={item.id}
-    className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105 hover:shadow-xl"
-  >
-    <div className="relative w-full h-[40vh]">
-      <img
-        src={item.image[0]}
-        alt={item.subTitle}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 "
-      />
-    </div>
-    <div className="p-4 text-center">
-      <h2 className="text-lg font-bold text-gray-800">{item.subSubCategory}</h2>
-      {/* Optional: Price or other details */}
-      {/* <p className="text-gray-700 mt-2">₹{item.price}</p> */}
-    </div>
-  </Link>
-)))}
-          </div>
+            ))
+          ) : (
+            <div className="text-center col-span-full">
+              <h2 className="text-xl font-semibold text-gray-700">
+                No products found for the selected filter.
+              </h2>
+            </div>
+          )}
         </div>
       </div>
+    </div>
+      ): (
+        
+        <div className="col-span-3 gap-6 px-[6%] py-4">
+        <h2 className='text-2xl mb-3'>Related Items</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {filteredResponseData.length > 0 ? (
+            filteredResponseData.map((item, index) => (
+              <Link
+                key={index}
+                to={`/edit/${item.category}/${item.subSubCategory}`}
+                state={{ image: item.image[0] }}
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
+              >
+                <div className="relative w-full h-[20vh]">
+                  <img
+                    src={item.image[0]}
+                    alt={item.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="text-center col-span-full">
+              <h2 className="text-xl font-semibold text-gray-700">
+                No products found for the selected filter.
+              </h2>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      )
+      }
     </>
   );
 }
