@@ -89,7 +89,7 @@ const [customText, setCustomText] = useState("");
           <img
             src={filteredProduct.image[currentImageIndex]}
             alt={filteredProduct.name}
-            className="w-64 h-112 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="w-64 h-[60vh] object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
           <div className="grid grid-cols-5 gap-3 mt-4">
             {filteredProduct.image.map((img, index) => (
@@ -118,24 +118,7 @@ const [customText, setCustomText] = useState("");
             <p className="mb-4 text-gray-600">SKU: {filteredProduct.sku}</p>
             
             <div className="flex gap-7">
-            <div className="">
-              <p className="text-base font-medium mb-2 text-black">Select Type</p>
-              <div className="flex gap-3 flex-wrap">
-                {types.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setSelectedType(type)}
-                    className={`px-4 py-1 text-sm bg-white text-black rounded-full border-2 shadow-md transition-all focus:outline-none hover:bg-gray-100 ${
-                      selectedType === type
-                        ? "border-green-500 bg-green-50"
-                        : "border-gray-300"
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-            </div>
+            
 
             <div className="mb-0">
               <label
