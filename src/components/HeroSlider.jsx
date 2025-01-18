@@ -180,7 +180,7 @@ export default function HeroSlider() {
               <img className="h-24" src={freeImg} alt="" />
               <img className="h-44" src={wedImg2} alt="" />
             </div>
-            <div className="relative flex flex-col items-center justify-center hover:translate-x-2 duration-300">
+            <div className="relative flex flex-col items-center justify-center">
               <img className="w-48" src={buttonBg} alt="" />
               <a
                 href="/create-wedding-website"

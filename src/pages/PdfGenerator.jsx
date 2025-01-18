@@ -75,7 +75,8 @@ console.log("working");
             <div
               key={pageIndex}
               ref={(el) => (previewRefs.current[pageIndex] = el)}
-              className="relative w-80 h-112 overflow-hidden border border-gray-300 shadow-lg rounded-xl bg-white"
+              className="relative overflow-hidden border border-gray-300 shadow-lg rounded-xl bg-white"
+              style={{width:"270px"}}
             >
               <img src={currentImage} alt={`Page ${pageIndex + 1}`} className="w-full h-full object-cover" />
               <img

@@ -1260,7 +1260,7 @@ export default function WeddingCardEditor() {
         <button
           onClick={handleDownloadPDF}
           disabled={isDownloading}
-          className="px-4 py-2 lg:mt-1 md:mt-1 lg:mb-1 mb-1 rounded-full bg-[#AF7D32] text-white font-semibold text-lg shadow-lg transition-all duration-300 transform hover:scale-110 hover:bg-[#643C28] focus:ring-4 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-3"
+          className="px-4 py-2 lg:mt-1 lg:mr-10 md:mt-1 lg:mb-1 mb-1 rounded-full bg-[#AF7D32] text-white font-semibold text-lg shadow-lg transition-all duration-300 transform hover:scale-110 hover:bg-[#643C28] focus:ring-4 focus:ring-[#AF7D32] focus:outline-none flex items-center gap-3"
         >
 
           <FaFilePdf size={24} />
@@ -1309,11 +1309,11 @@ export default function WeddingCardEditor() {
           )}
 
           {/* Fixed Customize Image Button */}
-          <div className="fixed bottom-4 left-20  sm:left-10 md:left-16 lg:left-20 xl:left-14  z-5">
+          <div className="fixed bottom-4 left-20  sm:left-10 md:left-16 lg:left-2 xl:left-4  z-5">
 
             <button
               onClick={openCustomizeModal}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-[#AF7D32] text-white 
+              className="flex items-center justify-center gap-2 px-3 py-3 bg-[#AF7D32] text-white 
               font-semibold text-lg rounded-full shadow-lg hover:bg-[#643C28] transition-all duration-300 
               transform hover:scale-105 focus:ring-2 focus:ring-[#AF7D32] focus:outline-none "
             >
@@ -1415,7 +1415,7 @@ export default function WeddingCardEditor() {
 
         {isCustomizeModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col lg:w-1/3 md:w-auto">
+            <div className="relative bg-white p-6 rounded-lg shadow-lg flex flex-col lg:h-auto lg:w-auto md:w-auto">
               <h2 className="text-2xl font-bold mb-4">Let's Customize Images</h2>
               <div className="gap-4 flex flex-col overflow-y-auto" style={{ height: "500px" }}>
                 {images.map((img, index) => (
@@ -1476,13 +1476,16 @@ export default function WeddingCardEditor() {
         >
           <div className="flex flex-col 2xl:mb-6   sm:ml-0 xl:mb-6 xl:ml-56 md:mr-4 mr-8">
             {/* Image Container */}
-            <div className="relative w-80 flex items-center mr-8 rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden" >
+            <div className="relative  flex items-center mr-8 rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden" 
+            style={{width:"270px"}}>
               <img
                 src={imageUrl}
                 alt="Background"
                 className="w-full h-auto object-cover "
+                
 
               />
+              
               {/* Left Arrow */}
               <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
                 <button
@@ -1897,11 +1900,11 @@ export default function WeddingCardEditor() {
 
 
             {/* Buttons Below the Image */}
-            <div className="flex lg:gap-5 md:mt-4 lg:mt-1 gap-4 sm:mt-4 mt-6 ">
+            <div className="flex lg:gap-3 md:mt-4 lg:mt-1 gap-4 sm:mt-4 mt-6 ">
               {/* Save Button */}
               <button
                 onClick={handleSaveChanges}
-                className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                className="flex items-center justify-center gap-2 px-7 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1923,7 +1926,7 @@ export default function WeddingCardEditor() {
               {/* Preview Button */}
               <button
                 onClick={handlePreview}
-                className="flex items-center justify-center gap-2  px-8 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                className="flex items-center justify-center gap-2  px-6 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1954,7 +1957,7 @@ export default function WeddingCardEditor() {
                       {/* Add Text Button */}
                       <button
                         onClick={handleAddNewText}
-                        className="flex items-center justify-center gap-2  px-16 py-4  mt-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                        className="flex items-center justify-center gap-2  px-14 py-4  mt-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                       >
                         <AiOutlineFileText className="w-6 h-6" />
                       </button>
@@ -1962,7 +1965,7 @@ export default function WeddingCardEditor() {
                       {/* Add Sticker Button */}
                       <button
                         onClick={() => setShowStickerSelector(true)}
-                        className="flex items-center justify-center gap-3 px-16 py-4 mt-4  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                        className="flex items-center justify-center gap-3 px-12 py-4 mt-4  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                       >
                         <FaStickerMule className="w-6 h-6" />
                       </button>
@@ -1971,7 +1974,8 @@ export default function WeddingCardEditor() {
                     {/* Add Image Button */}
                     <button
                       onClick={handleAddImageClick}
-                      className="flex items-center justify-center gap-2  w-80 h-20 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                      className="flex items-center justify-center gap-2  h-20 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                      style={{width:"270px"}}
                     >
                       <AiOutlinePicture className="w-8 h-8" />
                       <span className="text-lg">Add Images</span>
