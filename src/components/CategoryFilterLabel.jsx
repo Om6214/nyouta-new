@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/zoom';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Link, useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import ProductJson from '../products.json';
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Zoom, Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/zoom";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ProductJson from "../products.json";
 
 export default function CategoryFilterLabel() {
   const [loading, setLoading] = useState(true);
@@ -17,9 +17,7 @@ export default function CategoryFilterLabel() {
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
   const relatedItemsRef = useRef(null);
-    const [quantity, setQuantity] = useState(1);
-  
-
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -76,7 +74,6 @@ export default function CategoryFilterLabel() {
 
   const formatCategoryName = (name) => name;
   const formatSubCategoryName = (name) => decodeURIComponent(name);
-
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
@@ -135,8 +132,7 @@ export default function CategoryFilterLabel() {
       // }
     }
 
-    relatedItemsRef.current?.scrollIntoView({ behavior: 'smooth' });
-
+    relatedItemsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   // const filteredResponseData = responseData.filter((item) =>
@@ -239,23 +235,24 @@ export default function CategoryFilterLabel() {
               </div>
 
               <div className="mb-4">
-              <label
-                htmlFor="quantity"
-                className="block mb-2 text-sm font-medium text-gray-600"
-              >
-                Quantity:
-              </label>
-              <input
-                type="number"
-                id="quantity"
-                value={quantity}
-                onChange={handleQuantityChange}
-                min="1"
-                className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+                <label
+                  htmlFor="quantity"
+                  className="block mb-2 text-sm font-medium text-gray-600"
+                >
+                  Quantity:
+                </label>
+                <input
+                  type="number"
+                  id="quantity"
+                  value={quantity}
+                  onChange={handleQuantityChange}
+                  min="1"
+                  className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
 
-              <button ref={relatedItemsRef}
+              <button
+                ref={relatedItemsRef}
                 onClick={handleButtonClick}
                 className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
               >
@@ -307,12 +304,12 @@ export default function CategoryFilterLabel() {
                 Clear all
               </button>
             </div>
-            <div className="py-4 px-2 border-2 rounded-lg shadow-lg">
+            <div className="py-3 px-2 border-2 rounded-lg shadow-lg">
               <div className="flex justify-between">
-                <h2 className="text-lg font-semibold mb-4">Variations</h2>
+                <h2 className="text-lg font-avalonB mb-4">Variations</h2>
               </div>
               <button
-                className={`block w-full py-2 mb-2 px-2 text-left rounded-md border-2 ${
+                className={`block w-full font-avalonN py-1 mb-2 px-2 text-left rounded-md border-2 ${
                   filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
                 }`}
                 onClick={() => setFilter("royal")}
@@ -321,7 +318,7 @@ export default function CategoryFilterLabel() {
               </button>
 
               <button
-                className={`block w-full py-2 px-2 text-left rounded-md ${
+                className={`block w-full font-avalonN py-1 px-2 text-left rounded-md ${
                   filter === "popular"
                     ? "bg-orange-500 text-white"
                     : "bg-[#fff] border-2"
