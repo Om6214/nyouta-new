@@ -302,6 +302,59 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
+<<<<<<< HEAD
+
+      {filteredItems[0].category === "Planner Books" ?(
+
+      <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
+      {/* Left column: Filter options */}
+      <div className="col-span-1">
+      Filter By
+        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+        <div className='flex justify-between'>
+          <h2 className="text-lg font-semibold mb-4">Variations</h2>
+          <button
+            className={`py-2 mb-2 text-left rounded-md ${
+              filter === "all"
+            }`}
+            onClick={() => setFilter("all")}
+          >
+            Clear all
+          </button>
+          </div>
+          <button
+            className={`block w-full py-2 mb-2 px-2 text-left rounded-md border-2 ${
+              filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
+            }`}
+            onClick={() => setFilter("royal")}
+          >
+            Royal
+          </button>
+          
+          <button
+            className={`block w-full py-2 px-2 text-left rounded-md ${
+              filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
+            }`}
+            onClick={() => setFilter("popular")}
+          >
+            Popular
+            
+          </button>
+          
+        </div>
+      </div>
+
+      {/* Right column: Filtered results */}
+      <div className="col-span-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredResponseData.length > 0 ? (
+            filteredResponseData.map((item, index) => (
+              <Link
+                key={index}
+                to={`/edit/PlannerBooks/${item.subSubCategory}`}
+                state={{ image: item.image[0],ider:item._id}}
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
+=======
       {filteredItems[0].category === "Planner Books" ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
@@ -313,6 +366,7 @@ export default function CategoryFilterLabel() {
                   filter === "all"
                 }`}
                 onClick={() => setFilter("all")}
+>>>>>>> 70dc3a3128a5c5a8368ce83518d8adba28783d94
               >
                 Clear all
               </button>
