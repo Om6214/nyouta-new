@@ -6,6 +6,10 @@ import 'swiper/css';
 import 'swiper/css/zoom';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+
+import  { useRef } from 'react';
+
+
 import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import ProductJson from '../products.json';
@@ -148,16 +152,29 @@ export default function CategoryFilterLabel() {
     if (filter === "royal") {
       return (
         new Date(item.createdAt) >= new Date("2025-01-01T11:58:23.284Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z")
+        new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z")&&
+        item.category.toLowerCase()===pageName.toLowerCase() &&
+        item.subCategory.toLowerCase()===pagid.toLowerCase() &&
+        item.subSubCategory.toLowerCase()===path.toLowerCase()
+
       );
     }
     if (filter === "popular") {
       return (
         new Date(item.createdAt) >= new Date("2025-01-14T09:52:06.843Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z")
+        new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z") &&
+        item.category.toLowerCase()===pageName.toLowerCase() &&
+        item.subCategory.toLowerCase()===pagid.toLowerCase() &&
+        item.subSubCategory.toLowerCase()===path.toLowerCase()
       );
     }
-    return true; // Return all items if no filter is applied
+    if (filter === "all") {
+      return (
+        item.category.toLowerCase()===pageName.toLowerCase() &&
+        item.subCategory.toLowerCase()===pagid.toLowerCase() &&
+        item.subSubCategory.toLowerCase()===path.toLowerCase()
+      );
+    } // Return all items if no filter is applied
   });
 
   return (
@@ -238,7 +255,7 @@ export default function CategoryFilterLabel() {
                 </p>
               </div>
 
-              <div className="mb-4">
+              {/* <div className="mb-4">
               <label
                 htmlFor="quantity"
                 className="block mb-2 text-sm font-medium text-gray-600"
@@ -253,7 +270,7 @@ export default function CategoryFilterLabel() {
                 min="1"
                 className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
               />
-            </div>
+            </div> */}
 
               <button ref={relatedItemsRef}
                 onClick={handleButtonClick}
@@ -370,38 +387,37 @@ export default function CategoryFilterLabel() {
         </div>
       ) : (
         <div className="col-span-3 gap-6 px-[6%] py-4">
-          <h2 className="text-2xl mb-3">Related Items</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {filteredResponseData.length > 0 ? (
-              filteredResponseData.map((item, index) => (
-                <Link
-                  key={index}
-                  to={`/edit/${item.category}/${item.subSubCategory}`}
-                  state={{ image: item.image[0] }}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
-                >
-                  <div className="relative w-full h-[20vh]">
-                    <img
-                      src={item.image[0]}
-                      alt={item.name}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4 text-center">
-                    <h2 className="text-lg font-bold text-gray-800">
-                      {item.name}
-                    </h2>
-                  </div>
-                </Link>
-              ))
-            ) : (
-              <div className="text-center col-span-full">
-                <h2 className="text-xl font-semibold text-gray-700">
-                  No products found for the selected filter.
-                </h2>
-              </div>
-            )}
-          </div>
+
+        <h2 className='text-2xl mb-3'>Related Items</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {RelatedItems.length > 0 ? (
+            RelatedItems.map((item, index) => (
+              <Link
+                key={index}
+                to={`/edit/${item.category}/${item.subSubCategory}`}
+                state={{ image: item.image[0] }}
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
+              >
+                <div className="relative w-full h-[20vh]">
+                  <img
+                    src={item.image[0]}
+                    alt={item.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="text-center col-span-full">
+              <h2 className="text-xl font-semibold text-gray-700">
+                No products found for the selected filter.
+              </h2>
+            </div>
+          )}
+</div>
         </div>
       )}
     </>
