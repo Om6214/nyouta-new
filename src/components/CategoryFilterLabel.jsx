@@ -7,7 +7,7 @@ import 'swiper/css/zoom';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import  { useRef } from 'react';
+
 
 
 import { Link, useNavigate } from 'react-router-dom';
