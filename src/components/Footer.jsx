@@ -124,10 +124,10 @@ export default function Footer() {
               <div className="flex items-center space-x-2">
                 <Mail className="w-5 h-5" />
                 <a
-                  href="mailto:info@enyouta.com"
+                  href="mailto:info@nyouta.com"
                   className="hover:text-white transition-colors"
                 >
-                  info@enyouta.com
+                  info@nyouta.com
                 </a>
               </div>
               <div className="flex items-center space-x-2">

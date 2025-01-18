@@ -22,6 +22,7 @@ export default function CategoryFilterLabel() {
       try {
         const response = await axios.get(url);
         setResponseData(response.data);
+        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching products:", error);

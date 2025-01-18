@@ -6,7 +6,7 @@ import Banner4 from "../assets/images/Banner4.png";
 import button from "../assets/images/07.png";
 import { Upload } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
 const indianStates = [
   "Andhra Pradesh",
   "Arunachal Pradesh",
@@ -351,13 +351,13 @@ const JoinNyouta = () => {
                   />
                   <label htmlFor="terms" className="ml-2 text-sm text-gray-700">
                     By submitting and sharing your information you agree to{" "}
-                    <a href="#" className="text-[#AF7D32] underline">
+                    <Link to="/Terms" className="text-[#AF7D32] underline">
                        terms of use
-                    </a>{" "}
+                    </Link>{" "}
                     and{" "}
-                    <a href="#" className="text-[#AF7D32] underline">
-                      privacy policy
-                    </a>
+                    <Link to="/Terms" className="text-[#AF7D32] underline">
+                       terms of use
+                    </Link>
                     .
                   </label>
                 </div>
