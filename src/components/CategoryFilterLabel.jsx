@@ -24,6 +24,7 @@ export default function CategoryFilterLabel() {
         setResponseData(response.data);
         console.log(response.data);
         setLoading(false);
+        // console.log(responseData)
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -92,7 +93,7 @@ export default function CategoryFilterLabel() {
     
     return categoryMatch && subCatego ;
   });
-  console.log(RelatedItems)
+  
 
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
@@ -119,7 +120,7 @@ export default function CategoryFilterLabel() {
   };
 
   const filteredResponseData = responseData.filter((item) =>
-    item.name && item.name.includes(path)
+    item.subSubCategory && item.subSubCategory.includes(path)
   );
 
   return (
@@ -141,7 +142,7 @@ export default function CategoryFilterLabel() {
                 className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
               >
                 {filteredItems[0]?.category === "Planner Books" ?
-              (
+                  (
   filteredResponseData.slice(0, 4).map((item, index) =>
     item?.image?.map((src, imgIndex) => (
       <SwiperSlide key={`${index}-${imgIndex}`}>
@@ -151,7 +152,7 @@ export default function CategoryFilterLabel() {
       </SwiperSlide>
     ))
   )
-) : (
+): (
   filteredItems[0]?.image?.map((src, index) => (
     <SwiperSlide key={index}>
       <div className="swiper-zoom-container">
