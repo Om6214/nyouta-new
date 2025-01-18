@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -6,8 +6,8 @@ import 'swiper/css';
 import 'swiper/css/zoom';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import  { useRef } from 'react';
 
+import  { useRef } from 'react';
 
 
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,9 +21,7 @@ export default function CategoryFilterLabel() {
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
   const relatedItemsRef = useRef(null);
-    const [quantity, setQuantity] = useState(1);
-  
-
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -80,7 +78,6 @@ export default function CategoryFilterLabel() {
   const formatCategoryName = (name) => name;
   const formatSubCategoryName = (name) => decodeURIComponent(name);
 
-
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
@@ -131,8 +128,7 @@ export default function CategoryFilterLabel() {
       // }
     }
 
-    relatedItemsRef.current?.scrollIntoView({ behavior: 'smooth' });
-
+    relatedItemsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   // const filteredResponseData = responseData.filter((item) =>
@@ -228,7 +224,7 @@ export default function CategoryFilterLabel() {
                 <p className="text-sm text-gray-500">SubSubCategory: {filteredItems[0].subSubCategory}</p>
               </div>
 
-              {/* <div className="mb-4">
+              <div className="mb-4">
               <label
                 htmlFor="quantity"
                 className="block mb-2 text-sm font-medium text-gray-600"
@@ -243,9 +239,10 @@ export default function CategoryFilterLabel() {
                 min="1"
                 className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
               />
-            </div> */}
+            </div>
 
-              <button ref={relatedItemsRef}
+              <button
+                ref={relatedItemsRef}
                 onClick={handleButtonClick}
                 className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
               >
@@ -348,7 +345,7 @@ export default function CategoryFilterLabel() {
         </div>
       </div>
     </div>
-      ): (
+      ):(
         
         <div className="col-span-3 gap-6 px-[6%] py-4">
         <h2 className='text-2xl mb-3'>Related Items</h2>
