@@ -276,22 +276,25 @@ export default function CategoryFilterLabel() {
 
       <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
       {/* Left column: Filter options */}
-      <div className="col-span-1">
-      Filter By
-        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
-        <div className='flex justify-between'>
-          <h2 className="text-lg font-semibold mb-4">Variations</h2>
-          <button
-            className={`py-2 mb-2 text-left rounded-md ${
+      <div className="col-span-1 space-y-2">
+        <div className='flex items-center justify-between'>
+      <h1 className='text-lg fonr-avalonN'>Filter By</h1>
+      <button
+            className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
               filter === "all"
             }`}
             onClick={() => setFilter("all")}
           >
             Clear all
           </button>
+      </div>
+        <div className="px-4 py-3 bg-gray-100 rounded-lg shadow-md">
+        <div className='flex justify-between'>
+          <h2 className="text-lg font-avalonB">Variations</h2>
+          
           </div>
           <button
-            className={`block w-full py-2 mb-2 px-2 text-left rounded-md border-2 ${
+            className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 ${
               filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
             }`}
             onClick={() => setFilter("royal")}
@@ -300,7 +303,7 @@ export default function CategoryFilterLabel() {
           </button>
           
           <button
-            className={`block w-full py-2 px-2 text-left rounded-md ${
+            className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
               filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
             }`}
             onClick={() => setFilter("popular")}
