@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Zoom, Navigation, Pagination, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/zoom";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Link, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import ProductJson from "../products.json";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Zoom, Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/zoom';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Link, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import ProductJson from '../products.json';
 
 export default function CategoryFilterLabel() {
   const [loading, setLoading] = useState(true);
@@ -16,6 +16,10 @@ export default function CategoryFilterLabel() {
   const { pageName, pagid, "*": path } = useParams();
   const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
+  const relatedItemsRef = useRef(null);
+    const [quantity, setQuantity] = useState(1);
+  
+
 
   useEffect(() => {
     async function fetchProducts() {
@@ -73,6 +77,11 @@ export default function CategoryFilterLabel() {
   const formatCategoryName = (name) => name;
   const formatSubCategoryName = (name) => decodeURIComponent(name);
 
+
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value);
+  };
+
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
 
@@ -125,6 +134,9 @@ export default function CategoryFilterLabel() {
       //   navigate("/someurl");
       // }
     }
+
+    relatedItemsRef.current?.scrollIntoView({ behavior: 'smooth' });
+
   };
 
   // const filteredResponseData = responseData.filter((item) =>
@@ -152,7 +164,7 @@ export default function CategoryFilterLabel() {
     <>
       {filteredItems.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
-          <div className="mt-0">
+          <div className="mt-6">
             <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
               <Swiper
                 style={{
@@ -226,7 +238,24 @@ export default function CategoryFilterLabel() {
                 </p>
               </div>
 
-              <button
+              <div className="mb-4">
+              <label
+                htmlFor="quantity"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Quantity:
+              </label>
+              <input
+                type="number"
+                id="quantity"
+                value={quantity}
+                onChange={handleQuantityChange}
+                min="1"
+                className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+              <button ref={relatedItemsRef}
                 onClick={handleButtonClick}
                 className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
               >
