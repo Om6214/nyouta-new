@@ -169,32 +169,32 @@ const categories = [
       {
         subTitle: "Wedding Management",
         imgUrl: wedPlan, // Example image
-        url: '/e/nav/planner%20books/Planner%20Books/Wedding%20Management'
+        url: "/e/nav/planner%20books/Planner%20Books/Wedding%20Management",
       },
       {
         subTitle: "Guest Management",
         imgUrl: guestPlan, // Example image
-        url: '/e/nav/planner%20books/Planner%20Books/Guest%20Management'
+        url: "/e/nav/planner%20books/Planner%20Books/Guest%20Management",
       },
       {
         subTitle: "Wedding Notepad (Liner)",
         imgUrl: wedNote, // Example image
-        url: '/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Linear)'
+        url: "/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Linear)",
       },
       {
         subTitle: "Wedding Notepad (Photo)",
         imgUrl: wedPhoto, // Example image
-        url: '/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Photo)'
+        url: "/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Photo)",
       },
       {
         subTitle: "Guest List Booklet",
         imgUrl: guestList, // Example image
-        url: '/e/nav/planner%20books/Planner%20Books/Guest%20List%20Booklet%20-%20Best%20Seller'
+        url: "/e/nav/planner%20books/Planner%20Books/Guest%20List%20Booklet%20-%20Best%20Seller",
       },
       {
         subTitle: "Free Printables",
         imgUrl: pdfPrint, // Example image
-        url: '/nav/planner%20books/Free%20Printable'
+        url: "/nav/planner%20books/Free%20Printable",
       },
     ],
   },
