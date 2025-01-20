@@ -284,8 +284,8 @@ const CategoriesNavBar = () => {
     "photo books": {
       title: "Photo Books",
       Description1:
-        "Nyouta’s photo books are a sleek and modern version of the old school ‘Photo albums’.",
-
+        "Create lasting memories with our personalized photobooks, designed to capture the essence of your special moments. Each page is a work of art, reflecting the joy and beauty of your celebrations. Cherish your memories forever in a custom-crafted photobook.",
+      slang: 'Preserve Your Celebration with a Photobook "A Story Told in Every Page"',
       url: "/photo-books",
       Description:
         "Transform your precious wedding memories into elegant, professionally crafted photo books that tell your unique love story. Our premium photo book service combines cutting-edge printing technology with artistic design to create stunning keepsakes that will preserve your special moments for generations to come.",
@@ -316,8 +316,8 @@ const CategoriesNavBar = () => {
       title: "Itinerary",
       url: "/itinerary",
 
-      Description1: "Create detailed travel itineraries for your trips.",
-
+      Description1: "We create detailed wedding itineraries for every event, ensuring a seamless and memorable experience. Our itineraries are customized to fit the unique flow and timings of your celebration. Stay organized and stress-free with our expertly crafted wedding schedules.",
+      slang: 'Custom Wedding Itineraries for a Flawless Day "Your Wedding, Our Expert Itinerary"',
       Description:
         "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
       subCategory: [
@@ -350,8 +350,8 @@ const CategoriesNavBar = () => {
     "calendars 2025": {
       title: "Calendars 2025",
       url: "/calendars 2025",
-
-      Description1: "Design and print personalized calendars for 2025.",
+      slang: 'Your Memories, Crafted Into a Calendar "Turn Your Moments into Monthly Treasures"',
+      Description1: "Create personalized calendars that turn every month into a cherished memory. Each page is uniquely designed to showcase your special moments, making every day a celebration. Stay organized while reliving your most memorable events with our custom calendars.",
 
       Description:
         "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
@@ -386,8 +386,8 @@ const CategoriesNavBar = () => {
     "free greetings": {
       title: "Free Greetings",
       url: "/free-greetings",
-      Description1: "Send free digital greeting cards to your loved ones.",
-
+      Description1: "We offer greetings for all occasions, allowing you to celebrate every moment with heartfelt messages. Whether it's for a wedding, birthday, or any special event, our greetings are designed to bring joy. Share love and happiness, making every celebration memorable.",
+      slang: 'Making Every Occasion Special with Greetings "Your Perfect Greeting, Absolutely Free"',
       Description:
         "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
 
@@ -413,7 +413,8 @@ const CategoriesNavBar = () => {
     "guest surprising": {
       title: "Guest Surprising",
       url: "/guest-surprising",
-      Description1: "Find unique and memorable ways to surprise your guests.",
+      Description1: "We design custom wedding newspapers and magazines to tell your unique love story in print. From pre-wedding events to the big day, every moment is captured with creativity and style. Create a memorable keepsake that guests will cherish and remember long after the celebration.",
+      slang: 'A Unique Wedding Newspaper for Your Unique Day "Your Wedding, Captured in Print"',
       Description:
         "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
       subCategory: [
@@ -430,11 +431,11 @@ const CategoriesNavBar = () => {
     "planner books": {
       title: "Planner Books",
       url: "/planner-books",
-
+      slang: 'The Perfect Planner for Your Special Day "Plan Your Perfect Day, Step by Step"',
       Description:
         "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
       Description1:
-        "Organize your life with our stylish and functional planner books.",
+        "We offer comprehensive wedding planning tools, including a wedding planner book, guest management booklet, and a wedding notepad to keep every detail organized. From managing guests to tracking your plans, our products ensure a seamless, stress-free celebration. Keep all your wedding essentials in one place for a flawless experience.",
       subCategory: [
         {
           subTitle: "Wedding Management",
@@ -471,8 +472,8 @@ const CategoriesNavBar = () => {
     "e shop": {
       title: "E-Shop",
       url: "/e-shop",
-
-      Description1: "Browse and shop for a wide range of products online.",
+      slang: 'Personalized Essentials for Your Special Day "Perfect Gifts for Every Celebration"',
+      Description1: "Explore our E-shop for the finest wedding and event essentials, along with unforgettable gifts. From beautifully crafted invitations to personalized keepsakes, we provide everything to make your celebration extraordinary. Discover unique treasures that add elegance, charm, and a personal touch to weddings and all your special events.",
       Description:
         "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
 
