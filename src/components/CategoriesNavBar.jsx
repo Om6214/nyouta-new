@@ -632,7 +632,7 @@ const CategoriesNavBar = () => {
           </div>
 
           <div className="pt-5 md:max-w-[95%] mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {content.subCategory.map((item) => (
                 <Link
                   to={item.url ? `/${item.url}` : `${item.subTitle}`}

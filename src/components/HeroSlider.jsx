@@ -12,6 +12,7 @@ import { Carousel } from "flowbite-react";
 import wedImg1 from "../assets/images/weddingurl/w5.png";
 import wedImg2 from "../assets/images/weddingurl/w6.png";
 import wedImg3 from "../assets/images/weddingurl/w7.png";
+import WedSlide from "./WedSlide";
 
 const images = [img2, img3, img4];
 
@@ -178,7 +179,7 @@ export default function HeroSlider() {
             </h1>
             <div className="flex items-center flex-col sm:flex-row gap-4">
               <img className="h-24" src={freeImg} alt="" />
-              <img className="h-44" src={wedImg2} alt="" />
+              <WedSlide/>
             </div>
             <div className="relative flex flex-col items-center justify-center">
               <img className="w-48" src={buttonBg} alt="" />
