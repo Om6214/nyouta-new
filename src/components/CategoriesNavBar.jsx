@@ -467,7 +467,13 @@ const CategoriesNavBar = () => {
           url: "e/nav/Planner Books/Planner Books/Guest Management",
         },
         {
-          subTitle: "Wedding Notepad",
+          subTitle: "Wedding Notepad (Liner)",
+          imgUrl:
+            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
+          url: "e/nav/Planner Books/Planner Books/Wedding Notepad",
+        },
+        {
+          subTitle: "Wedding Notepad (Photo)",
           imgUrl:
             "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Notepad",
@@ -558,7 +564,7 @@ const CategoriesNavBar = () => {
           <div className="py-6 px-6 md:px-16">
             <motion.div className="flex flex-col md:flex-row gap-2 items-center justify-between w-full">
               {/* Left Section */}
-              <div className="text-center col-span-1 space-y-2 md:text-left">
+              <div className="text-center col-span-1 space-y-2 lg:pr-32 md:text-left">
                 <h1 className="text-[#333533] font-avalonB text-[6vw] md:text-[3vw] leading-tight">
                   {content.title}
                 </h1>

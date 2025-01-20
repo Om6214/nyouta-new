@@ -302,7 +302,7 @@ const navItems = [
         label: "Guest Management",
       },
       {
-        label: "Wedding Notepad (Linear)",
+        label: "Wedding Notepad (Liner)",
       },
       {
         label: "Wedding Notepad (Photo)",

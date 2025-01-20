@@ -22,9 +22,6 @@ export default function CategoryFilterLabel() {
   const relatedItemsRef = useRef(null);
   const [quantity, setQuantity] = useState(1);
 
-
-  
-
   const handleClick = () => {
     setShowFilter(true);
   };
@@ -92,7 +89,6 @@ export default function CategoryFilterLabel() {
   const formattedPath = formatSubCategoryName(path);
 
   console.log(ProductJson);
-  
 
   const filteredItems = ProductJson.filter((item) => {
     const categoryMatch =
@@ -159,10 +155,6 @@ export default function CategoryFilterLabel() {
 
   // Filtering logic based on timestamps
 
-  
-  
-  
-
   const filteredResponseData = responseData.filter((item) => {
     if (filter === "royal") {
       return (
@@ -191,13 +183,12 @@ export default function CategoryFilterLabel() {
     } // Return all items if no filter is applied
   });
 
-
   console.log("filteredItems:", filteredItems);
   console.log("filteredResponseData:", filteredResponseData);
 
   return (
     <>
-      {filteredItems?.length > 0? (
+      {filteredItems?.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
           <div className="mt-6">
             <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
@@ -275,23 +266,6 @@ export default function CategoryFilterLabel() {
                 </p>
               </div>
 
-              <div className="mb-4">
-                <label
-                  htmlFor="quantity"
-                  className="block mb-2 text-sm font-medium text-gray-600"
-                >
-                  Quantity:
-                </label>
-                <input
-                  type="number"
-                  id="quantity"
-                  value={quantity}
-                  onChange={handleQuantityChange}
-                  min="1"
-                  className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
               <button
                 ref={relatedItemsRef}
                 onClick={handleButtonClick}
@@ -308,7 +282,7 @@ export default function CategoryFilterLabel() {
               ["Planner Books", "Free Greetings"].includes(
                 filteredItems[0].category
               ) ? (
-                <div>
+                <div className="mt-4">
                   <h2 className="text-lg font-semibold mb-3">
                     Product Specifications
                   </h2>
@@ -428,8 +402,7 @@ export default function CategoryFilterLabel() {
             )}
           </div>
 
-          {/* Right column: Filtered results */
-          }
+          {/* Right column: Filtered results */}
           <div className="col-span-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {filteredResponseData.length > 0 ? (
