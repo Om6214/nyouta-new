@@ -4,7 +4,8 @@ import User from '../models/User.js';
 
 export const addToCart = async (req, res) => {
     try {
-        const { productId, quantity } = req.body;
+        const { productId, quantity,customText,userUploadedImages } = req.body;
+        const images=userUploadedImages;
         const userId = req.user.userId;
         const user = await User.findById(userId);
         if (!user) {
@@ -27,7 +28,7 @@ export const addToCart = async (req, res) => {
             }
         }
         const q=Number(quantity);
-        cart.products.push({ productId: productId, quantity:q });
+        cart.products.push({ productId: productId, quantity:q,customText:customText,images:images });
         cart.totalPrice += product.price * quantity;
         await cart.save();
         user.cart = cart._id;

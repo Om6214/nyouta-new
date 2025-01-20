@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addtoCart, getCart } from "../Store/slices/productSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { BASE_URL } from "../utils/api";
 
 export default function DesignEdit() {
   const navigate = useNavigate();
@@ -19,9 +20,9 @@ export default function DesignEdit() {
   const [warning, setWarning] = useState("");
   const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [userUploadedImages, setUserUploadedImages] = useState([]);
-const [customText, setCustomText] = useState("");
-
-
+  const [customText, setCustomText] = useState("");
+  const [uploadLoading, setUploadLoading] = useState(false);
+  console.log(userUploadedImages)
   const types = ["Pdf Invitation"];
 
   // Fetch products from API
@@ -75,10 +76,50 @@ const [customText, setCustomText] = useState("");
 
   const handleAddtoCart = async () => {
     setAddToCartLoading(true);
-    await dispatch(addtoCart({ productId: filteredProduct._id, quantity }));
-    dispatch(getCart());
-    setAddToCartLoading(false);
-    toast.success("Added to cart successfully!");
+    const res = await dispatch(addtoCart({ productId: filteredProduct._id, quantity, customText, userUploadedImages }));
+    if (res.type === "products/addtoCart/fulfilled") {
+      dispatch(getCart());
+      setAddToCartLoading(false);
+      setWarning("");
+      setCustomText("");
+      setUserUploadedImages([]);
+    } else {
+      setAddToCartLoading(false);
+      return;
+    }
+  };
+
+  // Add this function to handle image uploads
+  const handleImageUpload = async (files) => {
+    setUploadLoading(true);
+    try {
+      const uploadedUrls = [];
+
+      // Upload each file to Cloudinary
+      for (const file of files) {
+        const imagedata = new FormData();
+        imagedata.append("file", file);
+        imagedata.append("upload_preset", "NYOUTA_WEBSITE");
+        imagedata.append("cloud_name", "dybuuoqdo");
+
+        const imageRes = await fetch(
+          "https://api.cloudinary.com/v1_1/dybuuoqdo/image/upload",
+          {
+            method: "POST",
+            body: imagedata
+          }
+        );
+        const uploadImageUrl = await imageRes.json();
+        uploadedUrls.push(uploadImageUrl.secure_url);
+      }
+      // Update state with new image URLs
+      setUserUploadedImages(prev => [...prev, ...uploadedUrls]);
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      toast.error("Failed to upload images");
+    } finally {
+      setUploadLoading(false);
+    }
   };
 
   return (
@@ -97,9 +138,8 @@ const [customText, setCustomText] = useState("");
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${
-                  currentImageIndex === index ? "border-blue-500" : "border-gray-300"
-                }`}
+                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${currentImageIndex === index ? "border-blue-500" : "border-gray-300"
+                  }`}
                 onClick={() => handleThumbnailClick(index)}
               />
             ))}
@@ -116,26 +156,26 @@ const [customText, setCustomText] = useState("");
               ₹{filteredProduct.price.toFixed(2)}
             </p>
             <p className="mb-4 text-gray-600">SKU: {filteredProduct.sku}</p>
-            
-            <div className="flex gap-7">
-            
 
-            <div className="mb-0">
-              <label
-                htmlFor="quantity"
-                className="block mb-2 text-sm font-medium text-gray-600"
-              >
-                Quantity:
-              </label>
-              <input
-                type="number"
-                id="quantity"
-                value={quantity}
-                onChange={handleQuantityChange}
-                min="1"
-                className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+            <div className="flex gap-7">
+
+
+              <div className="mb-0">
+                <label
+                  htmlFor="quantity"
+                  className="block mb-2 text-sm font-medium text-gray-600"
+                >
+                  Quantity:
+                </label>
+                <input
+                  type="number"
+                  id="quantity"
+                  value={quantity}
+                  onChange={handleQuantityChange}
+                  min="1"
+                  className="border rounded-lg px-3 py-2 w-20 shadow-sm focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
             </div>
 
             <div className="mt-4">
@@ -151,65 +191,65 @@ const [customText, setCustomText] = useState("");
 
 
             <div className="mt-3">
-  <h2 className="text-2xl font-bold mb-4 text-gray-800">Upload and Manage Photos</h2>
+              <h2 className="text-2xl font-bold mb-4 text-gray-800">Upload and Manage Photos</h2>
 
-  {/* Photo Upload Section */}
-  <div className="mb-4">
-    <p className="text-base font-medium mb-2 text-black">Add Photos</p>
-    <input
-      type="file"
-      accept="image/*"
-      multiple
-      onChange={(e) => {
-        const files = Array.from(e.target.files);
-        const newPhotos = files.map((file) => URL.createObjectURL(file));
-        setUserUploadedImages((prevImages) => [...prevImages, ...newPhotos]);
-      }}
-      className="block w-full text-sm text-gray-900 border rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
-  </div>
+              {/* Photo Upload Section */}
+              <div className="mb-4">
+                <p className="text-base font-medium mb-2 text-black">Add Photos</p>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => handleImageUpload(Array.from(e.target.files))}
+                  className="block w-full text-sm text-gray-900 border rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  disabled={uploadLoading}
+                />
+                {uploadLoading && (
+                  <p className="text-sm text-gray-600 mt-2">Uploading images...</p>
+                )}
+              </div>
 
-  {/* Display Uploaded Photos with Delete Option */}
-  <div className="grid grid-cols-5 gap-3 mt-4">
-    {userUploadedImages.map((img, index) => (
-      <div key={index} className="relative">
-        <img
-          src={img}
-          alt={`Uploaded ${index + 1}`}
-          className="w-full h-20 object-cover rounded-lg border-2 border-gray-300"
-        />
-        <button
-          onClick={() =>
-            setUserUploadedImages((prevImages) =>
-              prevImages.filter((_, i) => i !== index)
-            )
-          }
-          className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md hover:bg-red-600"
-        >
-          ✕
-        </button>
-      </div>
-    ))}
-  </div>
+              {/* Display Uploaded Photos with Delete Option */}
+              <div className="grid grid-cols-5 gap-3 mt-4">
+                {userUploadedImages.map((img, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={img}
+                      alt={`Uploaded ${index + 1}`}
+                      className="w-full h-20 object-cover rounded-lg border-2 border-gray-300"
+                    />
+                    <button
+                      onClick={() =>
+                        setUserUploadedImages((prevImages) =>
+                          prevImages.filter((_, i) => i !== index)
+                        )
+                      }
+                      className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md hover:bg-red-600"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+              </div>
 
-  {/* Custom Text Input */}
-  <div className="mt-6">
-    <label
-      htmlFor="customTextInput"
-      className="block mb-2 text-sm font-medium text-gray-600"
-    >
-      Enter Custom Text:
-    </label>
-    <input
-      type="text"
-      id="customTextInput"
-      value={customText}
-      onChange={(e) => setCustomText(e.target.value)}
-      placeholder="Type your custom text here"
-      className="w-full border rounded-lg px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500"
-    />
-  </div>
-</div>
+              {/* Custom Text Input */}
+              <div className="mt-6">
+                <label
+                  htmlFor="customTextInput"
+                  className="block mb-2 text-sm font-medium text-gray-600"
+                >
+                  Enter Custom Text:
+                </label>
+                <input
+                  type="text"
+                  id="customTextInput"
+                  value={customText}
+                  onChange={(e) => setCustomText(e.target.value)}
+                  placeholder="Type your custom text here"
+                  className="w-full border rounded-lg px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
 
             {warning && (
               <div className="text-red-500 font-semibold mt-4 p-3 border border-red-500 rounded-lg bg-red-100">
@@ -219,7 +259,7 @@ const [customText, setCustomText] = useState("");
 
             <div className="space-x-4 flex md:flex-row mt-12 gap-4">
               {selectedType !== "Photobook" && (
-               <></>
+                <></>
               )}
 
               <button

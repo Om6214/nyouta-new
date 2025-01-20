@@ -29,7 +29,7 @@ export default function CategoryLabel() {
     fetchProducts();
   }, []);
   
-  console.log("filteredItems",filteredItems)
+  // console.log("filteredItems",filteredItems)
   const { pageName, "*": path } = useParams();
   const navigate = useNavigate();
   const formatCategoryName = (name) => {
