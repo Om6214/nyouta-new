@@ -48,12 +48,12 @@ const HomeSlider = () => {
             <h2 className="text-xl">
               Unique shapes that stack together in a perfect piece suite
             </h2>
-            <div className="relative hover:translate-x-2 duration-300">
+            <Link to={"/products"} className="relative hover:translate-x-2 duration-300">
               <img className="w-44" src={buttonBg} alt="" />
               <button className="absolute top-0 left-4 text-lg font-semibold text-white">
                 Shop New Shapes
               </button>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
