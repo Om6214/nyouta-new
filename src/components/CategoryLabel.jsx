@@ -29,7 +29,7 @@ export default function CategoryLabel() {
     fetchProducts();
   }, []);
   
-  console.log("filteredItems",filteredItems)
+  // console.log("filteredItems",filteredItems)
   const { pageName, "*": path } = useParams();
   const navigate = useNavigate();
   const formatCategoryName = (name) => {
@@ -61,6 +61,10 @@ export default function CategoryLabel() {
       if (filteredItems[0].category === "Photo Books") {
         // Navigate to a different component with the image as state
         navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
+      }
+      if (filteredItems[0].category === "Free Greetings") {
+        // Navigate to a different component with the image as state
+        navigate(`/edit/FreeGreetings/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
       }
       if (filteredItems[0].category === "Itinerary") {
         // Navigate to a different component with the image as state

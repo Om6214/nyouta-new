@@ -97,6 +97,7 @@ export default function CategoryFilterLabel() {
       item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
     return categoryMatch && subCategoryMatch && subSubCategoryMatch;
   });
+ 
 
   const RelatedItems = ProductJson.filter((item) => {
     const categoryMatch =
@@ -115,6 +116,12 @@ export default function CategoryFilterLabel() {
       if (filteredItems[0].category === "Photo Books") {
         // Navigate to a different component with the image as state
         navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, {
+          state: { image: filteredItems[0].image[0] },
+        });
+      }
+      if (filteredItems[0].category === "Free Greetings") {
+        // Navigate to a different component with the image as state
+        navigate(`/edit/FreeGreeting/${filteredItems[0].subSubCategory}`, {
           state: { image: filteredItems[0].image[0] },
         });
       }
@@ -146,10 +153,8 @@ export default function CategoryFilterLabel() {
   // );
 
   // Filtering logic based on timestamps
-
-  
-  
-  
+  console.log("filtered",filteredItems)
+  console.log("related items",RelatedItems)
 
   const filteredResponseData = responseData.filter((item) => {
     if (filter === "royal") {
@@ -199,7 +204,9 @@ export default function CategoryFilterLabel() {
                 modules={[Zoom, Navigation, Pagination, Autoplay]}
                 className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
               >
-                {filteredItems[0]?.category === "Planner Books"
+                {["Planner Books", "Free Greetings"].includes(
+                  filteredItems[0]?.category
+                )
                   ? filteredResponseData.slice(0, 4).map((item, index) =>
                       item?.image?.map((src, imgIndex) => (
                         <SwiperSlide key={`${index}-${imgIndex}`}>
@@ -281,13 +288,17 @@ export default function CategoryFilterLabel() {
                 onClick={handleButtonClick}
                 className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
               >
-                {filteredItems[0].category === "Planner Books"
+                {["Planner Books", "Free Greetings"].includes(
+                  filteredItems[0].category
+                )
                   ? "Choose Now"
                   : "Add Now"}
               </button>
 
               {filteredItems.length > 0 &&
-              filteredItems[0].category === "Planner Books" ? (
+              ["Planner Books", "Free Greetings"].includes(
+                filteredItems[0].category
+              ) ? (
                 <div>
                   <h2 className="text-lg font-semibold mb-3">
                     Product Specifications
@@ -314,12 +325,14 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      {filteredItems[0].category === "Planner Books" ? (
+      {["Planner Books", "Free Greeting"].includes(
+        filteredItems[0].category
+      ) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
           <div className="col-span-1 hidden md:block space-y-2">
             <div className="flex items-center justify-between">
-              <h1 className="text-lg fonr-avalonN">Filter By</h1>
+              <h1 className="text-lg font-avalonN">Filter By</h1>
               <button
                 className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
                   filter === "all"
@@ -341,7 +354,6 @@ export default function CategoryFilterLabel() {
               >
                 Royal
               </button>
-
               <button
                 className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
                   filter === "popular"
@@ -354,6 +366,7 @@ export default function CategoryFilterLabel() {
               </button>
             </div>
           </div>
+
           {/* Mobile filter */}
           <div className="md:hidden relative">
             <Filter onClick={handleClick} />
@@ -390,7 +403,6 @@ export default function CategoryFilterLabel() {
                   >
                     Royal
                   </button>
-
                   <button
                     className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
                       filter === "popular"
@@ -416,7 +428,7 @@ export default function CategoryFilterLabel() {
                 filteredResponseData.map((item, index) => (
                   <Link
                     key={index}
-                    to={`/edit/PlannerBooks/${item.subSubCategory}`}
+                    to={`/edit/${filteredItems[0].category}/${item.subSubCategory}`}
                     state={{ image: item.image[0], ider: item._id }}
                     className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
                   >
