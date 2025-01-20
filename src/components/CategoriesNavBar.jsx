@@ -654,8 +654,6 @@ const CategoriesNavBar = () => {
         <motion.div className="px-[6%] pt-[1%]">
           <div className="font-semibold text-[4vh]">Categories</div>
 
-          
-
           <div className="pt-5 md:max-w-[95%] mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
               {content.subCategory.map((item) => (
