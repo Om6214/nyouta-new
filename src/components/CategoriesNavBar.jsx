@@ -83,12 +83,9 @@ const CategoriesNavBar = () => {
 
     itinerary: {
       Title: "Itinerary",
-      Description:
-        "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
-      Description1:
-        "Create detailed travel itineraries for your trips. ghthrjhytjreyse4",
-      Details1:
-        "Transform your wedding timeline into an engaging and informative guide that keeps your guests informed and excited about every planned moment. Our Wedding Itineraries service combines practical organization with beautiful design to create comprehensive schedules that enhance the experience for everyone involved in your celebration.",
+      Description: "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
+      Description1: "Create detailed travel itineraries for your trips.",
+      Details1: "Transform your wedding timeline into an engaging and informative guide that keeps your guests informed and excited about every planned moment. Our Wedding Itineraries service combines practical organization with beautiful design to create comprehensive schedules that enhance the experience for everyone involved in your celebration.",
 
       Details2: [
         "Easily share event schedules, venue locations, and contact information.",
@@ -220,11 +217,9 @@ const CategoriesNavBar = () => {
     "print invitations": {
       title: "Print Invitations",
       url: "Print Invitations",
-      Description1:
-        "Create beautiful wedding, party, pooja and other events invitations with unique shapes and artistic designs. Each piece is tailored to add elegance and charm to your celebrations. Celebrate your moments with creative and unforgettable invites.",
-      slang: 'Shaped Elegance for Celebrations "Perfect Shapes for Your Joy"',
-      Description:
-        "Design and print stunning wedding invitations that perfectly capture the essence of your special day. Our premium collection offers sophisticated designs and high-quality materials to create memorable announcements that will set the tone for your celebration.",
+      Description1: "Design and print stunning wedding invitations.",
+
+      Description: "Design and print stunning wedding invitations that perfectly capture the essence of your special day. Our premium collection offers sophisticated designs and high-quality materials to create memorable announcements that will set the tone for your celebration.",
 
       subCategory: [
         {
@@ -252,12 +247,9 @@ const CategoriesNavBar = () => {
     "e-invitations": {
       title: "E Invitations",
       url: "/e-invitations",
-      Description1:
-        "We make digital invitations for weddings, parties, poojas, and all celebrations with creative and elegant designs. Each invitation is thoughtfully crafted to reflect the spirit of your event. Celebrate your special moments with personalized, memorable digital invites.",
-      slang:
-        'Where Creativity Meets Celebration  " A Digital Journey for Every Event"',
-      Description:
-        "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
+      Description1: "Create and send digital invitations with ease.",
+
+      Description: "Transform your wedding announcements with our innovative digital invitation platform that combines contemporary design with cutting-edge technology. Our e-invitations offer unlimited creative possibilities while providing convenient tracking and management features for a seamless guest experience.",
       subCategory: [
         {
           subTitle: "Wedding Invitations",
@@ -287,10 +279,8 @@ const CategoriesNavBar = () => {
     },
     "photo books": {
       title: "Photo Books",
-      Description1:
-        "Create lasting memories with our personalized photobooks, designed to capture the essence of your special moments. Each page is a work of art, reflecting the joy and beauty of your celebrations. Cherish your memories forever in a custom-crafted photobook.",
-      slang:
-        'Preserve Your Celebration with a Photobook "A Story Told in Every Page"',
+      Description1: "Nyouta’s photo books are a sleek and modern version of the old school ‘Photo albums’.",
+
       url: "/photo-books",
       Description:
         "Transform your precious wedding memories into elegant, professionally crafted photo books that tell your unique love story. Our premium photo book service combines cutting-edge printing technology with artistic design to create stunning keepsakes that will preserve your special moments for generations to come.",
@@ -321,12 +311,9 @@ const CategoriesNavBar = () => {
       title: "Itinerary",
       url: "/itinerary",
 
-      Description1:
-        "We create detailed wedding itineraries for every event, ensuring a seamless and memorable experience. Our itineraries are customized to fit the unique flow and timings of your celebration. Stay organized and stress-free with our expertly crafted wedding schedules.",
-      slang:
-        'Custom Wedding Itineraries for a Flawless Day "Your Wedding, Our Expert Itinerary"',
-      Description:
-        "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
+      Description1: "Create detailed travel itineraries for your trips.",
+
+      Description: "Craft comprehensive and stylish wedding itineraries that guide your guests through every moment of your celebration. Our professional itinerary service helps you create detailed schedules and information packages that ensure everyone can fully participate in and enjoy your special day, from welcome events to the final farewell.",
       subCategory: [
         {
           subTitle: "Wedding Itinerary",
@@ -362,8 +349,8 @@ const CategoriesNavBar = () => {
       Description1:
         "Create personalized calendars that turn every month into a cherished memory. Each page is uniquely designed to showcase your special moments, making every day a celebration. Stay organized while reliving your most memorable events with our custom calendars.",
 
-      Description:
-        "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
+
+      Description: "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
 
       subCategory: [
         {
@@ -395,41 +382,38 @@ const CategoriesNavBar = () => {
     "free greetings": {
       title: "Free Greetings",
       url: "/free-greetings",
-      Description1:
-        "We offer greetings for all occasions, allowing you to celebrate every moment with heartfelt messages. Whether it's for a wedding, birthday, or any special event, our greetings are designed to bring joy. Share love and happiness, making every celebration memorable.",
-      slang:
-        'Making Every Occasion Special with Greetings "Your Perfect Greeting, Absolutely Free"',
-      Description:
-        "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
+      Description1: "Send free digital greeting cards to your loved ones.",
+
+      Description: "Share your joy and excitement with our collection of elegant digital wedding greetings that allow you to connect with loved ones near and far. Our free greeting service offers a perfect blend of sophistication and convenience, enabling you to express your happiness and gratitude through beautifully designed digital cards.",
 
       subCategory: [
         {
           subTitle: "Wishes Greeting",
           imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+          url: "e/nav/Free Greetings/Free Greetings/Wishes Greeting",
         },
         {
           subTitle: "Thanks Greeting",
           imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+          url: "e/nav/Free Greetings/Free Greetings/Wishes Greeting",
         },
         {
           subTitle: "Feeling Greetings",
           imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+          url: "e/nav/Free Greetings/Free Greetings/Feeling Greetings",
         },
         {
           subTitle: "Funny Greeting",
           imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+          url: "e/nav/Free Greetings/Free Greetings/Funny Greeting",
         },
       ],
     },
     "guest surprising": {
       title: "Guest Surprising",
       url: "/guest-surprising",
-      Description1:
-        "We design custom wedding newspapers and magazines to tell your unique love story in print. From pre-wedding events to the big day, every moment is captured with creativity and style. Create a memorable keepsake that guests will cherish and remember long after the celebration.",
-      slang:
-        'A Unique Wedding Newspaper for Your Unique Day "Your Wedding, Captured in Print"',
-      Description:
-        "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
+      Description1: "Find unique and memorable ways to surprise your guests.",
+      Description: "Create unforgettable moments for your wedding guests with our innovative surprise and delight services that go beyond traditional entertainment. Our comprehensive guest experience program helps you design and implement unique touches that will make your celebration truly memorable and ensure your guests feel specially honored throughout your wedding events.",
       subCategory: [
         {
           subTitle: "Newspaper",
@@ -444,12 +428,9 @@ const CategoriesNavBar = () => {
     "planner books": {
       title: "Planner Books",
       url: "/planner-books",
-      slang:
-        'The Perfect Planner for Your Special Day "Plan Your Perfect Day, Step by Step"',
-      Description:
-        "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
-      Description1:
-        "We offer comprehensive wedding planning tools, including a wedding planner book, guest management booklet, and a wedding notepad to keep every detail organized. From managing guests to tracking your plans, our products ensure a seamless, stress-free celebration. Keep all your wedding essentials in one place for a flawless experience.",
+
+      Description: "Stay perfectly organized throughout your wedding planning journey with our comprehensive planner books that combine practical tools with beautiful design. Our professional planning guides offer everything you need to coordinate your perfect day, from detailed checklists and budget trackers to vendor coordination sheets and timeline management tools.",
+      Description1: "Organize your life with our stylish and functional planner books.",
       subCategory: [
         {
           subTitle: "Wedding Management",
@@ -465,11 +446,9 @@ const CategoriesNavBar = () => {
         },
         {
           subTitle: "Wedding Notepad",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
-          url: "e/nav/Planner Books/Planner Books/Wedding Notepad",
-        },
-        {
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
+          url: "e/nav/Planner Books/Planner Books/Wedding Notepad"
+        }, {
           subTitle: "Guest List Booklet - Best Seller",
           imgUrl:
             "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848346/quntb8uznw1eg81xkrff.jpg", // Example image
@@ -486,12 +465,9 @@ const CategoriesNavBar = () => {
     "e shop": {
       title: "E-Shop",
       url: "/e-shop",
-      slang:
-        'Personalized Essentials for Your Special Day "Perfect Gifts for Every Celebration"',
-      Description1:
-        "Explore our E-shop for the finest wedding and event essentials, along with unforgettable gifts. From beautifully crafted invitations to personalized keepsakes, we provide everything to make your celebration extraordinary. Discover unique treasures that add elegance, charm, and a personal touch to weddings and all your special events.",
-      Description:
-        "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
+
+      Description1: "Browse and shop for a wide range of products online.",
+      Description: "Discover a carefully curated collection of premium wedding essentials in our comprehensive online marketplace. Our E-Shop offers everything you need to create your perfect celebration, from elegant decorations and personalized favors to unique gifts and essential planning tools, all available with convenient shopping and reliable delivery.",
 
       subCategory: [
         {
@@ -552,8 +528,12 @@ const CategoriesNavBar = () => {
     <>
       <div>
         <div className="bg-gradient-to-r from-[#e7d8c9] to-[#eae0d5]">
-          <div className=" px-6 md:px-16">
-            <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center min-h-[28vh] sm:h-[300px] lg:h-[350px] w-full">
+          <div className="pt-4 pb-4 px-6 md:px-16">
+
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center min-h-[28vh] sm:h-[300px] lg:h-[400px] w-full"
+            >
+
               {/* Left Section */}
               <div className="text-center col-span-1 space-y-2 md:text-left">
                 <h1 className="text-[#333533] font-avalonB text-[6vw] md:text-[3vw] leading-tight">
@@ -569,7 +549,8 @@ const CategoriesNavBar = () => {
 
               <div className="relative  col-span-2 ">
                 <div className="lg:w-full w-full">
-                  <motion.div className="relative h-[200px] lg:h-[280px] sm:h-[250px]   rounded-xl overflow-hidden">
+                  <motion.div className="relative h-[200px] lg:h-[380px] sm:h-[250px]   rounded-xl overflow-hidden">
+
                     {images.map((image, index) => (
                       <div
                         key={index}
@@ -648,39 +629,86 @@ const CategoriesNavBar = () => {
       </div>
 
       <div id="section2">
-        <motion.div className="px-[6%] pt-[1%]">
-          <div className="font-semibold text-[4vh]">Categories</div>
+  <motion.div className="px-[6%] pt-[1%]">
+    <div className="font-semibold text-[4vh]">Categories</div>
 
-          <div className="font-normal md:text-[2.2vh] text-[2vw]">
-            {/* Create personalized gifts for Kids, Friends, Loved ones and give them the your attention of love. */}
-          </div>
+    <div className="font-normal md:text-[2.2vh] text-[2vw]">
+      {/* Create personalized gifts for Kids, Friends, Loved ones and give them your attention of love. */}
+    </div>
 
-          <div className="pt-5 md:max-w-[95%] mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {content.subCategory.map((item) => (
-                <Link
-                  to={item.url ? `/${item.url}` : `${item.subTitle}`}
-                  key={item.id}
-                  className="block bg-white rounded-lg shadow-md  overflow-hidden transform transition-transform duration-300 hover:scale-105"
-                >
+    <div className="pt-5 md:max-w-[95%] mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {content.subCategory.map((item) => (
+          <div
+            className="relative block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
+            key={item.id}
+          >
+            {/* Conditionally render the 'under progress' text */}
+            {[
+              "Photo Books",
+              "Print Invitations",
+              "Itinerary",
+              "Calendars 2025",
+              "Guest Surprising",
+              "E-Shop",
+              "Wedding Website"
+            ].includes(content.title) && (
+              <div className="absolute top-0 left-0 w-full h-full bg-transparent text-black text-center py-2 opacity-0 hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                <span className="text-lg font-semibold">
+                  This part is under progress
+                </span>
+              </div>
+            )}
+
+            {/* Conditionally disable link based on content.title */}
+            {[
+              "Photo Books",
+              "Print Invitations",
+              "Itinerary",
+              "Calendars 2025",
+              "Guest Surprising",
+              "E-Shop",
+              "Wedding Website"
+            ].includes(content.title) ? (
+              <div className="cursor-not-allowed">
+                <img
+                  src={item.imgUrl}
+                  alt={item.subTitle}
+                  className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
+                />
+                <div className="p-4 h-[10%] w-full flex justify-center items-center">
+                  <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
+                    {item.subTitle.length > 21
+                      ? `${item.subTitle.slice(0, 21)}...`
+                      : item.subTitle}
+                  </h2>
+                </div>
+              </div>
+            ) : (
+              <Link to={item.url ? `/${item.url}` : `${item.subTitle}`}>
+                <div className="relative">
                   <img
                     src={item.imgUrl}
                     alt={item.subTitle}
-                    className="w-full  h-[90%]  object-cover transition-transform duration-300 ease-in-out "
+                    className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
                   />
                   <div className="p-4 h-[10%] w-full flex justify-center items-center">
-                    <h2 className="text-lg sm:text-md  font-semibold text-nowrap py-2 ">
+                    <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
                       {item.subTitle.length > 21
                         ? `${item.subTitle.slice(0, 21)}...`
                         : item.subTitle}
                     </h2>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </Link>
+            )}
           </div>
-        </motion.div>
+        ))}
       </div>
+    </div>
+  </motion.div>
+</div>
+
 
       <div>
         <div id="section4">

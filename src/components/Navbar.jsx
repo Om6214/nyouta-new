@@ -466,7 +466,6 @@ export default function MainNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   useEffect(() => {
     const selectElement = selectRef.current;
     if (selectElement) {
@@ -474,15 +473,14 @@ export default function MainNav() {
       tempOption.style.visibility = "hidden";
       tempOption.style.position = "absolute";
       tempOption.style.whiteSpace = "nowrap";
-      tempOption.textContent = selectElement.options[selectElement.selectedIndex].text;
+      tempOption.textContent =
+        selectElement.options[selectElement.selectedIndex].text;
 
       document.body.appendChild(tempOption);
       selectElement.style.width = `${tempOption.offsetWidth + 53}px`;
       document.body.removeChild(tempOption);
     }
   }, [category]); // Runs whenever the selected category changes
-
-
 
   const handleDropdownToggle = (dropdown) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
@@ -558,22 +556,21 @@ export default function MainNav() {
               {/* <span className="text-xl font-bold">न्यौता</span> */}
             </Link>
             <div className="lg:flex hidden">
-            <select
-      name="category"
-      id="category"
-      className="border-r-0 rounded-l-lg"
-      ref={selectRef}
-      value={category}
-      onChange={(e) => setCategory(e.target.value)}
-    >
-      <option value="">All</option>
-      {navItems.map((item, index) => (
-        <option value={item.value} key={index}>
-          {item.label}
-        </option>
-      ))}
-    </select>
-
+              <select
+                name="category"
+                id="category"
+                className="border-r-0 rounded-l-lg"
+                ref={selectRef}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="">All</option>
+                {navItems.map((item, index) => (
+                  <option value={item.value} key={index}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
 
               <input
                 className="flex-1 px-4 border-t border-b border-r rounded-none focus:outline-none"
@@ -755,10 +752,6 @@ export default function MainNav() {
                           {item.children.map((child, childIndex) => (
                             <li
                               key={childIndex}
-                              // variants={gridVariants}
-                              // initial="hidden"
-                              // animate="visible"
-                              custom={childIndex}
                               onMouseEnter={() =>
                                 setActiveChildDropdown(childIndex)
                               }
@@ -767,15 +760,19 @@ export default function MainNav() {
                             >
                               <Link
                                 to={
-                                  item.url === "/nav/planner books" &&
-                                  child.label != "Free Printable"
-                                    ? `e${item.url}/Planner%20Books/${child.label}`
-                                    : `${item.url}/${child.label}`
+                                  (item.url === "/nav/planner books" ||
+                                    item.url === "/nav/free greetings") &&
+                                  child.label !== "Free Printable"
+                                    ? `e${item.url}/${encodeURIComponent(
+                                        item.label
+                                      )}/${encodeURIComponent(child.label)}`
+                                    : `${item.url}/${encodeURIComponent(
+                                        child.label
+                                      )}`
                                 }
                                 className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
                               >
                                 {child.label}
-                                {/* {console.log(item.url)} */}
                               </Link>
                               <AnimatePresence>
                                 {child.Filters &&
@@ -790,15 +787,15 @@ export default function MainNav() {
                                       <ul className="space-y-2">
                                         {child.Filters.map(
                                           (filter, filterIndex) => (
-                                            <li
-                                              key={filterIndex}
-                                              // variants={gridVariants}
-                                              // initial="hidden"
-                                              // animate="visible"
-                                              custom={filterIndex}
-                                            >
+                                            <li key={filterIndex}>
                                               <Link
-                                                to={`e${item.url}/${child.label}/${filter.a}`}
+                                                to={`e${
+                                                  item.url
+                                                }/${encodeURIComponent(
+                                                  child.label
+                                                )}/${encodeURIComponent(
+                                                  filter.a
+                                                )}`}
                                                 className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
                                               >
                                                 {filter.a}
