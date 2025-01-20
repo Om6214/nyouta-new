@@ -1,4 +1,5 @@
-import Address from '../models/Address.js'; 
+import Address from '../models/Address.js';
+import User from '../models/User.js'; 
 
 export const addAddress = async (req, res) => { 
     try {
@@ -8,12 +9,10 @@ export const addAddress = async (req, res) => {
         if (!getuser) {
             return res.status(404).json({ message: 'User not found' });
         }
-        // console.log(user);
-        // console.log(req.body);
         const address = new Address({ user, firstName, lastName, streetName:addressLine1, apartment:addressLine2, city, state, pincode, contactNo:contactNumber, email });
         await address.save();
         getuser.address.push(address._id);
-        await getuser.save();
+        await getuser.save();  
         res.status(201).json({ message: 'Address added successfully', address });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });

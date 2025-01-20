@@ -129,7 +129,7 @@ const Checkout = () => {
     React.useEffect(() => {
         loadRazorpayScript();
     }, []);
-
+console.log(cart)
     const handleOrder = async () => {
         if (cart.products.length === 0) {
             toast.error("Please add product to cart.")
@@ -143,6 +143,8 @@ const Checkout = () => {
             product: product.productId._id,
             quantity: product.quantity,
             price: product.productId.price,
+            customText: product.customText,
+            images: product.images,
         }));
         const totalPrice = cart.products.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
         const address = addresses[selectedAddress]._id;

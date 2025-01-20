@@ -8,6 +8,12 @@ const CartSchema = new mongoose.Schema({
     },
     quantity:{
       type:Number
+    },
+    customText:{
+      type:String
+    },
+    images:{
+      type:[String]
     }
    }],
   totalPrice: { type: Number, required: true },
