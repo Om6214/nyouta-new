@@ -10,7 +10,7 @@ import img18 from "../assets/images/promise/18.png";
 
 const RewardCard = () => {
   return (
-    <div className="bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 text-white font-heroFont py-6 flex flex-col gap-4">
+    <div className="bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 text-white font-heroFont py-6 my-6 flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-center text-2xl lg:text-4xl font-semibold">
           Exclusive Rewards Await

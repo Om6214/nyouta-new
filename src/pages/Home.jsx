@@ -33,9 +33,9 @@ const Home = () => {
       <About />
       <CouponCard />
       <Testimonials />
+      <RewardCard />
       <BlogsCard />
       <PromiseCard />
-      <RewardCard />
     </div>
   );
 };

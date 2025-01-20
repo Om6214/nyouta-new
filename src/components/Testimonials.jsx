@@ -389,7 +389,7 @@ export default function Testimonials() {
 
   
   return (
-    <section className="py-16 text-primaryBlue ">
+    <section className="my-4 text-primaryBlue ">
       <div className="container mx-auto lg:px-4 px-0">
         <h2 className="mb-12 text-secondary font-avalonB text-center text-2xl tracking-tight lg:text-4xl">
           Real Stories, Real Experiences – Our Customers Speak
