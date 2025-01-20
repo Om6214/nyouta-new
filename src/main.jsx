@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <GoogleOAuthProvider clientId="134448973901-5i5v9air5pmirrcelodj5uhqoo707ccb.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="1050408168075-0orv0rlrn38457qe9p3hoh3sqdi3k29k.apps.googleusercontent.com">
         <App />
       </GoogleOAuthProvider>
       <ToastContainer/>
