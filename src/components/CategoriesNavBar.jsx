@@ -349,7 +349,6 @@ const CategoriesNavBar = () => {
       Description1:
         "Create personalized calendars that turn every month into a cherished memory. Each page is uniquely designed to showcase your special moments, making every day a celebration. Stay organized while reliving your most memorable events with our custom calendars.",
 
-      Description1: "Design and print personalized calendars for 2025.",
 
       Description: "Create stunning personalized wedding countdown calendars that build anticipation for your 2025 celebration while helping you stay organized throughout the planning process. Our custom calendars combine practical functionality with beautiful design elements to create a unique way to track your journey to the altar.",
 
@@ -630,35 +629,86 @@ const CategoriesNavBar = () => {
       </div>
 
       <div id="section2">
-        <motion.div className="px-[6%] pt-[1%]">
-          <div className="font-semibold text-[4vh]">Categories</div>
+  <motion.div className="px-[6%] pt-[1%]">
+    <div className="font-semibold text-[4vh]">Categories</div>
 
-          <div className="font-normal md:text-[2.2vh] text-[2vw]">
-            {/* Create personalized gifts for Kids, Friends, Loved ones and give them your attention of love. */}
-          </div>
+    <div className="font-normal md:text-[2.2vh] text-[2vw]">
+      {/* Create personalized gifts for Kids, Friends, Loved ones and give them your attention of love. */}
+    </div>
 
-          <div className="pt-5 md:max-w-[95%] mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-              {content.subCategory.map((item) => (
-                <div
-                  className="relative block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
-                  key={item.id}
-                  className="block bg-white rounded-lg shadow-md  overflow-hidden transform transition-transform duration-300 hover:scale-105"
-                >
+    <div className="pt-5 md:max-w-[95%] mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {content.subCategory.map((item) => (
+          <div
+            className="relative block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
+            key={item.id}
+          >
+            {/* Conditionally render the 'under progress' text */}
+            {[
+              "Photo Books",
+              "Print Invitations",
+              "Itinerary",
+              "Calendars 2025",
+              "Guest Surprising",
+              "E-Shop",
+              "Wedding Website"
+            ].includes(content.title) && (
+              <div className="absolute top-0 left-0 w-full h-full bg-transparent text-black text-center py-2 opacity-0 hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+                <span className="text-lg font-semibold">
+                  This part is under progress
+                </span>
+              </div>
+            )}
+
+            {/* Conditionally disable link based on content.title */}
+            {[
+              "Photo Books",
+              "Print Invitations",
+              "Itinerary",
+              "Calendars 2025",
+              "Guest Surprising",
+              "E-Shop",
+              "Wedding Website"
+            ].includes(content.title) ? (
+              <div className="cursor-not-allowed">
+                <img
+                  src={item.imgUrl}
+                  alt={item.subTitle}
+                  className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
+                />
+                <div className="p-4 h-[10%] w-full flex justify-center items-center">
+                  <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
+                    {item.subTitle.length > 21
+                      ? `${item.subTitle.slice(0, 21)}...`
+                      : item.subTitle}
+                  </h2>
+                </div>
+              </div>
+            ) : (
+              <Link to={item.url ? `/${item.url}` : `${item.subTitle}`}>
+                <div className="relative">
                   <img
                     src={item.imgUrl}
                     alt={item.subTitle}
-                    className="w-full  h-[90%]  object-cover transition-transform duration-300 ease-in-out "
+                    className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
                   />
                   <div className="p-4 h-[10%] w-full flex justify-center items-center">
-                    <h2 className="text-lg sm:text-md  font-semibold text-nowrap py-2 ">{item.subTitle.length > 21 ? `${item.subTitle.slice(0, 21)}...` : item.subTitle}</h2>
+                    <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
+                      {item.subTitle.length > 21
+                        ? `${item.subTitle.slice(0, 21)}...`
+                        : item.subTitle}
+                    </h2>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </Link>
+            )}
           </div>
-        </motion.div>
+        ))}
       </div>
+    </div>
+  </motion.div>
+</div>
+
 
       <div>
         <div id="section4">
