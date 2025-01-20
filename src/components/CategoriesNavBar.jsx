@@ -440,9 +440,14 @@ const CategoriesNavBar = () => {
           imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847362/n2ppyskd7modih1qznm3.jpg", // Example image
           url: "e/nav/Planner Books/Planner Books/Guest Management"
         }, {
-          subTitle: "Wedding Notepad",
+          subTitle: "Wedding Notepad (liner)",
           imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
-          url: "e/nav/Planner Books/Planner Books/Wedding Notepad"
+          url: "e/nav/Planner Books/Planner Books/Wedding Notepad(liner)"
+        }, 
+         {
+          subTitle: "Wedding Notepad (photo)",
+          imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
+          url: "e/nav/Planner Books/Planner Books/Wedding Notepad(photo)"
         }, {
           subTitle: "Guest List Booklet - Best Seller",
           imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848346/quntb8uznw1eg81xkrff.jpg", // Example image

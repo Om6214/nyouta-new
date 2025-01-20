@@ -22,6 +22,9 @@ export default function CategoryFilterLabel() {
   const relatedItemsRef = useRef(null);
   const [quantity, setQuantity] = useState(1);
 
+
+  
+
   const handleClick = () => {
     setShowFilter(true);
   };
@@ -88,6 +91,9 @@ export default function CategoryFilterLabel() {
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
 
+  console.log(ProductJson);
+  
+
   const filteredItems = ProductJson.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
@@ -97,6 +103,9 @@ export default function CategoryFilterLabel() {
       item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
     return categoryMatch && subCategoryMatch && subSubCategoryMatch;
   });
+
+  
+  
 
   const RelatedItems = ProductJson.filter((item) => {
     const categoryMatch =
@@ -148,6 +157,7 @@ export default function CategoryFilterLabel() {
   // Filtering logic based on timestamps
 
   
+  console.log(path);
   
   
 
@@ -179,11 +189,13 @@ export default function CategoryFilterLabel() {
     } // Return all items if no filter is applied
   });
 
-  console.log(filteredResponseData);
+
+  console.log("filteredItems:", filteredItems);
+  console.log("filteredResponseData:", filteredResponseData);
 
   return (
     <>
-      {filteredItems.length > 0 ? (
+      {filteredItems?.length > 0? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
           <div className="mt-6">
             <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
@@ -314,7 +326,7 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      {filteredItems[0].category === "Planner Books" ? (
+      {filteredItems[0]?.category === "Planner Books" ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
           <div className="col-span-1 hidden md:block space-y-2">
@@ -409,7 +421,8 @@ export default function CategoryFilterLabel() {
             )}
           </div>
 
-          {/* Right column: Filtered results */}
+          {/* Right column: Filtered results */
+          }
           <div className="col-span-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {filteredResponseData.length > 0 ? (
