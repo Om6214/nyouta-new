@@ -146,6 +146,11 @@ export default function CategoryFilterLabel() {
   // );
 
   // Filtering logic based on timestamps
+
+  
+  
+  
+
   const filteredResponseData = responseData.filter((item) => {
     if (filter === "royal") {
       return (
@@ -173,6 +178,8 @@ export default function CategoryFilterLabel() {
       );
     } // Return all items if no filter is applied
   });
+
+  console.log(filteredResponseData);
 
   return (
     <>
