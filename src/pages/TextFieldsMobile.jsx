@@ -34,19 +34,40 @@ const TextFieldsMobile = ({ selectedText, updateTextField, onClose }) => {
   // Handle real-time translation when the user types in the text area
   const handleTextChange = async (e) => {
     let newText = e.target.value;
-
+  
     // Apply transformations
     if (isUppercase) {
       newText = newText.toUpperCase();
     } else if (isLowercase) {
       newText = newText.toLowerCase();
     }
-
+  
     updateTextField(selectedText.id, "text", newText); // Update original text
-
+  
     try {
-      const translated = await translate(newText, { to: selectedLanguage }); // Translate the new text
+      // Translate the new text and specify both the source and target languages
+      const translated = await translate(newText, {
+        from: selectedLanguage, // Current selected language
+        to: selectedLanguage,  // Translate to the same language for now
+      });
       setTranslatedText(translated); // Update the translated text
+      updateTextField(selectedText.id, "text", translated); // Update the text field with translated text
+    } catch (error) {
+      console.error("Translation Error:", error);
+    }
+  };
+  
+  const handleLanguageChange = async (e) => {
+    const newLanguage = e.target.value;
+    setSelectedLanguage(newLanguage);
+  
+    try {
+      // Translate existing text to the new target language
+      const translated = await translate(text, {
+        from: selectedLanguage, // Current selected language
+        to: newLanguage,        // Translate to the new language
+      });
+      setTranslatedText(translated); // Update translated text
       updateTextField(selectedText.id, "text", translated); // Update the text field with translated text
     } catch (error) {
       console.error("Translation Error:", error);
@@ -59,18 +80,6 @@ const TextFieldsMobile = ({ selectedText, updateTextField, onClose }) => {
     updateTextField(selectedText.id, "curveValue", newCurveValue); // Update the curve value in the parent state
   };
 
-  const handleLanguageChange = async (e) => {
-    const newLanguage = e.target.value;
-    setSelectedLanguage(newLanguage);
-
-    try {
-      const translated = await translate(text, { to: newLanguage }); // Translate existing text to the new target language
-      setTranslatedText(translated); // Update translated text
-      updateTextField(selectedText.id, "text", translated); // Update the text field with translated text
-    } catch (error) {
-      console.error("Translation Error:", error);
-    }
-  };
 
   const toggleUppercase = () => {
     updateTextField(selectedText.id, "isUppercase", !isUppercase);
