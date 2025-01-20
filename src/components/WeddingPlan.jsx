@@ -7,41 +7,48 @@ import guestList from "../assets/images/stressfree/guestlist.jpg";
 import pdfPrint from "../assets/images/stressfree/checklist.jpg";
 import wedNote from "../assets/images/stressfree/wednoteliner.jpg";
 import wedPhoto from "../assets/images/stressfree/wednotephoto.jpeg";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
     title: "Management Planner",
     format: "Easy to Manage Wedding",
+    url:"/e/nav/planner%20books/Planner%20Books/Wedding%20Management",
     btn: "Shop Now",
     imgUrl: wedPlan,
   },
   {
     title: "Guest Management",
     format: "Easy to Manage Guests",
+    url:"/e/nav/planner%20books/Planner%20Books/Guest%20Management",
     btn: "Shop Now",
     imgUrl: guestPlan,
   },
   {
     title: "Notepad (Liner)",
     format: "Write your Wedding Notes",
+    url:"/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Linear)",
     btn: "Shop Now",
     imgUrl: wedNote,
   },
   {
     title: "Notepad (Photo)",
     format: "Write your Wedding Notes",
+    url:"/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Photo)",
     btn: "Shop Now",
     imgUrl: wedPhoto,
   },
   {
     title: "Guest Checklist Booklet",
     format: "Easy to Manage Guests",
+    url:"/e/nav/planner%20books/Planner%20Books/Guest%20List%20Booklet%20-%20Best%20Seller",
     btn: "Free Download",
     imgUrl: guestList,
   },
   {
     title: "Checklist Printable",
     format: "PDF/XLS Printable",
+    url:"/nav/planner%20books/Free%20Printable",
     btn: "Free Download",
     imgUrl: pdfPrint,
   },
@@ -85,9 +92,9 @@ const WeddingPlan = () => {
                 <h2 className="h-[50px] md:h-full">{plan.format}</h2>
                 <div className="relative flex flex-col items-center">
                   <img className="h-8" src={buttonBg} alt="" />
-                  <button className="text-lg font-semibold absolute ">
+                  <Link to={plan.url} className="text-lg font-semibold absolute ">
                     {plan.btn}
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
