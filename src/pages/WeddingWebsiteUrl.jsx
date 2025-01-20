@@ -13,6 +13,13 @@ import { getWeddingTemplates } from "../Store/slices/weddingtemplateSlice";
 import TemplateSection from "../components/TemplateSection.jsx";
 import btnImg from "../assets/images/09.png";
 import { motion } from "framer-motion";
+import { Carousel } from "flowbite-react";
+import banImg1 from "../assets/images/weddingurl/1.jpg";
+import banImg2 from "../assets/images/weddingurl/2.jpg";
+import banImg3 from "../assets/images/weddingurl/3.jpg";
+import banImg4 from "../assets/images/weddingurl/4.jpg";
+import banImg5 from "../assets/images/weddingurl/5.jpg";
+import banImg6 from "../assets/images/weddingurl/6.jpg";
 
 const items = [
   {
@@ -83,10 +90,17 @@ const WeddingWebsiteUrl = () => {
   return (
     <div>
       <div className="lg:mx-24 mx-4 mt-2">
-        <motion.div>
-          <img className="h-[350px] w-full" src={wedBg} alt="" />
-        </motion.div>
-        <motion.div className="flex font-avalonN gap-2 text-gray-600 font-semibold items-center justify-center border-t-2 border-b-2 my-2 border-gray-600">
+      <div className="h-80 sm:h-80 xl:h-80 2xl:h-96">
+      <Carousel indicators={false}>
+        <img className="object-cover lg:object-contain h-full" src={banImg1} alt="..." />
+        <img className="object-cover lg:object-contain h-full" src={banImg2} alt="..." />
+        <img className="object-cover lg:object-contain h-full" src={banImg3} alt="..." />
+        <img className="object-cover lg:object-contain h-full" src={banImg4} alt="..." />
+        <img className="object-cover lg:object-contain h-full" src={banImg5} alt="..." />
+        <img className="object-cover lg:object-contain h-full" src={banImg6} alt="..." />
+      </Carousel>
+    </div>
+        {/* <motion.div className="flex font-avalonN gap-2 text-gray-600 font-semibold items-center justify-center border-t-2 border-b-2 my-2 border-gray-600">
           <h1>Sort By</h1>
           <select name="" id="" className="border-none">
             <option value="">Trending</option>
@@ -94,7 +108,7 @@ const WeddingWebsiteUrl = () => {
             <option value="">New</option>
             <option value="">Hot</option>
           </select>
-        </motion.div>
+        </motion.div> */}
         <motion.div className="flex flex-col gap-6">
           <div className="mt-4">
             <h1 className="text-4xl text-secondary font-avalonN">
