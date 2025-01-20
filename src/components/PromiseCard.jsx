@@ -58,7 +58,7 @@ const PromiseCard = () => {
         ))}
       </div>
       <div className="mx-4">
-        <div className="flex overflow-x-auto gap-4">
+        <div className="flex overflow-x-auto gap-4 lg:justify-center">
           <img
             className="cursor-pointer w-[150px] lg:w-[170px]"
             src={img1}

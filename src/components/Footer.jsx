@@ -10,7 +10,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-secondary text-amber-200 py-12">
+    <footer className="bg-secondary text-amber-200 py-8 space-y-6">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* User Area */}
@@ -143,6 +143,18 @@ export default function Footer() {
                 <p>{"Monday to Saturday 10am-5pm IST"}</p>
                 <p>Closed all Sunday & holidays</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-[#1E2A47] font-avalonN">
+        <div className=" lg:mx-auto lg:px-20 px-2 mt-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div className="text-lg font-avalonB">
+              © 2025 Nyouta. All rights reserved.
+            </div>
+            <div className="flex text-lg ">
+              Designed and Developed by House Of Marktech
             </div>
           </div>
         </div>
