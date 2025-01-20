@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Heart,
@@ -451,8 +451,9 @@ export default function MainNav() {
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(null);
   const [isHoveringDropdown, setIsHoveringDropdown] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [category, setCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("");
+  const selectRef = useRef(null); // Ref to access the <select> element
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -465,6 +466,24 @@ export default function MainNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+
+  useEffect(() => {
+    const selectElement = selectRef.current;
+    if (selectElement) {
+      const tempOption = document.createElement("span");
+      tempOption.style.visibility = "hidden";
+      tempOption.style.position = "absolute";
+      tempOption.style.whiteSpace = "nowrap";
+      tempOption.textContent = selectElement.options[selectElement.selectedIndex].text;
+
+      document.body.appendChild(tempOption);
+      selectElement.style.width = `${tempOption.offsetWidth + 53}px`;
+      document.body.removeChild(tempOption);
+    }
+  }, [category]); // Runs whenever the selected category changes
+
+
+
   const handleDropdownToggle = (dropdown) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
@@ -472,11 +491,10 @@ export default function MainNav() {
   const handleSearch = () => {
     // Construct query parameters
     const params = new URLSearchParams();
-    if (searchTerm) params.append('term', searchTerm);
-    if (category) params.append('category', category);
+    if (searchTerm) params.append("term", searchTerm);
+    if (category) params.append("category", category);
 
     // console.log(params.toString());
-    
 
     // Redirect to the products page with query parameters
     navigate(`/products?${params.toString()}`);
@@ -508,286 +526,304 @@ export default function MainNav() {
     navigate("/login");
   };
   return (
-
     <div className="flex flex-col">
       <div className="h-[30px] flex justify-between px-6 lg:px-56 sm:px-8  bg-[#FAF0DC] ">
-        <div className="bg-[#af7d32] rounded-b-2xl  text-white font-avalonN ms-4 sm:ms-0  flex items-center justify-center px-2 sm:px-4 tracking-widest text-md    sm:text-xl">NYOUTA</div>
-        <div className="sm:flex hidden items-center sm:me-0  lg:me-10"> <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md " >Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc. &gt;&gt;&gt;&gt; Scrolling </h1></div>
-        <div className="flex sm:hidden items-center sm:me-0  lg:me-10"> <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md " >Scrolling Offers | Discount Coupons | etc. </h1></div>
+        <div className="bg-[#af7d32] rounded-b-2xl  text-white font-avalonN ms-4 sm:ms-0  flex items-center justify-center px-2 sm:px-4 tracking-widest text-md    sm:text-xl">
+          NYOUTA
+        </div>
+        <div className="sm:flex hidden items-center sm:me-0  lg:me-10">
+          {" "}
+          <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
+            Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc.
+            &gt;&gt;&gt;&gt; Scrolling{" "}
+          </h1>
+        </div>
+        <div className="flex sm:hidden items-center sm:me-0  lg:me-10">
+          {" "}
+          <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
+            Scrolling Offers | Discount Coupons | etc.{" "}
+          </h1>
+        </div>
       </div>
       <header
-      className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
-        isScrolled ? "bg-white shadow-md" : "bg-white"
-      }`}
+        className={`sticky top-0 z-50 w-full transition-all border-b-2 border-primary ${
+          isScrolled ? "bg-white shadow-md" : "bg-white"
+        }`}
+      >
+        <div className="container mx-auto ">
+          {/* Top Navigation */}
+          <div className="flex h-18 items-center justify-between px-4">
+            <Link to="/" className="flex items-center py-2 lg:pl-12 gap-2">
+              <img className="lg:w-56 w-36" src={logo} alt="logo-imgh" />
+              {/* <span className="text-xl font-bold">न्यौता</span> */}
+            </Link>
+            <div className="lg:flex hidden">
+            <select
+      name="category"
+      id="category"
+      className="border-r-0 rounded-l-lg"
+      ref={selectRef}
+      value={category}
+      onChange={(e) => setCategory(e.target.value)}
     >
-      <div className="container mx-auto ">
-        {/* Top Navigation */}
-        <div className="flex h-18 items-center justify-between px-4">
-          <Link to="/" className="flex items-center py-2 lg:pl-12 gap-2">
-            <img className="lg:w-56 w-36" src={logo} alt="logo-imgh" />
-            {/* <span className="text-xl font-bold">न्यौता</span> */}
-          </Link>
-          <div className="lg:flex hidden">
-      <select
-        name="category"
-        id="category"
-        className="!pr-8 border-r-0 rounded-l-lg w-[80px]"
-        onChange={(e) => setCategory(e.target.value)}
-      >
-        <option value="">All</option>
-        {navItems.map((item, index) => (
-          <option value={item.value} key={index}>
-            {item.label}
-          </option>
-        ))}
-      </select>
-      <input
-        className="flex-1 px-4 border-t border-b border-r rounded-none focus:outline-none"
-        type="search"
-        name="search"
-        id="search"
-        placeholder="I'm shopping for..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button
-        className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont"
-        onClick={handleSearch}
-      >
-        Search
-      </button>
-    </div>
+      <option value="">All</option>
+      {navItems.map((item, index) => (
+        <option value={item.value} key={index}>
+          {item.label}
+        </option>
+      ))}
+    </select>
 
-          {/* Right Section for Icons */}
-          <div className="flex items-center gap-1 lg:gap-4">
-            {/* <Link className="pr-4">
-              <Search className="h-6 w-6 hover:text-primary" />
-            </Link> */}
-            <a
-              href="/join-e-nyouta"
-              className="text-pink-600 font-avalonN hidden lg:flex leading-none hover:underline"
-            >
-              Join E-Nyouta
-              <br />
-              Share Memories
-            </a>
-            <button
-              onClick={toggleCart}
-              className="flex items-center gap-1 relative"
-            >
-              <ShoppingBag size={27} className=" hover:text-primary" />
-              {totalItems > 0 && (
-                <span className="absolute -top-2 right-0 rounded-full bg-black px-2 py-1 text-[8px] text-white">
-                  {totalItems}
-                </span>
-              )}
-            </button>
 
-            <div className="relative">
+              <input
+                className="flex-1 px-4 border-t border-b border-r rounded-none focus:outline-none"
+                type="search"
+                name="search"
+                id="search"
+                placeholder="I'm shopping for..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
               <button
-                onClick={() => handleDropdownToggle("user")}
-                className="flex items-center gap-1 rounded-md p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2"
+                className="bg-secondary py-2 px-6 rounded-r-lg hover:bg-primary font-semibold text-white font-heroFont"
+                onClick={handleSearch}
               >
-                {user && Object.keys(user).length > 0 ? (
-                  <div>
-                    <img
-                      src={user.avatar || "profile.jpeg"}
-                      alt="profile-pic"
-                      className="w-10 h-10 rounded-full"
-                    />
-                  </div>
-                ) : (
-                  <>
-                    <User size={27} />
-                    <ChevronDown className="h-4 w-4" />
-                  </>
-                )}
+                Search
               </button>
-              {openDropdown === "user" && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md bg-priBg py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
-                  {!(user && Object.keys(user).length > 0) ? (
-                    <>
-                      <Link
-                        to="/login"
-                        onClick={() => setOpenDropdown(null)}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        Log in
-                      </Link>
-                      <Link
-                        to="/register"
-                        onClick={() => setOpenDropdown(null)}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      >
-                        Register
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        onClick={handleLogout}
-                        className="block px-4 py-2 text-sm text-gray-700"
-                      >
-                        Logout
-                      </button>
-                    </>
-                  )}
-                </div>
-              )}
             </div>
 
-            {/* Mobile Drawer Button */}
-            <button
-              className="lg:hidden p-2"
-              onClick={() => setIsDrawerOpen(true)}
-            >
-              <Menu size={27} />
-            </button>
+            {/* Right Section for Icons */}
+            <div className="flex items-center gap-1 lg:gap-4">
+              {/* <Link className="pr-4">
+              <Search className="h-6 w-6 hover:text-primary" />
+            </Link> */}
+              <a
+                href="/join-e-nyouta"
+                className="text-pink-600 font-avalonN hidden lg:flex leading-none hover:underline"
+              >
+                Join E-Nyouta
+                <br />
+                Share Memories
+              </a>
+              <button
+                onClick={toggleCart}
+                className="flex items-center gap-1 relative"
+              >
+                <ShoppingBag size={27} className=" hover:text-primary" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-2 right-0 rounded-full bg-black px-2 py-1 text-[8px] text-white">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+
+              <div className="relative">
+                <button
+                  onClick={() => handleDropdownToggle("user")}
+                  className="flex items-center gap-1 rounded-md p-2 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2"
+                >
+                  {user && Object.keys(user).length > 0 ? (
+                    <div>
+                      <img
+                        src={user.avatar || "profile.jpeg"}
+                        alt="profile-pic"
+                        className="w-10 h-10 rounded-full"
+                      />
+                    </div>
+                  ) : (
+                    <>
+                      <User size={27} />
+                      <ChevronDown className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
+                {openDropdown === "user" && (
+                  <div className="absolute right-0 mt-2 w-48 rounded-md bg-priBg py-1 shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                    {!(user && Object.keys(user).length > 0) ? (
+                      <>
+                        <Link
+                          to="/login"
+                          onClick={() => setOpenDropdown(null)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Log in
+                        </Link>
+                        <Link
+                          to="/register"
+                          onClick={() => setOpenDropdown(null)}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Register
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={handleLogout}
+                          className="block px-4 py-2 text-sm text-gray-700"
+                        >
+                          Logout
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Drawer Button */}
+              <button
+                className="lg:hidden p-2"
+                onClick={() => setIsDrawerOpen(true)}
+              >
+                <Menu size={27} />
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Drawer Menu */}
+          <AnimatePresence>
+            {isDrawerOpen && (
+              <motion.div
+                initial={{ opacity: 0.8, x: 300 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0.8, x: 300 }}
+                transition={{ duration: 0.3, ease: "linear" }}
+                className="fixed inset-0 z-50 bg-black bg-opacity-50 lg:hidden"
+              >
+                <div className="absolute right-0 h-full w-64  bg-white p-4">
+                  <button
+                    className="mb-4 text-right"
+                    onClick={() => setIsDrawerOpen(false)}
+                  >
+                    <X />
+                  </button>
+                  <ul className="">
+                    {navItems.map((item) => (
+                      <li
+                        key={item}
+                        className="flex flex-col gap-2 font-avalonN"
+                      >
+                        <Link
+                          onClick={() => setIsDrawerOpen(false)}
+                          to={item.url}
+                          className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
+                        >
+                          {item.label}{" "}
+                          <span>
+                            <ArrowRight size={20} />
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        {/* Mobile Drawer Menu */}
-        <AnimatePresence>
-          {isDrawerOpen && (
-            <motion.div
-              initial={{ opacity: 0.8, x: 300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0.8, x: 300 }}
-              transition={{ duration: 0.3, ease: "linear" }}
-              className="fixed inset-0 z-50 bg-black bg-opacity-50 lg:hidden"
-            >
-              <div className="absolute right-0 h-full w-64  bg-white p-4">
-                <button
-                  className="mb-4 text-right"
-                  onClick={() => setIsDrawerOpen(false)}
+        <div className="hidden lg:flex py-2 justify-center ">
+          <ul className="flex gap-10 justify-center items-center text-md font-avalonN">
+            {navItems.map((item, index) => {
+              const isLastTwoItems = index >= navItems.length - 2;
+              return (
+                <li
+                  key={index}
+                  onMouseEnter={() => setActiveDropdown(index)}
+                  onMouseLeave={() => {
+                    setActiveDropdown(null);
+                    setActiveChildDropdown(null);
+                  }}
+                  className="relative py-2"
                 >
-                  <X />
-                </button>
-                <ul className="">
-                  {navItems.map((item) => (
-                    <li key={item} className="flex flex-col gap-2 font-avalonN">
-                      <Link
-                        onClick={() => setIsDrawerOpen(false)}
-                        to={item.url}
-                        className="py-2 text-lg hover:text-brown-600 flex items-center gap-1"
+                  <Link
+                    to={item.url}
+                    className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-3"
+                  >
+                    {item.label}
+                  </Link>
+                  <AnimatePresence>
+                    {item.children && activeDropdown === index && (
+                      <div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute top-8 left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
                       >
-                        {item.label}{" "}
-                        <span>
-                          <ArrowRight size={20} />
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <div className="hidden lg:flex py-2 justify-center ">
-        <ul className="flex gap-10 justify-center items-center text-md font-avalonN">
-          {navItems.map((item, index) => {
-            const isLastTwoItems = index >= navItems.length - 2;
-            return (
-              <li
-                key={index}
-                onMouseEnter={() => setActiveDropdown(index)}
-                onMouseLeave={() => {
-                  setActiveDropdown(null);
-                  setActiveChildDropdown(null);
-                }}
-                className="relative py-2"
-              >
-                <Link
-                  to={item.url}
-                  className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-3"
-                >
-                  {item.label}
-                </Link>
-                <AnimatePresence>
-                  {item.children && activeDropdown === index && (
-                    <div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-8 left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
-                    >
-                      <ul className="space-y-2">
-                        {item.children.map((child, childIndex) => (
-                          <li
-                            key={childIndex}
-                            // variants={gridVariants}
-                            // initial="hidden"
-                            // animate="visible"
-                            custom={childIndex}
-                            onMouseEnter={() =>
-                              setActiveChildDropdown(childIndex)
-                            }
-                            onMouseLeave={() => setActiveChildDropdown(null)}
-                            className="relative"
-                          >
-                            <Link
-                              to={
-                                item.url === "/nav/planner books" &&
-                                child.label != "Free Printable"
-                                  ? `e${item.url}/Planner%20Books/${child.label}`
-                                  : `${item.url}/${child.label}`
+                        <ul className="space-y-2">
+                          {item.children.map((child, childIndex) => (
+                            <li
+                              key={childIndex}
+                              // variants={gridVariants}
+                              // initial="hidden"
+                              // animate="visible"
+                              custom={childIndex}
+                              onMouseEnter={() =>
+                                setActiveChildDropdown(childIndex)
                               }
-                              className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
+                              onMouseLeave={() => setActiveChildDropdown(null)}
+                              className="relative"
                             >
-                              {child.label}
-                              {/* {console.log(item.url)} */}
-                            </Link>
-                            <AnimatePresence>
-                              {child.Filters &&
-                                activeChildDropdown === childIndex && (
-                                  <div
-                                    className={`absolute top-0 ${
-                                      isLastTwoItems
-                                        ? "right-full "
-                                        : "left-full ml-2"
-                                    } bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-3 shadow-lg`}
-                                  >
-                                    <ul className="space-y-2">
-                                      {child.Filters.map(
-                                        (filter, filterIndex) => (
-                                          <li
-                                            key={filterIndex}
-                                            // variants={gridVariants}
-                                            // initial="hidden"
-                                            // animate="visible"
-                                            custom={filterIndex}
-                                          >
-                                            <Link
-                                              to={`e${item.url}/${child.label}/${filter.a}`}
-                                              className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
+                              <Link
+                                to={
+                                  item.url === "/nav/planner books" &&
+                                  child.label != "Free Printable"
+                                    ? `e${item.url}/Planner%20Books/${child.label}`
+                                    : `${item.url}/${child.label}`
+                                }
+                                className="flex items-center gap-1 text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors"
+                              >
+                                {child.label}
+                                {/* {console.log(item.url)} */}
+                              </Link>
+                              <AnimatePresence>
+                                {child.Filters &&
+                                  activeChildDropdown === childIndex && (
+                                    <div
+                                      className={`absolute top-0 ${
+                                        isLastTwoItems
+                                          ? "right-full "
+                                          : "left-full ml-2"
+                                      } bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-3 shadow-lg`}
+                                    >
+                                      <ul className="space-y-2">
+                                        {child.Filters.map(
+                                          (filter, filterIndex) => (
+                                            <li
+                                              key={filterIndex}
+                                              // variants={gridVariants}
+                                              // initial="hidden"
+                                              // animate="visible"
+                                              custom={filterIndex}
                                             >
-                                              {filter.a}
-                                            </Link>
-                                          </li>
-                                        )
-                                      )}
-                                    </ul>
-                                  </div>
-                                )}
-                            </AnimatePresence>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </AnimatePresence>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+                                              <Link
+                                                to={`e${item.url}/${child.label}/${filter.a}`}
+                                                className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
+                                              >
+                                                {filter.a}
+                                              </Link>
+                                            </li>
+                                          )
+                                        )}
+                                      </ul>
+                                    </div>
+                                  )}
+                              </AnimatePresence>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
-      {/* Mobile drawer code remains the same */}
-    </header>
+        {/* Mobile drawer code remains the same */}
+      </header>
     </div>
-    
   );
 }
