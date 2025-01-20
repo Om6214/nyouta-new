@@ -10,7 +10,131 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProducts } from "../Store/slices/productSlice";
 import { useDispatch } from "react-redux";
+import button from "../assets/images/09.png";
 import cardImg from "../assets/images/mahal1.png";
+import atmPass from "../assets/images/products/ATM-Pass-Invites.png";
+import coasters from "../assets/images/products/Coasters.jpg";
+import diningmats from "../assets/images/products/DiningMats.jpg";
+import door from "../assets/images/products/DoorHandleTags.jpg";
+import giftEnvelops from "../assets/images/products/Gift-Envelops.jpg";
+import giftStickers from "../assets/images/products/Gift-Stickers.jpg";
+import gifttags from "../assets/images/products/Gift-Tags.png";
+import luggageTags from "../assets/images/products/Luggage-Tags.jpg";
+import miniCalendars from "../assets/images/products/Mini-Calendars.jpg";
+import newsPaper from "../assets/images/products/NewsPaper-Invites.jpg";
+import passport from "../assets/images/products/Passport-Invites.jpeg";
+import photoMagnet from "../assets/images/products/Photo-magnet.jpg";
+import plannerBooks from "../assets/images/products/Planner-books.jpg";
+import playingcard from "../assets/images/products/Playing-cards.jpg";
+import poster from "../assets/images/products/Poster-calendars.png";
+import puzzleGames from "../assets/images/products/Puzzle-games.jpg";
+import table from "../assets/images/products/Table-itinerary.jpg";
+import thankyou from "../assets/images/products/Thankyou.jpg";
+import vintage from "../assets/images/products/Vintage.png";
+import wall from "../assets/images/products/Wall-calendars.jpg";
+import wedBadges from "../assets/images/products/Wedding-badges.jpg";
+import wedBooks from "../assets/images/products/Wedding-books.jpeg";
+import wedNews from "../assets/images/products/Wedding-newspaper.jpg";
+import wedNote from "../assets/images/products/Wedding-notepad.jpeg";
+
+const productItems = [
+  {
+    name: "ATM Pass Invites",
+    imgUrl: atmPass,
+  },
+  {
+    name: "Coasters",
+    imgUrl: coasters,
+  },
+  {
+    name: "Dining Mats",
+    imgUrl: diningmats,
+  },
+  {
+    name: "Door Handle Tags",
+    imgUrl: door,
+  },
+  {
+    name: "Gift Envelopes",
+    imgUrl: giftEnvelops,
+  },
+  {
+    name: "Gift Stickers",
+    imgUrl: giftStickers,
+  },
+  {
+    name: "Gift Tags",
+    imgUrl: gifttags,
+  },
+  {
+    name: "Luggage Tags",
+    imgUrl: luggageTags,
+  },
+  {
+    name: "Mini Calendars",
+    imgUrl: miniCalendars,
+  },
+  {
+    name: "Newspaper Invites",
+    imgUrl: newsPaper,
+  },
+  {
+    name: "Passport Invites",
+    imgUrl: passport,
+  },
+  {
+    name: "Photo Magnet",
+    imgUrl: photoMagnet,
+  },
+  {
+    name: "Planner Books",
+    imgUrl: plannerBooks,
+  },
+  {
+    name: "Playing Cards",
+    imgUrl: playingcard,
+  },
+  {
+    name: "Poster Calendars",
+    imgUrl: poster,
+  },
+  {
+    name: "Puzzle Games",
+    imgUrl: puzzleGames,
+  },
+  {
+    name: "Table Itinerary",
+    imgUrl: table,
+  },
+  {
+    name: "Thank You Cards",
+    imgUrl: thankyou,
+  },
+  {
+    name: "Vintage Invites",
+    imgUrl: vintage,
+  },
+  {
+    name: "Wall Calenders",
+    imgUrl: wall,
+  },
+  {
+    name: "Wedding Badges",
+    imgUrl: wedBadges,
+  },
+  {
+    name: "Wedding Newspaper",
+    imgUrl: wedNews,
+  },
+  {
+    name: "Wedding Notepad",
+    imgUrl: wedNote,
+  },
+  {
+    name: "Wedding Photo Books",
+    imgUrl: wedBooks,
+  },
+];
 
 export default function FeaturedProducts() {
   const { products } = useSelector((state) => state.product);
@@ -27,15 +151,15 @@ export default function FeaturedProducts() {
     swipeToSlide: true,
     infinite: true, // Infinite scrolling to create a continuous loop
     speed: 500, // Very slow transition speed for each slide (7 seconds)
-    slidesToShow: 5,
+    slidesToShow: 6,
     slidesToScroll: 3, // Scroll 4 slides at a time for manual navigation
-    autoplay: false, 
+    autoplay: false,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 5,
           slidesToScroll: 3,
           infinite: true,
           dots: true,
@@ -67,25 +191,24 @@ export default function FeaturedProducts() {
           dots: false,
         },
       },
-     
     ],
   };
 
   return (
-    <section className="py-16 lg:pt-1 lg:pb-8 px-4 lg:px-8">
+    <section className="py-16 lg:pt-1 lg:pb-8 px-4 md:px-8 lg:px-8 bg-pink-200">
       <div className="container mx-auto gap-8">
         {/* Heading with animation and font-family */}
         <div className="my-4">
-          <h2
-            className="lg:text-5xl text-4xl text-secondary text-center font-avalonB md:text-5xl mb-4 transition-opacity duration-700 opacity-100"
-          >
+          <h2 className="lg:text-5xl text-4xl text-secondary text-center font-avalonB md:text-5xl mb-4 transition-opacity duration-700 opacity-100">
             Customer Favorites
           </h2>
-          <h3 className="lg:text-4xl text-2xl text-secondary text-center font-avalonN">Top Picks Chosen by Our Happy Customers</h3>
+          <h3 className="lg:text-4xl text-2xl text-secondary text-center font-avalonN">
+            Top Picks Chosen by Our Happy Customers
+          </h3>
         </div>
 
         {/* Slider */}
-        <div className="slider-container mx-4 relative">
+        <div className="slider-container mx-8 relative">
           <style>
             {`
             .slick-slide {
@@ -142,7 +265,7 @@ export default function FeaturedProducts() {
 
           {/* Slider Content */}
           <Slider {...settings} ref={sliderRef}>
-            {products?.slice(25, 35).map((product, index) => (
+            {/* {products?.slice(25, 35).map((product, index) => (
               <div
                 key={index}
                 className="bg-white lg:h-[340px] rounded-lg hover:scale-105 transition duration-300 ease-in-out"
@@ -195,6 +318,22 @@ export default function FeaturedProducts() {
                   </div>
                   </div>
                 </Link>
+              </div>
+            ))} */}
+            {productItems.map((item) => (
+              <div className="">
+                <img className="rounded-2xl" src={item.imgUrl} alt="" />
+                <div className="py-2 space-y-2">
+                  <h1 className="font-avalonB text-xl text-secondary text-center">
+                    {item.name}
+                  </h1>
+                  <div className="relative flex items-center justify-center">
+                    <img className="h-6" src={button} alt="" />
+                    <a href="#" className="absolute text-white font-avalonB">
+                      Shop Now
+                    </a>
+                  </div>
+                </div>
               </div>
             ))}
           </Slider>

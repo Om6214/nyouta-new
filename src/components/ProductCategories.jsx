@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 export default function TopCategories() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
+  console.log("producs",products);
   useEffect(() => {
     if (!products.length) {
       dispatch(getProducts());
@@ -301,36 +302,36 @@ export default function TopCategories() {
   console.log(products);
   // Filter Logic
 
-  const filteredProducts = products?.filter((product) => {
-    // If both searchTerm and category have no meaningful values, return all products
-    if (!searchTerm && (category === "All" || !category)) {
-      return true; // Include all products
-    }
+ const filteredProducts = products?.filter((product) => {
+  // Matches the main category
+  const matchesCategory =
+    !selectedOptions.main || product.category === selectedOptions.main;
 
-    const matchesCategory =
-      (!selectedOptions.main || product?.category === selectedOptions.main) &&
-      (!category || category === "All" || product?.category === category);
+  // Matches the sub-category
+  const matchesSubCategory =
+    !selectedOptions.sub || product.subCategory === selectedOptions.sub;
 
-    const matchesSubCategory =
-      !selectedOptions.sub || product?.subCategory === selectedOptions.sub;
+  // Matches the sub-sub-category
+  const matchesSubSubCategory =
+    !selectedOptions.subSub || product.subSubCategory === selectedOptions.subSub;
 
-    const matchesSubSubCategory =
-      !selectedOptions.subSub ||
-      product?.subSubCategory === selectedOptions.subSub;
+  // Matches the price filter
+  const matchesPrice = product.price <= priceFilter;
 
-    const matchesPrice = product?.price <= priceFilter;
+  // Matches the search term
+  const matchesSearchTerm =
+    !searchTerm ||
+    product.name?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesSearchTerm =
-      !searchTerm ||
-      product?.name?.toLowerCase().includes(searchTerm.toLowerCase());
-    return (
-      matchesCategory &&
-      matchesSubCategory &&
-      matchesSubSubCategory &&
-      matchesPrice &&
-      matchesSearchTerm
-    );
-  });
+  return (
+    matchesCategory &&
+    matchesSubCategory &&
+    matchesSubSubCategory &&
+    matchesPrice &&
+    matchesSearchTerm
+  );
+});
+
 
   return (
     <section className="py-16 px-4 bg-priBg">
@@ -441,9 +442,9 @@ export default function TopCategories() {
                     to={`/product/${product?._id}`}
                     key={product?._id}
                     state={{ product }} // Pass product data
-                    className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group"
+                    className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group border border-gray-400"
                   >
-                    <div className="relative w-full aspect-square mb-3">
+                    <div className="relative w-full aspect-square mb-3  ">
                       <img
                         src={product?.image[0]}
                         alt={product?.name}

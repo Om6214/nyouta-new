@@ -1,9 +1,13 @@
 import React from "react";
-import giftCard from "../assets/images/featured/gift.jpg";
-import greetingCard from "../assets/images/featured/greeting.jpg";
-import luggageCard from "../assets/images/featured/luggage.jpg";
-import roomCard from "../assets/images/featured/room.jpg";
-import thankyouCard from "../assets/images/featured/thankyou.jpg";
+import checkIn from "../assets/images/decor/Check-in.jpeg";
+import coasters from "../assets/images/decor/Coasters.jpg";
+import dining from "../assets/images/decor/DinningMat.png";
+import roomHandle from "../assets/images/decor/Roomhandle.jpg";
+import roomItinerary from "../assets/images/decor/Roomit.jpeg";
+import roomKey from "../assets/images/decor/Roomkey.jpeg";
+import tableIt from "../assets/images/decor/Tableit.jpeg";
+import tableMenu from "../assets/images/decor/Tablemenu.png";
+import thankCard from "../assets/images/decor/Thankyou.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,33 +16,40 @@ import buttonBg from "../assets/images/08.png";
 const items = [
   {
     name: "Room Itinerary",
-    imgURL: roomCard,
+    imgURL: roomItinerary,
   },
   {
-    name: "Thank You Cards",
-    imgURL: thankyouCard,
+    name: "Coasters",
+    imgURL: coasters,
   },
   {
     name: "Table Itinerary",
-    imgURL:
-      "https://img.freepik.com/free-photo/christmas-composition-with-present-pine-cones_23-2147712286.jpg?t=st=1736938319~exp=1736941919~hmac=efcaeb30ac0edf373299ad90a59e671fd516ca490be1835c87db39da64177336&w=996",
+    imgURL: tableIt
   },
   {
-    name: "Gift Stickers",
-    imgURL: giftCard,
+    name: "Room Handle Tags",
+    imgURL: roomHandle,
   },
   {
-    name: "Luggage Tags",
-    imgURL: luggageCard,
+    name: "Dining Mats",
+    imgURL: dining,
   },
   {
-    name: "Event Cards",
-    imgURL:
-      "https://img.freepik.com/free-photo/top-view-amazing-flowers-such-as-lilac-roses-daisy-with-white-gift-box-wooden-background_141793-51743.jpg?t=st=1736938400~exp=1736942000~hmac=371d335b3131968cb66a5c8d9e0cfba3b8bb3f3b21c5badf651194f917fafae8&w=996",
+    name: "Check-In Itinerary",
+    imgURL: checkIn
+      
   },
   {
-    name: "Greetings",
-    imgURL: greetingCard,
+    name: "Room Keys",
+    imgURL: roomKey,
+  },
+  {
+    name: "Table Menu",
+    imgURL: tableMenu,
+  },
+  {
+    name: "Thank You Cards",
+    imgURL: thankCard,
   },
 ];
 
@@ -99,16 +110,17 @@ const CategoryFeat = () => {
           <Slider {...settings}>
             {items.map((item) => (
               <div>
-                <div className="flex flex-col items-center bg-blue-100 rounded-2xl">
+                <div className="flex flex-col space-y-2 items-center rounded-2xl">
                   <img
-                    className="h-40 object-cover w-full rounded-t-2xl"
+                    className="border-2 border-pink-500 rounded-xl"
                     src={item.imgURL}
                     alt=""
                   />
-                  <div className="relative flex flex-col items-center py-3 hover:translate-x-2 duration-300">
+                  <h1 className="text-secondary font-avalonB">{item.name}</h1>
+                  <div className="relative flex flex-col items-center hover:translate-x-2 duration-300">
                     <img className="h-6" src={buttonBg} alt="" />
                     <button className="text-md font-semibold  text-white absolute">
-                      {item.name}
+                     Shop Now
                     </button>
                   </div>
                 </div>

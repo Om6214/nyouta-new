@@ -162,27 +162,27 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wedding Management",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // Example image
       },
       {
         subTitle: "Guest Management",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+        imgUrl: "https://i.postimg.cc/jjw6mny1/Template-1.jpg", // Example image
       },
       {
         subTitle: "Wedding Notepad (Liner)",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+        imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847474/ejfowniluyydeqncdllk.jpg", // Example image
       },
       {
         subTitle: "Wedding Notepad (Photo)",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737117643/dvamzguzug7ln0e9klqt.jpg", // Example image
       },
       {
         subTitle: "Guest List Booklet",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737118253/tnjlkyq36ipgxcsmwsfc.jpg", // Example image
       },
       {
         subTitle: "Free Printables",
-        imgUrl: "https://imagizer.imageshack.com/img922/8871/js4uRU.jpg", // Example image
+        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737117907/zbb7kdai0zc1et7o1qn4.jpg", // Example image
       },
     ],
   },

@@ -202,7 +202,7 @@ export default function LoginRegister(){
     >
       {/* Sign Up Section */}
       <div
-        className={`absolute top-0 left-0 h-full w-1/2 p-12 flex flex-col items-center justify-center transition-transform duration-500 ${
+        className={`absolute top-0 left-0 h-full w-1/2 p-4 sm:p-12 flex flex-col items-center justify-center transition-transform duration-500 ${
           isRightPanelActive ? "translate-x-full opacity-100 z-10" : "opacity-0 z-0"
         }`}
       >
@@ -315,7 +315,7 @@ export default function LoginRegister(){
 
       {/* Sign In Section */}
       <div
-        className={`absolute top-0 left-0 h-full w-1/2 p-12 flex flex-col items-center justify-center transition-transform duration-500 ${
+        className={`absolute top-0 left-0 h-full w-1/2 p-4 sm:p-12 flex flex-col items-center justify-center transition-transform duration-500 ${
           isRightPanelActive ? "-translate-x-full opacity-0 z-0" : "opacity-100 z-10"
         }`}
       >
@@ -392,7 +392,7 @@ export default function LoginRegister(){
       >
         <div className="absolute inset-0 bg-gradient-to-r from-yellow-700 to-yellow-500 flex">
           <div
-            className={`absolute top-0 left-0 h-full  flex flex-col items-center justify-center p-10 transition-transform duration-500 ${
+            className={`absolute top-0 left-0 h-full  flex flex-col items-center justify-center p-6 sm:p-10 transition-transform duration-500 ${
               isRightPanelActive ? "translate-x-0" : "-translate-x-full"
             }`}
           >
