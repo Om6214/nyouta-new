@@ -5,6 +5,12 @@ import vinvite from "../assets/images/v-invite.webp";
 import welcome from "../assets/images/welcome sign.webp";
 import { motion, useInView } from "framer-motion";
 import btnBg from "../assets/images/08.png";
+import guestPlan from "../assets/images/stressfree/guestplan.jpeg";
+import wedPlan from "../assets/images/stressfree/wedplan.jpg";
+import guestList from "../assets/images/stressfree/guestlist.jpg";
+import pdfPrint from "../assets/images/stressfree/checklist.jpg";
+import wedNote from "../assets/images/stressfree/wednoteliner.jpg";
+import wedPhoto from "../assets/images/stressfree/wednotephoto.jpeg";
 
 const categories = [
   {
@@ -162,27 +168,33 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wedding Management",
-        imgUrl: "https://imagizer.imageshack.com/img923/1097/0Gyp7f.jpg", // Example image
+        imgUrl: wedPlan, // Example image
+        url: '/e/nav/planner%20books/Planner%20Books/Wedding%20Management'
       },
       {
         subTitle: "Guest Management",
-        imgUrl: "https://i.postimg.cc/jjw6mny1/Template-1.jpg", // Example image
+        imgUrl: guestPlan, // Example image
+        url: '/e/nav/planner%20books/Planner%20Books/Guest%20Management'
       },
       {
         subTitle: "Wedding Notepad (Liner)",
-        imgUrl: "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847474/ejfowniluyydeqncdllk.jpg", // Example image
+        imgUrl: wedNote, // Example image
+        url: '/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Linear)'
       },
       {
         subTitle: "Wedding Notepad (Photo)",
-        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737117643/dvamzguzug7ln0e9klqt.jpg", // Example image
+        imgUrl: wedPhoto, // Example image
+        url: '/e/nav/planner%20books/Planner%20Books/Wedding%20Notepad%20(Photo)'
       },
       {
         subTitle: "Guest List Booklet",
-        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737118253/tnjlkyq36ipgxcsmwsfc.jpg", // Example image
+        imgUrl: guestList, // Example image
+        url: '/e/nav/planner%20books/Planner%20Books/Guest%20List%20Booklet%20-%20Best%20Seller'
       },
       {
         subTitle: "Free Printables",
-        imgUrl: "https://res.cloudinary.com/dybuuoqdo/image/upload/v1737117907/zbb7kdai0zc1et7o1qn4.jpg", // Example image
+        imgUrl: pdfPrint, // Example image
+        url: '/nav/planner%20books/Free%20Printable'
       },
     ],
   },
@@ -315,7 +327,7 @@ const CategoryCard = () => {
                       </a>
                     </div>
                   </div>
-                  <h1 className="text-md font-heroFont font-semibold text-center text-gray-800 py-1">
+                  <h1 className="text-md font-avalonN font-semibold text-center text-gray-800 py-1">
                     {sub.subTitle}
                   </h1>
                 </motion.div>
