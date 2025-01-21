@@ -410,7 +410,7 @@ const CategoriesNavBar = () => {
         {
           subTitle: "Thanks Greeting",
           imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
-          url: "e/nav/Free Greetings/Free Greetings/Wishes Greeting",
+          url: "e/nav/Free Greetings/Free Greetings/Thanks Greeting",
         },
         {
           subTitle: "Feeling Greetings",
@@ -672,6 +672,7 @@ const CategoriesNavBar = () => {
                     "Photo Books",
                     "Print Invitations",
                     "Itinerary",
+                    "E Invitations",
                     "Calendars 2025",
                     "Guest Surprising",
                     "E-Shop",
@@ -688,6 +689,7 @@ const CategoriesNavBar = () => {
                   {[
                     "Photo Books",
                     "Print Invitations",
+                    "E Invitations",
                     "Itinerary",
                     "Calendars 2025",
                     "Guest Surprising",
