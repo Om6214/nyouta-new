@@ -299,7 +299,6 @@ export default function TopCategories() {
   const params = new URLSearchParams(location.search);
   const searchTerm = params.get("term") || "";
   const category = params.get("category") || "All";
-  console.log(products);
   // Filter Logic
 
  const filteredProducts = products?.filter((product) => {
