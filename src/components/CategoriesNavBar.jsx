@@ -739,32 +739,32 @@ const CategoriesNavBar = () => {
 
       <div>
         <div id="section4">
-          <div className="px-[6%] pt-[1%] py-6  text-gray-800">
+          <div className="px-16 py-8  text-gray-800">
             <section className="mb-6">
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3 ">
                 About Our Personalised {DetailContent.Title}
               </h2>
-              <p className="text-lg leading-relaxed">
+              <p className="text-lg font-avalonN leading-relaxed">
                 {DetailContent.Description}
               </p>
             </section>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3">
                 Details for {DetailContent.Title}
               </h2>
-              <p className="text-lg leading-relaxed">
+              <p className="text-lg font-avalonN leading-relaxed">
                 {DetailContent.Details1}
               </p>
             </section>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3">
                 Features of Our Variety of {DetailContent.Title}
               </h2>
               <ul className="list-disc list-inside text-lg leading-relaxed">
                 {DetailContent.Details2.map((item, index) => (
-                  <li key={index} className="text-lg leading-relaxed">
+                  <li key={index} className="text-lg font-avalonN leading-relaxed">
                     {item}
                   </li>
                 ))}
@@ -772,10 +772,10 @@ const CategoriesNavBar = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3">
                 {DetailContent.Title} Are Best Suited
               </h2>
-              <ul className="list-disc list-inside text-lg leading-relaxed">
+              <ul className="list-disc list-inside text-lg font-avalonN leading-relaxed">
                 <li>{DetailContent.Details3}</li>
               </ul>
             </section>
