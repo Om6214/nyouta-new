@@ -414,7 +414,7 @@ export default function CategoryFilterLabel() {
                     key={index}
                     to={`/edit/${filteredItems[0].category}/${item.subSubCategory}`}
                     state={{ image: item.image[0], ider: item._id }}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
+                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
                   >
                     <div className="relative w-full h-[30vh]">
                       <img
@@ -423,8 +423,8 @@ export default function CategoryFilterLabel() {
                         className="absolute inset-0 w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-4 text-center">
-                      <h2 className="text-lg font-bold text-gray-800">
+                    <div className="px-1 flex justify-center h-14 items-center text-center">
+                      <h2 className="text-lg font-avalonB text-gray-800">
                         {item.name}
                       </h2>
                     </div>
