@@ -31,6 +31,7 @@ export default function CategoryFilterLabel() {
       const url = "https://nyouta.onrender.com/api/v1/products/products";
       try {
         const response = await axios.get(url);
+        
         setResponseData(response.data);
         setLoading(false);
         // console.log(responseData)
@@ -88,9 +89,11 @@ export default function CategoryFilterLabel() {
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
 
+  console.log(formattedPageName, formattedPath);
   console.log(ProductJson);
+  
 
-  const filteredItems = ProductJson.filter((item) => {
+  const filteredItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
     const subCategoryMatch =
