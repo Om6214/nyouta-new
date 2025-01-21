@@ -94,7 +94,7 @@ export default function CategoryFilterLabel() {
 
   console.log(ProductJson);
 
-  const filteredItems = ProductJson.filter((item) => {
+  const filteredItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
     const subCategoryMatch =
