@@ -308,7 +308,7 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      {filteredItems[0].category === "Planner Books" ? (
+      {filteredItems[0]?.category === "Planner Books" ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
           <div className="col-span-1 hidden md:block space-y-2">
