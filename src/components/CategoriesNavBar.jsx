@@ -12,6 +12,13 @@ import i4 from "../assets/images/Navbar_Planner_Header/04.jpg";
 import i5 from "../assets/images/Navbar_Planner_Header/05.jpg";
 import i6 from "../assets/images/Navbar_Planner_Header/06.jpg";
 
+import guestPlan from "../assets/images/stressfree/guestplan.jpeg";
+import wedPlan from "../assets/images/stressfree/wedplan.jpg";
+import guestList from "../assets/images/stressfree/guestlist.jpg";
+import pdfPrint from "../assets/images/stressfree/checklist.jpg";
+import wedNote from "../assets/images/stressfree/wednoteliner.jpg";
+import wedPhoto from "../assets/images/stressfree/wednotephoto.jpeg";
+
 const CategoriesNavBar = () => {
   const { pageName } = useParams();
 
@@ -456,38 +463,32 @@ const CategoriesNavBar = () => {
       subCategory: [
         {
           subTitle: "Wedding Management",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847773/phewexsfhaijro3dzxd8.jpg", // Example image
+          imgUrl: wedPlan, // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Management",
         },
         {
           subTitle: "Guest Management",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847362/n2ppyskd7modih1qznm3.jpg", // Example image
+          imgUrl: guestPlan, // Example image
           url: "e/nav/Planner Books/Planner Books/Guest Management",
         },
         {
           subTitle: "Wedding Notepad (Liner)",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
+          imgUrl: wedNote, // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Notepad(liner)",
         },
         {
           subTitle: "Wedding Notepad (Photo)",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
+          imgUrl: wedPhoto, // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Notepad(photo)",
         },
         {
           subTitle: "Guest List Booklet - Best Seller",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848346/quntb8uznw1eg81xkrff.jpg", // Example image
+          imgUrl: guestList, // Example image
           url: "e/nav/Planner Books/Planner Books/Guest List Booklet - Best Seller",
         },
         {
           subTitle: "Free Printables",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848578/uenbld7atg2lqufivgyc.jpg", // Example image
+          imgUrl: pdfPrint, // Example image
           url: "e/nav/planner books/Free Printable/Wedding Guest List-PDF",
         },
       ],
@@ -661,7 +662,7 @@ const CategoriesNavBar = () => {
           <div className="font-semibold text-[4vh]">Categories</div>
 
           <div className="pt-5 md:max-w-[95%] mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {content.subCategory.map((item) => (
                 <div
                   className="relative block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
@@ -703,7 +704,7 @@ const CategoriesNavBar = () => {
                         className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
                       />
                       <div className="px-4 h-[10%] w-full flex justify-center items-center">
-                        <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
+                        <h2 className="text-lg sm:text-md font-avalonB px-2 py-2">
                           {item.subTitle.length > 21
                             ? `${item.subTitle.slice(0, 21)}...`
                             : item.subTitle}
@@ -719,10 +720,11 @@ const CategoriesNavBar = () => {
                           className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
                         />
                         <div className="px-4 h-[10%] w-full flex justify-center items-center">
-                          <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
-                            {item.subTitle.length > 21
+                          <h2 className="text-lg sm:text-md text-center leading-tight font-avalonB py-1">
+                            {/* {item.subTitle.length > 21
                               ? `${item.subTitle.slice(0, 21)}...`
-                              : item.subTitle}
+                              : item.subTitle} */}
+                              {item.subTitle}
                           </h2>
                         </div>
                       </div>
