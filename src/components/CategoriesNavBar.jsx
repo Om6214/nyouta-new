@@ -19,6 +19,11 @@ import pdfPrint from "../assets/images/stressfree/checklist.jpg";
 import wedNote from "../assets/images/stressfree/wednoteliner.jpg";
 import wedPhoto from "../assets/images/stressfree/wednotephoto.jpeg";
 
+import wishes from "../assets/images/wishes/wish.jpg";
+import thanks from "../assets/images/wishes/thank.jpg";
+import feeling from "../assets/images/wishes/feeling.jpg";
+import funny from "../assets/images/wishes/funny.jpg";
+
 const CategoriesNavBar = () => {
   const { pageName } = useParams();
 
@@ -411,22 +416,22 @@ const CategoriesNavBar = () => {
       subCategory: [
         {
           subTitle: "Wishes Greeting",
-          imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+          imgUrl: wishes, // Example image
           url: "e/navbar/Free Greetings/Free Greetings/Wishes Greeting",
         },
         {
           subTitle: "Thanks Greeting",
-          imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+          imgUrl: thanks, // Example image
           url: "e/navbar/Free Greetings/Free Greetings/Thanks Greeting",
         },
         {
           subTitle: "Feeling Greetings",
-          imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+          imgUrl: feeling, // Example image
           url: "e/navbar/Free Greetings/Free Greetings/Feeling Greetings",
         },
         {
           subTitle: "Funny Greeting",
-          imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+          imgUrl: funny, // Example image
           url: "e/navbar/Free Greetings/Free Greetings/Funny Greeting",
         },
       ],
@@ -570,7 +575,7 @@ const CategoriesNavBar = () => {
                   {content.title}
                 </h1>
                 <h2 className="font-avalonN text-xl">{content.slang}</h2>
-                <p className="text-[#7f8c8d] font-medium text-[3vw] md:text-[15px] mt-4 leading-relaxed">
+                <p className="text-[#7f8c8d] font-avalonB text-[3vw] md:text-[15px] leading-tight">
                   {content.Description1}
                 </p>
               </div>
