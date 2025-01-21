@@ -37,6 +37,7 @@ import PdfGeneratorWaterMark from './pages/PdfGeneratorWaterMark';
 import PhotoBook from './components/PhotoBook';
 import ItineraryCompo from './components/ItineraryCompo';
 import DesignEdit from './components/DesignEdit';
+import FreeGreetingsFilter from "./components/FreeGreetingFilter"
 
 
 // gaganluthrasirji
@@ -65,6 +66,7 @@ function App() {
           <Route path="/nav/:pageName" element={<CategoriesNavBar />} />
           <Route path="/nav/:pageName/*" element={<CategoryLabel />} />
           <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
+          <Route path="/e/navbar/:pageName/:pagid/*" element={<FreeGreetingsFilter />} />
           <Route path='/edit/PhotoBook/:id' element={<PhotoBook />} />
           
           <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
