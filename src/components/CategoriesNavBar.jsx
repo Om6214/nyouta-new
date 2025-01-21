@@ -672,6 +672,7 @@ const CategoriesNavBar = () => {
                     "Photo Books",
                     "Print Invitations",
                     "Itinerary",
+                    "E Invitations",
                     "Calendars 2025",
                     "Guest Surprising",
                     "E-Shop",
@@ -688,6 +689,7 @@ const CategoriesNavBar = () => {
                   {[
                     "Photo Books",
                     "Print Invitations",
+                    "E Invitations",
                     "Itinerary",
                     "Calendars 2025",
                     "Guest Surprising",
