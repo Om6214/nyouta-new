@@ -122,7 +122,7 @@ export default function Login() {
             </div>
           </div>
 
-          {error && <p className="text-red-500 text-xs italic">{error}</p>}
+          {error && <p className="text-red-600 text-xs italic">{error}</p>}
 
           {/* <div className="flex items-center justify-between">
             <div className="flex items-center">
