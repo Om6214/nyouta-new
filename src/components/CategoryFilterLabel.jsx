@@ -77,7 +77,6 @@ export default function CategoryFilterLabel() {
       </div>
     );
   }
-  
 
   const formatCategoryName = (name) => name;
   const formatSubCategoryName = (name) => decodeURIComponent(name);
@@ -88,20 +87,27 @@ export default function CategoryFilterLabel() {
 
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
+  console.log(formattedPageName);
+  console.log(formattedPath);
+  // console.log(ProductJson);
 
-  console.log(ProductJson);
-
-  const filteredItems = ProductJson.filter((item) => {
+  const filteredItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
     const subCategoryMatch =
       item.subCategory.toLowerCase() === pagid.toLowerCase();
     const subSubCategoryMatch =
       item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
+      console.log({
+        item,
+        categoryMatch,
+        subCategoryMatch,
+        subSubCategoryMatch,
+      });
     return categoryMatch && subCategoryMatch && subSubCategoryMatch;
   });
 
-  const RelatedItems = ProductJson.filter((item) => {
+  const RelatedItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
 

@@ -1973,7 +1973,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Wishes Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Wishes to New Wed"
   },
   {
@@ -1987,7 +1987,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Wishes Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Engagement Wishes"
   },
   {
@@ -2001,7 +2001,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Wishes Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Anniversary Wishes"
   },
   {
@@ -2015,8 +2015,8 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Wishes Greeting",
-    "subSubCategory": "Birthday Wishes"
+    "subCategory": "Free Greetings",
+    "subSubCategory": "Wishes Greeting"
   },
   {
     "id": "143",
@@ -2029,7 +2029,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Wishes Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Retirement Wishes"
   },
   {
@@ -2043,7 +2043,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Wishes Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "General Wishes"
   },
   {
@@ -2057,7 +2057,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Thanks Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Thanks to Invitor"
   },
 
@@ -2072,7 +2072,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Thanks Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Thanks to Guests"
   },
   {
@@ -2086,7 +2086,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Thanks Greeting",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Thanks for Wishes"
   },
   {
@@ -2100,8 +2100,8 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Thanks Greeting",
-    "subSubCategory": "General Greetings"
+    "subCategory": "Free Greetings",
+    "subSubCategory": "Thanks Greeting"
   },
 
   {
@@ -2115,8 +2115,8 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Feeling Greetings",
-    "subSubCategory": "Love Cards"
+    "subCategory": "Free Greetings",
+    "subSubCategory": "Feeling Greetings"
   },
 
   {
@@ -2130,7 +2130,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Feeling Greetings",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Sorry Cards"
   },
 
@@ -2145,7 +2145,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Feeling Greetings",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Congrats Cards"
   },
 
@@ -2160,7 +2160,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Feeling Greetings",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Miss you Card"
   },
   {
@@ -2174,7 +2174,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Feeling Greetings",
+    "subCategory": "Free Greetings",
     "subSubCategory": "Good Luck Cards"
   },
   {
@@ -2188,7 +2188,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Funny Greetings",
+    "subCategory": "Free Greetings",
     "subSubCategory": "For Wedding"
   },
   {
@@ -2202,8 +2202,8 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Funny Greetings",
-    "subSubCategory": "For Anniversary"
+    "subCategory": "Free Greetings",
+    "subSubCategory": "Funny Greeting"
   },
   {
     "id": "156",
@@ -2216,7 +2216,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Funny Greetings",
+    "subCategory": "Free Greetings",
     "subSubCategory": "For Party"
   },
   {
@@ -2230,7 +2230,7 @@
     "price": 129.99,
     "tags": ["planner", "ultimate", "wedding"],
     "category": "Free Greetings",
-    "subCategory": "Funny Greetings",
+    "subCategory": "Free Greetings",
     "subSubCategory": "General Greetings"
   }
 

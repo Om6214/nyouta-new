@@ -69,6 +69,7 @@ function App() {
           
           <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
           <Route path='/edit/Planner Books/:pageid' element={<DesignEdit />} />
+          <Route path='/edit/Free Greetings/:pageid' element={<DesignEdit />} />
 
 
           <Route path="/checkout" element={<Checkout />} />
