@@ -28,12 +28,10 @@ export default function DesignEdit() {
   // Fetch products from API
   useEffect(() => {
     async function fetchProducts() {
-      const url = "https://nyouta.onrender.com/api/v1/products/products";
+      const url = `${BASE_URL}/v1/products/products`;
       try {
         const response = await axios.get(url);
         setResponseData(response.data);
-        
-
         // Filter for the matching product
         const matchedProduct = response.data.find(
           (item) => item._id === state?.ider
