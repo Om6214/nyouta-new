@@ -15,6 +15,7 @@ import logo from "../assets/images/nyouta-logo2.jpg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Store/slices/authSlice";
+import Slider from "react-slick";
 
 const navItems = [
   {
@@ -359,6 +360,7 @@ const navItems = [
     children: [
       {
         label: "Wishes Greeting",
+        url:'',
         Filters: [
           { a: "Wishes to New Wed" },
           { a: "Engagement Wishes" },
@@ -522,6 +524,17 @@ export default function MainNav() {
     dispatch(logout());
     setOpenDropdown(null);
     navigate("/login");
+  };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear"
   };
   return (
     <div className="flex flex-col">
