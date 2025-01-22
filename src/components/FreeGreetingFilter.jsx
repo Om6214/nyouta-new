@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import ProductJson from "../products.json";
+// import ProductJson from "../products.json";
 import { Filter, X } from "lucide-react";
 
 export default function CategoryFilterLabel() {
@@ -115,6 +115,7 @@ export default function CategoryFilterLabel() {
 
     return categoryMatch && subCatego;
   });
+  console.log(RelatedItems)
 
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
@@ -377,8 +378,8 @@ export default function CategoryFilterLabel() {
               filteredResponseData.map((item, index) => (
                 <Link
                   key={index}
-                  to={`/edit/${filteredItems[0].category}/${item.subSubCategory}`}
-                  state={{ image: item.image[0], ider: item._id }}
+                  to={`/product/${item._id}`}
+                  state={{ image: item.image[0], id: item._id ,product:item}}
                   className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
                 >
                   <div className="relative w-full h-[30vh]">

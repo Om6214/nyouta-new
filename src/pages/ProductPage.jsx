@@ -7,7 +7,9 @@ import { toast } from "react-toastify";
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  console.log(state);
   const product = state?.product;
+  console.log(product);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -33,7 +35,7 @@ export default function ProductPage() {
 
   const handleAddtoCart = async () => {
     setAddToCartLoading(true);
-    await dispatch(addtoCart({ productId: id, quantity: quantity }));
+    dispatch(addtoCart({ productId: id, quantity: quantity }));
     dispatch(getCart());
     setAddToCartLoading(false);
   };

@@ -124,6 +124,12 @@ export default function CategoryFilterLabel() {
           state: { image: filteredItems[0].image[0] },
         });
       }
+      if (filteredItems[0].category === "Free Greetings") {
+        // Navigate to a different component with the image as state
+        navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, {
+          state: { image: filteredItems[0].image[0] },
+        });
+      }
       if (filteredItems[0].category === "Itinerary") {
         // Navigate to a different component with the image as state
         // console.log(filteredItems[0].image[1]);
@@ -183,7 +189,7 @@ export default function CategoryFilterLabel() {
 
   // console.log("filteredItems:", filteredItems);
   // console.log("filteredResponseData:", filteredResponseData);
-  console.log(filteredItems[0].category)
+  console.log(filteredItems[0].category);
 
   return (
     <>
@@ -307,7 +313,9 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      {["Planner Books","Free Greetings"].includes(filteredItems[0].category) ? (
+      {["Planner Books", "Free Greetings"].includes(
+        filteredItems[0].category
+      ) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
           <div className="col-span-1 hidden md:block space-y-2">
@@ -408,8 +416,12 @@ export default function CategoryFilterLabel() {
                 filteredResponseData.map((item, index) => (
                   <Link
                     key={index}
-                    to={`/edit/${filteredItems[0].category}/${item.subSubCategory}`}
-                    state={{ image: item.image[0], ider: item._id }}
+                    to={
+                      filteredItems[0].category === "Free Greetings"
+                        ? `/product/${item._id}`
+                        : `/edit/${filteredItems[0].category}/${item.subSubCategory}`
+                    }
+                    state={{ image: item.image[0], ider: item._id, product: item}}
                     className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
                   >
                     <div className="relative w-full h-[30vh]">

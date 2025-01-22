@@ -23,7 +23,7 @@ import { Download } from 'lucide-react';
 import { Rnd } from "react-rnd";
 import PdfGeneratorWaterMark from './PdfGeneratorWaterMark';
 
-export default function WeddingCardEditor() {
+export default function PDFCustomize() {
   //const [draggingField, setDraggingField] = useState(null); // Field being dragged
   const [touchOffset, setTouchOffset] = useState({ x: 0, y: 0 }); // Offset for touch
   const [selectedStickerId, setSelectedStickerId] = useState(null);
@@ -1355,7 +1355,7 @@ export default function WeddingCardEditor() {
 
         {
           isDownload && (
-            <div className="fixed inset-0  bg-opacity-50 z-50 flex items-center justify-center min-h-screen bg-gray-200">
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50  min-h-screen ">
               <div className="bg-white rounded-lg shadow-lg p-6 w-[400px] relative">
                 <div className="rounded-t-lg text-center text-white cover w-80 h-60 ml-4">
                   <img
