@@ -11,13 +11,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductJson from "../products.json";
 import { Filter, X } from "lucide-react";
+import weddingManagement from "../assets/video/productTitle/WeddingManagement.mp4";
+import GuestListBooklet from "../assets/video/productTitle/guestListBooklet.mp4";
+import guestManagement from "../assets/video/productTitle/GuestManagement.mp4";
+import weddingNotepadLiner from "../assets/video/productTitle/weddingNotepad(liner).mp4";
+import weddingNotepadPhoto from "../assets/video/productTitle/WeddingNotepad(photo).mp4";
 
 export default function CategoryFilterLabel() {
   const [showFilter, setShowFilter] = useState(false);
   const [loading, setLoading] = useState(true);
   const [responseData, setResponseData] = useState([]);
   const { pageName, pagid, "*": path } = useParams();
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("royal");
   const navigate = useNavigate();
   const relatedItemsRef = useRef(null);
   const [quantity, setQuantity] = useState(1);
@@ -194,130 +199,284 @@ export default function CategoryFilterLabel() {
   // console.log(filteredItems[0].category);
   console.log(RelatedItems);
 
+  const TitleProduct = {
+    WeddingManagement: {
+      productCategory: "Planner Book",
+      productSubCategory: "Planner Book",
+      productSubSubCategory: "Wedding Management",
+      productImages: [
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847404/r2rqqbdd2jlmd7ep5tme.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847431/hzvkypnvdbscbr3baxob.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847474/lsccahbuqfci6mwx12u1.jpg",
+      ],
+      productVideo: weddingManagement,
+      RoyalPrice: 2550,
+      popularPrice: 2150,
+      productOff: 15,
+      productSpecificationsRoyal: [
+        "Pages : 100 (200 Sides) Coloured",
+        "Paper & Size : A4 (210x297 mm*) 100 gsm",
+        "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind : Perfect Binding with Bookmarks",
+      ],
+      productSpecificationsPopular: [
+        "Pages : 100 (200 Sides) Coloured",
+        "Paper & Size : A4 (210x297 mm*) 100 gsm",
+        "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind : Perfect Binding with Bookmarks",
+      ],
+    },
+    GuestManagement: {
+      productCategory: "Planner Book",
+      productSubCategory: "Planner Book",
+      productSubSubCategory: "Guest Management ",
+      productImages: [
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847602/afnildotap0p1neupfnx.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847573/me1wozjqjxspxyotunms.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847663/duqm5add6bbvpxfldphp.jpg",
+      ],
+      productVideo: guestManagement,
+      RoyalPrice: 1599,
+      popularPrice: 1199,
+      productOff: 15,
+      productSpecificationsRoyal: [
+        "Pages : 75 (150 Sides) Coloured",
+        "Paper & Size : A4 (210x297 mm*) 100 gsm",
+        "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind : Perfect Binding with Bookmarks",
+      ],
+      productSpecificationsPopular: [
+        "	Pages : 75 (150 Sides) Coloured",
+        "Paper & Size : A4 (210x297 mm*) 100 gsm",
+        "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind : Perfect Binding with Bookmarks",
+      ],
+    },
+    GuestListBookletBestSeller: {
+      productCategory: "Planner Book",
+      productSubCategory: "Planner Book",
+      productSubSubCategory: "Guest List Booklet ",
+      productImages: [
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846638/trfoutxrkpwpys0kbdnl.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846910/pthblbjmd6itillfnby3.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847030/yvyq33is48bofze3hxly.jpg",
+      ],
+      productVideo: GuestListBooklet,
+      RoyalPrice: 1349,
+      popularPrice: 1099,
+      productOff: 15,
+      productSpecificationsRoyal: [
+        	"Pages : 50 (100 Sides) Coloured",
+	"Paper & Size : A4 (210x297 mm*) 100 gsm",
+	"Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+	"Bind : Perfect Binding with Bookmarks"
+
+      ],
+      productSpecificationsPopular: [
+        	"Pages : 50 (100 Sides) B/W",
+	"Paper & Size : A4 (210x297 mm*) 70 gsm",
+	"Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+	"Bind : Perfect Binding with Bookmarks"
+
+      ],
+    },
+    WeddingNotepadLiner: {
+      productCategory: "Planner Book",
+      productSubCategory: "Planner Book",
+      productSubSubCategory: "Wedding Notepad Liner ",
+      productImages: [
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846638/trfoutxrkpwpys0kbdnl.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846910/pthblbjmd6itillfnby3.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847030/yvyq33is48bofze3hxly.jpg",
+      ],
+      productVideo: weddingNotepadLiner,
+      RoyalPrice: 649,
+      popularPrice: 389,
+      productOff: 15,
+      productSpecificationsRoyal: [
+        	"Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
+        "	Paper & Size : A5 (148x210 mm*) 70 gsm",
+        "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+        	"Bind : Perfect Binding"
+        
+      ],
+      productSpecificationsPopular: [
+        	"Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
+        "Paper & Size : A5 (148x210 mm*) 70 gsm",
+        	"Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind : Perfect Binding"
+        
+      ],
+    },
+    WeddingNotpadPhoto: {
+      productCategory: "Planner Book",
+      productSubCategory: "Planner Book",
+      productSubSubCategory: "Wedding Notepad photo ",
+      productImages: [
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846638/trfoutxrkpwpys0kbdnl.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846910/pthblbjmd6itillfnby3.jpg",
+        "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847030/yvyq33is48bofze3hxly.jpg",
+      ],
+      productVideo: weddingNotepadPhoto,
+      RoyalPrice: 749,
+      popularPrice: 499,
+      productOff: 15,
+      productSpecificationsRoyal: [
+        	"Pages : 25 (50 Sides) Coloured, Cover Photo on Both Side",
+	"Paper & Size : A5 (148x210 mm*) 70 gsm",
+	"Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+	"Bind : Perfect Binding"
+
+      ],
+      productSpecificationsPopular: [
+        	"Pages : 25 (50 Sides) B/W , Cover Photo on Both Side",
+        "Paper & Size : A5 (148x210 mm*) 70 gsm",
+        	"Cover : 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind : Perfect Binding"
+        
+      ],
+    },
+  };
+
+  const fetchvar = formattedPath
+    .replaceAll(" ", "")
+    .replaceAll("-", "")
+    .replaceAll("(", "")
+    .replaceAll(")", "");
+  const productData = TitleProduct[fetchvar];
+
   return (
     <>
-      {filteredItems?.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
-          <div className="mt-6">
-            <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
-              <Swiper
-                style={{
-                  "--swiper-navigation-color": "#000",
-                  "--swiper-pagination-color": "#000",
-                }}
-                zoom={true}
-                navigation={true}
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                modules={[Zoom, Navigation, Pagination, Autoplay]}
-                className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
-              >
-                {["Planner Books", "Free Greetings"].includes(
-                  filteredItems[0]?.category
-                )
-                  ? filteredResponseData.slice(0, 4).map((item, index) =>
-                      item?.image?.map((src, imgIndex) => (
-                        <SwiperSlide key={`${index}-${imgIndex}`}>
-                          <div className="swiper-zoom-container">
-                            <img
-                              src={src}
-                              alt={`Slide ${imgIndex + 1}`}
-                              className="object-cover w-full h-auto"
-                            />
-                          </div>
-                        </SwiperSlide>
-                      ))
-                    )
-                  : filteredItems[0]?.image?.map((src, index) => (
-                      <SwiperSlide key={index}>
-                        <div className="swiper-zoom-container">
-                          <img
-                            src={src}
-                            alt={`Slide ${index + 1}`}
-                            className="object-cover w-full h-auto"
-                          />
-                        </div>
-                      </SwiperSlide>
-                    ))}
-              </Swiper>
-            </div>
-          </div>
-          <div>
-            <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
-              <div className="mb-4">
-                <h1 className="text-3xl font-bold mb-2">
-                  {filteredItems[0].subSubCategory}
-                </h1>
-                <p className="text-lg text-gray-600">
-                  {filteredItems[0].category}
-                </p>
-                <p className="text-sm text-gray-500 mt-1">
-                  {filteredItems[0].subCategory},{" "}
-                  {filteredItems[0].subSubCategory}
-                </p>
-              </div>
-
-              <div className="border-t border-gray-300 mb-6"></div>
-
-              <div className="mb-6">
-                <p className="text-xl font-semibold text-gray-800 mb-1">
-                  {filteredItems[0].category === "Free Greetings"
-                    ? "Free"
-                    : `From ₹ ${filteredItems[0].price}`}
-                </p>
-
-                <p className="text-sm text-gray-600">
-                  Category: {filteredItems[0].category}
-                </p>
-                <p className="text-sm text-gray-500">
-                  Subcategory: {filteredItems[0].subCategory}
-                </p>
-                <p className="text-sm text-gray-500">
-                  SubSubCategory: {filteredItems[0].subSubCategory}
-                </p>
-              </div>
-
-              <button
-                ref={relatedItemsRef}
-                onClick={handleButtonClick}
-                className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
-              >
-                {["Planner Books", "Free Greetings"].includes(
-                  filteredItems[0].category
-                )
-                  ? "Choose Now"
-                  : "Add Now"}
-              </button>
-
-              {filteredItems.length > 0 &&
-              ["Planner Books", "Free Greetings"].includes(
-                filteredItems[0].category
-              ) ? (
-                <div className="mt-4">
-                  <h2 className="text-lg font-semibold mb-3">
-                    Product Specifications
-                  </h2>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-                    <li>Beautify your days with a planner that inspires.</li>
-                    <li>
-                      Express yourself with beautiful designs and personalized
-                      touches.
-                    </li>
-                    <li>High quality professional Planner Books.</li>
-                    {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
-                  </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
+        <div className="mt-6">
+          <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
+            <Swiper
+              style={{
+                "--swiper-navigation-color": "#000",
+                "--swiper-pagination-color": "#000",
+              }}
+              zoom={true}
+              navigation={true}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              modules={[Zoom, Navigation, Pagination, Autoplay]}
+              className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
+            >
+              {/* First Slide: Video */}
+              <SwiperSlide>
+                <div className="">
+                  <video
+                    src={productData.productVideo}
+                    autoPlay
+                    muted
+                    loop
+                    className="object-cover w-full h-auto rounded-lg"
+                  ></video>
                 </div>
-              ) : null}
+              </SwiperSlide>
+
+              {/* Additional Slides: Images */}
+              {productData.productImages &&
+                productData.productImages.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="swiper-zoom-container">
+                      <img
+                        src={image}
+                        alt={`Product Image ${index + 1}`}
+                        className="object-cover w-full h-auto rounded-lg"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          </div>
+        </div>
+        <div>
+          <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
+            <div className="mb-4">
+              <h1 className="text-3xl font-bold mb-2">
+                {productData.productSubSubCategory}
+              </h1>
+              <p className="text-lg text-gray-600">
+                {productData.productCategory}
+              </p>
+              <p className="text-sm text-gray-500 mt-1">
+                {productData.productSubCategory},{" "}
+                {productData.productSubSubCategory}
+              </p>
+            </div>
+
+            <div className="border-t border-gray-300 mb-6"></div>
+
+            <div className="flex gap-4 mb-4">
+              <div
+                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${
+                  filter === "royal"
+                    ? "bg-orange-500 text-white"
+                    : "bg-[#fff] border-2"
+                }`}
+                onClick={() => setFilter("royal")}
+              >
+                Royal
+              </div>
+              <div
+                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${
+                  filter === "popular"
+                    ? "bg-orange-500 text-white"
+                    : "bg-[#fff] border-2"
+                }`}
+                onClick={() => setFilter("popular")}
+              >
+                Popular
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-xl font-semibold text-gray-800 mb-1">
+                From Rs.
+                {filter === "royal"
+                  ? productData.RoyalPrice - (productData.popularPrice * productData.productOff) / 100
+                  : productData.popularPrice - (productData.popularPrice * productData.productOff) / 100} {" "}
+                  <span className="text-red-400 line-through text-[1.1rem] mx-2 ">{filter === "royal"
+                  ? productData.RoyalPrice
+                  : productData.popularPrice} </span>
+                <span className="text-green-400">
+                  {productData.productOff}%{" "}
+                </span>
+                Off
+              </p>
+            </div>
+
+            <button
+              ref={relatedItemsRef}
+              onClick={handleButtonClick}
+              className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+            >
+              Choose Now
+            </button>
+
+            <div className="mt-4">
+              <h2 className="text-lg font-semibold mb-3">
+                Product Specifications
+              </h2>
+              {filter === "royal" ? <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+                {productData.productSpecificationsRoyal.map((specification) => (
+                  <li>{specification}</li>
+                ))}
+
+                {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
+              </ul>:
+              <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+                {productData.productSpecificationsPopular.map((specification) => (
+                  <li>{specification}</li>
+                ))}
+
+                {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
+              </ul>}
             </div>
           </div>
         </div>
-      ) : (
-        <div className="p-8 text-center">
-          <h1 className="text-2xl font-semibold text-gray-700">
-            No products found for {formattedPageName} - {formattedPath}
-          </h1>
-        </div>
-      )}
+      </div>
 
       {["Planner Books"].includes(filteredItems[0].category) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
@@ -329,7 +488,7 @@ export default function CategoryFilterLabel() {
                 className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
                   filter === "all"
                 }`}
-                onClick={() => setFilter("all")}
+                // onClick={() => setFilter("all")}
               >
                 Clear all
               </button>
@@ -339,22 +498,17 @@ export default function CategoryFilterLabel() {
                 <h2 className="text-lg font-avalonB">Variations</h2>
               </div>
               <button
-                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 ${
-                  filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
+                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 bg-white
                 }`}
-                onClick={() => setFilter("royal")}
+                // onClick={() => setFilter("royal")}
               >
-                Royal
+                All Elegant
               </button>
               <button
-                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
-                  filter === "popular"
-                    ? "bg-orange-500 text-white"
-                    : "bg-[#fff] border-2"
-                }`}
-                onClick={() => setFilter("popular")}
+                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md bg-white`}
+                // onClick={() => setFilter("popular")}
               >
-                Popular
+                Floral
               </button>
             </div>
           </div>
