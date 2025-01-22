@@ -57,7 +57,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          {/* <Route path="/product/free-greetings/:id" element={< PDFCustomize/>} /> */}
           <Route path="/product/:id/edit-digital-card" element={<DigitalCardEditPage />} />
           <Route path="/login" element={<LoginRegister />} />
           <Route path="/register" element={<LoginRegister />} />
