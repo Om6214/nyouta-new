@@ -476,7 +476,7 @@ export default function CategoryFilterLabel() {
                     />
                   </div>
                   <div className="p-4 text-center">
-                    <h2 className="text-lg font-bold text-gray-800">
+                    <h2 className="text-lg font-bold text-gray-900">
                       {item.name}
                     </h2>
                   </div>
