@@ -296,15 +296,15 @@ export default function TopCategories() {
   };
 
   // Parse query parameters
-  const params = new URLSearchParams(location.search);
-  const searchTerm = params.get("term") || "";
-  const category = params.get("category") || "All";
-  // Filter Logic
+const params = new URLSearchParams(location.search);
+const searchTerm = params.get("term") || "";
+const category = params.get("category") || "All";
 
- const filteredProducts = products?.filter((product) => {
+// Filter Logic
+const filteredProducts = products?.filter((product) => {
   // Matches the main category
   const matchesCategory =
-    !selectedOptions.main || product.category === selectedOptions.main;
+    category === "All" || product.category === category;
 
   // Matches the sub-category
   const matchesSubCategory =
@@ -330,6 +330,7 @@ export default function TopCategories() {
     matchesSearchTerm
   );
 });
+
 
 
   return (
