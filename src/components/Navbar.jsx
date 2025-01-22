@@ -760,8 +760,7 @@ export default function MainNav() {
                             >
                               <Link
                                 to={
-                                  (item.url === "/nav/planner books" ||
-                                    item.url === "/nav/free greetings") &&
+                                  item.url === "/nav/planner books" &&
                                   child.label !== "Free Printable"
                                     ? `e${item.url}/${encodeURIComponent(
                                         item.label

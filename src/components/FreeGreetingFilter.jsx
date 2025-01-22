@@ -94,17 +94,17 @@ export default function CategoryFilterLabel() {
 
   //   console.log(ProductJson);
 
-  const filteredItems = ProductJson.filter((item) => {
+  const filteredItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
     const subCategoryMatch =
       item.subCategory.toLowerCase() === pagid.toLowerCase();
-    const subSubCategoryMatch =
-      item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
-    return categoryMatch && subCategoryMatch && subSubCategoryMatch;
+    return categoryMatch && subCategoryMatch;
   });
+  console.log(filteredItems);
+  // console.log(formattedPath)
 
-  const RelatedItems = ProductJson.filter((item) => {
+  const RelatedItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
 
@@ -141,8 +141,7 @@ export default function CategoryFilterLabel() {
         new Date(item.createdAt) >= new Date("2025-01-01T11:58:23.284Z") &&
         new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z") &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
+        item.subCategory.toLowerCase() === pagid.toLowerCase() 
       );
     }
     if (filter === "popular") {
@@ -150,19 +149,19 @@ export default function CategoryFilterLabel() {
         new Date(item.createdAt) >= new Date("2025-01-14T09:52:06.843Z") &&
         new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z") &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
+        item.subCategory.toLowerCase() === pagid.toLowerCase() 
+        // item.subSubCategory.toLowerCase() === path.toLowerCase()
       );
     }
     if (filter === "all") {
       return (
         item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
+        item.subCategory.toLowerCase() === pagid.toLowerCase() 
       );
     } // Return all items if no filter is applied
   });
   console.log(RelatedItems);
+  console.log(filteredResponseData)
 
   return (
     <>
@@ -280,39 +279,130 @@ export default function CategoryFilterLabel() {
           </h1>
         </div>
       )}
+      <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
+        {/* Left column: Filter options */}
+        <div className="col-span-1 hidden md:block space-y-2">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg font-avalonN">Filter By</h1>
+            <button
+              className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
+                filter === "all"
+              }`}
+              onClick={() => setFilter("all")}
+            >
+              Clear all
+            </button>
+          </div>
+          <div className="px-4 py-3 bg-gray-100 rounded-lg shadow-md">
+            <div className="flex justify-between">
+              <h2 className="text-lg font-avalonB">Variations</h2>
+            </div>
+            <button
+              className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 ${
+                filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
+              }`}
+              onClick={() => setFilter("royal")}
+            >
+              Royal
+            </button>
+            <button
+              className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
+                filter === "popular"
+                  ? "bg-orange-500 text-white"
+                  : "bg-[#fff] border-2"
+              }`}
+              onClick={() => setFilter("popular")}
+            >
+              Popular
+            </button>
+          </div>
+        </div>
 
-      <div className="col-span-3 gap-6 px-[6%] py-4">
-        <h2 className="text-2xl mb-3">Related Items</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {RelatedItems.length > 0 ? (
-            RelatedItems.map((item, index) => (
-              <Link
-                key={index}
-                to={`/edit/${item.category}/${item.subSubCategory}`}
-                state={{ image: item.image[0] }}
-                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
-              >
-                <div className="relative w-full h-[20vh]">
-                  <img
-                    src={item.image[0]}
-                    alt={item.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h2 className="text-lg font-bold text-gray-800">
-                    {item.name}
-                  </h2>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <div className="text-center col-span-full">
-              <h2 className="text-xl font-semibold text-gray-700">
-                No products found for the selected filter.
-              </h2>
+        {/* Mobile filter */}
+        <div className="md:hidden relative">
+          <Filter onClick={handleClick} />
+          {showFilter && (
+            <div className="absolute top-7 left-[-10px] space-y-2 border-2 rounded-xl bg-gray-50 font-avalonN w-[180px] px-2 py-2 z-50">
+              <div className="flex justify-between items-center">
+                <button onClick={() => setShowFilter(false)}>
+                  <X />
+                </button>
+                <button
+                  className={`border-b-2 border-dashed border-gray-500 leading-5 ${
+                    filter === "all"
+                  }`}
+                  onClick={() => {
+                    setFilter("all");
+                    setShowFilter(false);
+                  }}
+                >
+                  Clear
+                </button>
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <h1 className="font-avalonB">Variations</h1>
+                <button
+                  className={`block w-full py-1 font-avalonN px-2 text-left rounded-md border-2 ${
+                    filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
+                  }`}
+                  onClick={() => {
+                    setFilter("royal");
+                    setShowFilter(false);
+                  }}
+                >
+                  Royal
+                </button>
+                <button
+                  className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
+                    filter === "popular"
+                      ? "bg-orange-500 text-white"
+                      : "bg-[#fff] border-2"
+                  }`}
+                  onClick={() => {
+                    setFilter("popular");
+                    setShowFilter(false);
+                  }}
+                >
+                  Popular
+                </button>
+              </div>
             </div>
           )}
+        </div>
+
+        {/* Right column: Filtered results */}
+        <div className="col-span-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredResponseData.length > 0 ? (
+              filteredResponseData.map((item, index) => (
+                <Link
+                  key={index}
+                  to={`/edit/${filteredItems[0].category}/${item.subSubCategory}`}
+                  state={{ image: item.image[0], ider: item._id }}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
+                >
+                  <div className="relative w-full h-[30vh]">
+                    <img
+                      src={item.image[0]}
+                      alt={item.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="px-1 flex justify-center h-14 items-center text-center">
+                    <h2 className="text-lg font-avalonB text-gray-800">
+                      {item.name}
+                    </h2>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="text-center col-span-full">
+                <h2 className="text-xl font-semibold text-gray-700">
+                  No products found for the selected filter.
+                </h2>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

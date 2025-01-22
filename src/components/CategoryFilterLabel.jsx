@@ -31,7 +31,7 @@ export default function CategoryFilterLabel() {
       const url = "https://nyouta.onrender.com/api/v1/products/products";
       try {
         const response = await axios.get(url);
-        
+
         setResponseData(response.data);
         setLoading(false);
         // console.log(responseData)
@@ -88,11 +88,11 @@ export default function CategoryFilterLabel() {
 
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
-  console.log(formattedPageName);
-  console.log(formattedPath);
+  // console.log(formattedPageName);
+  // console.log(formattedPath);
   // console.log(ProductJson);
 
-  console.log(ProductJson);
+  // console.log(ProductJson);
 
   const filteredItems = responseData.filter((item) => {
     const categoryMatch =
@@ -101,12 +101,6 @@ export default function CategoryFilterLabel() {
       item.subCategory.toLowerCase() === pagid.toLowerCase();
     const subSubCategoryMatch =
       item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
-      console.log({
-        item,
-        categoryMatch,
-        subCategoryMatch,
-        subSubCategoryMatch,
-      });
     return categoryMatch && subCategoryMatch && subSubCategoryMatch;
   });
 
@@ -187,8 +181,9 @@ export default function CategoryFilterLabel() {
     } // Return all items if no filter is applied
   });
 
-  console.log("filteredItems:", filteredItems);
-  console.log("filteredResponseData:", filteredResponseData);
+  // console.log("filteredItems:", filteredItems);
+  // console.log("filteredResponseData:", filteredResponseData);
+  console.log(filteredItems[0].category)
 
   return (
     <>
@@ -312,7 +307,7 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      {filteredItems[0]?.category === "Planner Books" ? (
+      {["Planner Books","Free Greetings"].includes(filteredItems[0].category) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
           <div className="col-span-1 hidden md:block space-y-2">
