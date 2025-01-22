@@ -11,11 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductJson from "../products.json";
 import { Filter, X } from "lucide-react";
-import weddingManagement from "../assets/video/productTitle/WeddingManagement.mp4";
-import GuestListBooklet from "../assets/video/productTitle/guestListBooklet.mp4";
-import guestManagement from "../assets/video/productTitle/GuestManagement.mp4";
-import weddingNotepadLiner from "../assets/video/productTitle/weddingNotepad(liner).mp4";
-import weddingNotepadPhoto from "../assets/video/productTitle/WeddingNotepad(photo).mp4";
+// import weddingManagement from "../assets/video/productTitle/WeddingManagement.mp4";
+// import GuestListBooklet from "../assets/video/productTitle/guestListBooklet.mp4";
+// import guestManagement from "../assets/video/productTitle/GuestManagement.mp4";
+// import weddingNotepadLiner from "../assets/video/productTitle/weddingNotepad(liner).mp4";
+// import weddingNotepadPhoto from "../assets/video/productTitle/WeddingNotepad(photo).mp4";
 
 export default function CategoryFilterLabel() {
   const [showFilter, setShowFilter] = useState(false);
@@ -653,7 +653,7 @@ export default function CategoryFilterLabel() {
                     />
                   </div>
                   <div className="p-4 text-center">
-                    <h2 className="text-lg font-bold text-gray-800">
+                    <h2 className="text-lg font-bold text-gray-900">
                       {item.name}
                     </h2>
                   </div>
