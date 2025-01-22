@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import ProductJson from "../products.json";
+// import ProductJson from "../products.json";
 import { Filter, X } from "lucide-react";
 
 export default function CategoryFilterLabel() {
@@ -94,17 +94,17 @@ export default function CategoryFilterLabel() {
 
   //   console.log(ProductJson);
 
-  const filteredItems = ProductJson.filter((item) => {
+  const filteredItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
     const subCategoryMatch =
       item.subCategory.toLowerCase() === pagid.toLowerCase();
-    const subSubCategoryMatch =
-      item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
-    return categoryMatch && subCategoryMatch && subSubCategoryMatch;
+    return categoryMatch && subCategoryMatch;
   });
+  console.log(filteredItems);
+  // console.log(formattedPath)
 
-  const RelatedItems = ProductJson.filter((item) => {
+  const RelatedItems = responseData.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
 
@@ -115,12 +115,13 @@ export default function CategoryFilterLabel() {
 
     return categoryMatch && subCatego;
   });
+  console.log(RelatedItems)
 
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
       if (filteredItems[0].category === "Free Greetings") {
         // Navigate to a different component with the image as state
-        navigate(`/edit/FreeGreeting/${filteredItems[0].subSubCategory}`, {
+        navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, {
           state: { image: filteredItems[0].image[0] },
         });
       }
@@ -141,8 +142,7 @@ export default function CategoryFilterLabel() {
         new Date(item.createdAt) >= new Date("2025-01-01T11:58:23.284Z") &&
         new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z") &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
+        item.subCategory.toLowerCase() === pagid.toLowerCase() 
       );
     }
     if (filter === "popular") {
@@ -150,19 +150,19 @@ export default function CategoryFilterLabel() {
         new Date(item.createdAt) >= new Date("2025-01-14T09:52:06.843Z") &&
         new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z") &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
+        item.subCategory.toLowerCase() === pagid.toLowerCase() 
+        // item.subSubCategory.toLowerCase() === path.toLowerCase()
       );
     }
     if (filter === "all") {
       return (
         item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
+        item.subCategory.toLowerCase() === pagid.toLowerCase() 
       );
     } // Return all items if no filter is applied
   });
   console.log(RelatedItems);
+  console.log(filteredResponseData)
 
   return (
     <>
@@ -211,7 +211,7 @@ export default function CategoryFilterLabel() {
             <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
               <div className="mb-4">
                 <h1 className="text-3xl font-bold mb-2">
-                  {filteredItems[0].name}
+                  {filteredItems[0].subCategory}
                 </h1>
                 <p className="text-lg text-gray-600">
                   {filteredItems[0].category}
@@ -226,7 +226,7 @@ export default function CategoryFilterLabel() {
 
               <div className="mb-6">
                 <p className="text-xl font-semibold text-gray-800 mb-1">
-                  From Rs. {filteredItems[0].price}
+                  Free
                 </p>
                 <p className="text-sm text-gray-600">
                   Category: {filteredItems[0].category}
@@ -244,7 +244,7 @@ export default function CategoryFilterLabel() {
                 onClick={handleButtonClick}
                 className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
               >
-                {["Planner Books", "Free Greetings"].includes(
+                {["Free Greetings"].includes(
                   filteredItems[0].category
                 )
                   ? "Choose Now"
@@ -280,39 +280,39 @@ export default function CategoryFilterLabel() {
           </h1>
         </div>
       )}
-
-      <div className="col-span-3 gap-6 px-[6%] py-4">
-        <h2 className="text-2xl mb-3">Related Items</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {RelatedItems.length > 0 ? (
-            RelatedItems.map((item, index) => (
-              <Link
-                key={index}
-                to={`/edit/${item.category}/${item.subSubCategory}`}
-                state={{ image: item.image[0] }}
-                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
-              >
-                <div className="relative w-full h-[20vh]">
-                  <img
-                    src={item.image[0]}
-                    alt={item.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h2 className="text-lg font-bold text-gray-800">
-                    {item.name}
-                  </h2>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <div className="text-center col-span-full">
-              <h2 className="text-xl font-semibold text-gray-700">
-                No products found for the selected filter.
-              </h2>
-            </div>
-          )}
+      <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
+        <div className="col-span-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredResponseData.length > 0 ? (
+              filteredResponseData.map((item, index) => (
+                <Link
+                  key={index}
+                  to={`/product/${item._id}`}
+                  state={{ image: item.image[0], id: item._id ,product:item}}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
+                >
+                  <div className="relative w-full h-[30vh]">
+                    <img
+                      src={item.image[0]}
+                      alt={item.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="px-1 flex justify-center h-14 items-center text-center">
+                    <h2 className="text-lg font-avalonB text-gray-800">
+                      {item.name}
+                    </h2>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="text-center col-span-full">
+                <h2 className="text-xl font-semibold text-gray-700">
+                  No products found for the selected filter.
+                </h2>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

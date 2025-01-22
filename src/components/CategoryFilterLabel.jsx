@@ -93,11 +93,11 @@ export default function CategoryFilterLabel() {
 
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
-  console.log(formattedPageName);
-  console.log(formattedPath);
+  // console.log(formattedPageName);
+  // console.log(formattedPath);
   // console.log(ProductJson);
 
-  console.log(ProductJson);
+  // console.log(ProductJson);
 
   const filteredItems = responseData.filter((item) => {
     const categoryMatch =
@@ -114,16 +114,24 @@ export default function CategoryFilterLabel() {
       item.category.toLowerCase() === formattedPageName.toLowerCase();
 
     const subCatego = item.subCategory.toLowerCase() === pagid.toLowerCase();
+    const subSubCategoryMatch =
+      item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
 
     // const subCategoryMatch = item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
     // console.log(item.subSubCategory.toLowerCase()+"==="+formattedPath.toLowerCase())
 
-    return categoryMatch && subCatego;
+    return categoryMatch && subCatego && subSubCategoryMatch;
   });
 
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
       if (filteredItems[0].category === "Photo Books") {
+        // Navigate to a different component with the image as state
+        navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, {
+          state: { image: filteredItems[0].image[0] },
+        });
+      }
+      if (filteredItems[0].category === "Free Greetings") {
         // Navigate to a different component with the image as state
         navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, {
           state: { image: filteredItems[0].image[0] },
@@ -186,8 +194,10 @@ export default function CategoryFilterLabel() {
     } // Return all items if no filter is applied
   });
 
-  console.log("filteredItems:", filteredItems);
-  console.log("filteredResponseData:", filteredResponseData);
+  // console.log("filteredItems:", filteredItems);
+  // console.log("filteredResponseData:", filteredResponseData);
+  // console.log(filteredItems[0].category);
+  console.log(RelatedItems);
 
   const TitleProduct = {
     WeddingManagement: {
@@ -468,7 +478,7 @@ export default function CategoryFilterLabel() {
         </div>
       </div>
 
-      {filteredItems[0]?.category === "Planner Books" ? (
+      {["Planner Books"].includes(filteredItems[0].category) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
           <div className="col-span-1 hidden md:block space-y-2">
@@ -564,8 +574,16 @@ export default function CategoryFilterLabel() {
                 filteredResponseData.map((item, index) => (
                   <Link
                     key={index}
-                    to={`/edit/${filteredItems[0].category}/${item.subSubCategory}`}
-                    state={{ image: item.image[0], ider: item._id }}
+                    to={
+                      filteredItems[0].category === "Free Greetings"
+                        ? `/product/${item._id}`
+                        : `/edit/${filteredItems[0].category}/${item.subSubCategory}`
+                    }
+                    state={{
+                      image: item.image[0],
+                      ider: item._id,
+                      product: item,
+                    }}
                     className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
                   >
                     <div className="relative w-full h-[30vh]">
@@ -600,8 +618,8 @@ export default function CategoryFilterLabel() {
               RelatedItems.map((item, index) => (
                 <Link
                   key={index}
-                  to={`/edit/${item.category}/${item.subSubCategory}`}
-                  state={{ image: item.image[0] }}
+                  to={`/product/${item._id}`}
+                  state={{ image: item.image[0], id: item._id, product: item }}
                   className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
                 >
                   <div className="relative w-full h-[20vh]">

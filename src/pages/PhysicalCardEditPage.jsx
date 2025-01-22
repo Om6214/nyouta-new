@@ -1277,7 +1277,7 @@ export default function WeddingCardEditor() {
       <div className="flex w-full relative">
         <div className="hidden md:block absolute top-0 bottom-0 border-l-2 border-gray-300"></div>
 
-        <div className="hidden md:block w-48 lg:w-56 flex flex-col gap-6 md:p-4 lg:p-6 h-screen overflow-y-auto bg-gray-100 border-r border-gray-300 shadow-md">
+        <div className="hidden md:block w-48 lg:w-56  flex-col gap-6 md:p-4 lg:p-6 h-screen overflow-y-auto bg-gray-100 border-r border-gray-300 shadow-md">
           {/* Title */}
           <h2 className="font-bold text-gray-800 mb-4 text-2xl text-center border-b border-gray-300 pb-2">All Pages</h2>
 
@@ -1355,7 +1355,7 @@ export default function WeddingCardEditor() {
 
         {
           isDownload && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 flex items-center justify-center min-h-screen bg-gray-200">
+            <div className="fixed inset-0  bg-opacity-50 z-50 flex items-center justify-center min-h-screen bg-gray-200">
               <div className="bg-white rounded-lg shadow-lg p-6 w-[400px] relative">
                 <div className="rounded-t-lg text-center text-white cover w-80 h-60 ml-4">
                   <img
@@ -1377,7 +1377,7 @@ export default function WeddingCardEditor() {
                     </button>
                     <button
                       onClick={DownloadWithWatermark}
-                      className="bg-gray-100 text-gray-700 px-12 py-4  text-white rounded-lg shadow bg-gray-600 hover:bg-gray-800">
+                      className="bg-gray-100 text-gray-700 px-12 py-4   rounded-lg shadow  hover:bg-gray-800">
                       Download for free
                     </button>
                   </div>

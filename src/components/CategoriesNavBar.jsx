@@ -12,6 +12,18 @@ import i4 from "../assets/images/Navbar_Planner_Header/04.jpg";
 import i5 from "../assets/images/Navbar_Planner_Header/05.jpg";
 import i6 from "../assets/images/Navbar_Planner_Header/06.jpg";
 
+import guestPlan from "../assets/images/stressfree/guestplan.jpeg";
+import wedPlan from "../assets/images/stressfree/wedplan.jpg";
+import guestList from "../assets/images/stressfree/guestlist.jpg";
+import pdfPrint from "../assets/images/stressfree/checklist.jpg";
+import wedNote from "../assets/images/stressfree/wednoteliner.jpg";
+import wedPhoto from "../assets/images/stressfree/wednotephoto.jpeg";
+
+import wishes from "../assets/images/wishes/wish.jpg";
+import thanks from "../assets/images/wishes/thank.jpg";
+import feeling from "../assets/images/wishes/feeling.jpg";
+import funny from "../assets/images/wishes/funny.jpg";
+
 const CategoriesNavBar = () => {
   const { pageName } = useParams();
 
@@ -404,23 +416,23 @@ const CategoriesNavBar = () => {
       subCategory: [
         {
           subTitle: "Wishes Greeting",
-          imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
-          url: "e/navbar/Free Greetings/Free Greetings/Wishes Greeting",
+          imgUrl: wishes, // Example image
+          url: "e/navbar/free greetings/Wishes Greeting/Wishes Greeting",
         },
         {
           subTitle: "Thanks Greeting",
-          imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
-          url: "e/navbar/Free Greetings/Free Greetings/Thanks Greeting",
+          imgUrl: thanks, // Example image
+          url: "e/navbar/free greetings/Wishes Greeting/Thanks Greeting",
         },
         {
           subTitle: "Feeling Greetings",
-          imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
-          url: "e/navbar/Free Greetings/Free Greetings/Feeling Greetings",
+          imgUrl: feeling, // Example image
+          url: "e/navbar/free greetings/Wishes Greeting/Feeling Greetings",
         },
         {
           subTitle: "Funny Greeting",
-          imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
-          url: "e/navbar/Free Greetings/Free Greetings/Funny Greeting",
+          imgUrl: funny, // Example image
+          url: "e/navbar/free greetings/Wishes Greeting/Funny Greeting",
         },
       ],
     },
@@ -456,38 +468,32 @@ const CategoriesNavBar = () => {
       subCategory: [
         {
           subTitle: "Wedding Management",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847773/phewexsfhaijro3dzxd8.jpg", // Example image
+          imgUrl: wedPlan, // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Management",
         },
         {
           subTitle: "Guest Management",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847362/n2ppyskd7modih1qznm3.jpg", // Example image
+          imgUrl: guestPlan, // Example image
           url: "e/nav/Planner Books/Planner Books/Guest Management",
         },
         {
           subTitle: "Wedding Notepad (Liner)",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
+          imgUrl: wedNote, // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Notepad(liner)",
         },
         {
           subTitle: "Wedding Notepad (Photo)",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846734/kvsupuz7sbivojh4aind.jpg", // Example image
+          imgUrl: wedPhoto, // Example image
           url: "e/nav/Planner Books/Planner Books/Wedding Notepad(photo)",
         },
         {
           subTitle: "Guest List Booklet - Best Seller",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848346/quntb8uznw1eg81xkrff.jpg", // Example image
+          imgUrl: guestList, // Example image
           url: "e/nav/Planner Books/Planner Books/Guest List Booklet - Best Seller",
         },
         {
           subTitle: "Free Printables",
-          imgUrl:
-            "https://res.cloudinary.com/dpesh4axn/image/upload/v1736848578/uenbld7atg2lqufivgyc.jpg", // Example image
+          imgUrl: pdfPrint, // Example image
           url: "e/nav/planner books/Free Printable/Wedding Guest List-PDF",
         },
       ],
@@ -569,7 +575,7 @@ const CategoriesNavBar = () => {
                   {content.title}
                 </h1>
                 <h2 className="font-avalonN text-xl">{content.slang}</h2>
-                <p className="text-[#7f8c8d] font-medium text-[3vw] md:text-[15px] mt-4 leading-relaxed">
+                <p className="text-[#7f8c8d] font-avalonB text-[3vw] md:text-[15px] leading-tight">
                   {content.Description1}
                 </p>
               </div>
@@ -578,7 +584,7 @@ const CategoriesNavBar = () => {
 
               <div className="relative  col-span-2 ">
                 <div className="lg:w-full w-full">
-                  <motion.div className="relative h-[200px] lg:h-[250px] w-full lg:w-[750px] sm:h-[250px]   rounded-xl overflow-hidden">
+                  <motion.div className="relative h-[200px] lg:h-[200px] w-full lg:w-[600px] sm:h-[250px]   rounded-xl overflow-hidden">
                     {images.map((image, index) => (
                       <div
                         key={index}
@@ -661,7 +667,7 @@ const CategoriesNavBar = () => {
           <div className="font-semibold text-[4vh]">Categories</div>
 
           <div className="pt-5 md:max-w-[95%] mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
               {content.subCategory.map((item) => (
                 <div
                   className="relative block bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105"
@@ -703,7 +709,7 @@ const CategoriesNavBar = () => {
                         className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
                       />
                       <div className="px-4 h-[10%] w-full flex justify-center items-center">
-                        <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
+                        <h2 className="text-lg sm:text-md font-avalonB px-2 py-2">
                           {item.subTitle.length > 21
                             ? `${item.subTitle.slice(0, 21)}...`
                             : item.subTitle}
@@ -719,10 +725,11 @@ const CategoriesNavBar = () => {
                           className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
                         />
                         <div className="px-4 h-[10%] w-full flex justify-center items-center">
-                          <h2 className="text-lg sm:text-md font-semibold text-nowrap py-2">
-                            {item.subTitle.length > 21
+                          <h2 className="text-lg sm:text-md text-center leading-tight font-avalonB py-1">
+                            {/* {item.subTitle.length > 21
                               ? `${item.subTitle.slice(0, 21)}...`
-                              : item.subTitle}
+                              : item.subTitle} */}
+                              {item.subTitle}
                           </h2>
                         </div>
                       </div>
@@ -737,32 +744,32 @@ const CategoriesNavBar = () => {
 
       <div>
         <div id="section4">
-          <div className="px-[6%] pt-[1%] py-6  text-gray-800">
+          <div className="px-16 py-8  text-gray-800">
             <section className="mb-6">
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3 ">
                 About Our Personalised {DetailContent.Title}
               </h2>
-              <p className="text-lg leading-relaxed">
+              <p className="text-lg font-avalonN leading-relaxed">
                 {DetailContent.Description}
               </p>
             </section>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3">
                 Details for {DetailContent.Title}
               </h2>
-              <p className="text-lg leading-relaxed">
+              <p className="text-lg font-avalonN leading-relaxed">
                 {DetailContent.Details1}
               </p>
             </section>
 
             <section className="mb-6">
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3">
                 Features of Our Variety of {DetailContent.Title}
               </h2>
               <ul className="list-disc list-inside text-lg leading-relaxed">
                 {DetailContent.Details2.map((item, index) => (
-                  <li key={index} className="text-lg leading-relaxed">
+                  <li key={index} className="text-lg font-avalonN leading-relaxed">
                     {item}
                   </li>
                 ))}
@@ -770,10 +777,10 @@ const CategoriesNavBar = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold mb-3">
+              <h2 className="text-2xl font-avalonB mb-3">
                 {DetailContent.Title} Are Best Suited
               </h2>
-              <ul className="list-disc list-inside text-lg leading-relaxed">
+              <ul className="list-disc list-inside text-lg font-avalonN leading-relaxed">
                 <li>{DetailContent.Details3}</li>
               </ul>
             </section>
