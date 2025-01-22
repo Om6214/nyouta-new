@@ -119,12 +119,30 @@ export default function CategoryFilterLabel() {
 
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
-      if (filteredItems[0].category === "Free Greetings") {
+      if (filteredItems[0].category === "Photo Books") {
         // Navigate to a different component with the image as state
         navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, {
           state: { image: filteredItems[0].image[0] },
         });
       }
+      if (filteredItems[0].category === "Itinerary") {
+        // Navigate to a different component with the image as state
+        // console.log(filteredItems[0].image[1]);
+        navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, {
+          state: { image: filteredItems[0].image[0] },
+        });
+      }
+      if (filteredItems[0].category === "Calendars 2025") {
+        // Navigate to a different component with the image as state
+        // console.log(filteredItems[0].image[1]);
+        navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, {
+          state: { image: filteredItems[0].image[0] },
+        });
+      }
+      // else {
+      //   // Navigate to the default URL
+      //   navigate("/someurl");
+      // }
     }
 
     relatedItemsRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -264,9 +282,7 @@ export default function CategoryFilterLabel() {
                 onClick={handleButtonClick}
                 className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
               >
-                {["Free Greetings"].includes(filteredItems[0].category)
-                  ? "Choose Now"
-                  : "Add Now"}
+                Choose Now
               </button>
 
               {filteredItems.length > 0 &&
@@ -275,15 +291,21 @@ export default function CategoryFilterLabel() {
               ) ? (
                 <div className="mt-4">
                   <h2 className="text-lg font-semibold mb-3">
-                    Product Specifications
+                    Free Greeting Cards
                   </h2>
                   <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-                    <li>Beautify your days with a planner that inspires.</li>
                     <li>
-                      Express yourself with beautiful designs and personalized
-                      touches.
+                      Add a personal touch to your celebrations with beautifully
+                      crafted greeting cards.
                     </li>
-                    <li>High quality professional Planner Books.</li>
+                    <li>
+                      Choose from a wide variety of stunning designs for every
+                      occasion.
+                    </li>
+                    <li>
+                      High-quality cards available for free to make your moments
+                      memorable.
+                    </li>
                   </ul>
                 </div>
               ) : null}
@@ -298,38 +320,174 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-<h1 className="px-32 font-bold text-2xl pb-7 mt-5 text-gray-800">Related Items</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:px-28 mb-10">
-        {filteredResponseData.length > 0 ? (
-          filteredResponseData.map((item, index) => (
-            <Link
-              key={index}
-              to={`/product/${item._id}`}
-              state={{ image: item.image[0], id: item._id, product: item }}
-              className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
-            >
-              <div className="relative w-full h-[30vh]">
-                <img
-                  src={item.image[0]}
-                  alt={item.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+      {["Free Greetings"].includes(filteredItems[0].category) ? (
+        <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
+          {/* Left column: Filter options */}
+          <div className="col-span-1 hidden md:block space-y-2">
+            <div className="flex items-center justify-between">
+              <h1 className="text-lg font-avalonN">Filter By</h1>
+              <button
+                className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
+                  filter === "all"
+                }`}
+                // onClick={() => setFilter("all")}
+              >
+                Clear all
+              </button>
+            </div>
+            <div className="px-4 py-3 bg-gray-100 rounded-lg shadow-md">
+              <div className="flex justify-between">
+                <h2 className="text-lg font-avalonB">Variations</h2>
               </div>
-              <div className="px-1 flex justify-center h-14 items-center text-center">
-                <h2 className="text-lg font-avalonB text-gray-800">
-                  {item.name}
+              <button
+                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 bg-white
+                      }`}
+                // onClick={() => setFilter("royal")}
+              >
+                All Elegant
+              </button>
+              <button
+                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md bg-white`}
+                // onClick={() => setFilter("popular")}
+              >
+                Floral
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile filter */}
+          <div className="md:hidden relative">
+            <Filter onClick={handleClick} />
+            {showFilter && (
+              <div className="absolute top-7 left-[-10px] space-y-2 border-2 rounded-xl bg-gray-50 font-avalonN w-[180px] px-2 py-2 z-50">
+                <div className="flex justify-between items-center">
+                  <button onClick={() => setShowFilter(false)}>
+                    <X />
+                  </button>
+                  <button
+                    className={`border-b-2 border-dashed border-gray-500 leading-5 ${
+                      filter === "all"
+                    }`}
+                    onClick={() => {
+                      setFilter("all");
+                      setShowFilter(false);
+                    }}
+                  >
+                    Clear
+                  </button>
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <h1 className="font-avalonB">Variations</h1>
+                  <button
+                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md border-2 ${
+                      filter === "royal"
+                        ? "bg-orange-500 text-white"
+                        : "bg-white"
+                    }`}
+                    onClick={() => {
+                      setFilter("royal");
+                      setShowFilter(false);
+                    }}
+                  >
+                    Royal
+                  </button>
+                  <button
+                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
+                      filter === "popular"
+                        ? "bg-orange-500 text-white"
+                        : "bg-[#fff] border-2"
+                    }`}
+                    onClick={() => {
+                      setFilter("popular");
+                      setShowFilter(false);
+                    }}
+                  >
+                    Popular
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Right column: Filtered results */}
+          <div className="col-span-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {filteredResponseData.length > 0 ? (
+                filteredResponseData.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={
+                      filteredItems[0].category === "Free Greetings"
+                        ? `/product/${item._id}`
+                        : `/edit/${filteredItems[0].category}/${item.subSubCategory}`
+                    }
+                    state={{
+                      image: item.image[0],
+                      ider: item._id,
+                      product: item,
+                    }}
+                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
+                  >
+                    <div className="relative w-full h-[30vh]">
+                      <img
+                        src={item.image[0]}
+                        alt={item.name}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="px-1 flex justify-center h-14 items-center text-center">
+                      <h2 className="text-lg font-avalonB text-gray-800">
+                        {item.name}
+                      </h2>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <div className="text-center col-span-full">
+                  <h2 className="text-xl font-semibold text-gray-700">
+                    No products found for the selected filter.
+                  </h2>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="col-span-3 gap-6 px-[6%] py-4">
+          <h2 className="text-2xl mb-3">Related Items</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {RelatedItems.length > 0 ? (
+              RelatedItems.map((item, index) => (
+                <Link
+                  key={index}
+                  to={`/product/${item._id}`}
+                  state={{ image: item.image[0], id: item._id, product: item }}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
+                >
+                  <div className="relative w-full h-[20vh]">
+                    <img
+                      src={item.image[0]}
+                      alt={item.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-4 text-center">
+                    <h2 className="text-lg font-bold text-gray-900">
+                      {item.name}
+                    </h2>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="text-center col-span-full">
+                <h2 className="text-xl font-semibold text-gray-700">
+                  No products found for the selected filter.
                 </h2>
               </div>
-            </Link>
-          ))
-        ) : (
-          <div className="text-center col-span-full">
-            <h2 className="text-xl font-semibold text-gray-700">
-              No products found for the selected filter.
-            </h2>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }
