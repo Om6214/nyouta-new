@@ -121,7 +121,7 @@ export default function CategoryFilterLabel() {
     if (filteredItems.length > 0) {
       if (filteredItems[0].category === "Free Greetings") {
         // Navigate to a different component with the image as state
-        navigate(`/edit/FreeGreeting/${filteredItems[0].subSubCategory}`, {
+        navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, {
           state: { image: filteredItems[0].image[0] },
         });
       }
@@ -211,7 +211,7 @@ export default function CategoryFilterLabel() {
             <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
               <div className="mb-4">
                 <h1 className="text-3xl font-bold mb-2">
-                  {filteredItems[0].name}
+                  {filteredItems[0].subCategory}
                 </h1>
                 <p className="text-lg text-gray-600">
                   {filteredItems[0].category}
@@ -226,7 +226,7 @@ export default function CategoryFilterLabel() {
 
               <div className="mb-6">
                 <p className="text-xl font-semibold text-gray-800 mb-1">
-                  From Rs. {filteredItems[0].price}
+                  Free
                 </p>
                 <p className="text-sm text-gray-600">
                   Category: {filteredItems[0].category}
@@ -244,7 +244,7 @@ export default function CategoryFilterLabel() {
                 onClick={handleButtonClick}
                 className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
               >
-                {["Planner Books", "Free Greetings"].includes(
+                {["Free Greetings"].includes(
                   filteredItems[0].category
                 )
                   ? "Choose Now"
@@ -281,98 +281,7 @@ export default function CategoryFilterLabel() {
         </div>
       )}
       <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
-        {/* Left column: Filter options */}
-        <div className="col-span-1 hidden md:block space-y-2">
-          <div className="flex items-center justify-between">
-            <h1 className="text-lg font-avalonN">Filter By</h1>
-            <button
-              className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
-                filter === "all"
-              }`}
-              onClick={() => setFilter("all")}
-            >
-              Clear all
-            </button>
-          </div>
-          <div className="px-4 py-3 bg-gray-100 rounded-lg shadow-md">
-            <div className="flex justify-between">
-              <h2 className="text-lg font-avalonB">Variations</h2>
-            </div>
-            <button
-              className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 ${
-                filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
-              }`}
-              onClick={() => setFilter("royal")}
-            >
-              Royal
-            </button>
-            <button
-              className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
-                filter === "popular"
-                  ? "bg-orange-500 text-white"
-                  : "bg-[#fff] border-2"
-              }`}
-              onClick={() => setFilter("popular")}
-            >
-              Popular
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile filter */}
-        <div className="md:hidden relative">
-          <Filter onClick={handleClick} />
-          {showFilter && (
-            <div className="absolute top-7 left-[-10px] space-y-2 border-2 rounded-xl bg-gray-50 font-avalonN w-[180px] px-2 py-2 z-50">
-              <div className="flex justify-between items-center">
-                <button onClick={() => setShowFilter(false)}>
-                  <X />
-                </button>
-                <button
-                  className={`border-b-2 border-dashed border-gray-500 leading-5 ${
-                    filter === "all"
-                  }`}
-                  onClick={() => {
-                    setFilter("all");
-                    setShowFilter(false);
-                  }}
-                >
-                  Clear
-                </button>
-              </div>
-              <div className="flex flex-col items-start gap-2">
-                <h1 className="font-avalonB">Variations</h1>
-                <button
-                  className={`block w-full py-1 font-avalonN px-2 text-left rounded-md border-2 ${
-                    filter === "royal" ? "bg-orange-500 text-white" : "bg-white"
-                  }`}
-                  onClick={() => {
-                    setFilter("royal");
-                    setShowFilter(false);
-                  }}
-                >
-                  Royal
-                </button>
-                <button
-                  className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
-                    filter === "popular"
-                      ? "bg-orange-500 text-white"
-                      : "bg-[#fff] border-2"
-                  }`}
-                  onClick={() => {
-                    setFilter("popular");
-                    setShowFilter(false);
-                  }}
-                >
-                  Popular
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Right column: Filtered results */}
-        <div className="col-span-3">
+        <div className="col-span-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredResponseData.length > 0 ? (
               filteredResponseData.map((item, index) => (

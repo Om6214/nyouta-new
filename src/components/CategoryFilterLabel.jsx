@@ -109,11 +109,13 @@ export default function CategoryFilterLabel() {
       item.category.toLowerCase() === formattedPageName.toLowerCase();
 
     const subCatego = item.subCategory.toLowerCase() === pagid.toLowerCase();
+    const subSubCategoryMatch =
+      item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
 
     // const subCategoryMatch = item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
     // console.log(item.subSubCategory.toLowerCase()+"==="+formattedPath.toLowerCase())
 
-    return categoryMatch && subCatego;
+    return categoryMatch && subCatego && subSubCategoryMatch;
   });
 
   const handleButtonClick = () => {
@@ -189,7 +191,8 @@ export default function CategoryFilterLabel() {
 
   // console.log("filteredItems:", filteredItems);
   // console.log("filteredResponseData:", filteredResponseData);
-  console.log(filteredItems[0].category);
+  // console.log(filteredItems[0].category);
+  console.log(RelatedItems);
 
   return (
     <>
@@ -243,7 +246,7 @@ export default function CategoryFilterLabel() {
             <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
               <div className="mb-4">
                 <h1 className="text-3xl font-bold mb-2">
-                  {filteredItems[0].name}
+                  {filteredItems[0].subSubCategory}
                 </h1>
                 <p className="text-lg text-gray-600">
                   {filteredItems[0].category}
@@ -258,8 +261,11 @@ export default function CategoryFilterLabel() {
 
               <div className="mb-6">
                 <p className="text-xl font-semibold text-gray-800 mb-1">
-                  From Rs. {filteredItems[0].price}
+                  {filteredItems[0].category === "Free Greetings"
+                    ? "Free"
+                    : `From ₹ ${filteredItems[0].price}`}
                 </p>
+
                 <p className="text-sm text-gray-600">
                   Category: {filteredItems[0].category}
                 </p>
@@ -313,9 +319,7 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      {["Planner Books", "Free Greetings"].includes(
-        filteredItems[0].category
-      ) ? (
+      {["Planner Books"].includes(filteredItems[0].category) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
           <div className="col-span-1 hidden md:block space-y-2">
@@ -421,7 +425,11 @@ export default function CategoryFilterLabel() {
                         ? `/product/${item._id}`
                         : `/edit/${filteredItems[0].category}/${item.subSubCategory}`
                     }
-                    state={{ image: item.image[0], ider: item._id, product: item}}
+                    state={{
+                      image: item.image[0],
+                      ider: item._id,
+                      product: item,
+                    }}
                     className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
                   >
                     <div className="relative w-full h-[30vh]">
@@ -456,8 +464,8 @@ export default function CategoryFilterLabel() {
               RelatedItems.map((item, index) => (
                 <Link
                   key={index}
-                  to={`/edit/${item.category}/${item.subSubCategory}`}
-                  state={{ image: item.image[0] }}
+                  to={`/product/${item._id}`}
+                  state={{ image: item.image[0], id: item._id, product: item }}
                   className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
                 >
                   <div className="relative w-full h-[20vh]">

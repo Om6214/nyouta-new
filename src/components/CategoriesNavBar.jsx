@@ -416,22 +416,22 @@ const CategoriesNavBar = () => {
       subCategory: [
         {
           subTitle: "Wishes Greeting",
-          imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+          imgUrl: wishes, // Example image
           url: "e/navbar/free greetings/Wishes Greeting/Wishes Greeting",
         },
         {
           subTitle: "Thanks Greeting",
-          imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+          imgUrl: thanks, // Example image
           url: "e/navbar/free greetings/Wishes Greeting/Thanks Greeting",
         },
         {
           subTitle: "Feeling Greetings",
-          imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+          imgUrl: feeling, // Example image
           url: "e/navbar/free greetings/Wishes Greeting/Feeling Greetings",
         },
         {
           subTitle: "Funny Greeting",
-          imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+          imgUrl: funny, // Example image
           url: "e/navbar/free greetings/Wishes Greeting/Funny Greeting",
         },
       ],
