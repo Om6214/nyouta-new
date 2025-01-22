@@ -358,7 +358,7 @@ export default function CategoryFilterLabel() {
               zoom={true}
               navigation={true}
               pagination={{ clickable: true }}
-              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
               modules={[Zoom, Navigation, Pagination, Autoplay]}
               className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
             >
