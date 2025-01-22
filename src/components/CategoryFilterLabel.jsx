@@ -327,7 +327,7 @@ export default function CategoryFilterLabel() {
         
       ],
     },
-    WeddingNotpadPhoto: {
+    WeddingNotepadPhoto: {
       productCategory: "Planner Book",
       productSubCategory: "Planner Book",
       productSubSubCategory: "Wedding Notepad photo ",
@@ -359,12 +359,10 @@ export default function CategoryFilterLabel() {
     },
   };
 
-  const fetchvar = formattedPath
-    .replaceAll(" ", "")
-    .replaceAll("-", "")
-    .replaceAll("(", "")
-    .replaceAll(")", "");
+  const fetchvar = formattedPath.replaceAll(" ", "").replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
   const productData = TitleProduct[fetchvar];
+  
+  
 
   return (
     <>
