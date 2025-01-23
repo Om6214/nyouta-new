@@ -445,12 +445,6 @@ export default function CategoryFilterLabel() {
                     ? productData.RoyalPrice
                     : productData.popularPrice}{" "}
                 </span>
-                {filter === "royal"
-                  ? productData.RoyalPrice - (productData.RoyalPrice * productData.productOff) / 100
-                  : productData.popularPrice - (productData.popularPrice * productData.productOff) / 100} {" "}
-                  <span className="text-red-400 line-through text-[1.1rem] mx-2 ">{filter === "royal"
-                  ? productData.RoyalPrice
-                  : productData.popularPrice} </span>
                 <span className="text-green-400">
                   {productData.productOff}%{" "}
                 </span>
@@ -474,7 +468,7 @@ export default function CategoryFilterLabel() {
                 <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
                   {productData.productSpecificationsRoyal.map(
                     (specification) => (
-                      <li>{specification}</li>
+                      <li>{specification.length > 150 ? `${specification.slice(0,150)}...` : specification}</li>
                     )
                   )}
 
@@ -484,7 +478,7 @@ export default function CategoryFilterLabel() {
                 <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
                   {productData.productSpecificationsPopular.map(
                     (specification) => (
-                      <li>{specification}</li>
+                      <li>{specification.length > 150 ? `${specification.slice(0,150)}...` : specification}</li>
                     )
                   )}
 
