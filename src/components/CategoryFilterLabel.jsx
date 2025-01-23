@@ -11,11 +11,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductJson from "../products.json";
 import { Filter, X } from "lucide-react";
-import weddingManagement from "../assets/video/productTitle/WeddingManagement.mp4";
-import GuestListBooklet from "../assets/video/productTitle/guestListBooklet.mp4";
-import guestManagement from "../assets/video/productTitle/GuestManagement.mp4";
-import weddingNotepadLiner from "../assets/video/productTitle/weddingNotepad(liner).mp4";
-import weddingNotepadPhoto from "../assets/video/productTitle/WeddingNotepad(photo).mp4";
+import weddingManagement from "../assets/video/WeddingManagement.mp4";
+import GuestListBooklet from "../assets/video/guestListBooklet.mp4";
+import guestManagement from "../assets/video/GuestManagement.mp4";
+import weddingNotepadLiner from "../assets/video/weddingNotepad(liner).mp4";
+import weddingNotepadPhoto from "../assets/video/WeddingNotepad(photo).mp4";
 
 export default function CategoryFilterLabel() {
   const [showFilter, setShowFilter] = useState(false);
