@@ -306,8 +306,6 @@ export default function CategoryFilterLabel() {
 	"Paper & Size : A5 (148x210 mm*) 70 gsm",
 	"Cover : 200 gsm PVC (Coloured) with Velvet Finish",
 	"Bind : Perfect Binding"
-
-        
       ],
       productSpecificationsPopular: [
         	"Checklists : Programs • Check List • Day-of Checklist • To-do List { Top Priority } • To-do List • Thank You Gift To Guest • Gift Received By Guests • Special Notes • Notes • Experience",
