@@ -62,9 +62,7 @@ export default function Footer() {
 
           {/* Join E-nyouta */}
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-white">
-              Join Us
-            </h2>
+            <h2 className="text-xl font-semibold mb-4 text-white">Join Us</h2>
             <ul className="space-y-2">
               <li>
                 <Link
