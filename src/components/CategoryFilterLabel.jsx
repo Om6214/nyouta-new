@@ -444,6 +444,7 @@ export default function CategoryFilterLabel() {
                     ? productData.RoyalPrice
                     : productData.popularPrice}{" "}
                 </span>
+                {filter === "royal"
                   ? productData.RoyalPrice - (productData.RoyalPrice * productData.productOff) / 100
                   : productData.popularPrice - (productData.popularPrice * productData.productOff) / 100} {" "}
                   <span className="text-red-400 line-through text-[1.1rem] mx-2 ">{filter === "royal"
