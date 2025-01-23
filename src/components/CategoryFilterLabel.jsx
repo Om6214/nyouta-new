@@ -601,9 +601,9 @@ export default function CategoryFilterLabel() {
                       ider: item._id,
                       product: item,
                     }}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
+                    className="bg-white p-2 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
                   >
-                    <div className="relative w-full h-[30vh]">
+                    <div className="relative w-full h-[30vh] rounded-lg overflow-hidden">
                       <img
                         src={item.image[0]}
                         alt={item.name}
