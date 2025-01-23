@@ -125,13 +125,13 @@ export default function DesignEdit() {
 
   return (
     <div className="max-w-6xl mx-auto mb-10 p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image Section */}
         <div className="relative">
           <img
             src={filteredProduct.image[currentImageIndex]}
             alt={filteredProduct.name}
-            className="w-64 h-[60vh] object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="w-4/5  object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
           <div className="grid grid-cols-5 gap-3 mt-4">
             {filteredProduct.image.map((img, index) => (
@@ -185,8 +185,7 @@ export default function DesignEdit() {
               </h2>
               <ul className="list-disc list-inside text-gray-700">
                 <li>Category: {filteredProduct.category}</li>
-                <li>Subcategory: {filteredProduct.subCategory}</li>
-                <li>Tags: {filteredProduct.tags.join(", ")}</li>
+                
               </ul>
             </div>
 
