@@ -169,8 +169,7 @@ export default function CategoryFilterLabel() {
   const filteredResponseData = responseData.filter((item) => {
     if (filter === "royal") {
       return (
-        new Date(item.createdAt) >= new Date("2025-01-01T11:58:23.284Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z") &&
+        item.type?.toLowerCase() === filter.toLowerCase() &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
         item.subCategory.toLowerCase() === pagid.toLowerCase() &&
         item.subSubCategory.toLowerCase() === path.toLowerCase()
@@ -178,20 +177,13 @@ export default function CategoryFilterLabel() {
     }
     if (filter === "popular") {
       return (
-        new Date(item.createdAt) >= new Date("2025-01-14T09:52:06.843Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z") &&
+        item.type?.toLowerCase() === filter.toLowerCase() &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
         item.subCategory.toLowerCase() === pagid.toLowerCase() &&
         item.subSubCategory.toLowerCase() === path.toLowerCase()
       );
     }
-    if (filter === "all") {
-      return (
-        item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
-      );
-    } // Return all items if no filter is applied
+    
   });
 
   // console.log("filteredItems:", filteredItems);
@@ -363,6 +355,11 @@ export default function CategoryFilterLabel() {
               autoplay={{ delay: 5000, disableOnInteraction: false }}
               modules={[Zoom, Navigation, Pagination, Autoplay]}
               className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
+              onSwiper={(swiper) => {
+                // Add event listeners for pause on hover
+                swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
+                swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
+              }}
             >
               {/* First Slide: Video */}
               <SwiperSlide>
@@ -447,6 +444,11 @@ export default function CategoryFilterLabel() {
                     ? productData.RoyalPrice
                     : productData.popularPrice}{" "}
                 </span>
+                  ? productData.RoyalPrice - (productData.RoyalPrice * productData.productOff) / 100
+                  : productData.popularPrice - (productData.popularPrice * productData.productOff) / 100} {" "}
+                  <span className="text-red-400 line-through text-[1.1rem] mx-2 ">{filter === "royal"
+                  ? productData.RoyalPrice
+                  : productData.popularPrice} </span>
                 <span className="text-green-400">
                   {productData.productOff}%{" "}
                 </span>
@@ -608,12 +610,12 @@ export default function CategoryFilterLabel() {
                       />
                     </div>
                     <div className="px-1 flex justify-center pt-2 items-center text-center">
-                      <h2 className="text-lg font-avalonB text-gray-800">
-                        {item.name}
+                      <h2 className="text-md font-avalonB font-extralight text-gray-600">
+                        {item.name.length > 18 ? `${item.name.slice(0,18)}...` : item.name}
                       </h2>
                     </div>
                     <div className="px-1 flex justify-center py-2 items-center text-center">
-                      <h2 className="text-lg font-avalonB text-gray-800">
+                      <h2 className="text-md font-avalonB font-extralight text-gray-700">
                         Rs.{item.price}
                       </h2>
                     </div>
