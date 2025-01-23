@@ -172,8 +172,7 @@ export default function CategoryFilterLabel() {
   const filteredResponseData = responseData.filter((item) => {
     if (filter === "royal") {
       return (
-        new Date(item.createdAt) >= new Date("2025-01-01T11:58:23.284Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z") &&
+        item.type?.toLowerCase() === filter.toLowerCase() &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
         item.subCategory.toLowerCase() === pagid.toLowerCase() &&
         item.subSubCategory.toLowerCase() === path.toLowerCase()
@@ -181,20 +180,13 @@ export default function CategoryFilterLabel() {
     }
     if (filter === "popular") {
       return (
-        new Date(item.createdAt) >= new Date("2025-01-14T09:52:06.843Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z") &&
+        item.type?.toLowerCase() === filter.toLowerCase() &&
         item.category.toLowerCase() === pageName.toLowerCase() &&
         item.subCategory.toLowerCase() === pagid.toLowerCase() &&
         item.subSubCategory.toLowerCase() === path.toLowerCase()
       );
     }
-    if (filter === "all") {
-      return (
-        item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase() &&
-        item.subSubCategory.toLowerCase() === path.toLowerCase()
-      );
-    } // Return all items if no filter is applied
+    
   });
 
   // console.log("filteredItems:", filteredItems);
@@ -454,7 +446,7 @@ export default function CategoryFilterLabel() {
               <p className="text-xl font-semibold text-gray-800 mb-1">
                 From Rs.
                 {filter === "royal"
-                  ? productData.RoyalPrice - (productData.popularPrice * productData.productOff) / 100
+                  ? productData.RoyalPrice - (productData.RoyalPrice * productData.productOff) / 100
                   : productData.popularPrice - (productData.popularPrice * productData.productOff) / 100} {" "}
                   <span className="text-red-400 line-through text-[1.1rem] mx-2 ">{filter === "royal"
                   ? productData.RoyalPrice
@@ -479,15 +471,15 @@ export default function CategoryFilterLabel() {
                 Product Specifications
               </h2>
               {filter === "royal" ? <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-                {productData.productSpecificationsRoyal.map((specification) => (
-                  <li>{specification}</li>
+                {productData.productSpecificationsRoyal.map((specification, index) => (
+                  <li  key={index} className="text-justify">{specification}</li>
                 ))}
 
                 {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
               </ul>:
               <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-                {productData.productSpecificationsPopular.map((specification) => (
-                  <li>{specification}</li>
+                {productData.productSpecificationsPopular.map((specification, index) => (
+                  <li key={index} className="text-justify" >{specification}</li>
                 ))}
 
                 {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
@@ -613,12 +605,12 @@ export default function CategoryFilterLabel() {
                       />
                     </div>
                     <div className="px-1 flex justify-center pt-2 items-center text-center">
-                      <h2 className="text-lg font-avalonB text-gray-800">
-                        {item.name}
+                      <h2 className="text-md font-avalonB font-extralight text-gray-600">
+                        {item.name.length > 18 ? `${item.name.slice(0,18)}...` : item.name}
                       </h2>
                     </div>
                     <div className="px-1 flex justify-center py-2 items-center text-center">
-                      <h2 className="text-lg font-avalonB text-gray-800">
+                      <h2 className="text-md font-avalonB font-extralight text-gray-700">
                         Rs.{item.price}
                       </h2>
                     </div>
