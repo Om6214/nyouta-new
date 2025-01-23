@@ -207,14 +207,14 @@ export default function CategoryFilterLabel() {
       popularPrice: 2150,
       productOff: 15,
       productSpecificationsRoyal: [
-        "Checklists : • About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding • Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List • Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts • Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts • Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan • Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan, • Special Notes & Experience, Calendar 2024-2025, Family Pics",
+       
         "Pages : 100 (200 Sides) Coloured",
         "Paper & Size : A4 (210x297 mm*) 100 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
         "Bind : Perfect Binding with Bookmarks",
       ],
       productSpecificationsPopular: [
-        "Checklists : About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors • Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List • Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts • Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts • Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan  • Special Notes & Experience • Calendars • Family Pics",
+       
         "Pages : 100 (200 Sides) Coloured",
         "Paper & Size : A4 (210x297 mm*) 100 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
@@ -235,14 +235,14 @@ export default function CategoryFilterLabel() {
       popularPrice: 1199,
       productOff: 15,
       productSpecificationsRoyal: [
-        "Checklists : Wedding Family • Programs > Event Detail List • Daily Planner • Weekly Planner • Monthly Planner • To-Do List • Event wise Guest List • VIP Chief Guests List, Special Guests List, Friends List, Family Friends List, Friends of Friend List, Relatives List, Business Guests List, Staff Members List, Neighbor Guests List, Club Members List, Classmates List, Bride/Groom Side Guest List, Nearest/Dearest Guests List, Other Guest List, Outsider Guest List • Food Plan for Guests • Thank You Gift to Groom/Bride Side • Gift Received by Groom/Bride Side • Thank You Gift to Guest • Gift Received by Guests • Guest Room Arrangement • Guest Room Plan • Special Guest - Sitting Table Plan • Family - Sitting Table Plan • Sitting Floor Plan • Guest List Summery • Special Notes, Note, Experience • Memories & Much more ...",
+       
         "Pages : 75 (150 Sides) Coloured",
         "Paper & Size : A4 (210x297 mm*) 100 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
         "Bind : Perfect Binding with Bookmarks",
       ],
       productSpecificationsPopular: [
-        "Checklists : Wedding Family • Programs > Event Detail List • Daily Planner • Weekly Planner • Monthly Planner • To-Do List • Event wise Guest List • Categorised Guests List • Food Plan for Guests • Thank You Gift to Groom/Bride Side • Gift received by Groom/Bride Side • Thank You Gift to Guest • Gift Received by Guests • Guest Room Arrangement • Sitting Table Plans • Guest List Summery  Special Notes, Note, Experience • Memories & Much more ...",
+       
         "Pages : 75 (150 Sides) Coloured",
         "Paper & Size : A4 (210x297 mm*) 100 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
@@ -263,14 +263,14 @@ export default function CategoryFilterLabel() {
       popularPrice: 1099,
       productOff: 15,
       productSpecificationsRoyal: [
-        "Checklists : Wedding Family • Event wise guest List • Categorised Guest List • Guest List • Summery  Special Notes • Note • Experience • Memories",
+       
         "Pages : 50 (100 Sides) All pages - Coloured",
         "Paper & Size : A4 (210x297 mm*) 100 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
         "Bind : Perfect Binding with Bookmarks",
       ],
       productSpecificationsPopular: [
-        "Checklists : Wedding Family • Event wise guest List • Categorised Guest List • Guest List Summery • Special Notes • Note • Experience • Memories",
+       
         "Pages : 50 (100 Sides) All page - B/W",
         "Paper & Size : A4 (210x297 mm*) 70 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
@@ -291,14 +291,14 @@ export default function CategoryFilterLabel() {
       popularPrice: 389,
       productOff: 15,
       productSpecificationsRoyal: [
-        "Checklists : Programs • Check List • Don't Forget • Day-of Kit For The Bride/groom • Day-of Checklist • Daily Planner • Weekly Planner • Monthly Planner • To-do List { Top Priority } • To-do List • Wedding - Purchases • Wedding - Expenses • Vendors • Vendor - Payment Planner • Payment Planner • Music/dance Schedule • Guest Room Arrangement • Thank You Gift To Guest • Gift Received By Guests • Special Notes • Notes • Experience",
+       
         "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
         "Paper & Size : A5 (148x210 mm*) 70 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
         "Bind : Perfect Binding",
       ],
       productSpecificationsPopular: [
-        "Checklists : Programs • Check List • Day-of Checklist • To-do List { Top Priority } • To-do List • Thank You Gift To Guest • Gift Received By Guests • Special Notes • Notes • Experience",
+        
         "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
         "Paper & Size : A5 (148x210 mm*) 70 gsm",
         "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
@@ -468,7 +468,7 @@ export default function CategoryFilterLabel() {
                 <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
                   {productData.productSpecificationsRoyal.map(
                     (specification) => (
-                      <li>{specification.length > 150 ? `${specification.slice(0,150)}...` : specification}</li>
+                      <li>{specification.length > 90 ? `${specification.slice(0,90)}...` : specification}</li>
                     )
                   )}
 
@@ -478,7 +478,7 @@ export default function CategoryFilterLabel() {
                 <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
                   {productData.productSpecificationsPopular.map(
                     (specification) => (
-                      <li>{specification.length > 150 ? `${specification.slice(0,150)}...` : specification}</li>
+                      <li>{specification.length > 90 ? `${specification.slice(0,90)}...` : specification}</li>
                     )
                   )}
 
