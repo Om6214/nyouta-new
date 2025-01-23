@@ -370,6 +370,11 @@ export default function CategoryFilterLabel() {
               autoplay={{ delay: 5000, disableOnInteraction: false }}
               modules={[Zoom, Navigation, Pagination, Autoplay]}
               className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
+              onSwiper={(swiper) => {
+                // Add event listeners for pause on hover
+                swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
+                swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
+              }}
             >
               {/* First Slide: Video */}
               <SwiperSlide>
