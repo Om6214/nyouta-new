@@ -123,7 +123,7 @@ export default function Footer() {
                 <Mail className="w-5 h-5" />
                 <a
                   href="mailto:info@nyouta.com"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors duration-300"
                 >
                   info@nyouta.com
                 </a>
