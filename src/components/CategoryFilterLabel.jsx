@@ -11,11 +11,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ProductJson from "../products.json";
 import { Filter, X } from "lucide-react";
-import weddingManagement from "../assets/video/productTitle/WeddingManagement.mp4";
-import GuestListBooklet from "../assets/video/productTitle/guestListBooklet.mp4";
-import guestManagement from "../assets/video/productTitle/GuestManagement.mp4";
-import weddingNotepadLiner from "../assets/video/productTitle/weddingNotepad(liner).mp4";
-import weddingNotepadPhoto from "../assets/video/productTitle/WeddingNotepad(photo).mp4";
+
+// import weddingManagement from "../assets/video/productTitle/WeddingManagement.mp4";
+// import GuestListBooklet from "../assets/video/productTitle/guestListBooklet.mp4";
+// import guestManagement from "../assets/video/productTitle/GuestManagement.mp4";
+// import weddingNotepadLiner from "../assets/video/productTitle/weddingNotepad(liner).mp4";
+// import weddingNotepadPhoto from "../assets/video/productTitle/WeddingNotepad(photo).mp4";
 
 export default function CategoryFilterLabel() {
   const [showFilter, setShowFilter] = useState(false);
@@ -201,7 +202,7 @@ export default function CategoryFilterLabel() {
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847431/hzvkypnvdbscbr3baxob.jpg",
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847474/lsccahbuqfci6mwx12u1.jpg",
       ],
-      productVideo: weddingManagement,
+      productVideo: "https://res.cloudinary.com/dpesh4axn/video/upload/v1737639309/WeddingManagement_yqpov5.mp4",
       RoyalPrice: 2550,
       popularPrice: 2150,
       productOff: 15,
@@ -229,7 +230,7 @@ export default function CategoryFilterLabel() {
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847573/me1wozjqjxspxyotunms.jpg",
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847663/duqm5add6bbvpxfldphp.jpg",
       ],
-      productVideo: guestManagement,
+      productVideo: "https://res.cloudinary.com/dpesh4axn/video/upload/v1737639309/GuestManagement_vgkhwh.mp4",
       RoyalPrice: 1599,
       popularPrice: 1199,
       productOff: 15,
@@ -257,7 +258,7 @@ export default function CategoryFilterLabel() {
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846910/pthblbjmd6itillfnby3.jpg",
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847030/yvyq33is48bofze3hxly.jpg",
       ],
-      productVideo: GuestListBooklet,
+      productVideo: "https://res.cloudinary.com/dpesh4axn/video/upload/v1737639309/GuestListBooklet_ozg4vq.mp4",
       RoyalPrice: 1349,
       popularPrice: 1099,
       productOff: 15,
@@ -285,7 +286,7 @@ export default function CategoryFilterLabel() {
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846910/pthblbjmd6itillfnby3.jpg",
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847030/yvyq33is48bofze3hxly.jpg",
       ],
-      productVideo: weddingNotepadLiner,
+      productVideo: "https://res.cloudinary.com/dpesh4axn/video/upload/v1737639309/WeddingNotepad_Liner_drys4h.mp4",
       RoyalPrice: 649,
       popularPrice: 389,
       productOff: 15,
@@ -313,7 +314,7 @@ export default function CategoryFilterLabel() {
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846910/pthblbjmd6itillfnby3.jpg",
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736847030/yvyq33is48bofze3hxly.jpg",
       ],
-      productVideo: weddingNotepadPhoto,
+      productVideo: "https://res.cloudinary.com/dpesh4axn/video/upload/v1737639309/WeddingNotepad_Photo_v5buul.mp4",
       RoyalPrice: 749,
       popularPrice: 499,
       productOff: 15,

@@ -1491,7 +1491,7 @@ export default function WeddingCardEditor() {
               />
 
               {/* Left Arrow */}
-              <div className="absolute top-1/2 left-0 transform -translate-y-1/2">
+              <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
                 <button
                   onClick={handlePreviousImage}
                   className="p-3 bg-white text-gray-700 rounded-full shadow hover:bg-gray-100 hover:text-gray-900 transition duration-300"
@@ -1500,7 +1500,7 @@ export default function WeddingCardEditor() {
                 </button>
               </div>
               {/* Right Arrow */}
-              <div className="absolute top-1/2 right-0 transform -translate-y-1/2">
+              <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
                 <button
                   onClick={handleNextImage}
                   className="p-3 bg-white text-gray-700 rounded-full shadow hover:bg-gray-100 hover:text-gray-900 transition duration-300"
