@@ -231,7 +231,8 @@ export default function TopCategories() {
       "Planner Books": [
         "Wedding Management",
         "Guest Management",
-        "Wedding Notepad",
+        "Wedding Notepad(liner)",
+        "Wedding Notepad(photo)",
         "Guest List Booklet - Best Seller",
       ],
       "Free Printable": [
@@ -319,11 +320,18 @@ export default function TopCategories() {
     setPriceFilter(event.target.value);
   };
 
+  console.log(products);
+  
+
+console.log(selectedOptions.subSub);
 
   // Parse query parameters
 const params = new URLSearchParams(location.search);
 const searchTerm = params.get("term") || "";
 const category = params.get("category") || "All";
+
+console.log(searchTerm,category);
+
 
 
 // Filter Logic
@@ -349,7 +357,7 @@ const filteredProducts = products?.filter((product) => {
   // Matches the search term
   const matchesSearchTerm =
     !searchTerm ||
-    product.name?.toLowerCase().includes(searchTerm.toLowerCase());
+    product.subSubCategory?.toLowerCase().includes(searchTerm.toLowerCase());
 
 
   return (
