@@ -436,7 +436,7 @@ export default function CategoryFilterLabel() {
                 From Rs.
                 {filter === "royal"
                   ? productData.RoyalPrice -
-                    (productData.popularPrice * productData.productOff) / 100
+                    (productData.RoyalPrice * productData.productOff) / 100
                   : productData.popularPrice -
                     (productData.popularPrice * productData.productOff) /
                       100}{" "}
