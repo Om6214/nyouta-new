@@ -11,7 +11,8 @@ const testimonials = [
     role: "Homeowner",
     content:
       "Elegant, unique, and easy to share—our wedding invite was perfect!",
-    avatar: "https://images.pexels.com/photos/18173195/pexels-photo-18173195/free-photo-of-couple-talking-on-the-sidewalk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/18173195/pexels-photo-18173195/free-photo-of-couple-talking-on-the-sidewalk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -20,7 +21,8 @@ const testimonials = [
     role: "Property Investor",
     content:
       "The animated invite was magical and set the tone for our big day.",
-    avatar: "https://images.pexels.com/photos/14904695/pexels-photo-14904695.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/14904695/pexels-photo-14904695.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#FFD700", "#FFD700"], // All Gold
   },
   {
@@ -29,7 +31,8 @@ const testimonials = [
     role: "First-time Buyer",
     content:
       "Angira Creation captured our love story beautifully in the invitation.",
-    avatar: "https://images.pexels.com/photos/9827806/pexels-photo-9827806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/9827806/pexels-photo-9827806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -37,7 +40,8 @@ const testimonials = [
     name: "Divya & Aarav",
     role: "First-time Buyer",
     content: "Modern, eco-friendly, and absolutely gorgeous. Loved it!",
-    avatar: "https://images.pexels.com/photos/6023737/pexels-photo-6023737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/6023737/pexels-photo-6023737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -45,7 +49,8 @@ const testimonials = [
     name: "Niharika & Raj",
     role: "Commercial Property Owner",
     content: "Stunning design and hassle-free process. Highly recommend!",
-    avatar: "https://images.pexels.com/photos/7742859/pexels-photo-7742859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/7742859/pexels-photo-7742859.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -53,7 +58,8 @@ const testimonials = [
     name: "Preeti & Sameer",
     role: "Commercial Property Owner",
     content: "Guests couldn’t stop praising the unique and elegant design.",
-    avatar: "https://images.pexels.com/photos/8819460/pexels-photo-8819460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/8819460/pexels-photo-8819460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -61,7 +67,8 @@ const testimonials = [
     name: "Tanvi & Manan",
     role: "Commercial Property Owner",
     content: "Exceeded all expectations—our invite was simply perfect!",
-    avatar: "https://images.pexels.com/photos/2586337/pexels-photo-2586337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/2586337/pexels-photo-2586337.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -69,7 +76,8 @@ const testimonials = [
     name: "Rohini & Akshay",
     role: "Commercial Property Owner",
     content: "Professional, creative, and fast. A wonderful experience!",
-    avatar: "https://images.pexels.com/photos/2649169/pexels-photo-2649169.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/2649169/pexels-photo-2649169.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -77,7 +85,8 @@ const testimonials = [
     name: "Ria & Arjun",
     role: "Commercial Property Owner",
     content: "The perfect mix of tradition and modern elegance. Thank you!",
-    avatar: "https://images.pexels.com/photos/29433054/pexels-photo-29433054/free-photo-of-black-and-white-couple-in-sunlit-forest.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/29433054/pexels-photo-29433054/free-photo-of-black-and-white-couple-in-sunlit-forest.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -85,7 +94,8 @@ const testimonials = [
     name: "Priya & Rajesh",
     role: "Commercial Property Owner",
     content: "A seamless process from concept to delivery. Highly satisfied!",
-    avatar: "https://images.pexels.com/photos/28998612/pexels-photo-28998612/free-photo-of-romantic-couple-in-scenic-cao-b-ng-mountains.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/28998612/pexels-photo-28998612/free-photo-of-romantic-couple-in-scenic-cao-b-ng-mountains.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -94,7 +104,8 @@ const testimonials = [
     role: "Commercial Property Owner",
     content:
       "A beautiful invitation that set the perfect tone for our wedding.",
-    avatar: "https://images.pexels.com/photos/14682161/pexels-photo-14682161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/14682161/pexels-photo-14682161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -102,7 +113,8 @@ const testimonials = [
     name: "Priya & Vikram",
     role: "Commercial Property Owner",
     content: "Angira Creation made our wedding planning so much easier.",
-    avatar: "https://images.pexels.com/photos/8142734/pexels-photo-8142734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/8142734/pexels-photo-8142734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -110,7 +122,8 @@ const testimonials = [
     name: "Anjali & Kunal",
     role: "Commercial Property Owner",
     content: "The invite was a perfect blend of tradition and modernity.",
-    avatar: "https://images.pexels.com/photos/26821403/pexels-photo-26821403/free-photo-of-couple-hugging-on-a-street.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/26821403/pexels-photo-26821403/free-photo-of-couple-hugging-on-a-street.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -118,7 +131,8 @@ const testimonials = [
     name: "Sanya & Arjun",
     role: "Commercial Property Owner",
     content: "Our wedding invite was a masterpiece. Thank you!",
-    avatar: "https://images.pexels.com/photos/12909946/pexels-photo-12909946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/12909946/pexels-photo-12909946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -126,7 +140,8 @@ const testimonials = [
     name: "Priya & Rajesh",
     role: "Commercial Property Owner",
     content: "Guests loved the interactive features of our digital invite.",
-    avatar: "https://images.pexels.com/photos/17131240/pexels-photo-17131240/free-photo-of-couple-with-hats-against-sunset-over-sea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/17131240/pexels-photo-17131240/free-photo-of-couple-with-hats-against-sunset-over-sea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -134,7 +149,8 @@ const testimonials = [
     name: "Neha & Karan",
     role: "Commercial Property Owner",
     content: "A hassle-free experience with a beautiful outcome.",
-    avatar: "https://images.pexels.com/photos/17030108/pexels-photo-17030108/free-photo-of-a-man-and-woman-standing-next-to-each-other-in-front-of-a-blue-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/17030108/pexels-photo-17030108/free-photo-of-a-man-and-woman-standing-next-to-each-other-in-front-of-a-blue-wall.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -142,7 +158,8 @@ const testimonials = [
     name: "Aarav & Meera",
     role: "Commercial Property Owner",
     content: "Professional service and a stunning final product.",
-    avatar: "https://images.pexels.com/photos/23801564/pexels-photo-23801564/free-photo-of-back-view-of-a-couple-walking-with-umbrellas.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/23801564/pexels-photo-23801564/free-photo-of-back-view-of-a-couple-walking-with-umbrellas.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -150,7 +167,8 @@ const testimonials = [
     name: "Anjali & Kunal",
     role: "Commercial Property Owner",
     content: "The invite was a perfect blend of tradition and modernity.",
-    avatar: "https://images.pexels.com/photos/5032974/pexels-photo-5032974.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/5032974/pexels-photo-5032974.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -158,7 +176,8 @@ const testimonials = [
     name: "Priya & Rajesh",
     role: "Commercial Property Owner",
     content: "Guests loved the interactive features of our digital invite.",
-    avatar: "https://images.pexels.com/photos/7275701/pexels-photo-7275701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/7275701/pexels-photo-7275701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -166,7 +185,8 @@ const testimonials = [
     name: "Maya % Aarav",
     role: "Commercial Property Owner",
     content: "The best decision we made for our wedding—so beautiful and easy!",
-    avatar: "https://images.pexels.com/photos/26545208/pexels-photo-26545208/free-photo-of-woman-in-skirt-sitting-with-man-lying-down-in-shirt-on-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/26545208/pexels-photo-26545208/free-photo-of-woman-in-skirt-sitting-with-man-lying-down-in-shirt-on-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -174,7 +194,8 @@ const testimonials = [
     name: "Simran & Karan",
     role: "Commercial Property Owner",
     content: "Everyone loved the creative and elegant design. Thank you!",
-    avatar: "https://images.pexels.com/photos/21751236/pexels-photo-21751236/free-photo-of-smiling-woman-sitting-in-traditional-wedding-dress.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/21751236/pexels-photo-21751236/free-photo-of-smiling-woman-sitting-in-traditional-wedding-dress.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -182,7 +203,8 @@ const testimonials = [
     name: "Ishita & Raghav",
     role: "Commercial Property Owner",
     content: "The level of detail in our wedding invitation was incredible.",
-    avatar: "https://images.pexels.com/photos/9767149/pexels-photo-9767149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/9767149/pexels-photo-9767149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -190,7 +212,8 @@ const testimonials = [
     name: "Meera & Sanjay",
     role: "Commercial Property Owner",
     content: "The design team brought our vision to life beautifully!",
-    avatar: "https://images.pexels.com/photos/18213335/pexels-photo-18213335/free-photo-of-woman-and-man-posing-in-biker-gear-and-helmet.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/18213335/pexels-photo-18213335/free-photo-of-woman-and-man-posing-in-biker-gear-and-helmet.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -198,7 +221,8 @@ const testimonials = [
     name: "Ananya & Viraj",
     role: "Commercial Property Owner",
     content: "Quick, professional, and stunning. Absolutely loved it!",
-    avatar: "https://images.pexels.com/photos/12726029/pexels-photo-12726029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/12726029/pexels-photo-12726029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -207,7 +231,8 @@ const testimonials = [
     role: "Commercial Property Owner",
     content:
       "A breathtaking invite that set the tone for our wedding perfectly.",
-    avatar: "https://images.pexels.com/photos/16013881/pexels-photo-16013881/free-photo-of-man-and-woman-walking-with-umbrella.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/16013881/pexels-photo-16013881/free-photo-of-man-and-woman-walking-with-umbrella.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -215,7 +240,8 @@ const testimonials = [
     name: "Raj & Sneha",
     role: "Commercial Property Owner",
     content: "The digital wedding card was vibrant, modern, and easy to share!",
-    avatar: "https://images.pexels.com/photos/16235187/pexels-photo-16235187/free-photo-of-silhouette-of-couple-at-sunset.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/16235187/pexels-photo-16235187/free-photo-of-silhouette-of-couple-at-sunset.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -223,7 +249,8 @@ const testimonials = [
     name: "Tanvi & Sameer",
     role: "Commercial Property Owner",
     content: "Our guests were wowed by the invite’s beauty and elegance.",
-    avatar: "https://images.pexels.com/photos/18526272/pexels-photo-18526272/free-photo-of-man-extends-wishes-to-woman.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/18526272/pexels-photo-18526272/free-photo-of-man-extends-wishes-to-woman.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -232,7 +259,8 @@ const testimonials = [
     role: "Commercial Property Owner",
     content:
       "A digital masterpiece for our wedding that left a lasting impression!",
-    avatar: "https://images.pexels.com/photos/5954848/pexels-photo-5954848.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/5954848/pexels-photo-5954848.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -241,7 +269,8 @@ const testimonials = [
     role: "Commercial Property Owner",
     content:
       "The eco-friendly invitation was as stunning as it was thoughtful.",
-    avatar: "https://images.pexels.com/photos/12909943/pexels-photo-12909943.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/12909943/pexels-photo-12909943.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
   },
   {
@@ -250,9 +279,10 @@ const testimonials = [
     role: "Commercial Property Owner",
     content:
       "Such an elegant and unique design—we’re still receiving compliments!",
-    avatar: "https://images.pexels.com/photos/14010684/pexels-photo-14010684.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
+    avatar:
+      "https://images.pexels.com/photos/14010684/pexels-photo-14010684.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", // Placeholder image
     starColors: ["#FFD700", "#FFD700", "#FFD700", "#C0C0C0", "#C0C0C0"], // Gold and Silver
-  }
+  },
   // {
   //   id: 31,
   //   name: "Alisha & Ankur",
@@ -386,8 +416,6 @@ export default function Testimonials() {
     return () => clearInterval(timer);
   }, []);
 
-
-  
   return (
     <section className="my-4 text-primaryBlue ">
       <div className="container mx-auto lg:px-4 px-0">
@@ -396,7 +424,7 @@ export default function Testimonials() {
         </h2>
         <div className="relative mx-auto  overflow-hidden">
           <div className="slider-container mx-16">
-            <Slider {...settings} >
+            <Slider {...settings}>
               {testimonials.map((items) => (
                 <div>
                   <div className="flex flex-col gap-4 items-center relative font-heroFont overflow-hidden">
@@ -408,7 +436,9 @@ export default function Testimonials() {
                         alt=""
                       />
                       <div className="flex flex-col gap-3 pt-4 items-center h-[150px]">
-                        <p className="text-center h-[80%] px-3  ">{items.content}</p>
+                        <p className="text-center h-[80%] px-3  ">
+                          {items.content}
+                        </p>
                         <h1 className="font-semibold h-[20%] bg-pink-600 px-4 text-white">
                           {items.name}
                         </h1>
