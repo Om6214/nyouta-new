@@ -196,7 +196,7 @@ function formatTime(timeString) {
           </div>
           <div class="flex flex-col items-center">
             <h3 class="text-2xl">VENUE</h3>
-            <h3 class="text-2xl">VENUE NAME HERE</h3>
+            <h3 class="text-2xl"><%=(eventInfo && eventInfo.venue&&eventInfo.venue.address) ?eventInfo.venue.address:'Lernerra Luxury Resort 123 Anywhere St., Any City, ST' %></h3>
           </div>
         </div>
 
@@ -227,7 +227,7 @@ function formatTime(timeString) {
             <%=(about && about.bride && about.bride.description) ? about.bride.description : "We’re so excited to celebrate this next chapter of our love storywith the people who mean the most to us—our family and friends. Your love, support, and blessings have shaped our lives in more ways than we can express, and having you by our side as we say “I do” makes this day even more special." %>
             
           </p>
-          <h2><%= (home && home.name) ? home.name:"Groom"%><%= (home && home.partnerName)? home.partnerName:"Bride" %> &  </h2>
+          <h2><%= (home && home.name) ? home.name:"Groom"%> & <%= (home && home.partnerName)? home.partnerName:"Bride" %>   </h2>
         </div>
         <div class="flower">
           <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" alt="" />
