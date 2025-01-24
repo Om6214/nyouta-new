@@ -1,19 +1,32 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-// import products from "../products.json";
-import { useSelector } from "react-redux";
-import { getProducts } from "../Store/slices/productSlice";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
+
+
 export default function TopCategories() {
-  const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.product);
-  console.log("producs",products);
+
+  const [products, setproducts] = useState()
+
+
   useEffect(() => {
-    if (!products.length) {
-      dispatch(getProducts());
+    async function fetchProducts() {
+      const url = "https://nyouta.onrender.com/api/v1/products/products";
+      try {
+        const response = await axios.get(url);
+
+        setproducts(response.data);
+        // console.log(responseData)
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     }
-  }, [dispatch, products]);
+
+    fetchProducts();
+  }, []);
+  
+
+   
   const dropdownData = {
     "E-Invitations": {
       "Wedding Invitations": [
@@ -315,7 +328,6 @@ const category = params.get("category") || "All";
 
 // Filter Logic
 const filteredProducts = products?.filter((product) => {
-  // Matches the main category
   const matchesCategory =
     category === "All" || product.category === category;
 
@@ -380,8 +392,8 @@ const filteredProducts = products?.filter((product) => {
                 onChange={handleMainChange}
               >
                 <option value="">Select a Category</option>
-                {Object.keys(dropdownData).map((categoryKey) => (
-                  <option key={categoryKey} value={categoryKey}>
+                {Object.keys(dropdownData).map((categoryKey, index) => (
+                  <option key={index} value={categoryKey}>
                     {categoryKey.replace(/-/g, " ").toUpperCase()}
                   </option>
                 ))}
@@ -400,8 +412,8 @@ const filteredProducts = products?.filter((product) => {
                 >
                   <option value="">Select an Option</option>
                   {Object.keys(dropdownData[selectedOptions.main]).map(
-                    (subOptionKey) => (
-                      <option key={subOptionKey} value={subOptionKey}>
+                    (subOptionKey, index) => (
+                      <option key={index} value={subOptionKey}>
                         {subOptionKey}
                       </option>
                     )
@@ -463,10 +475,10 @@ const filteredProducts = products?.filter((product) => {
               <div>No products found</div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                {filteredProducts?.map((product) => (
+                {filteredProducts?.map((product, index) => (
                   <Link
                     to={`/product/${product?._id}`}
-                    key={product?._id}
+                    key={index}
                     state={{ product }} // Pass product data
                     className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group border border-gray-400"
                   >
