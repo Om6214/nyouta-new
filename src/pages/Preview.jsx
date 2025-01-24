@@ -60,7 +60,7 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
                   ))}
 
                   {/* Rotate Button */}
-                 
+
                 </div>
               );
             }
@@ -68,54 +68,37 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
 
 
           {/* Small Images */}
-          {images.map(({ id, src, x, y, width, height }) => {
-            if (y > 0) {
-              y = y + 280;
-              x = x + height + 10;
-            } else {
-              x = x + width - 80;
-              y = y + 280;
-            }
-
-            return (
-              <img
-                key={id}
-                src={src}
-                alt={`Small Image ${id}`}
-                className="absolute"
-                style={{
-                  top: y,
-                  left: x,
-                  width: `${width}px`,
-                  height: `${height}px`,
-                  transform: 'translate(-50%, -50%)',
-                }}
-              />
-            );
-          })}
+          {images.map(({ id, src, x, y, width, height }) => (
+            <img
+              key={id}
+              src={src}
+              alt={`Image ${id}`}
+              style={{
+                position: "absolute",
+                left: `${x}px`,
+                top: `${y}px`,
+                width: `${width}px`,
+                height: `${height}px`,
+              }}
+            />
+          ))}
 
           {/* Stickers */}
           {stickers.map(({ id, src, x, y, width, height, rotation }) => {
-            if (y > 0) {
-              y = y + 280;
-            } else {
-              y = y + 290;
-            }
 
             return (
               <img
-                key={id}
-                src={src}
-                alt={`Sticker ${id}`}
-                className="absolute"
-                style={{
-                  top: y,
-                  left: x,
-                  width: `${width}px`,
-                  height: `${height}px`,
-                  transform: `translate(-50%, -50%) rotate(${rotation}deg)`,
-                }}
-              />
+              key={id}
+              src={src}
+              alt={`Image ${id}`}
+              style={{
+                position: "absolute",
+                left: `${x}px`,
+                top: `${y}px`,
+                width: `${width}px`,
+                height: `${height}px`,
+              }}
+            />
             );
           })}
         </div>

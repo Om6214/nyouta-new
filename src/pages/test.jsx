@@ -17,7 +17,6 @@ import { FaStickerMule } from "react-icons/fa";
 import watermark from '../watermark/watermark.jpg';
 import ShimmerSkeleton from './ShimmerSkeleton';
 import TextFieldsMobile from './TextFieldsMobile';
-import PdfGenerator from './PdfGenerator';
 
 export default function WeddingCardEditor() {
   const [selectedStickerId, setSelectedStickerId] = useState(null);
@@ -32,7 +31,7 @@ export default function WeddingCardEditor() {
   const [selectedFont, setSelectedFont] = useState('Blade Rush');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
-  const [generatePdf, setGeneratepdf] = useState(false);
+
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
   const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState(false);
@@ -307,8 +306,8 @@ export default function WeddingCardEditor() {
             container.style.height = `${imgHeight}px`;
 
             // Calculate scale factors
-            const defaultWidth = 350;
-            const defaultHeight = 530;
+            const defaultWidth = 320;
+            const defaultHeight = 608;
             scaleX = imgWidth / defaultWidth;
             scaleY = imgHeight / defaultHeight;
             resolve();
@@ -384,14 +383,18 @@ export default function WeddingCardEditor() {
 
       // Add small images with scaling
       smallImagesData.forEach(({ src, x, y, width, height }) => {
-        y=y+34;
-        x=x+80;
+        if (y > 0) {
+          y = y + 280;
+          x = x + height + 10;
+        } else {
+          x = x + width - 80;
+          y = y + 280;
+        }
         const imgElement = document.createElement('img');
         imgElement.src = src;
         imgElement.style.position = 'absolute';
         imgElement.style.top = `${y * scaleY}px`;
         imgElement.style.left = `${x * scaleX}px`;
-        scaleX+=0.3; scaleY+=0.3;
         imgElement.style.width = `${width * Math.min(scaleX, scaleY)}px`;
         imgElement.style.height = `${height * Math.min(scaleX, scaleY)}px`;
         imgElement.style.transform = 'translate(-50%, -50%)';
@@ -401,14 +404,17 @@ export default function WeddingCardEditor() {
       // Add stickers with scaling
       //console.log("page stickers", pageStickers);
       pageStickers.forEach(({ id, src, x, y, width, height, rotation }) => {
-        y=y-10;
-        x=x+16;
+        if (y > 0) {
+          y = y + 280;
+        } else {
+          y = y + 290;
+        }
+
         const imgElement = document.createElement('img');
         imgElement.src = src;
         imgElement.style.position = 'absolute';
         imgElement.style.top = `${y * scaleY}px`;
         imgElement.style.left = `${x * scaleX}px`;
-        scaleX+=0.3; scaleY+=0.3;
         imgElement.style.width = `${width * Math.min(scaleX, scaleY)}px`;
         imgElement.style.height = `${height * Math.min(scaleX, scaleY)}px`;
         imgElement.style.transform = `rotate(${rotation}deg) translate(-50%, -50%)`;  // Apply rotation
@@ -474,15 +480,20 @@ export default function WeddingCardEditor() {
 
 
 
+
+
+
+
   const handleClose = () => {
     setSelectedField(null); // Close the TextOptions
   };
 
 
   const handleDownloadPDF = () => {
-    generatePDF();
-    //setGeneratepdf(true);
+    generatePDF(); // Call the PDF generation function
   };
+
+
 
 
 
@@ -928,7 +939,7 @@ export default function WeddingCardEditor() {
     document.addEventListener("mouseup", handleMouseUp);
   };
 
-
+  
 
 
   if (loading) return <ShimmerSkeleton />;
@@ -1171,16 +1182,16 @@ export default function WeddingCardEditor() {
                     style={{
                       position: "absolute",
                       cursor: "move",
-                      border: selectedStickerId === id ? "2px dotted blue" : "none", // Blue dotted border if selected
+                      border: selectedStickerId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
                       zIndex: selectedStickerId === id ? 20 : 10, // Ensure border is above other elements
                       display: "inline-block", // Ensure sticker stays within the border
-                      transform: `translate(-50%, -50%)`, // Center sticker correctly
-                      top: 0, // Ensures no offset from parent
-                      left: 0, // Ensures no offset from parent
+                      // border: "1px solid #ccc", // Apply the border around the sticker
+                      padding: "2px 5px", // Add padding to the border around the sticker
                     }}
                     onClick={() => handleStickerClick(id)}
                   >
                     <Resizable
+                      defaultSize={{ width, height }}
                       size={{ width, height }}
                       lockAspectRatio
                       onResizeStop={(e, direction, ref, d) => {
@@ -1197,9 +1208,9 @@ export default function WeddingCardEditor() {
                         );
                       }}
                       style={{
-                        position: "relative",
+                        position: "absolute",
                         zIndex: 10,
-                        border: selectedStickerId === id ? "2px dotted blue" : "none",
+                        border: selectedStickerId === id ? '2px dotted blue' : 'none',
                       }}
                     >
                       <div className="relative">
@@ -1215,12 +1226,14 @@ export default function WeddingCardEditor() {
                               e.stopPropagation();
                               handleDeleteSticker(id);
                             }}
-                            className="absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
+                            className="absolute top-0 right-0 w-6 h-6 shadow bg-white  border-2 border-blue-500 rounded-full flex justify-center items-center"
                             title="Delete Sticker"
                           >
                             <i className="fas fa-times-circle text-red-500 text-sm"></i>
                           </button>
                         )}
+
+
 
                         {selectedStickerId === id && (
                           <div
@@ -1233,72 +1246,6 @@ export default function WeddingCardEditor() {
                         )}
                       </div>
                     </Resizable>
-                  </div>
-                </Draggable>
-              ))}
-
-
-              {smallImages.map(({ id, src, x, y, width, height }) => (
-                <Draggable
-                  key={id}
-                  position={{ x, y }}
-                  onDrag={(e, data) => {
-                    setSmallImages((prev) =>
-                      prev.map((image) =>
-                        image.id === id ? { ...image, x: data.x, y: data.y } : image
-                      )
-                    );
-                  }}
-                  bounds="parent"
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      cursor: "move",
-                      zIndex: selectedImageId === id ? 20 : 10,
-                      width: `${width}px`,
-                      height: `${height}px`,
-                      border: selectedImageId === id ? "2px dotted blue" : "none",
-                      padding: "2px 5px",
-                      top: 0, // Ensures no offset from parent
-                      left: 0, // Ensures no offset from parent
-                      transform: `translate(${x}px, ${y}px)`, // Explicitly position with transform
-                    }}
-                    onClick={() => handleImageClick(id)} // Select image
-                  >
-                    {/* Image */}
-                    <img
-                      src={src}
-                      alt="Small Icon"
-                      className="object-cover w-full h-full rounded border"
-                    />
-
-                    {/* Delete Button */}
-                    {selectedImageId === id && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteImage(id);
-                        }}
-                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-                        style={{ transform: "translate(50%, -50%)" }}
-                        title="Delete Image"
-                      >
-                        <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                      </button>
-                    )}
-
-                    {/* Resize Handle */}
-                    {selectedImageId === id && (
-                      <div
-                        onMouseDown={(e) => handleResizeMouseDownImage(id, e)}
-                        className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-                        style={{ transform: "translate(50%, 50%)" }}
-                        title="Resize Image"
-                      >
-                        <i className="fas fa-arrows-alt text-white text-sm"></i>
-                      </div>
-                    )}
                   </div>
                 </Draggable>
               ))}
@@ -1423,14 +1370,72 @@ export default function WeddingCardEditor() {
                 )
               )}
 
+              {smallImages.map(({ id, src, x, y, width, height }) => (
+                <Draggable
+                  key={id}
+                  position={{ x, y }}
+                  onDrag={(e, data) => {
+                    setSmallImages((prev) =>
+                      prev.map((image) =>
+                        image.id === id ? { ...image, x: data.x, y: data.y } : image
+                      )
+                    );
+                  }}
+                  onStart={(e) => e.button === 0} // Start dragging only with left mouse button
+                  bounds="parent"
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      cursor: "move",
+                      zIndex: 10,
+                      width: `${width}px`, // Make width dynamic based on size
+                      height: `${height}px`, // Make height dynamic based on size
+                      //border: "2px solid #ccc", // Border around the image
+                      borderRadius: "8px", // Optional: Add rounded corners to the border around the image
+                      border: selectedImageId === id ? '2px dotted blue' : 'none', // Blue dotted border if selected
+                      // zIndex: selectedImageId === id ? 20 : 10, // Ensure border is above other elements
+                      padding: "2px 5px",
 
+                    }}
+                    onClick={() => handleImageClick(id)} // Select image
+                  >
+                    <img
+                      src={src}
+                      alt="Small Icon"
+                      className="object-cover w-full h-full rounded border"
+                    />
 
+                    {/* Add delete and resize options when selected */}
+                    {selectedImageId === id && (
+                      <>
+                        {/* Delete Icon */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteImage(id);
+                          }}
+                          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
+                          style={{ transform: "translate(50%, -50%)" }}
+                          title="Delete Image"
+                        >
+                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                        </button>
 
-
-
-
-
-
+                        {/* Resize Handle */}
+                        <div
+                          onMouseDown={(e) => handleResizeMouseDownImage(id, e)}
+                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
+                          style={{ transform: "translate(50%, 50%)" }}
+                          title="Resize Image"
+                        >
+                          <i className="fas fa-arrows-alt text-white text-sm"></i>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </Draggable>
+              ))}
 
 
             </div>
@@ -1495,18 +1500,6 @@ export default function WeddingCardEditor() {
               onClose={handleClosePreview}
             />
           )}
-
-          {
-            generatePdf && (
-              <PdfGenerator
-                savedPages={savedPages}
-                savedSmallImages={savedSmallImages}
-                savedStickers={savedStickers}
-                images={images}
-                textFields={textFields}
-              />
-            )
-          }
 
 
 
