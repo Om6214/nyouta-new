@@ -68,7 +68,6 @@ function App() {
           <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
           <Route path="/e/navbar/:pageName/:pagid/*" element={<FreeGreetingsFilter />} />
           <Route path='/edit/PhotoBook/:id' element={<PhotoBook />} />
-          
           <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
           <Route path='/edit/Planner Books/:pageid' element={<DesignEdit />} />
           <Route path='/edit/free greetings/:pageid' element={<DesignEdit />} />
