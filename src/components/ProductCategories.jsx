@@ -317,7 +317,8 @@ export default function TopCategories() {
 
 
   const handlePriceChange = (event) => {
-    setPriceFilter(event.target.value);
+    const value = event.target.value ? parseFloat(event.target.value) : Infinity;
+    setPriceFilter(value);
   };
 
   console.log(products);
