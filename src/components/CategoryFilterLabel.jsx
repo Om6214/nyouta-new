@@ -392,7 +392,7 @@ export default function CategoryFilterLabel() {
           </div>
         </div>
         <div>
-          <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
+          <div className="p-6 md:px-10 md:py-8 bg-white rounded-lg shadow-lg">
             <div className="mb-4">
               <h1 className="text-3xl font-bold mb-2">
                 {productData.productSubSubCategory}

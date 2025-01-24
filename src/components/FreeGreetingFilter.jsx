@@ -328,7 +328,7 @@ export default function CategoryFilterLabel() {
                 className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
                   filter === "all"
                 }`}
-                // onClick={() => setFilter("all")}
+                onClick={() => setFilter("all")}
               >
                 Clear all
               </button>
@@ -346,7 +346,7 @@ export default function CategoryFilterLabel() {
                 }`}
                 onClick={() => setFilter("Wishes to New Wed")}
               >
-                Wishes to New Wed
+                Newly Wed Wishes
               </button>
               <button
                 className={`block w-full py-1 font-avalonN px-2 text-left rounded-md  ${
@@ -395,7 +395,7 @@ export default function CategoryFilterLabel() {
                       setShowFilter(false);
                     }}
                   >
-                    Wishes to New Wed
+                    Newly Wed Wishes
                   </button>
                   <button
                     className={`block w-full text-sm py-1 font-avalonN px-2 text-left rounded-md ${
@@ -441,7 +441,7 @@ export default function CategoryFilterLabel() {
                         className="absolute rounded-t-lg inset-0 w-full h-full object-cover"
                       />
                     </div>
-                    <div className="px-1 flex justify-center h-14 items-center text-center">
+                    <div className="px-1 flex justify-center h-10 items-center text-center">
                       <h2 className="text-md font-avalonB text-gray-600 ">
                         {item.name}
                       </h2>
