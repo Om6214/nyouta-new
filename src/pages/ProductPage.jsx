@@ -7,9 +7,9 @@ import { toast } from "react-toastify";
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log(state);
+  //console.log(state);
   const product = state?.product;
-  console.log(product);
+  console.log("product",product);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -48,7 +48,7 @@ export default function ProductPage() {
           <img
             src={product.image[currentImageIndex]}
             alt={product.name}
-            className="w-60 h-112  object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="relative w-4/4  object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
           <div className="grid grid-cols-5 gap-3 mt-1">
             {product.image.map((img, index) => (
@@ -70,7 +70,7 @@ export default function ProductPage() {
           <div>
             <h1 className="text-3xl font-bold mb-2 text-gray-800">{product.name}</h1>
             <p className="text-xl font-semibold mb-2 text-gray-700">₹{product.price.toFixed(2)}</p>
-            <p className="mb-2 text-gray-600">SKU: {product.sku}</p>
+           
 
             <div className="mb-2">
               <label
@@ -94,7 +94,7 @@ export default function ProductPage() {
               <ul className="list-disc list-inside text-gray-700">
                 <li>Category: {product.category}</li>
                 <li>Subcategory: {product.subCategory}</li>
-                <li>Tags: {product.tags.join(", ")}</li>
+               
               </ul>
             </div>
 
