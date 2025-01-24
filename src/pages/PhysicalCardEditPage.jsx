@@ -52,6 +52,7 @@ export default function WeddingCardEditor() {
   const [showImageUploadOptions, setShowImageUploadOptions] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [savedPages, setSavedPages] = useState({});
+  console.log("savedpages globle",savedPages);
   const [savedStickers, setSavedStickers] = useState({});
   const [selectedImageId, setSelectedImageId] = useState(null);
   const [images, setImages] = useState([]);
@@ -158,7 +159,7 @@ export default function WeddingCardEditor() {
     const savedSmallImagesFromStorage = JSON.parse(localStorage.getItem('savedSmallImages')) || {};
     const savedStickersFromStorage = JSON.parse(localStorage.getItem('savedStickers')) || {}; // Load stickers from localStorage
 
-    console.log('savedStickersFromStorage', savedStickersFromStorage);  // Debugging line
+    console.log('savedPagesFromStorage', savedPagesFromStorage);  // Debugging line
 
     setSavedPages(savedPagesFromStorage);
     setSavedSmallImages(savedSmallImagesFromStorage);
@@ -177,6 +178,33 @@ export default function WeddingCardEditor() {
       setStickers(savedStickersFromStorage[currentImageIndex]);
     }
   }, [currentImageIndex]);
+
+  const handleSaveChanges = () => {
+    // Retrieve and update saved pages
+    const updatedSavedPages = JSON.parse(localStorage.getItem("savedPages")) || {};
+    updatedSavedPages[currentImageIndex] = textFields;
+    localStorage.setItem("savedPages", JSON.stringify(updatedSavedPages));
+  
+    console.log("savedPages", updatedSavedPages); // Debugging
+    setSavedPages(updatedSavedPages); // Update React state
+  
+    // Retrieve and update saved small images
+    const updatedSmallImages = JSON.parse(localStorage.getItem("savedSmallImages")) || {};
+    updatedSmallImages[currentImageIndex] = smallImages;
+    localStorage.setItem("savedSmallImages", JSON.stringify(updatedSmallImages));
+  
+    // Retrieve and update saved stickers
+    const updatedStickers = JSON.parse(localStorage.getItem("savedStickers")) || {};
+    updatedStickers[currentImageIndex] = stickers;
+    localStorage.setItem("savedStickers", JSON.stringify(updatedStickers));
+  
+    // Show success message
+    setShowSuccessMessage(true);
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 2000);
+  };
+  
 
   const [resizeState, setResizeState] = useState(null);
 
@@ -592,26 +620,7 @@ export default function WeddingCardEditor() {
 
  
 
-  const handleSaveChanges = () => {
-    
-    const savedPages = JSON.parse(localStorage.getItem('savedPages')) || {};
-    savedPages[currentImageIndex] = textFields;
-    localStorage.setItem('savedPages', JSON.stringify(savedPages));
- 
-    const savedSmallImages = JSON.parse(localStorage.getItem('savedSmallImages')) || {};
-    savedSmallImages[currentImageIndex] = smallImages;
-    localStorage.setItem('savedSmallImages', JSON.stringify(savedSmallImages));
 
-    const savedStickers = JSON.parse(localStorage.getItem('savedStickers')) || {};
-    savedStickers[currentImageIndex] = stickers; // Save stickers data to localStorage
-    localStorage.setItem('savedStickers', JSON.stringify(savedStickers));
-
-    setShowSuccessMessage(true);
-    setCurrentImageIndex(index);
-    setTimeout(() => {
-      setShowSuccessMessage(false);
-    }, 2000);
-  };
 
 
 
@@ -1478,10 +1487,10 @@ export default function WeddingCardEditor() {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
         >
-          <div className="flex flex-col 2xl:mb-6   sm:ml-0 xl:mb-6 xl:ml-56 md:mr-4 mr-8">
+          <div className="flex flex-col 2xl:mb-6   sm:ml-0 xl:mb-6 xl:ml-56 md:mr-4 mr-8 mt-20">
             {/* Image Container */}
             <div className="relative  flex items-center mr-8 rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden"
-              style={{ width: "270px" }}>
+              style={{ width: "320px" }}>
               <img
                 src={imageUrl}
                 alt="Background"
@@ -1491,7 +1500,7 @@ export default function WeddingCardEditor() {
               />
 
               {/* Left Arrow */}
-              <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+              <div className="absolute top-1/2 left-0 transform -translate-y-1/2">
                 <button
                   onClick={handlePreviousImage}
                   className="p-3 bg-white text-gray-700 rounded-full shadow hover:bg-gray-100 hover:text-gray-900 transition duration-300"
@@ -1500,7 +1509,7 @@ export default function WeddingCardEditor() {
                 </button>
               </div>
               {/* Right Arrow */}
-              <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
+              <div className="absolute top-1/2 right-0 transform -translate-y-1/2">
                 <button
                   onClick={handleNextImage}
                   className="p-3 bg-white text-gray-700 rounded-full shadow hover:bg-gray-100 hover:text-gray-900 transition duration-300"
@@ -1908,7 +1917,7 @@ export default function WeddingCardEditor() {
               {/* Save Button */}
               <button
                 onClick={handleSaveChanges}
-                className="flex items-center justify-center gap-2 px-7 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                className="flex items-center justify-center gap-2 px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -1930,7 +1939,7 @@ export default function WeddingCardEditor() {
               {/* Preview Button */}
               <button
                 onClick={handlePreview}
-                className="flex items-center justify-center gap-2  px-6 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                className="flex items-center justify-center gap-2  px-10 py-3 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

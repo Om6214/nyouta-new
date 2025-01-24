@@ -8,7 +8,7 @@ const Preview = ({ images, textFields, stickers, currentImage, onClose }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div
         className="relative   flex flex-col items-center rounded-lg shadow-md border border-gray-200 bg-gray-50 overflow-hidden"
-        style={{ width: "270px" }}
+        style={{ width: "320px" }}
       >
         <h2 className="text-2xl font-bold mb-4">Preview</h2>
         <div ref={previewRef} className="relative w-full h-auto">

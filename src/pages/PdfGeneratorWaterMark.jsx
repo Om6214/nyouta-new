@@ -82,7 +82,7 @@ console.log("working");
                 key={pageIndex}
                 ref={(el) => (previewRefs.current[pageIndex] = el)}
                 className="relative  overflow-hidden border border-gray-300 shadow-lg rounded-xl bg-white"
-                style={{width:"270px"}}
+                style={{width:"320px"}}
               >
                 <img src={currentImage} alt={`Page ${pageIndex + 1}`} className="w-full h-full object-cover" />
                
