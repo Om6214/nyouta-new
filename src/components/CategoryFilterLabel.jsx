@@ -596,7 +596,7 @@ export default function CategoryFilterLabel() {
                       ider: item._id,
                       product: item,
                     }}
-                    className="bg-white p-2 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
+                    className="bg-white p-2 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-300 hover:shadow-2xl"
                   >
                     <div className="relative w-full h-[30vh] rounded-lg overflow-hidden">
                       <img
@@ -606,7 +606,7 @@ export default function CategoryFilterLabel() {
                       />
                     </div>
                     <div className="px-1 flex justify-center pt-2 items-center text-center">
-                      <h2 className="text-md font-avalonB font-extralight text-gray-600">
+                      <h2 className="text-md font-avalonB text-gray-600">
                         {item.name.length > 18 ? `${item.name.slice(0,18)}...` : item.name}
                       </h2>
                     </div>

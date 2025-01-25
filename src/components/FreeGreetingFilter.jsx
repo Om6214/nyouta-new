@@ -432,7 +432,7 @@ export default function CategoryFilterLabel() {
                       ider: item._id,
                       product: item,
                     }}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105 p-2"
+                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-300 hover:shadow-2xl p-2"
                   >
                     <div className="relative w-full h-[30vh] p-2">
                       <img

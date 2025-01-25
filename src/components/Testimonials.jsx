@@ -436,10 +436,10 @@ export default function Testimonials() {
                         alt=""
                       />
                       <div className="flex flex-col gap-3 pt-4 items-center h-[150px]">
-                        <p className="text-center h-[80%] px-3  ">
+                        <p className="text-center font-avalonN h-[80%] px-3  ">
                           {items.content}
                         </p>
-                        <h1 className="font-semibold h-[20%] bg-pink-600 px-4 text-white">
+                        <h1 className="font-avalonB h-[20%] bg-pink-600 px-4 text-white">
                           {items.name}
                         </h1>
                         {/* <blockquote className="text-center">
