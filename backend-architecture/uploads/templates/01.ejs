@@ -409,7 +409,7 @@ function formatTime(timeString) {
             <h1 class="text-6xl text-pink-800 text-center">Photo Gallery</h1>
             <div class="flex gap-8 justify-center">
               <% if (gallery && gallery.photos && gallery.photos.length > 0) { %>
-                <div class="flex flex-wrap justify-center">
+                <div class="flex flex-wrap flex-col lg:flex-row justify-center">
                   <% gallery.photos.forEach(function(photo, index) { %>
                     <img class="w-64 m-2" src="<%= photo %>" alt="">
                   <% }); %>
