@@ -370,7 +370,7 @@ export default function LoginRegister() {
           <button
             id="button1"
             type="submit"
-            className="px-8 py-3 mt-4 rounded-full bg-red-500 text-white uppercase font-bold hover:bg-red-600"
+            className="md:px-8 py-3 px-4 mt-4 rounded-full bg-red-500 text-white uppercase font-bold hover:bg-red-600"
           >
             Sign In
           </button>
@@ -387,15 +387,16 @@ export default function LoginRegister() {
         className={`absolute top-0 left-1/2 h-full w-1/2 overflow-hidden transition-transform duration-500 z-20 ${isRightPanelActive ? "-translate-x-full" : "translate-x-0"
           }`}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-700 to-yellow-500 flex">
+        <div className="absolute md:w-full inset-0 bg-gradient-to-r from-yellow-700 to-yellow-500 flex " >
           <div
             className={`absolute top-0 left-0 h-full  flex flex-col items-center justify-center p-6 sm:p-10 transition-transform duration-500 ${isRightPanelActive ? "translate-x-0" : "-translate-x-full"
               }`}
           >
-            <h1 className="font-bold text-2xl text-white mb-4">Hello, Friend!</h1>
-            <p className="text-sm text-white mb-4">
+            <h1 className="font-bold md:text-2xl text-white mb-4 hidden md:block">Hello, Friend!</h1>
+            <p className="text-sm text-white mb-4 hidden md:block">
               Enter your personal details and start your journey with us
             </p>
+
             <button
               id="button1"
               className="px-8 py-3 rounded-full border border-white text-white uppercase font-bold hover:bg-white hover:text-yellow-700"
@@ -408,8 +409,8 @@ export default function LoginRegister() {
             className={`absolute top-0 right-0 h-full  flex flex-col items-center justify-center p-10 transition-transform duration-500 ${isRightPanelActive ? "translate-x-full" : "translate-x-0"
               }`}
           >
-            <h1 className="font-bold text-2xl text-white mb-4">Welcome Back!</h1>
-            <p className="text-sm text-white mb-4">
+            <h1 className="font-bold md:text-2xl text-white mb-4 hidden md:block">Welcome Back!</h1>
+            <p className="text-sm text-white mb-4 hidden md:block">
               To keep connected with us, please login with your personal info
             </p>
             <button
