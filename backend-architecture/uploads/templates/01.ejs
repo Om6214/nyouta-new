@@ -133,6 +133,21 @@
       .form-div{
         width: 33%;
       }
+      @media only screen and (max-width: 480px) {
+        .container-mob{
+          flex-direction: column;
+          padding: 1rem 5px;
+        }
+        .container-mob h1{
+          font-size: 3rem;
+        }
+        .container-mob h2{
+          font-size: 2rem;
+        }
+        .about{
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -165,7 +180,7 @@ function formatTime(timeString) {
         }
         %>
     <section id="section-1">
-      <div class="container">
+      <div class="container container-mob">
         <div class="floral-image">
           <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" />
         </div>
@@ -185,7 +200,7 @@ function formatTime(timeString) {
       </div>
     </section>
     <section id="section-2">
-      <div class="bg-blue-200 px-8 py-4 flex justify-between items-center">
+      <div class="bg-blue-200 px-8 py-4 flex flex-col justify-between items-center container-mob">
         <div class="flex flex-col gap-24 pl-32">
           <div class="flex flex-col items-center gap-2">
             <h1 class="text-6xl">Save the Date</h1>
@@ -204,7 +219,7 @@ function formatTime(timeString) {
           <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654545/c3_lp8zpe.png" alt="" />
         </div>
 
-        <div>
+        <div class="flex lg:flex-col">
           <h1 class="text-6xl"><%= (home && home.partnerName)? home.partnerName:"Bride" %></h1>
           <span class="text-5xl">&</span>
           <h1 class="text-6xl"><%= (home && home.name) ? home.name:"Groom"%></h1>
@@ -217,7 +232,7 @@ function formatTime(timeString) {
     </section>
 
     <section id="section-3">
-      <div class="flex py-8 px-24 justify-between">
+      <div class="flex py-8 px-24 justify-between container-mob">
         <div class="flex flex-col about items-center gap-4">
           <h1 class="text-6xl">About Us</h1>
           <p class="text-center">
@@ -235,7 +250,7 @@ function formatTime(timeString) {
       </div>
     </section>
     <section id="section-4">
-      <div class="flex justify-between items-center px-40 py-8">
+      <div class="flex justify-between items-center px-40 py-8 container-mob">
         <div class="flower">
           <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" alt="" />
         </div>
@@ -248,29 +263,29 @@ function formatTime(timeString) {
       </div>
     </section>
     <section id="section-5">
-      <div class="flex justify-between items-center px-24 py-16 bg-blue-200">
+      <div class="container-mob flex justify-between items-center px-24 py-16 bg-blue-200">
         <div class="flower-wed">
           <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" alt="" />
         </div>
         <div class="about flex flex-col items-center gap-6">
           <h1 class="text-6xl text-pink-600">Wedding Programs</h1>
           <div class="space-y-2 flex flex-col items-center">
-            <h2 class="text-3xl text-pink-600">Monday, 21ST APRIL, 2025</h2>
-            <h3 class="text-xl text-blue-600">Event-1 NAME - TIME</h3>
-            <h3 class="text-xl text-blue-600">Event-2 NAME - TIME</h3>
-            <h2 class="text-xl text-pink-700">VENUE: VENUE NAME HERE</h2>
+            <h2 class="lg:text-3xl text-xl text-pink-600">Monday, 21ST APRIL, 2025</h2>
+            <h3 class="lg:text-xl text-lg text-blue-600">Event-1 NAME - TIME</h3>
+            <h3 class="lg:text-xl text-lg text-blue-600">Event-2 NAME - TIME</h3>
+            <h2 class="lg:text-xl text-lg text-pink-700">VENUE: VENUE NAME HERE</h2>
           </div>
           <div class="space-y-2 flex flex-col items-center">
-            <h2 class="text-3xl text-pink-600">Monday, 21ST APRIL, 2025</h2>
-            <h3 class="text-xl text-blue-600">Event-1 NAME - TIME</h3>
-            <h3 class="text-xl text-blue-600">Event-2 NAME - TIME</h3>
-            <h2 class="text-xl text-pink-700">VENUE: VENUE NAME HERE</h2>
+            <h2 class="lg:text-3xl text-xl text-pink-600">Monday, 21ST APRIL, 2025</h2>
+            <h3 class="lg:text-xl text-lg text-blue-600">Event-1 NAME - TIME</h3>
+            <h3 class="lg:text-xl text-lg text-blue-600">Event-2 NAME - TIME</h3>
+            <h2 class="lg:text-xl text-lg text-pink-700">VENUE: VENUE NAME HERE</h2>
           </div>
         </div>
       </div>
     </section>
     <section id="section-6">
-      <div class="flex justify-between px-40 py-16">
+      <div class="container-mob flex justify-between px-40 py-16">
         <div class="flex flex-col items-center">
           <h1 class="text-6xl">Event Name</h1>
           <div class="space-y-2 flex flex-col items-center">
@@ -299,7 +314,7 @@ function formatTime(timeString) {
       </div>
     </section>
     <section id="section-7">
-      <div class="flex items-center justify-between py-16 px-40">
+      <div class="container-mob flex items-center justify-between py-16 px-40">
         <div class="flower">
           <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" alt="" />
         </div>
@@ -332,9 +347,9 @@ function formatTime(timeString) {
       </div>
     </section>
     <section id="section-8">
-      <div class="py-10 space-y-4 px-40 bg-blue-200">
+      <div class="container-mob py-10 space-y-4 px-40 bg-blue-200">
         <h2 class="text-4xl text-center text-pink-600">WEDDING VENUE</h2>
-        <div class="flex justify-between">
+        <div class="flex justify-between container-mob">
           <div class="flower">
             <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" alt="" />
           </div>
@@ -351,7 +366,7 @@ function formatTime(timeString) {
       </div>
     </section>
     <section id="section-9">
-      <div class="flex items-center justify-between px-40 py-16">
+      <div class="container-mob flex items-center justify-between px-40 py-16">
         <div class="flower">
           <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" alt="" />
         </div>
@@ -377,7 +392,7 @@ function formatTime(timeString) {
       </div>
     </section>
     <section id="section-10">
-        <div class="flex justify-between items-center px-40 py-16 bg-blue-200">
+        <div class="container-mob flex justify-between items-center px-40 py-16 bg-blue-200">
             <div class="flower">
                 <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png" alt="">
             </div>
@@ -390,7 +405,7 @@ function formatTime(timeString) {
         </div>
     </section>
     <section id="section-11">
-        <div class="py-16 px-24 space-y-4">
+        <div class="container-mob py-16 px-24 space-y-4">
             <h1 class="text-6xl text-pink-800 text-center">Photo Gallery</h1>
             <div class="flex gap-8 justify-center">
               <% if (gallery && gallery.photos && gallery.photos.length > 0) { %>
@@ -400,10 +415,10 @@ function formatTime(timeString) {
                   <% }); %>
                 </div>
             <% } else { %>
-              <img class="w-64" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655115/wed1_x1x9uo.jpg" alt="">
-              <img class="w-64" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655158/wed2_jrrsej.jpg" alt="">
-              <img class="w-64" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655207/wed3_sigwpr.jpg" alt="">
-              <img class="w-64" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655245/wed4_lebflo.jpg" alt="">
+              <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655115/wed1_x1x9uo.jpg" alt="">
+              <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655158/wed2_jrrsej.jpg" alt="">
+              <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655207/wed3_sigwpr.jpg" alt="">
+              <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655245/wed4_lebflo.jpg" alt="">
             <% } %>
                 
             </div>
@@ -411,10 +426,10 @@ function formatTime(timeString) {
         </div>
     </section>
     <section id="section-12">
-        <div class="px-24 py-16">
+        <div class="px-24 py-16 container-mob">
             <h2 class="text-6xl text-center text-pink-800">RSVP</h2>
-            <form action="" class="px-40 space-y-4">
-                <div class="flex gap-4">
+            <form action="" class="px-40 space-y-4 container-mob">
+                <div class="flex flex-col lg:flex-row gap-4">
                     <div class="flex flex-col gap-2 form-div">
                         <label class="text-xl" for="">Full Name</label>
                         <input class="border-2 px-1 py-2 rounded-md" type="text" placeholder="Enter you name">
@@ -437,7 +452,7 @@ function formatTime(timeString) {
         </div>
     </section>
     <section id="section-13">
-        <div class="flex flex-col gap-8 justify-center items-center">
+        <div class="flex flex-col gap-8 justify-center items-center container-mob">
             <h1 class="text-6xl text-blue-700">Creating Special For Special Day</h1>
             <img src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654585/c4_uldilv.png" alt="">
             <h2 class="text-4xl">NYOUTA.COM</h2>
