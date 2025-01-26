@@ -12,10 +12,10 @@ export default function Footer() {
   return (
     <footer className="bg-secondary text-amber-200 py-8 space-y-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 font-avalonN">
           {/* User Area */}
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-white">Nyouta</h2>
+            <h2 className="text-xl font-avalonB mb-4 text-white">Nyouta</h2>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -46,23 +46,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* <div>
-            <h2 className="text-xl font-semibold mb-4 text-white">Quick Links</h2>
-            <ul className="space-y-2">
-              <li><a href="/products" className="hover:text-white transition-colors">Wedding Invitations</a></li>
-              <li><a href="/products" className="hover:text-white transition-colors">Party Invitations</a></li>
-              <li><a href="/products" className="hover:text-white transition-colors">Pooja & Rituals</a></li>
-              <li><a href="/products" className="hover:text-white transition-colors">Welcome Signages</a></li>
-              <li><a href="/products" className="hover:text-white transition-colors">Announcement</a></li>
-              <li><a href="/products" className="hover:text-white transition-colors">Theme Invitations</a></li>
-              <li><a href="/blog" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="/printables" className="hover:text-white transition-colors">Free Printables</a></li>
-            </ul>
-          </div> */}
-
           {/* Join E-nyouta */}
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-white">Join Us</h2>
+            <h2 className="text-xl font-avalonB mb-4 text-white">Join Us</h2>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -74,7 +60,7 @@ export default function Footer() {
               </li>
             </ul>
 
-            <h2 className="text-xl font-semibold mt-8 mb-4 text-white">
+            <h2 className="text-xl font-avalonB mt-8 mb-4 text-white">
               Be Social & Stay Connected
             </h2>
             <div className="flex space-x-4">
@@ -115,9 +101,7 @@ export default function Footer() {
 
           {/* Contact Us */}
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-white">
-              Contact Us
-            </h2>
+            <h2 className="text-xl font-avalonB mb-4 text-white">Contact Us</h2>
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <Mail className="w-5 h-5" />

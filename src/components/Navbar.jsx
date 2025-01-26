@@ -544,16 +544,15 @@ export default function MainNav() {
         </div>
         <div className="sm:flex hidden items-center sm:me-0  lg:me-10">
           {" "}
-          <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
-            Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc.
-            &gt;&gt;&gt;&gt; Scrolling{" "}
-          </h1>
+          <marquee className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
+            Celebrate Your Event with Savings – Shop Now for Discounts! | Get Ready for Your Event – Special Discounts Inside! | Plan Perfect Weddings at a Discount – Limited Time Offer! | Show us your selfie with our portal and unlock a special discount just for you!
+          </marquee>
         </div>
         <div className="flex sm:hidden items-center sm:me-0  lg:me-10">
           {" "}
-          <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
-            Scrolling Offers | Discount Coupons | etc.{" "}
-          </h1>
+          <marquee className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
+          Celebrate Your Event with Savings – Shop Now for Discounts! | Get Ready for Your Event – Special Discounts Inside! | Plan Perfect Weddings at a Discount – Limited Time Offer! | Show us your selfie with our portal and unlock a special discount just for you!
+          </marquee>
         </div>
       </div>
       <header

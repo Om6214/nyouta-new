@@ -38,7 +38,7 @@ import PhotoBook from './components/PhotoBook';
 import ItineraryCompo from './components/ItineraryCompo';
 import DesignEdit from './components/DesignEdit';
 import FreeGreetingsFilter from "./components/FreeGreetingFilter"
-
+import Weddingtemp01 from './pages/templates/Template01'
 
 // gaganluthrasirji
 
@@ -53,6 +53,7 @@ function App() {
           <Route path="/products" element={<Category />} />
           <Route path="/weds/:slug" element={<WeddingWebsite />} />
           <Route path='/create-wedding-website' element={<WeddingWebsiteUrl/>}/>
+          <Route path='/edit-wedding-website/01' element={<Weddingtemp01/>}/>
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/terms" element={<Terms />} />
@@ -68,7 +69,6 @@ function App() {
           <Route path="/e/nav/:pageName/:pagid/*" element={<CategoryFilterLabel />} />
           <Route path="/e/navbar/:pageName/:pagid/*" element={<FreeGreetingsFilter />} />
           <Route path='/edit/PhotoBook/:id' element={<PhotoBook />} />
-          
           <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
           <Route path='/edit/Planner Books/:pageid' element={<DesignEdit />} />
           <Route path='/edit/free greetings/:pageid' element={<DesignEdit />} />
@@ -94,7 +94,7 @@ function ConditionalNavbar() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/weds') || 
+  if (location.pathname.includes('/weds')||location.pathname.includes('/edit-wedding-website/01') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
     return null;
@@ -108,7 +108,7 @@ function ConditionalFooter() {
   const location = useLocation();
 
   // Check if the current route matches the path for the wedding website or the physical/digital card edit pages
-  if (location.pathname.includes('/weds') || 
+  if (location.pathname.includes('/weds')||location.pathname.includes('/edit-wedding-website/01') || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-physical-card')) || 
       (location.pathname.includes('/product/') && location.pathname.includes('edit-digital-card'))) {
     return null;

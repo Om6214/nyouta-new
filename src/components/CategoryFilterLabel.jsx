@@ -392,7 +392,7 @@ export default function CategoryFilterLabel() {
           </div>
         </div>
         <div>
-          <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
+          <div className="p-6 md:px-10 md:py-8 bg-white rounded-lg shadow-lg">
             <div className="mb-4">
               <h1 className="text-3xl font-bold mb-2">
                 {productData.productSubSubCategory}
@@ -436,7 +436,7 @@ export default function CategoryFilterLabel() {
                 From Rs.
                 {filter === "royal"
                   ? productData.RoyalPrice -
-                    (productData.popularPrice * productData.productOff) / 100
+                    (productData.RoyalPrice * productData.productOff) / 100
                   : productData.popularPrice -
                     (productData.popularPrice * productData.productOff) /
                       100}{" "}
@@ -596,7 +596,7 @@ export default function CategoryFilterLabel() {
                       ider: item._id,
                       product: item,
                     }}
-                    className="bg-white p-2 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
+                    className="bg-white p-2 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-300 hover:shadow-2xl"
                   >
                     <div className="relative w-full h-[30vh] rounded-lg overflow-hidden">
                       <img
@@ -606,7 +606,7 @@ export default function CategoryFilterLabel() {
                       />
                     </div>
                     <div className="px-1 flex justify-center pt-2 items-center text-center">
-                      <h2 className="text-md font-avalonB font-extralight text-gray-600">
+                      <h2 className="text-md font-avalonB text-gray-600">
                         {item.name.length > 18 ? `${item.name.slice(0,18)}...` : item.name}
                       </h2>
                     </div>

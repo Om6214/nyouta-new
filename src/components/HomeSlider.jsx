@@ -42,7 +42,7 @@ const HomeSlider = () => {
         <div className="lg:w-[30%]">
           <div className="py-6 px-6 lg:h-full flex flex-col lg:gap-4 gap-3 text-secondary items-start border-2 rounded-xl bg-priBg">
             <h1 className="text-7xl font-ttMedium font-bold">new !</h1>
-            <h1 className="text-4xl font-linna leading-relaxed">
+            <h1 className="lg:text-4xl text-3xl font-linna leading-relaxed lg:leading-relaxed">
               shAped Wedding invitAtion
             </h1>
             <h2 className="text-xl">

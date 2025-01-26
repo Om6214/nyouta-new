@@ -35,7 +35,7 @@ const promises = [
 const PromiseCard = () => {
   return (
     <div className=" py-4 flex-col flex gap-8">
-      <h1 className="text-center text-primary font-heroFont text-2xl lg:text-4xl font-semibold pt-8">
+      <h1 className="text-center text-secondary font-avalonB text-2xl lg:text-3xl pt-8">
         Our Promise : Quality, Personalization, and a Heartfelt Experience
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 gap-6 lg:px-16 px-2 py-1">
