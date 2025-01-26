@@ -1970,7 +1970,7 @@ export default function WeddingCardEditor() {
                       {/* Add Text Button */}
                       <button
                         onClick={handleAddNewText}
-                        className="flex items-center justify-center gap-2  px-14 py-4  mt-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                        className="flex items-center justify-center gap-2  px-16 py-4  mt-4 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                       >
                         <AiOutlineFileText className="w-6 h-6" />
                       </button>
@@ -1978,7 +1978,7 @@ export default function WeddingCardEditor() {
                       {/* Add Sticker Button */}
                       <button
                         onClick={() => setShowStickerSelector(true)}
-                        className="flex items-center justify-center gap-3 px-12 py-4 mt-4  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+                        className="flex items-center justify-center gap-3 px-16 py-4 mt-4  bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
                       >
                         <FaStickerMule className="w-6 h-6" />
                       </button>
@@ -1988,7 +1988,7 @@ export default function WeddingCardEditor() {
                     <button
                       onClick={handleAddImageClick}
                       className="flex items-center justify-center gap-2  h-20 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-                      style={{ width: "270px" }}
+                      style={{ width: "330px" }}
                     >
                       <AiOutlinePicture className="w-8 h-8" />
                       <span className="text-lg">Add Images</span>
