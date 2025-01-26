@@ -32,8 +32,12 @@ const TemplateCard = ({ template, id, image,setShowForm,setId }) => {
     }
   }
   const handleUpdatedetails = () => {
-    setShowForm(true);
+    // setShowForm(true);   // Enable it when u want to use form functionality
     setId(id);
+    if(localStorage.getItem('token')){
+      navigate('/edit-wedding-website/01')
+    }
+    else navigate('/login')
   }
   const handleCreate = () => {
     handleTemplateClick(id);
