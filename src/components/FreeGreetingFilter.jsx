@@ -156,19 +156,13 @@ export default function CategoryFilterLabel() {
 
   const filteredResponseData = responseData.filter((item) => {
     if (filter === "Wishes to New Wed") {
-      return (
-        item.subSubCategory.toLowerCase() === filter.toLowerCase()
-      );
+      return item.subSubCategory.toLowerCase() === filter.toLowerCase();
     }
     if (filter === "Engagement Wishes") {
-      return (
-        item.subSubCategory.toLowerCase() === filter.toLowerCase()
-      );
+      return item.subSubCategory.toLowerCase() === filter.toLowerCase();
     }
     if (filter === "all") {
-      return (
-        item.subCategory.toLowerCase() === pagid.toLowerCase()
-      );
+      return item.subCategory.toLowerCase() === pagid.toLowerCase();
     } // Return all items if no filter is applied
   });
   console.log(RelatedItems);
@@ -299,10 +293,11 @@ export default function CategoryFilterLabel() {
                       memorable.
                     </li>
                     <li>
-                    Personalize your greeting cards with heartfelt messages.
+                      Personalize your greeting cards with heartfelt messages.
                     </li>
                     <li>
-                    Access and print your favorite designs instantly for quick and easy celebrations.
+                      Access and print your favorite designs instantly for quick
+                      and easy celebrations.
                     </li>
                   </ul>
                 </div>
@@ -340,10 +335,10 @@ export default function CategoryFilterLabel() {
               <button
                 className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2
                       ${
-                  filter === "Wishes to New Wed"
-                    ? "bg-orange-500 text-white"
-                    : "bg-[#fff] border-2"
-                }`}
+                        filter === "Wishes to New Wed"
+                          ? "bg-orange-500 text-white"
+                          : "bg-[#fff] border-2"
+                      }`}
                 onClick={() => setFilter("Wishes to New Wed")}
               >
                 Newly Wed Wishes
