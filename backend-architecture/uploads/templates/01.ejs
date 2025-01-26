@@ -407,20 +407,18 @@ function formatTime(timeString) {
     <section id="section-11">
         <div class="container-mob py-16 px-24 space-y-4">
             <h1 class="text-6xl text-pink-800 text-center">Photo Gallery</h1>
-            <div class="flex gap-8 justify-center">
+            <div class="flex gap-8 justify-center flex-col lg:flex-row">
               <% if (gallery && gallery.photos && gallery.photos.length > 0) { %>
-                <div class="flex flex-wrap flex-col lg:flex-row justify-center">
+                <div class="flex flex-wrap justify-center">
                   <% gallery.photos.forEach(function(photo, index) { %>
                     <img class="w-64 m-2" src="<%= photo %>" alt="">
                   <% }); %>
                 </div>
             <% } else { %>
-              <div class="flex flex-wrap flex-col lg:flex-row justify-center">
               <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655115/wed1_x1x9uo.jpg" alt="">
               <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655158/wed2_jrrsej.jpg" alt="">
               <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655207/wed3_sigwpr.jpg" alt="">
               <img class="w-64 mx-auto" src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655245/wed4_lebflo.jpg" alt="">
-            </div>
             <% } %>
                 
             </div>
