@@ -340,6 +340,8 @@ export default function CategoryFilterLabel() {
     .replaceAll("(", "")
     .replaceAll(")", "");
   const productData = TitleProduct[fetchvar];
+  console.log(filteredItems[0].category);
+  
 
   return (
     <>
@@ -724,3 +726,4 @@ export default function CategoryFilterLabel() {
     </>
   );
 }
+

@@ -479,12 +479,12 @@ const CategoriesNavBar = () => {
         {
           subTitle: "Wedding Notepad (Liner)",
           imgUrl: wedNote, // Example image
-          url: "e/nav/Planner Books/Planner Books/Wedding Notepad(liner)",
+          url: "e/nav/Planner Books/Planner Books/Wedding Notepad(Liner)",
         },
         {
           subTitle: "Wedding Notepad (Photo)",
           imgUrl: wedPhoto, // Example image
-          url: "e/nav/Planner Books/Planner Books/Wedding Notepad(photo)",
+          url: "e/nav/Planner Books/Planner Books/Wedding Notepad(Photo)",
         },
         {
           subTitle: "Guest List Booklet - Best Seller",
