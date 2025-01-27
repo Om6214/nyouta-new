@@ -10,7 +10,7 @@ export default function ProductPage() {
   const product = state?.product;
   console.log("product",product);
   const { id } = useParams();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
@@ -49,7 +49,9 @@ export default function ProductPage() {
   const handleAddtoCart = async () => {
     setAddToCartLoading(true);
     dispatch(addtoCart({ productId: id, quantity: quantity }));
-    dispatch(getCart());
+    console.log( dispatch(getCart()));
+    
+   
     setAddToCartLoading(false);
   };
 
