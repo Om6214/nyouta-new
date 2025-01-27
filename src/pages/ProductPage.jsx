@@ -7,9 +7,8 @@ import { toast } from "react-toastify";
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log(state);
   const product = state?.product;
-  console.log(product);
+  console.log("product", product);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -17,6 +16,7 @@ export default function ProductPage() {
   const [addToCartLoading, setAddToCartLoading] = useState(false);
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
+
 
   const handleThumbnailClick = (index) => {
     setCurrentImageIndex(index);
@@ -27,6 +27,19 @@ export default function ProductPage() {
   };
 
   const handleEditImage = () => {
+
+    const isLoggedIn = !!localStorage.getItem("token"); // Replace 'userToken' with your auth token key or condition.
+
+    console.log(isLoggedIn);
+
+
+    if (!isLoggedIn) {
+      toast.error("You need to be logged in first!", {
+        autoClose: 3000,
+      });
+      return;
+    }
+
     const route = `/product/${product.id}/edit-physical-card`;
     navigate(route, {
       state: { images: product.image },
@@ -36,7 +49,9 @@ export default function ProductPage() {
   const handleAddtoCart = async () => {
     setAddToCartLoading(true);
     dispatch(addtoCart({ productId: id, quantity: quantity }));
-    dispatch(getCart());
+    console.log( dispatch(getCart()));
+    
+   
     setAddToCartLoading(false);
   };
 
@@ -48,7 +63,7 @@ export default function ProductPage() {
           <img
             src={product.image[currentImageIndex]}
             alt={product.name}
-            className="w-60 h-112  object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="relative w-4/4  object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
           <div className="grid grid-cols-5 gap-3 mt-1">
             {product.image.map((img, index) => (
@@ -56,9 +71,8 @@ export default function ProductPage() {
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${
-                  currentImageIndex === index ? "border-blue-500" : "border-gray-300"
-                }`}
+                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${currentImageIndex === index ? "border-blue-500" : "border-gray-300"
+                  }`}
                 onClick={() => handleThumbnailClick(index)}
               />
             ))}
@@ -70,7 +84,7 @@ export default function ProductPage() {
           <div>
             <h1 className="text-3xl font-bold mb-2 text-gray-800">{product.name}</h1>
             <p className="text-xl font-semibold mb-2 text-gray-700">₹{product.price.toFixed(2)}</p>
-            <p className="mb-2 text-gray-600">SKU: {product.sku}</p>
+
 
             <div className="mb-2">
               <label
@@ -94,7 +108,7 @@ export default function ProductPage() {
               <ul className="list-disc list-inside text-gray-700">
                 <li>Category: {product.category}</li>
                 <li>Subcategory: {product.subCategory}</li>
-                <li>Tags: {product.tags.join(", ")}</li>
+
               </ul>
             </div>
 

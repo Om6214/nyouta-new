@@ -15,6 +15,7 @@ import logo from "../assets/images/nyouta-logo2.jpg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Store/slices/authSlice";
+import Slider from "react-slick";
 
 const navItems = [
   {
@@ -359,6 +360,7 @@ const navItems = [
     children: [
       {
         label: "Wishes Greeting",
+        url:'',
         Filters: [
           { a: "Wishes to New Wed" },
           { a: "Engagement Wishes" },
@@ -529,6 +531,17 @@ export default function MainNav() {
     setOpenDropdown(null);
     navigate("/login");
   };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear"
+  };
   return (
     <div className="flex flex-col">
       <div className="h-[30px] flex justify-between px-6 lg:px-56 sm:px-8  bg-[#FAF0DC] ">
@@ -537,16 +550,15 @@ export default function MainNav() {
         </div>
         <div className="sm:flex hidden items-center sm:me-0  lg:me-10">
           {" "}
-          <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
-            Scrolling &lt;&lt;&lt;&lt;&lt; Offers | Discount Coupons | etc.
-            &gt;&gt;&gt;&gt; Scrolling{" "}
-          </h1>
+          <marquee className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
+            Celebrate Your Event with Savings – Shop Now for Discounts! | Get Ready for Your Event – Special Discounts Inside! | Plan Perfect Weddings at a Discount – Limited Time Offer! | Show us your selfie with our portal and unlock a special discount just for you!
+          </marquee>
         </div>
         <div className="flex sm:hidden items-center sm:me-0  lg:me-10">
           {" "}
-          <h1 className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
-            Scrolling Offers | Discount Coupons | etc.{" "}
-          </h1>
+          <marquee className="text-[#643C28] font-bold text-xs sm:text-sm lg:text-md ">
+          Celebrate Your Event with Savings – Shop Now for Discounts! | Get Ready for Your Event – Special Discounts Inside! | Plan Perfect Weddings at a Discount – Limited Time Offer! | Show us your selfie with our portal and unlock a special discount just for you!
+          </marquee>
         </div>
       </div>
       <header

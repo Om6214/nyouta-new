@@ -12,6 +12,11 @@ import pdfPrint from "../assets/images/stressfree/checklist.jpg";
 import wedNote from "../assets/images/stressfree/wednoteliner.jpg";
 import wedPhoto from "../assets/images/stressfree/wednotephoto.jpeg";
 
+import wishes from "../assets/images/wishes/wish.jpg";
+import thanks from "../assets/images/wishes/thank.jpg";
+import feeling from "../assets/images/wishes/feeling.jpg";
+import funny from "../assets/images/wishes/funny.jpg";
+
 const categories = [
   {
     title: "Print Invitations",
@@ -220,19 +225,20 @@ const categories = [
     subCategory: [
       {
         subTitle: "Wishes Greeting",
-        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+        imgUrl: wishes, // Example image
+        url: "e/navbar/free greetings/Wishes Greeting/Wishes Greeting",
       },
       {
         subTitle: "Thanks Greeting",
-        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+        imgUrl: thanks, // Example image
       },
       {
         subTitle: "Feeling Greeting",
-        imgUrl: "https://imagizer.imageshack.com/img923/9710/88AWMh.jpg", // Example image
+        imgUrl: feeling, // Example image
       },
       {
         subTitle: "Funny Greeting",
-        imgUrl: "https://i.postimg.cc/SN3Zymj9/Guests-14.jpg", // Example image
+        imgUrl: funny, // Example image
       },
     ],
   },

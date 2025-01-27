@@ -155,28 +155,14 @@ export default function CategoryFilterLabel() {
   // Filtering logic based on timestamps
 
   const filteredResponseData = responseData.filter((item) => {
-    if (filter === "royal") {
-      return (
-        new Date(item.createdAt) >= new Date("2025-01-01T11:58:23.284Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-14T09:51:56.887Z") &&
-        item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase()
-      );
+    if (filter === "Wishes to New Wed") {
+      return item.subSubCategory.toLowerCase() === filter.toLowerCase();
     }
-    if (filter === "popular") {
-      return (
-        new Date(item.createdAt) >= new Date("2025-01-14T09:52:06.843Z") &&
-        new Date(item.createdAt) <= new Date("2025-01-17T13:34:16.874Z") &&
-        item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase()
-        // item.subSubCategory.toLowerCase() === path.toLowerCase()
-      );
+    if (filter === "Engagement Wishes") {
+      return item.subSubCategory.toLowerCase() === filter.toLowerCase();
     }
     if (filter === "all") {
-      return (
-        item.category.toLowerCase() === pageName.toLowerCase() &&
-        item.subCategory.toLowerCase() === pagid.toLowerCase()
-      );
+      return item.subCategory.toLowerCase() === pagid.toLowerCase();
     } // Return all items if no filter is applied
   });
   console.log(RelatedItems);
@@ -185,7 +171,7 @@ export default function CategoryFilterLabel() {
   return (
     <>
       {filteredItems?.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5">
           <div className="mt-6">
             <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
               <Swiper
@@ -255,7 +241,7 @@ export default function CategoryFilterLabel() {
               </Swiper>
             </div>
           </div>
-          <div>
+          <div className="">
             <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
               {/* Details section */}
               <div className="mb-4">
@@ -306,6 +292,13 @@ export default function CategoryFilterLabel() {
                       High-quality cards available for free to make your moments
                       memorable.
                     </li>
+                    <li>
+                      Personalize your greeting cards with heartfelt messages.
+                    </li>
+                    <li>
+                      Access and print your favorite designs instantly for quick
+                      and easy celebrations.
+                    </li>
                   </ul>
                 </div>
               ) : null}
@@ -330,7 +323,7 @@ export default function CategoryFilterLabel() {
                 className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
                   filter === "all"
                 }`}
-                // onClick={() => setFilter("all")}
+                onClick={() => setFilter("all")}
               >
                 Clear all
               </button>
@@ -340,17 +333,25 @@ export default function CategoryFilterLabel() {
                 <h2 className="text-lg font-avalonB">Variations</h2>
               </div>
               <button
-                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 bg-white
+                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2
+                      ${
+                        filter === "Wishes to New Wed"
+                          ? "bg-orange-500 text-white"
+                          : "bg-[#fff] border-2"
                       }`}
-                // onClick={() => setFilter("royal")}
+                onClick={() => setFilter("Wishes to New Wed")}
               >
-                All Elegant
+                Newly Wed Wishes
               </button>
               <button
-                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md bg-white`}
-                // onClick={() => setFilter("popular")}
+                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md  ${
+                  filter === "Engagement Wishes"
+                    ? "bg-orange-500 text-white"
+                    : "bg-[#fff] border-2"
+                }`}
+                onClick={() => setFilter("Engagement Wishes")}
               >
-                Floral
+                Engagement Wishes
               </button>
             </div>
           </div>
@@ -379,30 +380,30 @@ export default function CategoryFilterLabel() {
                 <div className="flex flex-col items-start gap-2">
                   <h1 className="font-avalonB">Variations</h1>
                   <button
-                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md border-2 ${
-                      filter === "royal"
+                    className={`block w-full py-1 text-sm font-avalonN px-2 text-left rounded-md border-2 ${
+                      filter === "Wishes to New Wed"
                         ? "bg-orange-500 text-white"
                         : "bg-white"
                     }`}
                     onClick={() => {
-                      setFilter("royal");
+                      setFilter("Wishes to New Wed");
                       setShowFilter(false);
                     }}
                   >
-                    Royal
+                    Newly Wed Wishes
                   </button>
                   <button
-                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${
-                      filter === "popular"
+                    className={`block w-full text-sm py-1 font-avalonN px-2 text-left rounded-md ${
+                      filter === "Engagement Wishes"
                         ? "bg-orange-500 text-white"
                         : "bg-[#fff] border-2"
                     }`}
                     onClick={() => {
-                      setFilter("popular");
+                      setFilter("Engagement Wishes");
                       setShowFilter(false);
                     }}
                   >
-                    Popular
+                    Engagement Wishes
                   </button>
                 </div>
               </div>
@@ -426,17 +427,17 @@ export default function CategoryFilterLabel() {
                       ider: item._id,
                       product: item,
                     }}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-200 hover:scale-105"
+                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-300 hover:shadow-2xl p-2"
                   >
-                    <div className="relative w-full h-[30vh]">
+                    <div className="relative w-full h-[30vh] p-2">
                       <img
                         src={item.image[0]}
                         alt={item.name}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        className="absolute rounded-t-lg inset-0 w-full h-full object-cover"
                       />
                     </div>
-                    <div className="px-1 flex justify-center h-14 items-center text-center">
-                      <h2 className="text-lg font-avalonB text-gray-800">
+                    <div className="px-1 flex justify-center h-10 items-center text-center">
+                      <h2 className="text-md font-avalonB text-gray-600 ">
                         {item.name}
                       </h2>
                     </div>

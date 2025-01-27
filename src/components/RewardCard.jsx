@@ -12,10 +12,10 @@ const RewardCard = () => {
   return (
     <div className="bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 text-white font-heroFont py-6 my-6 flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-center text-2xl lg:text-4xl font-semibold">
+        <h1 className="text-center text-2xl lg:text-4xl font-avalonB">
           Exclusive Rewards Await
         </h1>
-        <h2 className="text-center text-xl lg:text-3xl">
+        <h2 className="text-center font-avalonN text-xl lg:text-3xl">
           Shop Now and Earn Special Award with Surprise Gift & Discount
         </h2>
       </div>

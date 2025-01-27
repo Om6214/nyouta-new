@@ -10,6 +10,7 @@ import { ChevronDown } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeddingTemplates } from "../Store/slices/weddingtemplateSlice";
+import { getWeddingWebsitedata } from '../Store/slices/weddingwebsiteSlice';
 import TemplateSection from "../components/TemplateSection.jsx";
 import btnImg from "../assets/images/09.png";
 import { motion } from "framer-motion";
@@ -79,11 +80,15 @@ const WeddingWebsiteUrl = () => {
     (state) => state.weddingtemplates
   );
   // console.log(weddingTemplates);
+
   useEffect(() => {
     if (weddingTemplates.length < 1) {
       dispatch(getWeddingTemplates());
     }
   }, [dispatch]);
+  useEffect(() => {
+      dispatch(getWeddingWebsitedata());
+    }, [dispatch]);
   const toggleFaq = (id) => {
     setOpenId(openId === id ? null : id);
   };

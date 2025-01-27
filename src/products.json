@@ -4,9 +4,9 @@
     "name": "Elegant Wedding Invitation",
     "sku": "WED-001",
     "image": [
-        "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg",
+      "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg",
       "https://imagizer.imageshack.com/img923/9656/kETqxz.jpg",
-     "https://imagizer.imageshack.com/img922/5514/hvvqIf.jpg",
+      "https://imagizer.imageshack.com/img922/5514/hvvqIf.jpg",
       "https://imagizer.imageshack.com/img922/3017/bflFDJ.jpg"
     ],
     "price": 49.99,
@@ -14,7 +14,6 @@
     "category": "Print Invitations",
     "subCategory": "Wedding Invitations",
     "subSubCategory": "Elegant Collection"
-    
   },
   {
     "id": "2",
@@ -23,7 +22,6 @@
     "image": [
       "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg",
       "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg"
-      
     ],
     "price": 49.99,
     "tags": ["wedding", "invitation", "elegant", "classic"],
@@ -38,7 +36,6 @@
     "image": [
       "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg",
       "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg"
-      
     ],
     "price": 49.99,
     "tags": ["wedding", "invitation", "elegant", "classic"],
@@ -53,7 +50,6 @@
     "image": [
       "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg",
       "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg"
-      
     ],
     "price": 49.99,
     "tags": ["wedding", "invitation", "elegant", "classic"],
@@ -68,7 +64,6 @@
     "image": [
       "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg",
       "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg"
-      
     ],
     "price": 49.99,
     "tags": ["wedding", "invitation", "elegant", "classic"],
@@ -83,7 +78,6 @@
     "image": [
       "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg",
       "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg"
-      
     ],
     "price": 49.99,
     "tags": ["wedding", "invitation", "elegant", "classic"],
@@ -98,7 +92,6 @@
     "image": [
       "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg",
       "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg"
-      
     ],
     "price": 49.99,
     "tags": ["wedding", "invitation", "elegant", "classic"],
@@ -113,7 +106,6 @@
     "image": [
       "https://imagizer.imageshack.com/img922/7829/cplqEv.jpg",
       "https://imagizer.imageshack.com/img924/2023/xASzg2.jpg"
-      
     ],
     "price": 49.99,
     "tags": ["wedding", "invitation", "elegant", "classic"],
@@ -333,7 +325,7 @@
     "subCategory": "Ceremony Invitations",
     "subSubCategory": "Kua Poojan"
   },
-  
+
   {
     "id": "18",
     "name": "Modern Ceremony Invitation",
@@ -419,8 +411,6 @@
     "subSubCategory": "Royal Collection - NEW"
   },
 
-
-  
   {
     "id": "24",
     "name": "Save the Date Floral Card",
@@ -936,7 +926,6 @@
     "subSubCategory": "Birthday Photobook"
   },
 
-
   {
     "id": "59",
     "name": "Luxury Wedding Planner",
@@ -947,7 +936,7 @@
     ],
     "price": 89.99,
     "tags": ["planner", "luxury", "wedding"],
-    "category": "Itinerary", 
+    "category": "Itinerary",
     "subCategory": "Wedding Itinerary",
     "subSubCategory": "Room Itinerary"
   },
@@ -961,7 +950,7 @@
     ],
     "price": 89.99,
     "tags": ["planner", "luxury", "wedding"],
-    "category": "Itinerary", 
+    "category": "Itinerary",
     "subCategory": "Wedding Itinerary",
     "subSubCategory": "Check-in Itinerary"
   },
@@ -976,7 +965,7 @@
     ],
     "price": 89.99,
     "tags": ["planner", "luxury", "wedding"],
-    "category": "Itinerary", 
+    "category": "Itinerary",
     "subCategory": "Wedding Itinerary",
     "subSubCategory": "Room Key Enevelop"
   },
@@ -991,7 +980,7 @@
     ],
     "price": 89.99,
     "tags": ["planner", "luxury", "wedding"],
-    "category": "Itinerary", 
+    "category": "Itinerary",
     "subCategory": "Wedding Itinerary",
     "subSubCategory": "Thank You Cards"
   },
@@ -1005,7 +994,7 @@
     ],
     "price": 89.99,
     "tags": ["planner", "luxury", "wedding"],
-    "category": "Itinerary", 
+    "category": "Itinerary",
     "subCategory": "Wedding Itinerary",
     "subSubCategory": "Wedding Menu"
   },
@@ -1019,7 +1008,7 @@
     ],
     "price": 89.99,
     "tags": ["planner", "luxury", "wedding"],
-    "category": "Itinerary", 
+    "category": "Itinerary",
     "subCategory": "Wedding Itinerary",
     "subSubCategory": "Table Itinerary"
   },
@@ -1033,7 +1022,7 @@
     ],
     "price": 89.99,
     "tags": ["planner", "luxury", "wedding"],
-    "category": "Itinerary", 
+    "category": "Itinerary",
     "subCategory": "Wedding Itinerary",
     "subSubCategory": "Dining Table Mats"
   },
@@ -1082,7 +1071,6 @@
     "subSubCategory": "Vehicle Stickers"
   },
 
-
   {
     "id": "69",
     "name": "Wedding News E-Paper Subscription",
@@ -1097,7 +1085,6 @@
     "subCategory": "Stickers",
     "subSubCategory": "Designer Stickers"
   },
-
 
   {
     "id": "70",
@@ -1470,7 +1457,6 @@
     "subSubCategory": "Playing Cards"
   },
 
-  
   {
     "id": "96",
     "name": "Itinerary Puzzle Games",
@@ -1486,7 +1472,6 @@
     "subSubCategory": "Puzzle Games"
   },
 
-  
   {
     "id": "97",
     "name": "Itinerary Fun Games",
@@ -1589,7 +1574,6 @@
     "subSubCategory": "Engagement Magazine"
   },
 
-
   {
     "id": "104",
     "name": "Guest Birthday Magazine",
@@ -1604,7 +1588,6 @@
     "subCategory": "Magazine",
     "subSubCategory": "Birthday Magazine"
   },
-
 
   {
     "id": "105",
@@ -2233,6 +2216,4 @@
     "subCategory": "Free Greetings",
     "subSubCategory": "General Greetings"
   }
-
- 
 ]
