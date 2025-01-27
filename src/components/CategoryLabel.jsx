@@ -11,6 +11,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 export default function CategoryLabel() {
+
+
+  
   const { pageName, "*": path } = useParams();
   const navigate = useNavigate();
   const formatCategoryName = (name) => {
@@ -90,6 +93,10 @@ export default function CategoryLabel() {
                 ))}
               </Swiper>
             </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ab52b04011c2548e0e53c5f3db95876d445e61c3
         </div>
         <div>
         <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
@@ -153,6 +160,11 @@ export default function CategoryLabel() {
       <div id="section2">
     </div>
       </div>
+<<<<<<< HEAD
+=======
+      
+
+>>>>>>> ab52b04011c2548e0e53c5f3db95876d445e61c3
     ):(
           <div>
             <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
