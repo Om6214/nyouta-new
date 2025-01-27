@@ -7,16 +7,16 @@ import { toast } from "react-toastify";
 export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  //console.log(state);
   const product = state?.product;
   console.log("product",product);
   const { id } = useParams();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
+  
 
   const handleThumbnailClick = (index) => {
     setCurrentImageIndex(index);
@@ -27,6 +27,19 @@ export default function ProductPage() {
   };
 
   const handleEditImage = () => {
+
+    const isLoggedIn = !!localStorage.getItem("token"); // Replace 'userToken' with your auth token key or condition.
+
+    console.log(isLoggedIn);
+    
+
+    if (!isLoggedIn) {
+      toast.error("You need to be logged in first!", {
+        autoClose: 3000,
+      });
+      return;
+    }
+  
     const route = `/product/${product.id}/edit-physical-card`;
     navigate(route, {
       state: { images: product.image },
