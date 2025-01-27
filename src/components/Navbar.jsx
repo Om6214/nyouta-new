@@ -465,6 +465,12 @@ export default function MainNav() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const handleFreeGreetingNavigation = (parentLabel, childLabel) => {
+    const basePath = "/e/navbar/free greetings/Wishes Greeting";
+    const finalPath = `${basePath}/${childLabel}`;
+    console.log("Navigating to:", finalPath); // Debugging log
+    window.location.href = finalPath; // Navigate to the constructed path
+  };
 
   useEffect(() => {
     const selectElement = selectRef.current;
@@ -760,8 +766,16 @@ export default function MainNav() {
                             >
                               <Link
                                 to={
-                                  item.url === "/nav/planner books" &&
-                                  child.label !== "Free Printable"
+                                  child.label === "Wishes Greeting"
+                                    ? `/e/navbar/free greetings/Wishes Greeting/Wishes Greeting`
+                                    : child.label === "Thanks Greeting"
+                                    ? `/e/navbar/free greetings/Wishes Greeting/Thanks Greeting`
+                                    : child.label === "Feeling Greetings"
+                                    ? `/e/navbar/free greetings/Wishes Greeting/Feeling Greetings`
+                                    : child.label === "Funny Greetings"
+                                    ? `/e/navbar/free greetings/Wishes Greeting/Funny Greetings`
+                                    : item.url === "/nav/planner books" &&
+                                      child.label !== "Free Printable"
                                     ? `e${item.url}/${encodeURIComponent(
                                         item.label
                                       )}/${encodeURIComponent(child.label)}`
@@ -788,13 +802,35 @@ export default function MainNav() {
                                           (filter, filterIndex) => (
                                             <li key={filterIndex}>
                                               <Link
-                                                to={`e${
-                                                  item.url
-                                                }/${encodeURIComponent(
-                                                  child.label
-                                                )}/${encodeURIComponent(
-                                                  filter.a
-                                                )}`}
+                                                to={
+                                                  child.label ===
+                                                  "Wishes Greeting"
+                                                    ? `/e/navbar/free greetings/Wishes Greeting/Wishes Greeting/${encodeURIComponent(
+                                                        filter.a
+                                                      )}`
+                                                    : child.label ===
+                                                      "Thanks Greeting"
+                                                    ? `/e/navbar/free greetings/Wishes Greeting/Thanks Greeting/${encodeURIComponent(
+                                                        filter.a
+                                                      )}`
+                                                    : child.label ===
+                                                      "Feeling Greetings"
+                                                    ? `/e/navbar/free greetings/Wishes Greeting/Feeling Greetings/${encodeURIComponent(
+                                                        filter.a
+                                                      )}`
+                                                    : child.label ===
+                                                      "Funny Greetings"
+                                                    ? `/e/navbar/free greetings/Wishes Greeting/Funny Greetings/${encodeURIComponent(
+                                                        filter.a
+                                                      )}`
+                                                    : `e${
+                                                        item.url
+                                                      }/${encodeURIComponent(
+                                                        child.label
+                                                      )}/${encodeURIComponent(
+                                                        filter.a
+                                                      )}`
+                                                }
                                                 className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
                                               >
                                                 {filter.a}
