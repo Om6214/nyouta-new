@@ -8,7 +8,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const product = state?.product;
-  console.log("product",product);
+  console.log("product", product);
   const { id } = useParams();
   // const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -16,7 +16,7 @@ export default function ProductPage() {
   const [addToCartLoading, setAddToCartLoading] = useState(false);
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
-  
+
 
   const handleThumbnailClick = (index) => {
     setCurrentImageIndex(index);
@@ -31,7 +31,7 @@ export default function ProductPage() {
     const isLoggedIn = !!localStorage.getItem("token"); // Replace 'userToken' with your auth token key or condition.
 
     console.log(isLoggedIn);
-    
+
 
     if (!isLoggedIn) {
       toast.error("You need to be logged in first!", {
@@ -39,7 +39,7 @@ export default function ProductPage() {
       });
       return;
     }
-  
+
     const route = `/product/${product.id}/edit-physical-card`;
     navigate(route, {
       state: { images: product.image },
@@ -69,9 +69,8 @@ export default function ProductPage() {
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${
-                  currentImageIndex === index ? "border-blue-500" : "border-gray-300"
-                }`}
+                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${currentImageIndex === index ? "border-blue-500" : "border-gray-300"
+                  }`}
                 onClick={() => handleThumbnailClick(index)}
               />
             ))}
@@ -83,7 +82,7 @@ export default function ProductPage() {
           <div>
             <h1 className="text-3xl font-bold mb-2 text-gray-800">{product.name}</h1>
             <p className="text-xl font-semibold mb-2 text-gray-700">₹{product.price.toFixed(2)}</p>
-           
+
 
             <div className="mb-2">
               <label
@@ -107,7 +106,7 @@ export default function ProductPage() {
               <ul className="list-disc list-inside text-gray-700">
                 <li>Category: {product.category}</li>
                 <li>Subcategory: {product.subCategory}</li>
-               
+
               </ul>
             </div>
 

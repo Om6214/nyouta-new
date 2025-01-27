@@ -22,6 +22,7 @@ import welcome from "../assets/images/welcome sign.webp";
 import { Download } from 'lucide-react';
 import { Rnd } from "react-rnd";
 import PdfGeneratorWaterMark from './PdfGeneratorWaterMark';
+import { toast } from "react-toastify";
 
 export default function WeddingCardEditor() {
   //const [draggingField, setDraggingField] = useState(null); // Field being dragged
@@ -181,6 +182,13 @@ export default function WeddingCardEditor() {
 
   const handleSaveChanges = () => {
     // Retrieve and update saved pages
+    
+     
+      toast.success("You have saved successfully!", {
+        autoClose: 3000,
+      });
+      
+    
     const updatedSavedPages = JSON.parse(localStorage.getItem("savedPages")) || {};
     updatedSavedPages[currentImageIndex] = textFields;
     localStorage.setItem("savedPages", JSON.stringify(updatedSavedPages));
@@ -806,7 +814,11 @@ export default function WeddingCardEditor() {
     ]);
     setShowStickerSelector(false);
   };
+  
 
+    
+  
+  
   /*
     const updateTextField = (id, updates) => {
       setTextFields((prevFields) =>
@@ -2277,11 +2289,8 @@ export default function WeddingCardEditor() {
             />
           )}
 
-          {showSuccessMessage && (
-            <div className="absolute top-0 right-10 bg-green-100 border border-green-400 text-green-700 p-2 rounded">
-              Changes saved successfully!
-            </div>
-          )}
+          
+         
 
         </div>
         <div className="hidden md:block   border-l-2 border-gray-300"></div>
