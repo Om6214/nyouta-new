@@ -1,7 +1,5 @@
 import React from "react";
-
 import ProductJson from "../products.json";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/zoom";
@@ -9,27 +7,18 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Zoom, Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
-
-
 import { Link, useNavigate } from "react-router-dom";
-
-
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
 export default function CategoryLabel() {
   const { pageName, "*": path } = useParams();
-
   const navigate = useNavigate();
- 
-
   const formatCategoryName = (name) => {
     return name;
     // .split("-")
     // .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     // .join(" ");
   };
-
   const formatSubCategoryName = (name) => {
     return decodeURIComponent(name);
     // .split(" ")
@@ -38,42 +27,33 @@ export default function CategoryLabel() {
     // .replace(/-/g, " ");
   };
   // if(pageName ==="e-invitations") pageName=='E-Invitations'
-
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
   // console.log(formattedPageName, formattedPath);
-
   const filteredItems = ProductJson.filter((item) => {
     const categoryMatch =
       item.category.toLowerCase() === formattedPageName.toLowerCase();
-
     const subCategoryMatch =
       item.subCategory.toLowerCase() === formattedPath.toLowerCase();
-
     return categoryMatch && subCategoryMatch;
   });
-
-
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
       if (filteredItems[0].category === "Photo Books") {
         // Navigate to a different component with the image as state
         navigate(`/edit/PhotoBook/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
-      } 
+      }
       if (filteredItems[0].category === "Itinerary") {
         // Navigate to a different component with the image as state
         // console.log(filteredItems[0].image[1]);
         navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, { state: { image: filteredItems[0].image[0]} });
-      } 
+      }
       // else {
       //   // Navigate to the default URL
       //   navigate("/someurl");
       // }
     }
   };
-
-
-
   return (
     <>
       {filteredItems.length > 0 ? (
@@ -110,11 +90,6 @@ export default function CategoryLabel() {
                 ))}
               </Swiper>
             </div>
-
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
         </div>
         <div>
         <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
@@ -123,7 +98,6 @@ export default function CategoryLabel() {
         <p className="text-lg text-gray-600">PHOTO PRINTS 5x7 GLOSSY</p>
         <p className="text-sm text-gray-500 mt-1">11017 units sold</p>
       </div>
-
       {/* Select Finish */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold mb-3">Select Finish</h2>
@@ -132,8 +106,6 @@ export default function CategoryLabel() {
             { name: 'Matte', color: 'bg-gray-700' },
             { name: 'Black', color: 'bg-black' },
             { name: 'Beige', color: 'bg-[#FFE4A3]' },
-
-            
           ].map((finish, index) => (
             <div key={index} className="text-center">
               <div className={`h-16 w-16 ${finish.color} rounded-md mb-1`}></div>
@@ -142,9 +114,7 @@ export default function CategoryLabel() {
           ))}
         </div>
       </div>
-
       <div className="border-t border-gray-300 mb-6"></div>
-
       {/* Price and Offer */}
       <div className="mb-6">
         <p className="text-xl font-semibold text-gray-800 mb-1">From Rs. {filteredItems[0].price}</p>
@@ -152,17 +122,13 @@ export default function CategoryLabel() {
         <p className="text-sm font-bold text-orange-600 mt-2">Use Code: 15FREESHIP</p>
         <p className="text-sm text-gray-600">Flat 15% off + Free economy shipping</p>
       </div>
-
-
       <button
           onClick={handleButtonClick}
           className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
         >
           ADD NOW
         </button>
-
       <div className="border-t border-gray-300 mt-6 mb-6"></div>
-
       {/* Product Details */}
       <div>
         <h2 className="text-lg font-semibold mb-3">Product Details</h2>
@@ -171,7 +137,6 @@ export default function CategoryLabel() {
           eye-catching 6x8” print.
         </p>
       </div>
-
       {/* Product Specifications */}
       <div>
         <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
@@ -186,15 +151,9 @@ export default function CategoryLabel() {
         </div>
       <div>
       <div id="section2">
-    
-    
     </div>
       </div>
-      </div>
-
     ):(
-=======
-          </div>
           <div>
             <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
               <div className="mb-4">
@@ -204,7 +163,6 @@ export default function CategoryLabel() {
                 <p className="text-lg text-gray-600">PHOTO PRINTS 5x7 GLOSSY</p>
                 <p className="text-sm text-gray-500 mt-1">11017 units sold</p>
               </div>
-
               {/* Select Finish */}
               <div className="mb-6">
                 <h2 className="text-lg font-semibold mb-3">Select Finish</h2>
@@ -223,9 +181,7 @@ export default function CategoryLabel() {
                   ))}
                 </div>
               </div>
-
               <div className="border-t border-gray-300 mb-6"></div>
-
               {/* Price and Offer */}
               <div className="mb-6">
                 <p className="text-xl font-semibold text-gray-800 mb-1">
@@ -241,13 +197,10 @@ export default function CategoryLabel() {
                   Flat 15% off + Free economy shipping
                 </p>
               </div>
-
               <button className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition">
                 ADD NOW
               </button>
-
               <div className="border-t border-gray-300 mt-6 mb-6"></div>
-
               {/* Product Details */}
               <div>
                 <h2 className="text-lg font-semibold mb-3">Product Details</h2>
@@ -257,7 +210,6 @@ export default function CategoryLabel() {
                   6x8” print.
                 </p>
               </div>
-
               {/* Product Specifications */}
               <div>
                 <h2 className="text-lg font-semibold mb-3">
@@ -284,20 +236,17 @@ export default function CategoryLabel() {
           </div>
         </motion.div>
       ) : (
-
         <div className="p-8 text-center">
           <h1 className="text-2xl font-semibold text-gray-700">
             No products found for {formattedPageName} - {formattedPath}
           </h1>
         </div>
       )}
-
       <div className="px-[6%] pt-[1%]">
         <div className="font-semibold text-[4vh]">Related Items</div>
         <div className="font-normal md:text-[2.2vh] text-[2vw]">
           {/* Create personalized gifts for Kids, Friends, Loved ones and give them the your attention of love. */}
         </div>
-
         <div className="pt-5 md:max-w-[95%] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredItems.map((item) => (

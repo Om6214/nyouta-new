@@ -21,14 +21,16 @@ import PdfGenerator from './PdfGenerator';
 import welcome from "../assets/images/welcome sign.webp";
 import { Download } from 'lucide-react';
 import { Rnd } from "react-rnd";
+import PdfGeneratorWaterMark from './PdfGeneratorWaterMark';
 export default function WeddingCardEditor() {
+  
   const [selectedStickerId, setSelectedStickerId] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newText, setNewText] = useState('');
   const [sizeValue, setSizeValue] = useState(30);
   const [textFields, setTextFields] = useState([]);
-  // State to track selected field
+  
 
   const [isFontModalOpen, setIsFontModalOpen] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Blade Rush');
@@ -953,30 +955,16 @@ export default function WeddingCardEditor() {
     });
   };
   */
-  const DownloadPurchase = () => {
-    navigate(`/product/${productId}/edit-physical-card/purchase-download-pdf`, {
-      state: {
-        savedPages,
-        savedSmallImages,
-        savedStickers,
-        images,
-        textFields,
-      },
-    });
-  }
-  const DownloadWithWatermark = () => {
-    navigate(`/product/${productId}/edit-physical-card/download-pdf`,
-      {
-        state: {
-          savedPages,
-          savedSmallImages,
-          savedStickers,
-          images,
-          textFields,
-        },
-      });
-  }
 
+  const [isDownloadWatermark, SetisDownloadWatermark] = useState(false);
+  const [isDownloadPurchase, SetisDownloadPurchase] = useState(false);
+  const DownloadWithWatermark = () => {
+    SetisDownloadWatermark(true);
+  }
+  const DownloadPurchase = () => {
+    console.log("works");
+    SetisDownloadPurchase(true);
+  }
 
   const handleDownloadPDF = () => {
     // Navigate to the PDF page
@@ -1152,6 +1140,28 @@ export default function WeddingCardEditor() {
             </div>
           )
         }
+        {
+          isDownloadWatermark && (
+            <PdfGenerator
+              savedPages={savedPages}
+              savedSmallImages={savedSmallImages}
+              savedStickers={savedStickers}
+              images={images}
+              textFields={textFields}
+            />
+          )
+        }
+        {
+          isDownloadPurchase && (
+            <PdfGeneratorWaterMark
+              savedPages={savedPages}
+              savedSmallImages={savedSmallImages}
+              savedStickers={savedStickers}
+              images={images}
+              textFields={textFields}
+            />
+          )
+        }
 
 
         {isCustomizeModalOpen && (
@@ -1200,7 +1210,7 @@ export default function WeddingCardEditor() {
               </div>
               <button
                 onClick={() => setIsCustomizeModalOpen(false)}
-                className="mt-4 px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                className="mt-4 px-6 py-2 bg-[#AF7D32] hover:bg-[#643C28] text-white rounded  transition"
               >
                 Close
               </button>
