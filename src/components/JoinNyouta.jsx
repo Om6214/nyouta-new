@@ -3,41 +3,7 @@ import Banner1 from "../assets/images/Banner1.png";
 import Banner2 from "../assets/images/Banner2.png";
 import Banner3 from "../assets/images/Banner3.png";
 import Banner4 from "../assets/images/Banner4.png";
-import button from "../assets/images/07.png";
-import { Upload } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-const indianStates = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
-  "Assam",
-  "Bihar",
-  "Chhattisgarh",
-  "Goa",
-  "Gujarat",
-  "Haryana",
-  "Himachal Pradesh",
-  "Jammu and Kashmir",
-  "Jharkhand",
-  "Karnataka",
-  "Kerala",
-  "Madhya Pradesh",
-  "Maharashtra",
-  "Manipur",
-  "Meghalaya",
-  "Mizoram",
-  "Nagaland",
-  "Odisha",
-  "Punjab",
-  "Rajasthan",
-  "Sikkim",
-  "Tamil Nadu",
-  "Telangana",
-  "Tripura",
-  "Uttar Pradesh",
-  "Uttarakhand",
-  "West Bengal",
-];
 
 const forms = {
   vendor: {
@@ -57,90 +23,452 @@ const forms = {
     imgUrl: Banner4,
   },
 };
+const indianStates = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Andaman and Nicobar Islands",
+  "Chandigarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi",
+  "Lakshadweep",
+  "Puducherry",
+];
 
 const JoinNyouta = () => {
   const [currentCategory, setCurrentCategory] = useState("vendor");
-  const [fileName, setFileName] = useState("");
-  const [file, setFile] = useState(null);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    member: "",
-    state: "",
-    specialMoments: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      // Create FormData object to send file and form data
-      const submitData = new FormData();
-
-      // Append all form fields
-      Object.keys(formData).forEach((key) => {
-        submitData.append(key, formData[key]);
-      });
-
-      // Append file if exists
-      if (file) {
-        submitData.append("image", file);
-      }
-
-      // Replace with your API endpoint
-      const response = await fetch("YOUR_API_ENDPOINT", {
-        method: "POST",
-        body: submitData,
-        // Don't set Content-Type header - browser will set it automatically with boundary for FormData
-      });
-
-      if (!response.ok) {
-        throw new Error("Form submission failed");
-      }
-
-      // Handle successful submission
-      const result = await response.json();
-      console.log("Form submitted successfully:", result);
-
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        member: "",
-        state: "",
-        specialMoments: "",
-      });
-      setFile(null);
-      setFileName("");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile && selectedFile.type.startsWith("image/")) {
-      setFile(selectedFile);
-      setFileName(selectedFile.name);
-    }
-  };
 
   const handleCategoryChange = (category) => {
     setCurrentCategory(category);
   };
+
+  const renderFormInputs = () => {
+    switch (currentCategory) {
+      case "vendor":
+        return (
+          <div className="space-y-4">
+            {/* Name and Email Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your email"
+                />
+              </div>
+            </div>
+
+            {/* Place and Type of Member Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Place
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your place"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Type of Member
+                </label>
+                <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                  <option value="">Select type</option>
+                  <option value="individual">Individual</option>
+                  <option value="business">Business</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Phone Number Input */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              {/* Select State Dropdown */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Select State
+                </label>
+                <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                  <option value="">Select state</option>
+                  {indianStates.map((state, index) => (
+                    <option key={index} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Message Textarea */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Message
+              </label>
+              <textarea
+                rows="4"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                placeholder="Enter your message"
+              />
+            </div>
+
+            {/* Upload Design Uploader */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Upload Design
+              </label>
+              <input
+                type="file"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+              />
+            </div>
+          </div>
+        );
+      case "memories":
+        return (
+          <div className="space-y-4">
+            {/* Name and Email in the Same Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Name Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              {/* Email Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your email"
+                />
+              </div>
+            </div>
+
+            {/* Phone Number and State in the Same Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Phone Number Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              {/* Select State Dropdown */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Select State
+                </label>
+                <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                  <option value="">Select state</option>
+                  {indianStates.map((state, index) => (
+                    <option key={index} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Place Input */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Place
+              </label>
+              <input
+                type="text"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                placeholder="Enter your place"
+              />
+            </div>
+
+            {/* Textarea for Special Moments */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Write About Special Moments
+              </label>
+              <textarea
+                rows="4"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                placeholder="Write about special moments..."
+              />
+            </div>
+
+            {/* Design Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Upload Design
+              </label>
+              <input
+                type="file"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+              />
+            </div>
+          </div>
+        );
+      case "matrimony":
+        return (
+          <div className="space-y-4">
+            {/* Name and Email in the Same Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Name Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              {/* Email Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your email"
+                />
+              </div>
+            </div>
+
+            {/* Phone Number and State in the Same Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Phone Number Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              {/* Select State Dropdown */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Select State
+                </label>
+                <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                  <option value="">Select state</option>
+                  {indianStates.map((state, index) => (
+                    <option key={index} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Place Input */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Place
+              </label>
+              <input
+                type="text"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                placeholder="Enter your place"
+              />
+            </div>
+
+            {/* Textarea for Special Moments */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Write About Special Moments
+              </label>
+              <textarea
+                rows="4"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                placeholder="Write about special moments..."
+              />
+            </div>
+
+            {/* Design Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Upload Design
+              </label>
+              <input
+                type="file"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+              />
+            </div>
+          </div>
+        );
+      case "submitDesign":
+        return (
+          <div className="space-y-4">
+            {/* Name and Email in the Same Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Name Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your name"
+                />
+              </div>
+
+              {/* Email Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your email"
+                />
+              </div>
+            </div>
+
+            {/* Phone Number and State in the Same Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Phone Number Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              {/* Select State Dropdown */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Select State
+                </label>
+                <select className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary">
+                  <option value="">Select state</option>
+                  {indianStates.map((state, index) => (
+                    <option key={index} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Place Input */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Place
+              </label>
+              <input
+                type="text"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                placeholder="Enter your place"
+              />
+            </div>
+
+            {/* Textarea for Special Moments */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Write About Special Moments
+              </label>
+              <textarea
+                rows="4"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+                placeholder="Write about special moments..."
+              />
+            </div>
+
+            {/* Design Upload */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Upload Design
+              </label>
+              <input
+                type="file"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
+              />
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
+      {/* Header Section */}
       <motion.div className="py-4">
         <h1 className="lg:text-4xl text-3xl text-secondary font-avalonN text-center">
           Join E-Nyouta
@@ -149,14 +477,15 @@ const JoinNyouta = () => {
           Choose Your type of Category Below
         </h1>
       </motion.div>
+
+      {/* Tabs Section */}
       <motion.div className="flex lg:gap-8 gap-2 px-2 lg:justify-center py-4 overflow-x-auto">
         {Object.entries(forms).map(([key, { name }]) => (
           <button
-            className={`px-4 py-2 text-lg flex flex-shrink-0 font-avalonB rounded-md ${
-              currentCategory === key
+            className={`px-4 py-2 text-lg flex flex-shrink-0 font-avalonB rounded-md ${currentCategory === key
                 ? "bg-primary text-white"
                 : "bg-secondary text-white"
-            }`}
+              }`}
             key={key}
             onClick={() => handleCategoryChange(key)}
           >
@@ -164,220 +493,29 @@ const JoinNyouta = () => {
           </button>
         ))}
       </motion.div>
+
+      {/* Banner Image */}
       <motion.div>
         <img
           src={forms[currentCategory].imgUrl}
-          className="w-full h-[250px]"
+          className="lg:w-3/4 mx-auto w-full h-[250px]"
           alt={forms[currentCategory].name}
         />
       </motion.div>
-      <motion.div className="mx-4 lg:mx-32 my-8 flex flex-col  ">
+
+      {/* Form Section */}
+      <motion.div className="mx-4 lg:mx-32 my-8 flex flex-col">
         <div>
           <h1 className="text-center text-3xl lg:text-4xl font-avalonN text-secondary">
             {forms[currentCategory].name}
           </h1>
         </div>
-        
-        <div className="  flex items-center justify-center mt-8 ">
-          <div className="bg-white p-8 rounded-lg w-full max-w-xl border border-gray-300">
-           
-            <form>
-              {/* First Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    id="first-name"
-                    name="first-name"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#AF7D32] focus:border-[#AF7D32] sm:text-sm"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    id="last-name"
-                    name="last-name"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#AF7D32] focus:border-[#AF7D32] sm:text-sm"
-                    required
-                  />
-                </div>
-              </div>
 
-              {/* Second Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-700">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#AF7D32] focus:border-[#AF7D32] sm:text-sm"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="business-category" className="block text-sm font-medium text-gray-700">
-                    Business Category
-                  </label>
-                  <select
-                    id="business-category"
-                    name="business-category"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#AF7D32] focus:border-[#AF7D32] sm:text-sm"
-                    required
-                  >
-                    <option value="">Select a category</option>
-                    <option value="Bar Services & Beverages">Bar Services & Beverages</option>
-                    <option value="Dance Lessons">Dance Lessons</option>
-                    <option value="Photo Booths">Photo Booths</option>
-                    <option value="Rehearsal Dinner">Rehearsal Dinner</option>
-                    <option value="Travel Agents">Travel Agents</option>
-                    <option value="Venue">Venue</option>
-                    <option value="Wedding Bands">Wedding Bands</option>
-                    <option value="Wedding Cakes">Wedding Cakes</option>
-                    <option value="Wedding Caterers">Wedding Caterers</option>
-                    <option value="Wedding Decor & Lighting">Wedding Decor & Lighting</option>
-                    <option value="Wedding DJs">Wedding DJs</option>
-                    <option value="Wedding Dresses">Wedding Dresses</option>
-                    <option value="Wedding Favors">Wedding Favors</option>
-                    <option value="Wedding Florists">Wedding Florists</option>
-                    <option value="Wedding Hair & Makeup">Wedding Hair & Makeup</option>
-                    <option value="Wedding Invitations">Wedding Invitations</option>
-                    <option value="Wedding Jewelers">Wedding Jewelers</option>
-                    <option value="Wedding Limos">Wedding Limos</option>
-                    <option value="Wedding Musicians">Wedding Musicians</option>
-                    <option value="Wedding Officiants">Wedding Officiants</option>
-                    <option value="Wedding Photographers">Wedding Photographers</option>
-                    <option value="Wedding Planners">Wedding Planners</option>
-                    <option value="Wedding Rentals">Wedding Rentals</option>
-                    <option value="Wedding Videographers">Wedding Videographers</option>
-
-                    {/* Add more options as needed */}
-                  </select>
-                </div>
-              </div>
-
-              {/* Third Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#AF7D32] focus:border-[#AF7D32] sm:text-sm"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#AF7D32] focus:border-[#AF7D32] sm:text-sm"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Fourth Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                    Country
-                  </label>
-                  <select
-                    id="country"
-                    name="country"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#AF7D32] focus:border-[#AF7D32] sm:text-sm"
-                    required
-                  >
-                     <option value="">Select a Country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="GB">United Kingdom</option>
-                    <option value="AU">Australia</option>
-                    <option value="IN">India</option>
-                    <option value="DE">Germany</option>
-                    <option value="FR">France</option>
-                    <option value="IT">Italy</option>
-                    <option value="ES">Spain</option>
-                    <option value="BR">Brazil</option>
-                    <option value="CN">China</option>
-                    <option value="JP">Japan</option>
-                    <option value="RU">Russia</option>
-                    <option value="ZA">South Africa</option>
-                    <option value="MX">Mexico</option>
-                    <option value="KR">South Korea</option>
-                    <option value="AR">Argentina</option>
-                    <option value="CL">Chile</option>
-                    <option value="NZ">New Zealand</option>
-                    <option value="SG">Singapore</option>
-                    <option value="SA">Saudi Arabia</option>
-                    <option value="AE">United Arab Emirates</option>
-                    <option value="SE">Sweden</option>
-                    <option value="NO">Norway</option>
-                    <option value="FI">Finland</option>
-                    <option value="IE">Ireland</option>
-                    <option value="NL">Netherlands</option>
-                    <option value="CH">Switzerland</option>
-                    <option value="TH">Thailand</option>
-                    <option value="MY">Malaysia</option>
-
-                    {/* Add more options as needed */}
-                  </select>
-                </div>
-                <div className="mb-4">
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="terms"
-                    name="terms"
-                    className="h-4 w-4 [#AF7D32] focus:ring-[#AF7D32] border-gray-300 rounded"
-                    required
-                  />
-                  <label htmlFor="terms" className="ml-2 text-sm text-gray-700">
-                    By submitting and sharing your information you agree to{" "}
-                    <Link to="/Terms" className="text-[#AF7D32] underline">
-                       terms of use
-                    </Link>{" "}
-                    and{" "}
-                    <Link to="/Terms" className="text-[#AF7D32] underline">
-                       terms of use
-                    </Link>
-                    .
-                  </label>
-                </div>
-              </div>
-              </div>
-
-              {/* Terms */}
-              <div className="flex items-center justify-center">
-              <button
-                    type="submit"
-                    className="w-full md:w-auto bg-[#AF7D32] text-white py-2 px-14 rounded-md shadow-sm hover:bg-[#643C28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#AF7D32]"
-                  >
-                    Get in touch
-                  </button>
-              </div>
-              
-            </form>
+        <div className="flex items-center justify-center mt-8">
+          <div className="bg-white p-8 rounded-lg lg:w-3/4 w-full border border-gray-300">
+            {renderFormInputs()}
           </div>
         </div>
-     
       </motion.div>
     </div>
   );

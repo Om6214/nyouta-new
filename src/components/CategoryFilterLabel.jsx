@@ -28,6 +28,8 @@ export default function CategoryFilterLabel() {
   const relatedItemsRef = useRef(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedSpecification, setSelectedSpecification] = useState(null);
+  const [expandedSpecifications, setExpandedSpecifications] = useState({});
+  const [expandedSections, setExpandedSections] = useState(new Set());
 
   const handleClick = () => {
     setShowFilter(true);
@@ -91,6 +93,13 @@ export default function CategoryFilterLabel() {
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
+  };
+
+  const toggleSpecification = (index) => {
+    setExpandedSpecifications((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   };
 
   const formattedPageName = formatCategoryName(pageName);
@@ -208,18 +217,114 @@ export default function CategoryFilterLabel() {
       popularPrice: 2150,
       productOff: 15,
       productSpecificationsRoyal: [
-        "Checklists :About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding • Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List • Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts • Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts • Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan • Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan, • Special Notes & Experience, Calendar 2024-2025, Family Pics",
-        "Pages : 100 (200 Sides) Coloured",
-        "Paper & Size : A4 (210x297 mm*) 100 gsm",
-        "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-        "Bind : Perfect Binding with Bookmarks",
+        "Checklists:",
+        "• About Wedding:",
+        "  - Blessings",
+        "  - Wedding Detail",
+        "  - 7 Steps of Wedding",
+        "  - Congratulations",
+        "  - Wedding Programs",
+        "  - Tables of Contents",
+        "  - Planning Before Priors",
+        "  - Brand your Wedding",
+        "• Wedding Checklist:",
+        "  - Checklists & Don't Forget",
+        "  - Day-of Checklist",
+        "  - Venue & Vendors Comparisons",
+        "  - Day of Kit for the Bride/Groom",
+        "  - Daily, Weekly & Monthly Planner",
+        "  - To-do List (Top Priority)",
+        "  - To-do List",
+        "• Finance Management:",
+        "  - Sample Wedding Budget",
+        "  - Wedding Budget (Eventwise)",
+        "  - Wedding Purchases & Expenses",
+        "  - Payment Planner",
+        "  - Payment Schedule",
+        "  - A Few Last Thoughts",
+        "• Vendor Management:",
+        "  - Engagement & Bachelor Party",
+        "  - Vendor Details",
+        "  - Food Plan",
+        "  - Music/Dance Schedule",
+        "  - Floor Plan",
+        "  - A Few Last Thoughts",
+        "• Guest Management:",
+        "  - Guest List - Eventwise",
+        "  - Wedding Guest List",
+        "  - Outsider Guests",
+        "  - Thanks Gift for Groom/Bride Side",
+        "  - Received Gift by Groom/Bride Side",
+        "  - Thanks Gift for Relative",
+        "  - Received Gift for by Relatives",
+        "  - Thank You Gift to Guest",
+        "  - Gift Received by Guests",
+        "  - Guest List Summary",
+        "  - Guest Room Arrangement",
+        "  - Guest Room Plan",
+        "  - Guest Sitting Table Plan",
+        "  - Family - Sitting Table Plan",
+        "• Honeymoon Management:",
+        "  - Honeymoon - Planning Guide",
+        "  - Honeymoon Budget",
+        "  - Travel Detail",
+        "  - Sample Packing List",
+        "  - Tour/Activity Plan",
+        "• Special Notes & Experience",
+        "• Calendar 2024-2025",
+        "• Family Pics",
+        "Pages: 100 (200 Sides) Coloured",
+        "Paper & Size: A4 (210x297 mm*) 100 gsm",
+        "Cover: 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind: Perfect Binding with Bookmarks",
       ],
       productSpecificationsPopular: [
-        "Checklists : About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors • Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List • Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts • Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts • Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan  • Special Notes & Experience • Calendars • Family Pics",
-        "Pages : 100 (200 Sides) Coloured",
-        "Paper & Size : A4 (210x297 mm*) 100 gsm",
-        "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-        "Bind : Perfect Binding with Bookmarks",
+        "Checklists:",
+        "• About Wedding:",
+        "  - Wedding Detail",
+        "  - 7 Steps of Wedding",
+        "  - Congratulations",
+        "  - Wedding Programs",
+        "  - Planning Before Priors",
+        "• Wedding Checklist:",
+        "  - Checklists & Don't Forget",
+        "  - Day-of Checklist",
+        "  - Day of Kit for the Bride/Groom",
+        "  - Daily, Weekly & Monthly Planner",
+        "  - To-do List (Top Priority)",
+        "  - To-do List",
+        "• Finance Management:",
+        "  - Sample Wedding Budget",
+        "  - Wedding Budget (Eventwise)",
+        "  - Wedding Purchases & Expenses",
+        "  - Payment Planner",
+        "  - Payment Schedule",
+        "  - A Few Last Thoughts",
+        "• Vendor Management:",
+        "  - Engagement & Bachelor Party",
+        "  - Vendor Details",
+        "  - Food Plan",
+        "  - Music/Dance Schedule",
+        "  - Floor Plan",
+        "  - A Few Last Thoughts",
+        "• Guest Management:",
+        "  - Guest List - Eventwise",
+        "  - Wedding Guest List",
+        "  - Outsider Guests",
+        "  - Thank You Gift to Guest",
+        "  - Gift Received by Guests",
+        "  - Guest List Summary",
+        "  - Guest Room Arrangement",
+        "  - Guest Room Plan",
+        "  - Guest Sitting Table Plan",
+        "  - Family - Sitting Table Plan",
+        "Special Notes & Experience",
+        "Calendars",
+        "Family Pics",
+        "Pages: 100 (200 Sides) Coloured",
+        "Paper & Size: A4 (210x297 mm*) 100 gsm",
+        "Cover: 200 gsm PVC (Coloured) with Velvet Finish",
+        "Bind: Perfect Binding with Bookmarks",
       ],
     },
     GuestManagement: {
@@ -340,13 +445,51 @@ export default function CategoryFilterLabel() {
     .replaceAll("(", "")
     .replaceAll(")", "");
   const productData = TitleProduct[fetchvar];
-  console.log(filteredItems[0].category);
-  
+  // console.log(filteredItems[0].category);
+  const processSpecifications = (specs) => {
+    const groups = [];
+    let currentGroup = null;
+
+    specs.forEach((spec) => {
+      if (spec.startsWith('• ')) {
+        currentGroup = {
+          type: 'parent',
+          content: spec,
+          children: [],
+          index: groups.length
+        };
+        groups.push(currentGroup);
+      } else if (spec.startsWith('  - ')) {
+        if (currentGroup) {
+          currentGroup.children.push(spec);
+        } else {
+          groups.push({ type: 'standalone', content: spec });
+        }
+      } else {
+        groups.push({ type: 'standalone', content: spec });
+      }
+    });
+
+    return groups;
+  };
+
+  const groupedSpecs = processSpecifications(
+    filter === 'royal'
+      ? productData.productSpecificationsRoyal
+      : productData.productSpecificationsPopular
+  );
+
+  const toggleSection = (index) => {
+    const newExpanded = new Set(expandedSections);
+    newExpanded.has(index) ? newExpanded.delete(index) : newExpanded.add(index);
+    setExpandedSections(newExpanded);
+  };
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
-        <div className="mt-6">
+        {/* Left Carousel (Static) */}
+        <div className="mt-6 sticky top-0 h-screen">
           <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
             <Swiper
               style={{
@@ -356,16 +499,13 @@ export default function CategoryFilterLabel() {
               zoom={true}
               navigation={true}
               pagination={{ clickable: true }}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
-              modules={[Zoom, Navigation, Pagination, Autoplay]}
+              modules={[Zoom, Navigation, Pagination]}
               className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
               onSwiper={(swiper) => {
-                // Add event listeners for pause on hover
                 swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
                 swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
               }}
             >
-              {/* First Slide: Video */}
               <SwiperSlide>
                 <div className="">
                   <video
@@ -377,15 +517,15 @@ export default function CategoryFilterLabel() {
                   ></video>
                 </div>
               </SwiperSlide>
-
-              {/* Additional Slides: Images */}
               {productData.productImages &&
                 productData.productImages.map((image, index) => (
                   <SwiperSlide key={index}>
                     <div className="swiper-zoom-container">
                       <img
                         src={image}
-                        alt={`Product Image ${index + 1}`}
+                        alt={`Product Imag
+
+e ${index + 1}`}
                         className="object-cover w-full h-auto rounded-lg"
                       />
                     </div>
@@ -394,18 +534,17 @@ export default function CategoryFilterLabel() {
             </Swiper>
           </div>
         </div>
-        <div>
+
+        {/* Right Content (Scrollable) */}
+        <div className="overflow-y-auto h-screen">
           <div className="p-6 md:px-10 md:py-8 bg-white rounded-lg shadow-lg">
             <div className="mb-4">
               <h1 className="text-3xl font-bold mb-2">
                 {productData.productSubSubCategory}
               </h1>
-              <p className="text-lg text-gray-600">
-                {productData.productCategory}
-              </p>
+              <p className="text-lg text-gray-600">{productData.productCategory}</p>
               <p className="text-sm text-gray-500 mt-1">
-                {productData.productSubCategory},{" "}
-                {productData.productSubSubCategory}
+                {productData.productSubCategory}, {productData.productSubSubCategory}
               </p>
             </div>
 
@@ -413,18 +552,14 @@ export default function CategoryFilterLabel() {
 
             <div className="flex gap-4 mb-4">
               <div
-                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${filter === "royal"
-                  ? "bg-orange-500 text-white"
-                  : "bg-[#fff] border-2"
+                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${filter === "royal" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
                   }`}
                 onClick={() => setFilter("royal")}
               >
                 Royal
               </div>
               <div
-                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${filter === "popular"
-                  ? "bg-orange-500 text-white"
-                  : "bg-[#fff] border-2"
+                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
                   }`}
                 onClick={() => setFilter("popular")}
               >
@@ -439,16 +574,11 @@ export default function CategoryFilterLabel() {
                   ? productData.RoyalPrice -
                   (productData.RoyalPrice * productData.productOff) / 100
                   : productData.popularPrice -
-                  (productData.popularPrice * productData.productOff) /
-                  100}{" "}
-                <span className="text-red-400 line-through text-[1.1rem] mx-2 ">
-                  {filter === "royal"
-                    ? productData.RoyalPrice
-                    : productData.popularPrice}{" "}
+                  (productData.popularPrice * productData.productOff) / 100}{" "}
+                <span className="text-red-400 line-through text-[1.1rem] mx-2">
+                  {filter === "royal" ? productData.RoyalPrice : productData.popularPrice}{" "}
                 </span>
-                <span className="text-green-400">
-                  {productData.productOff}%{" "}
-                </span>
+                <span className="text-green-400">{productData.productOff}% </span>
                 Off
               </p>
             </div>
@@ -462,97 +592,48 @@ export default function CategoryFilterLabel() {
             </button>
 
             <div className="mt-4">
-              <h2 className="text-lg font-semibold mb-3">
-                Product Specifications
-              </h2>
-              {filter === "royal" ? (
-                <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-                  {productData.productSpecificationsRoyal.map((specification, index) => (
-                    <li key={index}>
-                      {specification.length > 60 ? (
-                        <>
-                          {specification.slice(0, 60)}{" "}
-                          <span
-                            onClick={() => setSelectedSpecification(specification)}
-                            className="text-blue-500 cursor-pointer underline"
-                          >
-                            ...Read More
+              <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
+              <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+                {groupedSpecs.map((item, index) => {
+                  if (item.type === 'standalone') {
+                    return <li key={index}>{item.content}</li>;
+                  }
+
+                  if (item.type === 'parent') {
+                    const isExpanded = expandedSections.has(item.index);
+                    return (
+                      <li key={item.index} className="!list-none">
+                        <div className="flex items-center gap-2 cursor-pointer"
+                          onClick={() => toggleSection(item.index)}>
+                          <span className="text-sm">
+                            {isExpanded ? '▼' : '▶'}
                           </span>
-                        </>
-                      ) : (
-                        specification
-                      )}
-                    </li>
-                  ))}
-
-                  {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
-                </ul>
-              ) : (
-                <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
-
-                  {productData.productSpecificationsPopular.map((specification, index) => (
-                    <li key={index}>
-                      {specification.length > 60 ? (
-                        <>
-                          {specification.slice(0, 60)}{" "}
-                          <span
-                            onClick={() => setSelectedSpecification(specification)}
-                            className="text-blue-500 cursor-pointer underline"
-                          >
-                            ...Read More
+                          <span className="font-medium">
+                            {item.content.replace('• ', '')}
                           </span>
-                        </>
-                      ) : (
-                        specification
-                      )}
-                    </li>
-                  ))}
+                        </div>
+                        {isExpanded && (
+                          <ul className="ml-6 mt-1 space-y-1">
+                            {item.children.map((child, idx) => (
+                              <li key={idx} className="text-gray-500">
+                                {child.replace('  - ', '')}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  }
 
-                  {/* <li>Display using Wooden Clips, Magnetic ropes or wall-safe Washi tapes.<e/li> */}
-                </ul>
-              )}
-
-
+                  return null;
+                })}
+              </ul>
             </div>
-            {selectedSpecification && (
-              <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full relative mx-4">
-                  {/* Close Button (X) */}
-                  <button
-                    onClick={() => setSelectedSpecification(null)}
-                    className="absolute top-2 right-2 text-gray-500 hover:text-black"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                  {/* Modal Content */}
-                  <h3 className="text-lg font-semibold mb-4 text-center">Full Checklist</h3>
-                  <p className="text-gray-700 text-justify leading-relaxed">
-                    {selectedSpecification}
-                  </p>
-
-                </div>
-              </div>
-            )}
-
-
-
           </div>
-
         </div>
       </div>
+
+
 
       {["Planner Books"].includes(filteredItems[0].category) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">

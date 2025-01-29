@@ -5,6 +5,7 @@ import { addtoCart, getCart } from "../Store/slices/productSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../utils/api";
+import { ClipLoader } from "react-spinners"; // Import a spinner component
 
 export default function DesignEdit() {
   const navigate = useNavigate();
@@ -22,7 +23,8 @@ export default function DesignEdit() {
   const [userUploadedImages, setUserUploadedImages] = useState([]);
   const [customText, setCustomText] = useState("");
   const [uploadLoading, setUploadLoading] = useState(false);
-  console.log(userUploadedImages)
+  const [loading, setLoading] = useState(true); // Add loading state
+
   const types = ["Pdf Invitation"];
 
   // Fetch products from API
@@ -32,7 +34,6 @@ export default function DesignEdit() {
       try {
         const response = await axios.get(url);
         setResponseData(response.data);
-        
 
         // Filter for the matching product
         const matchedProduct = response.data.find(
@@ -41,11 +42,21 @@ export default function DesignEdit() {
         setFilteredProduct(matchedProduct);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching data
       }
     }
 
     fetchProducts();
   }, [state?.ider]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ClipLoader color="#4A90E2" size={50} /> {/* Display a spinner while loading */}
+      </div>
+    );
+  }
 
   if (!filteredProduct) {
     return <div className="text-center p-4">Product not found</div>;

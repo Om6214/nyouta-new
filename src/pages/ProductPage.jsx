@@ -8,7 +8,7 @@ export default function ProductPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const product = state?.product;
-  console.log("product", product);
+  // console.log("product", product);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -17,21 +17,20 @@ export default function ProductPage() {
 
   if (!product) return <div className="text-center p-4">Product not found</div>;
 
-
+  // console.log("product", product);
   const handleThumbnailClick = (index) => {
     setCurrentImageIndex(index);
   };
 
+  console.log(product);
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
   const handleEditImage = () => {
-
     const isLoggedIn = !!localStorage.getItem("token"); // Replace 'userToken' with your auth token key or condition.
 
     console.log(isLoggedIn);
-
 
     if (!isLoggedIn) {
       toast.error("You need to be logged in first!", {
@@ -49,9 +48,8 @@ export default function ProductPage() {
   const handleAddtoCart = async () => {
     setAddToCartLoading(true);
     dispatch(addtoCart({ productId: id, quantity: quantity }));
-    console.log( dispatch(getCart()));
-    
-   
+    console.log(dispatch(getCart()));
+
     setAddToCartLoading(false);
   };
 
@@ -71,8 +69,11 @@ export default function ProductPage() {
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${currentImageIndex === index ? "border-blue-500" : "border-gray-300"
-                  }`}
+                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${
+                  currentImageIndex === index
+                    ? "border-blue-500"
+                    : "border-gray-300"
+                }`}
                 onClick={() => handleThumbnailClick(index)}
               />
             ))}
@@ -82,9 +83,13 @@ export default function ProductPage() {
         {/* Product Details Section */}
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-2 text-gray-800">{product.name}</h1>
-            <p className="text-xl font-semibold mb-2 text-gray-700">₹{product.price.toFixed(2)}</p>
-
+            <h1 className="text-3xl font-bold mb-2 text-gray-800">
+              {product.name}
+            </h1>
+            <p className="text-xl font-semibold mb-2 text-gray-700">
+              <del className="text-gray-500">₹{product.price.toFixed(2)}</del>{" "}
+              <span className="text-green-600 font-bold">Free</span>
+            </p>
 
             <div className="mb-2">
               <label
@@ -104,11 +109,12 @@ export default function ProductPage() {
             </div>
 
             <div className="">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800">Product Details</h2>
+              <h2 className="text-2xl font-bold mb-4 text-gray-800">
+                Product Details
+              </h2>
               <ul className="list-disc list-inside text-gray-700">
                 <li>Category: {product.category}</li>
                 <li>Subcategory: {product.subCategory}</li>
-
               </ul>
             </div>
 

@@ -39,6 +39,7 @@ import ItineraryCompo from './components/ItineraryCompo';
 import DesignEdit from './components/DesignEdit';
 import FreeGreetingsFilter from "./components/FreeGreetingFilter"
 import Weddingtemp01 from './pages/templates/Template01'
+import ShareView from './components/ShareView';
 
 // gaganluthrasirji
 
@@ -72,6 +73,7 @@ function App() {
           <Route path='/edit/Itinerary/:id' element={<ItineraryCompo />} />
           <Route path='/edit/Planner Books/:pageid' element={<DesignEdit />} />
           <Route path='/edit/free greetings/:pageid' element={<DesignEdit />} />
+          <Route path='/share/:state' element={<ShareView />} />
 
 
           <Route path="/checkout" element={<Checkout />} />

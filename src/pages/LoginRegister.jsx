@@ -101,7 +101,7 @@ useEffect(() => {
     }
     const res = await dispatch(login(data));
     if (res.type === 'auth/login/fulfilled') {
-      // console.log(res.payload);
+      // console.log(res.pay3);
       if (res.payload.requiresOtp) {
         setIsOtpModalOpen(true);
       } else {
@@ -196,7 +196,7 @@ useEffect(() => {
   const handleotp1 = async (e) => {
     e.preventDefault();
     const data1 = {
-      otp1: otp1,
+      otp1: Number(otp1), 
       emailorphone: formData1.email,
     }
     // console.log(data1);
@@ -205,12 +205,12 @@ useEffect(() => {
       setIsotp1ModalOpen(false);
     }
   }
-  const otp1Modal = () => (
+  const Otp1Modal = () => (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded shadow-md">
         <h2 className="text-lg font-bold">Enter otp</h2>
         <input
-          type="text"
+          type="number"
           placeholder="Enter otp1"
           className="border p-2 rounded w-full"
           value={otp1}
@@ -341,7 +341,7 @@ useEffect(() => {
             Sign Up
           </button>
         </form>
-        {isotp1ModalOpen && <otp1Modal />}
+        {isotp1ModalOpen && <Otp1Modal />}
       </div>
 
       {/* Sign In Section */}

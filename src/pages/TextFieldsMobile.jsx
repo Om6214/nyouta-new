@@ -97,7 +97,7 @@ const TextFieldsMobile = ({ selectedText, updateTextField, onClose }) => {
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black sm:max-w-full ">
+    <div className="p-6 bg-white rounded-lg shadow-xl lg:w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black sm:max-w-full ">
       {/* Language and Text Area */}
       <div className="mb-2">
         <label className="block text-sm font-semibold mb-2">Language</label>

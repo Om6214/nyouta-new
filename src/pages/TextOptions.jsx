@@ -34,21 +34,21 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
   // Handle real-time translation when the user types in the text area
   const handleTextChange = async (e) => {
     let newText = e.target.value;
-  
+
     // Apply transformations
     if (isUppercase) {
       newText = newText.toUpperCase();
     } else if (isLowercase) {
       newText = newText.toLowerCase();
     }
-  
+
     updateTextField(selectedText.id, "text", newText); // Update original text
-  
+
     try {
       // Translate the new text and specify both the source and target languages
       const translated = await translate(newText, {
         from: selectedLanguage, // Current selected language
-        to: selectedLanguage,  // Translate to the same language for now
+        to: selectedLanguage, // Translate to the same language for now
       });
       setTranslatedText(translated); // Update the translated text
       updateTextField(selectedText.id, "text", translated); // Update the text field with translated text
@@ -56,30 +56,29 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       console.error("Translation Error:", error);
     }
   };
-  
-  const handleLanguageChange = async (e) => {
-    const newLanguage = e.target.value;
-    setSelectedLanguage(newLanguage);
-  
-    try {
-      // Translate existing text to the new target language
-      const translated = await translate(text, {
-        from: selectedLanguage, // Current selected language
-        to: newLanguage,        // Translate to the new language
-      });
-      setTranslatedText(translated); // Update translated text
-      updateTextField(selectedText.id, "text", translated); // Update the text field with translated text
-    } catch (error) {
-      console.error("Translation Error:", error);
-    }
-  };
-  
-  const handleCurveChange = (e) => {
-    const newCurveValue = e.target.value;
-    setCurveValue(newCurveValue); // Update the curveValue in state
-    updateTextField(selectedText.id, "curveValue", newCurveValue); // Update the curve value in the parent state
-  };
 
+  // const handleLanguageChange = async (e) => {
+  //   const newLanguage = e.target.value;
+  //   setSelectedLanguage(newLanguage);
+
+  //   try {
+  //     // Translate existing text to the new target language
+  //     const translated = await translate(text, {
+  //       from: selectedLanguage, // Current selected language
+  //       to: newLanguage, // Translate to the new language
+  //     });
+  //     setTranslatedText(translated); // Update translated text
+  //     updateTextField(selectedText.id, "text", translated); // Update the text field with translated text
+  //   } catch (error) {
+  //     console.error("Translation Error:", error);
+  //   }
+  // };
+
+  // const handleCurveChange = (e) => {
+  //   const newCurveValue = e.target.value;
+  //   setCurveValue(newCurveValue); // Update the curveValue in state
+  //   updateTextField(selectedText.id, "curveValue", newCurveValue); // Update the curve value in the parent state
+  // };
 
   const toggleUppercase = () => {
     updateTextField(selectedText.id, "isUppercase", !isUppercase);
@@ -91,16 +90,36 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
     updateTextField(selectedText.id, "isUppercase", false); // Disable uppercase
   };
 
-  const fontOptions = ["Lora", "Roboto", "Arial", "Times New Roman","Andallan","Linna","AvalonBold","AvalonNormal","TT_Medium","Angelina",
-    "Bebas Neue","Blade Rush","Cinzel","Garden Hidaleya","Justin Hailey","Lovely Valentine","Magdelin","Mussica Swash",
-    "New Walt Disney","Nexa Bold","Quicksand","Wedding"
+  const fontOptions = [
+    "Lora",
+    "Roboto",
+    "Arial",
+    "Times New Roman",
+    "Andallan",
+    "Linna",
+    "AvalonBold",
+    "AvalonNormal",
+    "TT_Medium",
+    "Angelina",
+    "Bebas Neue",
+    "Blade Rush",
+    "Cinzel",
+    "Garden Hidaleya",
+    "Justin Hailey",
+    "Lovely Valentine",
+    "Magdelin",
+    "Mussica Swash",
+    "New Walt Disney",
+    "Nexa Bold",
+    "Quicksand",
+    "Wedding",
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-xl w-full max-w-lg mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black">
+    <div className="py-2 bg-white rounded-lg  flex w-full items-center space-x-10 justify-center mx-auto relative border focus:outline-none focus:ring-2 focus:ring-black">
       {/* Language and Text Area */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-2">Language</label>
+      {/* <div className="mb-4">
+        <label className="block text-sm font-semibold mb-2">Languages</label>
         <select
           value={selectedLanguage}
           onChange={handleLanguageChange}
@@ -113,33 +132,41 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
           <option value="ta">தமிழ்</option>
         </select>
         
-      </div>
+      </div> */}
 
       {/* Font Family, Bold, Italic, and Color */}
       <div className="flex items-center justify-between gap-3 mb-4">
         <select
           value={font}
-          onChange={(e) => updateTextField(selectedText.id, "font", e.target.value)}
-          className="flex-1 p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={(e) =>
+            updateTextField(selectedText.id, "font", e.target.value)
+          }
+          className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#AF7D32]"
         >
-          {fontOptions.map((font) => (
-            <option key={font} value={font}>
-              {font}
+          {fontOptions.map((fontName) => (
+            <option
+              key={fontName}
+              value={fontName}
+              style={{ fontFamily: fontName }} // Apply the font style to the option
+            >
+              {fontName}
             </option>
           ))}
-        </select>
+        </select> 
         <button
           onClick={() => updateTextField(selectedText.id, "isBold", !isBold)}
           className={`p-2 rounded-lg ${
-            isBold ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+            isBold ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
           }`}
         >
           <FaBold />
         </button>
         <button
-          onClick={() => updateTextField(selectedText.id, "isItalic", !isItalic)}
+          onClick={() =>
+            updateTextField(selectedText.id, "isItalic", !isItalic)
+          }
           className={`p-2 rounded-lg ${
-            isItalic ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+            isItalic ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
           }`}
         >
           <FaItalic />
@@ -147,36 +174,49 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
         <input
           type="color"
           value={fontColor}
-          onChange={(e) => updateTextField(selectedText.id, "fontColor", e.target.value)}
-          className="w-10 h-10 cursor-pointer border rounded-lg"
+          onChange={(e) =>
+            updateTextField(selectedText.id, "fontColor", e.target.value)
+          }
+          className="w-16 h-8 cursor-pointer border rounded-lg"
         />
       </div>
 
       {/* Alignment, Letter Spacing, Uppercase */}
       <div className="flex items-center justify-between gap-3 mb-4">
         <div className="flex flex-col items-center">
-          <label className="text-xs text-gray-500 mb-1">Alignment</label>
           <div className="flex gap-2">
             <button
-              onClick={() => updateTextField(selectedText.id, "textAlign", "left")}
+              onClick={() =>
+                updateTextField(selectedText.id, "textAlign", "left")
+              }
               className={`p-2 rounded-lg ${
-                textAlign === "left" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+                textAlign === "left"
+                  ? "bg-[#AF7D32] text-white"
+                  : "border hover:bg-gray-100"
               }`}
             >
               <AiOutlineAlignLeft />
             </button>
             <button
-              onClick={() => updateTextField(selectedText.id, "textAlign", "center")}
+              onClick={() =>
+                updateTextField(selectedText.id, "textAlign", "center")
+              }
               className={`p-2 rounded-lg ${
-                textAlign === "center" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+                textAlign === "center"
+                  ? "bg-[#AF7D32] text-white"
+                  : "border hover:bg-gray-100"
               }`}
             >
               <AiOutlineAlignCenter />
             </button>
             <button
-              onClick={() => updateTextField(selectedText.id, "textAlign", "right")}
+              onClick={() =>
+                updateTextField(selectedText.id, "textAlign", "right")
+              }
               className={`p-2 rounded-lg ${
-                textAlign === "right" ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+                textAlign === "right"
+                  ? "bg-blue-500 text-white"
+                  : "border hover:bg-gray-100"
               }`}
             >
               <AiOutlineAlignRight />
@@ -191,11 +231,12 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
             max="10"
             step="0.1"
             value={letterSpacing}
-            onChange={(e) => updateTextField(selectedText.id, "letterSpacing", e.target.value)}
+            onChange={(e) =>
+              updateTextField(selectedText.id, "letterSpacing", e.target.value)
+            }
             className="w-full"
           />
         </div>
-        
       </div>
 
       {/* Line Height, Curve Text, Lowercase */}
@@ -208,24 +249,25 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
             max="3"
             step="0.1"
             value={lineHeight}
-            onChange={(e) => updateTextField(selectedText.id, "lineHeight", e.target.value)}
+            onChange={(e) =>
+              updateTextField(selectedText.id, "lineHeight", e.target.value)
+            }
             className="w-full"
           />
         </div>
         <button
           onClick={toggleUppercase}
           className={`p-2 rounded-lg ${
-            isUppercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+            isUppercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
           }`}
         >
           Upper
         </button>
 
-
         <button
           onClick={toggleLowercase}
           className={`p-2 rounded-lg ${
-            isLowercase ? "bg-blue-500 text-white" : "border hover:bg-gray-100"
+            isLowercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
           }`}
         >
           Lower

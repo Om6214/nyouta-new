@@ -250,7 +250,7 @@ const WeddingWebsiteUrl = () => {
                     : "max-h-0 opacity-0"
                 } overflow-hidden`}
               >
-                <div className="lg:pl-[600px]">
+                <div className="">
                   <p className="px-6 py-4 text-gray-600 bg-amber-100 rounded-xl">
                     {faq.answer}
                   </p>

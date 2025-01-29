@@ -753,7 +753,7 @@ export default function MainNav() {
                 >
                   <Link
                     to={item.url}
-                    className="hover:text-primary hover:border-b-2 border-primary hover:font-semibold flex items-center gap-3"
+                    className="hover:text-primary hover:border-b-2 border-primary  flex items-center gap-3"
                   >
                     {item.label}
                   </Link>
@@ -843,7 +843,7 @@ export default function MainNav() {
                                                         filter.a
                                                       )}`
                                                 }
-                                                className="block text-md hover:text-primary hover:border-b-2 border-primary pb-1 transition-colors whitespace-nowrap"
+                                                className="block text-md hover:text-primary  border-primary pb-1 transition-colors whitespace-nowrap"
                                               >
                                                 {filter.a}
                                               </Link>

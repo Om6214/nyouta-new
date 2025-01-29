@@ -316,7 +316,7 @@ export default function CategoryFilterLabel() {
       {["Free Greetings"].includes(filteredItems[0].category) ? (
         <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
           {/* Left column: Filter options */}
-          <div className="col-span-1 hidden md:block space-y-2">
+          <div className="col-span-1 hidden sticky top-10 md:block space-y-2">
             <div className="flex items-center justify-between">
               <h1 className="text-lg font-avalonN">Filter By</h1>
               <button
@@ -411,7 +411,7 @@ export default function CategoryFilterLabel() {
           </div>
 
           {/* Right column: Filtered results */}
-          <div className="col-span-3">
+          <div className="col-span-3 max-h-[80vh] overflow-y-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {filteredResponseData.length > 0 ? (
                 filteredResponseData.map((item, index) => (
