@@ -483,24 +483,24 @@ const filteredProducts = products?.filter((product) => {
             {filteredProducts?.length === 0 ? (
               <div>No products found</div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                 {filteredProducts?.map((product, index) => (
                   <Link
                     to={`/product/${product?._id}`}
                     key={index}
                     state={{ product }} // Pass product data
-                    className="relative flex flex-col rounded-xl hover:shadow-2xl items-center group border border-gray-400"
+                    className="relative flex flex-col rounded-xl hover:shadow-lg group duration-200 overflow-hidden transition items-center group border bg-white "
                   >
-                    <div className="relative w-full aspect-square mb-3  ">
+                    <div className="relative w-full aspect-square  p-2   ">
                       <img
                         src={product?.image[0]}
                         alt={product?.name}
-                        className="object-cover w-full h-72 rounded-t-xl"
+                        className="object-cover w-full h-72 rounded-t-xl group-hover:rotate-2 group-hover:scale-105 duration-300 transition "
                       />
                     </div>
-                    <div className="flex flex-col px-[2px]">
-                      <h4 className="text-center text-brown-800 font-medium text-sm md:text-base">
-                        {product?.subSubCategory}
+                    <div className="flex flex-col justify-center py-2 ">
+                      <h4 className="text-center text-brown-800  font-medium text-sm ">
+                        {product?.subSubCategory.length > 25 ? `${product?.subSubCategory.slice(0, 25)}...` : product?.subSubCategory }
                       </h4>
 
 
