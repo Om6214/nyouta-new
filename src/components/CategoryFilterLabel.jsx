@@ -543,7 +543,7 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-full rounded-lg"
+                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
                 onSwiper={(swiper) => {
                   swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
                   swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
