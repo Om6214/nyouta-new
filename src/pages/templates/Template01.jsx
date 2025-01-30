@@ -158,11 +158,8 @@ const Template01 = () => {
                 <div className="title">
                   <h1 className="font-great-vibes text-3xl sm:text-4xl md:text-5xl text-e0447b">
                     <span
-                      contentEditable
-                      onInput={(e) => handleContentChange(e, "home.title")}
-                      suppressContentEditableWarning={true}
                     >
-                      {formData.home.title || "WEDDING"}
+                      WEDDING
                     </span>
                   </h1>
                 </div>
@@ -170,11 +167,8 @@ const Template01 = () => {
                 {/* Ceremony */}
                 <div className="ceremony text-e0447b text-2xl sm:text-2xl md:text-3xl">
                   <span
-                    contentEditable
-                    onInput={(e) => handleContentChange(e, "home.ceremony")}
-                    suppressContentEditableWarning={true}
                   >
-                    {formData.home.ceremony || "CEREMONY"}
+                    CEREMONY
                   </span>
                 </div>
 
@@ -246,11 +240,8 @@ const Template01 = () => {
                 <h1 className="text-2xl md:text-4xl mb-6">Save the Date</h1>
                 <h2 className="text-xl md:text-2xl">
                   <span
-                    contentEditable
-                    onInput={(e) => handleContentChange(e, "home.weddingDate")}
-                    suppressContentEditableWarning={true}
                   >
-                    {formData.home.weddingDate || "Date"}
+                    DATE
                   </span>
                 </h2>
                 <p className="text-lg md:text-xl border-l-2 inline border-r-2 px-2 border-red-600">

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Zoom, Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Zoom, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { ChevronLeft, ChevronRight, FilterX } from 'lucide-react';
 
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -21,6 +22,31 @@ export default function CategoryFilterLabel() {
   const navigate = useNavigate();
   const relatedItemsRef = useRef(null);
   const [quantity, setQuantity] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth >= 640) { // sm breakpoint
+        setItemsPerPage(9);
+      } else {
+        setItemsPerPage(6);
+      }
+    };
+
+    // Initial setup
+    updateItemsPerPage();
+
+    // Add event listener
+    window.addEventListener('resize', updateItemsPerPage);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
+
 
   const handleClick = () => {
     setShowFilter(true);
@@ -45,35 +71,53 @@ export default function CategoryFilterLabel() {
 
   if (loading) {
     return (
-      <div className="flex-row">
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+        {/* Left Carousel Skeleton */}
+        <div className="mt-6 lg:sticky lg:top-0 h-auto">
+          <div className="w-full max-w-full mx-auto mb-6 lg:mb-0">
+            <div className="relative w-full max-w-4xl mx-auto">
+              <div className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[50vh] xl:h-[96vh] bg-gray-200 animate-pulse"></div>
+            </div>
+          </div>
         </div>
 
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-        </div>
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-        </div>
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+        {/* Right Content Skeleton */}
+        <div className="overflow-y-auto h-[96vh]">
+          <div className="p-6 md:px-10 md:py-8 bg-slate-50 rounded-lg shadow-lg">
+            {/* Title Skeleton */}
+            <div className="mb-4">
+              <div className="h-8 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
+              <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+              <div className="h-4 bg-gray-200 rounded w-2/3 mt-1 animate-pulse"></div>
+            </div>
+
+            {/* Divider Skeleton */}
+            <div className="border-t border-gray-300 mb-6"></div>
+
+            {/* Filter Buttons Skeleton */}
+            <div className="flex gap-4 mb-4">
+              <div className="py-2 px-8 bg-gray-200 rounded-lg w-1/2 animate-pulse"></div>
+              <div className="py-2 px-8 bg-gray-200 rounded-lg w-1/2 animate-pulse"></div>
+            </div>
+
+            {/* Price Skeleton */}
+            <div className="mb-6">
+              <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+            </div>
+
+            {/* Button Skeleton */}
+            <div className="w-1/3 py-2 bg-gray-200 rounded-md animate-pulse"></div>
+
+            {/* Specifications Skeleton */}
+            <div className="mt-4">
+              <div className="h-6 bg-gray-200 rounded w-1/4 mb-3 animate-pulse"></div>
+              <ul className="space-y-2">
+                {[...Array(5)].map((_, index) => (
+                  <li key={index} className="h-4 bg-gray-200 rounded w-full animate-pulse"></li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -167,11 +211,25 @@ export default function CategoryFilterLabel() {
   });
   console.log(RelatedItems);
   console.log(filteredItems[0].image);
+  const totalPages = Math.ceil(filteredResponseData.length / itemsPerPage);
+
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredResponseData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const goToNextPage = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  };
+
+  const goToPrevPage = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+  };
 
   return (
     <>
       {filteredItems?.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5">
+        <div className="grid grid-cols-1 bg-slate-50 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5">
           <div className="mt-6">
             <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
               <Swiper
@@ -182,9 +240,8 @@ export default function CategoryFilterLabel() {
                 zoom={true}
                 navigation={true}
                 pagination={{ clickable: true }}
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                modules={[Zoom, Navigation, Pagination, Autoplay]}
-                className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
+                modules={[Zoom, Navigation, Pagination]}
+                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[50vh] xl:h-[60vh]"
               >
                 {/* Hardcoded Images */}
                 <SwiperSlide>
@@ -217,7 +274,7 @@ export default function CategoryFilterLabel() {
 
                 {/* Dynamic Images */}
                 {filteredItems[0]?.image &&
-                Array.isArray(filteredItems[0]?.image) ? (
+                  Array.isArray(filteredItems[0]?.image) ? (
                   filteredItems[0].image.map((src, index) => (
                     <SwiperSlide key={index}>
                       <div className="swiper-zoom-container">
@@ -242,13 +299,13 @@ export default function CategoryFilterLabel() {
             </div>
           </div>
           <div className="">
-            <div className="p-6 md:p-10 bg-white rounded-lg shadow-lg">
+            <div className="p-6 md:p-10 bg-slate-50 rounded-lg">
               {/* Details section */}
               <div className="mb-4">
-                <h1 className="text-3xl font-bold mb-2">
+                <h1 className="text-6xl font-base mb-2">
                   {path === "all" ? formattedPageName : formattedPath}
                 </h1>
-                <p className="text-lg text-gray-600">
+                <p className="text-2xl text-gray-600">
                   {filteredItems[0].category}
                 </p>
                 <p className="text-sm text-gray-500 mt-1">
@@ -259,9 +316,16 @@ export default function CategoryFilterLabel() {
 
               <div className="border-t border-gray-300 mb-6"></div>
 
-              <div className="mb-6">
-                <p className="text-xl font-semibold text-gray-800 mb-1">Free</p>
+              <div className="mb-6 flex justify-start items-center">
+                <p className="text-xl flex line-through font-light text-gray-800 mb-1">
+                  &#8377;
+                  129
+                </p>
+                <span className="text-red-400 text-[1.1rem] mx-2">
+                  FREE
+                </span>
               </div>
+
 
               <button
                 ref={relatedItemsRef}
@@ -272,14 +336,14 @@ export default function CategoryFilterLabel() {
               </button>
 
               {filteredItems.length > 0 &&
-              ["Planner Books", "Free Greetings"].includes(
-                filteredItems[0].category
-              ) ? (
+                ["Planner Books", "Free Greetings"].includes(
+                  filteredItems[0].category
+                ) ? (
                 <div className="mt-4">
                   <h2 className="text-lg font-semibold mb-3">
                     Free Greeting Cards
                   </h2>
-                  <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+                  <ul className="list-disc list-inside text-xs text-gray-600 space-y-2">
                     <li>
                       Add a personal touch to your celebrations with beautifully
                       crafted greeting cards.
@@ -313,182 +377,224 @@ export default function CategoryFilterLabel() {
         </div>
       )}
 
-      {["Free Greetings"].includes(filteredItems[0].category) ? (
-        <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
-          {/* Left column: Filter options */}
-          <div className="col-span-1 hidden sticky top-10 md:block space-y-2">
-            <div className="flex items-center justify-between">
-              <h1 className="text-lg font-avalonN">Filter By</h1>
-              <button
-                className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${
-                  filter === "all"
-                }`}
-                onClick={() => setFilter("all")}
-              >
-                Clear all
-              </button>
-            </div>
-            <div className="px-4 py-3 bg-gray-100 rounded-lg shadow-md">
-              <div className="flex justify-between">
-                <h2 className="text-lg font-avalonB">Variations</h2>
-              </div>
-              <button
-                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2
-                      ${
-                        filter === "Wishes to New Wed"
-                          ? "bg-orange-500 text-white"
-                          : "bg-[#fff] border-2"
-                      }`}
-                onClick={() => setFilter("Wishes to New Wed")}
-              >
-                Newly Wed Wishes
-              </button>
-              <button
-                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md  ${
-                  filter === "Engagement Wishes"
-                    ? "bg-orange-500 text-white"
-                    : "bg-[#fff] border-2"
-                }`}
-                onClick={() => setFilter("Engagement Wishes")}
-              >
-                Engagement Wishes
-              </button>
-            </div>
-          </div>
+      <div className="relative min-h-screen bg-slate-50">
+        {["Free Greetings"].includes(filteredItems[0]?.category) ? (
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex flex-col lg:flex-row gap-6">
+              {/* Desktop Filter - Left Side */}
+              <div className="hidden lg:block w-1/5">
+                <div>
+                  <div className="bg-slate-50 rounded-lg  p-4 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h1 className="text-lg font-semibold">Filter By</h1>
+                      <button
+                        className="text-sm text-gray-600 hover:text-gray-900 border-b border-dashed"
+                        onClick={() => setFilter("all")}
+                      >
+                        Clear all
+                      </button>
+                    </div>
 
-          {/* Mobile filter */}
-          <div className="md:hidden relative">
-            <Filter onClick={handleClick} />
-            {showFilter && (
-              <div className="absolute top-7 left-[-10px] space-y-2 border-2 rounded-xl bg-gray-50 font-avalonN w-[180px] px-2 py-2 z-50">
-                <div className="flex justify-between items-center">
-                  <button onClick={() => setShowFilter(false)}>
-                    <X />
-                  </button>
-                  <button
-                    className={`border-b-2 border-dashed border-gray-500 leading-5 ${
-                      filter === "all"
-                    }`}
-                    onClick={() => {
-                      setFilter("all");
-                      setShowFilter(false);
-                    }}
-                  >
-                    Clear
-                  </button>
-                </div>
-                <div className="flex flex-col items-start gap-2">
-                  <h1 className="font-avalonB">Variations</h1>
-                  <button
-                    className={`block w-full py-1 text-sm font-avalonN px-2 text-left rounded-md border-2 ${
-                      filter === "Wishes to New Wed"
-                        ? "bg-orange-500 text-white"
-                        : "bg-white"
-                    }`}
-                    onClick={() => {
-                      setFilter("Wishes to New Wed");
-                      setShowFilter(false);
-                    }}
-                  >
-                    Newly Wed Wishes
-                  </button>
-                  <button
-                    className={`block w-full text-sm py-1 font-avalonN px-2 text-left rounded-md ${
-                      filter === "Engagement Wishes"
-                        ? "bg-orange-500 text-white"
-                        : "bg-[#fff] border-2"
-                    }`}
-                    onClick={() => {
-                      setFilter("Engagement Wishes");
-                      setShowFilter(false);
-                    }}
-                  >
-                    Engagement Wishes
-                  </button>
+                    <div className="space-y-3">
+                      <h2 className="text-lg font-semibold">Variations</h2>
+                      <div className="space-y-2">
+                        <button
+                          className={`w-full py-2 px-3 text-left rounded-md transition-colors duration-200
+                          ${filter === "Wishes to New Wed"
+                              ? "bg-orange-500 text-white"
+                              : "bg-white border-2 hover:bg-gray-50"
+                            }`}
+                          onClick={() => setFilter("Wishes to New Wed")}
+                        >
+                          Newly Wed Wishes
+                        </button>
+                        <button
+                          className={`w-full py-2 px-3 text-left rounded-md transition-colors duration-200
+                          ${filter === "Engagement Wishes"
+                              ? "bg-orange-500 text-white"
+                              : "bg-white border-2 hover:bg-gray-50"
+                            }`}
+                          onClick={() => setFilter("Engagement Wishes")}
+                        >
+                          Engagement Wishes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            )}
-          </div>
 
-          {/* Right column: Filtered results */}
-          <div className="col-span-3 max-h-[80vh] overflow-y-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {filteredResponseData.length > 0 ? (
-                filteredResponseData.map((item, index) => (
+              {/* Main Content */}
+              <div className="w-full lg:w-4/5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentItems.length > 0 ? (
+                    currentItems.map((item, index) => (
+                      <Link
+                        key={index}
+                        to={`/product/${item._id}`}
+                        state={{
+                          image: item.image[0],
+                          ider: item._id,
+                          product: item,
+                        }}
+                        className="group bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                      >
+                        <div className="relative pt-[100%]">
+                          <img
+                            src={item.image[0]}
+                            alt={item.name}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="p-4 text-center">
+                          <h2 className="text-md font-medium text-gray-800 truncate">
+                            {item.name}
+                          </h2>
+                          <div className=" flex justify-center items-center">
+                            <p className="text-xl flex line-through font-light text-gray-800 mb-1">
+                              &#8377;
+                              129
+                            </p>
+                            <span className="text-red-400 text-[1.1rem] mx-2">
+                              FREE
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-8">
+                      <h2 className="text-xl font-semibold text-gray-700">
+                        No products found for the selected filter.
+                      </h2>
+                    </div>
+                  )}
+                </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center mt-8 pb-8">
+                    <button
+                      onClick={() => { }} // Add goToPrevPage
+                      disabled={currentPage === 1}
+                      className={`p-2 mx-2 rounded-full border transition-colors duration-200
+                      ${currentPage === 1
+                          ? "text-gray-400 cursor-not-allowed"
+                          : "hover:bg-gray-100"
+                        }`}
+                    >
+                      <ChevronLeft />
+                    </button>
+                    <span className="px-4 py-2 text-lg font-semibold">
+                      {currentPage} / {totalPages}
+                    </span>
+                    <button
+                      onClick={() => { }} // Add goToNextPage
+                      disabled={currentPage === totalPages}
+                      className={`p-2 mx-2 rounded-full border transition-colors duration-200
+                      ${currentPage === totalPages
+                          ? "text-gray-400 cursor-not-allowed"
+                          : "hover:bg-gray-100"
+                        }`}
+                    >
+                      <ChevronRight />
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Filter Button and Dropdown */}
+              <div className="lg:hidden">
+                <button
+                  onClick={() => setShowFilter(!showFilter)}
+                  className="fixed top-20 left-4 bg-white p-2 rounded-full shadow-lg z-50"
+                >
+                  <FilterX size={24} />
+                </button>
+
+                {showFilter && (
+                  <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+                    <div className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg">
+                      <div className="p-4 space-y-4">
+                        <div className="flex justify-between items-center">
+                          <h2 className="text-lg font-semibold">Filters</h2>
+                          <button onClick={() => setShowFilter(false)}>
+                            <X size={24} />
+                          </button>
+                        </div>
+
+                        <div className="space-y-3">
+                          <button
+                            className={`w-full py-2 px-3 text-left rounded-md transition-colors duration-200
+                            ${filter === "Wishes to New Wed"
+                                ? "bg-orange-500 text-white"
+                                : "bg-white border-2 hover:bg-gray-50"
+                              }`}
+                            onClick={() => {
+                              setFilter("Wishes to New Wed");
+                              setShowFilter(false);
+                            }}
+                          >
+                            Newly Wed Wishes
+                          </button>
+                          <button
+                            className={`w-full py-2 px-3 text-left rounded-md transition-colors duration-200
+                            ${filter === "Engagement Wishes"
+                                ? "bg-orange-500 text-white"
+                                : "bg-white border-2 hover:bg-gray-50"
+                              }`}
+                            onClick={() => {
+                              setFilter("Engagement Wishes");
+                              setShowFilter(false);
+                            }}
+                          >
+                            Engagement Wishes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="container mx-auto px-4 py-6">
+            <h2 className="text-2xl mb-6">Related Items</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              {RelatedItems.length > 0 ? (
+                RelatedItems.map((item, index) => (
                   <Link
                     key={index}
-                    to={
-                      filteredItems[0].category === "Free Greetings"
-                        ? `/product/${item._id}`
-                        : `/edit/${filteredItems[0].category}/${item.subSubCategory}`
-                    }
-                    state={{
-                      image: item.image[0],
-                      ider: item._id,
-                      product: item,
-                    }}
-                    className="bg-white rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-300 hover:shadow-2xl p-2"
+                    to={`/product/${item._id}`}
+                    state={{ image: item.image[0], id: item._id, product: item }}
+                    className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                   >
-                    <div className="relative w-full h-[30vh] p-2">
+                    <div className="relative pt-[100%]">
                       <img
                         src={item.image[0]}
                         alt={item.name}
-                        className="absolute rounded-t-lg inset-0 w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                     </div>
-                    <div className="px-1 flex justify-center h-10 items-center text-center">
-                      <h2 className="text-md font-avalonB text-gray-600 ">
+                    <div className="p-4 text-center">
+                      <h2 className="text-lg font-medium text-gray-900 truncate">
                         {item.name}
                       </h2>
                     </div>
                   </Link>
                 ))
               ) : (
-                <div className="text-center col-span-full">
+                <div className="col-span-full text-center py-8">
                   <h2 className="text-xl font-semibold text-gray-700">
-                    No products found for the selected filter.
+                    No related items found.
                   </h2>
                 </div>
               )}
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="col-span-3 gap-6 px-[6%] py-4">
-          <h2 className="text-2xl mb-3">Related Items</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {RelatedItems.length > 0 ? (
-              RelatedItems.map((item, index) => (
-                <Link
-                  key={index}
-                  to={`/product/${item._id}`}
-                  state={{ image: item.image[0], id: item._id, product: item }}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-200 hover:scale-105"
-                >
-                  <div className="relative w-full h-[20vh]">
-                    <img
-                      src={item.image[0]}
-                      alt={item.name}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4 text-center">
-                    <h2 className="text-lg font-bold text-gray-900">
-                      {item.name}
-                    </h2>
-                  </div>
-                </Link>
-              ))
-            ) : (
-              <div className="text-center col-span-full">
-                <h2 className="text-xl font-semibold text-gray-700">
-                  No products found for the selected filter.
-                </h2>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 }

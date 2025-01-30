@@ -80,35 +80,53 @@ export default function CategoryFilterLabel() {
 
   if (loading) {
     return (
-      <div className="flex-row">
-        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+        {/* Left Carousel Skeleton */}
+        <div className="mt-6 lg:sticky lg:top-0 h-auto">
+          <div className="w-full max-w-full mx-auto mb-6 lg:mb-0">
+            <div className="relative w-full max-w-4xl mx-auto">
+              <div className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[50vh] xl:h-[96vh] bg-gray-200 animate-pulse"></div>
+            </div>
+          </div>
         </div>
 
-        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-        </div>
-        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-        </div>
-        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-          <div className="h-48 bg-gray-300 rounded mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+        {/* Right Content Skeleton */}
+        <div className="overflow-y-auto h-[96vh]">
+          <div className="p-6 md:px-10 md:py-8 bg-slate-50 rounded-lg shadow-lg">
+            {/* Title Skeleton */}
+            <div className="mb-4">
+              <div className="h-8 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
+              <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+              <div className="h-4 bg-gray-200 rounded w-2/3 mt-1 animate-pulse"></div>
+            </div>
+
+            {/* Divider Skeleton */}
+            <div className="border-t border-gray-300 mb-6"></div>
+
+            {/* Filter Buttons Skeleton */}
+            <div className="flex gap-4 mb-4">
+              <div className="py-2 px-8 bg-gray-200 rounded-lg w-1/2 animate-pulse"></div>
+              <div className="py-2 px-8 bg-gray-200 rounded-lg w-1/2 animate-pulse"></div>
+            </div>
+
+            {/* Price Skeleton */}
+            <div className="mb-6">
+              <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+            </div>
+
+            {/* Button Skeleton */}
+            <div className="w-1/3 py-2 bg-gray-200 rounded-md animate-pulse"></div>
+
+            {/* Specifications Skeleton */}
+            <div className="mt-4">
+              <div className="h-6 bg-gray-200 rounded w-1/4 mb-3 animate-pulse"></div>
+              <ul className="space-y-2">
+                {[...Array(5)].map((_, index) => (
+                  <li key={index} className="h-4 bg-gray-200 rounded w-full animate-pulse"></li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -543,7 +561,7 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[50vh] xl:h-[96vh]"
+                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[96vh] xl:h-[96vh]"
               >
                 {productData.productVideo && (
                   <SwiperSlide>
@@ -798,7 +816,7 @@ export default function CategoryFilterLabel() {
                       </div>
                       <div className="px-1 flex justify-center py-2 items-center text-center">
                         <p className="text-lg flex font-light text-gray-800 mb-1">
-                           &#8377;
+                          &#8377;
                           {filter === "royal"
                             ? productData.RoyalPrice -
                             (productData.RoyalPrice * productData.productOff) / 100
