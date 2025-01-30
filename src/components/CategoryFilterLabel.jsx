@@ -610,7 +610,7 @@ export default function CategoryFilterLabel() {
             </div>
 
             <div className="mb-6">
-              <p className="text-xl font-light text-gray-800 mb-1">
+              <p className="text-xl flex font-light text-gray-800 mb-1">
                 From &#8377;
                 {filter === "royal"
                   ? productData.RoyalPrice -
@@ -620,7 +620,8 @@ export default function CategoryFilterLabel() {
                 <span className="text-red-400 line-through text-[1.1rem] mx-2">
                   {filter === "royal" ? productData.RoyalPrice : productData.popularPrice}{" "}
                 </span>
-                <span className="text-green-400">{productData.productOff}% </span>
+                <span className="inline-block w-[1px] h-6 bg-black"></span>
+                <span className="text-green-400 pl-1">{productData.productOff}% </span>
                 Off
               </p>
             </div>
@@ -791,14 +792,25 @@ export default function CategoryFilterLabel() {
                         />
                       </div>
                       <div className="px-1 flex justify-center pt-2 items-center text-center">
-                        <h2 className="text-md font-avalonB text-gray-600">
+                        <h2 className="text-md font-medium text-gray-600">
                           {item.name.length > 18 ? `${item.name.slice(0, 18)}...` : item.name}
                         </h2>
                       </div>
                       <div className="px-1 flex justify-center py-2 items-center text-center">
-                        <h2 className="text-md font-avalonB font-extralight text-gray-700">
-                          Rs.{item.price}
-                        </h2>
+                        <p className="text-lg flex font-light text-gray-800 mb-1">
+                           &#8377;
+                          {filter === "royal"
+                            ? productData.RoyalPrice -
+                            (productData.RoyalPrice * productData.productOff) / 100
+                            : productData.popularPrice -
+                            (productData.popularPrice * productData.productOff) / 100}{" "}
+                          <span className="text-red-400 line-through text-[1rem] mx-2">
+                            {filter === "royal" ? productData.RoyalPrice : productData.popularPrice}{" "}
+                          </span>
+                          <span className="inline-block w-[1px] h-6 bg-black"></span>
+                          <span className="text-green-400 pl-1">{productData.productOff}% </span>
+                          Off
+                        </p>
                       </div>
                     </Link>
                   ))
