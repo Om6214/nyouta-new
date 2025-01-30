@@ -132,91 +132,99 @@ const Template01 = () => {
 
         <section
           id="section-1"
-          className="bg-cover"
+          className="bg-cover bg-center bg-no-repeat min-h-80vh w-full px-4 sm:px-6 md:px-8 lg:px-12"
           style={{
             backgroundImage:
               "url(https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/background1.png)",
           }}
         >
-          <div
-            className="container w-full mx-auto flex items-center justify-center gap-16 py-16 px-20"
-            style={{ maxWidth: "1700px" }}
-          >
-            <div className="floral-image flex-1 w-[50%]">
-              <img
-                src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
-                alt="Floral"
-                className="w-[50%] h-auto max-h-[300px]"
-                contentEditable
-                onInput={(e) => handleContentChange(e, "home.floralImage")}
-                suppressContentEditableWarning={true}
-              />
-            </div>
-            <div className="wedding-details flex-1 text-center flex flex-col justify-center items-center">
-              <div className="title mb-4">
-                <h1 className="font-great-vibes text-5xl text-e0447b">
+          <div className="container mx-auto max-w-7xl py-8 sm:py-12 md:py-16">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16">
+              {/* Floral Image */}
+              <div className="floral-image w-full md:w-1/2 flex justify-center md:justify-center">
+                <img
+                  src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
+                  alt="Floral"
+                  className="w-2/3 sm:w-1/2 md:w-2/3 lg:w-1/2 h-auto max-h-[300px] object-contain"
+                  contentEditable
+                  onInput={(e) => handleContentChange(e, "home.floralImage")}
+                  suppressContentEditableWarning={true}
+                />
+              </div>
+
+              {/* Wedding Details */}
+              <div className="wedding-details w-full md:w-1/2 text-center flex flex-col justify-center items-center space-y-4 md:space-y-6">
+                {/* Title */}
+                <div className="title">
+                  <h1 className="font-great-vibes text-3xl sm:text-4xl md:text-5xl text-e0447b">
+                    <span
+                      contentEditable
+                      onInput={(e) => handleContentChange(e, "home.title")}
+                      suppressContentEditableWarning={true}
+                    >
+                      {formData.home.title || "WEDDING"}
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Ceremony */}
+                <div className="ceremony text-e0447b text-2xl sm:text-2xl md:text-3xl">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "home.title")}
+                    onInput={(e) => handleContentChange(e, "home.ceremony")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.home.title || "WEDDING"}
+                    {formData.home.ceremony || "CEREMONY"}
                   </span>
-                </h1>
-              </div>
-              <div className="ceremony text-e0447b text-3xl mb-4">
-                <span
-                  contentEditable
-                  onInput={(e) => handleContentChange(e, "home.ceremony")}
-                  suppressContentEditableWarning={true}
-                >
-                  {formData.home.ceremony || "CEREMONY"}
-                </span>
-              </div>
-              <div className="names-container mb-4">
-                <div className="names flex justify-center">
-                  <div
-                    contentEditable
-                    onInput={(e) => handleContentChange(e, "home.name")}
-                    className="font-great-vibes text-4xl text-e0447b mx-2"
-                    suppressContentEditableWarning={true}
-                  >
-                    {formData.home.name || "Groom's Name"}
-                  </div>
-                  &
-                  <div
-                    contentEditable
-                    onInput={(e) => handleContentChange(e, "home.partnerName")}
-                    className="font-great-vibes text-4xl text-e0447b mx-2"
-                    suppressContentEditableWarning={true}
-                  >
-                    {formData.home.partnerName || "Bride's Name"}
+                </div>
+
+                {/* Names Container */}
+                <div className="names-container">
+                  <div className="names flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
+                    <div
+                      contentEditable
+                      onInput={(e) => handleContentChange(e, "home.name")}
+                      className="font-great-vibes text-3xl sm:text-3xl md:text-4xl text-e0447b"
+                      suppressContentEditableWarning={true}
+                    >
+                      {formData.home.name || "Groom's Name"}
+                    </div>
+                    <span className="font-great-vibes text-3xl sm:text-3xl md:text-4xl text-e0447b">&</span>
+                    <div
+                      contentEditable
+                      onInput={(e) => handleContentChange(e, "home.partnerName")}
+                      className="font-great-vibes text-3xl sm:text-3xl md:text-4xl text-e0447b"
+                      suppressContentEditableWarning={true}
+                    >
+                      {formData.home.partnerName || "Bride's Name"}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="date-time text-e0447b font-montserrat text-xl">
-                <p className="mb-2">
+
+                {/* Date and Time */}
+                <div className="date-time text-e0447b font-montserrat text-base sm:text-lg md:text-xl space-y-2 sm:space-y-3">
                   <div
                     contentEditable
                     onInput={(e) => handleContentChange(e, "home.weddingDate")}
-                    className="font-montserrat text-xl text-e0447b"
+                    className="font-montserrat text-e0447b"
                     suppressContentEditableWarning={true}
                   >
                     {formData.home.weddingDate || "Wedding Date"}
                   </div>
-                </p>
-                <p className="inline-block">
-                  |
-                  <div
-                    contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.time")}
-                    className="font-montserrat text-xl text-e0447b inline"
-                    suppressContentEditableWarning={true}
-                  >
-                    {formData.eventInfo.time || "Event Time"}
+
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="text-e0447b">|</span>
+                    <div
+                      contentEditable
+                      onInput={(e) => handleContentChange(e, "eventInfo.time")}
+                      className="font-montserrat text-e0447b inline"
+                      suppressContentEditableWarning={true}
+                    >
+                      {formData.eventInfo.time || "Event Time"}
+                    </div>
+                    <span className="text-e0447b">|</span>
                   </div>
-                  |
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -231,11 +239,12 @@ const Template01 = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="bg-blue-200 px-8 py-4 flex justify-between items-center">
-            <div className="flex flex-col gap-24 pl-28">
-              <div className="flex flex-col items-center gap-2">
-                <h1 className="text-6xl mb-8">Save the Date</h1>
-                <h2 className="text-2xl">
+          <div className="bg-blue-200 px-4 py-6 md:px-8 flex flex-col md:flex-row items-center md:justify-between gap-6">
+            {/* Left Section */}
+            <div className="flex flex-col gap-12 md:gap-24 text-center">
+              <div className="flex flex-col items-center lg:pl-10 gap-2">
+                <h1 className="text-2xl md:text-4xl mb-6">Save the Date</h1>
+                <h2 className="text-xl md:text-2xl">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "home.weddingDate")}
@@ -244,7 +253,7 @@ const Template01 = () => {
                     {formData.home.weddingDate || "Date"}
                   </span>
                 </h2>
-                <p className="text-xl border-l-2 inline border-r-2 px-2 border-red-600">
+                <p className="text-lg md:text-xl border-l-2 inline border-r-2 px-2 border-red-600">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.time")}
@@ -254,9 +263,9 @@ const Template01 = () => {
                   </span>
                 </p>
               </div>
-              <div className="flex flex-col items-center">
-                <h3 className="text-2xl">VENUE</h3>
-                <h3 className="text-2xl">
+              <div className="flex flex-col items-center lg:pl-10 lg:items-center">
+                <h3 className="text-xl md:text-2xl">VENUE</h3>
+                <h3 className="text-xl md:text-2xl">
                   <span
                     contentEditable
                     onInput={(e) =>
@@ -269,17 +278,19 @@ const Template01 = () => {
                 </h3>
               </div>
             </div>
-            <div>
+
+            {/* Image Section */}
+            <div className="w-2/3 md:w-auto flex justify-center">
               <img
                 src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654545/c3_lp8zpe.png"
-                alt=""
-                contentEditable
-                onInput={(e) => handleContentChange(e, "home.venueImage")}
-                suppressContentEditableWarning={true}
+                alt="Venue"
+                className="max-w-full h-auto"
               />
             </div>
-            <div>
-              <h1 className="text-6xl">
+
+            {/* Names Section */}
+            <div className="text-center">
+              <h1 className="text-4xl md:text-6xl">
                 <span
                   contentEditable
                   onInput={(e) => handleContentChange(e, "home.partnerName")}
@@ -288,8 +299,8 @@ const Template01 = () => {
                   {formData.home.partnerName || "Bride"}
                 </span>
               </h1>
-              <span className="text-5xl">&</span>
-              <h1 className="text-6xl">
+              <span className="text-3xl md:text-5xl">&</span>
+              <h1 className="text-4xl md:text-6xl">
                 <span
                   contentEditable
                   onInput={(e) => handleContentChange(e, "home.name")}
@@ -299,54 +310,53 @@ const Template01 = () => {
                 </span>
               </h1>
             </div>
-            <div className="flower">
+
+            {/* Decorative Image */}
+            <div className="w-2/3 md:w-auto">
               <img
-                className=""
                 src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
-                alt=""
-                contentEditable
-                onInput={(e) => handleContentChange(e, "home.flowerImage")}
-                suppressContentEditableWarning={true}
+                alt="Decoration"
+                className="max-w-full h-auto"
               />
             </div>
           </div>
         </section>
 
+
         <section
           id="section-3"
+          className="bg-cover bg-center py-8 px-4 sm:px-8 md:px-16 lg:px-24"
           style={{
             backgroundImage:
               "url(https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/background3.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
           }}
         >
-          <div className="flex py-8 px-24 justify-between">
-            <div className="flex flex-col about items-center gap-4">
-              <h1 className="text-6xl">About Us</h1>
-              <p className="text-center">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            {/* Left Content */}
+            <div className="flex flex-col about items-center text-center gap-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold">About Us</h1>
+
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl">
                 <span
                   contentEditable
-                  onInput={(e) =>
-                    handleContentChange(e, "about.groom.description")
-                  }
+                  onInput={(e) => handleContentChange(e, "about.groom.description")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.about.groom.description || "Groom's Description"}
                 </span>
               </p>
-              <p className="text-center">
+
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl">
                 <span
                   contentEditable
-                  onInput={(e) =>
-                    handleContentChange(e, "about.bride.description")
-                  }
+                  onInput={(e) => handleContentChange(e, "about.bride.description")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.about.bride.description || "Bride's Description"}
                 </span>
               </p>
-              <h2>
+
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">
                 <span
                   contentEditable
                   onInput={(e) => handleContentChange(e, "home.name")}
@@ -364,10 +374,13 @@ const Template01 = () => {
                 </span>
               </h2>
             </div>
-            <div className="flower">
+
+            {/* Right Image */}
+            <div className="flower flex justify-center">
               <img
                 src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
-                alt=""
+                alt="Flower"
+                className="w-44 sm:w-48 md:w-72 lg:w-72 xl:w-80"
                 contentEditable
                 onInput={(e) => handleContentChange(e, "about.flowerImage")}
                 suppressContentEditableWarning={true}
@@ -376,28 +389,36 @@ const Template01 = () => {
           </div>
         </section>
 
+
         <section
           id="section-4"
+          className="bg-cover bg-center py-8 px-4 sm:px-8 md:px-16 lg:px-24"
           style={{
             backgroundImage:
               "url(https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/background4.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
           }}
         >
-          <div className="flex py-8 px-24 justify-between">
-            <div className="flower">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+
+            {/* Left Image */}
+            <div className="flower flex justify-center md:justify-start">
               <img
                 src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
-                alt=""
+                alt="Flower"
+                className="w-48 sm:w-48 md:w-64 lg:w-72"
               />
             </div>
-            <div className="py-16 px-24 space-y-4">
-              <h1 className="text-6xl text-pink-800 text-center">Our Story</h1>
+
+            {/* Right Content */}
+            <div className="py-8 sm:py-12 md:py-16 px-4 sm:px-8 md:px-16 space-y-4 text-center">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-pink-800 font-bold">
+                Our Story
+              </h1>
+
               <div
                 contentEditable
                 onInput={(e) => handleContentChange(e, "ourStory.description")}
-                className="font-montserrat text-xl text-center"
+                className="font-montserrat text-base sm:text-lg md:text-xl text-gray-800"
                 suppressContentEditableWarning={true}
               >
                 {formData.ourStory.description || "Your story goes here..."}
@@ -405,6 +426,7 @@ const Template01 = () => {
             </div>
           </div>
         </section>
+
 
         <section
           id="section-5"
@@ -415,8 +437,8 @@ const Template01 = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="flex justify-between items-center px-24 py-16 bg-blue-200">
-            <div className="flower-wed">
+          <div className="flex justify-between items-center px-8 text-center lg:px-24 py-16 bg-blue-200">
+            <div className="flower-wed hidden lg:block">
               <img
                 src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
                 alt=""
@@ -472,23 +494,23 @@ const Template01 = () => {
           </div>
         </section>
 
-        <section id="section-6">
-          <div className="flex justify-between px-40 py-16">
-            <div className="flex flex-col items-center">
-              <h1 className="text-6xl">Event Name</h1>
+        <section
+          id="section-6" className="px-4 sm:px-8 md:px-16 lg:px-40 py-8 md:py-16">
+          <div className="flex flex-col lg:flex-row justify-between items-center">
+            {/* Left Column */}
+            <div className="flex flex-col items-center text-center">
               <div className="space-y-2 flex flex-col items-center">
-                <h2 className="text-3xl text-pink-800">
+                <h2 className="text-2xl lg:pb-4 md:text-3xl text-pink-800">
                   <span
                     contentEditable
-                    onInput={(e) =>
-                      handleContentChange(e, "eventInfo.eventName")
-                    }
+                    onInput={(e) => handleContentChange(e, "eventInfo.eventName")}
                     suppressContentEditableWarning={true}
+                    className="text-4xl"
                   >
                     {formData.eventInfo.eventName || "Event Name"}
                   </span>
                 </h2>
-                <h3 className="text-xl text-blue-600">
+                <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.event1")}
@@ -497,7 +519,7 @@ const Template01 = () => {
                     {formData.eventInfo.event1 || "Event-1 NAME - TIME"}
                   </span>
                 </h3>
-                <h3 className="text-xl text-blue-600">
+                <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.event2")}
@@ -506,7 +528,7 @@ const Template01 = () => {
                     {formData.eventInfo.event2 || "Event-2 NAME - TIME"}
                   </span>
                 </h3>
-                <h3 className="text-xl text-blue-600">
+                <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.event3")}
@@ -516,22 +538,15 @@ const Template01 = () => {
                   </span>
                 </h3>
                 <img
-                  className="w-20"
+                  className="w-16 md:w-20"
                   src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654819/c5_nkagil.jpg"
                   alt=""
-                  contentEditable
-                  onInput={(e) =>
-                    handleContentChange(e, "eventInfo.eventImage")
-                  }
-                  suppressContentEditableWarning={true}
                 />
-                <h2 className="text-xl text-pink-800">
-                  VENUE:
+                <h2 className="text-lg md:text-xl text-pink-800">
+                  VENUE:{" "}
                   <span
                     contentEditable
-                    onInput={(e) =>
-                      handleContentChange(e, "eventInfo.venue.address")
-                    }
+                    onInput={(e) => handleContentChange(e, "eventInfo.venue.address")}
                     suppressContentEditableWarning={true}
                   >
                     {formData.eventInfo.venue.address || "VENUE NAME HERE"}
@@ -539,28 +554,29 @@ const Template01 = () => {
                 </h2>
               </div>
             </div>
-            <div className="flower">
+
+            {/* Center Flower Image */}
+            <div className="w-44 md:w-52 lg:w-72 py-6 lg:py-0">
               <img
                 src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
                 alt=""
-                contentEditable
-                onInput={(e) => handleContentChange(e, "eventInfo.flowerImage")}
-                suppressContentEditableWarning={true}
               />
             </div>
-            <div className="flex flex-col items-center">
-              <h1 className="text-6xl">Event Name</h1>
+
+            {/* Right Column - Duplicate for Mobile Symmetry */}
+            <div className="flex flex-col items-center text-center">
               <div className="space-y-2 flex flex-col items-center">
-                <h2 className="text-3xl text-pink-800">
+                <h2 className="text-2xl lg:pb-4 md:text-3xl text-pink-800">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.eventName")}
                     suppressContentEditableWarning={true}
+                    className="text-4xl"
                   >
                     {formData.eventInfo.eventName || "Event Name"}
                   </span>
                 </h2>
-                <h3 className="text-xl text-blue-600">
+                <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.event1")}
@@ -569,7 +585,7 @@ const Template01 = () => {
                     {formData.eventInfo.event1 || "Event-1 NAME - TIME"}
                   </span>
                 </h3>
-                <h3 className="text-xl text-blue-600">
+                <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.event2")}
@@ -578,7 +594,7 @@ const Template01 = () => {
                     {formData.eventInfo.event2 || "Event-2 NAME - TIME"}
                   </span>
                 </h3>
-                <h3 className="text-xl text-blue-600">
+                <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.event3")}
@@ -588,15 +604,12 @@ const Template01 = () => {
                   </span>
                 </h3>
                 <img
-                  className="w-20"
+                  className="w-16 md:w-20"
                   src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654819/c5_nkagil.jpg"
                   alt=""
-                  contentEditable
-                  onInput={(e) => handleContentChange(e, "eventInfo.eventImage")}
-                  suppressContentEditableWarning={true}
                 />
-                <h2 className="text-xl text-pink-800">
-                  VENUE:
+                <h2 className="text-lg md:text-xl text-pink-800">
+                  VENUE:{" "}
                   <span
                     contentEditable
                     onInput={(e) => handleContentChange(e, "eventInfo.venue.address")}
@@ -610,23 +623,23 @@ const Template01 = () => {
           </div>
         </section>
 
+
         <section
           id="section-7"
+          className="bg-cover bg-center py-10 md:py-16 px-6 md:px-24"
           style={{
             backgroundImage:
               "url(https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/background7.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
           }}
         >
-          <div className="py-16 px-24 space-y-4">
-            <h1 className="text-6xl text-pink-800 text-center">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl text-pink-800 text-center">
               Wedding Timeline
             </h1>
             <div
               contentEditable
               onInput={(e) => handleContentChange(e, "eventInfo.timeline")}
-              className="font-montserrat text-xl text-center"
+              className="font-montserrat text-lg md:text-xl text-center"
               suppressContentEditableWarning={true}
             >
               {formData.eventInfo.timeline || "Enter Wedding Timeline"}
@@ -634,8 +647,9 @@ const Template01 = () => {
           </div>
         </section>
 
+
         <section id="section-8">
-          <div className="py-10 space-y-4 px-40 bg-blue-200">
+          <div className="py-10 space-y-4 px-4 lg:px-40 bg-blue-200">
             <h2 className="text-4xl text-center text-pink-600">
               WEDDING VENUE
             </h2>
@@ -659,7 +673,7 @@ const Template01 = () => {
                   </span>
                 </h2>
                 <img
-                  className="w-48"
+                  className="w-32"
                   src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737655025/c6_nzcplz.jpg"
                   alt=""
                 />
@@ -683,8 +697,8 @@ const Template01 = () => {
             backgroundPosition: "center",
           }}
         >
-          <div className="py-16 px-24 space-y-4">
-            <h1 className="text-6xl text-pink-800 text-center">
+          <div className="py-16 lg:px-24 px-4 space-y-4">
+            <h1 className="lg:text-6xl text2xl md:text-4xl text-pink-800 text-center">
               Photo Gallery
             </h1>
             <div className="flex gap-8 justify-center">
@@ -800,14 +814,14 @@ const Template01 = () => {
           }}
         >
           <div className="flex flex-col gap-8 justify-center items-center">
-            <h1 className="text-6xl text-blue-700">
+            <h1 className="lg:text-6xl text-2xl md:text-4xl text-blue-700">
               Creating Special For Special Day
             </h1>
             <img
               src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654585/c4_uldilv.png"
               alt=""
             />
-            <h2 className="text-4xl">NYOUTA.COM</h2>
+            <h2 className="lg:text-4xl text-2xl">NYOUTA.COM</h2>
           </div>
         </section>
       </form>
