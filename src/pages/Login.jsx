@@ -56,7 +56,7 @@ export default function Login() {
       otp:otp,
       emailorphone:formData.email,
     }
-    const res = await dispatch(verifyEmail(data));
+    const res = dispatch(verifyEmail(data));
     if (res.type === 'auth/verifyEmail/fulfilled') {
       setIsOtpModalOpen(false);
       navigate("/");

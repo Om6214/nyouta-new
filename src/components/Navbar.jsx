@@ -738,7 +738,7 @@ export default function MainNav() {
         </div>
 
         <div className="hidden lg:flex py-2 justify-center ">
-          <ul className="flex gap-10 justify-center items-center text-md font-avalonN">
+          <ul className="flex gap-8 px-8  justify-center items-center text-sm font-avalonN">
             {navItems.map((item, index) => {
               const isLastTwoItems = index >= navItems.length - 2;
               return (
@@ -753,7 +753,7 @@ export default function MainNav() {
                 >
                   <Link
                     to={item.url}
-                    className="hover:text-primary hover:border-b-2 border-primary  flex items-center gap-3"
+                    className="hover:text-primary hover:border-b-2 border-primary hover:font-thin flex items-center gap-3"
                   >
                     {item.label}
                   </Link>

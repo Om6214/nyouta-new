@@ -724,8 +724,8 @@ const CategoriesNavBar = () => {
                           alt={item.subTitle}
                           className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out"
                         />
-                        <div className="px-4 h-[10%] w-full flex justify-center items-center">
-                          <h2 className="text-lg sm:text-md text-center leading-tight font-avalonB py-1">
+                        <div className="px-0 h-[10%] w-full flex justify-center items-center">
+                          <h2 className="text-base sm:text-md text-center leading-tight font-avalonB py-1">
                             {/* {item.subTitle.length > 21
                               ? `${item.subTitle.slice(0, 21)}...`
                               : item.subTitle} */}

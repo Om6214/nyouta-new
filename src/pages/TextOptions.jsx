@@ -27,6 +27,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
   const [selectedLanguage, setSelectedLanguage] = useState("en"); // Default target language: English
   const [translatedText, setTranslatedText] = useState(text); // Holds the translated text
   const [curveValue, setCurveValue] = useState(initialCurveValue || 0); // Initialize curveValue with selectedText's curveValue or default to 0
+  const [isFontDropdownOpen, setIsFontDropdownOpen] = useState(false);
 
   // Configure the translation library to auto-detect the source language and use Google Translate without an API key
   translate.engine = "google"; // Use Google Translate's free engine
@@ -136,28 +137,37 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
 
       {/* Font Family, Bold, Italic, and Color */}
       <div className="flex items-center justify-between gap-3 mb-4">
-        <select
-          value={font}
-          onChange={(e) =>
-            updateTextField(selectedText.id, "font", e.target.value)
-          }
-          className="w-full p-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#AF7D32]"
-        >
-          {fontOptions.map((fontName) => (
-            <option
-              key={fontName}
-              value={fontName}
-              style={{ fontFamily: fontName }} // Apply the font style to the option
-            >
-              {fontName}
-            </option>
-          ))}
-        </select> 
+        <div className="relative w-[200px]">
+          <button
+            onClick={() => setIsFontDropdownOpen(!isFontDropdownOpen)}
+            className="w-full p-2 border rounded-lg text-sm text-left focus:outline-none focus:ring-2 focus:ring-[#AF7D32]"
+            style={{ fontFamily: font }}
+          >
+            {font}
+          </button>
+
+          {isFontDropdownOpen && (
+            <div className="absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-60 overflow-y-auto">
+              {fontOptions.map((fontName) => (
+                <button
+                  key={fontName}
+                  onClick={() => {
+                    updateTextField(selectedText.id, "font", fontName);
+                    setIsFontDropdownOpen(false);
+                  }}
+                  className="w-full px-4 py-2 text-left hover:bg-gray-100"
+                  style={{ fontFamily: fontName }}
+                >
+                  {fontName}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
         <button
           onClick={() => updateTextField(selectedText.id, "isBold", !isBold)}
-          className={`p-2 rounded-lg ${
-            isBold ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
-          }`}
+          className={`p-2 rounded-lg ${isBold ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
+            }`}
         >
           <FaBold />
         </button>
@@ -165,9 +175,8 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
           onClick={() =>
             updateTextField(selectedText.id, "isItalic", !isItalic)
           }
-          className={`p-2 rounded-lg ${
-            isItalic ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
-          }`}
+          className={`p-2 rounded-lg ${isItalic ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
+            }`}
         >
           <FaItalic />
         </button>
@@ -189,11 +198,10 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
               onClick={() =>
                 updateTextField(selectedText.id, "textAlign", "left")
               }
-              className={`p-2 rounded-lg ${
-                textAlign === "left"
-                  ? "bg-[#AF7D32] text-white"
-                  : "border hover:bg-gray-100"
-              }`}
+              className={`p-2 rounded-lg ${textAlign === "left"
+                ? "bg-[#AF7D32] text-white"
+                : "border hover:bg-gray-100"
+                }`}
             >
               <AiOutlineAlignLeft />
             </button>
@@ -201,11 +209,10 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
               onClick={() =>
                 updateTextField(selectedText.id, "textAlign", "center")
               }
-              className={`p-2 rounded-lg ${
-                textAlign === "center"
-                  ? "bg-[#AF7D32] text-white"
-                  : "border hover:bg-gray-100"
-              }`}
+              className={`p-2 rounded-lg ${textAlign === "center"
+                ? "bg-[#AF7D32] text-white"
+                : "border hover:bg-gray-100"
+                }`}
             >
               <AiOutlineAlignCenter />
             </button>
@@ -213,11 +220,10 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
               onClick={() =>
                 updateTextField(selectedText.id, "textAlign", "right")
               }
-              className={`p-2 rounded-lg ${
-                textAlign === "right"
-                  ? "bg-blue-500 text-white"
-                  : "border hover:bg-gray-100"
-              }`}
+              className={`p-2 rounded-lg ${textAlign === "right"
+                ? "bg-blue-500 text-white"
+                : "border hover:bg-gray-100"
+                }`}
             >
               <AiOutlineAlignRight />
             </button>
@@ -257,18 +263,16 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
         </div>
         <button
           onClick={toggleUppercase}
-          className={`p-2 rounded-lg ${
-            isUppercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
-          }`}
+          className={`p-2 rounded-lg ${isUppercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
+            }`}
         >
           Upper
         </button>
 
         <button
           onClick={toggleLowercase}
-          className={`p-2 rounded-lg ${
-            isLowercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
-          }`}
+          className={`p-2 rounded-lg ${isLowercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"
+            }`}
         >
           Lower
         </button>

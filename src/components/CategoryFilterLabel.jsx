@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Zoom, Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Zoom, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -30,6 +31,31 @@ export default function CategoryFilterLabel() {
   const [selectedSpecification, setSelectedSpecification] = useState(null);
   const [expandedSpecifications, setExpandedSpecifications] = useState({});
   const [expandedSections, setExpandedSections] = useState(new Set());
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth >= 640) { // sm breakpoint
+        setItemsPerPage(12);
+      } else {
+        setItemsPerPage(6);
+      }
+    };
+
+    // Initial setup
+    updateItemsPerPage();
+
+    // Add event listener
+    window.addEventListener('resize', updateItemsPerPage);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
+ 
 
   const handleClick = () => {
     setShowFilter(true);
@@ -55,7 +81,7 @@ export default function CategoryFilterLabel() {
   if (loading) {
     return (
       <div className="flex-row">
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
+        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
           <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
           <div className="h-48 bg-gray-300 rounded mb-4"></div>
           <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
@@ -63,21 +89,21 @@ export default function CategoryFilterLabel() {
           <div className="h-4 bg-gray-300 rounded w-2/3"></div>
         </div>
 
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
+        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
           <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
           <div className="h-48 bg-gray-300 rounded mb-4"></div>
           <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
           <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
           <div className="h-4 bg-gray-300 rounded w-2/3"></div>
         </div>
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
+        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
           <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
           <div className="h-48 bg-gray-300 rounded mb-4"></div>
           <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
           <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
           <div className="h-4 bg-gray-300 rounded w-2/3"></div>
         </div>
-        <div className="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md animate-pulse">
+        <div className="p-4 max-w-md mx-auto bg-slate-50 rounded-lg shadow-md animate-pulse">
           <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
           <div className="h-48 bg-gray-300 rounded mb-4"></div>
           <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
@@ -201,6 +227,22 @@ export default function CategoryFilterLabel() {
   // console.log("filteredResponseData:", filteredResponseData);
   // console.log(filteredItems[0].category);
   console.log(RelatedItems);
+
+   // Calculate total pages
+   const totalPages = Math.ceil(filteredResponseData.length / itemsPerPage);
+
+   // Get current items
+   const indexOfLastItem = currentPage * itemsPerPage;
+   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+   const currentItems = filteredResponseData.slice(indexOfFirstItem, indexOfLastItem);
+ 
+   const goToNextPage = () => {
+     setCurrentPage(prev => Math.min(prev + 1, totalPages));
+   };
+ 
+   const goToPrevPage = () => {
+     setCurrentPage(prev => Math.max(prev - 1, 1));
+   };
 
   const TitleProduct = {
     WeddingManagement: {
@@ -487,9 +529,9 @@ export default function CategoryFilterLabel() {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
         {/* Left Carousel (Static) */}
-        <div className="mt-6 sticky top-0 h-screen">
+        <div className="mt-6 lg:sticky lg:top-0 h-auto">
           <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
             <Swiper
               style={{
@@ -500,7 +542,7 @@ export default function CategoryFilterLabel() {
               navigation={true}
               pagination={{ clickable: true }}
               modules={[Zoom, Navigation, Pagination]}
-              className="rounded-xl shadow-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
+              className="rounded-md h-[40vh] md:h-[50vh] lg:h-[70vh] lg:w-[100vh]"
               onSwiper={(swiper) => {
                 swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
                 swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
@@ -513,7 +555,7 @@ export default function CategoryFilterLabel() {
                     autoPlay
                     muted
                     loop
-                    className="object-cover w-full h-auto rounded-lg"
+                    className="object-cover w-full h-auto rounded-md"
                   ></video>
                 </div>
               </SwiperSlide>
@@ -536,10 +578,10 @@ e ${index + 1}`}
         </div>
 
         {/* Right Content (Scrollable) */}
-        <div className="overflow-y-auto h-screen">
-          <div className="p-6 md:px-10 md:py-8 bg-white rounded-lg shadow-lg">
+        <div className="overflow-y-auto h-[80vh]">
+          <div className="p-6 md:px-10 md:py-8 bg-slate-50 rounded-lg shadow-lg">
             <div className="mb-4">
-              <h1 className="text-3xl font-bold mb-2">
+              <h1 className="text-5xl font-normal mb-2">
                 {productData.productSubSubCategory}
               </h1>
               <p className="text-lg text-gray-600">{productData.productCategory}</p>
@@ -636,9 +678,9 @@ e ${index + 1}`}
 
 
       {["Planner Books"].includes(filteredItems[0].category) ? (
-        <div className="grid grid-cols-4 gap-6 px-[6%] py-5">
+        <div className="grid grid-cols-4 gap-6 px-[6%] py-5 lg:max-w-8xl bg-slate-50 mx-auto">
           {/* Left column: Filter options */}
-          <div className="col-span-1 hidden md:block space-y-2">
+          {/* <div className="col-span-1 hidden md:block space-y-2">
             <div className="flex items-center justify-between">
               <h1 className="text-lg font-avalonN">Filter By</h1>
               <button
@@ -667,10 +709,10 @@ e ${index + 1}`}
                 Floral
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Mobile filter */}
-          <div className="md:hidden relative">
+          {/* <div className="md:hidden relative">
             <Filter onClick={handleClick} />
             {showFilter && (
               <div className="absolute top-7 left-[-10px] space-y-2 border-2 rounded-xl bg-gray-50 font-avalonN w-[180px] px-2 py-2 z-50">
@@ -718,51 +760,87 @@ e ${index + 1}`}
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* Right column: Filtered results */}
-          <div className="col-span-3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {filteredResponseData.length > 0 ? (
-                filteredResponseData.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={
-                      filteredItems[0].category === "Free Greetings"
-                        ? `/product/${item._id}`
-                        : `/edit/${filteredItems[0].category}/${item.subSubCategory}`
-                    }
-                    state={{
-                      image: item.image[0],
-                      ider: item._id,
-                      product: item,
-                    }}
-                    className="bg-white p-2 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-transform duration-300 hover:shadow-2xl"
+          <div className="col-span-4 bg-slate-50 max-w-8xl px-4 py-6">
+            <div className="relative">
+              {/* Product Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {currentItems.length > 0 ? (
+                  currentItems.map((item, index) => (
+                    <Link
+                      key={index}
+                      to={
+                        filteredItems[0]?.category === "Free Greetings"
+                          ? `/product/${item._id}`
+                          : `/edit/${filteredItems[0]?.category}/${item.subSubCategory}`
+                      }
+                      state={{
+                        image: item.image[0],
+                        ider: item._id,
+                        product: item,
+                      }}
+                      className="group bg-slate-50 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                    >
+                      <div className="relative w-full h-[45vh] rounded-lg overflow-hidden">
+                        <img
+                          src={item.image[0]}
+                          alt={item.name}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="px-1 flex justify-center pt-2 items-center text-center">
+                        <h2 className="text-md font-avalonB text-gray-600">
+                          {item.name.length > 18 ? `${item.name.slice(0, 18)}...` : item.name}
+                        </h2>
+                      </div>
+                      <div className="px-1 flex justify-center py-2 items-center text-center">
+                        <h2 className="text-md font-avalonB font-extralight text-gray-700">
+                          Rs.{item.price}
+                        </h2>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <div className="text-center col-span-full">
+                    <h2 className="text-xl font-semibold text-gray-700">
+                      No products found for the selected filter.
+                    </h2>
+                  </div>
+                )}
+              </div>
+
+              {/* Navigation Buttons */}
+              {filteredResponseData.length > itemsPerPage && (
+                <div className="flex justify-center items-center mt-8 gap-4">
+                  <button
+                    onClick={goToPrevPage}
+                    disabled={currentPage === 1}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full ${currentPage === 1
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                      } transition-all duration-200`}
                   >
-                    <div className="relative w-full h-[30vh] rounded-lg overflow-hidden">
-                      <img
-                        src={item.image[0]}
-                        alt={item.name}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="px-1 flex justify-center pt-2 items-center text-center">
-                      <h2 className="text-md font-avalonB text-gray-600">
-                        {item.name.length > 18 ? `${item.name.slice(0, 18)}...` : item.name}
-                      </h2>
-                    </div>
-                    <div className="px-1 flex justify-center py-2 items-center text-center">
-                      <h2 className="text-md font-avalonB font-extralight text-gray-700">
-                        Rs.{item.price}
-                      </h2>
-                    </div>
-                  </Link>
-                ))
-              ) : (
-                <div className="text-center col-span-full">
-                  <h2 className="text-xl font-semibold text-gray-700">
-                    No products found for the selected filter.
-                  </h2>
+                    <ChevronLeft size={20} />
+                  </button>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700">
+                      Page {currentPage} of {totalPages}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={goToNextPage}
+                    disabled={currentPage === totalPages}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full ${currentPage === totalPages
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                      } transition-all duration-200`}
+                  >
+                    <ChevronRight size={20} />
+                  </button>
                 </div>
               )}
             </div>
@@ -787,7 +865,7 @@ e ${index + 1}`}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>
-                  <div className="p-4 text-center">
+                  <div className=" text-center">
                     <h2 className="text-lg font-bold text-gray-900">
                       {item.name}
                     </h2>
