@@ -55,7 +55,7 @@ export default function CategoryFilterLabel() {
   useEffect(() => {
     setCurrentPage(1);
   }, [itemsPerPage]);
- 
+
 
   const handleClick = () => {
     setShowFilter(true);
@@ -228,21 +228,21 @@ export default function CategoryFilterLabel() {
   // console.log(filteredItems[0].category);
   console.log(RelatedItems);
 
-   // Calculate total pages
-   const totalPages = Math.ceil(filteredResponseData.length / itemsPerPage);
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredResponseData.length / itemsPerPage);
 
-   // Get current items
-   const indexOfLastItem = currentPage * itemsPerPage;
-   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-   const currentItems = filteredResponseData.slice(indexOfFirstItem, indexOfLastItem);
- 
-   const goToNextPage = () => {
-     setCurrentPage(prev => Math.min(prev + 1, totalPages));
-   };
- 
-   const goToPrevPage = () => {
-     setCurrentPage(prev => Math.max(prev - 1, 1));
-   };
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredResponseData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const goToNextPage = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  };
+
+  const goToPrevPage = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+  };
 
   const TitleProduct = {
     WeddingManagement: {
@@ -532,48 +532,52 @@ export default function CategoryFilterLabel() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
         {/* Left Carousel (Static) */}
         <div className="mt-6 lg:sticky lg:top-0 h-auto">
-          <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
-            <Swiper
-              style={{
-                "--swiper-navigation-color": "#000",
-                "--swiper-pagination-color": "#000",
-              }}
-              zoom={true}
-              navigation={true}
-              pagination={{ clickable: true }}
-              modules={[Zoom, Navigation, Pagination]}
-              className="rounded-md h-[40vh] md:h-[50vh] lg:h-[70vh] lg:w-[100vh]"
-              onSwiper={(swiper) => {
-                swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
-                swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
-              }}
-            >
-              <SwiperSlide>
-                <div className="">
-                  <video
-                    src={productData.productVideo}
-                    autoPlay
-                    muted
-                    loop
-                    className="object-cover w-full h-auto rounded-md"
-                  ></video>
-                </div>
-              </SwiperSlide>
-              {productData.productImages &&
-                productData.productImages.map((image, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="swiper-zoom-container">
-                      <img
-                        src={image}
-                        alt={`Product Imag
-
-e ${index + 1}`}
-                        className="object-cover w-full h-auto rounded-lg"
+          <div className="w-full max-w-full mx-auto mb-6 lg:mb-0">
+            <div className="relative w-full max-w-4xl mx-auto">
+              <Swiper
+                style={{
+                  "--swiper-navigation-color": "#000",
+                  "--swiper-pagination-color": "#000",
+                }}
+                zoom={true}
+                navigation={true}
+                pagination={{ clickable: true }}
+                modules={[Zoom, Navigation, Pagination]}
+                className="w-full rounded-lg"
+                onSwiper={(swiper) => {
+                  swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
+                  swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
+                }}
+              >
+                {productData.productVideo && (
+                  <SwiperSlide>
+                    <div className="aspect-square w-full relative">
+                      <video
+                        src={productData.productVideo}
+                        autoPlay
+                        muted
+                        loop
+                        className="absolute inset-0 w-full h-full object-cover rounded-lg"
                       />
                     </div>
                   </SwiperSlide>
+                )}
+
+                {productData.productImages?.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="aspect-square w-full relative">
+                      <div className="swiper-zoom-container absolute inset-0">
+                        <img
+                          src={image}
+                          alt={`Product Image ${index + 1}`}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  </SwiperSlide>
                 ))}
-            </Swiper>
+              </Swiper>
+            </div>
           </div>
         </div>
 
@@ -584,8 +588,8 @@ e ${index + 1}`}
               <h1 className="text-5xl font-normal mb-2">
                 {productData.productSubSubCategory}
               </h1>
-              <p className="text-lg text-gray-600">{productData.productCategory}</p>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-3xl text-gray-600">{productData.productCategory}</p>
+              <p className="text-lg text-gray-500 mt-1">
                 {productData.productSubCategory}, {productData.productSubSubCategory}
               </p>
             </div>
@@ -594,14 +598,14 @@ e ${index + 1}`}
 
             <div className="flex gap-4 mb-4">
               <div
-                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${filter === "royal" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
+                className={`py-2 px-8 border rounded-lg hover:shadow-md cursor-pointer ${filter === "royal" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
                   }`}
                 onClick={() => setFilter("royal")}
               >
                 Royal
               </div>
               <div
-                className={`py-2 px-4 border rounded-lg hover:shadow-md cursor-pointer ${filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
+                className={`py-2 px-8 border rounded-lg hover:shadow-md cursor-pointer ${filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
                   }`}
                 onClick={() => setFilter("popular")}
               >
@@ -610,7 +614,7 @@ e ${index + 1}`}
             </div>
 
             <div className="mb-6">
-              <p className="text-xl font-semibold text-gray-800 mb-1">
+              <p className="text-xl font-light text-gray-800 mb-1">
                 From Rs.
                 {filter === "royal"
                   ? productData.RoyalPrice -
@@ -628,14 +632,14 @@ e ${index + 1}`}
             <button
               ref={relatedItemsRef}
               onClick={handleButtonClick}
-              className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+              className="w-1/3 py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
             >
               Choose Now
             </button>
 
             <div className="mt-4">
               <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
-              <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
+              <ul className="list-disc list-inside text-xs text-gray-600 space-y-2">
                 {groupedSpecs.map((item, index) => {
                   if (item.type === 'standalone') {
                     return <li key={index}>{item.content}</li>;
@@ -818,8 +822,8 @@ e ${index + 1}`}
                     onClick={goToPrevPage}
                     disabled={currentPage === 1}
                     className={`flex items-center justify-center w-10 h-10 rounded-full ${currentPage === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
                       } transition-all duration-200`}
                   >
                     <ChevronLeft size={20} />
@@ -835,8 +839,8 @@ e ${index + 1}`}
                     onClick={goToNextPage}
                     disabled={currentPage === totalPages}
                     className={`flex items-center justify-center w-10 h-10 rounded-full ${currentPage === totalPages
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
                       } transition-all duration-200`}
                   >
                     <ChevronRight size={20} />
