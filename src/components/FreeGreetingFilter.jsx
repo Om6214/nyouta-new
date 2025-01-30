@@ -475,29 +475,31 @@ export default function CategoryFilterLabel() {
                 {totalPages > 1 && (
                   <div className="flex justify-center items-center mt-8 pb-8">
                     <button
-                      onClick={() => { }} // Add goToPrevPage
+                      onClick={goToPrevPage}
                       disabled={currentPage === 1}
-                      className={`p-2 mx-2 rounded-full border transition-colors duration-200
-                      ${currentPage === 1
-                          ? "text-gray-400 cursor-not-allowed"
-                          : "hover:bg-gray-100"
-                        }`}
+                      className={`flex items-center justify-center w-10 h-10 rounded-full ${currentPage === 1
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                        } transition-all duration-200`}
                     >
-                      <ChevronLeft />
+                      <ChevronLeft size={20} />
                     </button>
-                    <span className="px-4 py-2 text-lg font-semibold">
-                      {currentPage} / {totalPages}
-                    </span>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium px-3 text-gray-700">
+                        Page {currentPage} of {totalPages}
+                      </span>
+                    </div>
+
                     <button
-                      onClick={() => { }} // Add goToNextPage
+                      onClick={goToNextPage}
                       disabled={currentPage === totalPages}
-                      className={`p-2 mx-2 rounded-full border transition-colors duration-200
-                      ${currentPage === totalPages
-                          ? "text-gray-400 cursor-not-allowed"
-                          : "hover:bg-gray-100"
-                        }`}
+                      className={`flex items-center justify-center w-10 h-10 rounded-full ${currentPage === totalPages
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+                        } transition-all duration-200`}
                     >
-                      <ChevronRight />
+                      <ChevronRight size={20} />
                     </button>
                   </div>
                 )}
