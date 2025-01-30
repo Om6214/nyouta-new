@@ -543,11 +543,7 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[70vh]"
-                onSwiper={(swiper) => {
-                  swiper.el.addEventListener("mouseenter", () => swiper.autoplay.stop());
-                  swiper.el.addEventListener("mouseleave", () => swiper.autoplay.start());
-                }}
+                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[50vh] xl:h-[96vh]"
               >
                 {productData.productVideo && (
                   <SwiperSlide>
@@ -582,7 +578,7 @@ export default function CategoryFilterLabel() {
         </div>
 
         {/* Right Content (Scrollable) */}
-        <div className="overflow-y-auto h-[80vh]">
+        <div className="overflow-y-auto h-[96vh]">
           <div className="p-6 md:px-10 md:py-8 bg-slate-50 rounded-lg shadow-lg">
             <div className="mb-4">
               <h1 className="text-5xl font-normal mb-2">
@@ -615,7 +611,7 @@ export default function CategoryFilterLabel() {
 
             <div className="mb-6">
               <p className="text-xl font-light text-gray-800 mb-1">
-                From Rs.
+                From &#8377;
                 {filter === "royal"
                   ? productData.RoyalPrice -
                   (productData.RoyalPrice * productData.productOff) / 100
@@ -770,7 +766,7 @@ export default function CategoryFilterLabel() {
           <div className="col-span-4 bg-slate-50 max-w-8xl px-4 py-6">
             <div className="relative">
               {/* Product Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {currentItems.length > 0 ? (
                   currentItems.map((item, index) => (
                     <Link
@@ -787,7 +783,7 @@ export default function CategoryFilterLabel() {
                       }}
                       className="group bg-slate-50 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                     >
-                      <div className="relative w-full h-[45vh] rounded-lg overflow-hidden">
+                      <div className="relative w-full h-[45vh]  overflow-hidden">
                         <img
                           src={item.image[0]}
                           alt={item.name}
