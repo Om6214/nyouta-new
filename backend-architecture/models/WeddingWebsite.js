@@ -24,7 +24,7 @@ const weddingWebsiteSchema = new mongoose.Schema({
         description: { type: String, required: false },
         images: [{ type: String }],
     },
-    eventInfo:{
+    eventInfo:[{
         description: { type: String, required: false },
         time:{ type: String, required: false },
         venue:{
@@ -32,7 +32,7 @@ const weddingWebsiteSchema = new mongoose.Schema({
             address: { type: String, required: false },
             location: { type: String, required: false },
         },
-    },
+    }],
     socialLinks:{
         facebook: { type: String, required: false },
         instagram: { type: String, required: false },

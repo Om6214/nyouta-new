@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Template01 = () => {
   const dispatch = useDispatch();
   const { weddingwebsiteData } = useSelector((state) => state.weddingwebsite);
+  console.log(weddingwebsiteData);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     id: "01",
@@ -25,21 +26,36 @@ const Template01 = () => {
       },
       eventName: "",
       timeline: "",
-      event1: "",
-      event2: "",
-      event3: "",
     },
     about: {
-      groom: {
+      bride: {
+        image: "",
         description: "",
       },
-      bride: {
+      groom: {
+        image: "",
         description: "",
       },
     },
     ourStory: {
       description: "",
+      images: [], 
     },
+    eventInfo: [{
+      description: "",
+      time: "",
+      venue: {
+        name: "", 
+        address: "",
+        location: "", 
+      },
+    }],
+    socialLinks: {
+      facebook: "",
+      instagram: "",
+      twitter: "",
+    },
+    tags: [],
     gallery: {
       photos: [],
     },
@@ -48,11 +64,21 @@ const Template01 = () => {
       event1: "",
       event2: "",
     },
+
     rsvp: {
       name: "",
       address: "",
       mobile: "",
       response: "",
+    },
+    eventInfo: {
+      eventName: "",
+      event1: "",
+      event2: "",
+      event3: "",
+      venue: {
+        address: ""
+      }
     },
   });
 
@@ -63,10 +89,21 @@ const Template01 = () => {
 
   const handleContentChange = (e, field) => {
     const value = e.target.innerText;
-    setFormData((prevState) => ({
-      ...prevState,
-      [field]: value,
-    }));
+    setFormData((prevState) => {
+        const updatedState = { ...prevState };
+        const fields = field.split('.');
+        let current = updatedState;
+
+        fields.forEach((f, index) => {
+            if (index === fields.length - 1) {
+                current[f] = value;
+            } else {
+                current = current[f];
+            }
+        });
+
+        return updatedState;
+    });
   };
 
   const handleFileChange = (e) => {
@@ -143,7 +180,7 @@ const Template01 = () => {
                   alt="Floral"
                   className="w-2/3 sm:w-1/2 md:w-2/3 lg:w-1/2 h-auto max-h-[300px] object-contain"
                   contentEditable
-                  onInput={(e) => handleContentChange(e, "home.floralImage")}
+                  onBlur={(e) => handleContentChange(e, "home.floralImage")}
                   suppressContentEditableWarning={true}
                 />
               </div>
@@ -173,20 +210,20 @@ const Template01 = () => {
                   <div className="names flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
                     <div
                       contentEditable
-                      onInput={(e) => handleContentChange(e, "home.name")}
+                      onBlur={(e) => handleContentChange(e, "home.name")}
                       className="font-great-vibes text-3xl sm:text-3xl md:text-4xl text-e0447b"
                       suppressContentEditableWarning={true}
                     >
-                      {formData.home.name || "Groom's Name"}
+                      {formData.home.name || "Groom"}
                     </div>
                     <span className="font-great-vibes text-3xl sm:text-3xl md:text-4xl text-e0447b">&</span>
                     <div
                       contentEditable
-                      onInput={(e) => handleContentChange(e, "home.partnerName")}
+                      onBlur={(e) => handleContentChange(e, "home.partnerName")}
                       className="font-great-vibes text-3xl sm:text-3xl md:text-4xl text-e0447b"
                       suppressContentEditableWarning={true}
                     >
-                      {formData.home.partnerName || "Bride's Name"}
+                      {formData.home.partnerName || "Bride"}
                     </div>
                   </div>
                 </div>
@@ -195,22 +232,22 @@ const Template01 = () => {
                 <div className="date-time text-e0447b font-montserrat text-base sm:text-lg md:text-xl space-y-2 sm:space-y-3">
                   <div
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "home.weddingDate")}
+                    onBlur={(e) => handleContentChange(e, "home.weddingDate")}
                     className="font-montserrat text-e0447b"
                     suppressContentEditableWarning={true}
                   >
-                    {formData.home.weddingDate || "Wedding Date"}
+                    {formData.home.weddingDate || "October 23rd, 2025"}
                   </div>
 
                   <div className="flex items-center justify-center gap-2">
                     <span className="text-e0447b">|</span>
                     <div
                       contentEditable
-                      onInput={(e) => handleContentChange(e, "eventInfo.time")}
+                      onBlur={(e) => handleContentChange(e, "eventInfo[0].time")}
                       className="font-montserrat text-e0447b inline"
                       suppressContentEditableWarning={true}
                     >
-                      {formData.eventInfo.time || "Event Time"}
+                      {formData.eventInfo[0].time || "8:00 PM"}
                     </div>
                     <span className="text-e0447b">|</span>
                   </div>
@@ -243,10 +280,10 @@ const Template01 = () => {
                 <p className="text-lg md:text-xl border-l-2 inline border-r-2 px-2 border-red-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.time")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].time")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.time || "Time"}
+                    {formData.eventInfo[0].time || "Time"}
                   </span>
                 </p>
               </div>
@@ -255,12 +292,10 @@ const Template01 = () => {
                 <h3 className="text-xl md:text-2xl">
                   <span
                     contentEditable
-                    onInput={(e) =>
-                      handleContentChange(e, "eventInfo.venue.address")
-                    }
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].venue.address")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.venue.address || "Venue Address"}
+                    {formData.eventInfo[0].venue.address || "Venue Address"}
                   </span>
                 </h3>
               </div>
@@ -280,7 +315,7 @@ const Template01 = () => {
               <h1 className="text-4xl md:text-6xl">
                 <span
                   contentEditable
-                  onInput={(e) => handleContentChange(e, "home.partnerName")}
+                  onBlur={(e) => handleContentChange(e, "home.partnerName")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.home.partnerName || "Bride"}
@@ -290,7 +325,7 @@ const Template01 = () => {
               <h1 className="text-4xl md:text-6xl">
                 <span
                   contentEditable
-                  onInput={(e) => handleContentChange(e, "home.name")}
+                  onBlur={(e) => handleContentChange(e, "home.name")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.home.name || "Groom"}
@@ -326,7 +361,7 @@ const Template01 = () => {
               <p className="text-sm sm:text-base md:text-lg lg:text-xl">
                 <span
                   contentEditable
-                  onInput={(e) => handleContentChange(e, "about.groom.description")}
+                  onBlur={(e) => handleContentChange(e, "about.groom.description")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.about.groom.description || "Groom's Description"}
@@ -336,7 +371,7 @@ const Template01 = () => {
               <p className="text-sm sm:text-base md:text-lg lg:text-xl">
                 <span
                   contentEditable
-                  onInput={(e) => handleContentChange(e, "about.bride.description")}
+                  onBlur={(e) => handleContentChange(e, "about.bride.description")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.about.bride.description || "Bride's Description"}
@@ -346,7 +381,7 @@ const Template01 = () => {
               <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">
                 <span
                   contentEditable
-                  onInput={(e) => handleContentChange(e, "home.name")}
+                  onBlur={(e) => handleContentChange(e, "home.name")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.home.name || "Groom"}
@@ -354,7 +389,7 @@ const Template01 = () => {
                 &
                 <span
                   contentEditable
-                  onInput={(e) => handleContentChange(e, "home.partnerName")}
+                  onBlur={(e) => handleContentChange(e, "home.partnerName")}
                   suppressContentEditableWarning={true}
                 >
                   {formData.home.partnerName || "Bride"}
@@ -369,7 +404,7 @@ const Template01 = () => {
                 alt="Flower"
                 className="w-44 sm:w-48 md:w-72 lg:w-72 xl:w-80"
                 contentEditable
-                onInput={(e) => handleContentChange(e, "about.flowerImage")}
+                onBlur={(e) => handleContentChange(e, "about.flowerImage")}
                 suppressContentEditableWarning={true}
               />
             </div>
@@ -404,7 +439,7 @@ const Template01 = () => {
 
               <div
                 contentEditable
-                onInput={(e) => handleContentChange(e, "ourStory.description")}
+                onBlur={(e) => handleContentChange(e, "ourStory.description")}
                 className="font-montserrat text-base sm:text-lg md:text-xl text-gray-800"
                 suppressContentEditableWarning={true}
               >
@@ -430,7 +465,7 @@ const Template01 = () => {
                 src="https://res.cloudinary.com/dr6qk9jr8/image/upload/v1737654489/c2_hszmm6.png"
                 alt=""
                 contentEditable
-                onInput={(e) => handleContentChange(e, "program.flowerImage")}
+                onBlur={(e) => handleContentChange(e, "program.flowerImage")}
                 suppressContentEditableWarning={true}
               />
             </div>
@@ -440,40 +475,39 @@ const Template01 = () => {
                 <h2 className="text-3xl text-pink-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "program.details")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].eventName")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.program.details || "Monday, 21ST APRIL, 2025"}
+                   {formData.eventInfo[0].eventName || "Monday, 21ST APRIL, 2025"}
+                   
                   </span>
                 </h2>
                 <h3 className="text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "program.event1")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].eventName")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.program.event1 || "Event-1 NAME - TIME"}
+                     {formData.eventInfo[0].eventName || "Event-1 NAME - TIME"}
                   </span>
                 </h3>
                 <h3 className="text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "program.event2")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].eventName")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.program.event2 || "Event-2 NAME - TIME"}
+                  {formData.eventInfo[0].eventName || "Event-2 NAME - TIME"}
                   </span>
                 </h3>
                 <h2 className="text-xl text-pink-700">
                   VENUE:
                   <span
                     contentEditable
-                    onInput={(e) =>
-                      handleContentChange(e, "eventInfo.venue.address")
-                    }
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].venue.address")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.venue.address || "VENUE NAME HERE"}
+                    {formData.eventInfo[0].venue.address || "VENUE NAME HERE"}
                   </span>
                 </h2>
               </div>
@@ -490,38 +524,38 @@ const Template01 = () => {
                 <h2 className="text-2xl lg:pb-4 md:text-3xl text-pink-800">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.eventName")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].eventName")}
                     suppressContentEditableWarning={true}
                     className="text-4xl"
                   >
-                    {formData.eventInfo.eventName || "Event Name"}
+                    {formData.eventInfo[0].eventName || "Event Name"}
                   </span>
                 </h2>
                 <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.event1")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].event1")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.event1 || "Event-1 NAME - TIME"}
+                    {formData.eventInfo[0].event1 || "Event-1 NAME - TIME"}
                   </span>
                 </h3>
                 <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.event2")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].event2")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.event2 || "Event-2 NAME - TIME"}
+                    {formData.eventInfo[0].event2 || "Event-2 NAME - TIME"}
                   </span>
                 </h3>
                 <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.event3")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].event3")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.event3 || "Event-3 NAME - TIME"}
+                    {formData.eventInfo[0].event3 || "Event-3 NAME - TIME"}
                   </span>
                 </h3>
                 <img
@@ -533,10 +567,10 @@ const Template01 = () => {
                   VENUE:{" "}
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.venue.address")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].venue.address")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.venue.address || "VENUE NAME HERE"}
+                    {formData.eventInfo[0].venue.address || "VENUE NAME HERE"}
                   </span>
                 </h2>
               </div>
@@ -556,38 +590,38 @@ const Template01 = () => {
                 <h2 className="text-2xl lg:pb-4 md:text-3xl text-pink-800">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.eventName")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].eventName")}
                     suppressContentEditableWarning={true}
                     className="text-4xl"
                   >
-                    {formData.eventInfo.eventName || "Event Name"}
+                    {formData.eventInfo[0].eventName || "Event Name"}
                   </span>
                 </h2>
                 <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.event1")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].event1")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.event1 || "Event-1 NAME - TIME"}
+                    {formData.eventInfo[0].event1 || "Event-1 NAME - TIME"}
                   </span>
                 </h3>
                 <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.event2")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].event2")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.event2 || "Event-2 NAME - TIME"}
+                    {formData.eventInfo[0].event2 || "Event-2 NAME - TIME"}
                   </span>
                 </h3>
                 <h3 className="text-lg md:text-xl text-blue-600">
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.event3")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].event3")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.event3 || "Event-3 NAME - TIME"}
+                    {formData.eventInfo[0].event3 || "Event-3 NAME - TIME"}
                   </span>
                 </h3>
                 <img
@@ -599,10 +633,10 @@ const Template01 = () => {
                   VENUE:{" "}
                   <span
                     contentEditable
-                    onInput={(e) => handleContentChange(e, "eventInfo.venue.address")}
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].venue.address")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.venue.address || "VENUE NAME HERE"}
+                    {formData.eventInfo[0].venue.address || "VENUE NAME HERE"}
                   </span>
                 </h2>
               </div>
@@ -625,11 +659,11 @@ const Template01 = () => {
             </h1>
             <div
               contentEditable
-              onInput={(e) => handleContentChange(e, "eventInfo.timeline")}
+              onBlur={(e) => handleContentChange(e, "eventInfo[0].timeline")}
               className="font-montserrat text-lg md:text-xl text-center"
               suppressContentEditableWarning={true}
             >
-              {formData.eventInfo.timeline || "Enter Wedding Timeline"}
+              {formData.eventInfo[0].timeline || "Enter Wedding Timeline"}
             </div>
           </div>
         </section>
@@ -651,12 +685,10 @@ const Template01 = () => {
                 <h2 className="text-3xl text-center text-blue-700">
                   <span
                     contentEditable
-                    onInput={(e) =>
-                      handleContentChange(e, "eventInfo.venue.address")
-                    }
+                    onBlur={(e) => handleContentChange(e, "eventInfo[0].venue.address")}
                     suppressContentEditableWarning={true}
                   >
-                    {formData.eventInfo.venue.address || "Venue Address"}
+                    {formData.eventInfo[0].venue.address || "Venue Address"}
                   </span>
                 </h2>
                 <img
