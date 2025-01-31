@@ -548,9 +548,9 @@ export default function CategoryFilterLabel() {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
-        {/* Left Carousel (Static) */}
-        <div className="mt-6 lg:sticky lg:top-0 h-auto">
-          <div className="w-full max-w-full mx-auto mb-6 lg:mb-0">
+        {/* Left Carousel (Sticky until content is completed) */}
+        <div className="lg:sticky lg:top-0 h-auto max-h-[96vh]">
+          <div className="w-full max-w-full mx-auto">
             <div className="relative w-full max-w-4xl mx-auto">
               <Swiper
                 style={{
@@ -561,7 +561,7 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[96vh] xl:h-[96vh]"
+                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[90vh] xl:h-[90vh]"
               >
                 {productData.productVideo && (
                   <SwiperSlide>
@@ -596,13 +596,14 @@ export default function CategoryFilterLabel() {
         </div>
 
         {/* Right Content (Scrollable) */}
-        <div className="overflow-y-auto h-[96vh]">
-          <div className="p-6 md:px-10 md:py-8 bg-slate-50 rounded-lg shadow-lg">
+        <div className="h-auto">
+          <div className="p-6 md:px-10 md:py-8 bg-white rounded-lg shadow-lg">
+            {/* Product Title and Category */}
             <div className="mb-4">
-              <h1 className="text-5xl font-normal mb-2">
+              <h1 className="text-4xl font-semibold text-gray-800 mb-2">
                 {productData.productSubSubCategory}
               </h1>
-              <p className="text-3xl text-gray-600">{productData.productCategory}</p>
+              <p className="text-2xl text-gray-600">{productData.productCategory}</p>
               <p className="text-lg text-gray-500 mt-1">
                 {productData.productSubCategory}, {productData.productSubSubCategory}
               </p>
@@ -610,75 +611,80 @@ export default function CategoryFilterLabel() {
 
             <div className="border-t border-gray-300 mb-6"></div>
 
+            {/* Selection Options */}
             <div className="flex gap-4 mb-4">
               <div
-                className={`py-2 px-8 border rounded-lg hover:shadow-md cursor-pointer ${filter === "royal" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
-                  }`}
+                className={`py-2 px-8 border rounded-lg font-medium text-lg transition ${filter === "royal"
+                    ? "bg-orange-500 text-white"
+                    : "bg-white border-2 hover:bg-gray-100"
+                  } cursor-pointer`}
                 onClick={() => setFilter("royal")}
               >
                 Royal
               </div>
               <div
-                className={`py-2 px-8 border rounded-lg hover:shadow-md cursor-pointer ${filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"
-                  }`}
+                className={`py-2 px-8 border rounded-lg font-medium text-lg transition ${filter === "popular"
+                    ? "bg-orange-500 text-white"
+                    : "bg-white border-2 hover:bg-gray-100"
+                  } cursor-pointer`}
                 onClick={() => setFilter("popular")}
               >
                 Popular
               </div>
             </div>
 
+            {/* Price Section */}
             <div className="mb-6">
-              <p className="text-xl flex font-light text-gray-800 mb-1">
+              <p className="text-xl font-medium text-gray-800 mb-1 flex items-center">
                 From &#8377;
                 {filter === "royal"
                   ? productData.RoyalPrice -
                   (productData.RoyalPrice * productData.productOff) / 100
                   : productData.popularPrice -
                   (productData.popularPrice * productData.productOff) / 100}{" "}
-                <span className="text-red-400 line-through text-[1.1rem] mx-2">
-                  {filter === "royal" ? productData.RoyalPrice : productData.popularPrice}{" "}
+                <span className="text-red-400 line-through text-lg mx-2">
+                  {filter === "royal" ? productData.RoyalPrice : productData.popularPrice}
                 </span>
                 <span className="inline-block w-[1px] h-6 bg-black"></span>
-                <span className="text-green-400 pl-1">{productData.productOff}% </span>
-                Off
+                <span className="text-green-500 pl-1">{productData.productOff}% Off</span>
               </p>
             </div>
 
+            {/* CTA Button */}
             <button
               ref={relatedItemsRef}
               onClick={handleButtonClick}
-              className="w-1/3 py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+              className="w-full md:w-1/2 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg rounded-lg transition shadow-md"
             >
               Choose Now
             </button>
 
-            <div className="mt-4">
+            {/* Product Specifications */}
+            <div className="mt-6">
               <h2 className="text-lg font-semibold mb-3">Product Specifications</h2>
-              <ul className="list-disc list-inside text-xs text-gray-600 space-y-2">
+              <ul className="list-disc list-inside text-sm text-gray-600 space-y-2">
                 {groupedSpecs.map((item, index) => {
-                  if (item.type === 'standalone') {
+                  if (item.type === "standalone") {
                     return <li key={index}>{item.content}</li>;
                   }
 
-                  if (item.type === 'parent') {
+                  if (item.type === "parent") {
                     const isExpanded = expandedSections.has(item.index);
                     return (
                       <li key={item.index} className="!list-none">
-                        <div className="flex items-center gap-2 cursor-pointer"
-                          onClick={() => toggleSection(item.index)}>
-                          <span className="text-sm">
-                            {isExpanded ? '▼' : '▶'}
-                          </span>
+                        <div
+                          className="flex items-center gap-2 cursor-pointer hover:text-orange-500 transition"
+                          onClick={() => toggleSection(item.index)}
+                        >
+                          <span className="text-sm">{isExpanded ? "▼" : "▶"}</span>
                           <span className="font-medium">
-                            {item.content.replace('• ', '')}
+                            {item.content.replace("• ", "")}
                           </span>
                         </div>
                         {isExpanded && (
-                          <ul className="ml-6 mt-1 space-y-1">
+                          <ul className="ml-6 mt-1 space-y-1 text-gray-500 text-sm">
                             {item.children.map((child, idx) => (
-                              <li key={idx} className="text-gray-500">
-                                {child.replace('  - ', '')}
-                              </li>
+                              <li key={idx}>{child.replace("  - ", "")}</li>
                             ))}
                           </ul>
                         )}
@@ -693,6 +699,7 @@ export default function CategoryFilterLabel() {
           </div>
         </div>
       </div>
+
 
 
 

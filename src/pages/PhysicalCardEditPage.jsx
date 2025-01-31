@@ -1040,27 +1040,35 @@ export default function WeddingCardEditor() {
       });
 
       // Convert canvas to blob
-      canvas.toBlob(async (blob) => {
-        try {
-          // Upload to Cloudinary
-          const imageUrl = await uploadImageToCloudinary(blob);
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
 
-          // Copy URL to clipboard
-          await navigator.clipboard.writeText(imageUrl);
+      if (!blob) {
+        throw new Error("Failed to convert canvas to image");
+      }
 
-          toast.success('Shareable image link copied to clipboard!', {
-            autoClose: 3000,
+      // Upload to Cloudinary
+      const imageUrl = await uploadImageToCloudinary(blob);
+
+      // ✅ Move clipboard action into a direct user interaction context
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(imageUrl)
+          .then(() => {
+            toast.success('Shareable image link copied to clipboard!', { autoClose: 3000 });
+          })
+          .catch((error) => {
+            toast.error('Clipboard access denied');
+            console.error('Clipboard error:', error);
           });
-        } catch (error) {
-          toast.error('Failed to share design');
-          console.error('Sharing error:', error);
-        }
-      }, 'image/png');
+      } else {
+        toast.error('Clipboard API not supported');
+      }
+
     } catch (error) {
       toast.error('Error capturing design');
       console.error('Capture error:', error);
     }
   };
+
 
   if (loading) return <ShimmerSkeleton />;
 
@@ -1317,7 +1325,7 @@ export default function WeddingCardEditor() {
           <div className="flex flex-col mx-auto mt-16">
             {/* Image Container */}
             <div
-            id="design-container"
+              id="design-container"
               className="relative  flex items-center mx-auto border border-gray-200 bg-gray-50 overflow-hidden"
               style={{ width: "320px" }}
             >

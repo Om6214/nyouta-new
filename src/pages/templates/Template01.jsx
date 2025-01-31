@@ -25,6 +25,9 @@ const Template01 = () => {
       },
       eventName: "",
       timeline: "",
+      event1: "",
+      event2: "",
+      event3: "",
     },
     about: {
       groom: {
@@ -45,21 +48,11 @@ const Template01 = () => {
       event1: "",
       event2: "",
     },
-
     rsvp: {
       name: "",
       address: "",
       mobile: "",
       response: "",
-    },
-    eventInfo: {
-      eventName: "",
-      event1: "",
-      event2: "",
-      event3: "",
-      venue: {
-        address: ""
-      }
     },
   });
 
@@ -90,8 +83,10 @@ const Template01 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = dispatch(updateWeddingWebsitedata(formData));
-      if (res.payload.status === 200) {
+      const res = await dispatch(updateWeddingWebsitedata(formData)); // Ensure action is awaited
+      console.log("Response from dispatch:", res); // Debugging log
+
+      if (res && res.payload && res.payload.status === 200) {
         toast.success("Portfolio updated successfully!", {
           position: "top-center",
           autoClose: 5000,
@@ -105,7 +100,7 @@ const Template01 = () => {
         });
       }
     } catch (error) {
-      throw error;
+      console.error("Error updating portfolio:", error);
       toast.error("Failed to update portfolio. Please try again.", {
         position: "top-center",
         autoClose: 5000,
@@ -113,6 +108,7 @@ const Template01 = () => {
       });
     }
   };
+
 
   if (loading) {
     return <div>Loading...</div>;
