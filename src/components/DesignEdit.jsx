@@ -52,8 +52,60 @@ export default function DesignEdit() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <ClipLoader color="#4A90E2" size={50} /> {/* Display a spinner while loading */}
+      <div className="max-w-6xl mx-auto mb-10 p-6 animate-pulse">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Product Image Section */}
+          <div className="relative">
+            <div className="w-4/5 h-64 bg-gray-300 rounded-lg"></div>
+            <div className="grid grid-cols-5 gap-3 mt-4">
+              {[...Array(5)].map((_, index) => (
+                <div key={index} className="w-full h-20 bg-gray-300 rounded-lg"></div>
+              ))}
+            </div>
+          </div>
+
+          {/* Product Details Section */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <div className="h-8 bg-gray-300 w-3/4 mb-4 rounded-lg"></div>
+              <div className="h-6 bg-gray-300 w-1/3 mb-2 rounded-lg"></div>
+              <div className="h-4 bg-gray-300 w-1/4 mb-4 rounded-lg"></div>
+
+              <div className="flex gap-7">
+                <div className="mb-0">
+                  <div className="h-4 bg-gray-300 w-20 mb-2 rounded-lg"></div>
+                  <div className="h-10 bg-gray-300 w-20 rounded-lg"></div>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <div className="h-6 bg-gray-300 w-2/3 mb-4 rounded-lg"></div>
+                <div className="h-4 bg-gray-300 w-1/2 rounded-lg"></div>
+              </div>
+
+              <div className="mt-3">
+                <div className="h-6 bg-gray-300 w-2/3 mb-4 rounded-lg"></div>
+                <div className="h-10 bg-gray-300 w-full rounded-lg"></div>
+              </div>
+
+              {/* Display Uploaded Photos Placeholder */}
+              <div className="grid grid-cols-5 gap-3 mt-4">
+                {[...Array(5)].map((_, index) => (
+                  <div key={index} className="w-full h-20 bg-gray-300 rounded-lg"></div>
+                ))}
+              </div>
+
+              <div className="mt-6">
+                <div className="h-4 bg-gray-300 w-1/2 mb-2 rounded-lg"></div>
+                <div className="h-10 bg-gray-300 w-full rounded-lg"></div>
+              </div>
+
+              <div className="space-x-4 flex md:flex-row mt-12 gap-4">
+                <div className="w-1/2 h-12 bg-gray-300 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -196,7 +248,7 @@ export default function DesignEdit() {
               </h2>
               <ul className="list-disc list-inside text-gray-700">
                 <li>Category: {filteredProduct.category}</li>
-                
+
               </ul>
             </div>
 

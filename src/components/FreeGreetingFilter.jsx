@@ -24,6 +24,7 @@ export default function CategoryFilterLabel() {
   const [quantity, setQuantity] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [swiperInstance, setSwiperInstance] = useState(null);
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth >= 640) { // sm breakpoint
@@ -229,139 +230,130 @@ export default function CategoryFilterLabel() {
   return (
     <>
       {filteredItems?.length > 0 ? (
-        <div className="grid grid-cols-1 bg-slate-50 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5">
-          <div className="mt-6">
-            <div className="w-full max-w-md md:max-w-lg lg:max-w-xl">
-              <Swiper
-                style={{
-                  "--swiper-navigation-color": "#000",
-                  "--swiper-pagination-color": "#000",
-                }}
-                zoom={true}
-                navigation={true}
-                pagination={{ clickable: true }}
-                modules={[Zoom, Navigation, Pagination]}
-                className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[50vh] xl:h-[60vh]"
-              >
-                {/* Hardcoded Images */}
-                <SwiperSlide>
-                  <div className="swiper-zoom-container">
-                    <img
-                      src="https://res.cloudinary.com/dybuuoqdo/image/upload/v1737455187/iwlpkurvdoyzkioise7p.jpg"
-                      alt="Hardcoded Slide 1"
-                      className="object-cover w-full h-auto"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="swiper-zoom-container">
-                    <img
-                      src="https://res.cloudinary.com/dybuuoqdo/image/upload/v1737455337/jloa2kgewllbtupg8rql.jpg"
-                      alt="Hardcoded Slide 2"
-                      className="object-cover w-full h-auto"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="swiper-zoom-container">
-                    <img
-                      src="https://res.cloudinary.com/dybuuoqdo/image/upload/v1737456843/bu0dulyo7ko4cy3tzq1k.jpg"
-                      alt="Hardcoded Slide 3"
-                      className="object-cover w-full h-auto"
-                    />
-                  </div>
-                </SwiperSlide>
-
-                {/* Dynamic Images */}
-                {filteredItems[0]?.image &&
-                  Array.isArray(filteredItems[0]?.image) ? (
-                  filteredItems[0].image.map((src, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="swiper-zoom-container">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+          {/* Left Carousel (Takes up 2/3 of the space) */}
+          <div className="lg:sticky lg:top-10 h-auto max-h-[96vh] md:col-span-2">
+            <div className="w-full max-w-full mx-auto">
+              <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-4">
+                {/* Thumbnail Navigation (Left Side) */}
+                <div className="flex flex-col gap-4 w-24 sm:w-28 md:w-32">
+                  {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
+                    filteredItems[0].image.map((src, index) => (
+                      <div
+                        key={index}
+                        className="w-full h-20 sm:h-24 md:h-32 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-orange-500 transition"
+                        onClick={() => swiperInstance?.slideTo(index + 1)}
+                      >
                         <img
                           src={src}
-                          alt={`Slide ${index + 1}`}
-                          className="object-cover w-full h-auto"
+                          alt={`Thumbnail ${index + 1}`}
+                          className="w-full h-full object-cover"
                         />
                       </div>
-                    </SwiperSlide>
-                  ))
-                ) : (
-                  <SwiperSlide>
-                    <div className="swiper-zoom-container">
-                      <p className="text-center text-gray-500">
-                        No images available
-                      </p>
+                    ))
+                  ) : (
+                    <div className="w-full h-20 sm:h-24 md:h-32 flex-shrink-0 rounded-lg overflow-hidden border-2 border-gray-200">
+                      <p className="text-center text-gray-500 py-8">No images available</p>
                     </div>
-                  </SwiperSlide>
-                )}
-              </Swiper>
+                  )}
+                </div>
+
+                {/* Main Swiper */}
+                <Swiper
+                  style={{
+                    "--swiper-navigation-color": "#000",
+                    "--swiper-pagination-color": "#000",
+                  }}
+                  zoom={true}
+                  navigation={true}
+                  pagination={{ clickable: true }}
+                  modules={[Zoom, Navigation, Pagination]}
+                  className="w-full rounded-lg h-[35vh] sm:h-[60vh] md:h-[65vh] lg:h-[90vh] xl:h-[100vh]"
+                  onSwiper={(swiper) => setSwiperInstance(swiper)}
+                >
+                  {/* Dynamic Images */}
+                  {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
+                    filteredItems[0].image.map((src, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="aspect-square w-full relative">
+                          <div className="swiper-zoom-container absolute inset-0">
+                            <img
+                              src={src}
+                              alt={`Product Image ${index + 1}`}
+                              className="w-full h-[30vh] md:h-[60vh] xl:h-[105vh] object-cover rounded-lg"
+                            />
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))
+                  ) : (
+                    <SwiperSlide>
+                      <div className="aspect-square w-full relative">
+                        <div className="swiper-zoom-container absolute inset-0">
+                          <p className="text-center text-gray-500 py-20">No images available</p>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  )}
+                </Swiper>
+              </div>
             </div>
           </div>
-          <div className="">
-            <div className="p-6 md:p-10 bg-slate-50 rounded-lg">
-              {/* Details section */}
+
+          {/* Right Content (Scrollable, Takes up 1/3 of the space) */}
+          <div className="h-auto lg:mt-5 md:col-span-1">
+            <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg max-w-[350px] max-h-[96vh]">
+              {/* Product Title and Category */}
               <div className="mb-4">
-                <h1 className="text-6xl font-base mb-2">
+                <h1 className="text-3xl font-medium text-gray-800 mb-2">
                   {path === "all" ? formattedPageName : formattedPath}
                 </h1>
-                <p className="text-2xl text-gray-600">
+                <p className="text-sm font-medium text-gray-600">
                   {filteredItems[0].category}
                 </p>
                 <p className="text-sm text-gray-500 mt-1">
-                  {filteredItems[0].subCategory},{" "}
-                  {filteredItems[0].subSubCategory}
+                  {filteredItems[0].subCategory}, {filteredItems[0].subSubCategory}
                 </p>
               </div>
 
               <div className="border-t border-gray-300 mb-6"></div>
 
-              <div className="mb-6 flex justify-start items-center">
-                <p className="text-xl flex line-through font-light text-gray-800 mb-1">
-                  &#8377;
-                  129
+              {/* Price Section */}
+              <div className="mb-6">
+                <p className="text-lg font-medium text-gray-800 mb-1 flex items-center">
+                  <span className="text-green-500 pl-1">FREE</span>
                 </p>
-                <span className="text-red-400 text-[1.1rem] mx-2">
-                  FREE
-                </span>
               </div>
 
-
+              {/* CTA Button */}
               <button
                 ref={relatedItemsRef}
                 onClick={handleButtonClick}
-                className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md transition"
+                className="w-[40%] py-3 px-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 ease-in-out shadow-md"
               >
                 Choose Now
               </button>
 
+              {/* Additional Information */}
               {filteredItems.length > 0 &&
-                ["Planner Books", "Free Greetings"].includes(
-                  filteredItems[0].category
-                ) ? (
-                <div className="mt-4">
-                  <h2 className="text-lg font-semibold mb-3">
-                    Free Greeting Cards
-                  </h2>
+                ["Planner Books", "Free Greetings"].includes(filteredItems[0].category) ? (
+                <div className="mt-6 overflow-y-auto max-h-[48vh]">
+                  <h2 className="text-lg font-semibold mb-3">Free Greeting Cards</h2>
                   <ul className="list-disc list-inside text-xs text-gray-600 space-y-2">
                     <li>
-                      Add a personal touch to your celebrations with beautifully
-                      crafted greeting cards.
+                      Add a personal touch to your celebrations with beautifully crafted greeting cards.
                     </li>
                     <li>
-                      Choose from a wide variety of stunning designs for every
-                      occasion.
+                      Choose from a wide variety of stunning designs for every occasion.
                     </li>
                     <li>
-                      High-quality cards available for free to make your moments
-                      memorable.
+                      High-quality cards available for free to make your moments memorable.
                     </li>
                     <li>
                       Personalize your greeting cards with heartfelt messages.
                     </li>
                     <li>
-                      Access and print your favorite designs instantly for quick
-                      and easy celebrations.
+                      Access and print your favorite designs instantly for quick and easy celebrations.
                     </li>
                   </ul>
                 </div>
@@ -451,10 +443,6 @@ export default function CategoryFilterLabel() {
                             {item.name}
                           </h2>
                           <div className=" flex justify-center items-center">
-                            <p className="text-xl flex line-through font-light text-gray-800 mb-1">
-                              &#8377;
-                              129
-                            </p>
                             <span className="text-red-400 text-[1.1rem] mx-2">
                               FREE
                             </span>
