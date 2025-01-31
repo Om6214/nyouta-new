@@ -19,14 +19,6 @@ const Template01 = () => {
       partnerName: "",
       weddingDate: "",
     },
-    eventInfo: {
-      time: "",
-      venue: {
-        address: "",
-      },
-      eventName: "",
-      timeline: "",
-    },
     about: {
       bride: {
         image: "",
@@ -71,15 +63,15 @@ const Template01 = () => {
       mobile: "",
       response: "",
     },
-    eventInfo: {
-      eventName: "",
-      event1: "",
-      event2: "",
-      event3: "",
-      venue: {
-        address: ""
-      }
-    },
+    // eventInfo: {
+    //   eventName: "",
+    //   event1: "",
+    //   event2: "",
+    //   event3: "",
+    //   venue: {
+    //     address: ""
+    //   }
+    // },
   });
 
   useEffect(() => {
