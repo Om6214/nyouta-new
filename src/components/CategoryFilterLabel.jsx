@@ -35,7 +35,7 @@ export default function CategoryFilterLabel() {
   const [currentPage, setCurrentPage] = useState(1);
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(6);
-  
+
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (window.innerWidth >= 640) { // sm breakpoint
@@ -243,9 +243,10 @@ export default function CategoryFilterLabel() {
     }
 
   });
+  console.log(filter)
 
   // console.log("filteredItems:", filteredItems);
-  // console.log("filteredResponseData:", filteredResponseData);
+  console.log("filteredResponseData:", filteredResponseData);
   // console.log(filteredItems[0].category);
   // console.log(RelatedItems);
 
@@ -649,7 +650,6 @@ export default function CategoryFilterLabel() {
 
     return groups;
   };
-  console.log(productData)
   const specifications =
     filter === "royal"
       ? productData.productSpecificationsRoyal
@@ -697,7 +697,7 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-full rounded-lg h-[31vh] sm:h-[60vh] md:h-[65vh] lg:h-[90vh] xl:h-[95vh]"
+                className="w-full rounded-lg h-[35vh] sm:h-[60vh] md:h-[65vh] lg:h-[90vh] xl:h-[100vh]"
                 onSwiper={(swiper) => setSwiperInstance(swiper)}
               >
                 {productData.productVideo && (
@@ -721,7 +721,7 @@ export default function CategoryFilterLabel() {
                         <img
                           src={image}
                           alt={`Product Image ${index + 1}`}
-                          className="w-full h-full object-cover rounded-lg"
+                          className="w-full h-[30vh] md:h-[60vh] xl:h-[105vh] object-cover rounded-lg"
                         />
                       </div>
                     </div>
@@ -809,7 +809,7 @@ export default function CategoryFilterLabel() {
                       <div className="p-4 border shadow">
                         <h3 className="font-semibold text-gray-800">Product Description</h3>
                         <div className="text-sm text-gray-600 space-y-2">
-                        <ProductDescription descriptions={specifications.productDescription} />
+                          <ProductDescription descriptions={specifications.productDescription} />
                         </div>
                       </div>
                     </SwiperSlide>
@@ -865,41 +865,39 @@ export default function CategoryFilterLabel() {
 
 
       {["Planner Books"].includes(filteredItems[0].category) ? (
-        <div className="grid grid-cols-4 gap-6 px-[6%] py-5 lg:max-w-8xl bg-slate-50 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-[6%] py-5 lg:max-w-8xl bg-slate-50 mx-auto">
           {/* Left column: Filter options */}
-          {/* <div className="col-span-1 hidden md:block space-y-2">
+          <div className="col-span-1 hidden md:block space-y-2">
             <div className="flex items-center justify-between">
               <h1 className="text-lg font-avalonN">Filter By</h1>
               <button
-                className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${filter === "all"
-                  }`}
-              // onClick={() => setFilter("all")}
+                className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${filter === "all" ? "border-orange-500" : ""}`}
+                onClick={() => setFilter("all")}
               >
                 Clear all
               </button>
             </div>
-            <div className="px-4 py-3 bg-gray-100 rounded-lg shadow-md">
+            <div className="px-4 py-3 bg-slate-50 rounded-lg ">
               <div className="flex justify-between">
                 <h2 className="text-lg font-avalonB">Variations</h2>
               </div>
               <button
-                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 bg-white
-                }`}
-              // onClick={() => setFilter("royal")}
+                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 ${filter === "royal" ? "bg-orange-500 text-white" : "bg-white"}`}
+                onClick={() => setFilter("royal")}
               >
-                All Elegant
+                Elegant
               </button>
               <button
-                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md bg-white`}
-              // onClick={() => setFilter("popular")}
+                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${filter === "popular" ? "bg-orange-500 text-white" : "bg-white border-2"}`}
+                onClick={() => setFilter("popular")}
               >
                 Floral
               </button>
             </div>
-          </div> */}
+          </div>
 
           {/* Mobile filter */}
-          {/* <div className="md:hidden relative">
+          <div className="md:hidden relative">
             <Filter onClick={handleClick} />
             {showFilter && (
               <div className="absolute top-7 left-[-10px] space-y-2 border-2 rounded-xl bg-gray-50 font-avalonN w-[180px] px-2 py-2 z-50">
@@ -908,8 +906,7 @@ export default function CategoryFilterLabel() {
                     <X />
                   </button>
                   <button
-                    className={`border-b-2 border-dashed border-gray-500 leading-5 ${filter === "all"
-                      }`}
+                    className={`border-b-2 border-dashed border-gray-500 leading-5 ${filter === "all" ? "border-orange-500" : ""}`}
                     onClick={() => {
                       setFilter("all");
                       setShowFilter(false);
@@ -921,10 +918,7 @@ export default function CategoryFilterLabel() {
                 <div className="flex flex-col items-start gap-2">
                   <h1 className="font-avalonB">Variations</h1>
                   <button
-                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md border-2 ${filter === "royal"
-                      ? "bg-orange-500 text-white"
-                      : "bg-white"
-                      }`}
+                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md border-2 ${filter === "royal" ? "bg-orange-500 text-white" : "bg-white"}`}
                     onClick={() => {
                       setFilter("royal");
                       setShowFilter(false);
@@ -933,10 +927,7 @@ export default function CategoryFilterLabel() {
                     Royal
                   </button>
                   <button
-                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${filter === "popular"
-                      ? "bg-orange-500 text-white"
-                      : "bg-[#fff] border-2"
-                      }`}
+                    className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${filter === "popular" ? "bg-orange-500 text-white" : "bg-[#fff] border-2"}`}
                     onClick={() => {
                       setFilter("popular");
                       setShowFilter(false);
@@ -947,13 +938,13 @@ export default function CategoryFilterLabel() {
                 </div>
               </div>
             )}
-          </div> */}
+          </div>
 
           {/* Right column: Filtered results */}
-          <div className="col-span-4 bg-slate-50 max-w-8xl px-4 py-6">
+          <div className="col-span-4 md:col-span-3 bg-slate-50 max-w-8xl px-4 py-6">
             <div className="relative">
               {/* Product Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {currentItems.length > 0 ? (
                   currentItems.map((item, index) => (
                     <Link
@@ -970,7 +961,7 @@ export default function CategoryFilterLabel() {
                       }}
                       className="group bg-slate-50 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                     >
-                      <div className="relative w-full h-[45vh]  overflow-hidden">
+                      <div className="relative w-full h-[45vh] overflow-hidden">
                         <img
                           src={item.image[0]}
                           alt={item.name}
