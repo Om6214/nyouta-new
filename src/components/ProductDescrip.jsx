@@ -5,7 +5,7 @@ const ProductDescription = ({ descriptions }) => {
     descriptions?.map(() => false) || []
   );
 
-  const truncateText = (text, maxWords = 5) => {
+  const truncateText = (text, maxWords = 20) => {
     const words = text.split(' ');
     return words.length > maxWords
       ? words.slice(0, maxWords).join(' ') + '...'
@@ -19,13 +19,13 @@ const ProductDescription = ({ descriptions }) => {
   };
 
   return descriptions?.length > 0 ? (
-    <div className="text-sm text-gray-600 space-y-2">
+    <div className="text-sm font-light text-gray-900 space-y-2">
       {descriptions.map((desc, idx) => {
         const wordCount = desc.split(' ').length;
         const isTruncatable = wordCount > 5;
 
         return (
-          <div key={idx} className="flex items-center">
+          <div key={idx} className="flex flex-col">
             <p className="lg:mr-2">
               {isTruncatable && !expandedDescriptions[idx]
                 ? truncateText(desc)

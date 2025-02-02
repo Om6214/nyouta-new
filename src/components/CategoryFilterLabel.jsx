@@ -35,6 +35,14 @@ export default function CategoryFilterLabel() {
   const [currentPage, setCurrentPage] = useState(1);
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [activeTab, setActiveTab] = useState('description');
+
+  const tabs = [
+    { id: 'description', label: 'Product Description' },
+    { id: 'information', label: 'Product Information' },
+    { id: 'about', label: 'About the Product' },
+    { id: 'awards', label: 'Awards & offers' },
+  ];
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -269,6 +277,7 @@ export default function CategoryFilterLabel() {
   const TitleProduct = {
     WeddingManagement: {
       productCategory: "Planner Book",
+      productdescrip: "A perfect wedding planner for Dream Wedding, Plan stress-Free wedding with confidence, stay organized, and manage guests, vendors, and your budget effortlessly. Find the perfect gift to create lasting memories with ease and joy.",
       productSubCategory: "Planner Book",
       productSubSubCategory: "Wedding Management",
       productImages: [
@@ -282,13 +291,8 @@ export default function CategoryFilterLabel() {
       productOff: 15,
       productSpecificationsRoyal: {
         productDescription: [
-          "• Checklists: • About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding",
-          "• Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List",
-          "• Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts",
-          "• Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts",
-          "• Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan",
-          "• Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan",
-          "• Special Notes & Experience, Calendar 2024-2025, Family Pics"
+          "Checklists: • About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding,Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts,Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan, Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan, Special Notes & Experience, Calendar 2024-2025, Family Pics",
+
         ],
         productInformation: [
           "• Pages: 100 (200 Sides) Coloured",
@@ -318,14 +322,7 @@ export default function CategoryFilterLabel() {
 
       productSpecificationsPopular: {
         productDescription: [
-          "• Checklists: About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors",
-          "• Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List",
-          "• Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts",
-          "• Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts",
-          "• Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan",
-          "• Special Notes & Experience",
-          "• Calendars",
-          "• Family Pics"
+          "• Checklists: About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors ,  Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List ,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,  Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts , Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan,Special Notes & Experience,Calendars,Family Pics",
         ],
         productInformation: [
           "• Pages: 100 (200 Sides) Coloured",
@@ -353,6 +350,7 @@ export default function CategoryFilterLabel() {
     },
     GuestManagement: {
       productCategory: "Planner Book",
+      productdescrip: "A perfect wedding guest planner for your dream wedding, Plan a stress-free event with confidence, managing guest lists, gifts, and thank-yous effortlessly. Stay organized and find the perfect gift to create lasting memories with ease and joy.",
       productSubCategory: "Planner Book",
       productSubSubCategory: "Guest Management ",
       productImages: [
@@ -383,7 +381,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -410,7 +408,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -422,6 +420,7 @@ export default function CategoryFilterLabel() {
     GuestListBookletBestSeller: {
       productCategory: "Planner Book",
       productSubCategory: "Planner Book",
+      productdescrip: "This wedding guest list booklet organizes your event-wise guests, including details for stays, thank-yous, and gift tracking. Keep everything in one place for seamless coordination. A perfect tool for stress-free wedding planning and ensuring no details are overlooked.",
       productSubSubCategory: "Guest List Booklet ",
       productImages: [
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846638/trfoutxrkpwpys0kbdnl.jpg",
@@ -451,7 +450,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -478,7 +477,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -490,6 +489,7 @@ export default function CategoryFilterLabel() {
     WeddingNotepadLiner: {
       productCategory: "Planner Book",
       productSubCategory: "Planner Book",
+      productdescrip: "Write memorable tasks and ideas, keep all details in one place with checklists for a stress-free, smart wedding planning. Save time and money while creating lifetime memories. A perfect wedding gift to make the big day effortless and joyful.",
       productSubSubCategory: "Wedding Notepad Liner ",
       productImages: [
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846638/trfoutxrkpwpys0kbdnl.jpg",
@@ -519,7 +519,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -546,7 +546,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -558,6 +558,7 @@ export default function CategoryFilterLabel() {
     WeddingNotepadPhoto: {
       productCategory: "Planner Book",
       productSubCategory: "Planner Book",
+      productdescrip: "A Photo wedding notepad to jot down memorable tasks, ideas, and details, keeping everything in one place for stress-free planning. Perfect for saving time, staying organized, and creating lasting memories. A thoughtful and practical wedding gift to make the big day effortless and joyful.",
       productSubSubCategory: "Wedding Notepad photo ",
       productImages: [
         "https://res.cloudinary.com/dpesh4axn/image/upload/v1736846638/trfoutxrkpwpys0kbdnl.jpg",
@@ -583,7 +584,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -606,7 +607,7 @@ export default function CategoryFilterLabel() {
           "Payment : 100% Safe & Secure Payments.",
           "Brand : Nyouta | Made with love in India."
         ],
-        awardAndOffers: [
+        awardsAndOffers: [
           "Selfie Award : Send Selfie with Product, Get Surprise Gift",
           "Review Award : Extra Discount Voucher for Best Review",
           "Best Choice Award : Surprise Gift for Best Choice Product",
@@ -623,45 +624,13 @@ export default function CategoryFilterLabel() {
     .replaceAll("(", "")
     .replaceAll(")", "");
   const productData = TitleProduct[fetchvar];
-  // console.log(filteredItems[0].category);
-  const processSpecifications = (specs) => {
-    const groups = [];
-    let currentGroup = null;
 
-    // specs.forEach((spec) => {
-    //   if (spec.startsWith('• ')) {
-    //     currentGroup = {
-    //       type: 'parent',
-    //       content: spec,
-    //       children: [],
-    //       index: groups.length
-    //     };
-    //     groups.push(currentGroup);
-    //   } else if (spec.startsWith('  - ')) {
-    //     if (currentGroup) {
-    //       currentGroup.children.push(spec);
-    //     } else {
-    //       groups.push({ type: 'standalone', content: spec });
-    //     }
-    //   } else {
-    //     groups.push({ type: 'standalone', content: spec });
-    //   }
-    // });
-
-    return groups;
-  };
   const specifications =
     filter === "royal"
       ? productData.productSpecificationsRoyal
       : productData.productSpecificationsPopular;
 
   console.log(specifications)
-
-  const toggleSection = (index) => {
-    const newExpanded = new Set(expandedSections);
-    newExpanded.has(index) ? newExpanded.delete(index) : newExpanded.add(index);
-    setExpandedSections(newExpanded);
-  };
 
   return (
     <>
@@ -742,8 +711,8 @@ export default function CategoryFilterLabel() {
               <h1 className="text-3xl font-medium text-gray-800 mb-2">
                 {productData.productSubSubCategory}
               </h1>
-              <p className="text-sm font-medium text-gray-600">
-                Tagline Lorem ipsum dolor sit amet consectetur adipisicing.
+              <p className="text-xs  font-light text-gray-600">
+                {productData.productdescrip}
               </p>
             </div>
 
@@ -781,6 +750,8 @@ export default function CategoryFilterLabel() {
                 <span className="inline-block w-[1px] h-6 bg-black"></span>
                 <span className="text-green-500 pl-1">{productData.productOff}% Off</span>
               </p>
+              {/* Add "Inclusive of all taxes" text */}
+              <p className="text-xs font-light text-gray-500 mt-1">Inclusive of all taxes</p>
             </div>
 
             {/* CTA Button */}
@@ -794,67 +765,68 @@ export default function CategoryFilterLabel() {
 
 
             {/* Product Specifications */}
-            <div className="mt-6 overflow-y-auto max-h-[48vh]">
+            <div className="mt-3">
+              {/* Tab Navigation */}
+              <div className=" flex border-b">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={` px-3 text-xs font-light ${activeTab === tab.id
+                      ? 'border-b-2 border-blue-500 text-blue-500'
+                      : 'text-gray-900 hover:text-gray-700'
+                      }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
 
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={20}
-                className="w-full"
-              >
-                {/* Product Description */}
-                {
-                  specifications.productDescription?.length > 0 && (
-                    <SwiperSlide>
-                      <div className="p-4 border shadow">
-                        <h3 className="font-semibold text-gray-800">Product Description</h3>
-                        <div className="text-sm text-gray-600 space-y-2">
-                          <ProductDescription descriptions={specifications.productDescription} />
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  )
-                }
+              {/* Tab Content */}
+              <div className="mt-1 w-full max-h-60 overflow-y-auto">
+                {activeTab === 'description' && (
+                  <div className="p-4 border rounded-lg shadow">
+                    <h3 className="font-semibold text-gray-800">Product Description</h3>
+                    <div className="text-xs text-gray-900 space-y-2">
+                      <ProductDescription descriptions={specifications.productDescription} />
+                    </div>
+                  </div>
+                )}
 
-
-                {/* Product Information */}
-                <SwiperSlide>
+                {activeTab === 'information' && (
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">Product Information</h3>
-                    <div className="text-sm text-gray-600 space-y-2">
+                    <div className="text-xs text-gray-900 space-y-2">
                       {specifications.productInformation.map((info, idx) => (
                         <p key={idx}>{info}</p>
                       ))}
                     </div>
                   </div>
-                </SwiperSlide>
+                )}
 
-                {/* About this Product */}
-                <SwiperSlide>
+                {activeTab === 'about' && (
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">About this Product</h3>
-                    <div className="text-sm text-gray-600 space-y-2">
+                    <div className="text-xs text-gray-900 space-y-2">
                       {specifications.aboutThisProduct.map((info, idx) => (
                         <p key={idx}>{info}</p>
                       ))}
                     </div>
                   </div>
-                </SwiperSlide>
-
-                {/* Awards & Offers */}
-                {specifications.awardsAndOffers?.length > 0 && (
-                  <SwiperSlide>
-                    <div className="p-4 border rounded-lg shadow">
-                      <h3 className="font-semibold text-gray-800">Awards & Offers</h3>
-                      <div className="text-sm text-gray-600 space-y-2">
-                        {specifications.awardsAndOffers.map((offer, idx) => (
-                          <p key={idx}>{offer}</p>
-                        ))}
-                      </div>
-                    </div>
-                  </SwiperSlide>
                 )}
-              </Swiper>
+
+                {activeTab === 'awards' && specifications.awardsAndOffers?.length > 0 && (
+                  <div className="p-4 border rounded-lg shadow">
+                    <h3 className="font-semibold text-gray-800">Awards & Offers</h3>
+                    <div className="text-xs text-gray-900 space-y-2">
+                      {specifications.awardsAndOffers.map((offer, idx) => (
+                        <p key={idx}>{offer}</p>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
             </div>
           </div>
         </div>
