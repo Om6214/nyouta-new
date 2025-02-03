@@ -630,7 +630,9 @@ export default function CategoryFilterLabel() {
       ? productData.productSpecificationsRoyal
       : productData.productSpecificationsPopular;
 
-  console.log(specifications)
+  console.log("productData",productData)
+  const price =
+  filter === "royal" ? productData.RoyalPrice : productData.popularPrice;
 
   return (
     <>
