@@ -331,7 +331,7 @@ export default function CategoryFilterLabel() {
                 onClick={handleButtonClick}
                 className="w-[40%] py-3 px-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 ease-in-out shadow-md"
               >
-                Choose Now
+                Choose Design
               </button>
 
               {/* Additional Information */}

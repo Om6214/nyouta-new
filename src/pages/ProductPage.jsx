@@ -57,19 +57,15 @@ export default function ProductPage() {
     <div className="max-w-6xl mx-auto p-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Product Image Section */}
-        <div className="lg:ml-40 xl:ml-40 ml-auto mr-10">
-          <img
-            src={product.image[currentImageIndex]}
-            alt={product.name}
-            className="relative w-4/4  object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
-          />
-          <div className="grid grid-cols-5 gap-3 mt-1">
+        <div className="flex items-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10 ">
+          {/* Left Side - Thumbnails (Vertical List) */}
+          <div className="flex flex-col">
             {product.image.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className={`cursor-pointer w-full h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${
+                className={`cursor-pointer w-20 h-20 object-cover rounded-lg border-2 transition-all duration-300 transform hover:scale-105 ${
                   currentImageIndex === index
                     ? "border-blue-500"
                     : "border-gray-300"
@@ -78,6 +74,13 @@ export default function ProductPage() {
               />
             ))}
           </div>
+
+          {/* Right Side - Main Image */}
+          <img
+            src={product.image[currentImageIndex]}
+            alt={product.name}
+            className="w-80 h-80 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+          />
         </div>
 
         {/* Product Details Section */}
@@ -123,7 +126,7 @@ export default function ProductPage() {
                 onClick={handleEditImage}
                 className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
               >
-                Edit PDF
+                Edit Greeting
               </button>
 
               <button
