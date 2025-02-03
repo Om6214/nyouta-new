@@ -5,7 +5,7 @@ const ProductDescription = ({ descriptions }) => {
     descriptions?.map(() => false) || []
   );
 
-  const truncateText = (text, maxWords = 20) => {
+  const truncateText = (text, maxWords = 30) => {
     const words = text.split(' ');
     return words.length > maxWords
       ? words.slice(0, maxWords).join(' ') + '...'

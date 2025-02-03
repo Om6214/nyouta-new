@@ -291,53 +291,37 @@ export default function CategoryFilterLabel() {
       productOff: 15,
       productSpecificationsRoyal: {
         productDescription: [
-          "Checklists: • About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding,Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts,Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan, Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan, Special Notes & Experience, Calendar 2024-2025, Family Pics",
+          "Checklists:  About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding,Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts,Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan, Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan, Special Notes & Experience, Calendar 2024-2025, Family Pics",
 
         ],
         productInformation: [
           "Pages: 100 (200 Sides) Coloured,Paper & Size: A4 (210x297 mm*) 100 gsm,Cover: 200 gsm PVC (Coloured) with Velvet Finish,Bind: Perfect Binding with Bookmarks,Packaging: Eco-Friendly Packaging,Pack of: 1,Shipping: Free Delivery",
         ],
         aboutThisProduct: [
-          "• Usability: Perfectly manage your wedding",
-          "• Customise: You can make your own Cover",
-          "• Value: Lifetime Memory & Perfect Gift to New Weds",
-          "• Return: This product is not exchangeable & Not Returnable",
-          "• Helpful Features: Detailed checklist and journal sheets.",
-          "• Payment: 100% Safe & Secure Payments.",
-          "• Brand: Nyouta | Made with love in India."
+          " Usability: Perfectly manage your wedding ,Customise: You can make your own Cover , Value: Lifetime Memory & Perfect Gift to New Weds , Return: This product is not exchangeable & Not Returnable , Helpful Features: Detailed checklist and journal sheets. , Payment: 100% Safe & Secure Payments. , Brand: Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "• Selfie Award: Send Selfie with Product, Get surprise Gift",
-          "• Review Award: Extra Discount Voucher for Best Review",
-          "• Best Choice Award: Surprise Gift for Best Choice Product",
-          "• Couple Award: This Award for Best Couple Photo on Cover Pages."
+          " Selfie Award: Send Selfie with Product, Get surprise Gift , Review Award: Extra Discount Voucher for Best Review , Best Choice Award: Surprise Gift for Best Choice Product , Couple Award: This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
       productSpecificationsPopular: {
         productDescription: [
-          "• Checklists: About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors ,  Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List ,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,  Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts , Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan,Special Notes & Experience,Calendars,Family Pics",
+          " Checklists: About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors ,  Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List ,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,  Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts , Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan,Special Notes & Experience,Calendars,Family Pics",
         ],
         productInformation: [
-          "• Pages: 100 (200 Sides) Coloured",
-          "• Paper & Size: A4 (210x297 mm*) 100 gsm",
-          "• Cover: 200 gsm PVC (Coloured) with Velvet Finish",
-          "• Bind: Perfect Binding with Bookmarks"
+          " Pages: 100 (200 Sides) Coloured , Paper & Size: A4 (210x297 mm*) 100 gsm , Cover: 200 gsm PVC (Coloured) with Velvet Finish , Bind: Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "• Usability: Perfectly manage your wedding",
-          "• Customise: You can make your own Cover",
-          "• Value: Lifetime Memory & Perfect Gift to New Weds",
-          "• Return: This product is not exchangeable & Not Returnable",
-          "• Helpful Features: Detailed checklist and journal sheets.",
-          "• Payment: 100% Safe & Secure Payments.",
-          "• Brand: Nyouta | Made with love in India."
+          "Usability: Perfectly manage your wedding , Customise: You can make your own Cover , Value: Lifetime Memory & Perfect Gift to New Weds , Return: This product is not exchangeable & Not Returnable , Helpful Features: Detailed checklist and journal sheets. , Payment: 100% Safe & Secure Payments. , Brand: Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "• Selfie Award: Send Selfie with Product, Get surprise Gift",
-          "• Review Award: Extra Discount Voucher for Best Review",
-          "• Best Choice Award: Surprise Gift for Best Choice Product",
-          "• Couple Award: This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award: Send Selfie with Product, Get surprise Gift , Review Award: Extra Discount Voucher for Best Review , Best Choice Award: Surprise Gift for Best Choice Product , Couple Award: This Award for Best Couple Photo on Cover Pages.",
+
         ]
       }
 
@@ -361,25 +345,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Programs > Event Detail List • Daily Planner • Weekly Planner • Monthly Planner • To-Do List • Event wise Guest List • VIP Chief Guests List, Special Guests List, Friends List, Family Friends List, Friends of Friend List, Relatives List, Business Guests List, Staff Members List, Neighbor Guests List, Club Members List, Classmates List, Bride/Groom Side Guest List, Nearest/Dearest Guests List, Other Guest List, Outsider Guest List • Food Plan for Guests • Thank You Gift to Groom/Bride Side • Gift Received by Groom/Bride Side • Thank You Gift to Guest • Gift Received by Guests • Guest Room Arrangement • Guest Room Plan • Special Guest - Sitting Table Plan • Family - Sitting Table Plan • Sitting Floor Plan • Guest List Summary • Special Notes, Note, Experience • Memories & Much more ..."
         ],
         productInformation: [
-          "Pages : 75 (150 Sides) Coloured",
-          "Paper & Size : A4 (210x297 mm*) 100 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 75 (150 Sides) Coloured , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -388,25 +363,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Programs > Event Detail List • Daily Planner • Weekly Planner • Monthly Planner • To-Do List • Event wise Guest List • Categorised Guests List • Food Plan for Guests • Thank You Gift to Groom/Bride Side • Gift received by Groom/Bride Side • Thank You Gift to Guest • Gift Received by Guests • Guest Room Arrangement • Sitting Table Plans • Guest List Summary • Special Notes, Note, Experience • Memories & Much more ..."
         ],
         productInformation: [
-          "Pages : 75 (150 Sides) Coloured",
-          "Paper & Size : A4 (210x297 mm*) 100 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 75 (150 Sides) Coloured , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -430,25 +396,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Event wise guest List • Categorised Guest List • Guest List Summery • Special Notes • Note • Experience • Memories"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) All pages - Coloured",
-          "Paper & Size : A4 (210x297 mm*) 100 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 50 (100 Sides) All pages - Coloured , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -457,25 +414,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Event wise guest List • Categorised Guest List • Guest List Summery • Special Notes • Note • Experience • Memories"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) All pages - B/W",
-          "Paper & Size : A4 (210x297 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 50 (100 Sides) All pages - B/W , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -499,25 +447,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Programs • Check List • Don't Forget • Day-of Kit For The Bride/groom • Day-of Checklist • Daily Planner • Weekly Planner • Monthly Planner • To-do List { Top Priority } • To-do List • Wedding - Purchases • Wedding - Expenses • Vendors • Vendor - Payment Planner • Payment Planner • Music/dance Schedule • Guest Room Arrangement • Thank You Gift To Guest • Gift Received By Guests • Special Notes • Notes • Experience"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -526,25 +465,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Programs • Check List • Day-of Checklist • To-do List { Top Priority } • To-do List • Thank You Gift To Guest • Gift Received By Guests • Special Notes • Notes • Experience"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -565,47 +495,31 @@ export default function CategoryFilterLabel() {
       productOff: 15,
       productSpecificationsRoyal: {
         productInformation: [
-          "Pages : 25 (50 Sides) Coloured, Cover Photo on Both Side",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 25 (50 Sides) Coloured, Cover Photo on Both Side , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your own wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your own wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
       productSpecificationsPopular: {
         productInformation: [
-          "Pages : 25 (50 Sides) B/W , Cover Photo on Both Side",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 25 (50 Sides) B/W , Cover Photo on Both Side , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your own wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your own wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -624,15 +538,15 @@ export default function CategoryFilterLabel() {
       ? productData.productSpecificationsRoyal
       : productData.productSpecificationsPopular;
 
-  console.log("productData",productData)
+  console.log("productData", productData)
   const price =
-  filter === "royal" ? productData.RoyalPrice : productData.popularPrice;
+    filter === "royal" ? productData.RoyalPrice : productData.popularPrice;
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
         {/* Left Carousel (Takes up 2/3 of the space) */}
-        <div className="lg:sticky lg:top-50 h-auto max-h-[96vh] md:col-span-2">
+        <div className="lg:sticky lg:top-50 h-auto max-h-[96vh] md:col-span-3">
           <div className="w-full max-w-full mx-auto">
             <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-0">
               {/* Thumbnail Navigation (Left Side) */}
@@ -662,13 +576,13 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-[100%] rounded-lg h-[25vh]  sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh] mx-0" // Added mx-0 here
+                className="w-[70%] mx-auto rounded-lg h-[25vh]  sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh]" // Added mx-0 here
                 onSwiper={(swiper) => setSwiperInstance(swiper)}
               >
                 {productData.productVideo && (
                   <SwiperSlide>
                     {/* Remove aspect-square and use fixed container */}
-                    <div className="w-full h-[80vh] relative">
+                    <div className=" w-full h-[80vh] relative">
                       <video
                         src={productData.productVideo}
                         autoPlay
@@ -701,8 +615,8 @@ export default function CategoryFilterLabel() {
 
 
         {/* Right Content (Scrollable, Takes up 1/3 of the space) */}
-        <div className="h-auto md:col-span-1">
-          <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg  max-w-[350px] max-h-[96vh]">
+        <div className="h-auto w-full md:col-span-2">
+          <div className="p-6 w-full md:px-4 md:py-0 bg-slate-50 rounded-lg  max-w-[470px] max-h-[96vh]">
             {/* Product Title and Category */}
             <div className="mb-4">
               <h1 className="text-xl lg:text-3xl font-medium text-gray-800 mb-2">
@@ -713,10 +627,10 @@ export default function CategoryFilterLabel() {
               </p>
             </div>
 
-            <div className="border-t border-gray-300 mb-6"></div>
+            <div className="border-t  border-orange-600 mb-2"></div>
 
             {/* Selection Options */}
-            <div className="flex gap-4 mb-4">
+            <div className="flex gap-4 mb-2">
               <div
                 className={`py-2 px-6 border rounded-lg font-medium text-sm transition ${filter === "royal" ? "bg-orange-500 text-white" : "bg-white border-2 hover:bg-gray-100"
                   } cursor-pointer`}
@@ -735,8 +649,8 @@ export default function CategoryFilterLabel() {
 
 
             {/* Price Section */}
-            <div className="mb-6">
-              <p className="text-lg font-medium text-gray-800 mb-1 flex items-center">
+            <div className="mb-2">
+              <p className="text-lg font-medium text-gray-800 mb-0 flex items-center">
                 From &#8377;
                 {filter === "royal"
                   ? productData.RoyalPrice - (productData.RoyalPrice * productData.productOff) / 100
@@ -748,7 +662,7 @@ export default function CategoryFilterLabel() {
                 <span className="text-green-500 pl-1">{productData.productOff}% Off</span>
               </p>
               {/* Add "Inclusive of all taxes" text */}
-              <p className="text-xs font-light text-gray-500 mt-1">Inclusive of all taxes</p>
+              <p className="text-xs font-light text-gray-500">Inclusive of all taxes</p>
             </div>
 
             {/* CTA Button */}
@@ -794,9 +708,7 @@ export default function CategoryFilterLabel() {
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">Product Information</h3>
                     <div className="text-xs text-gray-900 space-y-2">
-                      {specifications.productInformation.map((info, idx) => (
-                        <p key={idx}>{info}</p>
-                      ))}
+                      <ProductDescription descriptions={specifications.productInformation} />
                     </div>
                   </div>
                 )}
@@ -805,9 +717,7 @@ export default function CategoryFilterLabel() {
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">About this Product</h3>
                     <div className="text-xs text-gray-900 space-y-2">
-                      {specifications.aboutThisProduct.map((info, idx) => (
-                        <p key={idx}>{info}</p>
-                      ))}
+                      <ProductDescription descriptions={specifications.aboutThisProduct} />
                     </div>
                   </div>
                 )}
@@ -816,9 +726,7 @@ export default function CategoryFilterLabel() {
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">Awards & Offers</h3>
                     <div className="text-xs text-gray-900 space-y-2">
-                      {specifications.awardsAndOffers.map((offer, idx) => (
-                        <p key={idx}>{offer}</p>
-                      ))}
+                      <ProductDescription descriptions={specifications.awardsAndOffers} />
                     </div>
                   </div>
                 )}
