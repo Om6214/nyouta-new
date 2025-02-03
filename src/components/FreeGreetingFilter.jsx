@@ -230,9 +230,9 @@ export default function CategoryFilterLabel() {
   return (
     <>
       {filteredItems?.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
-          {/* Left Carousel (Takes up 2/3 of the space) */}
-          <div className="lg:sticky lg:top-10 h-auto max-h-[96vh] md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+          {/* Left Carousel (Takes up 50% of the space) */}
+          <div className="lg:sticky lg:top-10 h-auto max-h-[96vh] md:col-span-3">
             <div className="w-full max-w-full mx-auto">
               <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-0">
                 {/* Thumbnail Navigation (Left Side) */}
@@ -263,14 +263,12 @@ export default function CategoryFilterLabel() {
                   style={{
                     "--swiper-navigation-color": "#000",
                     "--swiper-pagination-color": "#000",
-                    
                   }}
                   zoom={true}
                   navigation={true}
                   pagination={{ clickable: true }}
                   modules={[Zoom, Navigation, Pagination]}
                   className="lg:w-[458px] w-full rounded-lg h-[25vh] sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh] mx-0"
-            
                   onSwiper={(swiper) => setSwiperInstance(swiper)}
                 >
                   {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
@@ -301,9 +299,9 @@ export default function CategoryFilterLabel() {
             </div>
           </div>
 
-          {/* Right Content (Scrollable, Takes up 1/3 of the space) */}
-          <div className="h-auto md:col-span-1">
-            <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg max-w-[350px] max-h-[96vh]">
+          {/* Right Content (Takes up 50% of the space) */}
+          <div className="h-auto w-full md:col-span-2">
+            <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg max-w-full max-h-[96vh]">
               {/* Product Title and Category */}
               <div className="mb-4">
                 <h1 className="text-xl lg:text-3xl font-medium text-gray-800 mb-2">
@@ -369,6 +367,7 @@ export default function CategoryFilterLabel() {
           </h1>
         </div>
       )}
+
 
       <div className="relative min-h-screen bg-slate-50">
         {["Free Greetings"].includes(filteredItems[0]?.category) ? (
