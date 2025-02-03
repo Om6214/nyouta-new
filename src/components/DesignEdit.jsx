@@ -231,7 +231,7 @@ export default function DesignEdit() {
         {/* Product Image Section */}
         <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
           {/* Thumbnails */}
-          <div className="flex md:flex-col gap-3 order-2 md:order-1 overflow-x-auto pb-2 md:pb-0 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 relative">
+          <div className="flex md:flex-col gap-3 order-2 md:order-1  pb-2 md:pb-0  relative">
             <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-white via-white/80 to-transparent md:hidden pointer-events-none" />
             {filteredProduct.image.map((img, index) => (
               <img
@@ -239,7 +239,7 @@ export default function DesignEdit() {
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
                 className={`cursor-pointer w-20 h-20 object-cover rounded-lg border-2 transition-all duration-300 hover:scale-105 ${currentImageIndex === index
-                    ? "border-blue-600 shadow-md"
+                    ? "border-gray-600 shadow-md"
                     : "border-gray-200 hover:border-blue-400"
                   }`}
                 onClick={() => handleThumbnailClick(index)}
@@ -248,19 +248,20 @@ export default function DesignEdit() {
           </div>
 
           {/* Main Image */}
-          <div className="relative w-full order-1 md:order-2 group">
-            <div className="aspect-square bg-gray-50 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
-              <img
-                src={filteredProduct.image[currentImageIndex]}
-                alt={filteredProduct.name}
-                className="w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-          </div>
+          <div className="relative order-1 md:order-2 group">
+  <div className="aspect-square w-full md:w-[440px] rounded-xl overflow-hidden transition-all duration-300">
+    <img
+      src={filteredProduct.image[currentImageIndex]}
+      alt={filteredProduct.name}
+      className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+    />
+  </div>
+</div>
+
         </div>
 
         {/* Product Details Section */}
-        <div className="flex flex-col gap-6 overflow-y-auto max-h-[80vh] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pr-2">
+        <div className="flex flex-col gap-6 overflow-y-auto max-h-[80vh] no-scrollbar scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pr-2">
           {/* Header Section */}
           <div className="flex justify-between items-start pb-4 border-b border-gray-200">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
@@ -325,55 +326,27 @@ export default function DesignEdit() {
             </div>
 
             {/* Customization Sections */}
-            <div className="space-y-6">
+            <div className="space-y-6 ">
               {/* Upload Photos */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-3">
                   Personalize with Photos
                   <span className="text-xs text-gray-500 ml-1">(JPEG/PNG, max 5MB each)</span>
                 </label>
-                <div className="space-y-4">
-                  <label className="flex flex-col items-center justify-center h-32 border-2 border-dashed rounded-xl cursor-pointer hover:border-blue-500 transition-all duration-200 bg-gray-50 group">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      onChange={(e) => handleImageUpload(Array.from(e.target.files))}
-                      className="hidden"
-                      disabled={uploadLoading}
-                    />
-                    <svg
-                      className="w-8 h-8 text-gray-400 mb-2 group-hover:text-blue-500 transition-colors"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg>
-                    <span className="text-sm text-gray-600 group-hover:text-blue-600 transition-colors">
-                      {uploadLoading ? "Uploading..." : "Click or drag to upload"}
-                    </span>
-                  </label>
-
-                  {/* Uploaded Images Grid */}
-                  <div className="grid grid-cols-4 gap-3">
-                    {userUploadedImages.map((img, index) => (
-                      <div key={index} className="relative group">
-                        <img
-                          src={img}
-                          alt={`Upload ${index + 1}`}
-                          className="w-full h-24 object-cover rounded-lg border shadow-sm hover:shadow-md transition-all"
-                        />
-                        <button
-                          onClick={() => setUserUploadedImages(prev => prev.filter((_, i) => i !== index))}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm hover:bg-red-600 active:scale-95"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <div className="mb-4">
+             
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={(e) => handleImageUpload(Array.from(e.target.files))}
+                  className="block w-full text-sm text-gray-900 border rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  disabled={uploadLoading}
+                />
+                {uploadLoading && (
+                  <p className="text-sm text-gray-600 mt-2">Uploading images...</p>
+                )}
+              </div>
               </div>
 
               {/* Custom Text Inputs */}
@@ -399,7 +372,7 @@ export default function DesignEdit() {
                     type="text"
                     value={customText}
                     onChange={(e) => setCustomText(e.target.value)}
-                    placeholder="Text...."
+                    placeholder="CustomText"
                     className="w-full px-4 py-3 border rounded-lg peer focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
 
@@ -421,7 +394,7 @@ export default function DesignEdit() {
                 <button
                   onClick={handleAddtoCart}
                   disabled={addToCartLoading}
-                  className="flex-1 bg-amber-800 hover:bg-amber-900 text-white py-4 px-8 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]"
+                  className="flex-1 bg-amber-800 hover:bg-amber-900 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]"
                 >
                   {addToCartLoading ? (
                     <>
@@ -441,7 +414,7 @@ export default function DesignEdit() {
                   )}
                 </button>
 
-                <button className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-4 px-8 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]">
+                <button className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
