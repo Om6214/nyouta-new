@@ -232,15 +232,15 @@ export default function DesignEdit() {
         <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
           {/* Thumbnails */}
           <div className="flex md:flex-col gap-3 order-2 md:order-1  pb-2 md:pb-0  relative">
-            <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-white via-white/80 to-transparent md:hidden pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l md:hidden pointer-events-none" />
             {filteredProduct.image.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
                 className={`cursor-pointer w-20 h-20 object-cover rounded-lg border-2 transition-all duration-300 hover:scale-105 ${currentImageIndex === index
-                    ? "border-gray-600 shadow-md"
-                    : "border-gray-200 hover:border-blue-400"
+                  ? "border-gray-600 shadow-md"
+                  : "border-gray-200 hover:border-blue-400"
                   }`}
                 onClick={() => handleThumbnailClick(index)}
               />
@@ -249,22 +249,22 @@ export default function DesignEdit() {
 
           {/* Main Image */}
           <div className="relative order-1 md:order-2 group">
-  <div className="aspect-square w-full md:w-[440px] rounded-xl overflow-hidden transition-all duration-300">
-    <img
-      src={filteredProduct.image[currentImageIndex]}
-      alt={filteredProduct.name}
-      className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-    />
-  </div>
-</div>
+            <div className="aspect-square w-full md:w-[440px] rounded-xl overflow-hidden transition-all duration-300">
+              <img
+                src={filteredProduct.image[currentImageIndex]}
+                alt={filteredProduct.name}
+                className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
 
         </div>
 
         {/* Product Details Section */}
-        <div className="flex flex-col gap-6 overflow-y-auto max-h-[80vh] no-scrollbar scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pr-2">
+        <div className="flex flex-col gap-6  max-h-[80vh] pr-2">
           {/* Header Section */}
-          <div className="flex justify-between items-start pb-4 border-b border-gray-200">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+          <div className="flex justify-between items-start  border-b border-gray-200">
+            <h1 className="text-2xl lg:mt-2 md:text-3xl font-bold text-gray-900 tracking-tight">
               {filteredProduct.name}
             </h1>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:rotate-12 active:scale-95">
@@ -275,66 +275,73 @@ export default function DesignEdit() {
           </div>
 
           {/* Price Section */}
-          <div className="space-y-1">
-            <div className="flex items-baseline gap-3">
-              <span className="text-2xl font-bold text-gray-900">
-                ₹{filteredProduct.price.toFixed(2)}
-              </span>
-              <span className="text-lg text-gray-500 line-through">
-                ₹{price.toFixed(2)}
-              </span>
-              <span className="text-sm font-semibold text-green-600 bg-green-100 px-2 py-1 rounded">
-                15% OFF
-              </span>
+          <div className="flex flex-col lg:flex-row justify-between lg:items-center">
+            <div className="space-y-0">
+              <div className="flex items-baseline gap-3">
+                <span className="text-2xl font-bold text-gray-900">
+                  ₹{filteredProduct.price.toFixed(2)}
+                </span>
+                <span className="text-lg text-gray-500 line-through">
+                  ₹{price.toFixed(2)}
+                </span>
+                <span className="text-sm font-semibold text-green-600 bg-green-100 px-2 py-1 rounded">
+                  15% OFF
+                </span>
+              </div>
+              <p className="text-sm text-gray-500">Inclusive of all taxes • FREE Shipping</p>
             </div>
-            <p className="text-sm text-gray-500">Inclusive of all taxes • FREE Shipping</p>
-          </div>
+            <div className="flex flex-row items-center gap-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Quantity
+              </label>
+              <div className="relative group w-fit">
+                <button
+                  type="button"
+                  className="flex items-center justify-between px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 transition-colors w-32"
+                >
+                  <span className="font-medium text-gray-900">{quantity}</span>
+                  <svg
+                    className="w-5 h-5 text-gray-500 transform group-hover:rotate-180 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
 
-          {/* Quantity Selector */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-6">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Quantity
-                </label>
-                <div className="flex items-center border rounded-lg w-fit shadow-sm bg-white">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 border-r transition-colors active:bg-gray-200"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                    </svg>
-                  </button>
-                  <input
-                    type="number"
-                    value={quantity}
-                    onChange={handleQuantityChange}
-                    className="w-16 text-center border-0 focus:ring-0 bg-transparent font-medium text-gray-900"
-                    min="1"
-                  />
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 border-l transition-colors active:bg-gray-200"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  </button>
+                {/* Dropdown */}
+                <div className="absolute z-10 mt-1 w-full origin-top scale-95 opacity-0 invisible group-hover:scale-100 group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="border rounded-lg bg-white shadow-lg overflow-hidden">
+                    {[1, 2, 3, 4].map((num) => (
+                      <button
+                        key={num}
+                        onClick={() => setQuantity(num)}
+                        className={`w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors ${quantity === num ? 'bg-gray-50' : ''
+                          }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Customization Sections */}
-            <div className="space-y-6 ">
-              {/* Upload Photos */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Personalize with Photos
-                  <span className="text-xs text-gray-500 ml-1">(JPEG/PNG, max 5MB each)</span>
-                </label>
-                <div className="mb-4">
-             
+          {/* Quantity Selector */}
+
+
+          {/* Customization Sections */}
+          <div className="space-y-0 ">
+            {/* Upload Photos */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Personalize with Photos
+                <span className="text-xs text-gray-500 ml-1">(JPEG/PNG, max 5MB each)</span>
+              </label>
+              <div className="mb-4">
+
                 <input
                   type="file"
                   accept="image/*"
@@ -347,101 +354,94 @@ export default function DesignEdit() {
                   <p className="text-sm text-gray-600 mt-2">Uploading images...</p>
                 )}
               </div>
+            </div>
+
+            {/* Custom Text Inputs */}
+            <div className="space-y-4 ml-2">
+
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Custom Name"
+                  className="w-full px-4 py-3 border rounded-lg peer focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                />
+
               </div>
 
-              {/* Custom Text Inputs */}
-              <div className="space-y-4 ml-2">
+              <div className="relative">
+                <input
+                  type="text"
+                  value={customText}
+                  onChange={(e) => setCustomText(e.target.value)}
+                  placeholder="CustomText"
+                  className="w-full px-4 py-3 border rounded-lg peer focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                />
 
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Custom Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Name..."
-                    className="w-full px-4 py-3 border rounded-lg peer focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  />
+              </div>
+            </div>
 
+            {/* Warning Message */}
+            {warning && (
+              <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2 animate-fade-in">
+                <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+                {warning}
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex flex-col md:flex-row gap-4 pt-4 ml-2">
+              <button
+                onClick={handleAddtoCart}
+                disabled={addToCartLoading}
+                className="flex-1 bg-amber-800 hover:bg-amber-900 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]"
+              >
+                {addToCartLoading ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Adding...
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                    </svg>
+                    Add to Cart
+                  </>
+                )}
+              </button>
+
+              <button className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Buy Now
+              </button>
+            </div>
+
+            {/* Delivery Info */}
+            <div className="flex flex-col md:flex-row ml-2 gap-6 bg-gray-50 p-5 rounded-xl 0">
+              <div className="flex items-center gap-3 flex-1">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <FaTruck className="text-blue-600" size={20} />
                 </div>
-
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Custom text
-                  </label>
-                  <input
-                    type="text"
-                    value={customText}
-                    onChange={(e) => setCustomText(e.target.value)}
-                    placeholder="CustomText"
-                    className="w-full px-4 py-3 border rounded-lg peer focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  />
+                <div>
+                  <p className="font-medium text-gray-900">2-10 business days</p>
 
                 </div>
               </div>
 
-              {/* Warning Message */}
-              {warning && (
-                <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center gap-2 animate-fade-in">
-                  <svg className="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  {warning}
+              <div className="flex items-center gap-3 flex-1">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <FaMoneyBillAlt className="text-green-600" size={20} />
                 </div>
-              )}
+                <div>
+                  <p className="font-medium text-gray-900">Cash on Delivery</p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col md:flex-row gap-4 pt-4 ml-2">
-                <button
-                  onClick={handleAddtoCart}
-                  disabled={addToCartLoading}
-                  className="flex-1 bg-amber-800 hover:bg-amber-900 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]"
-                >
-                  {addToCartLoading ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Adding...
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                      </svg>
-                      Add to Cart
-                    </>
-                  )}
-                </button>
-
-                <button className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                  Buy Now
-                </button>
-              </div>
-
-              {/* Delivery Info */}
-              <div className="flex flex-col md:flex-row ml-2 gap-6 bg-gray-50 p-5 rounded-xl border border-gray-200">
-                <div className="flex items-center gap-3 flex-1">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <FaTruck className="text-blue-600" size={20} />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">2-10 business days</p>
-                   
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 flex-1">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <FaMoneyBillAlt className="text-green-600" size={20} />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">Cash on Delivery</p>
-                   
-                  </div>
                 </div>
               </div>
             </div>
