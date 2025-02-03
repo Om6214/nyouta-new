@@ -234,26 +234,26 @@ export default function CategoryFilterLabel() {
           {/* Left Carousel (Takes up 2/3 of the space) */}
           <div className="lg:sticky lg:top-10 h-auto max-h-[96vh] md:col-span-2">
             <div className="w-full max-w-full mx-auto">
-              <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-4">
+              <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-0">
                 {/* Thumbnail Navigation (Left Side) */}
-                <div className="flex flex-col gap-4 w-24 sm:w-28 md:w-32">
+                <div className="flex flex-col mr-10 gap-3 w-20 sm:w-24 md:w-28">
                   {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
                     filteredItems[0].image.map((src, index) => (
                       <div
                         key={index}
-                        className="w-full h-20 sm:h-24 md:h-32 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-orange-500 transition"
+                        className="w-full h-16 sm:h-20 md:h-24 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-orange-500 transition"
                         onClick={() => swiperInstance?.slideTo(index + 1)}
                       >
                         <img
                           src={src}
                           alt={`Thumbnail ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover scale-95"
                         />
                       </div>
                     ))
                   ) : (
-                    <div className="w-full h-20 sm:h-24 md:h-32 flex-shrink-0 rounded-lg overflow-hidden border-2 border-gray-200">
-                      <p className="text-center text-gray-500 py-8">No images available</p>
+                    <div className="w-full h-16 sm:h-20 md:h-24 rounded-lg overflow-hidden border-2 border-gray-200">
+                      <p className="text-center text-gray-500 py-4">No images</p>
                     </div>
                   )}
                 </div>
@@ -263,24 +263,25 @@ export default function CategoryFilterLabel() {
                   style={{
                     "--swiper-navigation-color": "#000",
                     "--swiper-pagination-color": "#000",
+                    
                   }}
                   zoom={true}
                   navigation={true}
                   pagination={{ clickable: true }}
                   modules={[Zoom, Navigation, Pagination]}
-                  className="w-full rounded-lg h-[35vh] sm:h-[60vh] md:h-[65vh] lg:h-[90vh] xl:h-[100vh]"
+                  className="lg:w-[458px] w-full rounded-lg h-[25vh] sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh] mx-0"
+            
                   onSwiper={(swiper) => setSwiperInstance(swiper)}
                 >
-                  {/* Dynamic Images */}
                   {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
                     filteredItems[0].image.map((src, index) => (
                       <SwiperSlide key={index}>
-                        <div className="aspect-square w-full relative">
-                          <div className="swiper-zoom-container absolute inset-0">
+                        <div className="w-full h-full relative">
+                          <div className="swiper-zoom-container w-full h-full">
                             <img
                               src={src}
                               alt={`Product Image ${index + 1}`}
-                              className="w-full h-[30vh] md:h-[60vh] xl:h-[105vh] object-cover rounded-lg"
+                              className="w-full h-full object-cover rounded-lg"
                             />
                           </div>
                         </div>
@@ -288,9 +289,9 @@ export default function CategoryFilterLabel() {
                     ))
                   ) : (
                     <SwiperSlide>
-                      <div className="aspect-square w-full relative">
-                        <div className="swiper-zoom-container absolute inset-0">
-                          <p className="text-center text-gray-500 py-20">No images available</p>
+                      <div className="w-full h-full relative">
+                        <div className="swiper-zoom-container w-full h-full">
+                          <p className="text-center text-gray-500 py-12">No images</p>
                         </div>
                       </div>
                     </SwiperSlide>
@@ -301,11 +302,11 @@ export default function CategoryFilterLabel() {
           </div>
 
           {/* Right Content (Scrollable, Takes up 1/3 of the space) */}
-          <div className="h-auto lg:mt-5 md:col-span-1">
+          <div className="h-auto md:col-span-1">
             <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg max-w-[350px] max-h-[96vh]">
               {/* Product Title and Category */}
               <div className="mb-4">
-                <h1 className="text-3xl font-medium text-gray-800 mb-2">
+                <h1 className="text-xl lg:text-3xl font-medium text-gray-800 mb-2">
                   {path === "all" ? formattedPageName : formattedPath}
                 </h1>
                 <p className="text-sm font-medium text-gray-600">
