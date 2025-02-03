@@ -126,7 +126,7 @@ export default function ProductPage() {
                 onClick={handleEditImage}
                 className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
               >
-                Edit PDF
+                Edit Greeting
               </button>
 
               <button
