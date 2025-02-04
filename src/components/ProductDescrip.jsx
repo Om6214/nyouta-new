@@ -8,7 +8,23 @@ const ProductDescription = ({ descriptions }) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const words = description.split(" ");
-  const previewText = words.slice(0, 15).join(" ") + "...";
+
+  // State for word limit based on screen size
+  const [wordLimit, setWordLimit] = useState(
+    window.innerWidth < 640 ? 8 : 15
+  );
+
+  // Handle resizing
+  useEffect(() => {
+    const handleResize = () => {
+      setWordLimit(window.innerWidth < 640 ? 8 : 15);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const previewText = words.slice(0, wordLimit).join(" ") + "...";
 
   const contentRef = useRef(null);
   const [height, setHeight] = useState("0px");
@@ -19,7 +35,7 @@ const ProductDescription = ({ descriptions }) => {
     } else {
       setHeight("30px"); // Adjust based on preview text height
     }
-  }, [isExpanded]);
+  }, [isExpanded, wordLimit]);
 
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
@@ -34,7 +50,7 @@ const ProductDescription = ({ descriptions }) => {
       >
         <p className="text-xs leading-4 text-gray-900">
           {isExpanded ? description : previewText}{" "}
-          {words.length > 15 && (
+          {words.length > wordLimit && (
             <button
               onClick={toggleReadMore}
               className="text-blue-500 text-xs ml-1 hover:underline"

@@ -580,19 +580,21 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-[75%] mx-auto rounded-lg h-[25vh]  sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh]" // Added mx-0 here
+                // Fixed heights based on breakpoints (width-driven)
+                className="w-[75%] mx-auto rounded-lg h-[220px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[450px]"
                 onSwiper={(swiper) => setSwiperInstance(swiper)}
               >
                 {productData.productVideo && (
                   <SwiperSlide>
-                    {/* Remove aspect-square and use fixed container */}
-                    <div className=" w-full h-[80vh] relative">
+                    {/* Use full height of SwiperSlide */}
+                    <div className="w-full h-full relative">
                       <video
                         src={productData.productVideo}
                         autoPlay
                         muted
                         loop
-                        className="absolute inset-0 w-[30vh] lg:w-full lg:h-full object-cover rounded-lg"
+                        // Remove vh-based sizing
+                        className="absolute inset-0 w-full h-full object-cover rounded-lg"
                       />
                     </div>
                   </SwiperSlide>
@@ -605,7 +607,8 @@ export default function CategoryFilterLabel() {
                         <img
                           src={image}
                           alt={`Product Image ${index + 1}`}
-                          className="w-[90vh] h-full object-cover rounded-lg"
+                          // Use full parent height
+                          className="w-full h-full object-cover rounded-lg"
                         />
                       </div>
                     </div>
@@ -764,9 +767,9 @@ export default function CategoryFilterLabel() {
           {/* Left column: Filter options */}
           <div className="col-span-1 mt-10 hidden md:block space-y-2">
             <div className="flex items-center justify-between px-4">
-              <h1 className="text-lg font-avalonN">Filter By</h1>
+              <h1 className="text-lg md:text-sm font-avalonN">Filter By</h1>
               <button
-                className={`font-avalonN border-gray-500 leading-5 ${filter === "all" ? "border-orange-500" : ""}`}
+                className={`font-avalonN md:text-sm border-gray-500 leading-5 ${filter === "all" ? "border-orange-500" : ""}`}
                 onClick={() => setFilter("all")}
               >
                 Clear all
@@ -854,13 +857,13 @@ export default function CategoryFilterLabel() {
                         ider: item._id,
                         product: item,
                       }}
-                      className="group bg-slate-50 rounded-lg shadow-lg overflow-hidden transform flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                      className="group bg-slate-50 rounded-lg h-[43vh] sm:h-[35vh] md:h-[35vh] lg:h-[58vh] xl:h-[58vh] shadow-lg overflow-hidden transform flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
                     >
-                      <div className="relative w-full h-[45vh] overflow-hidden">
+                      <div className="relative w-full h-[100%] overflow-hidden">
                         <img
                           src={item.image[0]}
                           alt={item.name}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="absolute inset-0 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                       </div>
                       <div className="px-1 flex justify-center pt-2 items-center text-center">
