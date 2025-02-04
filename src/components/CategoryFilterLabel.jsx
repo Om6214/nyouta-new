@@ -103,51 +103,77 @@ export default function CategoryFilterLabel() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
         {/* Left Carousel Skeleton */}
-        <div className="mt-6 lg:sticky lg:top-0 h-auto">
-          <div className="w-full max-w-full mx-auto mb-6 lg:mb-0">
-            <div className="relative w-full max-w-4xl mx-auto">
-              <div className="w-full rounded-lg h-[40vh] md:h-[50vh] lg:h-[50vh] xl:h-[96vh] bg-gray-200 animate-pulse"></div>
+        <div className="lg:sticky top-10 h-auto md:col-span-4 self-start">
+          <div className="w-full max-w-full mx-auto">
+            <div className="relative w-full lg:mt-0 max-w-7xl mx-auto flex gap-0">
+              {/* Thumbnail Navigation Skeleton */}
+              <div className="flex flex-col mr-10 gap-3 w-20 sm:w-24 md:w-28">
+                {[1, 2, 3, 4].map((_, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-16 sm:h-20 md:h-28 flex-shrink-0 bg-gray-200 rounded-lg animate-pulse"
+                  ></div>
+                ))}
+              </div>
+
+              {/* Main Swiper Skeleton */}
+              <div className="w-[75%] mx-auto rounded-lg h-[220px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[450px] bg-gray-200 animate-pulse"></div>
             </div>
           </div>
         </div>
 
         {/* Right Content Skeleton */}
-        <div className="overflow-y-auto h-[96vh]">
-          <div className="p-6 md:px-10 md:py-8 bg-slate-50 rounded-lg shadow-lg">
-            {/* Title Skeleton */}
+        <div className="h-auto w-full md:col-span-3">
+          <div className="p-6 w-full md:px-4 md:py-0 bg-slate-50 rounded-lg">
+            {/* Product Title and Category Skeleton */}
             <div className="mb-4">
               <div className="h-8 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
-              <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-              <div className="h-4 bg-gray-200 rounded w-2/3 mt-1 animate-pulse"></div>
+              <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
+              <div className="h-4 bg-gray-200 rounded w-2/3 mt-2 animate-pulse"></div>
             </div>
 
-            {/* Divider Skeleton */}
-            <div className="border-t border-gray-300 mb-6"></div>
+            <div className="border-t py-2 border-orange-600 mb-2"></div>
 
-            {/* Filter Buttons Skeleton */}
-            <div className="flex gap-4 mb-4">
-              <div className="py-2 px-8 bg-gray-200 rounded-lg w-1/2 animate-pulse"></div>
-              <div className="py-2 px-8 bg-gray-200 rounded-lg w-1/2 animate-pulse"></div>
+            {/* Selection Options Skeleton */}
+            <div className="flex pb-2 gap-4 mb-2">
+              <div className="py-2 px-6 rounded-lg bg-gray-200 w-20 h-10 animate-pulse"></div>
+              <div className="py-2 px-5 rounded-lg bg-gray-200 w-20 h-10 animate-pulse"></div>
             </div>
 
-            {/* Price Skeleton */}
-            <div className="mb-6">
-              <div className="h-6 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+            {/* Price Section Skeleton */}
+            <div className="mb-4">
+              <div className="h-6 bg-gray-200 rounded w-1/2 mb-2 animate-pulse"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/3 animate-pulse"></div>
             </div>
 
-            {/* Button Skeleton */}
-            <div className="w-1/3 py-2 bg-gray-200 rounded-md animate-pulse"></div>
+            {/* CTA Button Skeleton */}
+            <div className="w-[40%] py-3 px-2 mb-4 bg-gray-200 rounded-lg animate-pulse"></div>
 
-            {/* Specifications Skeleton */}
-            <div className="mt-4">
-              <div className="h-6 bg-gray-200 rounded w-1/4 mb-3 animate-pulse"></div>
-              <ul className="space-y-2">
-                {[...Array(5)].map((_, index) => (
-                  <li key={index} className="h-4 bg-gray-200 rounded w-full animate-pulse"></li>
+            {/* Product Specifications Skeleton */}
+            <div className="mt-3">
+              {/* Tab Navigation Skeleton */}
+              <div className="flex border-b pb-3 mb-4">
+                {[1, 2, 3, 4].map((_, index) => (
+                  <div
+                    key={index}
+                    className="px-3 lg:px-6 h-6 bg-gray-200 rounded w-16 animate-pulse mr-2"
+                  ></div>
                 ))}
-              </ul>
+              </div>
+
+              {/* Tab Content Skeleton */}
+              <div className="mt-1 w-full">
+                <div className="p-4 border rounded-lg">
+                  <div className="h-6 bg-gray-200 rounded w-1/3 mb-2 animate-pulse"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded w-4/5 animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

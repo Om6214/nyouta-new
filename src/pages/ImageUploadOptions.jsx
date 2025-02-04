@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaFolderOpen } from 'react-icons/fa'; // Local Drive icon
 import { FcGoogle } from 'react-icons/fc'; // Google Drive icon
-import { SiDropbox, SiMicrosoftonedrive } from 'react-icons/si'; // Dropbox, OneDrive
+import { SiDropbox,  } from 'react-icons/si'; // Dropbox, OneDrive
+import { FaMicrosoft } from "react-icons/fa6";
 import { MdPhotoLibrary } from 'react-icons/md'; // Google Photos
 import { IoClose } from 'react-icons/io5'; // Close icon
 
@@ -43,7 +44,7 @@ const ImageUploadOptions = ({ onClose, onSelect }) => {
           </button>
 
           <button onClick={() => handleSelect('oneDrive')} className={buttonStyle}>
-            <SiMicrosoftonedrive size={24} /> OneDrive
+            <FaMicrosoft size={24} /> OneDrive
           </button>
 
           <button onClick={() => handleSelect('googlePhotos')} className={buttonStyle}>
