@@ -1,49 +1,51 @@
-import React, { useState } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 const ProductDescription = ({ descriptions }) => {
-  const [expandedDescriptions, setExpandedDescriptions] = useState(
-    descriptions?.map(() => false) || []
-  );
+  // Ensure descriptions is always a string
+  const description = Array.isArray(descriptions)
+    ? descriptions.join(" ")
+    : descriptions || "";
 
-  const truncateText = (text, maxWords = 20) => {
-    const words = text.split(' ');
-    return words.length > maxWords
-      ? words.slice(0, maxWords).join(' ') + '...'
-      : text;
+  const [isExpanded, setIsExpanded] = useState(false);
+  const words = description.split(" ");
+  const previewText = words.slice(0, 15).join(" ") + "...";
+
+  const contentRef = useRef(null);
+  const [height, setHeight] = useState("0px");
+
+  useEffect(() => {
+    if (isExpanded) {
+      setHeight(`${contentRef.current.scrollHeight}px`);
+    } else {
+      setHeight("30px"); // Adjust based on preview text height
+    }
+  }, [isExpanded]);
+
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
   };
 
-  const toggleDescription = (index) => {
-    const newExpandedState = [...expandedDescriptions];
-    newExpandedState[index] = !newExpandedState[index];
-    setExpandedDescriptions(newExpandedState);
-  };
-
-  return descriptions?.length > 0 ? (
-    <div className="text-sm font-light text-gray-900 space-y-2">
-      {descriptions.map((desc, idx) => {
-        const wordCount = desc.split(' ').length;
-        const isTruncatable = wordCount > 5;
-
-        return (
-          <div key={idx} className="flex flex-col">
-            <p className="lg:mr-2">
-              {isTruncatable && !expandedDescriptions[idx]
-                ? truncateText(desc)
-                : desc}
-            </p>
-            {isTruncatable && (
-              <button
-                onClick={() => toggleDescription(idx)}
-                className="text-blue-600 hover:underline text-xs w-20"
-              >
-                {expandedDescriptions[idx] ? 'Show Less' : 'Read More'}
-              </button>
-            )}
-          </div>
-        );
-      })}
+  return (
+    <div>
+      <div
+        ref={contentRef}
+        className="overflow-hidden transition-all duration-500 ease-in-out"
+        style={{ maxHeight: height }}
+      >
+        <p className="text-xs leading-4 text-gray-900">
+          {isExpanded ? description : previewText}{" "}
+          {words.length > 15 && (
+            <button
+              onClick={toggleReadMore}
+              className="text-blue-500 text-xs ml-1 hover:underline"
+            >
+              {isExpanded ? "Read Less" : "Read More"}
+            </button>
+          )}
+        </p>
+      </div>
     </div>
-  ) : null;
+  );
 };
 
 export default ProductDescription;

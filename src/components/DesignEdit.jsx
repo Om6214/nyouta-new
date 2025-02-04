@@ -7,6 +7,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/api";
 import { ClipLoader } from "react-spinners"; // Import a spinner component
 import { FaTruck, FaMoneyBillAlt } from 'react-icons/fa';
+import ShareButton from "./ShareButton";
 export default function DesignEdit() {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -229,18 +230,18 @@ export default function DesignEdit() {
     <div className="max-w-6xl mx-auto mb-10 p-4 md:p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
         {/* Product Image Section */}
-        <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6">
+        <div className="flex lg:sticky top-10 lg:h-[65vh] flex-col md:flex-row items-start gap-4 md:gap-6">
           {/* Thumbnails */}
-          <div className="flex md:flex-col gap-3 order-2 md:order-1  pb-2 md:pb-0  relative">
-            <div className="absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-white via-white/80 to-transparent md:hidden pointer-events-none" />
+          <div className="flex lg:mt-6 ml-4 md:flex-col gap-3 order-2 md:order-1  pb-2 md:pb-0  relative">
+            <div className="absolute inset-y-0 right-0 w-6 " />
             {filteredProduct.image.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
                 className={`cursor-pointer w-20 h-20 object-cover rounded-lg border-2 transition-all duration-300 hover:scale-105 ${currentImageIndex === index
-                    ? "border-gray-600 shadow-md"
-                    : "border-gray-200 hover:border-blue-400"
+                  ? "border-gray-600 shadow-md"
+                  : "border-gray-200 hover:border-blue-400"
                   }`}
                 onClick={() => handleThumbnailClick(index)}
               />
@@ -249,29 +250,25 @@ export default function DesignEdit() {
 
           {/* Main Image */}
           <div className="relative order-1 md:order-2 group">
-  <div className="aspect-square w-full md:w-[440px] rounded-xl overflow-hidden transition-all duration-300">
-    <img
-      src={filteredProduct.image[currentImageIndex]}
-      alt={filteredProduct.name}
-      className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-    />
-  </div>
-</div>
+            <div className="aspect-square w-full md:w-[440px] rounded-xl overflow-hidden transition-all duration-300">
+              <img
+                src={filteredProduct.image[currentImageIndex]}
+                alt={filteredProduct.name}
+                className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
 
         </div>
 
         {/* Product Details Section */}
-        <div className="flex flex-col gap-6 overflow-y-auto max-h-[80vh] no-scrollbar scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pr-2">
+        <div className="flex px-4 flex-col gap-6 mt-3 max-h-auto no-scrollbar scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pr-2">
           {/* Header Section */}
           <div className="flex justify-between items-start pb-4 border-b border-gray-200">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
               {filteredProduct.name}
             </h1>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:rotate-12 active:scale-95">
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-              </svg>
-            </button>
+           <ShareButton/>
           </div>
 
           {/* Price Section */}
@@ -292,35 +289,40 @@ export default function DesignEdit() {
 
           {/* Quantity Selector */}
           <div className="space-y-4">
-            <div className="flex items-center gap-6">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Quantity
-                </label>
-                <div className="flex items-center border rounded-lg w-fit shadow-sm bg-white">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 border-r transition-colors active:bg-gray-200"
+            <div className="flex flex-row items-center gap-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Quantity
+              </label>
+              <div className="relative group w-fit">
+                <button
+                  type="button"
+                  className="flex items-center justify-between px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 transition-colors w-32"
+                >
+                  <span className="font-medium text-gray-900">{quantity}</span>
+                  <svg
+                    className="w-5 h-5 text-gray-500 transform group-hover:rotate-180 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                    </svg>
-                  </button>
-                  <input
-                    type="number"
-                    value={quantity}
-                    onChange={handleQuantityChange}
-                    className="w-16 text-center border-0 focus:ring-0 bg-transparent font-medium text-gray-900"
-                    min="1"
-                  />
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-600 border-l transition-colors active:bg-gray-200"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  </button>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {/* Dropdown */}
+                <div className="absolute z-10 mt-1 w-full origin-top scale-95 opacity-0 invisible group-hover:scale-100 group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="border rounded-lg bg-white shadow-lg overflow-hidden">
+                    {[1, 2, 3, 4].map((num) => (
+                      <button
+                        key={num}
+                        onClick={() => setQuantity(num)}
+                        className={`w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors ${quantity === num ? 'bg-gray-50' : ''
+                          }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -334,19 +336,19 @@ export default function DesignEdit() {
                   <span className="text-xs text-gray-500 ml-1">(JPEG/PNG, max 5MB each)</span>
                 </label>
                 <div className="mb-4">
-             
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={(e) => handleImageUpload(Array.from(e.target.files))}
-                  className="block w-full text-sm text-gray-900 border rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={uploadLoading}
-                />
-                {uploadLoading && (
-                  <p className="text-sm text-gray-600 mt-2">Uploading images...</p>
-                )}
-              </div>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(e) => handleImageUpload(Array.from(e.target.files))}
+                    className="block w-full text-sm text-gray-900 border rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={uploadLoading}
+                  />
+                  {uploadLoading && (
+                    <p className="text-sm text-gray-600 mt-2">Uploading images...</p>
+                  )}
+                </div>
               </div>
 
               {/* Custom Text Inputs */}
@@ -430,7 +432,7 @@ export default function DesignEdit() {
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">2-10 business days</p>
-                   
+
                   </div>
                 </div>
 
@@ -440,7 +442,7 @@ export default function DesignEdit() {
                   </div>
                   <div>
                     <p className="font-medium text-gray-900">Cash on Delivery</p>
-                   
+
                   </div>
                 </div>
               </div>

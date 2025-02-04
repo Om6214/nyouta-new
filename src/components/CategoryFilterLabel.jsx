@@ -36,13 +36,25 @@ export default function CategoryFilterLabel() {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [activeTab, setActiveTab] = useState('description');
+  const [isExpanded, setIsExpanded] = useState(false);
+  const contentRef = useRef(null);
+  const [height, setHeight] = useState("0px");
+
 
   const tabs = [
-    { id: 'description', label: 'Product Description' },
-    { id: 'information', label: 'Product Information' },
-    { id: 'about', label: 'About the Product' },
-    { id: 'awards', label: 'Awards & offers' },
+    { id: 'description', label: 'Description' },
+    { id: 'information', label: 'Information' },
+    { id: 'about', label: 'About' },
+    { id: 'awards', label: 'Awards ' },
   ];
+
+  useEffect(() => {
+    if (isExpanded) {
+      setHeight(`${contentRef.current.scrollHeight}px`);
+    } else {
+      setHeight("40px"); // Adjust this based on your text size
+    }
+  }, [isExpanded]);
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -159,11 +171,6 @@ export default function CategoryFilterLabel() {
 
   const formattedPageName = formatCategoryName(pageName);
   const formattedPath = formatSubCategoryName(path);
-  // console.log(formattedPageName);
-  // console.log(formattedPath);
-  // console.log(ProductJson);
-
-  // console.log(ProductJson);
 
   const filteredItems = responseData.filter((item) => {
     const categoryMatch =
@@ -183,9 +190,6 @@ export default function CategoryFilterLabel() {
     const subSubCategoryMatch =
       item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
 
-    // const subCategoryMatch = item.subSubCategory.toLowerCase() === formattedPath.toLowerCase();
-    // console.log(item.subSubCategory.toLowerCase()+"==="+formattedPath.toLowerCase())
-
     return categoryMatch && subCatego && subSubCategoryMatch;
   });
 
@@ -204,8 +208,6 @@ export default function CategoryFilterLabel() {
         });
       }
       if (filteredItems[0].category === "Itinerary") {
-        // Navigate to a different component with the image as state
-        // console.log(filteredItems[0].image[1]);
         navigate(`/edit/Itinerary/${filteredItems[0].subSubCategory}`, {
           state: { image: filteredItems[0].image[0] },
         });
@@ -251,12 +253,6 @@ export default function CategoryFilterLabel() {
     }
 
   });
-  console.log(filter)
-
-  // console.log("filteredItems:", filteredItems);
-  console.log("filteredResponseData:", filteredResponseData);
-  // console.log(filteredItems[0].category);
-  // console.log(RelatedItems);
 
   // Calculate total pages
   const totalPages = Math.ceil(filteredResponseData.length / itemsPerPage);
@@ -291,53 +287,37 @@ export default function CategoryFilterLabel() {
       productOff: 15,
       productSpecificationsRoyal: {
         productDescription: [
-          "Checklists: • About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding,Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts,Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan, Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan, Special Notes & Experience, Calendar 2024-2025, Family Pics",
+          "Checklists:  About Wedding - Blessings, Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Tables of Contents, Planning Before Priors, Brand your Wedding,Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Venue & Vendors Comparisons, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts,Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thanks Gift for Groom/Bride Side, Received Gift by Groom/Bride Side, Thanks Gift for Relative, Received Gift for by Relatives, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan, Honeymoon Management - Honeymoon - Planning Guide, Honeymoon Budget, Travel Detail, Sample Packing List, Tour/Activity Plan, Special Notes & Experience, Calendar 2024-2025, Family Pics",
 
         ],
         productInformation: [
           "Pages: 100 (200 Sides) Coloured,Paper & Size: A4 (210x297 mm*) 100 gsm,Cover: 200 gsm PVC (Coloured) with Velvet Finish,Bind: Perfect Binding with Bookmarks,Packaging: Eco-Friendly Packaging,Pack of: 1,Shipping: Free Delivery",
         ],
         aboutThisProduct: [
-          "• Usability: Perfectly manage your wedding",
-          "• Customise: You can make your own Cover",
-          "• Value: Lifetime Memory & Perfect Gift to New Weds",
-          "• Return: This product is not exchangeable & Not Returnable",
-          "• Helpful Features: Detailed checklist and journal sheets.",
-          "• Payment: 100% Safe & Secure Payments.",
-          "• Brand: Nyouta | Made with love in India."
+          " Usability: Perfectly manage your wedding ,Customise: You can make your own Cover , Value: Lifetime Memory & Perfect Gift to New Weds , Return: This product is not exchangeable & Not Returnable , Helpful Features: Detailed checklist and journal sheets. , Payment: 100% Safe & Secure Payments. , Brand: Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "• Selfie Award: Send Selfie with Product, Get surprise Gift",
-          "• Review Award: Extra Discount Voucher for Best Review",
-          "• Best Choice Award: Surprise Gift for Best Choice Product",
-          "• Couple Award: This Award for Best Couple Photo on Cover Pages."
+          " Selfie Award: Send Selfie with Product, Get surprise Gift , Review Award: Extra Discount Voucher for Best Review , Best Choice Award: Surprise Gift for Best Choice Product , Couple Award: This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
       productSpecificationsPopular: {
         productDescription: [
-          "• Checklists: About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors ,  Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List ,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,  Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts , Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan,Special Notes & Experience,Calendars,Family Pics",
+          " Checklists: About Wedding - Wedding Detail, 7 Steps of Wedding, Congratulations, Wedding Programs, Planning Before Priors ,  Wedding Checklist - Checklists & Don't Forget, Day-of checklist, Day of Kit for the Bride/Groom, Daily, Weekly & Monthly Planner, To-do List (Top Priority), To-do List ,Finance Management - Sample Wedding Budget, Wedding Budget (Eventwise), Wedding Purchases & Expenses, Payment Planner, Payment Schedule, A Few Last Thoughts,  Vendor Management - Engagement & Bachelor Party, Vendor Details, Food Plan, Music/Dance Schedule, Floor Plan, A Few Last Thoughts , Guest Management - Guest List - Eventwise, Wedding Guest List, Outsider Guests, Thank You Gift to Guest, Gift Received by Guests, Guest List Summery, Guest Room Arrangement, Guest Room Plan, Guest Sitting Table Plan, Family - Sitting Table Plan,Special Notes & Experience,Calendars,Family Pics",
         ],
         productInformation: [
-          "• Pages: 100 (200 Sides) Coloured",
-          "• Paper & Size: A4 (210x297 mm*) 100 gsm",
-          "• Cover: 200 gsm PVC (Coloured) with Velvet Finish",
-          "• Bind: Perfect Binding with Bookmarks"
+          " Pages: 100 (200 Sides) Coloured , Paper & Size: A4 (210x297 mm*) 100 gsm , Cover: 200 gsm PVC (Coloured) with Velvet Finish , Bind: Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "• Usability: Perfectly manage your wedding",
-          "• Customise: You can make your own Cover",
-          "• Value: Lifetime Memory & Perfect Gift to New Weds",
-          "• Return: This product is not exchangeable & Not Returnable",
-          "• Helpful Features: Detailed checklist and journal sheets.",
-          "• Payment: 100% Safe & Secure Payments.",
-          "• Brand: Nyouta | Made with love in India."
+          "Usability: Perfectly manage your wedding , Customise: You can make your own Cover , Value: Lifetime Memory & Perfect Gift to New Weds , Return: This product is not exchangeable & Not Returnable , Helpful Features: Detailed checklist and journal sheets. , Payment: 100% Safe & Secure Payments. , Brand: Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "• Selfie Award: Send Selfie with Product, Get surprise Gift",
-          "• Review Award: Extra Discount Voucher for Best Review",
-          "• Best Choice Award: Surprise Gift for Best Choice Product",
-          "• Couple Award: This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award: Send Selfie with Product, Get surprise Gift , Review Award: Extra Discount Voucher for Best Review , Best Choice Award: Surprise Gift for Best Choice Product , Couple Award: This Award for Best Couple Photo on Cover Pages.",
+
         ]
       }
 
@@ -361,25 +341,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Programs > Event Detail List • Daily Planner • Weekly Planner • Monthly Planner • To-Do List • Event wise Guest List • VIP Chief Guests List, Special Guests List, Friends List, Family Friends List, Friends of Friend List, Relatives List, Business Guests List, Staff Members List, Neighbor Guests List, Club Members List, Classmates List, Bride/Groom Side Guest List, Nearest/Dearest Guests List, Other Guest List, Outsider Guest List • Food Plan for Guests • Thank You Gift to Groom/Bride Side • Gift Received by Groom/Bride Side • Thank You Gift to Guest • Gift Received by Guests • Guest Room Arrangement • Guest Room Plan • Special Guest - Sitting Table Plan • Family - Sitting Table Plan • Sitting Floor Plan • Guest List Summary • Special Notes, Note, Experience • Memories & Much more ..."
         ],
         productInformation: [
-          "Pages : 75 (150 Sides) Coloured",
-          "Paper & Size : A4 (210x297 mm*) 100 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 75 (150 Sides) Coloured , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -388,25 +359,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Programs > Event Detail List • Daily Planner • Weekly Planner • Monthly Planner • To-Do List • Event wise Guest List • Categorised Guests List • Food Plan for Guests • Thank You Gift to Groom/Bride Side • Gift received by Groom/Bride Side • Thank You Gift to Guest • Gift Received by Guests • Guest Room Arrangement • Sitting Table Plans • Guest List Summary • Special Notes, Note, Experience • Memories & Much more ..."
         ],
         productInformation: [
-          "Pages : 75 (150 Sides) Coloured",
-          "Paper & Size : A4 (210x297 mm*) 100 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 75 (150 Sides) Coloured , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -430,25 +392,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Event wise guest List • Categorised Guest List • Guest List Summery • Special Notes • Note • Experience • Memories"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) All pages - Coloured",
-          "Paper & Size : A4 (210x297 mm*) 100 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 50 (100 Sides) All pages - Coloured , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -457,25 +410,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Wedding Family • Event wise guest List • Categorised Guest List • Guest List Summery • Special Notes • Note • Experience • Memories"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) All pages - B/W",
-          "Paper & Size : A4 (210x297 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding with Bookmarks"
+          "Pages : 50 (100 Sides) All pages - B/W , Paper & Size : A4 (210x297 mm*) 100 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding with Bookmarks",
+
         ],
         aboutThisProduct: [
-          "Usability : Perfect to manage wedding guests",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Perfect to manage wedding guests , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -499,25 +443,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Programs • Check List • Don't Forget • Day-of Kit For The Bride/groom • Day-of Checklist • Daily Planner • Weekly Planner • Monthly Planner • To-do List { Top Priority } • To-do List • Wedding - Purchases • Wedding - Expenses • Vendors • Vendor - Payment Planner • Payment Planner • Music/dance Schedule • Guest Room Arrangement • Thank You Gift To Guest • Gift Received By Guests • Special Notes • Notes • Experience"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -526,25 +461,16 @@ export default function CategoryFilterLabel() {
           "Checklists : Programs • Check List • Day-of Checklist • To-do List { Top Priority } • To-do List • Thank You Gift To Guest • Gift Received By Guests • Special Notes • Notes • Experience"
         ],
         productInformation: [
-          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 50 (100 Sides) B/W , 1st Liner & 2nd Plain , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Helpful Features : Detailed checklist and journal sheets.",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Helpful Features : Detailed checklist and journal sheets. , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -565,47 +491,31 @@ export default function CategoryFilterLabel() {
       productOff: 15,
       productSpecificationsRoyal: {
         productInformation: [
-          "Pages : 25 (50 Sides) Coloured, Cover Photo on Both Side",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 25 (50 Sides) Coloured, Cover Photo on Both Side , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your own wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your own wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
       productSpecificationsPopular: {
         productInformation: [
-          "Pages : 25 (50 Sides) B/W , Cover Photo on Both Side",
-          "Paper & Size : A5 (148x210 mm*) 70 gsm",
-          "Cover : 200 gsm PVC (Coloured) with Velvet Finish",
-          "Bind : Perfect Binding"
+          "Pages : 25 (50 Sides) B/W , Cover Photo on Both Side , Paper & Size : A5 (148x210 mm*) 70 gsm , Cover : 200 gsm PVC (Coloured) with Velvet Finish , Bind : Perfect Binding",
+
         ],
         aboutThisProduct: [
-          "Usability : Write Your own wedding Notes",
-          "Customise : You can make your own Cover",
-          "Value : Lifetime Memory & Perfect Gift to Newlyweds",
-          "Return : This product is not exchangeable & Not Returnable",
-          "Payment : 100% Safe & Secure Payments.",
-          "Brand : Nyouta | Made with love in India."
+          "Usability : Write Your own wedding Notes , Customise : You can make your own Cover , Value : Lifetime Memory & Perfect Gift to Newlyweds , Return : This product is not exchangeable & Not Returnable , Payment : 100% Safe & Secure Payments. , Brand : Nyouta | Made with love in India.",
+
         ],
         awardsAndOffers: [
-          "Selfie Award : Send Selfie with Product, Get Surprise Gift",
-          "Review Award : Extra Discount Voucher for Best Review",
-          "Best Choice Award : Surprise Gift for Best Choice Product",
-          "Couple Award : This Award for Best Couple Photo on Cover Pages."
+          "Selfie Award : Send Selfie with Product, Get Surprise Gift , Review Award : Extra Discount Voucher for Best Review , Best Choice Award : Surprise Gift for Best Choice Product , Couple Award : This Award for Best Couple Photo on Cover Pages.",
+
         ]
       },
 
@@ -624,29 +534,37 @@ export default function CategoryFilterLabel() {
       ? productData.productSpecificationsRoyal
       : productData.productSpecificationsPopular;
 
-  console.log("productData",productData)
+  console.log("productData", productData)
   const price =
-  filter === "royal" ? productData.RoyalPrice : productData.popularPrice;
+    filter === "royal" ? productData.RoyalPrice : productData.popularPrice;
+
+
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
+  const description = productData.productdescrip;
+  const words = description.split(" ");
+  const previewText = words.slice(0, 10).join(" ") + "...";
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
         {/* Left Carousel (Takes up 2/3 of the space) */}
-        <div className="lg:sticky lg:top-50 h-auto max-h-[96vh] md:col-span-2">
+        <div className="lg:sticky top-10 h-auto md:col-span-4 self-start">
           <div className="w-full max-w-full mx-auto">
-            <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-0">
+            <div className="relative w-full lg:mt-0 max-w-7xl mx-auto flex gap-0">
               {/* Thumbnail Navigation (Left Side) */}
               <div className="flex flex-col mr-10 gap-3 w-20 sm:w-24 md:w-28"> {/* Reduced width and gap */}
                 {productData.productImages?.map((image, index) => (
                   <div
                     key={index}
-                    className="w-full h-16 sm:h-20 md:h-24 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-orange-500 transition" // Reduced heights
+                    className="w-full h-16 sm:h-20 md:h-28 flex-shrink-0 cursor-pointer border-[1px] shadow-md rounded-lg overflow-hidden border-gray-200 hover:border-orange-500  transition" // Reduced heights
                     onClick={() => swiperInstance?.slideTo(index + 1)}
                   >
                     <img
                       src={image}
                       alt={`Thumbnail ${index + 1}`}
-                      className="w-full h-full object-cover scale-95" // Added slight scale-down
+                      className="w-full h-full object-cover scale-100" // Added slight scale-down
                     />
                   </div>
                 ))}
@@ -662,13 +580,13 @@ export default function CategoryFilterLabel() {
                 navigation={true}
                 pagination={{ clickable: true }}
                 modules={[Zoom, Navigation, Pagination]}
-                className="w-[100%] rounded-lg h-[25vh]  sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh] mx-0" // Added mx-0 here
+                className="w-[75%] mx-auto rounded-lg h-[25vh]  sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh]" // Added mx-0 here
                 onSwiper={(swiper) => setSwiperInstance(swiper)}
               >
                 {productData.productVideo && (
                   <SwiperSlide>
                     {/* Remove aspect-square and use fixed container */}
-                    <div className="w-full h-[80vh] relative">
+                    <div className=" w-full h-[80vh] relative">
                       <video
                         src={productData.productVideo}
                         autoPlay
@@ -687,7 +605,7 @@ export default function CategoryFilterLabel() {
                         <img
                           src={image}
                           alt={`Product Image ${index + 1}`}
-                          className="w-full h-full object-cover rounded-lg"
+                          className="w-[90vh] h-full object-cover rounded-lg"
                         />
                       </div>
                     </div>
@@ -701,31 +619,45 @@ export default function CategoryFilterLabel() {
 
 
         {/* Right Content (Scrollable, Takes up 1/3 of the space) */}
-        <div className="h-auto md:col-span-1">
-          <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg  max-w-[350px] max-h-[96vh]">
+        <div className="h-auto w-full md:col-span-3">
+          <div className="p-6 w-full md:px-4 md:py-0 bg-slate-50 rounded-lg">
             {/* Product Title and Category */}
             <div className="mb-4">
               <h1 className="text-xl lg:text-3xl font-medium text-gray-800 mb-2">
                 {productData.productSubSubCategory}
               </h1>
-              <p className="text-xs  font-light text-gray-600">
-                {productData.productdescrip}
-              </p>
+              <div
+                ref={contentRef}
+                className="overflow-hidden transition-all duration-500 ease-in-out"
+                style={{ maxHeight: height }}
+              >
+                <p className="text-sm font-light text-gray-600">
+                  {isExpanded ? description : previewText}{" "}
+                  {words.length > 10 && (
+                    <button
+                      onClick={toggleReadMore}
+                      className="text-blue-500 text-xs ml-1 hover:underline"
+                    >
+                      {isExpanded ? "Read Less" : "Read More"}
+                    </button>
+                  )}
+                </p>
+              </div>
             </div>
 
-            <div className="border-t border-gray-300 mb-6"></div>
+            <div className="border-t py-2  border-orange-600 mb-2"></div>
 
             {/* Selection Options */}
-            <div className="flex gap-4 mb-4">
+            <div className="flex pb-2 gap-4 mb-2">
               <div
-                className={`py-2 px-6 border rounded-lg font-medium text-sm transition ${filter === "royal" ? "bg-orange-500 text-white" : "bg-white border-2 hover:bg-gray-100"
+                className={`py-2 px-6 rounded-lg font-medium text-sm transition ${filter === "royal" ? "bg-orange-500 text-white" : "bg-white  hover:bg-gray-100"
                   } cursor-pointer`}
                 onClick={() => setFilter("royal")}
               >
                 Royal
               </div>
               <div
-                className={`py-2 px-5 border rounded-lg font-medium text-sm transition ${filter === "popular" ? "bg-orange-500 text-white" : "bg-white border-2 hover:bg-gray-100"
+                className={`py-2 px-5  rounded-lg font-medium text-sm transition ${filter === "popular" ? "bg-orange-500 text-white" : "bg-white  hover:bg-gray-100"
                   } cursor-pointer`}
                 onClick={() => setFilter("popular")}
               >
@@ -735,8 +667,8 @@ export default function CategoryFilterLabel() {
 
 
             {/* Price Section */}
-            <div className="mb-6">
-              <p className="text-lg font-medium text-gray-800 mb-1 flex items-center">
+            <div className="mb-4">
+              <p className="text-lg font-medium text-gray-800 mb-0 flex items-center">
                 From &#8377;
                 {filter === "royal"
                   ? productData.RoyalPrice - (productData.RoyalPrice * productData.productOff) / 100
@@ -748,14 +680,14 @@ export default function CategoryFilterLabel() {
                 <span className="text-green-500 pl-1">{productData.productOff}% Off</span>
               </p>
               {/* Add "Inclusive of all taxes" text */}
-              <p className="text-xs font-light text-gray-500 mt-1">Inclusive of all taxes</p>
+              <p className="text-xs font-light text-gray-500">Inclusive of all taxes</p>
             </div>
 
             {/* CTA Button */}
             <button
               ref={relatedItemsRef}
               onClick={handleButtonClick}
-              className="w-[40%] py-3 px-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 ease-in-out shadow-md"
+              className="w-[40%] py-3 px-2 mb-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm rounded-lg transition-all duration-300 ease-in-out shadow-md"
             >
               Choose Design
             </button>
@@ -764,13 +696,13 @@ export default function CategoryFilterLabel() {
             {/* Product Specifications */}
             <div className="mt-3">
               {/* Tab Navigation */}
-              <div className=" flex border-b">
+              <div className=" flex border-b pb-3 mb-4">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={` px-3 text-xs font-light ${activeTab === tab.id
-                      ? 'border-b-2 border-blue-500 text-blue-500'
+                    className={`px-3 lg:px-6 text-xs lg:text-sm font-normal ${activeTab === tab.id
+                      ? ' border-blue-500 text-blue-500'
                       : 'text-gray-900 hover:text-gray-700'
                       }`}
                   >
@@ -780,9 +712,9 @@ export default function CategoryFilterLabel() {
               </div>
 
               {/* Tab Content */}
-              <div className="mt-1 w-full max-h-60 overflow-y-auto">
+              <div className="mt-1 w-full">
                 {activeTab === 'description' && (
-                  <div className="p-4 border rounded-lg shadow">
+                  <div className="p-4 border rounded-lg ">
                     <h3 className="font-semibold text-gray-800">Product Description</h3>
                     <div className="text-xs text-gray-900 space-y-2">
                       <ProductDescription descriptions={specifications.productDescription} />
@@ -794,9 +726,7 @@ export default function CategoryFilterLabel() {
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">Product Information</h3>
                     <div className="text-xs text-gray-900 space-y-2">
-                      {specifications.productInformation.map((info, idx) => (
-                        <p key={idx}>{info}</p>
-                      ))}
+                      <ProductDescription descriptions={specifications.productInformation} />
                     </div>
                   </div>
                 )}
@@ -805,9 +735,7 @@ export default function CategoryFilterLabel() {
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">About this Product</h3>
                     <div className="text-xs text-gray-900 space-y-2">
-                      {specifications.aboutThisProduct.map((info, idx) => (
-                        <p key={idx}>{info}</p>
-                      ))}
+                      <ProductDescription descriptions={specifications.aboutThisProduct} />
                     </div>
                   </div>
                 )}
@@ -816,9 +744,7 @@ export default function CategoryFilterLabel() {
                   <div className="p-4 border rounded-lg shadow">
                     <h3 className="font-semibold text-gray-800">Awards & Offers</h3>
                     <div className="text-xs text-gray-900 space-y-2">
-                      {specifications.awardsAndOffers.map((offer, idx) => (
-                        <p key={idx}>{offer}</p>
-                      ))}
+                      <ProductDescription descriptions={specifications.awardsAndOffers} />
                     </div>
                   </div>
                 )}
@@ -836,11 +762,11 @@ export default function CategoryFilterLabel() {
       {["Planner Books"].includes(filteredItems[0].category) ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-[6%] py-5 lg:max-w-8xl bg-slate-50 mx-auto">
           {/* Left column: Filter options */}
-          <div className="col-span-1 hidden md:block space-y-2">
-            <div className="flex items-center justify-between">
+          <div className="col-span-1 mt-10 hidden md:block space-y-2">
+            <div className="flex items-center justify-between px-4">
               <h1 className="text-lg font-avalonN">Filter By</h1>
               <button
-                className={`font-avalonN border-b-2 border-dashed border-gray-500 leading-5 ${filter === "all" ? "border-orange-500" : ""}`}
+                className={`font-avalonN border-gray-500 leading-5 ${filter === "all" ? "border-orange-500" : ""}`}
                 onClick={() => setFilter("all")}
               >
                 Clear all
@@ -851,13 +777,13 @@ export default function CategoryFilterLabel() {
                 <h2 className="text-lg font-avalonB">Variations</h2>
               </div>
               <button
-                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md border-2 ${filter === "royal" ? "bg-orange-500 text-white" : "bg-white"}`}
+                className={`block w-full py-1 font-avalonN mb-2 px-2 text-left rounded-md  ${filter === "royal" ? "bg-orange-500 text-white" : "bg-white"}`}
                 onClick={() => setFilter("royal")}
               >
                 Elegant
               </button>
               <button
-                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${filter === "popular" ? "bg-orange-500 text-white" : "bg-white border-2"}`}
+                className={`block w-full py-1 font-avalonN px-2 text-left rounded-md ${filter === "popular" ? "bg-orange-500 text-white" : "bg-white"}`}
                 onClick={() => setFilter("popular")}
               >
                 Floral
@@ -938,7 +864,7 @@ export default function CategoryFilterLabel() {
                         />
                       </div>
                       <div className="px-1 flex justify-center pt-2 items-center text-center">
-                        <h2 className="text-md font-medium text-gray-600">
+                        <h2 className="text-md font-light text-gray-600">
                           {item.name.length > 18 ? `${item.name.slice(0, 18)}...` : item.name}
                         </h2>
                       </div>

@@ -764,7 +764,7 @@ export default function MainNav() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-8 left-0 mt-2 bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
+                        className="absolute top-8 left-0  bg-priBg rounded-lg border-b-2 border-primary min-w-[250px] py-3 px-4 shadow-lg"
                       >
                         <ul className="space-y-2">
                           {item.children.map((child, childIndex) => (
