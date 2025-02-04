@@ -1074,7 +1074,7 @@ export default function WeddingCardEditor() {
 
   return (
     <>
-      <div className="w-full flex flex-row justify-evenly py-3 items-center bg-white shadow-md relative">
+      <div className="w-full flex flex-row justify-evenly py-3 items-center bg-slate-100 shadow-md relative">
         {/* Left Section - Logo */}
         <div className="flex items-center">
           <img
