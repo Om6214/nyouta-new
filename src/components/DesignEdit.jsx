@@ -89,6 +89,7 @@ export default function DesignEdit() {
 
 
 
+
   if (loading) {
     return (
       <div className="max-w-6xl mx-auto mb-10 p-6 animate-pulse">
@@ -193,6 +194,25 @@ export default function DesignEdit() {
     }
   };
 
+  const handleBuyNow = async () => {
+    //setAddToCartLoading(true);
+    const res = await dispatch(addtoCart({ productId: filteredProduct._id, quantity, customText, userUploadedImages }));
+    if (res.type === "products/addtoCart/fulfilled") {
+      dispatch(getCart());
+      //setAddToCartLoading(false);
+      //setWarning("");
+      setCustomText("");
+      setUserUploadedImages([]);
+    } else {
+      //setAddToCartLoading(false);
+      return;
+    }
+    setTimeout(() => {
+      navigate('/checkout');
+    }, 2500)
+
+  };
+
   // Add this function to handle image uploads
   const handleImageUpload = async (files) => {
     setUploadLoading(true);
@@ -227,21 +247,20 @@ export default function DesignEdit() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto mb-10 p-4 md:p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+    <div className="max-w-6xl mx-auto mb-10 p-4 sm:p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12">
         {/* Product Image Section */}
-        <div className="flex lg:sticky top-10 lg:h-[65vh] flex-col md:flex-row items-start gap-4 md:gap-6">
-          {/* Thumbnails */}
-          <div className="flex lg:mt-6 ml-4 md:flex-col gap-3 order-2 md:order-1  pb-2 md:pb-0  relative">
-            <div className="absolute inset-y-0 right-0 w-6 " />
+        <div className="flex flex-col-reverse sm:flex-row items-start gap-4 lg:sticky lg:top-10 lg:h-[65vh]">
+        
+          <div className="flex sm:flex-col gap-2 sm:gap-3  pb-2 sm:pb-0 w-full sm:w-auto">
             {filteredProduct.image.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className={`cursor-pointer w-20 h-20 object-cover rounded-lg border-2 transition-all duration-300 hover:scale-105 ${currentImageIndex === index
-                  ? "border-gray-600 shadow-md"
-                  : "border-gray-200 hover:border-blue-400"
+                className={`flex-shrink-0 cursor-pointer w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border-2 transition-all duration-300 hover:scale-105 ${currentImageIndex === index
+                    ? "border-gray-600 shadow-md"
+                    : "border-gray-200 hover:border-blue-400"
                   }`}
                 onClick={() => handleThumbnailClick(index)}
               />
@@ -249,54 +268,53 @@ export default function DesignEdit() {
           </div>
 
           {/* Main Image */}
-          <div className="relative order-1 md:order-2 group">
-            <div className="aspect-square w-full md:w-[440px] rounded-xl overflow-hidden transition-all duration-300">
+          <div className="relative w-full aspect-square sm:w-[400px] lg:w-[500px]">
+            <div className="rounded-xl overflow-hidden transition-all duration-300">
               <img
                 src={filteredProduct.image[currentImageIndex]}
                 alt={filteredProduct.name}
-                className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-contain p-2 sm:p-4"
               />
             </div>
           </div>
-
         </div>
 
         {/* Product Details Section */}
-        <div className="flex px-4 flex-col gap-6 mt-3 max-h-auto no-scrollbar scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pr-2">
+        <div className="flex flex-col gap-6 px-2 sm:px-4">
           {/* Header Section */}
           <div className="flex justify-between items-start pb-4 border-b border-gray-200">
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">
               {filteredProduct.name}
             </h1>
-           <ShareButton/>
+            <ShareButton className="flex-shrink-0" />
           </div>
 
           {/* Price Section */}
           <div className="space-y-1">
-            <div className="flex items-baseline gap-3">
-              <span className="text-2xl font-bold text-gray-900">
+            <div className="flex flex-wrap items-baseline gap-2 sm:gap-3">
+              <span className="text-xl sm:text-2xl font-bold text-gray-900">
                 ₹{filteredProduct.price.toFixed(2)}
               </span>
-              <span className="text-lg text-gray-500 line-through">
+              <span className="text-base sm:text-lg text-gray-500 line-through">
                 ₹{price.toFixed(2)}
               </span>
               <span className="text-sm font-semibold text-green-600 bg-green-100 px-2 py-1 rounded">
                 15% OFF
               </span>
             </div>
-            <p className="text-sm text-gray-500">Inclusive of all taxes • FREE Shipping</p>
+            <p className="text-xs sm:text-sm text-gray-500">Inclusive of all taxes • FREE Shipping</p>
           </div>
 
           {/* Quantity Selector */}
           <div className="space-y-4">
-            <div className="flex flex-row items-center gap-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              <label className="text-sm font-medium text-gray-700">
                 Quantity
               </label>
-              <div className="relative group w-fit">
+              <div className="relative group w-full sm:w-40">
                 <button
                   type="button"
-                  className="flex items-center justify-between px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 transition-colors w-32"
+                  className="flex items-center justify-between px-4 py-2.5 border rounded-lg bg-white hover:bg-gray-50 transition-colors w-full"
                 >
                   <span className="font-medium text-gray-900">{quantity}</span>
                   <svg
@@ -310,13 +328,13 @@ export default function DesignEdit() {
                 </button>
 
                 {/* Dropdown */}
-                <div className="absolute z-10 mt-1 w-full origin-top scale-95 opacity-0 invisible group-hover:scale-100 group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute z-10 mt-1 w-full right-0 origin-top scale-95 opacity-0 invisible group-hover:scale-100 group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="border rounded-lg bg-white shadow-lg overflow-hidden">
                     {[1, 2, 3, 4].map((num) => (
                       <button
                         key={num}
                         onClick={() => setQuantity(num)}
-                        className={`w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors ${quantity === num ? 'bg-gray-50' : ''
+                        className={`w-full px-4 py-2.5 text-left text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors ${quantity === num ? 'bg-gray-50' : ''
                           }`}
                       >
                         {num}
@@ -328,15 +346,14 @@ export default function DesignEdit() {
             </div>
 
             {/* Customization Sections */}
-            <div className="space-y-6 ">
+            <div className="space-y-6">
               {/* Upload Photos */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Personalize with Photos
                   <span className="text-xs text-gray-500 ml-1">(JPEG/PNG, max 5MB each)</span>
                 </label>
                 <div className="mb-4">
-
                   <input
                     type="file"
                     accept="image/*"
@@ -352,32 +369,29 @@ export default function DesignEdit() {
               </div>
 
               {/* Custom Text Inputs */}
-              <div className="space-y-4 ml-2">
-
-                <div className="relative">
+              <div className="space-y-4">
+                <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Custom Name
                   </label>
                   <input
                     type="text"
                     placeholder="Name..."
-                    className="w-full px-4 py-3 border rounded-lg peer focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
-
                 </div>
 
-                <div className="relative">
+                <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Custom text
+                    Custom Text
                   </label>
                   <input
                     type="text"
                     value={customText}
                     onChange={(e) => setCustomText(e.target.value)}
-                    placeholder="CustomText"
-                    className="w-full px-4 py-3 border rounded-lg peer focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    placeholder="Custom Text"
+                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
-
                 </div>
               </div>
 
@@ -392,11 +406,11 @@ export default function DesignEdit() {
               )}
 
               {/* Action Buttons */}
-              <div className="flex flex-col md:flex-row gap-4 pt-4 ml-2">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button
                   onClick={handleAddtoCart}
                   disabled={addToCartLoading}
-                  className="flex-1 bg-amber-800 hover:bg-amber-900 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]"
+                  className="flex-1 bg-amber-800 hover:bg-amber-900 text-white py-3 sm:py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]"
                 >
                   {addToCartLoading ? (
                     <>
@@ -416,7 +430,10 @@ export default function DesignEdit() {
                   )}
                 </button>
 
-                <button className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]">
+                <button
+                  onClick={handleBuyNow}
+                  className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-3 sm:py-4 px-4 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-[0.98]"
+                >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
@@ -425,14 +442,13 @@ export default function DesignEdit() {
               </div>
 
               {/* Delivery Info */}
-              <div className="flex flex-col md:flex-row ml-2 gap-6 bg-gray-50 p-5 rounded-xl border border-gray-200">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-gray-50 p-4 sm:p-5 rounded-xl border border-gray-200">
                 <div className="flex items-center gap-3 flex-1">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <FaTruck className="text-blue-600" size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">2-10 business days</p>
-
+                    <p className="text-sm sm:text-base font-medium text-gray-900">2-10 business days</p>
                   </div>
                 </div>
 
@@ -441,8 +457,7 @@ export default function DesignEdit() {
                     <FaMoneyBillAlt className="text-green-600" size={20} />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">Cash on Delivery</p>
-
+                    <p className="text-sm sm:text-base font-medium text-gray-900">Cash on Delivery</p>
                   </div>
                 </div>
               </div>
