@@ -230,77 +230,60 @@ export default function CategoryFilterLabel() {
   return (
     <>
       {filteredItems?.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-5 px-6 md:px-[10%] py-5 bg-slate-50 ">
-          {/* Left Carousel (Takes up 50% of the space) */}
-          <div className="lg:sticky lg:top-0 h-auto max-h-[96vh] md:col-span-3">
-            <div className="w-full max-w-full mx-auto ">
-              <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-0 ">
-                {/* Thumbnail Navigation (Left Side) */}
-                <div className="flex flex-col mr-10 gap-3 w-20 sm:w-24 md:w-28">
-                  {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
-                    filteredItems[0].image.map((src, index) => (
-                      <div
-                        key={index}
-                        className="w-full h-16  sm:h-20 md:h-24 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-orange-500 transition"
-                        onClick={() => swiperInstance?.slideTo(index + 1)}
-                      >
-                        <img
-                          src={src}
-                          alt={`Thumbnail ${index + 1}`}
-                          className="w-full h-full object-cover scale-95"
-                        />
-                      </div>
-                    ))
-                  ) : (
-                    <div className="w-full h-16 sm:h-20 md:h-24 rounded-lg overflow-hidden border-2 border-gray-200">
-                      <p className="text-center text-gray-500 py-4">No images</p>
-                    </div>
-                  )}
+  <div className=" flex flex-col lg:flex-row gap-8 justify-center px-4 py-4 bg-slate-50">
+    <div className=" w-full lg:w-[50%] h-full flex  sm:p-4 items-start">
+       <div className="flex items-start gap-4 justify-start px-8 sm:px-0 sm:justify-center lg:justify-end h-auto w-full sm:py-4">
+       <div className="h-fit w-[15%] rounded-lg overflow-hidden border-red-400 border-2   ">
+            {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
+              filteredItems[0].image.map((src, index) => (
+                <div key={index} onClick={() => swiperInstance?.slideTo(index + 1)}>
+                  <img src={src} alt={`Thumbnail ${index + 1}`} className="h-full w-full" />
                 </div>
-
-                {/* Main Swiper */}
-                <Swiper
-                  style={{
-                    "--swiper-navigation-color": "#000",
-                    "--swiper-pagination-color": "#000",
-                  }}
-                  zoom={true}
-                  navigation={true}
-                  pagination={{ clickable: true }}
-                  modules={[Zoom, Navigation, Pagination]}
-                  className="lg:w-[458px]  w-full rounded-lg h-[25vh]  sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh] mx-0"
-                  onSwiper={(swiper) => setSwiperInstance(swiper)}
-                >
-                  {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
-                    filteredItems[0].image.map((src, index) => (
-                      <SwiperSlide key={index}>
-                        <div className="w-full h-full relative">
-                          <div className="swiper-zoom-container w-full h-full">
-                            <img
-                              src={src}
-                              alt={`Product Image ${index + 1}`}
-                              className="w-full h-full object-cover rounded-lg"
-                            />
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    ))
-                  ) : (
-                    <SwiperSlide>
-                      <div className="w-full h-full relative">
-                        <div className="swiper-zoom-container w-full h-full">
-                          <p className="text-center text-gray-500 py-12">No images</p>
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  )}
-                </Swiper>
+              ))
+            ) : (
+              <div>
+                <p>No images</p>
               </div>
-            </div>
-          </div>
-
-          {/* Right Content (Takes up 50% of the space) */}
-          <div className="h-auto w-full lg:w-[600px] md:col-span-2">
+            )}
+        </div>
+        <div className="w-[80%] sm:w-[60%] relative h-full lg:w-[65%] rounded-lg overflow-hidden ">
+           <Swiper
+            style={{
+              "--swiper-navigation-color": "#000",
+              "--swiper-pagination-color": "#000",
+            }}
+            zoom={true}
+            navigation={true}
+            pagination={{ clickable: true }}
+            modules={[Zoom, Navigation, Pagination]}
+            onSwiper={(swiper) => setSwiperInstance(swiper)}
+            className="h-full w-full"
+          >
+            {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
+              filteredItems[0].image.map((src, index) => (
+                <SwiperSlide key={index}>
+                  <div>
+                    <div>
+                      <img src={src} alt={`Product Image ${index + 1}`} />
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))
+            ) : (
+              <SwiperSlide>
+                <div>
+                  <div>
+                    <p>No images</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            )}
+          </Swiper>
+        </div>
+       </div>
+    </div>
+    <div className="w-full  lg:w-[40%]  flex justify-center  items-start p-4">
+    <div className="h-auto w-full lg:w-full  rounded-lg md:col-span-2 py-4 shadow-lg">
             <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg max-w-full max-h-[96vh]">
               {/* Product Title and Category */}
               <div className="mb-4">
@@ -315,7 +298,7 @@ export default function CategoryFilterLabel() {
                 </p>
               </div>
 
-              <div className="border-t border-gray-300 mb-6"></div>
+              <div className="border-t border-orange-500 mb-6"></div>
 
               {/* Price Section */}
               <div className="mb-6">
@@ -359,14 +342,15 @@ export default function CategoryFilterLabel() {
               ) : null}
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="p-8 text-center">
-          <h1 className="text-2xl font-semibold text-gray-700">
-            No products found for {formattedPageName} - {formattedPath}
-          </h1>
-        </div>
-      )}
+    </div>
+   
+  </div>
+) : (
+  <div>
+    <h1>No products found for {formattedPageName} - {formattedPath}</h1>
+  </div>
+)}
+
 
 
       <div className="relative min-h-screen bg-slate-50">
