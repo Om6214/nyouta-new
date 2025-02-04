@@ -1073,8 +1073,8 @@ export default function WeddingCardEditor() {
   if (loading) return <ShimmerSkeleton />;
 
   return (
-    <>
-      <div className="w-full flex flex-row justify-evenly py-3 items-center bg-slate-100 shadow-md relative">
+    <div className="h-[100vh]">
+      <div className="w-full flex h-[20%] border-gray-300 border-b-2 flex-row justify-evenly py-3 items-center  bg-white shadow-md relative">
         {/* Left Section - Logo */}
         <div className="flex items-center">
           <img
@@ -1252,8 +1252,8 @@ export default function WeddingCardEditor() {
         </div>
       )}
 
-      <hr className="border-gray-300 w-full " />
-      <div className="flex w-full relative">
+      
+      <div className="flex w-full relative h-[80%] ">
         <div className="hidden md:block absolute top-0 bottom-0 border-l-2 border-gray-300"></div>
 
         {isCustomizeModalOpen && (
@@ -1915,6 +1915,6 @@ export default function WeddingCardEditor() {
         </div>
         <div className="hidden md:block   border-l-2 border-gray-300"></div>
       </div>
-    </>
+    </div>
   );
 }

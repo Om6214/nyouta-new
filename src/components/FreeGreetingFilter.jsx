@@ -230,18 +230,18 @@ export default function CategoryFilterLabel() {
   return (
     <>
       {filteredItems?.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
+        <div className="grid grid-cols-1 md:grid-cols-5 px-6 md:px-[10%] py-5 bg-slate-50 ">
           {/* Left Carousel (Takes up 50% of the space) */}
-          <div className="lg:sticky lg:top-10 h-auto max-h-[96vh] md:col-span-3">
-            <div className="w-full max-w-full mx-auto">
-              <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-0">
+          <div className="lg:sticky lg:top-0 h-auto max-h-[96vh] md:col-span-3">
+            <div className="w-full max-w-full mx-auto ">
+              <div className="relative w-full lg:mt-0 max-w-5xl mx-auto flex gap-0 ">
                 {/* Thumbnail Navigation (Left Side) */}
                 <div className="flex flex-col mr-10 gap-3 w-20 sm:w-24 md:w-28">
                   {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
                     filteredItems[0].image.map((src, index) => (
                       <div
                         key={index}
-                        className="w-full h-16 sm:h-20 md:h-24 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-orange-500 transition"
+                        className="w-full h-16  sm:h-20 md:h-24 flex-shrink-0 cursor-pointer rounded-lg overflow-hidden border-2 border-gray-200 hover:border-orange-500 transition"
                         onClick={() => swiperInstance?.slideTo(index + 1)}
                       >
                         <img
@@ -268,7 +268,7 @@ export default function CategoryFilterLabel() {
                   navigation={true}
                   pagination={{ clickable: true }}
                   modules={[Zoom, Navigation, Pagination]}
-                  className="lg:w-[458px] w-full rounded-lg h-[25vh] sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh] mx-0"
+                  className="lg:w-[458px]  w-full rounded-lg h-[25vh]  sm:h-[40vh] md:h-[45vh] lg:h-[50vh] xl:h-[68vh] mx-0"
                   onSwiper={(swiper) => setSwiperInstance(swiper)}
                 >
                   {filteredItems[0]?.image && Array.isArray(filteredItems[0].image) ? (
@@ -300,7 +300,7 @@ export default function CategoryFilterLabel() {
           </div>
 
           {/* Right Content (Takes up 50% of the space) */}
-          <div className="h-auto w-full md:col-span-2">
+          <div className="h-auto w-full lg:w-[600px] md:col-span-2">
             <div className="p-6 md:px-4 md:py-0 bg-slate-50 rounded-lg max-w-full max-h-[96vh]">
               {/* Product Title and Category */}
               <div className="mb-4">
