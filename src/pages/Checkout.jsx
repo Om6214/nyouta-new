@@ -5,7 +5,7 @@ import { getCart } from '../Store/slices/productSlice';
 import { toast } from 'react-toastify';
 import { use } from 'react';
 import { placeOrder } from '../Store/slices/orderSlice';
-import {emptyCart} from '../Store/slices/productSlice';
+import { emptyCart } from '../Store/slices/productSlice';
 import axios from 'axios';
 import { BASE_URL } from '../utils/api';
 
@@ -129,7 +129,7 @@ const Checkout = () => {
     React.useEffect(() => {
         loadRazorpayScript();
     }, []);
-console.log(cart)
+    console.log("cart", cart)
     const handleOrder = async () => {
         if (cart.products.length === 0) {
             toast.error("Please add product to cart.")
@@ -204,202 +204,281 @@ console.log(cart)
         rzp1.open();
     }
     return (
-        <div className='flex flex-col-reverse lg:flex-row justify-evenly'>
-            <div className='mx-4 my-4 lg:w-[50%]'>
-                <h1 className='text-xl font-bold'>Billing Details</h1>
-                {addresses.length > 0 && !showForm && (
-                    <div className='mt-4'>
-                        <h2 className='text-lg font-semibold'>Saved Addresses</h2>
-                        <ul className='list-disc pl-5'>
-                            {addresses.map((address, index) => (
-                                <>
-                                    <input
-                                        type="radio"
-                                        name="selectedAddress"
-                                        checked={selectedAddress === index}
-                                        onChange={() => handleAddressSelection(address, index)}
-                                        className="mr-2"
-                                    />
-                                    <div key={index} className='mb-2'>
-                                        <p>{`${address.firstName} ${address.lastName}, ${address.streetName}, ${address.apartment},${address.city}, ${address.state}, ${address.pincode}`}</p>
-                                        <p>{`Contact: ${address.contactNo}`}</p>
-                                    </div>
-                                </>
-                            ))}
-                        </ul>
-                        <button
-                            onClick={() => setShowForm(true)}
-                            className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700'
-                        >
-                            Add New Address
-                        </button>
-                    </div>
-                )}
-                {(addresses.length === 0 || showForm) && (
-                    <div className='mt-4'>
-                        <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-                            <div className='flex flex-col gap-1'>
-                                <label>First Name *</label>
-                                <input
-                                    value={formData.firstName}
-                                    onChange={handleChange}
-                                    name='firstName'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='text'
-                                    required
-                                    placeholder='Enter your first name'
-                                />
-                            </div>
-                            <div className='flex flex-col gap-1'>
-                                <label>Last Name *</label>
-                                <input
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                    name='lastName'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='text'
-                                    required
-                                    placeholder='Enter your last name'
-                                />
-                            </div>
-                            <div className='flex flex-col gap-1'>
-                                <label>Street Address *</label>
-                                <input
-                                    value={formData.addressLine1}
-                                    onChange={handleChange}
-                                    name='addressLine1'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='text'
-                                    required
-                                    placeholder='House number and street name'
-                                />
-                                <input
-                                    value={formData.addressLine2}
-                                    onChange={handleChange}
-                                    name='addressLine2'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='text'
-                                    placeholder='Apartment, suite, etc.'
-                                />
-                            </div>
-                            <div className='flex flex-col gap-1'>
-                                <label>City *</label>
-                                <input
-                                    value={formData.city}
-                                    onChange={handleChange}
-                                    name='city'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='text'
-                                    required
-                                    placeholder='Enter your city'
-                                />
-                            </div>
-                            <div className='flex flex-col gap-1'>
-                                <label>State *</label>
-                                <select
-                                    value={formData.state}
-                                    onChange={handleChange}
-                                    name='state'
-                                    className='border-2 py-2 px-4 rounded-lg'
-                                >
-                                    <option value=''>Select a state</option>
-                                    {indianStates.map((state) => (
-                                        <option key={state} value={state}>
-                                            {state}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className='flex flex-col gap-1'>
-                                <label>Pincode *</label>
-                                <input
-                                    value={formData.pincode}
-                                    onChange={handleChange}
-                                    name='pincode'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='text'
-                                    required
-                                    placeholder='Enter your pincode'
-                                />
-                            </div>
-                            <div className='flex flex-col gap-1'>
-                                <label>Contact Number *</label>
-                                <input
-                                    value={formData.contactNumber}
-                                    onChange={handleChange}
-                                    name='contactNumber'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='tel'
-                                    required
-                                    placeholder='Enter your contact number'
-                                />
-                            </div>
-                            <div className='flex flex-col gap-1'>
-                                <label>Email *</label>
-                                <input
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    name='email'
-                                    className='py-2 border-2 px-4 rounded-lg'
-                                    type='email'
-                                    required
-                                    placeholder='Enter your email'
-                                />
-                            </div>
-                            <div className='flex gap-4'>
-                                <button
-                                    type='submit'
-                                    className='bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700'
-                                >
-                                    Save Address
-                                </button>
-                                <button
-                                    type='button'
-                                    onClick={() => setShowForm(false)}
-                                    className='bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700'
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                )}
-            </div>
-            <div className='m-4 lg:w-[45%]'>
-                <h1 className='text-xl font-bold'>Your Order</h1>
-                {/* Order details */}
-                {cart?.products?.map((product) => (
-                    <div key={product.productId._id} className='flex justify-between mt-4'>
-                        <img
-                            src={product.productId.image[0]}
-                            alt={product.productId.name}
-                            className='w-16 h-16 object-cover'
-                        />
-                        <p>{product.productId.name}</p>
-                        <p>₹{`${product.productId.price} x ${product.quantity}`}</p>
-                    </div>
-                ))}
-                <div className='flex justify-between mt-4'>
-                    <p>Items</p>
-                    <p>{cart?.products?.length}</p>
+        <div className="flex flex-col-reverse lg:flex-row justify-between gap-8 p-4 md:p-6 lg:p-8 bg-gray-50">
+  {/* Billing Details Section */}
+  <div className="w-full lg:w-[58%] bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 border-b pb-3">
+      Billing Details
+    </h1>
+    {addresses.length > 0 && !showForm && (
+      <div className="mt-4">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">
+          Saved Addresses
+        </h2>
+        <ul className="space-y-4">
+          {addresses.map((address, index) => (
+            <li
+              key={index}
+              className={`p-5 border-2 rounded-xl transition-all duration-200 ${
+                selectedAddress === index
+                  ? "border-blue-500 bg-blue-50 shadow-md"
+                  : "border-gray-200 hover:border-blue-300"
+              }`}
+            >
+              <label className="flex items-start gap-4 cursor-pointer">
+                <input
+                  type="radio"
+                  name="selectedAddress"
+                  checked={selectedAddress === index}
+                  onChange={() => handleAddressSelection(address, index)}
+                  className="mt-1.5 h-5 w-5 text-blue-600 focus:ring-blue-500"
+                />
+                <div className="flex-1">
+                  <p className="text-gray-800 font-semibold">{`${address.firstName} ${address.lastName}`}</p>
+                  <p className="text-gray-600 text-sm">
+                    {`${address.streetName}, ${address.apartment}`}
+                  </p>
+                  <p className="text-gray-600 text-sm">
+                    {`${address.city}, ${address.state} - ${address.pincode}`}
+                  </p>
+                  <p className="text-gray-600 text-sm mt-1">
+                    {`Contact: ${address.contactNo}`}
+                  </p>
                 </div>
-                <div className='flex justify-between mt-4'>
-                    <p>Shipping</p>
-                    <p>Free</p>
-                </div>
-                <div className='flex justify-between mt-4'>
-                    <p>Subtotal</p>
-                     
-                    <p>₹{cart?.products?.length>0?cart?.products?.reduce((acc, item) => acc + item.productId.price * item.quantity, 0).toFixed(2):(0)}</p>
-                </div>
-                <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700' onClick={handleOrder}>
-                    Place Order
-                </button>
-                {/* <button className='bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-700'>
-                    Place Order via Phone Pe
-                </button> */}
-            </div>
+              </label>
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={() => setShowForm(true)}
+          className="w-full md:w-auto bg-amber-600 text-white py-3 px-6 rounded-xl mt-6 hover:bg-amber-900 transition-colors font-medium text-base shadow-lg"
+        >
+          Add New Address
+        </button>
+      </div>
+    )}
+
+    {(addresses.length === 0 || showForm) && (
+     <div className="mt-6">
+     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+       {/* First and Last Name in one row */}
+       <div className="grid grid-cols-2 gap-4">
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">First Name *</label>
+           <input
+             value={formData.firstName}
+             onChange={handleChange}
+             name="firstName"
+             type="text"
+             required
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">Last Name *</label>
+           <input
+             value={formData.lastName}
+             onChange={handleChange}
+             name="lastName"
+             type="text"
+             required
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+       </div>
+   
+       {/* Street Address in one row */}
+       <div className="grid grid-cols-2 gap-4">
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">Street Address *</label>
+           <input
+             value={formData.addressLine1}
+             onChange={handleChange}
+             name="addressLine1"
+             type="text"
+             required
+             placeholder="House number and street name"
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">Apartment/Suite</label>
+           <input
+             value={formData.addressLine2}
+             onChange={handleChange}
+             name="addressLine2"
+             type="text"
+             placeholder="Apartment, suite, etc."
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+       </div>
+   
+       {/* City, State, and Pincode arranged in two columns */}
+       <div className="grid grid-cols-2 gap-4">
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">City *</label>
+           <input
+             value={formData.city}
+             onChange={handleChange}
+             name="city"
+             type="text"
+             required
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">State *</label>
+           <select
+             value={formData.state}
+             onChange={handleChange}
+             name="state"
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white"
+           >
+             <option value="">Select State</option>
+             {indianStates.map((state) => (
+               <option key={state} value={state}>
+                 {state}
+               </option>
+             ))}
+           </select>
+         </div>
+         {/* Pincode on its own row spanning both columns */}
+         <div className="space-y-1 col-span-2">
+           <label className="text-sm font-medium text-gray-700">Pincode *</label>
+           <input
+             value={formData.pincode}
+             onChange={handleChange}
+             name="pincode"
+             type="text"
+             required
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+       </div>
+   
+       {/* Contact Number and Email in one row */}
+       <div className="grid grid-cols-2 gap-4">
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">Contact Number *</label>
+           <input
+             value={formData.contactNumber}
+             onChange={handleChange}
+             name="contactNumber"
+             type="tel"
+             required
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+         <div className="space-y-1">
+           <label className="text-sm font-medium text-gray-700">Email *</label>
+           <input
+             value={formData.email}
+             onChange={handleChange}
+             name="email"
+             type="email"
+             required
+             className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+           />
+         </div>
+       </div>
+   
+       {/* Buttons */}
+       <div className="flex flex-col md:flex-row gap-4 mt-6">
+         <button
+           type="submit"
+           className="w-full md:w-auto bg-amber-600 text-white py-3 px-8 rounded-xl hover:bg-amber-700 transition-colors font-semibold shadow-lg"
+         >
+           Save Address
+         </button>
+         <button
+           type="button"
+           onClick={() => setShowForm(false)}
+           className="w-full md:w-auto bg-gray-500 text-white py-3 px-8 rounded-xl hover:bg-gray-600 transition-colors font-semibold shadow-lg"
+         >
+           Cancel
+         </button>
+       </div>
+     </form>
+   </div>
+   
+    )}
+  </div>
+
+  {/* Order Summary Section */}
+  <div className="w-full lg:w-[38%] bg-white rounded-2xl shadow-2xl p-6 md:p-8 h-fit">
+    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 border-b pb-3">
+      Your Order
+    </h1>
+    <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+      {cart?.products?.map((product) => (
+        <div
+          key={product.productId._id}
+          className="flex items-center gap-4 py-3 border-b border-gray-100"
+        >
+          <img
+            src={product.productId.image[0]}
+            alt={product.productId.name}
+            className="w-16 h-16 object-cover rounded-xl"
+          />
+          <div className="flex-1">
+            <p className="font-semibold text-gray-800 line-clamp-1">
+              {product.productId.name}
+            </p>
+            <p className="text-sm text-gray-500">
+              Quantity: {product.quantity}
+            </p>
+          </div>
+          <p className="font-medium text-gray-700">
+            ₹{(product.productId.price * product.quantity).toFixed(2)}
+          </p>
         </div>
+      ))}
+    </div>
+
+    <div className="space-y-4 mt-6">
+      <div className="flex justify-between items-center">
+        <span className="text-gray-600">Subtotal</span>
+        <span className="font-medium text-gray-800">
+          ₹
+          {cart?.products
+            ?.reduce(
+              (acc, item) => acc + item.productId.price * item.quantity,
+              0
+            )
+            .toFixed(2) || 0}
+        </span>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-gray-600">Shipping</span>
+        <span className="font-medium text-green-600">Free</span>
+      </div>
+    </div>
+
+    <div className="border-t border-gray-200 mt-6 pt-6">
+      <div className="flex justify-between items-center mb-6">
+        <span className="font-semibold text-lg text-gray-800">Total</span>
+        <span className="font-bold text-xl text-blue-600">
+          ₹
+          {cart?.products
+            ?.reduce(
+              (acc, item) => acc + item.productId.price * item.quantity,
+              0
+            )
+            .toFixed(2) || 0}
+        </span>
+      </div>
+      <button
+        onClick={handleOrder}
+        className="w-full bg-amber-600 text-white py-3.5 px-6 rounded-xl hover:bg-amber-900 transition-colors font-semibold text-base shadow-xl"
+      >
+        Place Order
+      </button>
+    </div>
+  </div>
+</div>
+
+
     );
 };
 
