@@ -345,12 +345,14 @@ const Checkout = () => {
          </div>
          {/* Pincode on its own row spanning both columns */}
          <div className="space-y-1 col-span-2">
-           <label className="text-sm font-medium text-gray-700">Pincode *</label>
-           <input
-             value={formData.pincode}
+           <label className="text-sm font-medium text-gray-700">Email *</label>
+           
+
+<input
+             value={formData.email}
              onChange={handleChange}
-             name="pincode"
-             type="text"
+             name="email"
+             type="email"
              required
              className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
            />
@@ -371,12 +373,12 @@ const Checkout = () => {
            />
          </div>
          <div className="space-y-1">
-           <label className="text-sm font-medium text-gray-700">Email *</label>
+           <label className="text-sm font-medium text-gray-700">Pincode *</label>
            <input
-             value={formData.email}
+             value={formData.pincode}
              onChange={handleChange}
-             name="email"
-             type="email"
+             name="pincode"
+             type="text"
              required
              className="w-full py-2 px-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
            />
