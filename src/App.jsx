@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import CategoriesPage from './pages/CategoriesPage';
 import About from './components/About';
 import Checkout from './pages/Checkout';
+import CheckoutBuy from './pages/CheckoutBuy';
 import ProductsCategory from './pages/ProductsCategory';
 import Cart from './components/Cart';
 import { CartProvider } from './CartContext';
@@ -77,6 +78,7 @@ function App() {
 
 
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout-buy" element={<CheckoutBuy />} />
           <Route path="/products/:category" element={<ProductsCategory />} />
          
           <Route path="/product/:id/edit-physical-card" element={<PhysicalCardEditPage />} />

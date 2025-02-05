@@ -194,23 +194,8 @@ export default function DesignEdit() {
     }
   };
 
-  const handleBuyNow = async () => {
-    //setAddToCartLoading(true);
-    const res = await dispatch(addtoCart({ productId: filteredProduct._id, quantity, customText, userUploadedImages }));
-    if (res.type === "products/addtoCart/fulfilled") {
-      dispatch(getCart());
-      //setAddToCartLoading(false);
-      //setWarning("");
-      setCustomText("");
-      setUserUploadedImages([]);
-    } else {
-      //setAddToCartLoading(false);
-      return;
-    }
-    setTimeout(() => {
-      navigate('/checkout');
-    }, 2500)
-
+  const handleBuyNow = () => {
+    navigate('/checkout-buy', { state: { filteredProduct } }); // Passing product data to Checkout
   };
 
   // Add this function to handle image uploads
