@@ -10,6 +10,7 @@ import { RxLetterSpacing } from "react-icons/rx";
 import { FaBold, FaItalic, FaTrash, FaTextHeight } from "react-icons/fa";
 import { IoMdClose, IoIosArrowDown } from "react-icons/io";
 import { TbLetterCaseUpper, TbLetterCaseLower } from "react-icons/tb";
+import { FaBezierCurve } from "react-icons/fa";
 
 const TextOptions = ({ selectedText, updateTextField, onClose }) => {
   // ... existing state and props destructuring ...
@@ -34,6 +35,9 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [translatedText, setTranslatedText] = useState(selectedText.text);
   const [curveValue, setCurveValue] = useState(selectedText.curveValue || 0);
+  const [isCurveOpen, setIsCurveOpen] = useState(false);
+
+  console.log(selectedText.curveValue)
 
   const fontOptions = [
     "Lora",
@@ -76,7 +80,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       <div className="relative">
         <button
           onClick={() => setIsFontDropdownOpen(!isFontDropdownOpen)}
-          className="p-2 rounded-lg border hover:bg-gray-100 flex items-center gap-1"
+          className="p-2 rounded-lg  hover:bg-gray-100 flex items-center gap-1"
           title="Font Family"
         >
           <AiOutlineFontSize className="text-lg" />
@@ -106,14 +110,14 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       <div className="flex flex-col gap-2">
         <button
           onClick={() => updateTextField(selectedText.id, "isBold", !isBold)}
-          className={`p-2 rounded-lg ${isBold ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"}`}
+          className={`p-2 rounded-lg ${isBold ? "bg-[#AF7D32] text-white" : " hover:bg-gray-100"}`}
           title="Bold"
         >
           <FaBold />
         </button>
         <button
           onClick={() => updateTextField(selectedText.id, "isItalic", !isItalic)}
-          className={`p-2 rounded-lg ${isItalic ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"}`}
+          className={`p-2 rounded-lg ${isItalic ? "bg-[#AF7D32] text-white" : " hover:bg-gray-100"}`}
           title="Italic"
         >
           <FaItalic />
@@ -124,7 +128,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       <div className="relative">
         <button
           onClick={() => setIsAlignmentOpen(!isAlignmentOpen)}
-          className="p-2 rounded-lg border hover:bg-gray-100 flex items-center gap-1"
+          className="p-2 rounded-lg  hover:bg-gray-100 flex items-center gap-1"
           title="Text Alignment"
         >
           <AiOutlineAlignLeft className="text-lg" />
@@ -159,7 +163,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       <div className="relative">
         <button
           onClick={() => setIsSpacingOpen(!isSpacingOpen)}
-          className="p-2 rounded-lg border hover:bg-gray-100 flex items-center gap-1"
+          className="p-2 rounded-lg  hover:bg-gray-100 flex items-center gap-1"
           title="Spacing Options"
         >
           <MdFormatLineSpacing className="text-lg" />
@@ -201,19 +205,55 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
           </div>
         )}
       </div>
+      <div className="relative">
+        <button
+          onClick={() => setIsCurveOpen(!isCurveOpen)}
+          className="p-2 rounded-lg hover:bg-gray-100 flex items-center gap-1"
+          title="Text Curvature"
+        >
+          <FaBezierCurve className="text-lg" />
+          <IoIosArrowDown className="text-xs" />
+        </button>
+
+        {isCurveOpen && (
+          <div className="absolute left-0 top-full z-10 bg-white border rounded-lg shadow-lg p-3 mt-1 w-48">
+            <div className="mb-2">
+              <label className="flex items-center gap-2 text-sm mb-1">
+                <FaBezierCurve />
+                Curve Intensity
+              </label>
+              <input
+                type="range"
+                min="-50"
+                max="50"
+                step="1"
+                value={curveValue}
+                onChange={(e) => {
+                  setCurveValue(e.target.value);
+                  updateTextField(selectedText.id, "curveValue", e.target.value);
+                }}
+                className="w-full"
+              />
+              <div className="text-xs text-gray-600 mt-1">
+                Current value: {curveValue}%
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Case Buttons */}
       <div className="flex flex-col gap-2">
         <button
           onClick={toggleUppercase}
-          className={`p-2 rounded-lg ${isUppercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"}`}
+          className={`p-2 rounded-lg ${isUppercase ? "bg-[#AF7D32] text-white" : " hover:bg-gray-100"}`}
           title="Uppercase"
         >
           <TbLetterCaseUpper />
         </button>
         <button
           onClick={toggleLowercase}
-          className={`p-2 rounded-lg ${isLowercase ? "bg-[#AF7D32] text-white" : "border hover:bg-gray-100"}`}
+          className={`p-2 rounded-lg ${isLowercase ? "bg-[#AF7D32] text-white" : " hover:bg-gray-100"}`}
           title="Lowercase"
         >
           <TbLetterCaseLower />
@@ -232,7 +272,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-0 right-0 text-lg text-gray-600 hover:text-black"
+        className="absolute top-0 right-0 pt-1 pr-1 text-lg text-gray-600 hover:text-black"
         title="Close"
       >
         <IoMdClose />

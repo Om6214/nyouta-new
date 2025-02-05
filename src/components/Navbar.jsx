@@ -543,7 +543,7 @@ export default function MainNav() {
     cssEase: "linear"
   };
   return (
-    <div className="flex flex-col">
+    <div className="flex  flex-col">
       <div className="h-[30px] flex justify-between px-6 lg:px-56 sm:px-8  bg-[#FAF0DC] ">
         <div className="bg-[#af7d32] rounded-b-2xl  text-white font-avalonN ms-4 sm:ms-0  flex items-center justify-center px-2 sm:px-4 tracking-widest text-md    sm:text-xl">
           NYOUTA

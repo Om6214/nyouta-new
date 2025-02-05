@@ -721,43 +721,41 @@ export default function WeddingCardEditor() {
     );
     console.log("newRotationAngle", newRotationAngle);
   };
+
+  const getAngleForTextField = (id) => {
+    const field = textFields.find((f) => f.id === id);
+    return field ? field.angle || 0 : 0;
+  };
+
   // A function to handle the mouse down event for rotation
   const handleRotateMouseDown = (e, id) => {
-    e.preventDefault();
     e.stopPropagation();
+    // Capture the initial mouse position and current angle
+    const startX = e.clientX;
+    const startY = e.clientY;
+    // Assume you have a function that returns the current angle for the text field:
+    const currentAngle = getAngleForTextField(id);
 
-    const initialMouseX = e.clientX;
-    const initialMouseY = e.clientY;
-    const selectedTextField = textFields.find((field) => field.id === id);
-    let initialAngle = selectedTextField.angle || 0;
-
-    // Mouse move handler to calculate rotation angle
-    const handleMouseMove = (moveEvent) => {
-      const deltaX = moveEvent.clientX - initialMouseX;
-      const deltaY = moveEvent.clientY - initialMouseY;
-
-      // Calculate angle based on mouse movement
-      const newAngle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-      const angleDifference = newAngle;
-      const updatedTextFields = textFields.map((field) =>
-        field.id === id
-          ? { ...field, angle: initialAngle + angleDifference }
-          : field
-      );
-
-      // Update state with new angle
-      setTextFields(updatedTextFields);
+    const onMouseMove = (moveEvent) => {
+      // Calculate the change in angle from the center of the text field.
+      // You can calculate the angle using the difference in mouse positions.
+      const dx = moveEvent.clientX - startX;
+      const dy = moveEvent.clientY - startY;
+      // A simple approach: change the angle by the arctan of dy/dx.
+      const deltaAngle = (Math.atan2(dy, dx) * 180) / Math.PI;
+      const newAngle = currentAngle + deltaAngle;
+      updateTextField(id, "angle", newAngle);
     };
 
-    const handleMouseUp = () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
     };
 
-    // Add event listeners for mouse move and mouse up
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
   };
+
   const handleRotateMouseDownSticker = (e, id) => {
     e.preventDefault();
     e.stopPropagation();
@@ -974,6 +972,12 @@ export default function WeddingCardEditor() {
     );
   };
 
+  const handleDeleteTextField = (id) => {
+    setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
+    setSelectedField(null);
+  };
+
+
   const handleRotateTouchMove = (e) => {
     if (!rotateState || e.touches.length !== 1) return; // Ensure a single touch point
 
@@ -1072,8 +1076,8 @@ export default function WeddingCardEditor() {
   if (loading) return <ShimmerSkeleton />;
 
   return (
-    <div className="h-[100vh]">
-      <div className="w-full flex flex-col  h-[20%] border-gray-300 border-b-2 lg:flex-row justify-evenly py-3 items-center  bg-white shadow-md relative">
+    <div className="h-[110vh]">
+      <div className="w-full flex flex-col  h-[15vh] lg:h-[15vh] xl:h-[15vh] lg:px-20 border-gray-300 border-b-2 lg:flex-row justify-between py-3 items-center  bg-white shadow-md relative">
         {/* Left Section - Logo */}
         <div className="flex items-center">
           <img
@@ -1280,17 +1284,16 @@ export default function WeddingCardEditor() {
           onMouseUp={handleMouseUp}
         >
           <div className="flex flex-col lg:flex-row">
-            <div className="flex flex-col mx-auto mt-16">
+            <div className="flex flex-col mx-auto mt-4">
               {/* Image Container */}
               <div
                 id="design-container"
-                className="relative  flex items-center mx-auto border border-gray-200 bg-gray-50 overflow-hidden"
-                style={{ width: "320px" }}
+                className="relative  flex items-center mx-auto border w-3/4 lg:w-[550px] border-gray-200 bg-gray-50 overflow-hidden"
               >
                 <img
                   src={imageUrl}
                   alt="Background"
-                  className="w-full h-auto mx-auto object-cover "
+                  className="w-full lg:w-[550px] lg:h-[490px] mx-auto object-cover "
                 />
 
                 {stickers.map(({ id, src, x, y, width, height }) => (
@@ -1517,7 +1520,6 @@ export default function WeddingCardEditor() {
                     size,
                     font,
                     fontColor,
-                    angle, // Rotation
                     isBold,
                     isItalic,
                     textAlign,
@@ -1526,6 +1528,7 @@ export default function WeddingCardEditor() {
                     isUppercase,
                     isLowercase,
                     curveValue,
+                    angle = 0
                   }) => (
                     <div
                       key={id}
@@ -1548,29 +1551,36 @@ export default function WeddingCardEditor() {
                         border:
                           selectedField === id && editingField !== id
                             ? "2px dotted blue"
-                            : "none", // Apply border only when not in edit mode
+                            : "none",
                         width: "fit-content",
                         transformOrigin: "center",
-                        transform: `translate(-50%, -50%) rotate(${angle || 0
-                          }deg)`, // Apply Rotation
-                        touchAction: "none", // Prevent scrolling on touch devices while dragging
+                        transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`,
+                        touchAction: "none",
                       }}
-                      onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
+                      onDoubleClick={() => setEditingField(id)}
                       onMouseDown={(e) => handleMouseDown(e, id, x, y)}
-                      onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Updated for touch
+                      onTouchStart={(e) => handleTouchStart(e, id, x, y)}
                       onTouchMove={(e) => {
-                        e.preventDefault(); // Prevent default scrolling behavior during drag
-                        handleTouchMove(e); // Your existing touch move logic
+                        e.preventDefault();
+                        handleTouchMove(e);
                       }}
-                      //onTouchEnd={handleTouchEnd} // Updated for touch
                       onTouchEnd={(e) => handleTouchEnd(e, id)}
                     >
-                      {/* Editable Text */}
+                      {/* Delete Button */}
+                      {selectedField === id && (
+                        <button
+                          onClick={() => handleDeleteTextField(id)}
+                          className="absolute top-[-8px] right-[-11px] w-4 h-4  text-black rounded-full flex items-center  justify-center shadow-mdtransition bg-white "
+                        >
+                          <i class="fa-solid fa-xmark fa-xs"></i>
+                        </button>
+                      )}
+
                       {editingField === id ? (
                         <textarea
                           value={text}
                           onChange={(e) => handleTextChange(id, e.target.value)}
-                          onBlur={() => setEditingField(null)} // Exit edit mode on blur
+                          onBlur={() => setEditingField(null)}
                           autoFocus
                           className="bg-transparent border-none outline-none resize-none"
                           style={{
@@ -1582,25 +1592,25 @@ export default function WeddingCardEditor() {
                             letterSpacing: `${letterSpacing}px`,
                             lineHeight: `${lineHeight}`,
                             whiteSpace: "nowrap",
-                            overflow: "hidden", // Prevent scrollbars from appearing
+                            overflow: "hidden",
                             textAlign: textAlign,
                             zIndex: selectedField === id ? 10 : 1,
-                            border: "2px dotted blue", // Border for the textarea when editing
-                            width: "fit-content", // Width based on text content
-                            height: "fit-content", // Allow height to adjust according to the content
-                            minHeight: "fit-content", // Ensure no minimum height
-                            maxWidth: "fit-content", // Prevent it from growing too large
+                            border: "2px dotted blue",
+                            width: "fit-content",
+                            height: "fit-content",
+                            minHeight: "fit-content",
+                            maxWidth: "fit-content",
                           }}
                           onInput={(e) => {
-                            e.target.style.height = "auto"; // Reset height before adjusting
-                            e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
+                            e.target.style.height = "auto";
+                            e.target.style.height = `${e.target.scrollHeight}px`;
                           }}
                           onFocus={(e) =>
                             e.target.setSelectionRange(
                               e.target.value.length,
                               e.target.value.length
                             )
-                          } // Place cursor at the end when focused
+                          }
                         />
                       ) : (
                         <div
@@ -1610,80 +1620,73 @@ export default function WeddingCardEditor() {
                             cursor: "text",
                           }}
                         >
-                          {text.split("\n").map((line, index) => (
-                            <div key={index}>
-                              {line.split("").map((char, charIndex) => {
-                                const curve = curveValue || 0;
-                                const angle =
-                                  (Math.PI *
-                                    curve *
-                                    (charIndex - Math.floor(line.length / 2))) /
-                                  line.length;
-                                const radius = 100;
-                                return (
-                                  <span
-                                    key={charIndex}
-                                    style={{
-                                      position: "relative",
-                                      transform: `rotate(${angle}rad) translateY(-${radius}px)`,
-                                      transformOrigin: "center",
-                                    }}
-                                  >
-                                    {isUppercase
-                                      ? char.toUpperCase()
-                                      : isLowercase
-                                        ? char.toLowerCase()
-                                        : char}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          ))}
+                          {text.split("\n").map((line, index) => {
+                            const totalChars = line.length;
+                            // Compute maximum arc in degrees: +50 => 180°, -50 => -180°.
+                            const maxArc = (curveValue / 50) * 180;
+                            return (
+                              <div
+                                key={index}
+                                style={{
+                                  position: "relative",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {line.split("").map((char, charIndex) => {
+                                  // Use the absolute value to calculate a consistent arc spread.
+                                  const maxArc = (Math.abs(curveValue) / 50) * 180;
+                                  let theta = 0;
+                                  if (totalChars > 1) {
+                                    // Distribute characters evenly along the arc.
+                                    // theta will go from -maxArc/2 to +maxArc/2.
+                                    theta = -maxArc / 2 + (charIndex / (totalChars - 1)) * maxArc;
+                                  }
+                                  // Convert theta to radians.
+                                  const thetaRad = (theta * Math.PI) / 180;
+                                  // Define a circle radius (adjust this value to control the curvature)
+                                  const R = 100;
+                                  // Calculate the offsets along the circle.
+                                  const offsetX = R * Math.sin(thetaRad);
+                                  const offsetY = R - R * Math.cos(thetaRad);
+
+                                  // For upward curves (curveValue >= 0) we want a rotation of -theta;
+                                  // for downward curves (curveValue < 0), use theta.
+                                  const rotation = curveValue >= 0 ? -theta : theta;
+                                  // For upward curves, move the characters upward (negative y);
+                                  // for downward curves, move them downward.
+                                  const translateY = curveValue >= 0 ? -offsetY : offsetY;
+
+                                  return (
+                                    <span
+                                      key={charIndex}
+                                      style={{
+                                        position: "relative",
+                                        display: "inline-block",
+                                        transform: `translate(${offsetX}px, ${translateY}px) rotate(${rotation}deg)`,
+                                        // Change the transform origin based on the curve direction.
+                                        transformOrigin: curveValue >= 0 ? "center bottom" : "center top",
+                                      }}
+                                    >
+                                      {isUppercase
+                                        ? char.toUpperCase()
+                                        : isLowercase
+                                          ? char.toLowerCase()
+                                          : char}
+                                    </span>
+                                  );
+                                })}
+
+                              </div>
+                            );
+                          })}
                         </div>
                       )}
-
-                      {/* Resizing Handle */}
-                      {selectedField === id && (
-                        <div
-                          onMouseDown={(e) => handleResizeMouseDown(e, id)}
-                          onTouchStart={(e) => handleResizeTouchStart(e, id)} // Added for touch
-                          onTouchMove={handleResizeTouchMove} // Added for touch
-                          onTouchEnd={handleResizeTouchEnd} // Added for touch
-                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-                          style={{ transform: "translate(50%, 50%)" }}
-                        >
-                          <i className="fas fa-arrows-alt text-white text-sm"></i>
-                        </div>
-                      )}
-
-                      {/* Delete Button */}
-                      {selectedField === id && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDelete(id);
-                          }}
-                          onTouchEnd={(e) => {
-                            e.stopPropagation();
-                            handleDelete(id);
-                          }}
-                          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-                          style={{
-                            transform: "translate(50%, -50%)",
-                            zIndex: 20,
-                          }}
-                        >
-                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                        </button>
-                      )}
-
-                      {/* Rotate Button */}
+                      {/* Rotate Handle */}
                       {selectedField === id && (
                         <div
                           onMouseDown={(e) => handleRotateMouseDown(e, id)}
-                          onTouchStart={(e) => handleRotateTouchStart(e, id)}
-                          onTouchMove={handleRotateTouchMove} // Handle touch move
-                          onTouchEnd={handleRotateTouchEnd} // Handle touch end
+                          onTouchStart={(e) => handleRotateMouseDown(e, id)} // Or a separate touch handler
                           className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
                           style={{
                             transform: "translate(-50%, -50%)",
@@ -1693,54 +1696,66 @@ export default function WeddingCardEditor() {
                           <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
                         </div>
                       )}
+
+                      {/* Resize Handle */}
+                      {selectedField === id && (
+                        <div
+                          onMouseDown={(e) => handleResizeMouseDown(e, id)}
+                          onTouchStart={(e) => handleResizeTouchStart(e, id)}
+                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
+                          style={{
+                            transform: "translate(50%, 50%)",
+                            zIndex: 20,
+                          }}
+                        >
+                          <i className="fas fa-arrows-alt text-white text-sm"></i>
+                        </div>
+                      )}
                     </div>
                   )
                 )}
+
+
+
               </div>
 
               {/* Buttons Below the Image */}
-              <div className="flex lg:gap-3 md:mt-4 lg:mt-1 gap-4 sm:mt-4 mt-6 ">
-                {/* Preview Button */}
-                <button
-                  onClick={handlePreview}
-                  className="flex items-center justify-center mx-auto gap-2  px-10 py-3  text-[#AF7D32] font-medium rounded-lg   transform hover:scale-105 transition-all duration-300"
-                >
-                  <span>Preview</span>
-                </button>
-              </div>
+
             </div>
             {/* Center Section - Action Buttons (hidden on small screens) */}
-            {selectedField && selectedTextField && !isSmallScreen && (
-              <div className="lg:ml-6 lg:mr-4 self-center"> {/* Added spacing */}
-                <TextOptions
-                  selectedText={selectedTextField}
-                  updateTextField={updateTextField}
-                  onClose={handleClose}
-                />
+            <div className="flex lg:flex-row">
+              {selectedField && selectedTextField && !isSmallScreen && (
+                <div className="lg:ml-6 lg:mr-4 self-center"> {/* Added spacing */}
+                  <TextOptions
+                    selectedText={selectedTextField}
+                    updateTextField={updateTextField}
+                    onClose={handleClose}
+                  />
+                </div>
+              )}
+              <div className="md:flex px-1 text-sm flex-row lg:flex-col justify-evenly mx-auto bg-white rounded-xl lg:p-7 mt-8 lg:mr-6 h-64 items-center gap-4">
+                <button
+                  onClick={handleAddNewText}
+                  className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2  bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
+                >
+                  <i class="fa-solid fa-font fa-lg"></i>
+                  <span>Add Text</span>
+                </button>
+                <button
+                  onClick={() => setShowStickerSelector(true)}
+                  className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2 bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
+                >
+                  <i class="fa-regular fa-note-sticky fa-lg"></i>
+                  <span>Add Sticker</span>
+                </button>
+                <button
+                  onClick={handleAddImageClick}
+                  className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2 bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
+                >
+                  <i class="fa-regular fa-square-plus fa-lg"></i>
+                  <span>Add Image</span>
+                </button>
               </div>
-            )}
-            <div className="md:flex flex px-1 text-sm flex-row lg:flex-col justify-evenly bg-white rounded-xl lg:p-7 lg:mr-6 lg:h-[40%] lg:mt-5  items-center gap-4">
-              <button
-                onClick={handleAddNewText}
-                className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2  bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
-              >
-                <i class="fa-solid fa-font fa-lg"></i>
-                <span>Add Text</span>
-              </button>
-              <button
-                onClick={() => setShowStickerSelector(true)}
-                className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2 bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
-              >
-                <i class="fa-regular fa-note-sticky fa-lg"></i>
-                <span>Add Sticker</span>
-              </button>
-              <button
-                onClick={handleAddImageClick}
-                className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2 bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
-              >
-                <i class="fa-regular fa-square-plus fa-lg"></i>
-                <span>Add Image</span>
-              </button>
             </div>
           </div>
           {isSmallScreen && (
@@ -1749,7 +1764,7 @@ export default function WeddingCardEditor() {
                 {/* Selected Field Section */}
                 {selectedField && selectedTextField && (
                   <div
-                    style={{ position: "relative", bottom: "0", width: "107%" }}
+                    style={{ position: "absolute", bottom: "0", width: "100%" }}
                   >
                     <TextFieldsMobile
                       selectedText={selectedTextField}

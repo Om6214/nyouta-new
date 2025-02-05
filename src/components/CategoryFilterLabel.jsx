@@ -134,7 +134,7 @@ export default function CategoryFilterLabel() {
               <div className="h-4 bg-gray-200 rounded w-2/3 mt-2 animate-pulse"></div>
             </div>
 
-            <div className="border-t py-2 border-orange-600 mb-2"></div>
+            <div className="border-t py-2 border-gray-200 mb-2"></div>
 
             {/* Selection Options Skeleton */}
             <div className="flex pb-2 gap-4 mb-2">
