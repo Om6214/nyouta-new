@@ -180,6 +180,9 @@ export default function DesignEdit() {
   };
 
   const handleAddtoCart = async () => {
+
+
+    
     setAddToCartLoading(true);
     const res = await dispatch(addtoCart({ productId: filteredProduct._id, quantity, customText, userUploadedImages }));
     if (res.type === "products/addtoCart/fulfilled") {
