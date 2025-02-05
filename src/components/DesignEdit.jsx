@@ -249,7 +249,7 @@ export default function DesignEdit() {
     <div className="max-w-6xl mx-auto mb-20 p-4 sm:p-6 ">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 ">
         {/* Product Image Section */}
-        <div className="flex flex-col-reverse sm:flex-row items-start gap-4 lg:sticky lg:top-10 lg:h-[65vh]">
+        <div className="flex flex-col-reverse sm:flex-row items-start gap-4 lg:sticky lg:top-48 lg:h-[65vh]">
         
           <div className="flex sm:flex-col gap-2 sm:gap-3   pb-2 sm:pb-0 w-[200px] ">
             {filteredProduct.image.map((img, index) => (
