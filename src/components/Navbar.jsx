@@ -320,11 +320,11 @@ const navItems = [
 
       {
         label: "Free Printable",
-        Filters: [
-          { a: "Wedding Guest List-PDF" },
-          { a: "Wedding Guest List - XLS" },
-          { a: "Wedding Notepad - PDF" },
-        ],
+        // Filters: [
+        //   { a: "Wedding Guest List-PDF" },
+        //   { a: "Wedding Guest List - XLS" },
+        //   { a: "Wedding Notepad - PDF" },
+        // ],
       },
     ],
   },
