@@ -11,14 +11,16 @@ export default function Cart() {
   const cartRef = useRef(null);
   const cartButtonRef = useRef(null);
   const dispatch = useDispatch();
-  const { cart, loading } = useSelector((state) => state.product); // Added loading from Redux
+  const { cart, loading } = useSelector((state) => state.product);
   const [showModal, setShowModal] = useState(false);
   const [productToRemove, setProductToRemove] = useState(null);
 
+  // Fetch cart data on mount & when cart updates
   useEffect(() => {
     dispatch(getCart());
-  }, [dispatch]);
+  }, [dispatch, cart?.products?.length]); // Added dependency to re-fetch when cart changes
 
+  // Close cart when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -38,32 +40,51 @@ export default function Cart() {
     };
   }, [isCartOpen, toggleCart]);
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+  // Calculate total price dynamically
+  const totalPrice = cart?.products?.reduce(
+    (total, item) => total + item.productId.price * item.quantity,
     0
-  );
+  ) || 0;
 
-  const handleRemove = (item) => {
-    dispatch(removeFromCart(item.productId._id));
+  // Optimized Remove Function
+  const handleRemove = async (item) => {
+    try {
+      dispatch(removeFromCart(item.productId._id));
+      setTimeout(() => dispatch(getCart()), 500); // Ensure UI updates smoothly
+    } catch (error) {
+      console.error('Error removing item:', error);
+    }
   };
 
+  // Handle quantity changes
   const handleQuantityChange = async (item, operation) => {
     const newQuantity = operation === 'increment' ? item.quantity + 1 : item.quantity - 1;
+
     if (newQuantity === 0) {
       setProductToRemove(item);
       setShowModal(true);
     } else {
-      await dispatch(updateCartQuantity({ productId: item.productId._id, quantity: newQuantity,operation:operation==='increment'?1:0 }));
-      await dispatch(getCart());
+      try {
+        await dispatch(updateCartQuantity({
+          productId: item.productId._id,
+          quantity: newQuantity,
+          operation: operation === 'increment' ? 1 : 0,
+        }));
+        setTimeout(() => dispatch(getCart()), 500);
+      } catch (error) {
+        console.error('Error updating quantity:', error);
+      }
     }
   };
 
-  const confirmRemoveProduct = async() => {
+  // Confirm remove product
+  const confirmRemoveProduct = async () => {
     await dispatch(removeFromCart(productToRemove.productId._id));
-    await dispatch(getCart());
+    setTimeout(() => dispatch(getCart()), 500);
     setShowModal(false);
   };
 
+  // Cancel remove confirmation
   const cancelRemoveProduct = () => {
     setShowModal(false);
   };
@@ -120,12 +141,12 @@ export default function Cart() {
           <div className="p-4 border-t">
             <div className="flex justify-between items-center mb-4">
               <span className="font-semibold">Total</span>
-              <span className="font-semibold text-xl">₹{cart?.totalPrice?.toFixed(2)}</span>
+              <span className="font-semibold text-xl">₹{totalPrice.toFixed(2)}</span>
             </div>
-            <Link to="/checkout">
+            <Link to="/checkout" className='w-20'>
               <button
                 onClick={() => toggleCart()}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300 ease-in-out"
+                className="w-full bg-amber-600 text-white py-3 rounded-lg text font-semibold hover:bg-amber-700 transition duration-300 ease-in-out"
               >
                 Proceed to Checkout
               </button>

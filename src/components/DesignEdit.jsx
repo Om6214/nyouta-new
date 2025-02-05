@@ -180,6 +180,9 @@ export default function DesignEdit() {
   };
 
   const handleAddtoCart = async () => {
+
+
+    
     setAddToCartLoading(true);
     const res = await dispatch(addtoCart({ productId: filteredProduct._id, quantity, customText, userUploadedImages }));
     if (res.type === "products/addtoCart/fulfilled") {
@@ -196,9 +199,9 @@ export default function DesignEdit() {
 
   const handleBuyNow = async () => {
     //setAddToCartLoading(true);
-    const res = await dispatch(addtoCart({ productId: filteredProduct._id, quantity, customText, userUploadedImages }));
+    // const res = await dispatch(addtoCart({ productId: filteredProduct._id, quantity, customText, userUploadedImages }));
     if (res.type === "products/addtoCart/fulfilled") {
-      dispatch(getCart());
+      // dispatch(getCart());
       //setAddToCartLoading(false);
       //setWarning("");
       setCustomText("");
@@ -247,20 +250,20 @@ export default function DesignEdit() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto mb-10 p-4 sm:p-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12">
+    <div className="max-w-6xl mx-auto mb-20 p-4 sm:p-6 ">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
         {/* Product Image Section */}
         <div className="flex flex-col-reverse sm:flex-row items-start gap-4 lg:sticky lg:top-10 lg:h-[65vh]">
         
-          <div className="flex sm:flex-col gap-2 sm:gap-3  pb-2 sm:pb-0 w-full sm:w-auto">
+          <div className="flex sm:flex-col gap-2 sm:gap-3   pb-2 sm:pb-0 w-[200px] ">
             {filteredProduct.image.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className={`flex-shrink-0 cursor-pointer w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border-2 transition-all duration-300 hover:scale-105 ${currentImageIndex === index
-                    ? "border-gray-600 shadow-md"
-                    : "border-gray-200 hover:border-blue-400"
+                className={`flex-shrink-0 cursor-pointer w-16 h-16 sm:w-full sm:h-full object-cover rounded-lg border-2 transition-all duration-300 hover:scale-105 ${currentImageIndex === index
+                    ? "border-gray-300 shadow-md"
+                    : "border-gray-300 hover:border-blue-400"
                   }`}
                 onClick={() => handleThumbnailClick(index)}
               />
@@ -268,12 +271,12 @@ export default function DesignEdit() {
           </div>
 
           {/* Main Image */}
-          <div className="relative w-full aspect-square sm:w-[400px] lg:w-[500px]">
-            <div className="rounded-xl overflow-hidden transition-all duration-300">
+          <div className="relative w-full aspect-square sm:w-[400px] md:w-[800px] lg:w-[900px]">
+            <div className="rounded-xl overflow-hidden transition-all duration-300 border-2">
               <img
                 src={filteredProduct.image[currentImageIndex]}
                 alt={filteredProduct.name}
-                className="w-full h-full object-contain p-2 sm:p-4"
+                className="w-full h-full object-contain sm:p-4  border-gray-100 "
               />
             </div>
           </div>
