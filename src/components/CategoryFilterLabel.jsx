@@ -796,7 +796,7 @@ export default function CategoryFilterLabel() {
               <h1 className="text-lg md:text-sm font-avalonN">Filter By</h1>
               <button
                 className={`font-avalonN md:text-sm border-gray-500 leading-5 ${filter === "all" ? "border-orange-500" : ""}`}
-                onClick={() => setFilter("all")}
+                onClick={() => setFilter("royal")}
               >
                 Clear all
               </button>

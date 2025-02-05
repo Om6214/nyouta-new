@@ -54,10 +54,10 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-2">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div className="max-w-6xl  mx-auto p-2 h-[calc(100vh-120px)]">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mt-10 ">
         {/* Product Image Section */}
-        <div className="flex items-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10 ">
+        <div className="flex items-start justify-center lg:justify-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10  px-4">
           {/* Left Side - Thumbnails (Vertical List) */}
           <div className="flex flex-col">
             {product.image.map((img, index) => (
@@ -79,12 +79,12 @@ export default function ProductPage() {
           <img
             src={product.image[currentImageIndex]}
             alt={product.name}
-            className="w-80 h-80 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
         </div>
 
         {/* Product Details Section */}
-        <div className="flex flex-col justify-between">
+        <div className="flex lg:ml-14 mt-8 md:mt-14 lg:mt-0 px-4 lg:px-0 flex-col w-full lg:w-[400px] justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2 text-gray-800">
               {product.name}
