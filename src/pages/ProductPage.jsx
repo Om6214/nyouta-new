@@ -57,7 +57,7 @@ export default function ProductPage() {
     <div className="max-w-6xl  mx-auto p-2 h-[calc(100vh-120px)]">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mt-10 ">
         {/* Product Image Section */}
-        <div className="flex items-start justify-start lg:justify-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10  px-4">
+        <div className="flex items-start justify-center lg:justify-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10  px-4">
           {/* Left Side - Thumbnails (Vertical List) */}
           <div className="flex flex-col">
             {product.image.map((img, index) => (
@@ -79,7 +79,7 @@ export default function ProductPage() {
           <img
             src={product.image[currentImageIndex]}
             alt={product.name}
-            className="w-64 h-64 lg:w-80 lg:h-80 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="w-64 h-64 md:w-80 md:h-80 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105"
           />
         </div>
 
