@@ -54,10 +54,10 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="max-w-6xl  mx-auto p-2 h-[calc(100vh-120px)]">
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mt-10 ">
+    <div className="max-w-6xl  mx-auto p-2 md:h-[calc(100vh-200px)] lg:h-[calc(100vh-120px)]">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:space-x-24 mt-10  ">
         {/* Product Image Section */}
-        <div className="flex items-start justify-center lg:justify-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10  px-4">
+        <div className="flex items-start  justify-start lg:justify-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10  px-4">
           {/* Left Side - Thumbnails (Vertical List) */}
           <div className="flex flex-col">
             {product.image.map((img, index) => (
@@ -84,9 +84,9 @@ export default function ProductPage() {
         </div>
 
         {/* Product Details Section */}
-        <div className="flex lg:ml-14 mt-8 md:mt-14 lg:mt-0 px-4 lg:px-0 flex-col w-full lg:w-[400px] justify-between">
-          <div>
-            <h1 className="text-3xl font-bold mb-2 text-gray-800">
+        <div className="flex lg:ml-14 mt-8 md:mt-14 mb-10 sm:mb-0   lg:mt-0 px-4 lg:px-0 flex-col w-full md:w-[600px] lg:w-[400px] justify-between">
+          <div className="">
+            <h1 className="text-3xl font-bold mb-2 text-gray-800 ">
               {product.name}
             </h1>
             <p className="text-xl font-semibold mb-2 text-gray-700">
