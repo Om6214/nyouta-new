@@ -54,8 +54,8 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="max-w-6xl  mx-auto p-2 md:h-[calc(100vh-200px)] lg:h-[calc(100vh-120px)]">
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:space-x-24 mt-10  ">
+    <div className="max-w-6xl  mx-auto p-2 md:h-[calc(100vh-200px)] lg:h-[calc(100vh-200px)]">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 lg:space-x-24 lg:mt-16 mt-10  ">
         {/* Product Image Section */}
         <div className="flex items-start  justify-start lg:justify-start w-full gap-4 lg:ml-40 xl:ml-40 ml-auto mr-10  px-4">
           {/* Left Side - Thumbnails (Vertical List) */}
@@ -115,7 +115,7 @@ export default function ProductPage() {
               <h2 className="text-2xl font-bold mb-4 text-gray-800">
                 Product Details
               </h2>
-              <ul className="list-disc list-inside text-gray-700">
+              <ul  className="list-disc list-inside text-gray-700">
                 <li>Category: {product.category}</li>
                 <li>Subcategory: {product.subCategory}</li>
               </ul>
@@ -124,7 +124,7 @@ export default function ProductPage() {
             <div className="space-x-4 flex md:flex-row mt-6 gap-4">
               <button
                 onClick={handleEditImage}
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-6 rounded-full shadow-lg hover:bg-gradient-to-l transition-colors"
+                className="w-full bg-amber-800  text-white py-3 px-4  transition duration-200 rounded-xl shadow-lg hover:bg-amber-900 "
               >
                 Edit Greeting
               </button>
@@ -132,7 +132,7 @@ export default function ProductPage() {
               <button
                 onClick={handleAddtoCart}
                 disabled={addToCartLoading}
-                className="w-full bg-yellow-600 text-white py-3 px-6 mr-6 rounded-full shadow-lg hover:bg-yellow-700 transition-colors"
+                className="w-full bg-gray-900 text-white py-3 px-4 mr-6 transition duration-200 rounded-xl shadow-lg hover:bg-gray-800"
               >
                 {addToCartLoading ? "Adding to Cart..." : "Add to Cart"}
               </button>
