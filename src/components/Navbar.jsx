@@ -806,7 +806,7 @@ export default function MainNav() {
                                       className={`absolute top-0 ${
                                         isLastTwoItems
                                           ? "right-full "
-                                          : "left-full ml-2"
+                                          : "left-full"
                                       } bg-priBg rounded-lg border-b-2 border-primary min-w-[200px] py-3 px-3 shadow-lg`}
                                     >
                                       <ul className="space-y-2">
