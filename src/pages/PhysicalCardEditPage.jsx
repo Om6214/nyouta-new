@@ -3,8 +3,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import {
   FaTrash,
-  FaUndo,
-  FaRedo,
   FaFont,
   FaRegEdit,
   FaPlus,
@@ -14,6 +12,7 @@ import {
   FaArrowsAlt,
   FaFilePdf,
 } from "react-icons/fa";
+import { Undo2, Redo2 } from "lucide-react";
 import "../utils/pdf.css"; // Correctly import the external CSS file
 import ImageUploadOptions from "./ImageUploadOptions";
 import Preview from "./Preview";
@@ -1074,7 +1073,7 @@ export default function WeddingCardEditor() {
 
   return (
     <div className="h-[100vh]">
-      <div className="w-full flex h-[20%] border-gray-300 border-b-2 flex-row justify-evenly py-3 items-center  bg-white shadow-md relative">
+      <div className="w-full flex flex-col  h-[20%] border-gray-300 border-b-2 lg:flex-row justify-evenly py-3 items-center  bg-white shadow-md relative">
         {/* Left Section - Logo */}
         <div className="flex items-center">
           <img
@@ -1084,61 +1083,39 @@ export default function WeddingCardEditor() {
           />
         </div>
 
-        {/* Center Section - Action Buttons (hidden on small screens) */}
-        <div className="hidden md:flex items-center gap-4">
-          <button
-            onClick={handleAddNewText}
-            className="flex items-center justify-center gap-2 px-6 py-2 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-          >
-            <AiOutlineFileText className="w-5 h-5" />
-            <span>Add Text</span>
-          </button>
-          <button
-            onClick={() => setShowStickerSelector(true)}
-            className="flex items-center justify-center gap-2 px-6 py-2 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-          >
-            <i class="fa-solid fa-icons"></i>
-            <span>Add Sticker</span>
-          </button>
-          <button
-            onClick={handleAddImageClick}
-            className="flex items-center justify-center gap-2 px-6 py-2 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-          >
-            <AiOutlinePicture className="w-5 h-5" />
-            <span>Add Image</span>
-          </button>
-        </div>
+
 
         {/* Plus Button (visible only on small screens) */}
-        <div className="md:hidden flex items-center">
+        {/* <div className="md:hidden flex items-center">
           <button
             onClick={() => setShowModal(true)}
             className="p-3 bg-[#AF7D32] text-white rounded-full shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
           >
             <FaPlus size={24} />
           </button>
-        </div>
+        </div> */}
 
         {/* Right Section - Undo/Redo */}
-        <div className="flex gap-4 z-10">
-          <button
-            onClick={handleUndo}
-            className="px-4 py-2  rounded-full border border-gray-300 bg-[#FAF0DC] text-gray-800 hover:bg-[#AF7D32] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50"
-            disabled={undoStack.length === 0}
-            title="Undo"
-          >
-            <FaUndo size={20} />
-          </button>
-          <button
-            onClick={handleRedo}
-            className="px-4 py-2 rounded-full border border-gray-300 bg-[#FAF0DC] text-gray-800 hover:bg-[#AF7D32] hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50"
-            disabled={redoStack.length === 0}
-            title="Redo"
-          >
-            <FaRedo size={20} />
-          </button>
-        </div>
-        <div className="flex flex-row space-x-4">
+
+        <div className="flex flex-row space-x-2 lg:space-x-4">
+          <div className="flex gap-4 z-10">
+            <button
+              onClick={handleUndo}
+              className="px-4 py-2  rounded-xl border border-gray-200 bg-slate-50 text-gray-800 hover:bg-slate-50 hover:text-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50"
+              disabled={undoStack.length === 0}
+              title="Undo"
+            >
+              <Undo2 size={20} />
+            </button>
+            <button
+              onClick={handleRedo}
+              className="px-4 py-2 rounded-xl border border-gray-200 bg-slate-50 text-gray-800 hover:bg-slate-50 hover:text-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50"
+              disabled={redoStack.length === 0}
+              title="Redo"
+            >
+              <Redo2 size={20} />
+            </button>
+          </div>
           <button
             onClick={handleSaveChanges}
             className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
@@ -1154,7 +1131,7 @@ export default function WeddingCardEditor() {
         </div>
 
         {/* Modal (shown when plus button is clicked) */}
-        {showModal && (
+        {/* {showModal && (
           <div className="fixed inset-x-0 bottom-0 z-50 md:inset-0 md:flex md:items-center md:justify-center">
             <div
               className="fixed inset-0 bg-black bg-opacity-50"
@@ -1195,28 +1172,8 @@ export default function WeddingCardEditor() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
-
-      {selectedField && selectedTextField && (
-        <div
-          className={`relative flex flex-col gap-4 bg-white rounded-lg z-50 `}
-        >
-          {isSmallScreen ? (
-            <TextFieldsMobile
-              selectedText={selectedTextField}
-              updateTextField={updateTextField}
-              onClose={handleClose}
-            />
-          ) : (
-            <TextOptions
-              selectedText={selectedTextField}
-              updateTextField={updateTextField}
-              onClose={handleClose}
-            />
-          )}
-        </div>
-      )}
 
       {/* Sticker Selector */}
       {showStickerSelector && (
@@ -1252,7 +1209,7 @@ export default function WeddingCardEditor() {
         </div>
       )}
 
-      
+
       <div className="flex w-full relative h-[80%] ">
         <div className="hidden md:block absolute top-0 bottom-0 border-l-2 border-gray-300"></div>
 
@@ -1322,432 +1279,467 @@ export default function WeddingCardEditor() {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
         >
-          <div className="flex flex-col mx-auto mt-16">
-            {/* Image Container */}
-            <div
-              id="design-container"
-              className="relative  flex items-center mx-auto border border-gray-200 bg-gray-50 overflow-hidden"
-              style={{ width: "320px" }}
-            >
-              <img
-                src={imageUrl}
-                alt="Background"
-                className="w-full h-auto mx-auto object-cover "
-              />
-
-              {stickers.map(({ id, src, x, y, width, height }) => (
-                <Rnd
-                  key={id}
-                  size={{ width, height }}
-                  position={{ x, y }}
-                  onDragStart={(e) => {
-                    // Prevent dragging if interacting with the delete button
-                    if (e.target.closest(".delete-button")) {
-                      e.stopPropagation();
-                    }
-                  }}
-                  onResizeStart={(e) => {
-                    // Prevent resizing if interacting with the delete button
-                    if (e.target.closest(".delete-button")) {
-                      e.stopPropagation();
-                    }
-                  }}
-                  onDragStop={(e, d) => {
-                    setStickers((prev) =>
-                      prev.map((sticker) =>
-                        sticker.id === id
-                          ? { ...sticker, x: d.x, y: d.y }
-                          : sticker
-                      )
-                    );
-                  }}
-                  onResizeStop={(e, direction, ref, delta, position) => {
-                    setStickers((prev) =>
-                      prev.map((sticker) =>
-                        sticker.id === id
-                          ? {
-                            ...sticker,
-                            width: ref.offsetWidth,
-                            height: ref.offsetHeight,
-                            x: position.x,
-                            y: position.y,
-                          }
-                          : sticker
-                      )
-                    );
-                  }}
-                  bounds="parent"
-                  lockAspectRatio
-                  style={{
-                    zIndex: selectedStickerId === id ? 20 : 10,
-                    border:
-                      selectedStickerId === id ? "2px dotted blue" : "none",
-                  }}
-                  onClick={() => handleStickerClick(id)} // Desktop click
-                  onTouchStart={() => handleStickerClick(id)} // Touch click
-                >
-                  <div
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <img
-                      src={src}
-                      alt="Sticker"
-                      className="w-full h-full object-contain"
-                      style={{ pointerEvents: "none" }}
-                    />
-
-                    {selectedStickerId === id && (
-                      <>
-                        {/* Delete Button */}
-                        <button
-                          className="delete-button absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevent click events from propagating to the parent
-                            handleDeleteSticker(id); // Delete the sticker
-                          }}
-                          onTouchEnd={(e) => {
-                            e.stopPropagation(); // Prevent touch events from propagating to the parent
-                            handleDeleteSticker(id); // Delete the sticker
-                          }}
-                          style={{
-                            cursor: "pointer",
-                            transform: "translate(50%, -50%)",
-                            zIndex: 50, // Ensure the delete button is above other elements
-                          }}
-                          title="Delete Sticker"
-                        >
-                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                        </button>
-
-                        {/* Resize Handle */}
-                        <div
-                          className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
-                          style={{
-                            transform: "translate(50%, 50%)",
-                          }}
-                          title="Resize Sticker"
-                        >
-                          <i className="fas fa-arrows-alt text-white"></i>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </Rnd>
-              ))}
-
-              {smallImages.map(({ id, src, x, y, width, height }) => (
-                <Rnd
-                  key={id}
-                  size={{ width, height }}
-                  position={{ x, y }}
-                  onDragStart={(e) => {
-                    // Prevent dragging if interacting with the delete button
-                    if (e.target.closest(".delete-button")) {
-                      e.stopPropagation();
-                    }
-                  }}
-                  onResizeStart={(e) => {
-                    // Prevent resizing if interacting with the delete button
-                    if (e.target.closest(".delete-button")) {
-                      e.stopPropagation();
-                    }
-                  }}
-                  onDragStop={(e, d) => {
-                    setSmallImages((prev) =>
-                      prev.map((image) =>
-                        image.id === id ? { ...image, x: d.x, y: d.y } : image
-                      )
-                    );
-                  }}
-                  onResizeStop={(e, direction, ref, delta, position) => {
-                    setSmallImages((prev) =>
-                      prev.map((image) =>
-                        image.id === id
-                          ? {
-                            ...image,
-                            width: ref.offsetWidth,
-                            height: ref.offsetHeight,
-                            x: position.x,
-                            y: position.y,
-                          }
-                          : image
-                      )
-                    );
-                  }}
-                  bounds="parent"
-                  lockAspectRatio
-                  style={{
-                    zIndex: selectedImageId === id ? 20 : 10,
-                    border: selectedImageId === id ? "2px dotted blue" : "none",
-                  }}
-                  onClick={() => handleImageClick(id)} // Desktop click
-                  onTouchStart={() => handleImageClick(id)} // Touch click
-                  enableResizing={{
-                    bottom: true,
-                    bottomRight: true,
-                    right: true,
-                    top: false, // Disable resizing from top (optional)
-                    topLeft: false, // Disable resizing from top left (optional)
-                    left: false, // Disable resizing from left (optional)
-                    bottomLeft: false, // Disable resizing from bottom left (optional)
-                    topRight: false, // Disable resizing from top right (optional)
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <img
-                      src={src}
-                      alt="Small Icon"
-                      className="object-cover w-full h-full rounded border"
-                      style={{ pointerEvents: "none" }}
-                    />
-
-                    {selectedImageId === id && (
-                      <>
-                        {/* Delete Button */}
-                        <button
-                          className="delete-button absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevent click events from propagating to the parent
-                            handleDeleteImagesmall(id); // Delete the image
-                          }}
-                          onTouchEnd={(e) => {
-                            e.stopPropagation(); // Prevent touch events from propagating to the parent
-                            handleDeleteImagesmall(id); // Delete the image
-                          }}
-                          style={{
-                            cursor: "pointer",
-                            transform: "translate(50%, -50%)",
-                            zIndex: 50, // Ensure the delete button is above other elements
-                          }}
-                          title="Delete Image"
-                        >
-                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                        </button>
-
-                        {/* Resize Handle (appears when selected) */}
-                        <div
-                          className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
-                          style={{
-                            transform: "translate(50%, 50%)",
-                          }}
-                          title="Resize Image"
-                        >
-                          <i className="fas fa-arrows-alt text-white"></i>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </Rnd>
-              ))}
-
-              {textFields.map(
-                ({
-                  id,
-                  text,
-                  x,
-                  y,
-                  size,
-                  font,
-                  fontColor,
-                  angle, // Rotation
-                  isBold,
-                  isItalic,
-                  textAlign,
-                  lineHeight,
-                  letterSpacing,
-                  isUppercase,
-                  isLowercase,
-                  curveValue,
-                }) => (
-                  <div
-                    key={id}
-                    className="absolute"
-                    style={{
-                      top: `${y}px`,
-                      left: `${x}px`,
-                      fontSize: `${size}px`,
-                      fontFamily: font,
-                      color: fontColor,
-                      fontWeight: isBold ? "bold" : "normal",
-                      fontStyle: isItalic ? "italic" : "normal",
-                      letterSpacing: `${letterSpacing}px`,
-                      lineHeight: `${lineHeight}`,
-                      whiteSpace: "nowrap",
-                      overflow: "visible",
-                      textAlign: textAlign,
-                      cursor: "move",
-                      zIndex: selectedField === id ? 10 : 1,
-                      border:
-                        selectedField === id && editingField !== id
-                          ? "2px dotted blue"
-                          : "none", // Apply border only when not in edit mode
-                      width: "fit-content",
-                      transformOrigin: "center",
-                      transform: `translate(-50%, -50%) rotate(${angle || 0
-                        }deg)`, // Apply Rotation
-                      touchAction: "none", // Prevent scrolling on touch devices while dragging
-                    }}
-                    onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
-                    onMouseDown={(e) => handleMouseDown(e, id, x, y)}
-                    onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Updated for touch
-                    onTouchMove={(e) => {
-                      e.preventDefault(); // Prevent default scrolling behavior during drag
-                      handleTouchMove(e); // Your existing touch move logic
-                    }}
-                    //onTouchEnd={handleTouchEnd} // Updated for touch
-                    onTouchEnd={(e) => handleTouchEnd(e, id)}
-                  >
-                    {/* Editable Text */}
-                    {editingField === id ? (
-                      <textarea
-                        value={text}
-                        onChange={(e) => handleTextChange(id, e.target.value)}
-                        onBlur={() => setEditingField(null)} // Exit edit mode on blur
-                        autoFocus
-                        className="bg-transparent border-none outline-none resize-none"
-                        style={{
-                          fontSize: `${size}px`,
-                          fontFamily: font,
-                          color: fontColor,
-                          fontWeight: isBold ? "bold" : "normal",
-                          fontStyle: isItalic ? "italic" : "normal",
-                          letterSpacing: `${letterSpacing}px`,
-                          lineHeight: `${lineHeight}`,
-                          whiteSpace: "nowrap",
-                          overflow: "hidden", // Prevent scrollbars from appearing
-                          textAlign: textAlign,
-                          zIndex: selectedField === id ? 10 : 1,
-                          border: "2px dotted blue", // Border for the textarea when editing
-                          width: "fit-content", // Width based on text content
-                          height: "fit-content", // Allow height to adjust according to the content
-                          minHeight: "fit-content", // Ensure no minimum height
-                          maxWidth: "fit-content", // Prevent it from growing too large
-                        }}
-                        onInput={(e) => {
-                          e.target.style.height = "auto"; // Reset height before adjusting
-                          e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
-                        }}
-                        onFocus={(e) =>
-                          e.target.setSelectionRange(
-                            e.target.value.length,
-                            e.target.value.length
-                          )
-                        } // Place cursor at the end when focused
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          display: "inline-block",
-                          padding: "2px 5px",
-                          cursor: "text",
-                        }}
-                      >
-                        {text.split("\n").map((line, index) => (
-                          <div key={index}>
-                            {line.split("").map((char, charIndex) => {
-                              const curve = curveValue || 0;
-                              const angle =
-                                (Math.PI *
-                                  curve *
-                                  (charIndex - Math.floor(line.length / 2))) /
-                                line.length;
-                              const radius = 100;
-                              return (
-                                <span
-                                  key={charIndex}
-                                  style={{
-                                    position: "relative",
-                                    transform: `rotate(${angle}rad) translateY(-${radius}px)`,
-                                    transformOrigin: "center",
-                                  }}
-                                >
-                                  {isUppercase
-                                    ? char.toUpperCase()
-                                    : isLowercase
-                                      ? char.toLowerCase()
-                                      : char}
-                                </span>
-                              );
-                            })}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Resizing Handle */}
-                    {selectedField === id && (
-                      <div
-                        onMouseDown={(e) => handleResizeMouseDown(e, id)}
-                        onTouchStart={(e) => handleResizeTouchStart(e, id)} // Added for touch
-                        onTouchMove={handleResizeTouchMove} // Added for touch
-                        onTouchEnd={handleResizeTouchEnd} // Added for touch
-                        className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
-                        style={{ transform: "translate(50%, 50%)" }}
-                      >
-                        <i className="fas fa-arrows-alt text-white text-sm"></i>
-                      </div>
-                    )}
-
-                    {/* Delete Button */}
-                    {selectedField === id && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(id);
-                        }}
-                        onTouchEnd={(e) => {
-                          e.stopPropagation();
-                          handleDelete(id);
-                        }}
-                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
-                        style={{
-                          transform: "translate(50%, -50%)",
-                          zIndex: 20,
-                        }}
-                      >
-                        <i className="fas fa-times-circle text-red-500 text-sm"></i>
-                      </button>
-                    )}
-
-                    {/* Rotate Button */}
-                    {selectedField === id && (
-                      <div
-                        onMouseDown={(e) => handleRotateMouseDown(e, id)}
-                        onTouchStart={(e) => handleRotateTouchStart(e, id)}
-                        onTouchMove={handleRotateTouchMove} // Handle touch move
-                        onTouchEnd={handleRotateTouchEnd} // Handle touch end
-                        className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
-                        style={{
-                          transform: "translate(-50%, -50%)",
-                          zIndex: 20,
-                        }}
-                      >
-                        <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
-                      </div>
-                    )}
-                  </div>
-                )
-              )}
-            </div>
-
-            {/* Buttons Below the Image */}
-            <div className="flex lg:gap-3 md:mt-4 lg:mt-1 gap-4 sm:mt-4 mt-6 ">
-              {/* Preview Button */}
-              <button
-                onClick={handlePreview}
-                className="flex items-center justify-center mx-auto gap-2  px-10 py-3  text-[#AF7D32] font-medium rounded-lg   transform hover:scale-105 transition-all duration-300"
+          <div className="flex flex-col lg:flex-row">
+            <div className="flex flex-col mx-auto mt-16">
+              {/* Image Container */}
+              <div
+                id="design-container"
+                className="relative  flex items-center mx-auto border border-gray-200 bg-gray-50 overflow-hidden"
+                style={{ width: "320px" }}
               >
-                <span>Preview</span>
+                <img
+                  src={imageUrl}
+                  alt="Background"
+                  className="w-full h-auto mx-auto object-cover "
+                />
+
+                {stickers.map(({ id, src, x, y, width, height }) => (
+                  <Rnd
+                    key={id}
+                    size={{ width, height }}
+                    position={{ x, y }}
+                    onDragStart={(e) => {
+                      // Prevent dragging if interacting with the delete button
+                      if (e.target.closest(".delete-button")) {
+                        e.stopPropagation();
+                      }
+                    }}
+                    onResizeStart={(e) => {
+                      // Prevent resizing if interacting with the delete button
+                      if (e.target.closest(".delete-button")) {
+                        e.stopPropagation();
+                      }
+                    }}
+                    onDragStop={(e, d) => {
+                      setStickers((prev) =>
+                        prev.map((sticker) =>
+                          sticker.id === id
+                            ? { ...sticker, x: d.x, y: d.y }
+                            : sticker
+                        )
+                      );
+                    }}
+                    onResizeStop={(e, direction, ref, delta, position) => {
+                      setStickers((prev) =>
+                        prev.map((sticker) =>
+                          sticker.id === id
+                            ? {
+                              ...sticker,
+                              width: ref.offsetWidth,
+                              height: ref.offsetHeight,
+                              x: position.x,
+                              y: position.y,
+                            }
+                            : sticker
+                        )
+                      );
+                    }}
+                    bounds="parent"
+                    lockAspectRatio
+                    style={{
+                      zIndex: selectedStickerId === id ? 20 : 10,
+                      border:
+                        selectedStickerId === id ? "2px dotted blue" : "none",
+                    }}
+                    onClick={() => handleStickerClick(id)} // Desktop click
+                    onTouchStart={() => handleStickerClick(id)} // Touch click
+                  >
+                    <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    >
+                      <img
+                        src={src}
+                        alt="Sticker"
+                        className="w-full h-full object-contain"
+                        style={{ pointerEvents: "none" }}
+                      />
+
+                      {selectedStickerId === id && (
+                        <>
+                          {/* Delete Button */}
+                          <button
+                            className="delete-button absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent click events from propagating to the parent
+                              handleDeleteSticker(id); // Delete the sticker
+                            }}
+                            onTouchEnd={(e) => {
+                              e.stopPropagation(); // Prevent touch events from propagating to the parent
+                              handleDeleteSticker(id); // Delete the sticker
+                            }}
+                            style={{
+                              cursor: "pointer",
+                              transform: "translate(50%, -50%)",
+                              zIndex: 50, // Ensure the delete button is above other elements
+                            }}
+                            title="Delete Sticker"
+                          >
+                            <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                          </button>
+
+                          {/* Resize Handle */}
+                          <div
+                            className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
+                            style={{
+                              transform: "translate(50%, 50%)",
+                            }}
+                            title="Resize Sticker"
+                          >
+                            <i className="fas fa-arrows-alt text-white"></i>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </Rnd>
+                ))}
+
+                {smallImages.map(({ id, src, x, y, width, height }) => (
+                  <Rnd
+                    key={id}
+                    size={{ width, height }}
+                    position={{ x, y }}
+                    onDragStart={(e) => {
+                      // Prevent dragging if interacting with the delete button
+                      if (e.target.closest(".delete-button")) {
+                        e.stopPropagation();
+                      }
+                    }}
+                    onResizeStart={(e) => {
+                      // Prevent resizing if interacting with the delete button
+                      if (e.target.closest(".delete-button")) {
+                        e.stopPropagation();
+                      }
+                    }}
+                    onDragStop={(e, d) => {
+                      setSmallImages((prev) =>
+                        prev.map((image) =>
+                          image.id === id ? { ...image, x: d.x, y: d.y } : image
+                        )
+                      );
+                    }}
+                    onResizeStop={(e, direction, ref, delta, position) => {
+                      setSmallImages((prev) =>
+                        prev.map((image) =>
+                          image.id === id
+                            ? {
+                              ...image,
+                              width: ref.offsetWidth,
+                              height: ref.offsetHeight,
+                              x: position.x,
+                              y: position.y,
+                            }
+                            : image
+                        )
+                      );
+                    }}
+                    bounds="parent"
+                    lockAspectRatio
+                    style={{
+                      zIndex: selectedImageId === id ? 20 : 10,
+                      border: selectedImageId === id ? "2px dotted blue" : "none",
+                    }}
+                    onClick={() => handleImageClick(id)} // Desktop click
+                    onTouchStart={() => handleImageClick(id)} // Touch click
+                    enableResizing={{
+                      bottom: true,
+                      bottomRight: true,
+                      right: true,
+                      top: false, // Disable resizing from top (optional)
+                      topLeft: false, // Disable resizing from top left (optional)
+                      left: false, // Disable resizing from left (optional)
+                      bottomLeft: false, // Disable resizing from bottom left (optional)
+                      topRight: false, // Disable resizing from top right (optional)
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: "relative",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    >
+                      <img
+                        src={src}
+                        alt="Small Icon"
+                        className="object-cover w-full h-full rounded border"
+                        style={{ pointerEvents: "none" }}
+                      />
+
+                      {selectedImageId === id && (
+                        <>
+                          {/* Delete Button */}
+                          <button
+                            className="delete-button absolute top-0 right-0 w-6 h-6 shadow bg-white border-2 border-blue-500 rounded-full flex justify-center items-center"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent click events from propagating to the parent
+                              handleDeleteImagesmall(id); // Delete the image
+                            }}
+                            onTouchEnd={(e) => {
+                              e.stopPropagation(); // Prevent touch events from propagating to the parent
+                              handleDeleteImagesmall(id); // Delete the image
+                            }}
+                            style={{
+                              cursor: "pointer",
+                              transform: "translate(50%, -50%)",
+                              zIndex: 50, // Ensure the delete button is above other elements
+                            }}
+                            title="Delete Image"
+                          >
+                            <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                          </button>
+
+                          {/* Resize Handle (appears when selected) */}
+                          <div
+                            className="absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex justify-center items-center bg-blue-500 rounded-full"
+                            style={{
+                              transform: "translate(50%, 50%)",
+                            }}
+                            title="Resize Image"
+                          >
+                            <i className="fas fa-arrows-alt text-white"></i>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </Rnd>
+                ))}
+
+                {textFields.map(
+                  ({
+                    id,
+                    text,
+                    x,
+                    y,
+                    size,
+                    font,
+                    fontColor,
+                    angle, // Rotation
+                    isBold,
+                    isItalic,
+                    textAlign,
+                    lineHeight,
+                    letterSpacing,
+                    isUppercase,
+                    isLowercase,
+                    curveValue,
+                  }) => (
+                    <div
+                      key={id}
+                      className="absolute"
+                      style={{
+                        top: `${y}px`,
+                        left: `${x}px`,
+                        fontSize: `${size}px`,
+                        fontFamily: font,
+                        color: fontColor,
+                        fontWeight: isBold ? "bold" : "normal",
+                        fontStyle: isItalic ? "italic" : "normal",
+                        letterSpacing: `${letterSpacing}px`,
+                        lineHeight: `${lineHeight}`,
+                        whiteSpace: "nowrap",
+                        overflow: "visible",
+                        textAlign: textAlign,
+                        cursor: "move",
+                        zIndex: selectedField === id ? 10 : 1,
+                        border:
+                          selectedField === id && editingField !== id
+                            ? "2px dotted blue"
+                            : "none", // Apply border only when not in edit mode
+                        width: "fit-content",
+                        transformOrigin: "center",
+                        transform: `translate(-50%, -50%) rotate(${angle || 0
+                          }deg)`, // Apply Rotation
+                        touchAction: "none", // Prevent scrolling on touch devices while dragging
+                      }}
+                      onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
+                      onMouseDown={(e) => handleMouseDown(e, id, x, y)}
+                      onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Updated for touch
+                      onTouchMove={(e) => {
+                        e.preventDefault(); // Prevent default scrolling behavior during drag
+                        handleTouchMove(e); // Your existing touch move logic
+                      }}
+                      //onTouchEnd={handleTouchEnd} // Updated for touch
+                      onTouchEnd={(e) => handleTouchEnd(e, id)}
+                    >
+                      {/* Editable Text */}
+                      {editingField === id ? (
+                        <textarea
+                          value={text}
+                          onChange={(e) => handleTextChange(id, e.target.value)}
+                          onBlur={() => setEditingField(null)} // Exit edit mode on blur
+                          autoFocus
+                          className="bg-transparent border-none outline-none resize-none"
+                          style={{
+                            fontSize: `${size}px`,
+                            fontFamily: font,
+                            color: fontColor,
+                            fontWeight: isBold ? "bold" : "normal",
+                            fontStyle: isItalic ? "italic" : "normal",
+                            letterSpacing: `${letterSpacing}px`,
+                            lineHeight: `${lineHeight}`,
+                            whiteSpace: "nowrap",
+                            overflow: "hidden", // Prevent scrollbars from appearing
+                            textAlign: textAlign,
+                            zIndex: selectedField === id ? 10 : 1,
+                            border: "2px dotted blue", // Border for the textarea when editing
+                            width: "fit-content", // Width based on text content
+                            height: "fit-content", // Allow height to adjust according to the content
+                            minHeight: "fit-content", // Ensure no minimum height
+                            maxWidth: "fit-content", // Prevent it from growing too large
+                          }}
+                          onInput={(e) => {
+                            e.target.style.height = "auto"; // Reset height before adjusting
+                            e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
+                          }}
+                          onFocus={(e) =>
+                            e.target.setSelectionRange(
+                              e.target.value.length,
+                              e.target.value.length
+                            )
+                          } // Place cursor at the end when focused
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            display: "inline-block",
+                            padding: "2px 5px",
+                            cursor: "text",
+                          }}
+                        >
+                          {text.split("\n").map((line, index) => (
+                            <div key={index}>
+                              {line.split("").map((char, charIndex) => {
+                                const curve = curveValue || 0;
+                                const angle =
+                                  (Math.PI *
+                                    curve *
+                                    (charIndex - Math.floor(line.length / 2))) /
+                                  line.length;
+                                const radius = 100;
+                                return (
+                                  <span
+                                    key={charIndex}
+                                    style={{
+                                      position: "relative",
+                                      transform: `rotate(${angle}rad) translateY(-${radius}px)`,
+                                      transformOrigin: "center",
+                                    }}
+                                  >
+                                    {isUppercase
+                                      ? char.toUpperCase()
+                                      : isLowercase
+                                        ? char.toLowerCase()
+                                        : char}
+                                  </span>
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Resizing Handle */}
+                      {selectedField === id && (
+                        <div
+                          onMouseDown={(e) => handleResizeMouseDown(e, id)}
+                          onTouchStart={(e) => handleResizeTouchStart(e, id)} // Added for touch
+                          onTouchMove={handleResizeTouchMove} // Added for touch
+                          onTouchEnd={handleResizeTouchEnd} // Added for touch
+                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
+                          style={{ transform: "translate(50%, 50%)" }}
+                        >
+                          <i className="fas fa-arrows-alt text-white text-sm"></i>
+                        </div>
+                      )}
+
+                      {/* Delete Button */}
+                      {selectedField === id && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(id);
+                          }}
+                          onTouchEnd={(e) => {
+                            e.stopPropagation();
+                            handleDelete(id);
+                          }}
+                          className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
+                          style={{
+                            transform: "translate(50%, -50%)",
+                            zIndex: 20,
+                          }}
+                        >
+                          <i className="fas fa-times-circle text-red-500 text-sm"></i>
+                        </button>
+                      )}
+
+                      {/* Rotate Button */}
+                      {selectedField === id && (
+                        <div
+                          onMouseDown={(e) => handleRotateMouseDown(e, id)}
+                          onTouchStart={(e) => handleRotateTouchStart(e, id)}
+                          onTouchMove={handleRotateTouchMove} // Handle touch move
+                          onTouchEnd={handleRotateTouchEnd} // Handle touch end
+                          className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
+                          style={{
+                            transform: "translate(-50%, -50%)",
+                            zIndex: 20,
+                          }}
+                        >
+                          <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
+                        </div>
+                      )}
+                    </div>
+                  )
+                )}
+              </div>
+
+              {/* Buttons Below the Image */}
+              <div className="flex lg:gap-3 md:mt-4 lg:mt-1 gap-4 sm:mt-4 mt-6 ">
+                {/* Preview Button */}
+                <button
+                  onClick={handlePreview}
+                  className="flex items-center justify-center mx-auto gap-2  px-10 py-3  text-[#AF7D32] font-medium rounded-lg   transform hover:scale-105 transition-all duration-300"
+                >
+                  <span>Preview</span>
+                </button>
+              </div>
+            </div>
+            {/* Center Section - Action Buttons (hidden on small screens) */}
+            {selectedField && selectedTextField && !isSmallScreen && (
+              <div className="lg:ml-6 lg:mr-4 self-center"> {/* Added spacing */}
+                <TextOptions
+                  selectedText={selectedTextField}
+                  updateTextField={updateTextField}
+                  onClose={handleClose}
+                />
+              </div>
+            )}
+            <div className="md:flex flex px-1 text-sm flex-row lg:flex-col justify-evenly bg-white rounded-xl lg:p-7 lg:mr-6 lg:h-[40%] lg:mt-5  items-center gap-4">
+              <button
+                onClick={handleAddNewText}
+                className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2  bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
+              >
+                <i class="fa-solid fa-font fa-lg"></i>
+                <span>Add Text</span>
+              </button>
+              <button
+                onClick={() => setShowStickerSelector(true)}
+                className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2 bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
+              >
+                <i class="fa-regular fa-note-sticky fa-lg"></i>
+                <span>Add Sticker</span>
+              </button>
+              <button
+                onClick={handleAddImageClick}
+                className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2 bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
+              >
+                <i class="fa-regular fa-square-plus fa-lg"></i>
+                <span>Add Image</span>
               </button>
             </div>
           </div>
