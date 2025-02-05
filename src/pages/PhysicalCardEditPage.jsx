@@ -1077,7 +1077,7 @@ export default function WeddingCardEditor() {
 
   return (
     <div className="h-[110vh]">
-      <div className="w-full flex flex-col  h-[20%] border-gray-300 border-b-2 lg:flex-row justify-evenly py-3 items-center  bg-white shadow-md relative">
+      <div className="w-full flex flex-col  h-[15vh] lg:h-[15vh] xl:h-[15vh] lg:px-20 border-gray-300 border-b-2 lg:flex-row justify-between py-3 items-center  bg-white shadow-md relative">
         {/* Left Section - Logo */}
         <div className="flex items-center">
           <img
@@ -1288,12 +1288,12 @@ export default function WeddingCardEditor() {
               {/* Image Container */}
               <div
                 id="design-container"
-                className="relative  flex items-center mx-auto border w-3/4 lg:w-[390px] border-gray-200 bg-gray-50 overflow-hidden"
+                className="relative  flex items-center mx-auto border w-3/4 lg:w-[550px] border-gray-200 bg-gray-50 overflow-hidden"
               >
                 <img
                   src={imageUrl}
                   alt="Background"
-                  className="w-full h-auto mx-auto object-cover "
+                  className="w-full lg:w-[550px] lg:h-[490px] mx-auto object-cover "
                 />
 
                 {stickers.map(({ id, src, x, y, width, height }) => (
@@ -1634,23 +1634,28 @@ export default function WeddingCardEditor() {
                                 }}
                               >
                                 {line.split("").map((char, charIndex) => {
+                                  // Use the absolute value to calculate a consistent arc spread.
+                                  const maxArc = (Math.abs(curveValue) / 50) * 180;
                                   let theta = 0;
                                   if (totalChars > 1) {
                                     // Distribute characters evenly along the arc.
-                                    // theta goes from -maxArc/2 to +maxArc/2.
-                                    theta =
-                                      -maxArc / 2 +
-                                      (charIndex / (totalChars - 1)) * maxArc;
+                                    // theta will go from -maxArc/2 to +maxArc/2.
+                                    theta = -maxArc / 2 + (charIndex / (totalChars - 1)) * maxArc;
                                   }
                                   // Convert theta to radians.
                                   const thetaRad = (theta * Math.PI) / 180;
                                   // Define a circle radius (adjust this value to control the curvature)
                                   const R = 100;
-                                  // Calculate the offset for each character along the circle.
+                                  // Calculate the offsets along the circle.
                                   const offsetX = R * Math.sin(thetaRad);
                                   const offsetY = R - R * Math.cos(thetaRad);
-                                  // The letter rotation is chosen so that the character is tangent to the arc.
-                                  const rotation = -theta;
+
+                                  // For upward curves (curveValue >= 0) we want a rotation of -theta;
+                                  // for downward curves (curveValue < 0), use theta.
+                                  const rotation = curveValue >= 0 ? -theta : theta;
+                                  // For upward curves, move the characters upward (negative y);
+                                  // for downward curves, move them downward.
+                                  const translateY = curveValue >= 0 ? -offsetY : offsetY;
 
                                   return (
                                     <span
@@ -1658,9 +1663,9 @@ export default function WeddingCardEditor() {
                                       style={{
                                         position: "relative",
                                         display: "inline-block",
-                                        transform: `translate(${offsetX}px, ${curveValue >= 0 ? -offsetY : offsetY
-                                          }px) rotate(${rotation}deg)`,
-                                        transformOrigin: "center bottom",
+                                        transform: `translate(${offsetX}px, ${translateY}px) rotate(${rotation}deg)`,
+                                        // Change the transform origin based on the curve direction.
+                                        transformOrigin: curveValue >= 0 ? "center bottom" : "center top",
                                       }}
                                     >
                                       {isUppercase
@@ -1671,6 +1676,7 @@ export default function WeddingCardEditor() {
                                     </span>
                                   );
                                 })}
+
                               </div>
                             );
                           })}
@@ -1727,7 +1733,7 @@ export default function WeddingCardEditor() {
                   />
                 </div>
               )}
-              <div className="md:flex flex px-1 text-sm flex-row lg:flex-col justify-evenly mx-auto bg-white rounded-xl lg:p-7 mt-8 lg:mr-6 lg:h-[40%] lg:mt-5  items-center gap-4">
+              <div className="md:flex px-1 text-sm flex-row lg:flex-col justify-evenly mx-auto bg-white rounded-xl lg:p-7 mt-8 lg:mr-6 h-64 items-center gap-4">
                 <button
                   onClick={handleAddNewText}
                   className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2  bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
