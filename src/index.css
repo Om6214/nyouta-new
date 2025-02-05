@@ -10,178 +10,162 @@
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
- /* Hide scrollbar for IE, Edge and Firefox */
+  /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-}
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 @font-face {
-  font-family: 'Andallan';
-  src: url('./fonts/Andallan.otf') format('opentype');
+  font-family: "Andallan";
+  src: url("./fonts/Andallan.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Linna';
-  src: url('./fonts/Linna-Regular_2.ttf') format('truetype');
+  font-family: "Linna";
+  src: url("./fonts/Linna-Regular_2.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'AvalonBold';
-  src: url('./fonts/AVALONB.TTF') format('truetype');
+  font-family: "AvalonBold";
+  src: url("./fonts/AVALONB.TTF") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'AvalonNormal';
-  src: url('./fonts/AVALONN.TTF') format('truetype');
+  font-family: "AvalonNormal";
+  src: url("./fonts/AVALONN.TTF") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TT_Medium';
-  src: url('./fonts/tt0037m_.ttf') format('truetype');
+  font-family: "TT_Medium";
+  src: url("./fonts/tt0037m_.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Angelina';
-  src: url('./fonts/angelina-regular-400.otf') format('opentype');
+  font-family: "Angelina";
+  src: url("./fonts/angelina-regular-400.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Bebas Neue';
-  src: url('./fonts/Bebas-Neue-Bold.ttf.woff') format('woff');
+  font-family: "Bebas Neue";
+  src: url("./fonts/Bebas-Neue-Bold.ttf.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Blade Rush';
-  src: url('./fonts/blade-rush-blade-rush-regular-400.otf') format('opentype');
+  font-family: "Blade Rush";
+  src: url("./fonts/blade-rush-blade-rush-regular-400.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Cinzel';
-  src: url('./fonts/Cinzel-Regular.ttf.woff') format('woff');
+  font-family: "Cinzel";
+  src: url("./fonts/Cinzel-Regular.ttf.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Garden Hidaleya';
-  src: url('./fonts/Garden-Hidaleya.otf') format('opentype');
+  font-family: "Garden Hidaleya";
+  src: url("./fonts/Garden-Hidaleya.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Justin Hailey';
-  src: url('./fonts/justin-hailey-justin-hailey-regular-400.ttf') format('truetype');
+  font-family: "Justin Hailey";
+  src: url("./fonts/justin-hailey-justin-hailey-regular-400.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Lovely Valentine';
-  src: url('./fonts/lovely-valentine-script.otf') format('opentype');
+  font-family: "Lovely Valentine";
+  src: url("./fonts/lovely-valentine-script.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Magdelin';
-  src: url('./fonts/magdelin-regular.otf') format('opentype');
+  font-family: "Magdelin";
+  src: url("./fonts/magdelin-regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Mussica Swash';
-  src: url('./fonts/MussicaSwash.otf') format('opentype');
+  font-family: "Mussica Swash";
+  src: url("./fonts/MussicaSwash.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'New Walt Disney';
-  src: url('./fonts/New-Walt-Disney-Font-Regular.ttf.woff') format('woff');
+  font-family: "New Walt Disney";
+  src: url("./fonts/New-Walt-Disney-Font-Regular.ttf.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Nexa Bold';
-  src: url('./fonts/NexaBold.ttf.woff') format('woff');
+  font-family: "Nexa Bold";
+  src: url("./fonts/NexaBold.ttf.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Quicksand';
-  src: url('./fonts/Quicksand-Medium.ttf.woff') format('woff');
+  font-family: "Quicksand";
+  src: url("./fonts/Quicksand-Medium.ttf.woff") format("woff");
   font-weight: 500;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Rhinatta';
-  src: url('./fonts/rhinatta-regular.otf') format('opentype');
+  font-family: "Rhinatta";
+  src: url("./fonts/rhinatta-regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Shattime';
-  src: url('./fonts/shattime-regular.otf') format('opentype');
+  font-family: "Shattime";
+  src: url("./fonts/shattime-regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
-  font-family: 'Vivaldi';
-  src: url('./fonts/Vivaldi-Italic.ttf.woff') format('woff');
+  font-family: "Vivaldi";
+  src: url("./fonts/Vivaldi-Italic.ttf.woff") format("woff");
   font-weight: normal;
   font-style: italic;
 }
 
-
 @font-face {
-  font-family: 'Wedding';
-  src: url('./fonts/Wedding.otf') format('opentype');
+  font-family: "Wedding";
+  src: url("./fonts/Wedding.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
-
 
 .swiper {
   margin-left: 0 !important;
@@ -189,14 +173,27 @@
 }
 
 /* Default arrow size */
-.swiper-button-next::after, 
+.swiper-button-next::after,
 .swiper-button-prev::after {
   font-size: 50px !important; /* Controls the actual arrow icon size */
 }
 
+/* Add to your CSS file */
+@media (pointer: coarse) {
+  .text-element {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .text-handles {
+    transform: scale(1.5); /* Larger touch targets */
+  }
+}
+
 /* Reduce arrow size for medium screens */
 @media (max-width: 768px) {
-  .swiper-button-next::after, 
+  .swiper-button-next::after,
   .swiper-button-prev::after {
     font-size: 40px !important;
   }
@@ -204,7 +201,7 @@
 
 /* Reduce arrow size further for small screens */
 @media (max-width: 480px) {
-  .swiper-button-next::after, 
+  .swiper-button-next::after,
   .swiper-button-prev::after {
     font-size: 28px !important;
   }

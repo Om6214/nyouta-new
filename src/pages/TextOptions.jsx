@@ -107,7 +107,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       </div>
 
       {/* Formatting Buttons */}
-      <div className="flex flex-col gap-2">
+      <div className="flex md:flex-row flex-col gap-2">
         <button
           onClick={() => updateTextField(selectedText.id, "isBold", !isBold)}
           className={`p-2 rounded-lg ${isBold ? "bg-[#AF7D32] text-white" : " hover:bg-gray-100"}`}
@@ -243,7 +243,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
       </div>
 
       {/* Case Buttons */}
-      <div className="flex flex-col gap-2">
+      <div className="flex md:flex-row flex-col gap-2">
         <button
           onClick={toggleUppercase}
           className={`p-2 rounded-lg ${isUppercase ? "bg-[#AF7D32] text-white" : " hover:bg-gray-100"}`}
