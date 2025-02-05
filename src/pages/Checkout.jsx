@@ -54,6 +54,8 @@ const Checkout = () => {
     const { addresses, loading } = useSelector((state) => state.address);
     const { cart } = useSelector((state) => state.product);
     // console.log(cart)
+
+    
     const user = localStorage.getItem('user');
     useEffect(() => {
         dispatch(getCart());
@@ -203,6 +205,8 @@ const Checkout = () => {
         const rzp1 = new window.Razorpay(options);
         rzp1.open();
     }
+
+    
     return (
         <div className="flex flex-col-reverse lg:flex-row justify-between gap-8 p-4 md:p-6 lg:p-8 bg-gray-50">
   {/* Billing Details Section */}

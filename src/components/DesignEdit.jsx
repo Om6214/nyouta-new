@@ -198,8 +198,19 @@ export default function DesignEdit() {
   };
 
   const handleBuyNow = () => {
-    navigate('/checkout-buy', { state: { filteredProduct } }); // Passing product data to Checkout
-  };
+    const productData = {
+        productId: filteredProduct._id,
+        quantity,
+        customText,
+        userUploadedImages,
+        product: filteredProduct, // Full product details
+        isSingleProduct: true // <-- Flag for single product purchase
+    };
+
+    navigate('/checkout-buy', { state: productData });
+};
+
+
 
   // Add this function to handle image uploads
   const handleImageUpload = async (files) => {
@@ -236,7 +247,7 @@ export default function DesignEdit() {
 
   return (
     <div className="max-w-6xl mx-auto mb-20 p-4 sm:p-6 ">
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 ">
         {/* Product Image Section */}
         <div className="flex flex-col-reverse sm:flex-row items-start gap-4 lg:sticky lg:top-10 lg:h-[65vh]">
         

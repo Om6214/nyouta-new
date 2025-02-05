@@ -11,6 +11,34 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import cropimage from "../assets/images/croppicture.png"
+import weddingguestlistPdf from "../assets/images/Wedding Guest List - PDF.png"
+import weddingguestlistXls from "../assets/images/Wedding Guest List - XLS.png"
+import weddingNotepad from "../assets/images/Wedding Notepad.png"
+import ogWeddingPdf from "../assets/Pdf/Wedding Guest List-PDF.pdf"
+import ogWeddingXls from "../assets/Pdf/Wedding Guest List-XLS.xlsx"
+import ogWeddingNotepad from "../assets/Pdf/Wedding Notepad.pdf"
+import { toast, ToastContainer } from "react-toastify";
+
+
+const allPdf = [
+  {
+    title:"Wedding Guest List - PDF",
+    image:weddingguestlistPdf,
+    content:ogWeddingPdf
+  },
+  {
+    title:"Wedding Guest List - XLS",
+    image:weddingguestlistXls,
+    content:ogWeddingXls
+  },
+  {
+    title:"Wedding Notepad",
+    image:weddingNotepad,
+    content:ogWeddingNotepad
+  }
+]
+
 export default function CategoryLabel() {
 
   async function fetchProducts() {
@@ -24,6 +52,17 @@ export default function CategoryLabel() {
       console.error("Error fetching products:", error);
     }
   }
+
+const token = localStorage.getItem('token'); // Replace 'token' with your key
+
+if (token) {
+  console.log('Token exists:', token);
+  // Perform actions based on the token
+} else {
+  console.log('No token found');
+  // Redirect to login page or handle accordingly
+}
+
   
   useEffect(() => {
     fetchProducts();
@@ -56,6 +95,12 @@ export default function CategoryLabel() {
       item.subCategory.toLowerCase() === formattedPath.toLowerCase();
     return categoryMatch && subCategoryMatch;
   });
+
+
+  const handleDownload = () => {
+  toast.error("Token is invalid, Please Login")
+  }
+
   const handleButtonClick = () => {
     if (filteredItems.length > 0) {
       if (filteredItems[0].category === "Photo Books") {
@@ -185,6 +230,52 @@ export default function CategoryLabel() {
     //   </div>
     //   <div className="mb-9" id="sdfasf"></div>
     // </>
-    <></>
+    <div className="w-[100vw] smooth-scroll">
+    <div className="w-full bg-[#FAF9FE] flex flex-col lg:flex-row   ">
+    <div className="w-full lg:w-[50%] flex justify-center lg:justify-start p-6 lg:p-0"><img src={cropimage} alt="BannerImage" /></div>
+    <div className="w-full lg:w-[50%] p-6 lg:p-0 flex flex-col justify-center items-center gap-6">
+      <h1 className="text-2xl sm:text-3xl font-[italic]">FREE PRINTABLE</h1>
+      <h2 className="text-4xl sm:text-5xl italic">Wedding planner</h2>
+      <p className="w-full sm:w-[450px] text-center" >Our 100 worksheets to guide you through each step of planning your big day </p>
+      <a href="#download"><button className="px-8 py-2 bg-[#F0DED0] capitalize font-semibold text-gray-700 hover:-translate-y-1 hover:translate-x-1 hover:shadow-lg transition duration-200 ">download now </button></a>
+    </div>
+    </div>
+
+    <div id="download" className="flex flex-col gap-10 bg-[hsl(26,16%,46%)] py-10 sm:px-10 ">
+      <div className="flex flex-col gap-4 items-center text-center">
+        <h1 className="text-4xl font-semibold text-[#ecbe81]">PLANNING SHEETS</h1>
+        <p className="w-full px-6 text-justify sm:px-0 sm:w-[500px]  text-white ">Download and print our free printables to see which planner will work best for you. 
+Get organized today with our free planning printables.
+</p>
+<h2 className="text-2xl sm:text-3xl italic text-white font-semibold">Ready ..... Set ..... Download !</h2>
+      </div>
+      {token ? <div className="flex gap-16 flex-wrap justify-center">
+      {allPdf.map((pdf)=><div  className=" flex flex-col   gap-2 group rounded-lg bg-white shadow-lg hover:-translate-y-2 transition duration-200 ">
+        <div className=" w-full rounded-t-lg overflow-hidden"><img src={pdf.image} alt="image" className="group-hover:scale-110 group-hover:rotate-2 duration-200 transition" /></div>
+        <div className="">
+          <h1 className="text-center font-semibold text-gray-700">{pdf.title}</h1>
+        </div>
+        <div className="">
+          <a href={pdf.content} download={true} ><p className="capitalize text-gray-500  text-center py-2 ">download <i class="fa-solid  fa-download ms-1"></i></p></a>
+        </div>
+      </div>)}
+      </div> : <div className="flex gap-16 flex-wrap justify-center">
+      {allPdf.map((pdf)=><div  className=" flex flex-col   gap-2 group rounded-lg bg-white shadow-lg hover:-translate-y-2 transition duration-200 ">
+        <div className=" w-full rounded-t-lg overflow-hidden"><img src={pdf.image} alt="image" className="group-hover:scale-110 group-hover:rotate-2 duration-200 transition" /></div>
+        <div className="">
+          <h1 className="text-center font-semibold text-gray-700">{pdf.title}</h1>
+        </div>
+        <div className="">
+          <div onClick={handleDownload} className="cursor-pointer" ><p className="capitalize text-gray-500  text-center py-2">download <i class="fa-solid  fa-download ms-1"></i></p></div>
+        </div>
+      </div>)}
+      </div>}
+
+      
+      
+     
+    </div>
+    <ToastContainer/>
+    </div>
   );
 }
