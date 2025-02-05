@@ -142,19 +142,21 @@ export default function WeddingCardEditor() {
   };
 
   const handleAddNewText = () => {
+    // Save current state for undo
+    setUndoStack((prevStack) => [
+      ...prevStack,
+      { textFields, smallImages, stickers },
+    ]);
+    setRedoStack([]); // Clear redo stack on new action
+
     const newTextField = {
-      id: Date.now(), // Unique ID based on timestamp
+      id: Date.now(),
       text: "New Text",
-      x: 100, // Example position
-      y: 100, // Example position
-      size: 20, // Example size
+      x: 100,
+      y: 100,
+      size: 20,
       font: "Roboto",
-      fontColor: "#000000",
-      isBold: false,
-      isItalic: false,
-      textAlign: "left",
-      lineHeight: 1.5,
-      letterSpacing: 1,
+      // ... other properties
     };
     setTextFields([...textFields, newTextField]);
   };
@@ -434,19 +436,46 @@ export default function WeddingCardEditor() {
 
   const handleUndo = () => {
     if (undoStack.length > 0) {
-      const lastChange = undoStack.pop();
-      setRedoStack((prevStack) => [...prevStack, { textFields }]);
+      const undoStackCopy = [...undoStack];
+      const lastChange = undoStackCopy.pop();
+
+      // Save current state to redo stack before undoing
+      setRedoStack((prevStack) => [
+        ...prevStack,
+        { textFields, smallImages, stickers },
+      ]);
+
+      // Restore all state variables from the last undo step
       setTextFields(lastChange.textFields);
+      setSmallImages(lastChange.smallImages);
+      setStickers(lastChange.stickers);
+
+      // Update undo stack
+      setUndoStack(undoStackCopy);
     }
   };
 
   const handleRedo = () => {
     if (redoStack.length > 0) {
-      const redoChange = redoStack.pop();
-      setUndoStack((prevStack) => [...prevStack, { textFields }]);
+      const redoStackCopy = [...redoStack];
+      const redoChange = redoStackCopy.pop();
+
+      // Save current state to undo stack before redoing
+      setUndoStack((prevStack) => [
+        ...prevStack,
+        { textFields, smallImages, stickers },
+      ]);
+
+      // Restore all state variables from the redo step
       setTextFields(redoChange.textFields);
+      setSmallImages(redoChange.smallImages);
+      setStickers(redoChange.stickers);
+
+      // Update redo stack
+      setRedoStack(redoStackCopy);
     }
   };
+
   const [draggingField, setDraggingField] = useState(null); // Tracks which field is being dragged
   const [resizingField, setResizingField] = useState(null);
 
@@ -544,6 +573,10 @@ export default function WeddingCardEditor() {
   };
 
   const handleStickerSelect = (sticker) => {
+    // Save current state
+    setUndoStack((prev) => [...prev, { textFields, smallImages, stickers }]);
+    setRedoStack([]);
+
     setStickers((prev) => [
       ...prev,
       {
