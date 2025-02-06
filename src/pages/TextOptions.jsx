@@ -37,7 +37,7 @@ const TextOptions = ({ selectedText, updateTextField, onClose }) => {
   const [curveValue, setCurveValue] = useState(selectedText.curveValue || 0);
   const [isCurveOpen, setIsCurveOpen] = useState(false);
 
-  console.log(selectedText.curveValue)
+  // console.log(selectedText.curveValue)
 
   const fontOptions = [
     "Lora",

@@ -71,7 +71,7 @@ export default function WeddingCardEditor() {
   const [showImageUploadOptions, setShowImageUploadOptions] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [savedPages, setSavedPages] = useState({});
-  console.log("savedpages globle", savedPages);
+  // console.log("savedpages globle", savedPages);
   const [savedStickers, setSavedStickers] = useState({});
   const [selectedImageId, setSelectedImageId] = useState(null);
   const [images, setImages] = useState([]);
@@ -83,7 +83,7 @@ export default function WeddingCardEditor() {
   const location = useLocation();
   const { images: initialImages = [] } = location.state || {}; // Default to an empty array if images are not present
   const [selectedField, setSelectedField] = useState(null);
-  console.log("parent stickers", stickers);
+  // console.log("parent stickers", stickers);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const startDrag = (clientX, clientY, id, x, y) => {
@@ -182,7 +182,7 @@ export default function WeddingCardEditor() {
     const savedStickersFromStorage =
       JSON.parse(localStorage.getItem("savedStickers")) || {}; // Load stickers from localStorage
 
-    console.log("savedPagesFromStorage", savedPagesFromStorage); // Debugging line
+    // console.log("savedPagesFromStorage", savedPagesFromStorage); // Debugging line
 
     setSavedPages(savedPagesFromStorage);
     setSavedSmallImages(savedSmallImagesFromStorage);
@@ -703,10 +703,10 @@ export default function WeddingCardEditor() {
   const [isMediumScreen, setISMediumScreen] = useState(false);
   useEffect(() => {
     const handleResize = () => {
-      console.log("Resize event triggered"); // Log to see if the event is firing
+      // console.log("Resize event triggered"); // Log to see if the event is firing
       setISMediumScreen(window.innerWidth < 1024 && window.innerWidth >= 768);
-      console.log("Screen size check:"); // Log the condition
-      console.log("Yes vfvxbcbvcbcvbdbb");
+      // console.log("Screen size check:"); // Log the condition
+      // console.log("Yes vfvxbcbvcbcvbdbb");
     };
 
     handleResize(); // Set initial value
@@ -719,10 +719,10 @@ export default function WeddingCardEditor() {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("Resize event triggered"); // Log to see if the event is firing
+      // console.log("Resize event triggered"); // Log to see if the event is firing
       setIsSmallScreen(window.innerWidth < 768);
-      console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
-      console.log("Yes vfvxbcbvcbcvbdbb");
+      // console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
+      // console.log("Yes vfvxbcbvcbcvbdbb");
     };
 
     handleResize(); // Set initial value
@@ -751,10 +751,10 @@ export default function WeddingCardEditor() {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("Resize event triggered"); // Log to see if the event is firing
+      // console.log("Resize event triggered"); // Log to see if the event is firing
       SetisBigScreen(window.innerWidth >= 1024);
-      console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
-      console.log("Yes vfvxbcbvcbcvbdbb");
+      // console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
+      // console.log("Yes vfvxbcbvcbcvbdbb");
     };
 
     handleResize(); // Set initial value
@@ -773,7 +773,7 @@ export default function WeddingCardEditor() {
         field.id === id ? { ...field, rotationAngle: newRotationAngle } : field
       )
     );
-    console.log("newRotationAngle", newRotationAngle);
+    // console.log("newRotationAngle", newRotationAngle);
   };
 
   const getAngleForTextField = (id) => {
@@ -982,19 +982,21 @@ export default function WeddingCardEditor() {
     });
   };
   const handleRotateTouchStart = (e, id) => {
-    if (e.cancelable) e.preventDefault();
+    e.preventDefault();
+    e.stopPropagation();
+    
     const touch = e.touches[0];
     const rect = e.target.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
+    const centerX = rect.left + rect.width/2;
+    const centerY = rect.top + rect.height/2;
+  
     const angle = Math.atan2(
       touch.clientY - centerY,
       touch.clientX - centerX
     );
-
-    setRotateState({
-      id,
+  
+    setRotateState({ 
+      id, 
       startAngle: angle,
       centerX,
       centerY,
@@ -1034,6 +1036,23 @@ export default function WeddingCardEditor() {
     );
   };
 
+  useEffect(() => {
+    const handleTouchMove = (e) => {
+      if (rotateState) {
+        handleRotateTouchMove(e);
+      } else if (draggingField) {
+        handleTouchMove(e);
+      }
+    };
+
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleRotateTouchEnd);
+
+    return () => {
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleRotateTouchEnd);
+    };
+  }, [rotateState, draggingField]);
   const handleDeleteTextField = (id) => {
     setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
     setSelectedField(null);
@@ -1041,16 +1060,17 @@ export default function WeddingCardEditor() {
 
 
   const handleRotateTouchMove = (e) => {
-    if (!rotateState || !e.touches[0]) return;
-
+    if (!rotateState) return;
+    e.preventDefault();
+    e.stopPropagation();
+  
     const touch = e.touches[0];
     const deltaAngle = Math.atan2(
       touch.clientY - rotateState.centerY,
       touch.clientX - rotateState.centerX
     ) - rotateState.startAngle;
-
+  
     const newRotation = rotateState.initialRotation + (deltaAngle * 180 / Math.PI);
-
     updateTextField(rotateState.id, "angle", newRotation);
   };
 
@@ -1563,18 +1583,17 @@ export default function WeddingCardEditor() {
                         userSelect: 'none',
                       }}
                       onDoubleClick={() => setEditingField(id)}
-                      onMouseDown={(e) => handleMouseDown(e, id, x, y)}
+                      onMouseDown={(e) => {
+                        // Only start drag if not clicking on controls
+                        if (!e.target.closest('.rotation-handle, .resize-handle')) {
+                          handleMouseDown(e, id, x, y);
+                        }
+                      }}
                       onTouchStart={(e) => {
-                        handleTouchStart(e, id, x, y);
-                        handleRotateTouchStart(e, id);
-                      }}
-                      onTouchMove={(e) => {
-                        handleTouchMove(e);
-                        handleRotateTouchMove(e);
-                      }}
-                      onTouchEnd={(e) => {
-                        handleTouchEnd(e, id);
-                        handleRotateTouchEnd();
+                        // Only start drag if not touching controls
+                        if (!e.target.closest('.rotation-handle, .resize-handle')) {
+                          handleTouchStart(e, id, x, y);
+                        }
                       }}
                     >
                       {/* Delete Button */}
