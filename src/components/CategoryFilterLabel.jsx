@@ -576,7 +576,7 @@ export default function CategoryFilterLabel() {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8 px-6 md:px-[6%] py-5 bg-slate-50">
         {/* Left Carousel (Takes up 2/3 of the space) */}
-        <div className="lg:sticky lg:top-44 h-auto md:col-span-4 self-start">
+        <div className="lg:sticky lg:top-10 h-auto md:col-span-4 self-start">
           <div className="w-full max-w-full mx-auto">
             <div className="relative w-full lg:mt-0 max-w-7xl mx-auto flex gap-0">
               {/* Thumbnail Navigation (Left Side) */}
