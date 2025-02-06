@@ -93,6 +93,24 @@ export default function WeddingCardEditor() {
   };
 
 
+  useEffect(() => {
+    const handleDocumentClick = (e) => {
+      // Optionally: check if e.target is not part of your selectable elements,
+      // for example, if you add a class like "selectable", you can do:
+      // if (!e.target.closest('.selectable')) { ... }
+      setSelectedStickerId(null);
+      setSelectedImageId(null);
+      setSelectedField(null);
+      // You can also clear any other selection state as needed
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
+
   const updateDrag = (clientX, clientY) => {
     if (isDragging && draggingField) {
       const newX = clientX - position.x;
@@ -613,8 +631,12 @@ export default function WeddingCardEditor() {
 
   // Function to handle the deletion of a text field
   const handleDelete = (id) => {
+    // Save current state
+    setUndoStack((prev) => [...prev, { textFields, smallImages, stickers }]);
+    setRedoStack([]);
+
     setTextFields((prev) => prev.filter((textField) => textField.id !== id));
-    setSelectedField(null); // Deselect field after deletion
+    setSelectedField(null);
   };
 
   const handleUpdate = () => {
@@ -973,25 +995,25 @@ export default function WeddingCardEditor() {
     setRotateState({ id, startAngle, centerX, centerY });
   };
 
-  const handleResizeTouchMove = (e) => {
-    if (!resizeState) return; // Prevent errors if state is not set
-    const touch = e.touches[0];
-    const deltaX = touch.clientX - resizeState.startX;
-    const deltaY = touch.clientY - resizeState.startY;
+  // const handleResizeTouchMove = (e) => {
+  //   if (!resizeState) return; // Prevent errors if state is not set
+  //   const touch = e.touches[0];
+  //   const deltaX = touch.clientX - resizeState.startX;
+  //   const deltaY = touch.clientY - resizeState.startY;
 
-    // Example logic to update field size
-    updateFieldSize(resizeState.id, deltaX, deltaY);
+  //   // Example logic to update field size
+  //   updateFieldSize(resizeState.id, deltaX, deltaY);
 
-    setResizeState({
-      ...resizeState,
-      startX: touch.clientX,
-      startY: touch.clientY,
-    });
-  };
+  //   setResizeState({
+  //     ...resizeState,
+  //     startX: touch.clientX,
+  //     startY: touch.clientY,
+  //   });
+  // };
 
-  const handleResizeTouchEnd = () => {
-    setResizeState(null); // Clear state after resize is complete
-  };
+  // const handleResizeTouchEnd = () => {
+  //   setResizeState(null); // Clear state after resize is complete
+  // };
   const updateFieldSize = (id, deltaX, deltaY) => {
     setTextFields((prevFields) =>
       prevFields.map((field) =>
@@ -1121,20 +1143,7 @@ export default function WeddingCardEditor() {
         </div>
 
 
-
-        {/* Plus Button (visible only on small screens) */}
-        {/* <div className="md:hidden flex items-center">
-          <button
-            onClick={() => setShowModal(true)}
-            className="p-3 bg-[#AF7D32] text-white rounded-full shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-          >
-            <FaPlus size={24} />
-          </button>
-        </div> */}
-
-        {/* Right Section - Undo/Redo */}
-
-        <div className="flex flex-row space-x-2 lg:space-x-4">
+        <div className="flex flex-row md:w-full justify-between md-justify-between space-x-2 lg:space-x-4 md:px-20">
           <div className="flex gap-4 z-10">
             <button
               onClick={handleUndo}
@@ -1153,63 +1162,23 @@ export default function WeddingCardEditor() {
               <Redo2 size={20} />
             </button>
           </div>
-          <button
-            onClick={handleSaveChanges}
-            className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-          >
-            <span>Save</span>
-          </button>
-          <button
-            onClick={handleShare}
-            className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-          >
-            <span>Share</span>
-          </button>
+          <div className="flex md:flex-row space-x-4">
+            <button
+              onClick={handleSaveChanges}
+              className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+            >
+              <span>Save</span>
+            </button>
+            <button
+              onClick={handleShare}
+              className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+            >
+              <span>Share</span>
+            </button>
+          </div>
         </div>
 
-        {/* Modal (shown when plus button is clicked) */}
-        {/* {showModal && (
-          <div className="fixed inset-x-0 bottom-0 z-50 md:inset-0 md:flex md:items-center md:justify-center">
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50"
-              onClick={() => setShowModal(false)}
-            />
-            <div className="relative bg-white w-full md:w-80 md:rounded-lg md:m-4">
-              <div className="flex justify-between items-center p-4 border-b">
-                <h3 className="text-xl font-semibold">Add Elements</h3>
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <AiOutlineClose size={24} />
-                </button>
-              </div>
-              <div className="p-4 space-y-3">
-                <button
-                  onClick={() => handleOptionClick("text")}
-                  className="w-full flex items-center gap-3 px-4 py-3 bg-[#AF7D32] text-white rounded-lg hover:bg-[#643C28] transition-all duration-300"
-                >
-                  <AiOutlineFileText size={20} />
-                  <span>Add Text</span>
-                </button>
-                <button
-                  onClick={() => handleOptionClick("sticker")}
-                  className="w-full flex items-center gap-3 px-4 py-3 bg-[#AF7D32] text-white rounded-lg hover:bg-[#643C28] transition-all duration-300"
-                >
-                  <FaStickerMule size={20} />
-                  <span>Add Sticker</span>
-                </button>
-                <button
-                  onClick={() => handleOptionClick("image")}
-                  className="w-full flex items-center gap-3 px-4 py-3 bg-[#AF7D32] text-white rounded-lg hover:bg-[#643C28] transition-all duration-300"
-                >
-                  <AiOutlinePicture size={20} />
-                  <span>Add Image</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )} */}
+
       </div>
 
       {/* Sticker Selector */}
@@ -1425,7 +1394,7 @@ export default function WeddingCardEditor() {
                             }}
                             title="Resize Sticker"
                           >
-                            <i className="fas fa-arrows-alt text-white"></i>
+                            <i className="fas fa-arrows-alt text-black"></i>
                           </div>
                         </>
                       )}
@@ -1536,7 +1505,7 @@ export default function WeddingCardEditor() {
                             }}
                             title="Resize Image"
                           >
-                            <i className="fas fa-arrows-alt text-white"></i>
+                            <i className="fas fa-arrows-alt text-black"></i>
                           </div>
                         </>
                       )}
@@ -1592,12 +1561,35 @@ export default function WeddingCardEditor() {
                       }}
                       onDoubleClick={() => setEditingField(id)}
                       onMouseDown={(e) => handleMouseDown(e, id, x, y)}
-                      onTouchStart={(e) => handleTouchStart(e, id, x, y)}
+                      onTouchStart={(e) => {
+                        e.preventDefault();
+                        const touch = e.touches[0];
+                        handleTouchStart(e, id, x, y);
+                        if (selectedField === id) {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const centerX = rect.left + rect.width / 2;
+                          const centerY = rect.top + rect.height / 2;
+
+                          // Check if touching rotation handle
+                          const rotationHandleRect = e.currentTarget.querySelector('.rotate-handle')?.getBoundingClientRect();
+                          if (rotationHandleRect &&
+                            touch.clientX >= rotationHandleRect.left &&
+                            touch.clientX <= rotationHandleRect.right &&
+                            touch.clientY >= rotationHandleRect.top &&
+                            touch.clientY <= rotationHandleRect.bottom) {
+                            handleRotateTouchStart(e, id);
+                          }
+                        }
+                      }}
                       onTouchMove={(e) => {
                         e.preventDefault();
                         handleTouchMove(e);
+                        if (rotateState?.id === id) handleRotateTouchMove(e);
                       }}
-                      onTouchEnd={(e) => handleTouchEnd(e, id)}
+                      onTouchEnd={(e) => {
+                        handleTouchEnd(e, id);
+                        handleRotateTouchEnd();
+                      }}
                     >
                       {/* Delete Button */}
                       {selectedField === id && (
@@ -1719,14 +1711,18 @@ export default function WeddingCardEditor() {
                       {selectedField === id && (
                         <div
                           onMouseDown={(e) => handleRotateMouseDown(e, id)}
-                          onTouchStart={(e) => handleRotateMouseDown(e, id)} // Or a separate touch handler
-                          className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
+                          onTouchStart={(e) => {
+                            e.stopPropagation();
+                            handleRotateTouchStart(e, id);
+                          }}
+                          className="rotate-handle absolute top-0 left-0 w-8 h-8 cursor-pointer bg-white rounded-full flex justify-center items-center shadow-lg"
                           style={{
                             transform: "translate(-50%, -50%)",
                             zIndex: 20,
+                            touchAction: "none",
                           }}
                         >
-                          <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
+                          <i className="fas fa-sync-alt text-yellow-500 text-lg"></i>
                         </div>
                       )}
 
@@ -1734,14 +1730,26 @@ export default function WeddingCardEditor() {
                       {selectedField === id && (
                         <div
                           onMouseDown={(e) => handleResizeMouseDown(e, id)}
-                          onTouchStart={(e) => handleResizeTouchStart(e, id)}
-                          className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
+                          onTouchStart={(e) => {
+                            e.stopPropagation();
+                            const touch = e.touches[0];
+                            const rect = e.target.getBoundingClientRect();
+                            setResizeState({
+                              id,
+                              startX: touch.clientX,
+                              startY: touch.clientY,
+                              startWidth: size,
+                              startHeight: size,
+                            });
+                          }}
+                          className="resize-handle absolute right-0 bottom-0 w-8 h-8 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center bg-white"
                           style={{
                             transform: "translate(50%, 50%)",
                             zIndex: 20,
+                            touchAction: "none",
                           }}
                         >
-                          <i className="fas fa-arrows-alt text-white text-sm"></i>
+                          <i className="fas fa-arrows-alt text-black  text-lg"></i>
                         </div>
                       )}
                     </div>
@@ -1756,7 +1764,7 @@ export default function WeddingCardEditor() {
 
             </div>
             {/* Center Section - Action Buttons (hidden on small screens) */}
-            <div className="flex lg:flex-row">
+            <div className="flex md:flex-col lg:flex-row">
               {selectedField && selectedTextField && !isSmallScreen && (
                 <div className="lg:ml-6 lg:mr-4 self-center"> {/* Added spacing */}
                   <TextOptions
@@ -1766,7 +1774,7 @@ export default function WeddingCardEditor() {
                   />
                 </div>
               )}
-              <div className="md:flex px-1 text-sm flex-row lg:flex-col justify-evenly mx-auto bg-white rounded-xl lg:p-7 mt-8 lg:mr-6 h-64 items-center gap-4">
+              <div className="md:flex  flex p-2 px-2 text-sm flex-row lg:flex-col justify-evenly mx-auto bg-white rounded-xl lg:p-7 mt-8 lg:mr-6 lg:h-64 items-center gap-4">
                 <button
                   onClick={handleAddNewText}
                   className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2  bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
