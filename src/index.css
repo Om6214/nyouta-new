@@ -200,6 +200,21 @@
   border-color: #4299e1;
   border-width: 2px;
 }
+/* Add to your CSS file */
+#design-container {
+  transition: height 0.3s ease;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#design-container img {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+}
 
 .rotation-handle {
   position: absolute;

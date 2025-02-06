@@ -71,7 +71,7 @@ export default function WeddingCardEditor() {
   const [showImageUploadOptions, setShowImageUploadOptions] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [savedPages, setSavedPages] = useState({});
-  // console.log("savedpages globle", savedPages);
+  console.log("savedpages globle", savedPages);
   const [savedStickers, setSavedStickers] = useState({});
   const [selectedImageId, setSelectedImageId] = useState(null);
   const [images, setImages] = useState([]);
@@ -83,7 +83,7 @@ export default function WeddingCardEditor() {
   const location = useLocation();
   const { images: initialImages = [] } = location.state || {}; // Default to an empty array if images are not present
   const [selectedField, setSelectedField] = useState(null);
-  // console.log("parent stickers", stickers);
+  console.log("parent stickers", stickers);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const startDrag = (clientX, clientY, id, x, y) => {
@@ -182,7 +182,7 @@ export default function WeddingCardEditor() {
     const savedStickersFromStorage =
       JSON.parse(localStorage.getItem("savedStickers")) || {}; // Load stickers from localStorage
 
-    // console.log("savedPagesFromStorage", savedPagesFromStorage); // Debugging line
+    console.log("savedPagesFromStorage", savedPagesFromStorage); // Debugging line
 
     setSavedPages(savedPagesFromStorage);
     setSavedSmallImages(savedSmallImagesFromStorage);
@@ -613,12 +613,8 @@ export default function WeddingCardEditor() {
 
   // Function to handle the deletion of a text field
   const handleDelete = (id) => {
-    // Save current state
-    setUndoStack((prev) => [...prev, { textFields, smallImages, stickers }]);
-    setRedoStack([]);
-
     setTextFields((prev) => prev.filter((textField) => textField.id !== id));
-    setSelectedField(null);
+    setSelectedField(null); // Deselect field after deletion
   };
 
   const handleUpdate = () => {
@@ -703,10 +699,10 @@ export default function WeddingCardEditor() {
   const [isMediumScreen, setISMediumScreen] = useState(false);
   useEffect(() => {
     const handleResize = () => {
-      // console.log("Resize event triggered"); // Log to see if the event is firing
+      console.log("Resize event triggered"); // Log to see if the event is firing
       setISMediumScreen(window.innerWidth < 1024 && window.innerWidth >= 768);
-      // console.log("Screen size check:"); // Log the condition
-      // console.log("Yes vfvxbcbvcbcvbdbb");
+      console.log("Screen size check:"); // Log the condition
+      console.log("Yes vfvxbcbvcbcvbdbb");
     };
 
     handleResize(); // Set initial value
@@ -719,10 +715,10 @@ export default function WeddingCardEditor() {
 
   useEffect(() => {
     const handleResize = () => {
-      // console.log("Resize event triggered"); // Log to see if the event is firing
+      console.log("Resize event triggered"); // Log to see if the event is firing
       setIsSmallScreen(window.innerWidth < 768);
-      // console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
-      // console.log("Yes vfvxbcbvcbcvbdbb");
+      console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
+      console.log("Yes vfvxbcbvcbcvbdbb");
     };
 
     handleResize(); // Set initial value
@@ -733,28 +729,11 @@ export default function WeddingCardEditor() {
   const [isBigScreen, SetisBigScreen] = useState(false);
 
   useEffect(() => {
-    const handleTouchMoveGlobal = (e) => {
-      handleTouchMove(e);
-      handleRotateTouchMove(e);
-    };
-
-    document.addEventListener('touchmove', handleTouchMoveGlobal, { passive: false });
-    document.addEventListener('touchend', handleRotateTouchEnd);
-
-    return () => {
-      document.removeEventListener('touchmove', handleTouchMoveGlobal);
-      document.removeEventListener('touchend', handleRotateTouchEnd);
-    };
-  }, [draggingField, rotateState]);
-
-
-
-  useEffect(() => {
     const handleResize = () => {
-      // console.log("Resize event triggered"); // Log to see if the event is firing
+      console.log("Resize event triggered"); // Log to see if the event is firing
       SetisBigScreen(window.innerWidth >= 1024);
-      // console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
-      // console.log("Yes vfvxbcbvcbcvbdbb");
+      console.log("Screen size check for medium:", window.innerWidth < 768); // Log the condition
+      console.log("Yes vfvxbcbvcbcvbdbb");
     };
 
     handleResize(); // Set initial value
@@ -773,7 +752,7 @@ export default function WeddingCardEditor() {
         field.id === id ? { ...field, rotationAngle: newRotationAngle } : field
       )
     );
-    // console.log("newRotationAngle", newRotationAngle);
+    console.log("newRotationAngle", newRotationAngle);
   };
 
   const getAngleForTextField = (id) => {
@@ -810,80 +789,80 @@ export default function WeddingCardEditor() {
     document.addEventListener("mouseup", onMouseUp);
   };
 
-  // const handleRotateMouseDownSticker = (e, id) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
+  const handleRotateMouseDownSticker = (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-  //   // Find the selected sticker
-  //   const sticker = stickers.find((sticker) => sticker.id === id);
+    // Find the selected sticker
+    const sticker = stickers.find((sticker) => sticker.id === id);
 
-  //   // Calculate the center of the sticker (for rotation)
-  //   const centerX = sticker.x + sticker.width / 2;
-  //   const centerY = sticker.y + sticker.height / 2;
+    // Calculate the center of the sticker (for rotation)
+    const centerX = sticker.x + sticker.width / 2;
+    const centerY = sticker.y + sticker.height / 2;
 
-  //   console.log(`Initial Center: (${centerX}, ${centerY})`);
+    console.log(`Initial Center: (${centerX}, ${centerY})`);
 
-  //   // Store the initial mouse coordinates and initial angle
-  //   const initialMouseX = e.clientX;
-  //   const initialMouseY = e.clientY;
-  //   let initialAngle = sticker.rotation || 0;
+    // Store the initial mouse coordinates and initial angle
+    const initialMouseX = e.clientX;
+    const initialMouseY = e.clientY;
+    let initialAngle = sticker.rotation || 0;
 
-  //   // Calculate the initial angle based on mouse movement
-  //   const calculateAngle = (clientX, clientY) => {
-  //     const deltaX = clientX - centerX;
-  //     const deltaY = clientY - centerY;
-  //     return Math.atan2(deltaY, deltaX) * (180 / Math.PI); // Angle in degrees
-  //   };
+    // Calculate the initial angle based on mouse movement
+    const calculateAngle = (clientX, clientY) => {
+      const deltaX = clientX - centerX;
+      const deltaY = clientY - centerY;
+      return Math.atan2(deltaY, deltaX) * (180 / Math.PI); // Angle in degrees
+    };
 
-  //   // Mouse move handler for tracking rotation
-  //   const handleMouseMove = (moveEvent) => {
-  //     const newAngle = calculateAngle(moveEvent.clientX, moveEvent.clientY);
-  //     const angleDifference = newAngle - initialAngle;
+    // Mouse move handler for tracking rotation
+    const handleMouseMove = (moveEvent) => {
+      const newAngle = calculateAngle(moveEvent.clientX, moveEvent.clientY);
+      const angleDifference = newAngle - initialAngle;
 
-  //     console.log(
-  //       `Mouse Move - New Angle: ${newAngle}, Angle Difference: ${angleDifference}`
-  //     );
+      console.log(
+        `Mouse Move - New Angle: ${newAngle}, Angle Difference: ${angleDifference}`
+      );
 
-  //     // Update the sticker's rotation state
-  //     setStickers((prevStickers) =>
-  //       prevStickers.map((sticker) =>
-  //         sticker.id === id
-  //           ? { ...sticker, rotation: initialAngle + angleDifference }
-  //           : sticker
-  //       )
-  //     );
-  //   };
+      // Update the sticker's rotation state
+      setStickers((prevStickers) =>
+        prevStickers.map((sticker) =>
+          sticker.id === id
+            ? { ...sticker, rotation: initialAngle + angleDifference }
+            : sticker
+        )
+      );
+    };
 
-  //   // Mouse up handler to stop rotating
-  //   const handleMouseUp = () => {
-  //     // Remove the mousemove and mouseup event listeners
-  //     document.removeEventListener("mousemove", handleMouseMove);
-  //     document.removeEventListener("mouseup", handleMouseUp);
-  //   };
+    // Mouse up handler to stop rotating
+    const handleMouseUp = () => {
+      // Remove the mousemove and mouseup event listeners
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
 
-  //   // Add event listeners for mouse move and mouse up
-  //   document.addEventListener("mousemove", handleMouseMove);
-  //   document.addEventListener("mouseup", handleMouseUp);
-  // };
-  // const [showModal, setShowModal] = useState(false);
+    // Add event listeners for mouse move and mouse up
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+  const [showModal, setShowModal] = useState(false);
 
-  // const handleOptionClick = (action) => {
-  //   switch (action) {
-  //     case "text":
-  //       handleAddNewText();
-  //       break;
-  //     case "sticker":
-  //       setShowStickerSelector(true);
-  //       break;
-  //     case "image":
-  //       handleAddImageClick();
-  //       break;
-  //   }
-  //   setShowModal(false);
-  // };
+  const handleOptionClick = (action) => {
+    switch (action) {
+      case "text":
+        handleAddNewText();
+        break;
+      case "sticker":
+        setShowStickerSelector(true);
+        break;
+      case "image":
+        handleAddImageClick();
+        break;
+    }
+    setShowModal(false);
+  };
 
-  // const [isDownload, setIsDownload] = useState(false);
-  // const { productId } = useParams();
+  const [isDownload, setIsDownload] = useState(false);
+  const { productId } = useParams();
   /*
   const handleDownloadPDF = () => {
     navigate(`/product/${productId}/edit-physical-card/download-pdf`, {
@@ -898,20 +877,20 @@ export default function WeddingCardEditor() {
   };
   */
 
-  // const [isDownloadWatermark, SetisDownloadWatermark] = useState(false);
-  // const [isDownloadPurchase, SetisDownloadPurchase] = useState(false);
-  // const DownloadWithWatermark = () => {
-  //   SetisDownloadWatermark(true);
-  // };
-  // const DownloadPurchase = () => {
-  //   console.log("works");
-  //   SetisDownloadPurchase(true);
-  // };
+  const [isDownloadWatermark, SetisDownloadWatermark] = useState(false);
+  const [isDownloadPurchase, SetisDownloadPurchase] = useState(false);
+  const DownloadWithWatermark = () => {
+    SetisDownloadWatermark(true);
+  };
+  const DownloadPurchase = () => {
+    console.log("works");
+    SetisDownloadPurchase(true);
+  };
 
-  // const handleDownloadPDF = () => {
-  //   // Navigate to the PDF page
-  //   setIsDownload(true);
-  // };
+  const handleDownloadPDF = () => {
+    // Navigate to the PDF page
+    setIsDownload(true);
+  };
 
   const downloadFun = () => {
     setIsDownload(false);
@@ -926,19 +905,19 @@ export default function WeddingCardEditor() {
     // Optionally, reset any dragging state
     setDragging(false);
   };
-  // const handleResizeStop = (direction, ref, delta, position, id) => {
-  //   const newWidth = ref.offsetWidth;
-  //   const newHeight = ref.offsetHeight;
+  const handleResizeStop = (direction, ref, delta, position, id) => {
+    const newWidth = ref.offsetWidth;
+    const newHeight = ref.offsetHeight;
 
-  //   // Update size and position for the element
-  //   updateFieldSize(id, newWidth, newHeight);
+    // Update size and position for the element
+    updateFieldSize(id, newWidth, newHeight);
 
-  //   // Optionally update position if Rnd allows repositioning during resize
-  //   updateFieldPosition(id, position.x, position.y);
+    // Optionally update position if Rnd allows repositioning during resize
+    updateFieldPosition(id, position.x, position.y);
 
-  //   // Reset any resizing-related states if necessary
-  //   setResizing(false);
-  // };
+    // Reset any resizing-related states if necessary
+    setResizing(false);
+  };
 
   const updateFieldPosition = (id, newX, newY) => {
     setTextFields((prevFields) =>
@@ -951,14 +930,8 @@ export default function WeddingCardEditor() {
   const handleTouchStart = (e, id, x, y) => {
     if (e.cancelable) e.preventDefault();
     const touch = e.touches[0];
-    const rect = e.target.getBoundingClientRect();
-
-    // Use element-relative coordinates
-    const offsetX = touch.clientX - rect.left;
-    const offsetY = touch.clientY - rect.top;
-
     setDraggingField(id);
-    setTouchOffset({ x: offsetX, y: offsetY });
+    setTouchOffset({ x: touch.clientX - x, y: touch.clientY - y });
   };
 
   const handleTouchMove = (e) => {
@@ -982,26 +955,22 @@ export default function WeddingCardEditor() {
     });
   };
   const handleRotateTouchStart = (e, id) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
+    if (e.cancelable) e.preventDefault(); // Prevent default behavior if allowed
+
     const touch = e.touches[0];
-    const rect = e.target.getBoundingClientRect();
-    const centerX = rect.left + rect.width/2;
-    const centerY = rect.top + rect.height/2;
-  
-    const angle = Math.atan2(
+    const boundingRect = e.target.getBoundingClientRect();
+
+    // Calculate the center of the element
+    const centerX = boundingRect.left + boundingRect.width / 2;
+    const centerY = boundingRect.top + boundingRect.height / 2;
+
+    // Calculate the starting angle based on the touch position
+    const startAngle = Math.atan2(
       touch.clientY - centerY,
       touch.clientX - centerX
     );
-  
-    setRotateState({ 
-      id, 
-      startAngle: angle,
-      centerX,
-      centerY,
-      initialRotation: textFields.find(f => f.id === id)?.angle || 0
-    });
+
+    setRotateState({ id, startAngle, centerX, centerY });
   };
 
   const handleResizeTouchMove = (e) => {
@@ -1036,23 +1005,6 @@ export default function WeddingCardEditor() {
     );
   };
 
-  useEffect(() => {
-    const handleTouchMove = (e) => {
-      if (rotateState) {
-        handleRotateTouchMove(e);
-      } else if (draggingField) {
-        handleTouchMove(e);
-      }
-    };
-
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleRotateTouchEnd);
-
-    return () => {
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleRotateTouchEnd);
-    };
-  }, [rotateState, draggingField]);
   const handleDeleteTextField = (id) => {
     setTextFields((prevFields) => prevFields.filter((field) => field.id !== id));
     setSelectedField(null);
@@ -1060,18 +1012,22 @@ export default function WeddingCardEditor() {
 
 
   const handleRotateTouchMove = (e) => {
-    if (!rotateState) return;
-    e.preventDefault();
-    e.stopPropagation();
-  
+    if (!rotateState || e.touches.length !== 1) return; // Ensure a single touch point
+
     const touch = e.touches[0];
-    const deltaAngle = Math.atan2(
-      touch.clientY - rotateState.centerY,
-      touch.clientX - rotateState.centerX
-    ) - rotateState.startAngle;
-  
-    const newRotation = rotateState.initialRotation + (deltaAngle * 180 / Math.PI);
-    updateTextField(rotateState.id, "angle", newRotation);
+    const { id, startAngle, centerX, centerY } = rotateState;
+
+    // Calculate the current angle based on touch position
+    const currentAngle = Math.atan2(
+      touch.clientY - centerY,
+      touch.clientX - centerX
+    );
+
+    // Calculate the rotation difference
+    const angleDiff = currentAngle - startAngle;
+
+    // Update the rotation angle of the text field
+    updateTextField(id, "angle", (angleDiff * 180) / Math.PI); // Convert radians to degrees
   };
 
   // Perform rotation
@@ -1165,7 +1121,20 @@ export default function WeddingCardEditor() {
         </div>
 
 
-        <div className="flex flex-row md:w-full justify-between md-justify-between space-x-2 lg:space-x-4 md:px-20">
+
+        {/* Plus Button (visible only on small screens) */}
+        {/* <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setShowModal(true)}
+            className="p-3 bg-[#AF7D32] text-white rounded-full shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+          >
+            <FaPlus size={24} />
+          </button>
+        </div> */}
+
+        {/* Right Section - Undo/Redo */}
+
+        <div className="flex flex-row space-x-2 lg:space-x-4">
           <div className="flex gap-4 z-10">
             <button
               onClick={handleUndo}
@@ -1184,23 +1153,63 @@ export default function WeddingCardEditor() {
               <Redo2 size={20} />
             </button>
           </div>
-          <div className="flex md:flex-row space-x-4">
-            <button
-              onClick={handleSaveChanges}
-              className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-            >
-              <span>Save</span>
-            </button>
-            <button
-              onClick={handleShare}
-              className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
-            >
-              <span>Share</span>
-            </button>
-          </div>
+          <button
+            onClick={handleSaveChanges}
+            className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+          >
+            <span>Save</span>
+          </button>
+          <button
+            onClick={handleShare}
+            className="flex items-center justify-center h-11 px-4 py-0 bg-[#AF7D32] text-white font-medium rounded-lg shadow-lg hover:bg-[#643C28] transform hover:scale-105 transition-all duration-300"
+          >
+            <span>Share</span>
+          </button>
         </div>
 
-
+        {/* Modal (shown when plus button is clicked) */}
+        {/* {showModal && (
+          <div className="fixed inset-x-0 bottom-0 z-50 md:inset-0 md:flex md:items-center md:justify-center">
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50"
+              onClick={() => setShowModal(false)}
+            />
+            <div className="relative bg-white w-full md:w-80 md:rounded-lg md:m-4">
+              <div className="flex justify-between items-center p-4 border-b">
+                <h3 className="text-xl font-semibold">Add Elements</h3>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <AiOutlineClose size={24} />
+                </button>
+              </div>
+              <div className="p-4 space-y-3">
+                <button
+                  onClick={() => handleOptionClick("text")}
+                  className="w-full flex items-center gap-3 px-4 py-3 bg-[#AF7D32] text-white rounded-lg hover:bg-[#643C28] transition-all duration-300"
+                >
+                  <AiOutlineFileText size={20} />
+                  <span>Add Text</span>
+                </button>
+                <button
+                  onClick={() => handleOptionClick("sticker")}
+                  className="w-full flex items-center gap-3 px-4 py-3 bg-[#AF7D32] text-white rounded-lg hover:bg-[#643C28] transition-all duration-300"
+                >
+                  <FaStickerMule size={20} />
+                  <span>Add Sticker</span>
+                </button>
+                <button
+                  onClick={() => handleOptionClick("image")}
+                  className="w-full flex items-center gap-3 px-4 py-3 bg-[#AF7D32] text-white rounded-lg hover:bg-[#643C28] transition-all duration-300"
+                >
+                  <AiOutlinePicture size={20} />
+                  <span>Add Image</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )} */}
       </div>
 
       {/* Sticker Selector */}
@@ -1580,21 +1589,15 @@ export default function WeddingCardEditor() {
                         transformOrigin: "center",
                         transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`,
                         touchAction: "none",
-                        userSelect: 'none',
                       }}
                       onDoubleClick={() => setEditingField(id)}
-                      onMouseDown={(e) => {
-                        // Only start drag if not clicking on controls
-                        if (!e.target.closest('.rotation-handle, .resize-handle')) {
-                          handleMouseDown(e, id, x, y);
-                        }
+                      onMouseDown={(e) => handleMouseDown(e, id, x, y)}
+                      onTouchStart={(e) => handleTouchStart(e, id, x, y)}
+                      onTouchMove={(e) => {
+                        e.preventDefault();
+                        handleTouchMove(e);
                       }}
-                      onTouchStart={(e) => {
-                        // Only start drag if not touching controls
-                        if (!e.target.closest('.rotation-handle, .resize-handle')) {
-                          handleTouchStart(e, id, x, y);
-                        }
-                      }}
+                      onTouchEnd={(e) => handleTouchEnd(e, id)}
                     >
                       {/* Delete Button */}
                       {selectedField === id && (
@@ -1715,15 +1718,15 @@ export default function WeddingCardEditor() {
                       {/* Rotate Handle */}
                       {selectedField === id && (
                         <div
-                          onTouchStart={(e) => handleRotateTouchStart(e, id)}
-                          className="absolute top-0 left-0 w-8 h-8 cursor-pointer bg-white rounded-full flex justify-center items-center text-handles"
+                          onMouseDown={(e) => handleRotateMouseDown(e, id)}
+                          onTouchStart={(e) => handleRotateMouseDown(e, id)} // Or a separate touch handler
+                          className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
                           style={{
                             transform: "translate(-50%, -50%)",
                             zIndex: 20,
-                            boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
                           }}
                         >
-                          <i className="fas fa-sync-alt text-yellow-500 text-lg"></i>
+                          <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
                         </div>
                       )}
 
@@ -1753,7 +1756,7 @@ export default function WeddingCardEditor() {
 
             </div>
             {/* Center Section - Action Buttons (hidden on small screens) */}
-            <div className="flex md:flex-col lg:flex-row">
+            <div className="flex lg:flex-row">
               {selectedField && selectedTextField && !isSmallScreen && (
                 <div className="lg:ml-6 lg:mr-4 self-center"> {/* Added spacing */}
                   <TextOptions
@@ -1763,7 +1766,7 @@ export default function WeddingCardEditor() {
                   />
                 </div>
               )}
-              <div className="md:flex  flex p-2 px-2 text-sm flex-row lg:flex-col justify-evenly mx-auto bg-white rounded-xl lg:p-7 mt-8 lg:mr-6 lg:h-64 items-center gap-4">
+              <div className="md:flex px-1 text-sm flex-row lg:flex-col justify-evenly mx-auto bg-white rounded-xl lg:p-7 mt-8 lg:mr-6 h-64 items-center gap-4">
                 <button
                   onClick={handleAddNewText}
                   className="flex items-center justify-center gap-2 px-0 lg:px-7 py-2  bg-white text-gray-900 font-medium rounded-lg shadow-sm hover:bg-slate-50 transform hover:scale-105 transition-all duration-300"
