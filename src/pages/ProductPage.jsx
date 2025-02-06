@@ -173,7 +173,7 @@ export default function ProductPage() {
       
         <h1 className="text-2xl font-bold mb-4 text-gray-800">{product.name}</h1>
         <p className="text-xl font-semibold mb-2 text-gray-700">
-          <del className="text-gray-500">₹{product.price.toFixed(2)}</del> <span className="text-green-600 font-bold">Free</span>
+          <del className="text-gray-500"></del> <span className="text-green-600 font-bold">Free</span>
         </p>
 
         <div className="mb-2">
@@ -198,11 +198,11 @@ export default function ProductPage() {
           </ul>
         </div>
         <div className="space-x-4 flex md:flex-row mt-6 gap-4">
-          <button onClick={handleEditImage} className="w-full bg-amber-800  text-white py-3 px-4  transition duration-200 rounded-xl shadow-lg hover:bg-amber-900 ">Edit Greeting</button>
+          <button onClick={handleEditImage} className=" bg-amber-800  text-white py-3 px-12  transition duration-200 rounded-xl shadow-lg hover:bg-amber-900 ">Edit Greeting</button>
 
-          <button onClick={handleAddtoCart} disabled={addToCartLoading} className="w-full bg-gray-900 text-white py-3 px-4 mr-6 transition duration-200 rounded-xl shadow-lg hover:bg-gray-800">
+          {/* <button onClick={handleAddtoCart} disabled={addToCartLoading} className=" bg-gray-900 text-white py-3 px-12 mr-6 transition duration-200 rounded-xl shadow-lg hover:bg-gray-800">
             {addToCartLoading ? "Adding to Cart..." : "Add to Cart"}
-          </button>
+          </button> */}
         </div>
       </div>
 
