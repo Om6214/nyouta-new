@@ -55,13 +55,7 @@ export default function CategoryLabel() {
 
 const token = localStorage.getItem('token'); // Replace 'token' with your key
 
-if (token) {
-  console.log('Token exists:', token);
-  // Perform actions based on the token
-} else {
-  console.log('No token found');
-  // Redirect to login page or handle accordingly
-}
+
 
   
   useEffect(() => {
@@ -98,7 +92,7 @@ if (token) {
 
 
   const handleDownload = () => {
-  toast.error("Token is invalid, Please Login")
+  toast.error("You need to be logged in first..!")
   }
 
   const handleButtonClick = () => {
@@ -230,7 +224,7 @@ if (token) {
     //   </div>
     //   <div className="mb-9" id="sdfasf"></div>
     // </>
-    <div className="w-[100vw] smooth-scroll">
+    <div className="w-full  overflow-hidden ">
     <div className="w-full bg-[#FAF9FE] flex flex-col lg:flex-row   ">
     <div className="w-full lg:w-[50%] flex justify-center lg:justify-start p-6 lg:p-0"><img src={cropimage} alt="BannerImage" /></div>
     <div className="w-full lg:w-[50%] p-6 lg:p-0 flex flex-col justify-center items-center gap-6">
@@ -241,13 +235,13 @@ if (token) {
     </div>
     </div>
 
-    <div id="download" className="flex flex-col gap-10 bg-[hsl(26,16%,46%)] py-10 sm:px-10 ">
+    <div id="download" className="flex flex-col gap-10 bg-white py-10 sm:px-10 w-[100vw]">
       <div className="flex flex-col gap-4 items-center text-center">
         <h1 className="text-4xl font-semibold text-[#ecbe81]">PLANNING SHEETS</h1>
-        <p className="w-full px-6 text-justify sm:px-0 sm:w-[500px]  text-white ">Download and print our free printables to see which planner will work best for you. 
+        <p className="w-full px-6 text-justify sm:px-0 sm:w-[500px] text-gray-500   ">Download and print our free printables to see which planner will work best for you. 
 Get organized today with our free planning printables.
 </p>
-<h2 className="text-2xl sm:text-3xl italic text-white font-semibold">Ready ..... Set ..... Download !</h2>
+<h2 className="text-2xl sm:text-3xl italic text-gray-600 font-semibold">Ready ..... Set ..... Download !</h2>
       </div>
       {token ? <div className="flex gap-16 flex-wrap justify-center">
       {allPdf.map((pdf)=><div  className=" flex flex-col   gap-2 group rounded-lg bg-white shadow-lg hover:-translate-y-2 transition duration-200 ">
@@ -260,7 +254,7 @@ Get organized today with our free planning printables.
         </div>
       </div>)}
       </div> : <div className="flex gap-16 flex-wrap justify-center">
-      {allPdf.map((pdf)=><div  className=" flex flex-col   gap-2 group rounded-lg bg-white shadow-lg hover:-translate-y-2 transition duration-200 ">
+      {allPdf.map((pdf)=><div  className=" flex flex-col gap-2 group rounded-lg border-[hsl(34,55%,84%)] border-2 bg-white shadow-lg hover:-translate-y-2 transition duration-200 ">
         <div className=" w-full rounded-t-lg overflow-hidden"><img src={pdf.image} alt="image" className="group-hover:scale-110 group-hover:rotate-2 duration-200 transition" /></div>
         <div className="">
           <h1 className="text-center font-semibold text-gray-700">{pdf.title}</h1>

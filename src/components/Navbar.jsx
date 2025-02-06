@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+
 import { Link, useNavigate } from "react-router-dom";
 import {
   Heart,
@@ -542,8 +544,21 @@ export default function MainNav() {
     autoplaySpeed: 2000,
     cssEase: "linear"
   };
+  const location = useLocation();
+  
+  const stickyPaths = [
+    "/edit/Planner%20Books/Guest%20Management",
+    "/edit/Planner%20Books/Wedding%20Management",
+    "/edit/Planner%20Books/Wedding%20Notepad(liner)",
+    "/edit/Planner%20Books/Wedding%20Notepad(photo)",
+    "/edit/Planner%20Books/Guest%20List%20Booklet%20-%20Best%20Seller"
+  ];
+
+  const isSticky = stickyPaths.includes(location.pathname);
+// "flex sticky top-0 z-50 flex-col"
+console.log("isSticky",location.pathname);
   return (
-    <div className="flex sticky top-0 z-50 flex-col">
+    <div className={`${isSticky ? "flex sticky top-0 z-50 flex-col" : "flex  flex-col"}`}>
       <div className="h-[30px] flex justify-between px-6 lg:px-56 sm:px-8  bg-[#FAF0DC] ">
         <div className="bg-[#af7d32] rounded-b-2xl  text-white font-avalonN ms-4 sm:ms-0  flex items-center justify-center px-2 sm:px-4 tracking-widest text-md    sm:text-xl">
           NYOUTA
