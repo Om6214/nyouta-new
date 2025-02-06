@@ -101,6 +101,7 @@ export default function WeddingCardEditor() {
     }
   };
 
+
   const endDrag = () => {
     setIsDragging(false);
     setDraggingField(null);
@@ -1072,11 +1073,13 @@ export default function WeddingCardEditor() {
 
       const canvas = await html2canvas(container, {
         useCORS: true, // Enable if using cross-origin images
-        scale: 2 // For higher resolution
+        scale: 2       // For higher resolution
       });
 
       // Convert canvas to blob
-      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+      const blob = await new Promise((resolve) =>
+        canvas.toBlob(resolve, 'image/png')
+      );
 
       if (!blob) {
         throw new Error("Failed to convert canvas to image");
@@ -1085,18 +1088,13 @@ export default function WeddingCardEditor() {
       // Upload to Cloudinary
       const imageUrl = await uploadImageToCloudinary(blob);
 
-      // ✅ Move clipboard action into a direct user interaction context
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(imageUrl)
-          .then(() => {
-            toast.success('Shareable image link copied to clipboard!', { autoClose: 3000 });
-          })
-          .catch((error) => {
-            toast.error('Clipboard access denied');
-            console.error('Clipboard error:', error);
-          });
-      } else {
-        toast.error('Clipboard API not supported');
+      // Try writing to clipboard directly
+      try {
+        await navigator.clipboard.writeText(imageUrl);
+        toast.success('Shareable image link copied to clipboard!', { autoClose: 3000 });
+      } catch (clipboardError) {
+        toast.error('Clipboard access denied. Please copy the link manually.');
+        console.error('Clipboard error:', clipboardError);
       }
 
     } catch (error) {
@@ -1104,6 +1102,7 @@ export default function WeddingCardEditor() {
       console.error('Capture error:', error);
     }
   };
+
 
 
   if (loading) return <ShimmerSkeleton />;
@@ -1319,11 +1318,25 @@ export default function WeddingCardEditor() {
           <div className="flex flex-col lg:flex-row">
             <div className="flex flex-col mx-auto mt-4">
               {/* Image Container */}
+              {/* In the main image container */}
               <div
                 id="design-container"
-                className="relative  flex items-center mx-auto border w-3/4 lg:w-[550px] border-gray-200 bg-gray-50 overflow-hidden"
+                className="relative flex items-center mx-auto border w-3/4 lg:w-[527px] border-gray-200  bg-gray-50 overflow-hidden"
+                onClick={(e) => {
+                  // Deselect when clicking on the container background
+                  if (
+                    e.target.id === "design-container" ||
+                    e.target.id === "background-image"
+                  ) {
+                    // Clear any selected items
+                    setSelectedImageId(null);
+                    setSelectedStickerId(null);
+                    setSelectedField(null);
+                  }
+                }}
               >
                 <img
+                  id="background-image"
                   src={imageUrl}
                   alt="Background"
                   className="w-full lg:w-[550px] lg:h-[490px] mx-auto object-cover "
@@ -1436,7 +1449,7 @@ export default function WeddingCardEditor() {
                 {smallImages.map(({ id, src, x, y, width, height }) => (
                   <Rnd
                     key={id}
-                    size={{ width, height }}
+                    size={{ width, height: "auto" }}
                     position={{ x, y }}
                     onDragStart={(e) => {
                       // Prevent dragging if interacting with the delete button
@@ -1495,7 +1508,7 @@ export default function WeddingCardEditor() {
                       style={{
                         position: "relative",
                         width: "100%",
-                        height: "100%",
+                        height: "auto",
                       }}
                     >
                       <img
@@ -1576,7 +1589,8 @@ export default function WeddingCardEditor() {
                         fontStyle: isItalic ? "italic" : "normal",
                         letterSpacing: `${letterSpacing}px`,
                         lineHeight: `${lineHeight}`,
-                        whiteSpace: "nowrap",
+
+                        whiteSpace: "pre-wrap",
                         overflow: "visible",
                         textAlign: textAlign,
                         cursor: "move",
@@ -1846,7 +1860,7 @@ export default function WeddingCardEditor() {
             </div>
           )}
 
-          {showPreview && (
+          {/* {showPreview && (
             <Preview
               images={smallImages} // Pass the small images to the preview
               textFields={textFields} // Pass the text fields to the preview
@@ -1854,9 +1868,9 @@ export default function WeddingCardEditor() {
               currentImage={imageUrl} // Pass the current image URL
               onClose={handleClosePreview}
             />
-          )}
+          )} */}
 
-          {generatePdf && (
+          {/* {generatePdf && (
             <PdfGenerator
               savedPages={savedPages}
               savedSmallImages={savedSmallImages}
@@ -1864,7 +1878,7 @@ export default function WeddingCardEditor() {
               images={images}
               textFields={textFields}
             />
-          )}
+          )} */}
 
           {showErrorMessage && (
             <div className="absolute top-2  bg-red-100 border border-red-400 text-red-700 p-2 rounded">

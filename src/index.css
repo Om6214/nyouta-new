@@ -233,6 +233,9 @@
   touch-action: none;
   z-index: 20;
 }
+.react-draggable{
+  height: auto;
+}
 
 .rotation-handle i {
   color: #AF7D32;
