@@ -55,13 +55,7 @@ export default function CategoryLabel() {
 
 const token = localStorage.getItem('token'); // Replace 'token' with your key
 
-if (token) {
-  console.log('Token exists:', token);
-  // Perform actions based on the token
-} else {
-  console.log('No token found');
-  // Redirect to login page or handle accordingly
-}
+
 
   
   useEffect(() => {
@@ -98,7 +92,7 @@ if (token) {
 
 
   const handleDownload = () => {
-  toast.error("Token is invalid, Please Login")
+  toast.error("You need to be logged in first..!")
   }
 
   const handleButtonClick = () => {
@@ -230,7 +224,7 @@ if (token) {
     //   </div>
     //   <div className="mb-9" id="sdfasf"></div>
     // </>
-    <div className="w-[100vw] smooth-scroll">
+    <div className="w-full  overflow-hidden bg-black">
     <div className="w-full bg-[#FAF9FE] flex flex-col lg:flex-row   ">
     <div className="w-full lg:w-[50%] flex justify-center lg:justify-start p-6 lg:p-0"><img src={cropimage} alt="BannerImage" /></div>
     <div className="w-full lg:w-[50%] p-6 lg:p-0 flex flex-col justify-center items-center gap-6">
@@ -241,7 +235,7 @@ if (token) {
     </div>
     </div>
 
-    <div id="download" className="flex flex-col gap-10 bg-[hsl(26,16%,46%)] py-10 sm:px-10 ">
+    <div id="download" className="flex flex-col gap-10 bg-[hsl(26,16%,46%)] py-10 sm:px-10 w-[100vw]">
       <div className="flex flex-col gap-4 items-center text-center">
         <h1 className="text-4xl font-semibold text-[#ecbe81]">PLANNING SHEETS</h1>
         <p className="w-full px-6 text-justify sm:px-0 sm:w-[500px]  text-white ">Download and print our free printables to see which planner will work best for you. 
