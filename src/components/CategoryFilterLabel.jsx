@@ -612,15 +612,13 @@ export default function CategoryFilterLabel() {
               >
                 {productData.productVideo && (
                   <SwiperSlide>
-                    {/* Use full height of SwiperSlide */}
-                    <div className="w-full h-full relative">
+                    <div className="w-full h-full relative aspect-video bg-slate-50"> {/* Added aspect-video and bg-black */}
                       <video
                         src={productData.productVideo}
                         autoPlay
                         muted
                         loop
-                        // Remove vh-based sizing
-                        className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                        className="w-full h-full object-contain rounded-lg" // Changed to object-contain
                       />
                     </div>
                   </SwiperSlide>
