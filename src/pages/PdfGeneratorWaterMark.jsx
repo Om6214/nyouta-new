@@ -19,51 +19,45 @@ console.log("working");
   const generatePDF = async () => {
     setIsDownloading(true);
     try {
-      const pdf = new jsPDF("portrait", "px", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
+      let pdf;
+  
       for (let pageIndex = 0; pageIndex < images.length; pageIndex++) {
         const pageRef = previewRefs.current[pageIndex];
         if (!pageRef) continue;
-
-        // Step 1: Capture the page as an image
+  
+        // Render the DOM element to a canvas
         const canvas = await html2canvas(pageRef, {
-          scale: 2, // High resolution for better quality
-          useCORS: true, // Allow cross-origin images
+          scale: 2, // Increase the resolution
+          useCORS: true, // Allow cross-origin for external images
         });
-
-        // Step 2: Convert canvas to image data
-        const imageData = canvas.toDataURL("image/png");
-
-        // Step 3: Scale the image to fit the PDF page
+  
+        // Get image dimensions
         const imgWidth = canvas.width;
         const imgHeight = canvas.height;
-        const scaleFactor = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-
-        const pdfImgWidth = imgWidth * scaleFactor;
-        const pdfImgHeight = imgHeight * scaleFactor;
-
-        const xOffset = (pdfWidth - pdfImgWidth) / 2;
-        const yOffset = (pdfHeight - pdfImgHeight) / 2;
-
-        // Step 4: Add the image to the PDF
-        pdf.addImage(imageData, "PNG", xOffset, yOffset, pdfImgWidth, pdfImgHeight);
-
-        // Add a new page if not the last page
-        if (pageIndex < images.length - 1) {
-          pdf.addPage();
+  
+        // Convert canvas to image data
+        const imageData = canvas.toDataURL("image/png");
+  
+        // Initialize PDF with custom dimensions for the first page
+        if (pageIndex === 0) {
+          pdf = new jsPDF("portrait", "px", [imgWidth, imgHeight]);
+        } else {
+          pdf.addPage([imgWidth, imgHeight]); // Add new page with the same dimensions
         }
+  
+        // Add image to the PDF page
+        pdf.addImage(imageData, "PNG", 0, 0, imgWidth, imgHeight);
       }
-
-      // Step 5: Save the PDF
+  
+      // Save the generated PDF
       pdf.save("generated.pdf");
-      console.log("PDF generated successfully.");
       setIsDownloading(false);
     } catch (error) {
       console.error("Error generating PDF:", error);
+      setIsDownloading(false);
     }
   };
+
 
 
   return (
@@ -118,7 +112,7 @@ console.log("working");
                         key={id}
                         className="absolute"
                         style={{
-                          top: clampedY,
+                          top: clampedY-10,
                           left: clampedX,
                           fontSize: `${size}px`,
                           fontFamily: font,

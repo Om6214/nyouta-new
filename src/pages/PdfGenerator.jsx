@@ -14,37 +14,37 @@ console.log("working");
   const generatePDF = async () => {
     setIsDownloading(true);
     try {
-      const pdf = new jsPDF("portrait", "px", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth() - 20;
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
+      let pdf;
+  
       for (let pageIndex = 0; pageIndex < images.length; pageIndex++) {
         const pageRef = previewRefs.current[pageIndex];
         if (!pageRef) continue;
-
+  
+        // Render the DOM element to a canvas
         const canvas = await html2canvas(pageRef, {
-          scale: 2,
-          useCORS: true,
+          scale: 2, // Increase the resolution
+          useCORS: true, // Allow cross-origin for external images
         });
-
-        const imageData = canvas.toDataURL("image/png");
+  
+        // Get image dimensions
         const imgWidth = canvas.width;
         const imgHeight = canvas.height;
-        const scaleFactor = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
-
-        const pdfImgWidth = imgWidth * scaleFactor;
-        const pdfImgHeight = imgHeight * scaleFactor;
-
-        const xOffset = (pdfWidth - pdfImgWidth) / 2;
-        const yOffset = (pdfHeight - pdfImgHeight) / 2;
-
-        pdf.addImage(imageData, "PNG", xOffset, yOffset, pdfImgWidth, pdfImgHeight);
-
-        if (pageIndex < images.length - 1) {
-          pdf.addPage();
+  
+        // Convert canvas to image data
+        const imageData = canvas.toDataURL("image/png");
+  
+        // Initialize PDF with custom dimensions for the first page
+        if (pageIndex === 0) {
+          pdf = new jsPDF("portrait", "px", [imgWidth, imgHeight]);
+        } else {
+          pdf.addPage([imgWidth, imgHeight]); // Add new page with the same dimensions
         }
+  
+        // Add image to the PDF page
+        pdf.addImage(imageData, "PNG", 0, 0, imgWidth, imgHeight);
       }
-
+  
+      // Save the generated PDF
       pdf.save("generated.pdf");
       setIsDownloading(false);
     } catch (error) {
@@ -52,6 +52,7 @@ console.log("working");
       setIsDownloading(false);
     }
   };
+  
 
   return (
     <div>
@@ -113,7 +114,7 @@ console.log("working");
                       key={id}
                       className="absolute"
                       style={{
-                        top: clampedY,
+                        top: clampedY-10,
                         left: clampedX,
                         fontSize: `${size}px`,
                         fontFamily: font,

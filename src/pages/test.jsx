@@ -23,15 +23,15 @@ import { Download } from 'lucide-react';
 import { Rnd } from "react-rnd";
 import PdfGeneratorWaterMark from './PdfGeneratorWaterMark';
 export default function WeddingCardEditor() {
-  
+
   const [selectedStickerId, setSelectedStickerId] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newText, setNewText] = useState('');
   const [sizeValue, setSizeValue] = useState(30);
   const [textFields, setTextFields] = useState([]);
-  
 
+  const [editingField, setEditingField] = useState(null);
   const [isFontModalOpen, setIsFontModalOpen] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Blade Rush');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -117,7 +117,13 @@ export default function WeddingCardEditor() {
   };
 
   // Fetch savedPages from localStorage and set text fields for the current page
-
+  const handleTextChange = (id, value) => {
+    setTextFields((prevFields) =>
+      prevFields.map((field) =>
+        field.id === id ? { ...field, text: value } : field
+      )
+    );
+  };
   useEffect(() => {
     const savedPagesFromStorage = JSON.parse(localStorage.getItem('savedPages')) || {};
     const savedSmallImagesFromStorage = JSON.parse(localStorage.getItem('savedSmallImages')) || {};
@@ -1470,7 +1476,7 @@ export default function WeddingCardEditor() {
                   size,
                   font,
                   fontColor,
-                  angle, // Add angle here
+                  angle, // Rotation
                   isBold,
                   isItalic,
                   textAlign,
@@ -1498,50 +1504,90 @@ export default function WeddingCardEditor() {
                       textAlign: textAlign,
                       cursor: "move",
                       zIndex: selectedField === id ? 10 : 1,
-                      border: selectedField === id ? "2px dotted blue" : "none", // Border for selection
+                      border: selectedField === id && editingField !== id ? "2px dotted blue" : "none", // Apply border only when not in edit mode
                       width: "fit-content",
                       transformOrigin: "center",
-                      transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`, // Apply rotation
+                      transform: `translate(-50%, -50%) rotate(${angle || 0}deg)`,  // Apply Rotation
                     }}
                     onMouseDown={(e) => handleMouseDown(e, id, x, y)}
-                    onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Touch event for dragging
+                    onTouchStart={(e) => handleTouchStart(e, id, x, y)} // Touch dragging
+                    onDoubleClick={() => setEditingField(id)} // Enter edit mode on double-click
                   >
-                    {/* Render the text inside a bordered container */}
-                    <div
-                      style={{
-                        display: "inline-block",
-                        border: "1px solid #ccc",
-                        padding: "2px 5px",
-                      }}
-                    >
-                      {text.split("\n").map((line, index) => (
-                        <div key={index}>
-                          {line.split("").map((char, charIndex) => {
-                            const curve = curveValue || 0;
-                            const angle = (Math.PI * curve) * (charIndex - Math.floor(line.length / 2)) / line.length;
-                            const radius = 100;
-                            return (
-                              <span
-                                key={charIndex}
-                                style={{
-                                  position: "relative",
-                                  transform: `rotate(${angle}rad) translateY(-${radius}px)`,
-                                  transformOrigin: "center",
-                                }}
-                              >
-                                {isUppercase ? char.toUpperCase() : isLowercase ? char.toLowerCase() : char}
-                              </span>
-                            );
-                          })}
-                        </div>
-                      ))}
-                    </div>
+                    {/* Editable Text */}
+                    {editingField === id ? (
+                      <textarea
+                        value={text}
+                        onChange={(e) => handleTextChange(id, e.target.value)}
+                        onBlur={() => setEditingField(null)} // Exit edit mode on blur
+                        autoFocus
+                        className="bg-transparent border-none outline-none resize-none"
+                        style={{
+                          fontSize: `${size}px`,
+                          fontFamily: font,
+                          color: fontColor,
+                          fontWeight: isBold ? "bold" : "normal",
+                          fontStyle: isItalic ? "italic" : "normal",
+                          letterSpacing: `${letterSpacing}px`,
+                          lineHeight: `${lineHeight}`,
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",  // Prevent scrollbars from appearing
+                          textAlign: textAlign,
+                          zIndex: selectedField === id ? 10 : 1,
+                          border: "2px dotted blue", // Border for the textarea when editing
+                          width: "fit-content", // Width based on text content
+                          height: "auto", // Allow height to adjust according to the content
+                          minHeight: "auto", // Ensure no minimum height
+                          maxWidth: "fit-content", // Prevent it from growing too large
+                        }}
+                        onInput={(e) => {
+                          e.target.style.height = "auto"; // Reset height before adjusting
+                          e.target.style.height = `${e.target.scrollHeight}px`; // Adjust height based on content
+                        }}
+                        onFocus={(e) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)} // Place cursor at the end when focused
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          display: "inline-block",
+                          padding: "2px 5px",
+                          cursor: "text",
+                        }}
+                      >
+                        {text.split("\n").map((line, index) => (
+                          <div key={index}>
+                            {line.split("").map((char, charIndex) => {
+                              const curve = curveValue || 0;
+                              const angle =
+                                (Math.PI * curve * (charIndex - Math.floor(line.length / 2))) /
+                                line.length;
+                              const radius = 100;
+                              return (
+                                <span
+                                  key={charIndex}
+                                  style={{
+                                    position: "relative",
+                                    transform: `rotate(${angle}rad) translateY(-${radius}px)`,
+                                    transformOrigin: "center",
+                                  }}
+                                >
+                                  {isUppercase
+                                    ? char.toUpperCase()
+                                    : isLowercase
+                                      ? char.toLowerCase()
+                                      : char}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
                     {/* Resizing Handle */}
                     {selectedField === id && (
                       <div
                         onMouseDown={(e) => handleResizeMouseDown(e, id)}
-                        onTouchStart={(e) => handleResizeTouchStart(e, id)} // Touch event for resizing
+                        onTouchStart={(e) => handleResizeTouchStart(e, id)}
                         className="absolute right-0 bottom-0 w-6 h-6 cursor-se-resize border-2 border-blue-500 rounded-full flex justify-center items-center"
                         style={{ transform: "translate(50%, 50%)" }}
                       >
@@ -1558,9 +1604,9 @@ export default function WeddingCardEditor() {
                         }}
                         onTouchEnd={(e) => {
                           e.stopPropagation();
-                          handleDelete(id); // Touch delete
-                        }} // Touch event for delete
-                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white  border-2 border-blue-500 flex justify-center items-center"
+                          handleDelete(id);
+                        }}
+                        className="absolute top-0 right-0 w-6 h-6 rounded-full shadow bg-white border-2 border-blue-500 flex justify-center items-center"
                         style={{
                           transform: "translate(50%, -50%)",
                           zIndex: 20,
@@ -1574,19 +1620,24 @@ export default function WeddingCardEditor() {
                     {selectedField === id && (
                       <div
                         onMouseDown={(e) => handleRotateMouseDown(e, id)}
-                        onTouchStart={(e) => handleRotateTouchStart(e, id)} // Touch rotate event
+                        onTouchStart={(e) => handleRotateTouchStart(e, id)}
                         className="absolute top-0 left-0 w-6 h-6 cursor-pointer bg-white rounded-full flex justify-center items-center"
                         style={{
                           transform: "translate(-50%, -50%)",
                           zIndex: 20,
                         }}
                       >
-                        <i className="fas fa-sync-alt text-yellow-500 text-sm"></i> {/* Rotation Icon */}
+                        <i className="fas fa-sync-alt text-yellow-500 text-sm"></i>
                       </div>
                     )}
                   </div>
                 )
               )}
+
+
+
+
+
 
 
 
@@ -1724,7 +1775,7 @@ export default function WeddingCardEditor() {
 
                 {selectedField && selectedTextField && (
                   <div
-                    className={`relative flex flex-col gap-4 ${isSmallScreen ? "mr-10" : "mt-14 left-20 mr-12"
+                    className={`relative flex flex-col gap-4 ${isSmallScreen ? "mr-10 mb-10" : "mt-14 left-20 mr-12"
                       }`}
                   >
                     {isSmallScreen ? (
